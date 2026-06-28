@@ -1,298 +1,77 @@
-# TruckFlow Manager — Glossary
+# Glossario
 
-## Scopo
+## Autocarro / motrice
 
-Questo glossario raccoglie i termini principali del progetto.
+Veicolo a motore con cabina e proprio vano/allestimento di carico.
 
-Serve per evitare confusione tra concetti simili.
+## Trattore stradale
 
----
+Veicolo a motore pensato per agganciare un semirimorchio. Normalmente non ha vano di carico proprio.
 
-## AccountLink
+## Rimorchio a timone
 
-Collegamento tra un account utente e una figura reale del sistema, come autista, cliente, dipendente o vettore esterno.
+Unità trainata con assi propri e timone.
 
----
+## Rimorchio ad assi centrali
+
+Rimorchio con gruppo assi vicino al centro, trainato da un veicolo motore.
+
+## Semirimorchio
+
+Unità trainata che poggia sulla ralla del trattore stradale.
+
+## Autotreno
+
+Convoglio composto da autocarro/motrice + rimorchio.
+
+## Autoarticolato / bilico
+
+Convoglio composto da trattore stradale + semirimorchio.
+
+## Allestimento base
+
+Struttura montata sul telaio: cassone, centinato, furgonato, frigo, cisterna, silo, pianale, scarrabile.
+
+## Accessorio di carico/scarico
+
+Modulo combinabile: gru, sponda idraulica, rampe, verricello, caricatore a polipo.
+
+## ATP
+
+Certificazione per trasporto a temperatura controllata di derrate deperibili.
 
 ## ADR
 
-Qualifica o requisito legato al trasporto di merci pericolose.  
-Nel dominio viene modellata come requisito del carico e/o qualifica professionale dell’autista.
+Normativa/certificazione per trasporto merci pericolose.
 
----
+## CQC merci
 
-## Audit
+Carta di Qualificazione del Conducente per trasporto professionale merci.
 
-Storico delle azioni importanti.  
-Serve per sapere chi ha fatto cosa, quando e su quale oggetto.
+## FIR
 
----
+Formulario Identificazione Rifiuti.
 
-## Billing
+## EER/CER
 
-Area che riguarda fatture e pagamenti.
+Codice europeo del rifiuto.
 
-Differenza:
+## P.B.C. / M.T.T.
 
-```text
-pricing = preventivo e stima
-billing = fattura e pagamento
-```
+Massa complessiva a pieno carico.
 
----
+## Tara
 
-## BodyType
+Massa a vuoto del mezzo.
 
-Tipo di allestimento o carrozzeria del mezzo.
+## Portata utile
 
-Esempi:
+Carico massimo trasportabile, calcolato come massa complessiva meno tara.
 
-- telonato;
-- frigo;
-- cisterna;
-- pianale;
-- furgonato;
-- ribaltabile.
+## Ralla / quinta ruota
 
----
+Dispositivo del trattore stradale su cui poggia il semirimorchio.
 
-## Cargo
+## Kingpin
 
-Carico trasportato.
-
-Può avere:
-
-- peso;
-- volume;
-- dimensioni;
-- pallet;
-- colli;
-- requisiti speciali.
-
----
-
-## CargoSpace
-
-Spazio fisico disponibile per il carico.
-
-Comprende:
-
-- lunghezza utile;
-- larghezza utile;
-- altezza utile;
-- volume utile;
-- numero pallet;
-- tipo vano.
-
----
-
-## Compliance
-
-Area dei controlli di compatibilità e conformità.
-
-Risponde alla domanda:
-
-```text
-Questa spedizione si può eseguire con questi dati?
-```
-
----
-
-## Customer
-
-Cliente che richiede o paga un trasporto.
-
-Può essere persona fisica o azienda.
-
----
-
-## Dispatcher
-
-Utente che pianifica missioni e assegna autisti/mezzi.
-
----
-
-## Driver
-
-Autista professionale.
-
-Da non confondere con `UserAccount`.
-
-`Driver` rappresenta la figura operativa.  
-`UserAccount` rappresenta l’accesso al sistema.
-
----
-
-## Fleet
-
-Flotta aziendale.
-
-Include:
-
-- furgoni;
-- camion;
-- rimorchi;
-- semirimorchi;
-- combinazioni.
-
----
-
-## LoadingResponsibility
-
-Responsabilità del carico/scarico fisico.
-
-Nel nostro progetto la regola standard è:
-
-```text
-NOT_PROVIDED_BY_CARRIER
-```
-
-L’azienda trasporta, ma non carica e non scarica fisicamente.
-
----
-
-## MissionStop
-
-Fermata all’interno di una missione operativa.
-
-Può essere:
-
-- ritiro;
-- consegna;
-- sosta;
-- pausa;
-- carburante;
-- frontiera.
-
----
-
-## ProofOfDelivery
-
-Prova di consegna.
-
-Può contenere:
-
-- data consegna;
-- nome ricevente;
-- firma;
-- note;
-- danni;
-- allegati.
-
----
-
-## Regulation
-
-Area che rappresenta regole esterne, divieti, permessi e restrizioni.
-
-Le regole reali vanno verificate su fonti ufficiali al momento dell’implementazione.
-
----
-
-## Shipment
-
-Spedizione collegata al cliente e al carico.
-
-È ciò che il cliente vuole trasportare.
-
----
-
-## TransportMission
-
-Viaggio operativo reale del mezzo.
-
-Una missione può contenere una o più spedizioni.
-
----
-
-## TransportOrder
-
-Richiesta iniziale del cliente.
-
-Non è ancora necessariamente una spedizione accettata.
-
----
-
-## TransportQuote
-
-Preventivo proposto al cliente.
-
----
-
-## UserAccount
-
-Account di accesso al sistema.
-
-Contiene dati come username, email, ruoli e stato account.  
-Non deve salvare password in chiaro.
-
----
-
-## VehicleCombination
-
-Combinazione di veicoli usata per una spedizione o missione.
-
-Può essere:
-
-- furgone singolo;
-- camion rigido;
-- camion + rimorchio;
-- trattore + semirimorchio.
-
-È il concetto corretto da collegare a `Shipment`, non `Truck`.
-
----
-
-## VehicleLegalCategory
-
-Categoria legale del veicolo.
-
-Esempi previsti:
-
-```text
-N1
-N2
-N3
-O1
-O2
-O3
-O4
-```
-
----
-
-## Value Object
-
-Oggetto senza identità propria, che conta per i suoi valori.
-
-Esempi:
-
-- `Money`;
-- `Weight`;
-- `Address`;
-- `Dimension`.
-
----
-
-## Entity
-
-Oggetto con identità propria.
-
-Esempi:
-
-- `Customer`;
-- `Driver`;
-- `Shipment`;
-- `VehicleCombination`.
-
----
-
-## Enum
-
-Insieme chiuso di valori.
-
-Esempi:
-
-- `ShipmentStatus`;
-- `DriverStatus`;
-- `VehicleStatus`.
+Perno del semirimorchio che si aggancia alla ralla.

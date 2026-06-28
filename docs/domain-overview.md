@@ -1,428 +1,122 @@
-# TruckFlow Manager — Domain Overview
+# Domain overview
 
-## Obiettivo del progetto
+Il domain di TruckFlow Manager è costruito intorno a una domanda:
 
-TruckFlow Manager è una web application gestionale pensata per aziende di trasporto merci su strada.
+> Questo trasporto può essere fatto in modo valido, sicuro, documentato e redditizio?
 
-L’obiettivo è costruire un sistema realistico, professionale e scalabile per gestire l’intero ciclo operativo di un trasporto:
+Per rispondere, il dominio incrocia diversi blocchi.
 
-- richiesta del cliente;
-- ordine di trasporto;
-- preventivo;
-- spedizione;
-- assegnazione autista;
-- assegnazione combinazione veicolo;
-- verifica compatibilità carico/mezzo/autista;
-- pianificazione viaggio;
-- gestione soste e pause;
-- monitoraggio della missione;
-- gestione documenti;
-- prova di consegna;
-- reclami, incidenti, ritardi e audit.
+## 1. Merce
 
-Il sistema deve poter crescere nel tempo senza dover riscrivere il dominio quando verranno aggiunte nuove funzionalità.
+La merce determina molte regole:
 
----
-
-## Tipo di applicazione
-
-TruckFlow Manager sarà una web application gestionale.
-
-L’utilizzo previsto è:
-
-1. Un operatore accede al sistema tramite browser.
-2. Crea o gestisce clienti.
-3. Registra ordini di trasporto.
-4. Prepara preventivi.
-5. Pianifica spedizioni.
-6. Assegna autisti e combinazioni di veicoli.
-7. Verifica se il trasporto è eseguibile.
-8. Monitora missioni, ritardi, eventi e consegne.
-9. Gestisce documenti, prove di consegna e reclami.
-
-In futuro potranno esistere anche:
-
-- portale cliente;
-- vista/app autista;
-- dashboard amministrativa;
-- tracking su mappa;
-- integrazione con servizi esterni.
-
----
-
-## Architettura generale prevista
-
-```text
-Frontend Web
-    ↓
-REST API
-    ↓
-Application Layer
-    ↓
-Domain
-    ↓
-Infrastructure
-```
-
-Il cuore del progetto è il `Domain`.
-
-Il dominio rappresenta le regole aziendali pure, senza dipendere da tecnologie esterne.
-
----
-
-## Regola architetturale principale
-
-Il dominio non deve dipendere da:
-
-- Spring Boot;
-- database;
-- JPA;
-- API REST;
-- Google Maps;
-- frontend;
-- filesystem;
-- email;
-- autenticazione tecnica;
-- servizi esterni.
-
-Questo significa che le classi del dominio devono essere classi Java pure.
+- allestimento compatibile;
+- temperatura richiesta;
+- ADR;
+- documenti;
+- fissaggio;
+- certificati veicolo;
+- abilitazioni autista;
+- costi extra.
 
 Esempi:
 
-- `Shipment` non deve sapere nulla del database.
-- `VehicleCombination` non deve sapere nulla di Spring.
-- `Route` non deve dipendere da Google Maps.
-- `Driver` non deve sapere come viene fatto il login.
-- `ComplianceCheck` non deve dipendere da una API esterna.
-
-Il dominio deve poter funzionare anche senza database, senza internet e senza interfaccia grafica.
-
----
-
-## Perché progettiamo prima il dominio
-
-Il progetto è grande e realistico.  
-Per evitare di dover riscrivere tutto in futuro, prima definiamo bene i concetti principali.
-
-Esempio sbagliato:
-
 ```text
-Shipment → Truck
+REFRIGERATED_FOOD -> frigo/isotermico + ATP + temperatura
+DANGEROUS_GOODS -> numero ONU + ADR autista + ADR veicolo
+WASTE_DANGEROUS -> EER/CER + FIR + licenza aziendale
+LIVESTOCK -> documenti veterinari + abilitazione animali vivi
 ```
 
-Questo sarebbe troppo limitato, perché nella realtà una spedizione può usare:
+## 2. Veicolo
 
-- furgone singolo;
-- camion rigido;
-- camion con rimorchio;
-- trattore stradale con semirimorchio;
-- combinazioni diverse di veicoli.
-
-La scelta corretta è:
+Un veicolo non è descritto da una sola categoria. Il modello separa:
 
 ```text
-Shipment → VehicleCombination
+VehicleUnitType
+VehicleBodyBaseType
+VehicleBodyConfiguration
+VehicleTechnicalSpecification
+VehicleCertificate
 ```
 
-In questo modo, se in futuro aggiungiamo nuovi tipi di mezzi o rimorchi, non dobbiamo cambiare tutta la struttura di `Shipment`.
-
----
-
-## Differenza tra ordine, spedizione e missione
-
-### TransportOrder
-
-Rappresenta la richiesta iniziale del cliente.
-
-Esempio:
-
-> Il cliente chiede di trasportare 10 pallet da Roma a Milano.
-
-L’ordine è ancora una richiesta commerciale e operativa.  
-Non è detto che sia già stato accettato o pianificato.
-
-### Shipment
-
-Rappresenta la spedizione collegata al cliente e al carico.
-
-Esempio:
-
-> La spedizione del cliente ACME riguarda 10 pallet da Roma a Milano, con consegna entro venerdì.
-
-La spedizione contiene:
-
-- cliente;
-- carico;
-- ritiro;
-- consegna;
-- stato;
-- documenti;
-- prova di consegna;
-- prezzo;
-- requisiti.
-
-### TransportMission
-
-Rappresenta il viaggio operativo reale del mezzo.
-
-Esempio:
-
-> Il camion parte dal deposito, ritira merce da due clienti, consegna in tre punti diversi e poi rientra.
-
-Una missione può contenere:
-
-- una sola spedizione;
-- più spedizioni;
-- più clienti;
-- più ritiri;
-- più consegne;
-- più carichi.
-
-Questa distinzione rende il sistema più realistico.
-
----
-
-## Flusso aziendale principale
+Questo permette di rappresentare casi realistici:
 
 ```text
-Customer
-    ↓
-TransportOrder
-    ↓
-TransportQuote
-    ↓
-Shipment
-    ↓
-TransportMission
-    ↓
-VehicleCombination + Driver
-    ↓
-TripPlan
-    ↓
-Tracking / Events
-    ↓
-ProofOfDelivery
-    ↓
-Closure / Claim / Billing
+trattore stradale + gru
+semirimorchio centinato mega
+rimorchio ribaltabile trilaterale
+furgonato frigo con sponda
+cisterna ADR
+portacontainer con twist-lock
 ```
 
-Descrizione:
+## 3. Convoglio
 
-1. Il cliente richiede un trasporto.
-2. L’azienda registra un ordine.
-3. Viene creato un preventivo.
-4. Il cliente accetta il preventivo.
-5. Viene creata una spedizione.
-6. La spedizione viene collegata a una missione operativa.
-7. Vengono assegnati autista e combinazione veicolo.
-8. Il sistema controlla compatibilità e conformità.
-9. Viene pianificato il viaggio.
-10. La missione viene eseguita.
-11. Vengono registrati eventi, ritardi o incidenti.
-12. Alla consegna viene registrata la prova di consegna.
-13. La spedizione viene chiusa.
-14. In futuro potranno essere gestiti fatturazione, reclami e report.
-
----
-
-## Struttura generale del dominio
+Il singolo mezzo è `Vehicle`.
+Il mezzo operativo può essere una combinazione `VehicleCombination`:
 
 ```text
-domain
-├── organization
-├── customer
-├── order
-├── pricing
-├── billing
-├── driver
-├── fleet
-├── maintenance
-├── cargo
-├── route
-├── shipment
-├── operation
-├── planning
-├── tracking
-├── document
-├── regulation
-├── compliance
-├── facility
-├── carrier
-├── availability
-├── notification
-├── claim
-├── audit
-├── sustainability
-├── security
-├── identity
-├── configuration
-├── reporting
-├── location
-└── shared
+SINGLE_VEHICLE
+TRUCK_AND_TRAILER
+ARTICULATED_VEHICLE
 ```
 
-Non tutti questi package verranno implementati subito.  
-Questa struttura rappresenta la visione completa del progetto.
-
----
-
-## Package principali
-
-### organization
-
-Gestisce l’azienda che usa il gestionale: azienda, sedi, filiali, reparti e dipendenti interni.
-
-### customer
-
-Gestisce i clienti. Un cliente può essere persona fisica o azienda, con contratti, condizioni di pagamento e accordi di servizio.
-
-### order
-
-Gestisce la richiesta iniziale di trasporto. Un ordine rappresenta ciò che il cliente chiede prima che venga creata una spedizione vera e propria.
-
-### pricing
-
-Gestisce preventivi, costi stimati, pedaggi futuri, carburante futuro, margini e sconti.
-
-### billing
-
-Gestisce la futura parte di fatturazione. È separato da `pricing`.
+Esempi:
 
 ```text
-pricing = preventivo e stima
-billing = fattura e pagamento
+furgone singolo
+motrice/autocarro singolo
+autotreno = autocarro + rimorchio
+bilico = trattore stradale + semirimorchio
 ```
 
-### driver
+## 4. Autista
 
-Gestisce autisti, patenti, CQC, ADR, disponibilità, carta tachigrafica e qualifiche.
+L’autista deve avere:
 
-### fleet
+- stato assegnabile;
+- patente corretta;
+- CQC merci;
+- ADR se richiesto;
+- patentini operativi se richiesti.
 
-Gestisce tutta la flotta: furgoni, camion, motrici, trattori stradali, rimorchi, semirimorchi e combinazioni di veicoli.
+## 5. Azienda
 
-### cargo
+Alcuni trasporti richiedono licenze aziendali:
 
-Gestisce il carico: peso, volume, dimensioni, numero pallet, tipo merce, requisiti speciali, temperatura, ADR, fragilità e sicurezza.
+- albo autotrasportatori;
+- REN;
+- licenza comunitaria;
+- conto proprio;
+- albo gestori ambientali.
 
-### shipment
+## 6. Missione
 
-Gestisce la spedizione commerciale-operativa.
-
-### operation
-
-Gestisce la missione operativa reale. Una missione può contenere più spedizioni.
-
-### planning
-
-Gestisce pianificazione viaggio, orari, soste, pause, riposi, tempi di guida, progressione tratta e posizione veicolo.
-
-### tracking
-
-Gestisce eventi, ritardi e incidenti.
-
-### document
-
-Gestisce documenti di trasporto e prova di consegna.
-
-### regulation
-
-Gestisce regole normative, divieti, permessi, ZTL, restrizioni e calendari di circolazione. Le regole precise saranno configurabili e dovranno essere verificate su fonti ufficiali quando implementate.
-
-### compliance
-
-Gestisce i controlli. È il package che risponde alla domanda:
+La missione collega tutto:
 
 ```text
-Posso eseguire questa spedizione con questo autista,
-questa combinazione di veicoli, questo carico,
-questa tratta e questa data?
+ordine accettato
+spedizione
+carico
+convoglio
+autista
+rotta
+documenti
+tracking
+costi
 ```
 
-### identity
+## 7. Moduli operativi
 
-Gestisce utenti, ruoli e permessi applicativi.
+Il domain include già concetti per:
 
-### audit
-
-Gestisce lo storico delle azioni. Serve per sapere chi ha fatto cosa.
-
-### configuration
-
-Gestisce impostazioni e cataloghi configurabili, evitando di mettere tutto fisso nel codice.
-
-### reporting
-
-Gestisce report e metriche future.
-
-### shared
-
-Contiene value object riutilizzabili come `Money`, `Weight`, `Volume`, `Distance`, `Dimension`, `TemperatureRange`, `DateRange`, `TimeWindow`, `Percentage`, `Notes`.
-
----
-
-## Regole fondamentali del dominio
-
-1. Una spedizione non può partire senza autista.
-2. Una spedizione non può partire senza combinazione veicolo.
-3. Una spedizione assegna una `VehicleCombination`, non un semplice `Truck`.
-4. Una combinazione veicolo può essere un furgone, un camion rigido, un camion con rimorchio o un trattore con semirimorchio.
-5. Il carico deve rispettare peso, volume e dimensioni disponibili.
-6. Il carico deve essere compatibile con il tipo di allestimento.
-7. Il carico refrigerato richiede mezzo compatibile.
-8. Il carico pericoloso richiede requisiti ADR.
-9. L’autista deve avere patente compatibile con il mezzo.
-10. L’autista deve avere CQC valida se richiesta.
-11. L’autista deve avere ADR valida se il carico lo richiede.
-12. La carta tachigrafica deve essere valida se richiesta.
-13. Il mezzo non può essere assegnato se è in manutenzione.
-14. Il rimorchio non può essere assegnato se non è disponibile.
-15. La motrice deve essere compatibile con il rimorchio.
-16. Il piano viaggio deve rispettare tempi di guida e pause.
-17. I divieti di circolazione devono essere controllabili.
-18. Il sistema deve distinguere spedizione e missione.
-19. Una missione può contenere più spedizioni.
-20. L’azienda trasporta ma non effettua carico e scarico fisico.
-21. Ogni evento importante deve poter essere registrato.
-22. Una spedizione consegnata non può tornare allo stato precedente.
-23. Una spedizione annullata non può ripartire senza nuova procedura.
-24. La prova di consegna chiude il ciclo operativo.
-25. Ogni azione importante deve essere auditabile.
-26. I servizi esterni devono stare fuori dal dominio.
-
----
-
-## Cosa non implementiamo subito
-
-Non implementiamo subito:
-
-- frontend web;
-- login reale;
-- Spring Security;
-- database;
-- Google Maps;
-- simulazione tracking;
-- fatturazione completa;
-- reportistica completa;
-- notifiche reali;
-- integrazione pedaggi;
-- integrazione carburante;
-- portale cliente;
-- app autista.
-
-Queste funzionalità verranno aggiunte in fasi successive.
-
----
-
-## Decisione finale
-
-TruckFlow Manager sarà progettato partendo dal dominio.
-
-Il dominio deve essere stabile, indipendente e scalabile.
-
-La regola più importante è:
-
-```text
-Il dominio rappresenta il business.
-La tecnologia serve solo a farlo funzionare.
-```
+- manutenzione;
+- pneumatici;
+- carburante;
+- telematica;
+- fissaggio carico;
+- sinistri/reclami;
+- sostenibilità;
+- pricing;
+- fatturazione.

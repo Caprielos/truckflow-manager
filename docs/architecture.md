@@ -1,152 +1,75 @@
-# TruckFlow Manager — Architecture
+# Architettura
 
-## Scopo
+TruckFlow Manager segue un’impostazione ispirata a clean architecture / hexagonal architecture.
 
-Questo documento descrive l’architettura prevista del progetto.
-
-L’obiettivo è mantenere il dominio indipendente e costruire l’applicazione in modo scalabile.
-
----
-
-## Architettura a livelli
+## Livelli previsti
 
 ```text
-Frontend Web
-    ↓
-REST API
-    ↓
-Application Layer
-    ↓
-Domain
-    ↓
-Infrastructure
+src/main/java/it/gabriele/truckflow
+├── domain
+├── application
+├── infrastructure
+└── web
 ```
 
----
+Attualmente il progetto è concentrato sul package `domain`.
 
-## Domain Layer
+## Domain
 
-Contiene le regole di business pure.
+Il domain contiene:
 
-Non dipende da:
+- entity;
+- value object;
+- enum;
+- rules;
+- stati e transizioni;
+- validazioni di business.
+
+Non deve dipendere da:
 
 - Spring;
+- JPA;
 - database;
-- REST;
-- frontend;
-- Google Maps;
-- email;
 - filesystem;
-- autenticazione tecnica.
+- controller REST;
+- API esterne;
+- UI.
 
-Contiene package come:
+## Application
 
-```text
-driver
-fleet
-cargo
-shipment
-compliance
-```
-
----
-
-## Application Layer
-
-Coordina i casi d’uso.
-
-Esempi futuri:
+L’application layer conterrà i casi d’uso. Esempi:
 
 ```text
-CreateShipmentUseCase
-AssignDriverUseCase
+CreateTransportOrderUseCase
 AssignVehicleCombinationUseCase
-CheckShipmentComplianceUseCase
-CreateTransportMissionUseCase
-CloseShipmentUseCase
+RegisterFuelTransactionUseCase
+ScheduleMaintenanceUseCase
 ```
 
-L’application layer usa il dominio, ma non contiene regole profonde di business.
-
----
-
-## Infrastructure Layer
-
-Contiene dettagli tecnici.
-
-Esempi futuri:
+L’application userà interfacce repository, per esempio:
 
 ```text
-PostgreSQLShipmentRepository
-GoogleMapsRouteService
-EmailNotificationSender
-DocumentStorageAdapter
-FuelPriceProvider
-TollCostProvider
+TransportOrderRepository
+VehicleRepository
+DriverRepository
 ```
 
-L’infrastructure dipende dal dominio, non il contrario.
+## Infrastructure
 
----
-
-## REST API
-
-Espone il backend al frontend.
-
-Esempi futuri:
+Infrastructure conterrà implementazioni concrete:
 
 ```text
-POST /api/shipments
-POST /api/shipments/{id}/assign-driver
-POST /api/shipments/{id}/assign-vehicle-combination
-GET /api/fleet/vehicles
-GET /api/drivers
+InMemoryTransportOrderRepository
+JpaVehicleRepository
+FileDocumentStorage
+GpsProviderClient
+FuelCardImportAdapter
 ```
 
-Le API non devono contenere logica di dominio complessa.
+## Web
 
----
+Web arriverà dopo e conterrà controller/API/UI.
 
-## Frontend Web
+## Regola fondamentale
 
-Sarà la parte grafica usata da operatori e amministratori.
-
-Viste future:
-
-- dashboard;
-- clienti;
-- ordini;
-- preventivi;
-- spedizioni;
-- missioni;
-- flotta;
-- autisti;
-- documenti;
-- alert;
-- tracking.
-
----
-
-## Regola delle dipendenze
-
-Le dipendenze devono andare verso il dominio, mai dal dominio verso l’esterno.
-
-```text
-Frontend → API → Application → Domain
-Infrastructure → Domain
-```
-
-Il dominio non deve importare classi di Spring, JPA, controller, repository o servizi esterni.
-
----
-
-## Perché questa architettura
-
-Questa architettura permette di:
-
-- cambiare database senza riscrivere il dominio;
-- cambiare frontend senza riscrivere il dominio;
-- aggiungere Google Maps senza modificare `Route`;
-- aggiungere regole compliance senza modificare tutto `Shipment`;
-- testare il dominio con unit test semplici;
-- costruire il progetto in modo professionale.
+Il domain non sa come viene salvato o mostrato un dato. Sa solo cosa è valido e cosa non è valido secondo le regole del business.
