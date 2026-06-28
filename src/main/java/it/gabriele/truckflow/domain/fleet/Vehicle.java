@@ -16,11 +16,15 @@ public final class Vehicle {
 
     private static final int MAX_FLEET_NUMBER_LENGTH = 50;
     private static final int MAX_LICENSE_PLATE_LENGTH = 20;
+    private static final int VIN_LENGTH = 17;
 
     private final String fleetNumber;
     private final String licensePlate;
+    private final String chassisNumber;
     private final VehicleType type;
+    private final VehicleBodyType bodyType;
     private final VehicleStatus status;
+    private final TireSpecification tireSpecification;
     private final Weight maxPayload;
     private final Dimension cargoSpaceDimension;
     private final TemperatureRange temperatureRange;
@@ -29,8 +33,11 @@ public final class Vehicle {
     private Vehicle(
             String fleetNumber,
             String licensePlate,
+            String chassisNumber,
             VehicleType type,
+            VehicleBodyType bodyType,
             VehicleStatus status,
+            TireSpecification tireSpecification,
             Weight maxPayload,
             Dimension cargoSpaceDimension,
             TemperatureRange temperatureRange,
@@ -38,24 +45,36 @@ public final class Vehicle {
     ) {
         this.fleetNumber = validateFleetNumber(fleetNumber);
         this.licensePlate = validateLicensePlate(licensePlate);
+        this.chassisNumber = validateChassisNumber(chassisNumber);
 
         if (type == null) {
             throw new IllegalArgumentException("Il tipo veicolo è obbligatorio.");
+        }
+
+        if (bodyType == null) {
+            throw new IllegalArgumentException("L'allestimento del veicolo è obbligatorio.");
         }
 
         if (status == null) {
             throw new IllegalArgumentException("Lo stato veicolo è obbligatorio.");
         }
 
+        if (tireSpecification == null) {
+            throw new IllegalArgumentException("Le specifiche degli pneumatici sono obbligatorie.");
+        }
+
         if (notes == null) {
             throw new IllegalArgumentException("Le note del veicolo sono obbligatorie.");
         }
 
-        validateCargoData(type, maxPayload, cargoSpaceDimension);
-        validateTemperatureData(type, temperatureRange);
+        validateBodyType(type, bodyType);
+        validateCargoData(type, bodyType, maxPayload, cargoSpaceDimension);
+        validateTemperatureData(type, bodyType, temperatureRange);
 
         this.type = type;
+        this.bodyType = bodyType;
         this.status = status;
+        this.tireSpecification = tireSpecification;
         this.maxPayload = maxPayload;
         this.cargoSpaceDimension = cargoSpaceDimension;
         this.temperatureRange = temperatureRange;
@@ -65,8 +84,11 @@ public final class Vehicle {
     public static Vehicle cargoVehicle(
             String fleetNumber,
             String licensePlate,
+            String chassisNumber,
             VehicleType type,
+            VehicleBodyType bodyType,
             VehicleStatus status,
+            TireSpecification tireSpecification,
             Weight maxPayload,
             Dimension cargoSpaceDimension,
             TemperatureRange temperatureRange,
@@ -75,8 +97,11 @@ public final class Vehicle {
         return new Vehicle(
                 fleetNumber,
                 licensePlate,
+                chassisNumber,
                 type,
+                bodyType,
                 status,
+                tireSpecification,
                 maxPayload,
                 cargoSpaceDimension,
                 temperatureRange,
@@ -87,15 +112,20 @@ public final class Vehicle {
     public static Vehicle nonCargoVehicle(
             String fleetNumber,
             String licensePlate,
+            String chassisNumber,
             VehicleType type,
             VehicleStatus status,
+            TireSpecification tireSpecification,
             Notes notes
     ) {
         return new Vehicle(
                 fleetNumber,
                 licensePlate,
+                chassisNumber,
                 type,
+                VehicleBodyType.NONE,
                 status,
+                tireSpecification,
                 null,
                 null,
                 null,
@@ -147,8 +177,53 @@ public final class Vehicle {
         return normalizedLicensePlate;
     }
 
+    private static String validateChassisNumber(String chassisNumber) {
+        if (chassisNumber == null) {
+            throw new IllegalArgumentException("Il numero telaio è obbligatorio.");
+        }
+
+        String normalizedChassisNumber = chassisNumber.trim().toUpperCase();
+
+        if (normalizedChassisNumber.isEmpty()) {
+            throw new IllegalArgumentException("Il numero telaio non può essere vuoto.");
+        }
+
+        if (normalizedChassisNumber.length() != VIN_LENGTH) {
+            throw new IllegalArgumentException("Il numero telaio deve avere " + VIN_LENGTH + " caratteri.");
+        }
+
+        if (!normalizedChassisNumber.matches("[A-HJ-NPR-Z0-9]+")) {
+            throw new IllegalArgumentException("Il numero telaio può contenere solo lettere e numeri, esclusi I, O e Q.");
+        }
+
+        return normalizedChassisNumber;
+    }
+
+    private static void validateBodyType(VehicleType type, VehicleBodyType bodyType) {
+        if (!type.canCarryCargo() && bodyType != VehicleBodyType.NONE) {
+            throw new IllegalArgumentException("Un veicolo non cargo deve avere allestimento NONE.");
+        }
+
+        if (type.canCarryCargo() && bodyType == VehicleBodyType.NONE) {
+            throw new IllegalArgumentException("Un veicolo cargo deve avere un allestimento cargo.");
+        }
+
+        if (type.canCarryCargo() && !bodyType.isCargoBody()) {
+            throw new IllegalArgumentException("L'allestimento non è compatibile con un veicolo cargo.");
+        }
+
+        if (type.supportsTemperatureControl() && !bodyType.supportsTemperatureControl()) {
+            throw new IllegalArgumentException("Un veicolo refrigerato deve avere un allestimento refrigerato.");
+        }
+
+        if (!type.supportsTemperatureControl() && bodyType.supportsTemperatureControl()) {
+            throw new IllegalArgumentException("Un allestimento refrigerato richiede un tipo veicolo refrigerato.");
+        }
+    }
+
     private static void validateCargoData(
             VehicleType type,
+            VehicleBodyType bodyType,
             Weight maxPayload,
             Dimension cargoSpaceDimension
     ) {
@@ -167,17 +242,25 @@ public final class Vehicle {
         if (maxPayload != null || cargoSpaceDimension != null) {
             throw new IllegalArgumentException("Un veicolo non cargo non può avere dati di carico.");
         }
+
+        if (bodyType.isCargoBody()) {
+            throw new IllegalArgumentException("Un veicolo non cargo non può avere allestimento cargo.");
+        }
     }
 
     private static void validateTemperatureData(
             VehicleType type,
+            VehicleBodyType bodyType,
             TemperatureRange temperatureRange
     ) {
-        if (type.supportsTemperatureControl() && temperatureRange == null) {
+        boolean requiresTemperatureRange = type.supportsTemperatureControl()
+                || bodyType.supportsTemperatureControl();
+
+        if (requiresTemperatureRange && temperatureRange == null) {
             throw new IllegalArgumentException("Un veicolo a temperatura controllata deve avere un intervallo di temperatura.");
         }
 
-        if (!type.supportsTemperatureControl() && temperatureRange != null) {
+        if (!requiresTemperatureRange && temperatureRange != null) {
             throw new IllegalArgumentException("Un veicolo non refrigerato non può avere un intervallo di temperatura.");
         }
     }
@@ -190,12 +273,24 @@ public final class Vehicle {
         return licensePlate;
     }
 
+    public String getChassisNumber() {
+        return chassisNumber;
+    }
+
     public VehicleType getType() {
         return type;
     }
 
+    public VehicleBodyType getBodyType() {
+        return bodyType;
+    }
+
     public VehicleStatus getStatus() {
         return status;
+    }
+
+    public TireSpecification getTireSpecification() {
+        return tireSpecification;
     }
 
     public Weight getMaxPayload() {
@@ -227,7 +322,7 @@ public final class Vehicle {
     }
 
     public boolean supportsTemperatureControl() {
-        return type.supportsTemperatureControl();
+        return bodyType.supportsTemperatureControl();
     }
 
     public boolean isPoweredUnit() {
@@ -236,6 +331,22 @@ public final class Vehicle {
 
     public boolean isTrailer() {
         return type.isTrailer();
+    }
+
+    public boolean hasTankBody() {
+        return bodyType.isTank();
+    }
+
+    public boolean hasFuelTankBody() {
+        return bodyType.isFuelTank();
+    }
+
+    public boolean hasGasTankBody() {
+        return bodyType.isGasTank();
+    }
+
+    public boolean hasOpenBody() {
+        return bodyType.isOpenBody();
     }
 
     public boolean hasNotes() {
@@ -276,7 +387,7 @@ public final class Vehicle {
     }
 
     public String formatSingleLine() {
-        return fleetNumber + " - " + licensePlate + " - " + type + " - " + status;
+        return fleetNumber + " - " + licensePlate + " - " + chassisNumber + " - " + type + " - " + bodyType + " - " + status;
     }
 
     @Override
@@ -285,8 +396,11 @@ public final class Vehicle {
         if (!(o instanceof Vehicle vehicle)) return false;
         return fleetNumber.equals(vehicle.fleetNumber)
                 && licensePlate.equals(vehicle.licensePlate)
+                && chassisNumber.equals(vehicle.chassisNumber)
                 && type == vehicle.type
+                && bodyType == vehicle.bodyType
                 && status == vehicle.status
+                && tireSpecification.equals(vehicle.tireSpecification)
                 && Objects.equals(maxPayload, vehicle.maxPayload)
                 && Objects.equals(cargoSpaceDimension, vehicle.cargoSpaceDimension)
                 && Objects.equals(temperatureRange, vehicle.temperatureRange)
@@ -298,8 +412,11 @@ public final class Vehicle {
         return Objects.hash(
                 fleetNumber,
                 licensePlate,
+                chassisNumber,
                 type,
+                bodyType,
                 status,
+                tireSpecification,
                 maxPayload,
                 cargoSpaceDimension,
                 temperatureRange,

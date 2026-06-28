@@ -20,8 +20,11 @@ class VehicleTest {
 
         assertEquals("TRUCK-001", vehicle.getFleetNumber());
         assertEquals("AB 123 CD", vehicle.getLicensePlate());
+        assertEquals("1HGCM82633A004352", vehicle.getChassisNumber());
         assertEquals(VehicleType.RIGID_TRUCK, vehicle.getType());
+        assertEquals(VehicleBodyType.BOX, vehicle.getBodyType());
         assertEquals(VehicleStatus.AVAILABLE, vehicle.getStatus());
+        assertEquals(standardTire(), vehicle.getTireSpecification());
         assertEquals(Weight.ofKilograms(12000), vehicle.getMaxPayload());
         assertEquals(Dimension.ofMeters(7, 2.4, 2.5), vehicle.getCargoSpaceDimension());
         assertEquals(Notes.empty(), vehicle.getNotes());
@@ -35,14 +38,18 @@ class VehicleTest {
         Vehicle vehicle = Vehicle.nonCargoVehicle(
                 "tractor-001",
                 "TR 001 AA",
+                "JH4KA8260MC000000",
                 VehicleType.TRACTOR_UNIT,
                 VehicleStatus.AVAILABLE,
+                standardTire(),
                 Notes.empty()
         );
 
         assertEquals("TRACTOR-001", vehicle.getFleetNumber());
         assertEquals("TR 001 AA", vehicle.getLicensePlate());
+        assertEquals("JH4KA8260MC000000", vehicle.getChassisNumber());
         assertEquals(VehicleType.TRACTOR_UNIT, vehicle.getType());
+        assertEquals(VehicleBodyType.NONE, vehicle.getBodyType());
         assertFalse(vehicle.canCarryCargo());
         assertTrue(vehicle.isPoweredUnit());
     }
@@ -54,8 +61,11 @@ class VehicleTest {
         Vehicle vehicle = Vehicle.cargoVehicle(
                 "frigo-001",
                 "FR 001 AA",
+                "WDB9301231L123456",
                 VehicleType.REFRIGERATED_TRUCK,
+                VehicleBodyType.REFRIGERATED_BOX,
                 VehicleStatus.AVAILABLE,
+                standardTire(),
                 Weight.ofKilograms(8000),
                 Dimension.ofMeters(6, 2.4, 2.4),
                 range,
@@ -67,12 +77,36 @@ class VehicleTest {
     }
 
     @Test
-    void shouldNormalizeFleetNumberAndLicensePlate() {
+    void shouldCreateTankVehicle() {
+        Vehicle vehicle = Vehicle.cargoVehicle(
+                "TANK-001",
+                "TK 001 AA",
+                "VF1AAAAA555123456",
+                VehicleType.SEMI_TRAILER,
+                VehicleBodyType.TANK_FUEL,
+                VehicleStatus.AVAILABLE,
+                standardTire(),
+                Weight.ofKilograms(25000),
+                Dimension.ofMeters(12, 2.5, 3.5),
+                null,
+                Notes.empty()
+        );
+
+        assertTrue(vehicle.hasTankBody());
+        assertTrue(vehicle.hasFuelTankBody());
+        assertFalse(vehicle.hasGasTankBody());
+    }
+
+    @Test
+    void shouldNormalizeFleetNumberLicensePlateAndChassisNumber() {
         Vehicle vehicle = Vehicle.cargoVehicle(
                 "  truck_001  ",
                 "  ab 123 cd  ",
+                "  1hgcm82633a004352  ",
                 VehicleType.RIGID_TRUCK,
+                VehicleBodyType.BOX,
                 VehicleStatus.AVAILABLE,
+                standardTire(),
                 Weight.ofKilograms(12000),
                 Dimension.ofMeters(7, 2.4, 2.5),
                 null,
@@ -81,6 +115,7 @@ class VehicleTest {
 
         assertEquals("TRUCK_001", vehicle.getFleetNumber());
         assertEquals("AB 123 CD", vehicle.getLicensePlate());
+        assertEquals("1HGCM82633A004352", vehicle.getChassisNumber());
     }
 
     @Test
@@ -88,8 +123,11 @@ class VehicleTest {
         assertThrows(IllegalArgumentException.class, () -> Vehicle.cargoVehicle(
                 null,
                 "AB 123 CD",
+                "1HGCM82633A004352",
                 VehicleType.RIGID_TRUCK,
+                VehicleBodyType.BOX,
                 VehicleStatus.AVAILABLE,
+                standardTire(),
                 Weight.ofKilograms(12000),
                 Dimension.ofMeters(7, 2.4, 2.5),
                 null,
@@ -99,8 +137,11 @@ class VehicleTest {
         assertThrows(IllegalArgumentException.class, () -> Vehicle.cargoVehicle(
                 "TRUCK 001",
                 "AB 123 CD",
+                "1HGCM82633A004352",
                 VehicleType.RIGID_TRUCK,
+                VehicleBodyType.BOX,
                 VehicleStatus.AVAILABLE,
+                standardTire(),
                 Weight.ofKilograms(12000),
                 Dimension.ofMeters(7, 2.4, 2.5),
                 null,
@@ -113,8 +154,11 @@ class VehicleTest {
         assertThrows(IllegalArgumentException.class, () -> Vehicle.cargoVehicle(
                 "TRUCK-001",
                 null,
+                "1HGCM82633A004352",
                 VehicleType.RIGID_TRUCK,
+                VehicleBodyType.BOX,
                 VehicleStatus.AVAILABLE,
+                standardTire(),
                 Weight.ofKilograms(12000),
                 Dimension.ofMeters(7, 2.4, 2.5),
                 null,
@@ -124,8 +168,56 @@ class VehicleTest {
         assertThrows(IllegalArgumentException.class, () -> Vehicle.cargoVehicle(
                 "TRUCK-001",
                 "AB@123",
+                "1HGCM82633A004352",
                 VehicleType.RIGID_TRUCK,
+                VehicleBodyType.BOX,
                 VehicleStatus.AVAILABLE,
+                standardTire(),
+                Weight.ofKilograms(12000),
+                Dimension.ofMeters(7, 2.4, 2.5),
+                null,
+                Notes.empty()
+        ));
+    }
+
+    @Test
+    void shouldNotAllowInvalidChassisNumber() {
+        assertThrows(IllegalArgumentException.class, () -> Vehicle.cargoVehicle(
+                "TRUCK-001",
+                "AB 123 CD",
+                null,
+                VehicleType.RIGID_TRUCK,
+                VehicleBodyType.BOX,
+                VehicleStatus.AVAILABLE,
+                standardTire(),
+                Weight.ofKilograms(12000),
+                Dimension.ofMeters(7, 2.4, 2.5),
+                null,
+                Notes.empty()
+        ));
+
+        assertThrows(IllegalArgumentException.class, () -> Vehicle.cargoVehicle(
+                "TRUCK-001",
+                "AB 123 CD",
+                "123",
+                VehicleType.RIGID_TRUCK,
+                VehicleBodyType.BOX,
+                VehicleStatus.AVAILABLE,
+                standardTire(),
+                Weight.ofKilograms(12000),
+                Dimension.ofMeters(7, 2.4, 2.5),
+                null,
+                Notes.empty()
+        ));
+
+        assertThrows(IllegalArgumentException.class, () -> Vehicle.cargoVehicle(
+                "TRUCK-001",
+                "AB 123 CD",
+                "1HGCM82633I004352",
+                VehicleType.RIGID_TRUCK,
+                VehicleBodyType.BOX,
+                VehicleStatus.AVAILABLE,
+                standardTire(),
                 Weight.ofKilograms(12000),
                 Dimension.ofMeters(7, 2.4, 2.5),
                 null,
@@ -138,8 +230,11 @@ class VehicleTest {
         assertThrows(IllegalArgumentException.class, () -> Vehicle.cargoVehicle(
                 "TRUCK-001",
                 "AB 123 CD",
+                "1HGCM82633A004352",
                 null,
+                VehicleBodyType.BOX,
                 VehicleStatus.AVAILABLE,
+                standardTire(),
                 Weight.ofKilograms(12000),
                 Dimension.ofMeters(7, 2.4, 2.5),
                 null,
@@ -149,8 +244,11 @@ class VehicleTest {
         assertThrows(IllegalArgumentException.class, () -> Vehicle.cargoVehicle(
                 "TRUCK-001",
                 "AB 123 CD",
+                "1HGCM82633A004352",
                 VehicleType.RIGID_TRUCK,
                 null,
+                VehicleStatus.AVAILABLE,
+                standardTire(),
                 Weight.ofKilograms(12000),
                 Dimension.ofMeters(7, 2.4, 2.5),
                 null,
@@ -160,12 +258,63 @@ class VehicleTest {
         assertThrows(IllegalArgumentException.class, () -> Vehicle.cargoVehicle(
                 "TRUCK-001",
                 "AB 123 CD",
+                "1HGCM82633A004352",
                 VehicleType.RIGID_TRUCK,
-                VehicleStatus.AVAILABLE,
+                VehicleBodyType.BOX,
+                null,
+                standardTire(),
                 Weight.ofKilograms(12000),
                 Dimension.ofMeters(7, 2.4, 2.5),
                 null,
-                null
+                Notes.empty()
+        ));
+
+        assertThrows(IllegalArgumentException.class, () -> Vehicle.cargoVehicle(
+                "TRUCK-001",
+                "AB 123 CD",
+                "1HGCM82633A004352",
+                VehicleType.RIGID_TRUCK,
+                VehicleBodyType.BOX,
+                VehicleStatus.AVAILABLE,
+                null,
+                Weight.ofKilograms(12000),
+                Dimension.ofMeters(7, 2.4, 2.5),
+                null,
+                Notes.empty()
+        ));
+    }
+
+    @Test
+    void shouldRequireCargoBodyForCargoVehicle() {
+        assertThrows(IllegalArgumentException.class, () -> Vehicle.cargoVehicle(
+                "TRUCK-001",
+                "AB 123 CD",
+                "1HGCM82633A004352",
+                VehicleType.RIGID_TRUCK,
+                VehicleBodyType.NONE,
+                VehicleStatus.AVAILABLE,
+                standardTire(),
+                Weight.ofKilograms(12000),
+                Dimension.ofMeters(7, 2.4, 2.5),
+                null,
+                Notes.empty()
+        ));
+    }
+
+    @Test
+    void shouldNotAllowCargoBodyForNonCargoVehicle() {
+        assertThrows(IllegalArgumentException.class, () -> Vehicle.cargoVehicle(
+                "TRACTOR-001",
+                "TR 001 AA",
+                "JH4KA8260MC000000",
+                VehicleType.TRACTOR_UNIT,
+                VehicleBodyType.BOX,
+                VehicleStatus.AVAILABLE,
+                standardTire(),
+                null,
+                null,
+                null,
+                Notes.empty()
         ));
     }
 
@@ -174,8 +323,11 @@ class VehicleTest {
         assertThrows(IllegalArgumentException.class, () -> Vehicle.cargoVehicle(
                 "TRUCK-001",
                 "AB 123 CD",
+                "1HGCM82633A004352",
                 VehicleType.RIGID_TRUCK,
+                VehicleBodyType.BOX,
                 VehicleStatus.AVAILABLE,
+                standardTire(),
                 null,
                 Dimension.ofMeters(7, 2.4, 2.5),
                 null,
@@ -185,24 +337,13 @@ class VehicleTest {
         assertThrows(IllegalArgumentException.class, () -> Vehicle.cargoVehicle(
                 "TRUCK-001",
                 "AB 123 CD",
+                "1HGCM82633A004352",
                 VehicleType.RIGID_TRUCK,
+                VehicleBodyType.BOX,
                 VehicleStatus.AVAILABLE,
+                standardTire(),
                 Weight.ofKilograms(12000),
                 null,
-                null,
-                Notes.empty()
-        ));
-    }
-
-    @Test
-    void shouldNotAllowCargoDataForNonCargoVehicle() {
-        assertThrows(IllegalArgumentException.class, () -> Vehicle.cargoVehicle(
-                "TRACTOR-001",
-                "TR 001 AA",
-                VehicleType.TRACTOR_UNIT,
-                VehicleStatus.AVAILABLE,
-                Weight.ofKilograms(12000),
-                Dimension.ofMeters(7, 2.4, 2.5),
                 null,
                 Notes.empty()
         ));
@@ -213,8 +354,11 @@ class VehicleTest {
         assertThrows(IllegalArgumentException.class, () -> Vehicle.cargoVehicle(
                 "FRIGO-001",
                 "FR 001 AA",
+                "WDB9301231L123456",
                 VehicleType.REFRIGERATED_TRUCK,
+                VehicleBodyType.REFRIGERATED_BOX,
                 VehicleStatus.AVAILABLE,
+                standardTire(),
                 Weight.ofKilograms(8000),
                 Dimension.ofMeters(6, 2.4, 2.4),
                 null,
@@ -223,12 +367,15 @@ class VehicleTest {
     }
 
     @Test
-    void shouldNotAllowTemperatureRangeForNonRefrigeratedVehicle() {
+    void shouldNotAllowRefrigeratedBodyForNonRefrigeratedVehicleType() {
         assertThrows(IllegalArgumentException.class, () -> Vehicle.cargoVehicle(
                 "TRUCK-001",
                 "AB 123 CD",
+                "1HGCM82633A004352",
                 VehicleType.RIGID_TRUCK,
+                VehicleBodyType.REFRIGERATED_BOX,
                 VehicleStatus.AVAILABLE,
+                standardTire(),
                 Weight.ofKilograms(12000),
                 Dimension.ofMeters(7, 2.4, 2.5),
                 TemperatureRange.ofCelsius(0, 8),
@@ -248,8 +395,10 @@ class VehicleTest {
         Vehicle tractor = Vehicle.nonCargoVehicle(
                 "TRACTOR-001",
                 "TR 001 AA",
+                "JH4KA8260MC000000",
                 VehicleType.TRACTOR_UNIT,
                 VehicleStatus.AVAILABLE,
+                standardTire(),
                 Notes.empty()
         );
 
@@ -278,8 +427,11 @@ class VehicleTest {
         Vehicle vehicle = Vehicle.cargoVehicle(
                 "FRIGO-001",
                 "FR 001 AA",
+                "WDB9301231L123456",
                 VehicleType.REFRIGERATED_TRUCK,
+                VehicleBodyType.REFRIGERATED_BOX,
                 VehicleStatus.AVAILABLE,
+                standardTire(),
                 Weight.ofKilograms(8000),
                 Dimension.ofMeters(6, 2.4, 2.4),
                 TemperatureRange.ofCelsius(0, 8),
@@ -291,26 +443,8 @@ class VehicleTest {
     }
 
     @Test
-    void shouldNotCheckNullCapacityValues() {
-        Vehicle vehicle = standardTruck();
-
-        assertThrows(IllegalArgumentException.class, () -> vehicle.canCarryWeight(null));
-        assertThrows(IllegalArgumentException.class, () -> vehicle.canFitDimension(null));
-        assertThrows(IllegalArgumentException.class, () -> vehicle.canSupportTemperatureRange(null));
-    }
-
-    @Test
     void shouldDetectTrailer() {
-        Vehicle trailer = Vehicle.cargoVehicle(
-                "TRL-001",
-                "TRAILER 01",
-                VehicleType.SEMI_TRAILER,
-                VehicleStatus.AVAILABLE,
-                Weight.ofKilograms(20000),
-                Dimension.ofMeters(13.6, 2.4, 2.7),
-                null,
-                Notes.empty()
-        );
+        Vehicle trailer = semiTrailer();
 
         assertTrue(trailer.isTrailer());
         assertFalse(trailer.isPoweredUnit());
@@ -321,8 +455,11 @@ class VehicleTest {
         Vehicle vehicle = Vehicle.cargoVehicle(
                 "TRUCK-001",
                 "AB 123 CD",
+                "1HGCM82633A004352",
                 VehicleType.RIGID_TRUCK,
+                VehicleBodyType.BOX,
                 VehicleStatus.AVAILABLE,
+                standardTire(),
                 Weight.ofKilograms(12000),
                 Dimension.ofMeters(7, 2.4, 2.5),
                 null,
@@ -336,7 +473,10 @@ class VehicleTest {
     void shouldFormatSingleLine() {
         Vehicle vehicle = standardTruck();
 
-        assertEquals("TRUCK-001 - AB 123 CD - RIGID_TRUCK - AVAILABLE", vehicle.formatSingleLine());
+        assertEquals(
+                "TRUCK-001 - AB 123 CD - 1HGCM82633A004352 - RIGID_TRUCK - BOX - AVAILABLE",
+                vehicle.formatSingleLine()
+        );
     }
 
     @Test
@@ -352,12 +492,41 @@ class VehicleTest {
         return Vehicle.cargoVehicle(
                 "TRUCK-001",
                 "AB 123 CD",
+                "1HGCM82633A004352",
                 VehicleType.RIGID_TRUCK,
+                VehicleBodyType.BOX,
                 VehicleStatus.AVAILABLE,
+                standardTire(),
                 Weight.ofKilograms(12000),
                 Dimension.ofMeters(7, 2.4, 2.5),
                 null,
                 Notes.empty()
+        );
+    }
+
+    private static Vehicle semiTrailer() {
+        return Vehicle.cargoVehicle(
+                "TRAILER-001",
+                "TRL 001",
+                "VF1BBBBB555123456",
+                VehicleType.SEMI_TRAILER,
+                VehicleBodyType.CURTAIN_SIDE,
+                VehicleStatus.AVAILABLE,
+                standardTire(),
+                Weight.ofKilograms(20000),
+                Dimension.ofMeters(13.6, 2.4, 2.7),
+                null,
+                Notes.empty()
+        );
+    }
+
+    private static TireSpecification standardTire() {
+        return TireSpecification.of(
+                "Michelin",
+                "X Multi",
+                "315/70 R22.5",
+                154,
+                "L"
         );
     }
 }

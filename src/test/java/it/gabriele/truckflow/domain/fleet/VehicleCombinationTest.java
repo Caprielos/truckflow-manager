@@ -297,8 +297,11 @@ class VehicleCombinationTest {
         return Vehicle.cargoVehicle(
                 "TRUCK-001",
                 "AB 123 CD",
+                "1HGCM82633A004352",
                 VehicleType.RIGID_TRUCK,
+                VehicleBodyType.BOX,
                 VehicleStatus.AVAILABLE,
+                standardTire(),
                 Weight.ofKilograms(12000),
                 Dimension.ofMeters(7, 2.4, 2.5),
                 null,
@@ -310,8 +313,10 @@ class VehicleCombinationTest {
         return Vehicle.nonCargoVehicle(
                 "TRACTOR-001",
                 "TR 001 AA",
+                "JH4KA8260MC000000",
                 VehicleType.TRACTOR_UNIT,
                 VehicleStatus.AVAILABLE,
+                standardTire(),
                 Notes.empty()
         );
     }
@@ -320,8 +325,10 @@ class VehicleCombinationTest {
         return Vehicle.nonCargoVehicle(
                 "TRACTOR-002",
                 "TR 002 AA",
+                "JH4KA8260MC000001",
                 VehicleType.TRACTOR_UNIT,
                 VehicleStatus.ASSIGNED,
+                standardTire(),
                 Notes.empty()
         );
     }
@@ -330,8 +337,11 @@ class VehicleCombinationTest {
         return Vehicle.cargoVehicle(
                 "TRAILER-001",
                 "TRL 001",
+                "VF1BBBBB555123456",
                 VehicleType.SEMI_TRAILER,
+                VehicleBodyType.CURTAIN_SIDE,
                 VehicleStatus.AVAILABLE,
+                standardTire(),
                 Weight.ofKilograms(20000),
                 Dimension.ofMeters(13.6, 2.4, 2.7),
                 null,
@@ -343,12 +353,26 @@ class VehicleCombinationTest {
         return Vehicle.cargoVehicle(
                 "FRIGO-TRAILER-001",
                 "FTR 001",
+                "VF1CCCCC555123456",
                 VehicleType.REFRIGERATED_TRAILER,
+                VehicleBodyType.REFRIGERATED_BOX,
                 VehicleStatus.AVAILABLE,
+                standardTire(),
                 Weight.ofKilograms(18000),
                 Dimension.ofMeters(13.6, 2.4, 2.5),
                 TemperatureRange.ofCelsius(0, 8),
                 Notes.empty()
         );
     }
+    private static TireSpecification standardTire() {
+        return TireSpecification.of(
+                "Michelin",
+                "X Multi",
+                "315/70 R22.5",
+                154,
+                "L"
+        );
+    }
+
 }
+
