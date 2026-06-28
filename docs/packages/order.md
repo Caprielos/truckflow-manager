@@ -1,43 +1,19 @@
-# Package `order` — Order
+# Package `order` — Ordini di trasporto
 
-## Scopo
+Rappresenta la richiesta commerciale accettabile o rifiutabile prima di diventare spedizione.
 
-Gestisce la richiesta commerciale del cliente prima che diventi spedizione/missione.
+## Responsabilità
 
-## Concetti principali
+- TransportOrder nasce da cliente, cargo, pickup/delivery, finestre orarie e prezzo.
+- Solo un ordine ACCEPTED può generare una Shipment.
 
-- `TransportOrder`
-- `TransportOrderStatus`
-- `TransportServiceType`
+## Classi
 
-## Classi del package
+- `TransportOrder` — modello/domain object del package.
+- `TransportOrderStatus` — enum con valori: `DRAFT`, `SUBMITTED`, `ACCEPTED`, `REJECTED`, `CANCELLED`.
+- `TransportServiceType` — enum con valori: `STANDARD`, `EXPRESS`, `REFRIGERATED`, `HAZARDOUS`, `OVERSIZED`.
 
-| Classe | Tipo | Ruolo sintetico |
-|---|---|---|
-| `TransportOrder` | final class | Richiesta commerciale del cliente. |
-| `TransportOrderStatus` | enum | Enum di classificazione/valori ammessi. |
-| `TransportServiceType` | enum | Enum di classificazione/valori ammessi. |
+## Collegamenti
 
-## Enum e valori ammessi
-
-- `TransportOrderStatus`: `DRAFT`, `SUBMITTED`, `ACCEPTED`, `REJECTED`, `CANCELLED`
-- `TransportServiceType`: `STANDARD`, `EXPRESS`, `REFRIGERATED`, `HAZARDOUS`, `OVERSIZED`
-
-## Regole di business
-
-- Ordine passa da bozza/inviato/accettato/rifiutato/cancellato secondo transizioni coerenti.
-- Un ordine accettato può generare una spedizione.
-
-## Collegamenti con altri package
-
-- customer, cargo, location, shipment, pricing
-
-## Test collegati
-
-- `TransportOrderTest.java`
-
-## Note di progettazione
-
-Questo package appartiene al domain puro. Non deve contenere codice di database, API esterne, controller web, query SQL, repository concreti o logica di framework.
-
-Le regole devono rimanere testabili con JUnit senza avviare servizi esterni.
+- TransportOrder nasce da cliente, cargo, pickup/delivery, finestre orarie e prezzo.
+- Solo un ordine ACCEPTED può generare una Shipment.

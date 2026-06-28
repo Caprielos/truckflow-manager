@@ -1,47 +1,20 @@
-# Package `route` — Route
+# Package `route` — Piani di viaggio
 
-## Scopo
+Modella soste, pickup, delivery, pause, carburante e sequenza di viaggio.
 
-Gestisce piano percorso, fermate, pickup, delivery e stop intermedi.
+## Responsabilità
 
-## Concetti principali
+- RoutePlan entra nella TransportMission.
+- RouteStop permette pickup, delivery, fuel stop, rest break e fine viaggio.
 
-- `RoutePlan`
-- `RouteStop`
-- `RouteStopType`
-- `RoutePlanRules`
+## Classi
 
-## Classi del package
+- `RoutePlan` — modello/domain object del package.
+- `RoutePlanRules` — classe di regole pure del package.
+- `RouteStop` — modello/domain object del package.
+- `RouteStopType` — enum con valori: `START`, `PICKUP`, `DELIVERY`, `REST_BREAK`, `FUEL_STOP`, `END`.
 
-| Classe | Tipo | Ruolo sintetico |
-|---|---|---|
-| `RoutePlan` | final class | Entity o value object del package. |
-| `RoutePlanRules` | final class | Classe statica di regole di business del package. |
-| `RouteStop` | final class | Entity o value object del package. |
-| `RouteStopType` | enum | Enum di classificazione/valori ammessi. |
+## Collegamenti
 
-## Enum e valori ammessi
-
-- `RouteStopType`: `START`, `PICKUP`, `DELIVERY`, `REST_BREAK`, `FUEL_STOP`, `END`
-
-## Regole di business
-
-- Fermate hanno ordine logico.
-- Pickup e delivery devono essere coerenti.
-- Il percorso può essere base per costi, tempi e tracking.
-
-## Collegamenti con altri package
-
-- location, operation, pricing, drivetime
-
-## Test collegati
-
-- `RoutePlanRulesTest.java`
-- `RoutePlanTest.java`
-- `RouteStopTest.java`
-
-## Note di progettazione
-
-Questo package appartiene al domain puro. Non deve contenere codice di database, API esterne, controller web, query SQL, repository concreti o logica di framework.
-
-Le regole devono rimanere testabili con JUnit senza avviare servizi esterni.
+- RoutePlan entra nella TransportMission.
+- RouteStop permette pickup, delivery, fuel stop, rest break e fine viaggio.

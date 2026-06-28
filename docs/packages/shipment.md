@@ -1,43 +1,27 @@
-# Package `shipment` — Shipment
+# Package `shipment` — Spedizioni
 
-## Scopo
+Rappresenta la spedizione generata da un ordine accettato. È il collegamento commerciale/logistico tra ordine e missione operativa.
 
-Rappresenta la spedizione logistica derivata da un ordine accettato.
+## Responsabilità
 
-## Concetti principali
+- Shipment nasce solo da TransportOrder ACCEPTED.
+- Shipment rimane commerciale/logistica; TransportMission gestisce driver, mezzo e rotta reale.
+- Il vecchio package fuori da domain è stato eliminato: ora esiste una sola sorgente corretta.
 
-- `Shipment`
-- `ShipmentStatus`
-- `ShipmentRules`
+## Classi
 
-## Classi del package
+- `Shipment` — modello/domain object del package.
+- `ShipmentRules` — classe di regole pure del package.
+- `ShipmentStatus` — enum con valori: `CREATED`, `PLANNED`, `DISPATCHED`, `IN_TRANSIT`, `DELIVERED`, `CANCELLED`.
 
-| Classe | Tipo | Ruolo sintetico |
-|---|---|---|
-| `Shipment` | final class | Spedizione accettata derivata da ordine. |
-| `ShipmentRules` | final class | Classe statica di regole di business del package. |
-| `ShipmentStatus` | enum | Enum di classificazione/valori ammessi. |
+## Regole importanti
 
-## Enum e valori ammessi
+- Una Shipment può essere creata solo da un TransportOrder ACCEPTED.
+- Transizioni valide: CREATED → PLANNED → DISPATCHED → IN_TRANSIT → DELIVERED.
+- CANCELLED è consentito solo se la spedizione non è terminale.
 
-- `ShipmentStatus`: `CREATED`, `PLANNED`, `DISPATCHED`, `IN_TRANSIT`, `DELIVERED`, `CANCELLED`
+## Collegamenti
 
-## Regole di business
-
-- Una spedizione nasce da un ordine accettato.
-- Segue stati operativi propri separati dalla missione.
-
-## Collegamenti con altri package
-
-- order, cargo, operation, tracking, document
-
-## Test collegati
-
-- `ShipmentRulesTest.java`
-- `ShipmentTest.java`
-
-## Note di progettazione
-
-Questo package appartiene al domain puro. Non deve contenere codice di database, API esterne, controller web, query SQL, repository concreti o logica di framework.
-
-Le regole devono rimanere testabili con JUnit senza avviare servizi esterni.
+- Shipment nasce solo da TransportOrder ACCEPTED.
+- Shipment rimane commerciale/logistica; TransportMission gestisce driver, mezzo e rotta reale.
+- Il vecchio package fuori da domain è stato eliminato: ora esiste una sola sorgente corretta.

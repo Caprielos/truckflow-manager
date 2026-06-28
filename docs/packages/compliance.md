@@ -1,38 +1,17 @@
-# Package `compliance` — Compliance
+# Package `compliance` — Compliance trasversale
 
-## Scopo
+Contiene regole che incrociano cargo, driver, veicolo e documenti.
 
-Coordina controlli di conformità tra merce, mezzo, autista, documenti e regole generali.
+## Responsabilità
 
-## Concetti principali
+- Incrocia requisiti di merce, autista, veicolo e documenti.
+- È la base per un futuro controllo mission readiness.
 
-- `ComplianceRules`
+## Classi
 
-## Classi del package
+- `ComplianceRules` — classe di regole pure del package.
 
-| Classe | Tipo | Ruolo sintetico |
-|---|---|---|
-| `ComplianceRules` | final class | Classe statica di regole di business del package. |
+## Collegamenti
 
-## Enum e valori ammessi
-
-_Nessuna enum nel package._
-
-## Regole di business
-
-- Verifica se un carico richiede ADR, ATP, documenti o qualifiche speciali.
-- Centralizza controlli trasversali senza spostare logica tecnica fuori dai package proprietari.
-
-## Collegamenti con altri package
-
-- cargo, driver, fleet, document, company, operation
-
-## Test collegati
-
-- `ComplianceRulesTest.java`
-
-## Note di progettazione
-
-Questo package appartiene al domain puro. Non deve contenere codice di database, API esterne, controller web, query SQL, repository concreti o logica di framework.
-
-Le regole devono rimanere testabili con JUnit senza avviare servizi esterni.
+- Incrocia requisiti di merce, autista, veicolo e documenti.
+- È la base per un futuro controllo mission readiness.

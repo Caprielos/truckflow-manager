@@ -1,59 +1,70 @@
 # Project Overview
 
-## Cos’è TruckFlow Manager
+## Obiettivo
 
-TruckFlow Manager è un gestionale per autotrasporto e fleet management.
+**TruckFlow Manager** vuole rappresentare il cuore di un sistema TMS/FMS realistico, cioè un software per gestire trasporti, spedizioni, mezzi, autisti, documenti, costi e operazioni quotidiane di una flotta.
 
-L’obiettivo non è solo registrare camion e viaggi, ma rappresentare l’intero ciclo operativo:
+Il progetto non è un semplice CRUD. Il valore principale è nel dominio:
 
-1. cliente richiede un trasporto;
-2. il trasporto diventa ordine;
-3. l’ordine accettato diventa spedizione;
-4. la spedizione viene assegnata a missione;
-5. la missione richiede autista, mezzo/convoglio, documenti, regole di compliance, tracking e costi;
-6. la flotta viene mantenuta nel tempo con manutenzioni, gomme, carburante, telematica e sinistri.
+- validare dati importanti;
+- modellare i concetti reali del trasporto;
+- impedire stati incoerenti;
+- preparare regole riutilizzabili dall'application layer;
+- separare ciò che è commerciale da ciò che è operativo;
+- mantenere indipendenza da database e framework.
 
-## Filosofia del progetto
+## Cosa contiene adesso
 
-Il domain è stato costruito con una logica realistica:
+Il dominio copre:
 
-- la merce determina molti vincoli;
-- il mezzo non è una macro-categoria unica, ma una composizione tecnica;
-- il convoglio è distinto dal singolo mezzo;
-- l’autista non ha solo una patente, ma anche certificati e abilitazioni;
-- l’azienda deve avere licenze;
-- i documenti dipendono dal tipo di missione e dal tipo merce;
-- costi, manutenzione e telematica sono parte della vita reale della flotta.
+- clienti, contatti e account;
+- ordini di trasporto;
+- spedizioni;
+- missioni operative;
+- carichi e merci speciali;
+- ADR, temperatura controllata, rifiuti, animali vivi, liquidi alimentari;
+- flotta con veicoli, allestimenti, assi, masse, dimensioni, agganci e certificati;
+- convogli: veicolo singolo, autotreno, articolato;
+- autisti con patenti, CQC, ADR, qualifiche e certificati a scadenza;
+- azienda di trasporto e licenze operative;
+- documenti di trasporto;
+- disponibilità risorse;
+- tracking operativo;
+- telematica;
+- carburante;
+- pneumatici;
+- manutenzione e downtime;
+- fissaggio carico;
+- reclami e danni;
+- pricing e billing;
+- sostenibilità;
+- notifiche;
+- audit;
+- identity;
+- configuration;
+- reporting.
 
-## Concetto centrale
+## Numeri del progetto documentato
 
-La missione reale nasce dall’incrocio di:
+- Package domain: **31**
+- Classi Java nel domain: **187**
+- Test class rilevate: **74**
+- Test rilevati dai report presenti nello zip: **788**
+- Failure/Error nei report presenti: **0**
+
+Nota: la documentazione è stata generata analizzando il codice sorgente e i report già presenti nello zip. Nel mio ambiente non è disponibile Maven, quindi il comando finale `mvn clean test` va sempre eseguito localmente.
+
+## Filosofia progettuale
+
+Il dominio deve essere abbastanza realistico da sembrare un sistema aziendale vero, ma non deve diventare confuso. Ogni package deve avere una responsabilità precisa.
+
+Esempio:
 
 ```text
-Cargo
-+ Vehicle / VehicleCombination
-+ Driver
-+ Company
-+ Documents
-+ Route
-+ Compliance
-+ Pricing
+Shipment  = spedizione commerciale/logistica
+Mission   = esecuzione operativa reale
+Vehicle   = mezzo fisico
+Tire      = gomma fisica tracciabile
+Document  = evidenza/documento richiesto
+Compliance = regole che incrociano requisiti diversi
 ```
-
-Se anche uno di questi blocchi non è conforme, la missione non dovrebbe partire.
-
-## Perché il domain è separato
-
-Il domain non conosce:
-
-- database;
-- REST API;
-- frontend;
-- Spring;
-- JPA;
-- Google Maps;
-- provider GPS;
-- provider route cost;
-- file system.
-
-Questo permette di testare le regole in modo veloce e stabile con JUnit.

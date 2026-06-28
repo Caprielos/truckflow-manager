@@ -1,52 +1,22 @@
-# Package `customer` — Customer
+# Package `customer` — Clienti e account
 
-## Scopo
+Gestisce cliente, stato commerciale, account operativo e contatti per logistica, amministrazione e fatturazione.
 
-Gestisce cliente, account e contatti commerciali/operativi.
+## Responsabilità
 
-## Concetti principali
+- CustomerAccount viene usato da TransportOrder.
+- CustomerContact può ricevere notifiche e documenti.
 
-- `Customer`
-- `CustomerAccount`
-- `CustomerContact`
-- `CustomerContactRole`
-- `CustomerStatus`
-- `CustomerType`
+## Classi
 
-## Classi del package
+- `Customer` — modello/domain object del package.
+- `CustomerAccount` — modello/domain object del package.
+- `CustomerContact` — modello/domain object del package.
+- `CustomerContactRole` — enum con valori: `LOGISTICS`, `ADMINISTRATION`, `BILLING`, `OPERATIONS`, `SALES`, `MANAGEMENT`, `OTHER`.
+- `CustomerStatus` — enum con valori: `ACTIVE`, `INACTIVE`, `SUSPENDED`.
+- `CustomerType` — enum con valori: `INDIVIDUAL`, `COMPANY`, `PUBLIC_AUTHORITY`, `INTERNAL`.
 
-| Classe | Tipo | Ruolo sintetico |
-|---|---|---|
-| `Customer` | final class | Entity o value object del package. |
-| `CustomerAccount` | final class | Entity o value object del package. |
-| `CustomerContact` | final class | Entity o value object del package. |
-| `CustomerContactRole` | enum | Enum di classificazione/valori ammessi. |
-| `CustomerStatus` | enum | Enum di classificazione/valori ammessi. |
-| `CustomerType` | enum | Enum di classificazione/valori ammessi. |
+## Collegamenti
 
-## Enum e valori ammessi
-
-- `CustomerContactRole`: `LOGISTICS`, `ADMINISTRATION`, `BILLING`, `OPERATIONS`, `SALES`, `MANAGEMENT`, `OTHER`
-- `CustomerStatus`: `ACTIVE`, `INACTIVE`, `SUSPENDED`
-- `CustomerType`: `INDIVIDUAL`, `COMPANY`, `PUBLIC_AUTHORITY`, `INTERNAL`
-
-## Regole di business
-
-- Un cliente ha stato, tipo, contatti e account.
-- I contatti hanno ruoli come amministrativo, operativo o fatturazione.
-
-## Collegamenti con altri package
-
-- order, billing, notification
-
-## Test collegati
-
-- `CustomerAccountTest.java`
-- `CustomerContactTest.java`
-- `CustomerTest.java`
-
-## Note di progettazione
-
-Questo package appartiene al domain puro. Non deve contenere codice di database, API esterne, controller web, query SQL, repository concreti o logica di framework.
-
-Le regole devono rimanere testabili con JUnit senza avviare servizi esterni.
+- CustomerAccount viene usato da TransportOrder.
+- CustomerContact può ricevere notifiche e documenti.

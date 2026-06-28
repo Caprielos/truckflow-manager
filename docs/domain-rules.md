@@ -1,93 +1,49 @@
 # Domain Rules
 
-## Regole generali
+Questo documento raccoglie le regole principali distribuite nei package `*Rules` e nelle entity/value object.
 
-1. Il domain deve rimanere puro Java.
-2. Le regole di business devono stare nel domain.
-3. Database, API, file, Spring, JPA e web non devono entrare nel domain.
-4. Le Entity hanno identità.
-5. I Value Object sono immutabili e validano i dati.
-6. Le Rules sono classi statiche senza stato.
-7. Le enum rappresentano scelte chiuse, non dati tecnici variabili.
-8. I dati tecnici reali devono stare in value object o entity, non in enum enormi.
+## cargo
+- La categoria merce determina requisiti operativi e documentali.
+- ADR e profilo dangerous goods restano separati dai colli ordinari.
 
-## Regola su Vehicle
+## company
+- Il trasporto internazionale richiede licenze aziendali valide.
+- Il trasporto rifiuti richiede categorie ambientali coerenti.
 
-Il mezzo non deve essere descritto con una sola macro-categoria.
+## driver
+- Il driver può avere vecchie categorie compatibili e nuovi certificati con validità temporale.
+- La CQC e l’ADR non sono semplici booleani: sono requisiti professionali/documentali.
 
-Modello corretto:
+## fleet
+- Il modello realistico distingue unità veicolo, allestimento, massa, dimensione, assi, aggancio e certificati.
+- Il refrigerato è un allestimento/certificazione, non un tipo veicolo separato.
+- Le combinazioni calcolano tipo, assi totali, massa complessiva e scadenze certificate.
 
-```text
-Vehicle
-├── VehicleUnitType / VehicleType
-├── VehicleStatus
-├── VehicleTechnicalSpecification
-├── VehicleBodyConfiguration
-├── VehicleCertificate
-└── Notes
-```
+## fuel
+- Consumi fuori soglia sono anomalie, non errori matematici.
+- La differenza odometrica deve essere coerente tra rifornimenti.
 
-`VehicleType` rimane come compatibilità/ponte verso il modello storico, ma il modello realistico usa `VehicleUnitType`, `VehicleBodyConfiguration` e `VehicleTechnicalSpecification`.
+## loadsecurity
+- La dotazione minima dipende da tipo merce e peso.
+- La checklist non sostituisce la missione, la abilita.
 
-## Regola su Cargo
+## maintenance
+- Work order e downtime sono separati: uno è intervento, l’altro è indisponibilità del mezzo.
+- Ticket autista permette segnalazioni dal campo.
 
-La merce guida il sistema.
+## shared
+- Valori nulli, vuoti o negativi vengono rifiutati quando non ammessi.
+- Ogni value object espone factory statiche leggibili.
 
-Esempi:
+## shipment
+- Una Shipment può essere creata solo da un TransportOrder ACCEPTED.
+- Transizioni valide: CREATED → PLANNED → DISPATCHED → IN_TRANSIT → DELIVERED.
+- CANCELLED è consentito solo se la spedizione non è terminale.
 
-- ADR richiede profilo ADR, autista ADR e mezzo/cisterna idonea.
-- Frigo/isotermico richiede temperatura, ATP e allestimento compatibile.
-- Rifiuti richiedono EER/CER, FIR e licenza aziendale.
-- Animali vivi richiedono idoneità conducente e documentazione veterinaria.
-- Merci pallettizzate usano capacità EPAL.
-- Merci sfuse usano volume e allestimenti come ribaltabile, silo o walking floor.
+## telematics
+- Fuel drop e speeding sono eventi rilevabili da regole pure.
+- Snapshot e behavior event restano separati da mission/tracking.
 
-## Regola su Driver
-
-La patente dipende da peso e combinazione.
-
-Le abilitazioni dipendono da trasporto e operazioni:
-
-- CQC per guida professionale merci.
-- ADR per merci pericolose.
-- Gru, PLE, muletto, macchine movimento terra per operazioni specifiche.
-- Animali vivi per trasporto bestiame.
-- Temperatura controllata per frigo/farmaceutico.
-
-## Regola su Company
-
-L’azienda deve essere autorizzata al tipo di trasporto.
-
-Esempi:
-
-- internazionale UE sopra soglie previste → licenza comunitaria;
-- rifiuti → Albo Gestori Ambientali;
-- conto proprio → licenza conto proprio;
-- autotrasporto conto terzi → Albo + REN.
-
-## Regola su Documents
-
-I documenti dipendono dalla missione.
-
-Esempi:
-
-- CMR per estero;
-- FIR per rifiuti;
-- SDS/Tremcards per ADR;
-- HACCP/sanificazione per alimentare;
-- veterinari per animali vivi;
-- autorizzazione per trasporto eccezionale.
-
-## Regola su Fleet Operations
-
-Manutenzione, gomme, carburante e telematica non devono gonfiare `Vehicle`.
-
-Sono moduli collegati al mezzo:
-
-```text
-Vehicle -> Maintenance
-Vehicle -> Tire
-Vehicle -> Fuel
-Vehicle -> Telematics
-Vehicle -> Claim
-```
+## tire
+- Una gomma fisica può cambiare veicolo e posizione.
+- Il battistrada minimo genera alert/sostituzione.

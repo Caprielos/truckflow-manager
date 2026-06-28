@@ -1,51 +1,29 @@
-# Package `maintenance` — Maintenance
+# Package `maintenance` — Manutenzione e downtime
 
-## Scopo
+Gestisce work order, scadenze manutentive, ticket autista, fermo mezzo e tipologie intervento.
 
-Gestisce manutenzioni preventive, straordinarie, ticket autista e fermi macchina.
+## Responsabilità
 
-## Concetti principali
+- MaintenanceWorkOrder registra interventi.
+- DriverDefectTicket collega segnalazioni autista alla manutenzione.
+- VehicleDowntime misura fermo tecnico.
 
-- `MaintenanceWorkOrder`
-- `MaintenanceType`
-- `MaintenanceStatus`
-- `MaintenanceRules`
-- `DriverDefectTicket`
-- `VehicleDowntime`
+## Classi
 
-## Classi del package
+- `DriverDefectTicket` — modello/domain object del package.
+- `MaintenanceRules` — classe di regole pure del package.
+- `MaintenanceStatus` — enum con valori: `OPEN`, `SCHEDULED`, `IN_PROGRESS`, `COMPLETED`, `CANCELLED`.
+- `MaintenanceType` — enum con valori: `ROUTINE_SERVICE`, `SAFETY_INSPECTION`, `TIRE_REPLACEMENT`, `REPAIR`, `REFRIGERATION_UNIT_SERVICE`, `ADR_TANK_INSPECTION`, `BREAKDOWN`, `ENGINE_SERVICE`, `AIR_DRYER_FILTER_REPLACEMENT`, `BRAKE_WEAR_CHECK`, `TIRE_ROTATION`, `DRIVER_DEFECT_TICKET`, `DOWNTIME`.
+- `MaintenanceWorkOrder` — modello/domain object del package.
+- `VehicleDowntime` — modello/domain object del package.
 
-| Classe | Tipo | Ruolo sintetico |
-|---|---|---|
-| `DriverDefectTicket` | final class | Segnalazione guasto/difetto fatta dall’autista. |
-| `MaintenanceRules` | final class | Classe statica di regole di business del package. |
-| `MaintenanceStatus` | enum | Enum di classificazione/valori ammessi. |
-| `MaintenanceType` | enum | Enum di classificazione/valori ammessi. |
-| `MaintenanceWorkOrder` | final class | Ordine di manutenzione. |
-| `VehicleDowntime` | final class | Periodo di fermo macchina. |
+## Regole importanti
 
-## Enum e valori ammessi
+- Work order e downtime sono separati: uno è intervento, l’altro è indisponibilità del mezzo.
+- Ticket autista permette segnalazioni dal campo.
 
-- `MaintenanceStatus`: `OPEN`, `SCHEDULED`, `IN_PROGRESS`, `COMPLETED`, `CANCELLED`
-- `MaintenanceType`: `ROUTINE_SERVICE`, `SAFETY_INSPECTION`, `TIRE_REPLACEMENT`, `REPAIR`, `REFRIGERATION_UNIT_SERVICE`, `ADR_TANK_INSPECTION`, `BREAKDOWN`, `ENGINE_SERVICE`, `AIR_DRYER_FILTER_REPLACEMENT`, `BRAKE_WEAR_CHECK`, `TIRE_ROTATION`, `DRIVER_DEFECT_TICKET`, `DOWNTIME`
+## Collegamenti
 
-## Regole di business
-
-- Manutenzioni possono essere pianificate per km/data o generate da guasto.
-- Un mezzo in fermo macchina o manutenzione non dovrebbe essere assegnabile.
-- Costi e tempi permettono calcolo del costo di indisponibilità.
-
-## Collegamenti con altri package
-
-- fleet, availability, tire, claim, pricing
-
-## Test collegati
-
-- `MaintenanceRulesTest.java`
-- `MaintenanceWorkOrderTest.java`
-
-## Note di progettazione
-
-Questo package appartiene al domain puro. Non deve contenere codice di database, API esterne, controller web, query SQL, repository concreti o logica di framework.
-
-Le regole devono rimanere testabili con JUnit senza avviare servizi esterni.
+- MaintenanceWorkOrder registra interventi.
+- DriverDefectTicket collega segnalazioni autista alla manutenzione.
+- VehicleDowntime misura fermo tecnico.

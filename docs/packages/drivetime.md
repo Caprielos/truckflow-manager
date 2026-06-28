@@ -1,39 +1,17 @@
-# Package `drivetime` — Driver Time
+# Package `drivetime` — Tempi guida/riposo
 
-## Scopo
+Contiene regole pure per limiti di guida, pause e riposi, preparate per una futura pianificazione più realistica.
 
-Contiene regole base sui tempi di guida e riposo per la pianificazione del viaggio.
+## Responsabilità
 
-## Concetti principali
+- Supporta planning operativo e mission readiness.
+- In futuro userà tachigrafo e log reali.
 
-- `DriverTimeRules`
+## Classi
 
-## Classi del package
+- `DriverTimeRules` — classe di regole pure del package.
 
-| Classe | Tipo | Ruolo sintetico |
-|---|---|---|
-| `DriverTimeRules` | final class | Classe statica di regole di business del package. |
+## Collegamenti
 
-## Enum e valori ammessi
-
-_Nessuna enum nel package._
-
-## Regole di business
-
-- Guida giornaliera ordinaria 9 ore, estensione a 10 in casi controllati.
-- Pausa dopo 4h30 di guida e riposo giornaliero minimo.
-- Limiti settimanali e bisettimanali usati per planning futuro.
-
-## Collegamenti con altri package
-
-- driver, route, operation, planning futuro
-
-## Test collegati
-
-- `DriverTimeRulesTest.java`
-
-## Note di progettazione
-
-Questo package appartiene al domain puro. Non deve contenere codice di database, API esterne, controller web, query SQL, repository concreti o logica di framework.
-
-Le regole devono rimanere testabili con JUnit senza avviare servizi esterni.
+- Supporta planning operativo e mission readiness.
+- In futuro userà tachigrafo e log reali.

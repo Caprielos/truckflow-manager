@@ -1,43 +1,19 @@
-# Package `operation` — Operation
+# Package `operation` — Missioni operative
 
-## Scopo
+Rappresenta l’esecuzione reale: spedizione + route plan + convoglio + autista + stato operativo.
 
-Rappresenta la missione reale: il viaggio operativo eseguito con autista, mezzo/convoglio e percorso.
+## Responsabilità
 
-## Concetti principali
+- TransportMission combina Shipment, RoutePlan, VehicleCombination e Driver.
+- È il punto operativo dove la spedizione diventa viaggio reale.
 
-- `TransportMission`
-- `TransportMissionStatus`
-- `TransportMissionRules`
+## Classi
 
-## Classi del package
+- `TransportMission` — modello/domain object del package.
+- `TransportMissionRules` — classe di regole pure del package.
+- `TransportMissionStatus` — enum con valori: `PLANNED`, `DISPATCHED`, `IN_PROGRESS`, `COMPLETED`, `CANCELLED`.
 
-| Classe | Tipo | Ruolo sintetico |
-|---|---|---|
-| `TransportMission` | final class | Missione operativa reale. |
-| `TransportMissionRules` | final class | Classe statica di regole di business del package. |
-| `TransportMissionStatus` | enum | Enum di classificazione/valori ammessi. |
+## Collegamenti
 
-## Enum e valori ammessi
-
-- `TransportMissionStatus`: `PLANNED`, `DISPATCHED`, `IN_PROGRESS`, `COMPLETED`, `CANCELLED`
-
-## Regole di business
-
-- Una missione non è una richiesta commerciale: è il lavoro reale da pianificare/eseguire.
-- Le assegnazioni devono rispettare disponibilità, compatibilità e compliance.
-
-## Collegamenti con altri package
-
-- shipment, driver, fleet, route, document, tracking, pricing
-
-## Test collegati
-
-- `TransportMissionRulesTest.java`
-- `TransportMissionTest.java`
-
-## Note di progettazione
-
-Questo package appartiene al domain puro. Non deve contenere codice di database, API esterne, controller web, query SQL, repository concreti o logica di framework.
-
-Le regole devono rimanere testabili con JUnit senza avviare servizi esterni.
+- TransportMission combina Shipment, RoutePlan, VehicleCombination e Driver.
+- È il punto operativo dove la spedizione diventa viaggio reale.

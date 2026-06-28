@@ -1,110 +1,73 @@
 # Domain Overview
 
-## Ragionamento generale
+## Mappa mentale del dominio
 
-TruckFlow Manager è stato modellato come dominio logistico realistico.
-
-La regola principale è:
+Il dominio segue un flusso realistico:
 
 ```text
-Non si forza la realtà dentro una sola enum.
-Si separano i concetti reali.
+Customer
+  ↓
+TransportOrder
+  ↓ ordine accettato
+Shipment
+  ↓ pianificazione operativa
+TransportMission
+  ↓ usa
+RoutePlan + VehicleCombination + Driver
+  ↓ controlla
+Cargo + Documents + Company + Compliance + Availability
+  ↓ durante il viaggio
+Tracking + Telematics + Fuel
+  ↓ dopo/durante
+Billing + Claim + Reporting + Audit
 ```
 
-Esempio nel fleet:
+## Differenza tra concetti simili
+
+### TransportOrder
+
+È la richiesta commerciale: cliente, merce, pickup, delivery, prezzo e tipo servizio.
+
+### Shipment
+
+È la spedizione nata da un ordine accettato. Tiene lo stato logistico della spedizione.
+
+### TransportMission
+
+È il viaggio reale pianificato/eseguito. Qui entrano driver, mezzo/convoglio e rotta.
+
+### Vehicle
+
+È il mezzo fisico: furgone, motrice, trattore, rimorchio, semirimorchio.
+
+### VehicleCombination
+
+È la combinazione operativa: mezzo singolo, autotreno, articolato.
+
+### Tire
+
+È una gomma fisica tracciabile. Non è un semplice campo del veicolo.
+
+### Driver
+
+È la persona/autista. Non è l'account software.
+
+### UserAccount
+
+È l'utente applicativo che accede al sistema.
+
+## Modello realistico
+
+Il progetto ora evita semplificazioni troppo finte.
+
+Esempio: un mezzo refrigerato non è un tipo separato assoluto. È una combinazione di:
 
 ```text
 VehicleUnitType
-→ che unità fisica è
-
 VehicleBodyConfiguration
-→ che allestimento ha
-
-VehicleTechnicalSpecification
-→ quali dati tecnici possiede
-
-VehicleCertificate
-→ quali certificati e scadenze ha
-
-VehicleCombination
-→ come viene agganciato in un convoglio
+VehicleCertificate ATP
+VehicleTechnicalFeature ACTIVE_REFRIGERATION
+TemperatureRange / cargo requirement
 ```
 
-## Merce come centro delle regole
-
-La merce non è una descrizione libera.
-
-La categoria merce attiva vincoli:
-
-- pallet;
-- temperatura;
-- ADR;
-- EER/CER rifiuti;
-- FIR;
-- ATP;
-- HACCP;
-- documentazione veterinaria;
-- allestimento compatibile;
-- driver qualificato;
-- azienda autorizzata;
-- surcharge di pricing.
-
-## Mezzi e convogli
-
-Un mezzo singolo è `Vehicle`.
-
-Un convoglio è `VehicleCombination`.
-
-Esempi:
-
-```text
-Autocarro singolo
-→ VehicleCombinationType.SINGLE_VEHICLE
-
-Autotreno
-→ RIGID_TRUCK + DRAWBAR_TRAILER / CENTER_AXLE_TRAILER
-→ VehicleCombinationType.TRUCK_AND_TRAILER
-
-Bilico / autoarticolato
-→ TRACTOR_UNIT + SEMI_TRAILER
-→ VehicleCombinationType.ARTICULATED_VEHICLE
-```
-
-## Autista
-
-L’autista non è solo una persona con patente.
-
-Può avere:
-
-- patenti B, C1, C, BE, C1E, CE;
-- CQC merci;
-- ADR base/cisterne/classe 1/classe 7;
-- patentini operativi;
-- certificati con scadenza;
-- stato operativo.
-
-## Azienda
-
-L’azienda può avere licenze:
-
-- Albo Autotrasportatori;
-- REN;
-- licenza comunitaria;
-- conto proprio;
-- Albo Gestori Ambientali.
-
-## Missione
-
-La missione è il punto dove tutto si incontra.
-
-Una missione corretta deve rispettare:
-
-- compatibilità merce/allestimento;
-- idoneità driver;
-- idoneità veicolo/convoglio;
-- licenze azienda;
-- documenti obbligatori;
-- disponibilità;
-- manutenzione/scadenze;
-- tempi guida;
-- costi e marginalità.
+Questa modellazione è più vicina alla realtà.

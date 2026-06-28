@@ -1,53 +1,22 @@
-# Package `pricing` — Pricing
+# Package `pricing` — Preventivazione costi
 
-## Scopo
+Modella stima costi rotta, breakdown prezzo e righe economiche: base freight, fuel surcharge, pedaggi, ADR, temperatura.
 
-Gestisce preventivi, breakdown prezzo, costi tratta, supplementi e sconti.
+## Responsabilità
 
-## Concetti principali
+- RouteCostEstimate genera costi tecnici.
+- PriceBreakdown aggrega righe prezzo per preventivo o fattura.
 
-- `RouteCostEstimate`
-- `PricingLine`
-- `PriceBreakdown`
-- `PricingRules`
-- `PricingLineType`
-- `CostEstimationSource`
+## Classi
 
-## Classi del package
+- `CostEstimationSource` — enum con valori: `MANUAL`, `INTERNAL_MODEL`, `VIAMICHELIN`, `HERE_MAPS`, `PTV`, `GOOGLE_MAPS`, `OTHER_EXTERNAL_PROVIDER`.
+- `PriceBreakdown` — modello/domain object del package.
+- `PricingLine` — modello/domain object del package.
+- `PricingLineType` — enum con valori: `BASE_FREIGHT`, `DISTANCE_CHARGE`, `FUEL_SURCHARGE`, `TOLL_CHARGE`, `VEHICLE_WEAR_CHARGE`, `ADR_SURCHARGE`, `TEMPERATURE_CONTROL_SURCHARGE`, `WAITING_TIME_CHARGE`, `HANDLING_CHARGE`, `DISCOUNT`.
+- `PricingRules` — classe di regole pure del package.
+- `RouteCostEstimate` — modello/domain object del package.
 
-| Classe | Tipo | Ruolo sintetico |
-|---|---|---|
-| `CostEstimationSource` | enum | Enum di classificazione/valori ammessi. |
-| `PriceBreakdown` | final class | Entity o value object del package. |
-| `PricingLine` | final class | Entity o value object del package. |
-| `PricingLineType` | enum | Enum di classificazione/valori ammessi. |
-| `PricingRules` | final class | Classe statica di regole di business del package. |
-| `RouteCostEstimate` | final class | Entity o value object del package. |
+## Collegamenti
 
-## Enum e valori ammessi
-
-- `CostEstimationSource`: `MANUAL`, `INTERNAL_MODEL`, `VIAMICHELIN`, `HERE_MAPS`, `PTV`, `GOOGLE_MAPS`, `OTHER_EXTERNAL_PROVIDER`
-- `PricingLineType`: `BASE_FREIGHT`, `DISTANCE_CHARGE`, `FUEL_SURCHARGE`, `TOLL_CHARGE`, `VEHICLE_WEAR_CHARGE`, `ADR_SURCHARGE`, `TEMPERATURE_CONTROL_SURCHARGE`, `WAITING_TIME_CHARGE`, `HANDLING_CHARGE`, `DISCOUNT`
-
-## Regole di business
-
-- Costi carburante, pedaggi, usura, ADR, frigo, attesa e handling sono linee separate.
-- Sconti e surcharge sono distinguibili.
-- Fonti esterne di stima strada restano fuori dal domain.
-
-## Collegamenti con altri package
-
-- route, fleet, cargo, fuel, billing
-
-## Test collegati
-
-- `PriceBreakdownTest.java`
-- `PricingLineTest.java`
-- `PricingRulesTest.java`
-- `RouteCostEstimateTest.java`
-
-## Note di progettazione
-
-Questo package appartiene al domain puro. Non deve contenere codice di database, API esterne, controller web, query SQL, repository concreti o logica di framework.
-
-Le regole devono rimanere testabili con JUnit senza avviare servizi esterni.
+- RouteCostEstimate genera costi tecnici.
+- PriceBreakdown aggrega righe prezzo per preventivo o fattura.

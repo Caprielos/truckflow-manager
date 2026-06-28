@@ -1,65 +1,31 @@
-# Package `shared` — Shared
+# Package `shared` — Value Object comuni
 
-## Scopo
+Contiene tipi immutabili e validati usati da tutto il dominio: peso, denaro, distanze, volumi, dimensioni, finestre temporali, range date, temperatura e note.
 
-Contiene value object riutilizzabili e puri come peso, distanza, denaro, volume, dimensioni e finestre temporali.
+## Responsabilità
 
-## Concetti principali
+- Usato da quasi tutti i package.
+- Evita primitive obsession: non si passa un double generico quando serve Weight, Money o Distance.
 
-- `Weight`
-- `Distance`
-- `Volume`
-- `Dimension`
-- `Money`
-- `Percentage`
-- `TemperatureRange`
-- `TimeWindow`
-- `DateRange`
-- `Notes`
+## Classi
 
-## Classi del package
+- `DateRange` — modello/domain object del package.
+- `Dimension` — modello/domain object del package.
+- `Distance` — modello/domain object del package.
+- `Money` — modello/domain object del package.
+- `Notes` — modello/domain object del package.
+- `Percentage` — modello/domain object del package.
+- `TemperatureRange` — modello/domain object del package.
+- `TimeWindow` — modello/domain object del package.
+- `Volume` — modello/domain object del package.
+- `Weight` — modello/domain object del package.
 
-| Classe | Tipo | Ruolo sintetico |
-|---|---|---|
-| `DateRange` | final class | Entity o value object del package. |
-| `Dimension` | final class | Entity o value object del package. |
-| `Distance` | final class | Entity o value object del package. |
-| `Money` | final class | Entity o value object del package. |
-| `Notes` | final class | Entity o value object del package. |
-| `Percentage` | final class | Entity o value object del package. |
-| `TemperatureRange` | final class | Entity o value object del package. |
-| `TimeWindow` | final class | Entity o value object del package. |
-| `Volume` | final class | Entity o value object del package. |
-| `Weight` | final class | Entity o value object del package. |
+## Regole importanti
 
-## Enum e valori ammessi
+- Valori nulli, vuoti o negativi vengono rifiutati quando non ammessi.
+- Ogni value object espone factory statiche leggibili.
 
-_Nessuna enum nel package._
+## Collegamenti
 
-## Regole di business
-
-- Value object validano unità, valori negativi, NaN/infinito e coerenza.
-- Sono immutabili e riutilizzati da tutti i package.
-
-## Collegamenti con altri package
-
-- tutti i package domain
-
-## Test collegati
-
-- `DateRangeTest.java`
-- `DimensionTest.java`
-- `DistanceTest.java`
-- `MoneyTest.java`
-- `NotesTest.java`
-- `PercentageTest.java`
-- `TemperatureRangeTest.java`
-- `TimeWindowTest.java`
-- `VolumeTest.java`
-- `WeightTest.java`
-
-## Note di progettazione
-
-Questo package appartiene al domain puro. Non deve contenere codice di database, API esterne, controller web, query SQL, repository concreti o logica di framework.
-
-Le regole devono rimanere testabili con JUnit senza avviare servizi esterni.
+- Usato da quasi tutti i package.
+- Evita primitive obsession: non si passa un double generico quando serve Weight, Money o Distance.

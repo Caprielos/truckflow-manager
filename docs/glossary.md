@@ -1,65 +1,46 @@
-# Glossary
+# Glossario
 
 ## ADR
-
-Accordo per il trasporto di merci pericolose. Nel progetto appare in `DangerousGoodsProfile`, `DriverAdrCertificateType`, `VehicleCertificateType` e regole di compliance.
+Accordo europeo relativo al trasporto internazionale di merci pericolose su strada. Nel progetto compare tramite classi ADR cargo, certificati driver, documenti e certificati veicolo.
 
 ## ATP
+Accordo relativo ai trasporti internazionali di derrate deperibili e ai mezzi speciali da usare. Nel progetto è modellato come certificato veicolo e requisito per merci a temperatura controllata.
 
-Certificazione per trasporto a temperatura controllata di derrate deperibili. Usata per veicoli frigo/isotermici.
-
-## Autocarro / Motrice
-
-Veicolo a motore con cabina e struttura propria di carico.
-
-## Autotreno
-
-Convoglio formato da autocarro/motrice più rimorchio.
-
-## Autoarticolato / Bilico
-
-Convoglio formato da trattore stradale più semirimorchio.
+## CMR
+Lettera di vettura internazionale. È un documento richiesto per trasporti internazionali.
 
 ## CQC
+Carta di qualificazione del conducente. Nel progetto è una qualifica professionale/certificato driver.
 
-Carta di Qualificazione del Conducente per attività professionale merci.
+## Cargo
+Merce trasportata. Può essere generica, pallettizzata, refrigerata, ADR, rifiuto, animale vivo, liquido alimentare, bulk, oversized, ecc.
 
-## EER / CER
+## Carrier / Transport Company
+Azienda di trasporto. Nel progetto è `TransportCompany`, con licenze operative.
 
-Codice a sei cifre per classificare i rifiuti.
+## Convoglio
+Combinazione operativa di uno o più veicoli: mezzo singolo, autotreno, articolato.
+
+## Domain layer
+Strato del software che contiene regole e concetti di business puri.
+
+## Facility
+Sede fisica: magazzino, deposito, cliente, terminal, porto, aeroporto o centro manutenzione.
 
 ## FIR
+Formulario identificazione rifiuto. Nel progetto è rappresentato dai documenti per rifiuti.
 
-Formulario Identificazione Rifiuti.
+## Missione
+Esecuzione reale del trasporto: spedizione + rotta + autista + convoglio.
 
-## Kingpin
+## Shipment
+Spedizione nata da un ordine accettato. Non è ancora la missione reale.
 
-Perno di ralla del semirimorchio.
+## Telematics
+Dati GPS/CAN-bus del mezzo: posizione, odometro, fuel level, velocità, eventi guida.
 
-## Ralla / Quinta ruota
-
-Sistema di aggancio del trattore stradale per semirimorchio.
-
-## Semirimorchio
-
-Unità trainata che poggia parzialmente sulla ralla del trattore.
-
-## Rimorchio a timone
-
-Rimorchio con assi propri e timone, trainato da autocarro.
-
-## Rimorchio ad assi centrali
-
-Rimorchio con assi centrali e aggancio tramite timone/occhione.
-
-## VehicleBodyConfiguration
-
-Composizione realistica dell’allestimento: base, accessori e feature.
-
-## VehicleCombination
-
-Convoglio operativo formato da veicolo motore e opzionale unità trainata.
+## Tire
+Gomma fisica tracciabile, distinta dalla specifica pneumatico del veicolo.
 
 ## VehicleTechnicalSpecification
-
-Scheda tecnica aggregata del mezzo: masse, dimensioni, assi, aggancio, certificati e allestimento.
+Scheda tecnica realistica del veicolo: masse, dimensioni, assi, agganci, body configuration e certificati.

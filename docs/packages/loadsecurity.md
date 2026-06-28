@@ -1,44 +1,25 @@
-# Package `loadsecurity` — Load Security
+# Package `loadsecurity` — Fissaggio carico
 
-## Scopo
+Modella checklist e dotazioni di fissaggio: cinghie, barre, antiscivolo, protezioni e reti.
 
-Gestisce dispositivi di fissaggio del carico e checklist di sicurezza.
+## Responsabilità
 
-## Concetti principali
+- LoadSecuringChecklist deve essere coerente con peso e categoria merce.
+- Serve prima della partenza missione.
 
-- `LoadSecuringChecklist`
-- `LoadSecuringEquipment`
-- `LoadSecuringEquipmentType`
-- `LoadSecuringRules`
+## Classi
 
-## Classi del package
+- `LoadSecuringChecklist` — modello/domain object del package.
+- `LoadSecuringEquipment` — modello/domain object del package.
+- `LoadSecuringEquipmentType` — enum con valori: `RATCHET_STRAP`, `LOAD_BAR`, `ANTI_SLIP_MAT`, `CONTAINMENT_NET`, `EDGE_PROTECTOR`.
+- `LoadSecuringRules` — classe di regole pure del package.
 
-| Classe | Tipo | Ruolo sintetico |
-|---|---|---|
-| `LoadSecuringChecklist` | final class | Checklist dispositivi di fissaggio del carico. |
-| `LoadSecuringEquipment` | final class | Entity o value object del package. |
-| `LoadSecuringEquipmentType` | enum | Enum di classificazione/valori ammessi. |
-| `LoadSecuringRules` | final class | Regole per verificare dotazione minima e sicurezza carico. |
+## Regole importanti
 
-## Enum e valori ammessi
+- La dotazione minima dipende da tipo merce e peso.
+- La checklist non sostituisce la missione, la abilita.
 
-- `LoadSecuringEquipmentType`: `RATCHET_STRAP`, `LOAD_BAR`, `ANTI_SLIP_MAT`, `CONTAINMENT_NET`, `EDGE_PROTECTOR`
+## Collegamenti
 
-## Regole di business
-
-- Cinghie, barre, tappeti, reti e angolari possono essere richiesti in base al carico e all’allestimento.
-- La checklist verifica quantità e portata minima dei dispositivi.
-
-## Collegamenti con altri package
-
-- cargo, fleet, operation, compliance
-
-## Test collegati
-
-- `LoadSecuringChecklistTest.java`
-
-## Note di progettazione
-
-Questo package appartiene al domain puro. Non deve contenere codice di database, API esterne, controller web, query SQL, repository concreti o logica di framework.
-
-Le regole devono rimanere testabili con JUnit senza avviare servizi esterni.
+- LoadSecuringChecklist deve essere coerente con peso e categoria merce.
+- Serve prima della partenza missione.

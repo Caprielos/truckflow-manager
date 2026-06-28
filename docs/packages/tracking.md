@@ -1,46 +1,20 @@
-# Package `tracking` — Tracking
+# Package `tracking` — Timeline eventi
 
-## Scopo
+Registra eventi di viaggio: partenza, arrivo, pickup, delivery, ritardi, incidenti, snapshot telematici.
 
-Gestisce eventi di tracking logistico e timeline della spedizione/missione.
+## Responsabilità
 
-## Concetti principali
+- TrackingTimeline conserva sequenza eventi.
+- TrackingEventType include eventi operativi e telematici.
 
-- `TrackingEvent`
-- `TrackingTimeline`
-- `TrackingEventType`
-- `TrackingRules`
+## Classi
 
-## Classi del package
+- `TrackingEvent` — modello/domain object del package.
+- `TrackingEventType` — enum con valori: `POSITION_RECORDED`, `DEPARTED`, `ARRIVED`, `PICKUP_COMPLETED`, `DELIVERY_COMPLETED`, `DELAY_REPORTED`, `INCIDENT_REPORTED`, `MISSION_COMPLETED`, `CAN_BUS_SNAPSHOT`, `HARSH_BRAKING`, `SPEEDING`, `FUEL_LEVEL_RECORDED`.
+- `TrackingRules` — classe di regole pure del package.
+- `TrackingTimeline` — modello/domain object del package.
 
-| Classe | Tipo | Ruolo sintetico |
-|---|---|---|
-| `TrackingEvent` | final class | Entity o value object del package. |
-| `TrackingEventType` | enum | Enum di classificazione/valori ammessi. |
-| `TrackingRules` | final class | Classe statica di regole di business del package. |
-| `TrackingTimeline` | final class | Entity o value object del package. |
+## Collegamenti
 
-## Enum e valori ammessi
-
-- `TrackingEventType`: `POSITION_RECORDED`, `DEPARTED`, `ARRIVED`, `PICKUP_COMPLETED`, `DELIVERY_COMPLETED`, `DELAY_REPORTED`, `INCIDENT_REPORTED`, `MISSION_COMPLETED`, `CAN_BUS_SNAPSHOT`, `HARSH_BRAKING`, `SPEEDING`, `FUEL_LEVEL_RECORDED`
-
-## Regole di business
-
-- Eventi devono avere timestamp e ordine coerente.
-- La timeline ricostruisce avanzamento e anomalie.
-
-## Collegamenti con altri package
-
-- shipment, operation, telematics, notification
-
-## Test collegati
-
-- `TrackingEventTest.java`
-- `TrackingRulesTest.java`
-- `TrackingTimelineTest.java`
-
-## Note di progettazione
-
-Questo package appartiene al domain puro. Non deve contenere codice di database, API esterne, controller web, query SQL, repository concreti o logica di framework.
-
-Le regole devono rimanere testabili con JUnit senza avviare servizi esterni.
+- TrackingTimeline conserva sequenza eventi.
+- TrackingEventType include eventi operativi e telematici.

@@ -1,51 +1,21 @@
-# Package `billing` — Billing
+# Package `billing` — Fatturazione e pagamenti
 
-## Scopo
+Gestisce fatture, stato fattura, pagamenti e regole economiche base.
 
-Gestisce fatture, pagamenti e regole amministrative economiche.
+## Responsabilità
 
-## Concetti principali
+- Invoice nasce da ordine/spedizione completata.
+- PaymentRecord traccia incassi.
 
-- `Invoice`
-- `PaymentRecord`
-- `InvoiceStatus`
-- `PaymentMethod`
-- `BillingRules`
+## Classi
 
-## Classi del package
+- `BillingRules` — classe di regole pure del package.
+- `Invoice` — modello/domain object del package.
+- `InvoiceStatus` — enum con valori: `DRAFT`, `ISSUED`, `PAID`, `CANCELLED`.
+- `PaymentMethod` — enum con valori: `BANK_TRANSFER`, `CARD`, `CASH`, `DIRECT_DEBIT`, `CREDIT_NOTE`, `OTHER`.
+- `PaymentRecord` — modello/domain object del package.
 
-| Classe | Tipo | Ruolo sintetico |
-|---|---|---|
-| `BillingRules` | final class | Classe statica di regole di business del package. |
-| `Invoice` | final class | Entity o value object del package. |
-| `InvoiceStatus` | enum | Enum di classificazione/valori ammessi. |
-| `PaymentMethod` | enum | Enum di classificazione/valori ammessi. |
-| `PaymentRecord` | final class | Entity o value object del package. |
+## Collegamenti
 
-## Enum e valori ammessi
-
-- `InvoiceStatus`: `DRAFT`, `ISSUED`, `PAID`, `CANCELLED`
-- `PaymentMethod`: `BANK_TRANSFER`, `CARD`, `CASH`, `DIRECT_DEBIT`, `CREDIT_NOTE`, `OTHER`
-
-## Regole di business
-
-- Una fattura segue stati coerenti da bozza/emessa/pagata/annullata.
-- I pagamenti devono essere collegati a importi e date validi.
-
-## Collegamenti con altri package
-
-- pricing per importi preventivati
-- customer per il cliente
-- order/shipment per fonte commerciale
-
-## Test collegati
-
-- `BillingRulesTest.java`
-- `InvoiceTest.java`
-- `PaymentRecordTest.java`
-
-## Note di progettazione
-
-Questo package appartiene al domain puro. Non deve contenere codice di database, API esterne, controller web, query SQL, repository concreti o logica di framework.
-
-Le regole devono rimanere testabili con JUnit senza avviare servizi esterni.
+- Invoice nasce da ordine/spedizione completata.
+- PaymentRecord traccia incassi.

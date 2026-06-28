@@ -1,56 +1,23 @@
-# Package `claim` — Claim
+# Package `claim` — Danni e reclami
 
-## Scopo
+Gestisce reclami, danni merce, ritardi, dispute, sinistri, damage inspection e severità.
 
-Gestisce reclami, danni, sinistri e controlli visivi legati a mezzi e missioni.
+## Responsabilità
 
-## Concetti principali
+- TransportClaim gestisce reclamo; DamageInspection dettaglia danni rilevati.
+- Può nascere da tracking, delivery, documenti o billing.
 
-- `TransportClaim`
-- `DamageInspection`
-- `DamageInspectionItem`
-- `ClaimType`
-- `ClaimSeverity`
-- `ClaimStatus`
-- `ClaimRules`
+## Classi
 
-## Classi del package
+- `ClaimRules` — classe di regole pure del package.
+- `ClaimSeverity` — enum con valori: `LOW`, `MEDIUM`, `HIGH`, `CRITICAL`.
+- `ClaimStatus` — enum con valori: `OPEN`, `UNDER_REVIEW`, `ACCEPTED`, `SETTLED`, `REJECTED`, `CANCELLED`.
+- `ClaimType` — enum con valori: `CARGO_DAMAGE`, `CARGO_LOSS`, `DELAY`, `TEMPERATURE_EXCURSION`, `DOCUMENT_DISPUTE`, `BILLING_DISPUTE`, `VEHICLE_DAMAGE`, `ACCIDENT`, `INSURANCE_CLAIM`, `OTHER`.
+- `DamageInspection` — modello/domain object del package.
+- `DamageInspectionItem` — modello/domain object del package.
+- `TransportClaim` — modello/domain object del package.
 
-| Classe | Tipo | Ruolo sintetico |
-|---|---|---|
-| `ClaimRules` | final class | Classe statica di regole di business del package. |
-| `ClaimSeverity` | enum | Enum di classificazione/valori ammessi. |
-| `ClaimStatus` | enum | Enum di classificazione/valori ammessi. |
-| `ClaimType` | enum | Enum di classificazione/valori ammessi. |
-| `DamageInspection` | final class | Controllo danni visivo pre/post viaggio. |
-| `DamageInspectionItem` | final class | Entity o value object del package. |
-| `TransportClaim` | final class | Pratica sinistro/reclamo. |
+## Collegamenti
 
-## Enum e valori ammessi
-
-- `ClaimSeverity`: `LOW`, `MEDIUM`, `HIGH`, `CRITICAL`
-- `ClaimStatus`: `OPEN`, `UNDER_REVIEW`, `ACCEPTED`, `SETTLED`, `REJECTED`, `CANCELLED`
-- `ClaimType`: `CARGO_DAMAGE`, `CARGO_LOSS`, `DELAY`, `TEMPERATURE_EXCURSION`, `DOCUMENT_DISPUTE`, `BILLING_DISPUTE`, `VEHICLE_DAMAGE`, `ACCIDENT`, `INSURANCE_CLAIM`, `OTHER`
-
-## Regole di business
-
-- Un sinistro deve avere gravità, stato e informazioni minime.
-- Le ispezioni danni permettono controlli pre-partenza o post-missione.
-
-## Collegamenti con altri package
-
-- fleet per mezzo danneggiato
-- operation/tracking per viaggio
-- document per CAI/foto/documenti
-- billing per costi o rimborsi
-
-## Test collegati
-
-- `ClaimRulesTest.java`
-- `TransportClaimTest.java`
-
-## Note di progettazione
-
-Questo package appartiene al domain puro. Non deve contenere codice di database, API esterne, controller web, query SQL, repository concreti o logica di framework.
-
-Le regole devono rimanere testabili con JUnit senza avviare servizi esterni.
+- TransportClaim gestisce reclamo; DamageInspection dettaglia danni rilevati.
+- Può nascere da tracking, delivery, documenti o billing.

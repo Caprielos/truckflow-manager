@@ -1,73 +1,82 @@
-# Architecture
+# Architettura
 
-## Architettura prevista
+## Architettura attuale
 
-Il progetto segue una separazione a strati:
+Il progetto è costruito attorno al **domain layer**.
+
+```text
+src/main/java/it/gabriele/truckflow
+├── Main.java
+└── domain/
+    ├── shared/
+    ├── cargo/
+    ├── fleet/
+    ├── driver/
+    ├── shipment/
+    ├── operation/
+    └── ...
+```
+
+Il dominio non usa:
+
+- Spring;
+- JPA;
+- database;
+- REST controller;
+- filesystem;
+- API esterne;
+- mapper JSON;
+- frontend.
+
+Questa scelta è voluta. Le classi domain devono essere riutilizzabili, testabili e indipendenti.
+
+## Layer previsti
+
+Il progetto può evolvere così:
 
 ```text
 domain
+  regole pure, entità, value object, enum
+
 application
+  casi d'uso: crea ordine, pianifica missione, assegna driver, verifica compliance
+
 infrastructure
+  repository DB, file, provider mappe, fuel card, GPS, email
+
 web
+  REST API, controller, DTO, sicurezza, frontend
 ```
-
-## Domain
-
-Il domain contiene il linguaggio e le regole del business.
-
-Esempi:
-
-- `CargoLoadRules`
-- `VehicleBodyCompatibilityRules`
-- `DriverRules`
-- `CompanyComplianceRules`
-- `DocumentRules`
-- `FuelConsumptionRules`
-- `TireRules`
-- `TransportMissionRules`
-
-Il domain è puro Java e non dipende da framework.
-
-## Application
-
-L’application layer sarà il prossimo passo.
-
-Conterrà i casi d’uso:
-
-- `CreateTransportOrderUseCase`
-- `AcceptTransportOrderUseCase`
-- `CreateShipmentFromOrderUseCase`
-- `PlanTransportMissionUseCase`
-- `AssignDriverAndVehicleUseCase`
-- `RegisterFuelTransactionUseCase`
-- `CreateMaintenanceWorkOrderUseCase`
-
-Userà repository port, cioè interfacce, non implementazioni concrete.
-
-## Infrastructure
-
-L’infrastructure conterrà implementazioni tecniche:
-
-- repository in memoria;
-- repository database;
-- integrazioni GPS;
-- integrazioni carte carburante;
-- integrazioni route cost;
-- generazione documenti;
-- email/notifiche esterne.
-
-## Web
-
-Il web layer arriverà dopo.
-
-Esporrà API REST o UI, ma non deve contenere regole di business.
 
 ## Dipendenze corrette
 
+La dipendenza deve andare dall'esterno verso il dominio, mai il contrario.
+
 ```text
-web -> application -> domain
-infrastructure -> application/domain
-domain -> nessuno strato esterno
+web → application → domain
+infrastructure → application/domain ports
 ```
 
-Il domain non deve mai dipendere da application, infrastructure o web.
+Il dominio non deve conoscere controller, database o framework.
+
+## Package boundary
+
+Ogni package rappresenta un sotto-dominio.
+
+- `fleet` non contiene logica carburante dettagliata: per quello c'è `fuel`.
+- `fleet` non contiene storico pneumatici: per quello c'è `tire`.
+- `shipment` non contiene assegnazione driver/mezzo: per quello c'è `operation`.
+- `identity` non sostituisce `driver` o `customer`: rappresenta utenti software.
+- `tracking` non sostituisce `audit`: tracking riguarda il viaggio, audit riguarda il sistema.
+
+## Perché il vecchio shipment è stato rimosso
+
+Il vecchio package `it.gabriele.truckflow.shipment` era fuori dal domain layer. Era utile all'inizio come esercizio semplice, ma nella versione attuale avrebbe creato duplicazione.
+
+La versione corretta è:
+
+```text
+it.gabriele.truckflow.domain.shipment
+```
+
+Questa scelta mantiene l'architettura pulita.

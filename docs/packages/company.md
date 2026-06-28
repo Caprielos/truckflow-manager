@@ -1,46 +1,25 @@
-# Package `company` — Company
+# Package `company` — Azienda e licenze
 
-## Scopo
+Modella l’impresa di trasporto e le licenze operative necessarie: albo, REN, licenza comunitaria, albo gestori ambientali.
 
-Rappresenta l’azienda di trasporto e le licenze necessarie per operare legalmente.
+## Responsabilità
 
-## Concetti principali
+- TransportCompany conserva licenze aziendali.
+- CompanyComplianceRules decide se l’azienda può fare internazionale o rifiuti.
 
-- `TransportCompany`
-- `CompanyLicense`
-- `CompanyLicenseType`
-- `CompanyComplianceRules`
+## Classi
 
-## Classi del package
+- `CompanyComplianceRules` — classe di regole pure del package.
+- `CompanyLicense` — modello/domain object del package.
+- `CompanyLicenseType` — enum con valori: `ROAD_HAULAGE_REGISTER`, `REN`, `COMMUNITY_LICENSE`, `OWN_ACCOUNT_LICENSE`, `ENVIRONMENTAL_MANAGERS_REGISTER_CATEGORY_2_BIS`, `ENVIRONMENTAL_MANAGERS_REGISTER_CATEGORY_4`, `ENVIRONMENTAL_MANAGERS_REGISTER_CATEGORY_5`.
+- `TransportCompany` — modello/domain object del package.
 
-| Classe | Tipo | Ruolo sintetico |
-|---|---|---|
-| `CompanyComplianceRules` | final class | Controlli sulle autorizzazioni aziendali. |
-| `CompanyLicense` | final class | Abilitazione/certificazione con validità. |
-| `CompanyLicenseType` | enum | Enum di classificazione/valori ammessi. |
-| `TransportCompany` | final class | Azienda di trasporto con licenze operative. |
+## Regole importanti
 
-## Enum e valori ammessi
+- Il trasporto internazionale richiede licenze aziendali valide.
+- Il trasporto rifiuti richiede categorie ambientali coerenti.
 
-- `CompanyLicenseType`: `ROAD_HAULAGE_REGISTER`, `REN`, `COMMUNITY_LICENSE`, `OWN_ACCOUNT_LICENSE`, `ENVIRONMENTAL_MANAGERS_REGISTER_CATEGORY_2_BIS`, `ENVIRONMENTAL_MANAGERS_REGISTER_CATEGORY_4`, `ENVIRONMENTAL_MANAGERS_REGISTER_CATEGORY_5`
+## Collegamenti
 
-## Regole di business
-
-- Licenze come Albo Autotrasportatori, REN, licenza comunitaria o Albo Gestori Ambientali possono essere obbligatorie in base al trasporto.
-- Una licenza scaduta non deve rendere idonea l’azienda.
-
-## Collegamenti con altri package
-
-- operation per missioni
-- cargo per rifiuti/internazionale/conto proprio
-- compliance per controlli complessivi
-
-## Test collegati
-
-_Nessun test specifico rilevato nel package._
-
-## Note di progettazione
-
-Questo package appartiene al domain puro. Non deve contenere codice di database, API esterne, controller web, query SQL, repository concreti o logica di framework.
-
-Le regole devono rimanere testabili con JUnit senza avviare servizi esterni.
+- TransportCompany conserva licenze aziendali.
+- CompanyComplianceRules decide se l’azienda può fare internazionale o rifiuti.

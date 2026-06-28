@@ -1,52 +1,35 @@
 # Domain Package Map
 
-Questa mappa collega ogni package al suo ruolo.
-
-| Package | Scopo | Documentazione |
+| Package | Responsabilità | Classi principali |
 |---|---|---|
-| `audit` | Registra gli eventi importanti del sistema: chi ha fatto cosa, quando, con che severità e su quale risorsa. | [`packages/audit.md`](packages/audit.md) |
-| `availability` | Gestisce disponibilità o indisponibilità temporanea di risorse come veicoli, autisti o asset. | [`packages/availability.md`](packages/availability.md) |
-| `billing` | Gestisce fatture, pagamenti e regole amministrative economiche. | [`packages/billing.md`](packages/billing.md) |
-| `cargo` | Modella la merce, che è il centro delle regole: determina allestimento, documenti, requisiti autista, certificati mezzo e costi. | [`packages/cargo.md`](packages/cargo.md) |
-| `claim` | Gestisce reclami, danni, sinistri e controlli visivi legati a mezzi e missioni. | [`packages/claim.md`](packages/claim.md) |
-| `company` | Rappresenta l’azienda di trasporto e le licenze necessarie per operare legalmente. | [`packages/company.md`](packages/company.md) |
-| `compliance` | Coordina controlli di conformità tra merce, mezzo, autista, documenti e regole generali. | [`packages/compliance.md`](packages/compliance.md) |
-| `configuration` | Gestisce configurazioni di sistema, profili e valori configurabili senza hardcodare tutto nel codice. | [`packages/configuration.md`](packages/configuration.md) |
-| `customer` | Gestisce cliente, account e contatti commerciali/operativi. | [`packages/customer.md`](packages/customer.md) |
-| `document` | Gestisce documenti di trasporto, legali, sanitari, ADR, CMR, FIR e allegati di missione. | [`packages/document.md`](packages/document.md) |
-| `driver` | Gestisce anagrafica autista, patenti, CQC, ADR, certificati operativi e idoneità alla missione. | [`packages/driver.md`](packages/driver.md) |
-| `drivetime` | Contiene regole base sui tempi di guida e riposo per la pianificazione del viaggio. | [`packages/drivetime.md`](packages/drivetime.md) |
-| `facility` | Rappresenta luoghi operativi come magazzini, hub, terminal, officine o punti di carico/scarico. | [`packages/facility.md`](packages/facility.md) |
-| `fleet` | È il package più importante per mezzi, allestimenti, schede tecniche, convogli, certificati e compatibilità con il carico. | [`packages/fleet.md`](packages/fleet.md) |
-| `fuel` | Traccia rifornimenti, carte carburante, litri, costo e consumo reale. | [`packages/fuel.md`](packages/fuel.md) |
-| `identity` | Gestisce account utenti, ruoli e permessi applicativi. | [`packages/identity.md`](packages/identity.md) |
-| `loadsecurity` | Gestisce dispositivi di fissaggio del carico e checklist di sicurezza. | [`packages/loadsecurity.md`](packages/loadsecurity.md) |
-| `location` | Gestisce indirizzi, coordinate geografiche e fusi orari. | [`packages/location.md`](packages/location.md) |
-| `maintenance` | Gestisce manutenzioni preventive, straordinarie, ticket autista e fermi macchina. | [`packages/maintenance.md`](packages/maintenance.md) |
-| `notification` | Modella messaggi e notifiche verso utenti, clienti, autisti o operatori. | [`packages/notification.md`](packages/notification.md) |
-| `operation` | Rappresenta la missione reale: il viaggio operativo eseguito con autista, mezzo/convoglio e percorso. | [`packages/operation.md`](packages/operation.md) |
-| `order` | Gestisce la richiesta commerciale del cliente prima che diventi spedizione/missione. | [`packages/order.md`](packages/order.md) |
-| `pricing` | Gestisce preventivi, breakdown prezzo, costi tratta, supplementi e sconti. | [`packages/pricing.md`](packages/pricing.md) |
-| `reporting` | Modella definizioni report, metriche e report generati. | [`packages/reporting.md`](packages/reporting.md) |
-| `route` | Gestisce piano percorso, fermate, pickup, delivery e stop intermedi. | [`packages/route.md`](packages/route.md) |
-| `shared` | Contiene value object riutilizzabili e puri come peso, distanza, denaro, volume, dimensioni e finestre temporali. | [`packages/shared.md`](packages/shared.md) |
-| `shipment` | Rappresenta la spedizione logistica derivata da un ordine accettato. | [`packages/shipment.md`](packages/shipment.md) |
-| `sustainability` | Calcola emissioni, rating ambientale e informazioni su carburante/emission standard. | [`packages/sustainability.md`](packages/sustainability.md) |
-| `telematics` | Gestisce dati da GPS/blackbox/CAN-bus e comportamento di guida. | [`packages/telematics.md`](packages/telematics.md) |
-| `tire` | Gestisce pneumatici singoli, posizioni ruota, montaggi e rotazioni. | [`packages/tire.md`](packages/tire.md) |
-| `tracking` | Gestisce eventi di tracking logistico e timeline della spedizione/missione. | [`packages/tracking.md`](packages/tracking.md) |
-
-## Lettura consigliata
-
-Per capire il sistema completo:
-
-1. `shared`
-2. `cargo`
-3. `fleet`
-4. `driver`
-5. `company`
-6. `document`
-7. `compliance`
-8. `order`, `shipment`, `operation`
-9. moduli operativi: `maintenance`, `tire`, `fuel`, `telematics`, `loadsecurity`
-10. moduli gestionali: `pricing`, `billing`, `reporting`, `notification`, `audit`
+| `audit` | Audit trail. Registra eventi di audit per modifiche, login, permessi, verifiche documentali e azioni sensibili. | `AuditActionType, AuditActorType, AuditEvent, AuditRules, AuditSeverity, AuditTrail` |
+| `availability` | Disponibilità risorse. Rappresenta disponibilità, assegnazione, manutenzione, ferie e indisponibilità di driver, veicoli, convogli e facility. | `AvailabilityResourceType, AvailabilityRules, AvailabilityStatus, ResourceAvailability` |
+| `billing` | Fatturazione e pagamenti. Gestisce fatture, stato fattura, pagamenti e regole economiche base. | `BillingRules, Invoice, InvoiceStatus, PaymentMethod, PaymentRecord` |
+| `cargo` | Merci e carichi. Modella merce, colli, carichi, categorie cargo, ADR e regole operative derivate dal tipo di merce. | `AdrClass, CargoCategory, CargoItem, CargoLoad, CargoLoadRules, CargoOperationalRules…` |
+| `claim` | Danni e reclami. Gestisce reclami, danni merce, ritardi, dispute, sinistri, damage inspection e severità. | `ClaimRules, ClaimSeverity, ClaimStatus, ClaimType, DamageInspection, DamageInspectionItem…` |
+| `company` | Azienda e licenze. Modella l’impresa di trasporto e le licenze operative necessarie: albo, REN, licenza comunitaria, albo gestori ambientali. | `CompanyComplianceRules, CompanyLicense, CompanyLicenseType, TransportCompany` |
+| `compliance` | Compliance trasversale. Contiene regole che incrociano cargo, driver, veicolo e documenti. | `ComplianceRules` |
+| `configuration` | Configurazioni dominio. Modella configurazioni tipizzate, categorie e scope applicativi senza dipendere da un database. | `ConfigurationCategory, ConfigurationRules, ConfigurationScope, ConfigurationValue, ConfigurationValueType, SystemConfiguration` |
+| `customer` | Clienti e account. Gestisce cliente, stato commerciale, account operativo e contatti per logistica, amministrazione e fatturazione. | `Customer, CustomerAccount, CustomerContact, CustomerContactRole, CustomerStatus, CustomerType` |
+| `document` | Documenti di trasporto. Gestisce documenti richiesti, ricevuti, verificati, scaduti o rifiutati: CMR, POD, FIR, ADR, ATP, HACCP, veterinari. | `DocumentRules, DocumentStatus, TransportDocument, TransportDocumentType` |
+| `driver` | Autisti e qualifiche. Gestisce autisti, patenti, CQC, ADR, qualifiche operative e certificati con scadenze reali. | `Driver, DriverAdrCertificateType, DriverCertificate, DriverCertificateType, DriverLicenseCategory, DriverOperationalQualification…` |
+| `drivetime` | Tempi guida/riposo. Contiene regole pure per limiti di guida, pause e riposi, preparate per una futura pianificazione più realistica. | `DriverTimeRules` |
+| `facility` | Sedi operative. Rappresenta magazzini, depositi, clienti, terminal, porti, aeroporti e centri manutenzione. | `Facility, FacilityType` |
+| `fleet` | Flotta e schede tecniche. Gestisce veicoli, rimorchi, trattori, convogli, assi, masse, allestimenti, equipaggiamenti, certificati e compatibilità tecnica. | `AxleSteeringType, BrakeSafetySystem, BrakeType, CouplingType, DeadlineStatus, KingpinDiameter…` |
+| `fuel` | Carburante e consumi. Gestisce transazioni carburante, fuel card provider e regole di consumo/anomalia tra rifornimenti. | `FuelCardProvider, FuelConsumptionRules, FuelTransaction` |
+| `identity` | Utenti, ruoli e permessi. Gestisce account applicativi separati da driver/customer, ruoli e permessi. | `IdentityRules, UserAccount, UserAccountStatus, UserPermission, UserRole` |
+| `loadsecurity` | Fissaggio carico. Modella checklist e dotazioni di fissaggio: cinghie, barre, antiscivolo, protezioni e reti. | `LoadSecuringChecklist, LoadSecuringEquipment, LoadSecuringEquipmentType, LoadSecuringRules` |
+| `location` | Indirizzi e coordinate. Modella coordinate geografiche, indirizzi e punti logistici geolocalizzabili. | `Address, GeoCoordinates, Location` |
+| `maintenance` | Manutenzione e downtime. Gestisce work order, scadenze manutentive, ticket autista, fermo mezzo e tipologie intervento. | `DriverDefectTicket, MaintenanceRules, MaintenanceStatus, MaintenanceType, MaintenanceWorkOrder, VehicleDowntime` |
+| `notification` | Notifiche. Rappresenta messaggi, canali, destinatari, priorità e stati di invio. | `NotificationChannel, NotificationMessage, NotificationPriority, NotificationRecipientType, NotificationRules, NotificationStatus…` |
+| `operation` | Missioni operative. Rappresenta l’esecuzione reale: spedizione + route plan + convoglio + autista + stato operativo. | `TransportMission, TransportMissionRules, TransportMissionStatus` |
+| `order` | Ordini di trasporto. Rappresenta la richiesta commerciale accettabile o rifiutabile prima di diventare spedizione. | `TransportOrder, TransportOrderStatus, TransportServiceType` |
+| `pricing` | Preventivazione costi. Modella stima costi rotta, breakdown prezzo e righe economiche: base freight, fuel surcharge, pedaggi, ADR, temperatura. | `CostEstimationSource, PriceBreakdown, PricingLine, PricingLineType, PricingRules, RouteCostEstimate` |
+| `reporting` | Reportistica. Definisce report, metriche, formato e stato di generazione per viste operative, economiche e compliance. | `GeneratedReport, ReportDefinition, ReportFormat, ReportMetric, ReportMetricType, ReportStatus…` |
+| `route` | Piani di viaggio. Modella soste, pickup, delivery, pause, carburante e sequenza di viaggio. | `RoutePlan, RoutePlanRules, RouteStop, RouteStopType` |
+| `shared` | Value Object comuni. Contiene tipi immutabili e validati usati da tutto il dominio: peso, denaro, distanze, volumi, dimensioni, finestre temporali, range date, temperatura e note. | `DateRange, Dimension, Distance, Money, Notes, Percentage…` |
+| `shipment` | Spedizioni. Rappresenta la spedizione generata da un ordine accettato. È il collegamento commerciale/logistico tra ordine e missione operativa. | `Shipment, ShipmentRules, ShipmentStatus` |
+| `sustainability` | Emissioni e sostenibilità. Calcola emissioni stimate, rating, fuel type e standard emissivi Euro/zero emission. | `EmissionEstimate, EmissionRating, EmissionStandard, FuelType, SustainabilityRules` |
+| `telematics` | Telematica e CAN bus. Modella snapshot GPS/CAN-bus e anomalie di guida: velocità, fuel drop, frenate brusche, idling. | `DrivingBehaviorEvent, DrivingBehaviorEventType, TelematicsRules, TelematicsSnapshot` |
+| `tire` | Pneumatici. Traccia singole gomme fisiche, RFID, posizione ruota, installazioni, rotazioni, stato e soglia battistrada. | `Tire, TireInstallation, TireRotationEvent, TireRules, TireStatus, WheelPosition…` |
+| `tracking` | Timeline eventi. Registra eventi di viaggio: partenza, arrivo, pickup, delivery, ritardi, incidenti, snapshot telematici. | `TrackingEvent, TrackingEventType, TrackingRules, TrackingTimeline` |

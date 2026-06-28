@@ -1,42 +1,24 @@
-# Package `fuel` — Fuel
+# Package `fuel` — Carburante e consumi
 
-## Scopo
+Gestisce transazioni carburante, fuel card provider e regole di consumo/anomalia tra rifornimenti.
 
-Traccia rifornimenti, carte carburante, litri, costo e consumo reale.
+## Responsabilità
 
-## Concetti principali
+- FuelTransaction viene confrontata con transazioni precedenti.
+- FuelConsumptionRules segnala consumi anomali.
 
-- `FuelTransaction`
-- `FuelCardProvider`
-- `FuelConsumptionRules`
+## Classi
 
-## Classi del package
+- `FuelCardProvider` — enum con valori: `DKV`, `UTA`, `ENI`, `SHELL`, `OTHER`.
+- `FuelConsumptionRules` — classe di regole pure del package.
+- `FuelTransaction` — modello/domain object del package.
 
-| Classe | Tipo | Ruolo sintetico |
-|---|---|---|
-| `FuelCardProvider` | enum | Enum di classificazione/valori ammessi. |
-| `FuelConsumptionRules` | final class | Calcoli e controlli su consumo reale/anomalie. |
-| `FuelTransaction` | final class | Rifornimento carburante. |
+## Regole importanti
 
-## Enum e valori ammessi
+- Consumi fuori soglia sono anomalie, non errori matematici.
+- La differenza odometrica deve essere coerente tra rifornimenti.
 
-- `FuelCardProvider`: `DKV`, `UTA`, `ENI`, `SHELL`, `OTHER`
+## Collegamenti
 
-## Regole di business
-
-- Un rifornimento deve avere veicolo, data, litri, prezzo e odometro validi.
-- Il consumo reale può essere calcolato tra due rifornimenti e usato per alert/anomalie.
-
-## Collegamenti con altri package
-
-- fleet, pricing, sustainability, telematics
-
-## Test collegati
-
-- `FuelTransactionTest.java`
-
-## Note di progettazione
-
-Questo package appartiene al domain puro. Non deve contenere codice di database, API esterne, controller web, query SQL, repository concreti o logica di framework.
-
-Le regole devono rimanere testabili con JUnit senza avviare servizi esterni.
+- FuelTransaction viene confrontata con transazioni precedenti.
+- FuelConsumptionRules segnala consumi anomali.

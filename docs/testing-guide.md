@@ -1,47 +1,47 @@
 # Testing Guide
 
-## Obiettivo dei test
-
-I test proteggono le regole di dominio.
-
-Ogni package principale ha test dedicati in:
-
-```text
-src/test/java/it/gabriele/truckflow/domain
-```
-
 ## Comando principale
 
 ```bash
 mvn clean test
 ```
 
-Va eseguito prima di ogni commit.
+## Stato dai report presenti nello zip
 
-## Cosa testare
+Nei report Surefire inclusi nello zip risultano:
 
-Per ogni nuova regola:
+```text
+Test class: 74
+Test totali: 788
+Failure: 0
+Error: 0
+Skipped: 0
+```
 
-1. caso valido;
-2. caso non valido;
-3. boundary case;
-4. eccezioni attese;
-5. comportamento di calcolo.
+Nel mio ambiente Maven non è installato, quindi questi numeri vengono dai report già presenti nel progetto zippato. Prima di fare commit o push, eseguire sempre localmente:
 
-## Test di integrazione domain
+```bash
+mvn clean test
+```
 
-Il package `domain.integration` contiene test che verificano l’integrazione trasversale dei nuovi concetti realistici.
+## Tipi di test presenti
 
-Esempi:
+I test coprono:
 
-- cargo → requisiti documentali;
-- vehicle → technical specification;
-- driver → certificati;
-- company → licenze;
-- mission readiness.
+- value object (`Weight`, `Money`, `Dimension`, `TimeWindow`, ecc.);
+- entity e stati (`Shipment`, `TransportOrder`, `TransportMission`, `Invoice`, ecc.);
+- rules class (`ShipmentRules`, `DriverRules`, `ComplianceRules`, ecc.);
+- modelli realistici (`RealisticFleetModelTest`, `SeriousDomainIntegrationTest`);
+- moduli operativi (`FuelTransactionTest`, `TireManagementTest`, `TelematicsSnapshotTest`, ecc.).
 
-## Regola importante
+## Regola pratica
 
-Quando una regola di business cambia, non bisogna forzare il codice a rispettare un test vecchio.
+Ogni nuovo comportamento domain deve avere almeno un test.
 
-Esempio: il frigo non è più un `VehicleType`, ma un allestimento. Quindi un autocarro rigido con `REFRIGERATED_BOX` è valido se ha dati coerenti.
+Quando si aggiunge una classe nuova:
+
+1. testare validazioni costruttore/factory;
+2. testare almeno un caso valido;
+3. testare almeno un caso non valido;
+4. testare transizioni di stato se presenti;
+5. testare regole pure in una classe `*RulesTest`.

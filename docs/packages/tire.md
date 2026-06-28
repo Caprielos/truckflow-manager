@@ -1,55 +1,29 @@
-# Package `tire` — Tire
+# Package `tire` — Pneumatici
 
-## Scopo
+Traccia singole gomme fisiche, RFID, posizione ruota, installazioni, rotazioni, stato e soglia battistrada.
 
-Gestisce pneumatici singoli, posizioni ruota, montaggi e rotazioni.
+## Responsabilità
 
-## Concetti principali
+- TireInstallation lega temporaneamente una gomma fisica a veicolo e posizione.
+- TireRotationEvent permette storico rotazioni.
 
-- `Tire`
-- `WheelPosition`
-- `TireInstallation`
-- `TireRotationEvent`
-- `TireStatus`
-- `WheelSide`
-- `WheelSlot`
-- `TireRules`
+## Classi
 
-## Classi del package
+- `Tire` — modello/domain object del package.
+- `TireInstallation` — modello/domain object del package.
+- `TireRotationEvent` — modello/domain object del package.
+- `TireRules` — classe di regole pure del package.
+- `TireStatus` — enum con valori: `NEW`, `RETREADED`, `REGROOVED`, `IN_USE`, `STORED`, `DISPOSED`.
+- `WheelPosition` — modello/domain object del package.
+- `WheelSide` — enum con valori: `LEFT`, `RIGHT`, `CENTER`.
+- `WheelSlot` — enum con valori: `SINGLE`, `INNER`, `OUTER`.
 
-| Classe | Tipo | Ruolo sintetico |
-|---|---|---|
-| `Tire` | final class | Singola copertura/pneumatico tracciata. |
-| `TireInstallation` | final class | Montaggio di uno pneumatico su una posizione ruota. |
-| `TireRotationEvent` | final class | Spostamento storico di una gomma. |
-| `TireRules` | final class | Regole su battistrada, rotazioni e stato pneumatici. |
-| `TireStatus` | enum | Enum di classificazione/valori ammessi. |
-| `WheelPosition` | final class | Entity o value object del package. |
-| `WheelSide` | enum | Enum di classificazione/valori ammessi. |
-| `WheelSlot` | enum | Enum di classificazione/valori ammessi. |
+## Regole importanti
 
-## Enum e valori ammessi
+- Una gomma fisica può cambiare veicolo e posizione.
+- Il battistrada minimo genera alert/sostituzione.
 
-- `TireStatus`: `NEW`, `RETREADED`, `REGROOVED`, `IN_USE`, `STORED`, `DISPOSED`
-- `WheelSide`: `LEFT`, `RIGHT`, `CENTER`
-- `WheelSlot`: `SINGLE`, `INNER`, `OUTER`
+## Collegamenti
 
-## Regole di business
-
-- Ogni copertura può essere nuova, ricostruita o riscolpita.
-- Battistrada, km installazione e rotazioni devono essere tracciabili.
-- La posizione ruota dipende da asse, lato e slot interno/esterno.
-
-## Collegamenti con altri package
-
-- fleet, maintenance, telematics, fuel
-
-## Test collegati
-
-- `TireManagementTest.java`
-
-## Note di progettazione
-
-Questo package appartiene al domain puro. Non deve contenere codice di database, API esterne, controller web, query SQL, repository concreti o logica di framework.
-
-Le regole devono rimanere testabili con JUnit senza avviare servizi esterni.
+- TireInstallation lega temporaneamente una gomma fisica a veicolo e posizione.
+- TireRotationEvent permette storico rotazioni.
