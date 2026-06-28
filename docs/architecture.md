@@ -1,75 +1,73 @@
-# Architettura
+# Architecture
 
-TruckFlow Manager segue un’impostazione ispirata a clean architecture / hexagonal architecture.
+## Architettura prevista
 
-## Livelli previsti
+Il progetto segue una separazione a strati:
 
 ```text
-src/main/java/it/gabriele/truckflow
-├── domain
-├── application
-├── infrastructure
-└── web
+domain
+application
+infrastructure
+web
 ```
-
-Attualmente il progetto è concentrato sul package `domain`.
 
 ## Domain
 
-Il domain contiene:
+Il domain contiene il linguaggio e le regole del business.
 
-- entity;
-- value object;
-- enum;
-- rules;
-- stati e transizioni;
-- validazioni di business.
+Esempi:
 
-Non deve dipendere da:
+- `CargoLoadRules`
+- `VehicleBodyCompatibilityRules`
+- `DriverRules`
+- `CompanyComplianceRules`
+- `DocumentRules`
+- `FuelConsumptionRules`
+- `TireRules`
+- `TransportMissionRules`
 
-- Spring;
-- JPA;
-- database;
-- filesystem;
-- controller REST;
-- API esterne;
-- UI.
+Il domain è puro Java e non dipende da framework.
 
 ## Application
 
-L’application layer conterrà i casi d’uso. Esempi:
+L’application layer sarà il prossimo passo.
 
-```text
-CreateTransportOrderUseCase
-AssignVehicleCombinationUseCase
-RegisterFuelTransactionUseCase
-ScheduleMaintenanceUseCase
-```
+Conterrà i casi d’uso:
 
-L’application userà interfacce repository, per esempio:
+- `CreateTransportOrderUseCase`
+- `AcceptTransportOrderUseCase`
+- `CreateShipmentFromOrderUseCase`
+- `PlanTransportMissionUseCase`
+- `AssignDriverAndVehicleUseCase`
+- `RegisterFuelTransactionUseCase`
+- `CreateMaintenanceWorkOrderUseCase`
 
-```text
-TransportOrderRepository
-VehicleRepository
-DriverRepository
-```
+Userà repository port, cioè interfacce, non implementazioni concrete.
 
 ## Infrastructure
 
-Infrastructure conterrà implementazioni concrete:
+L’infrastructure conterrà implementazioni tecniche:
 
-```text
-InMemoryTransportOrderRepository
-JpaVehicleRepository
-FileDocumentStorage
-GpsProviderClient
-FuelCardImportAdapter
-```
+- repository in memoria;
+- repository database;
+- integrazioni GPS;
+- integrazioni carte carburante;
+- integrazioni route cost;
+- generazione documenti;
+- email/notifiche esterne.
 
 ## Web
 
-Web arriverà dopo e conterrà controller/API/UI.
+Il web layer arriverà dopo.
 
-## Regola fondamentale
+Esporrà API REST o UI, ma non deve contenere regole di business.
 
-Il domain non sa come viene salvato o mostrato un dato. Sa solo cosa è valido e cosa non è valido secondo le regole del business.
+## Dipendenze corrette
+
+```text
+web -> application -> domain
+infrastructure -> application/domain
+domain -> nessuno strato esterno
+```
+
+Il domain non deve mai dipendere da application, infrastructure o web.

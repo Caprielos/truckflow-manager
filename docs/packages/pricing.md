@@ -1,71 +1,53 @@
-# Package `pricing` — Pricing e costi
+# Package `pricing` — Pricing
 
 ## Scopo
 
-Costi tratta, pedaggi, carburante, usura, surcharge e breakdown prezzo.
+Gestisce preventivi, breakdown prezzo, costi tratta, supplementi e sconti.
 
-## Classi ed enum
+## Concetti principali
 
-| Nome | Tipo | Ruolo sintetico |
+- `RouteCostEstimate`
+- `PricingLine`
+- `PriceBreakdown`
+- `PricingRules`
+- `PricingLineType`
+- `CostEstimationSource`
+
+## Classi del package
+
+| Classe | Tipo | Ruolo sintetico |
 |---|---|---|
-| `CostEstimationSource` | Enum | Valori controllati usati dalle regole di dominio. |
-| `PriceBreakdown` | Classe | Classe di dominio del package. |
-| `PricingLine` | Classe | Classe di dominio del package. |
-| `PricingLineType` | Enum | Valori controllati usati dalle regole di dominio. |
-| `PricingRules` | Classe | Classe di regole di business del package. |
-| `RouteCostEstimate` | Classe | Classe di dominio del package. |
+| `CostEstimationSource` | enum | Enum di classificazione/valori ammessi. |
+| `PriceBreakdown` | final class | Entity o value object del package. |
+| `PricingLine` | final class | Entity o value object del package. |
+| `PricingLineType` | enum | Enum di classificazione/valori ammessi. |
+| `PricingRules` | final class | Classe statica di regole di business del package. |
+| `RouteCostEstimate` | final class | Entity o value object del package. |
 
-## Enum principali
+## Enum e valori ammessi
 
-### `CostEstimationSource`
+- `CostEstimationSource`: `MANUAL`, `INTERNAL_MODEL`, `VIAMICHELIN`, `HERE_MAPS`, `PTV`, `GOOGLE_MAPS`, `OTHER_EXTERNAL_PROVIDER`
+- `PricingLineType`: `BASE_FREIGHT`, `DISTANCE_CHARGE`, `FUEL_SURCHARGE`, `TOLL_CHARGE`, `VEHICLE_WEAR_CHARGE`, `ADR_SURCHARGE`, `TEMPERATURE_CONTROL_SURCHARGE`, `WAITING_TIME_CHARGE`, `HANDLING_CHARGE`, `DISCOUNT`
 
-Valori: `MANUAL`, `INTERNAL_MODEL`, `VIAMICHELIN`, `HERE_MAPS`, `PTV`, `GOOGLE_MAPS`, `OTHER_EXTERNAL_PROVIDER`.
+## Regole di business
 
-### `PricingLineType`
-
-Valori: `BASE_FREIGHT`, `DISTANCE_CHARGE`, `FUEL_SURCHARGE`, `TOLL_CHARGE`, `VEHICLE_WEAR_CHARGE`, `ADR_SURCHARGE`, `TEMPERATURE_CONTROL_SURCHARGE`, `WAITING_TIME_CHARGE`, `HANDLING_CHARGE`, `DISCOUNT`.
-
-
-## Costi e pricing
-
-Il pricing è costruito a righe:
-
-```text
-base freight
-distance charge
-fuel surcharge
-toll charge
-vehicle wear
-ADR surcharge
-temperature surcharge
-waiting time
-handling
-discount
-```
-
-`RouteCostEstimate` può rappresentare stime manuali, interne o da provider esterni.
-
+- Costi carburante, pedaggi, usura, ADR, frigo, attesa e handling sono linee separate.
+- Sconti e surcharge sono distinguibili.
+- Fonti esterne di stima strada restano fuori dal domain.
 
 ## Collegamenti con altri package
 
-Questo package non vive isolato: le sue classi vengono usate dalle regole di business e dai casi d’uso futuri.
-
-Per capire il flusso completo leggere anche:
-
-- [`../domain-overview.md`](../domain-overview.md)
-- [`../domain-rules.md`](../domain-rules.md)
-- [`../domain-package-map.md`](../domain-package-map.md)
+- route, fleet, cargo, fuel, billing
 
 ## Test collegati
 
-I test si trovano sotto:
+- `PriceBreakdownTest.java`
+- `PricingLineTest.java`
+- `PricingRulesTest.java`
+- `RouteCostEstimateTest.java`
 
-```text
-src/test/java/it/gabriele/truckflow/domain/pricing
-```
+## Note di progettazione
 
-Quando si modifica questo package, eseguire sempre:
+Questo package appartiene al domain puro. Non deve contenere codice di database, API esterne, controller web, query SQL, repository concreti o logica di framework.
 
-```bash
-mvn clean test
-```
+Le regole devono rimanere testabili con JUnit senza avviare servizi esterni.

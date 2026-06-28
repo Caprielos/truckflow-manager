@@ -1,48 +1,59 @@
-# Project overview
+# Project Overview
 
-**TruckFlow Manager** è un progetto Java pensato come gestionale per trasporto merci, flotta e operazioni logistiche.
+## Cos’è TruckFlow Manager
 
-Il progetto parte da un domain model puro, senza Spring, database, REST API o UI. Questa scelta serve a costruire prima le regole di business e poi collegarle, in modo pulito, a repository, web app, database e integrazioni esterne.
+TruckFlow Manager è un gestionale per autotrasporto e fleet management.
 
-## Cosa gestisce il dominio
+L’obiettivo non è solo registrare camion e viaggi, ma rappresentare l’intero ciclo operativo:
 
-Il dominio copre:
+1. cliente richiede un trasporto;
+2. il trasporto diventa ordine;
+3. l’ordine accettato diventa spedizione;
+4. la spedizione viene assegnata a missione;
+5. la missione richiede autista, mezzo/convoglio, documenti, regole di compliance, tracking e costi;
+6. la flotta viene mantenuta nel tempo con manutenzioni, gomme, carburante, telematica e sinistri.
 
-- clienti e ordini di trasporto;
-- spedizioni e missioni operative;
-- merci e carichi;
-- veicoli, rimorchi, semirimorchi e convogli;
-- autisti, patenti e abilitazioni;
-- regole di compatibilità tra carico, veicolo e autista;
-- documenti e compliance;
-- manutenzione, pneumatici, carburante, tracking e telematica;
-- pricing, fatturazione e reportistica;
-- audit, notifiche, utenti e configurazione.
+## Filosofia del progetto
 
-## Stato attuale
+Il domain è stato costruito con una logica realistica:
 
-Il progetto contiene soprattutto il **domain layer**. Le classi sono organizzate per package funzionali e i test verificano le regole principali.
+- la merce determina molti vincoli;
+- il mezzo non è una macro-categoria unica, ma una composizione tecnica;
+- il convoglio è distinto dal singolo mezzo;
+- l’autista non ha solo una patente, ma anche certificati e abilitazioni;
+- l’azienda deve avere licenze;
+- i documenti dipendono dal tipo di missione e dal tipo merce;
+- costi, manutenzione e telematica sono parte della vita reale della flotta.
 
-Il prossimo passo naturale è l’**application layer**, cioè i casi d’uso:
+## Concetto centrale
+
+La missione reale nasce dall’incrocio di:
 
 ```text
-CreateTransportOrderUseCase
-AcceptTransportOrderUseCase
-CreateShipmentFromOrderUseCase
-CreateVehicleCombinationUseCase
-AssignDriverToMissionUseCase
+Cargo
++ Vehicle / VehicleCombination
++ Driver
++ Company
++ Documents
++ Route
++ Compliance
++ Pricing
 ```
 
-## Visione futura
+Se anche uno di questi blocchi non è conforme, la missione non dovrebbe partire.
 
-L’app finale potrà diventare un Fleet Management System con:
+## Perché il domain è separato
 
-- database persistente;
-- back office web;
-- portale autisti;
-- API REST;
-- integrazione GPS/telematica;
-- import carte carburante;
-- gestione documentale;
-- alert scadenze;
-- report operativi e marginalità viaggio.
+Il domain non conosce:
+
+- database;
+- REST API;
+- frontend;
+- Spring;
+- JPA;
+- Google Maps;
+- provider GPS;
+- provider route cost;
+- file system.
+
+Questo permette di testare le regole in modo veloce e stabile con JUnit.

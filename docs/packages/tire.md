@@ -1,68 +1,55 @@
-# Package `tire` — Gestione pneumatici
+# Package `tire` — Tire
 
 ## Scopo
 
-Gomme singole, posizioni ruota e ciclo vita pneumatici.
+Gestisce pneumatici singoli, posizioni ruota, montaggi e rotazioni.
 
-## Classi ed enum
+## Concetti principali
 
-| Nome | Tipo | Ruolo sintetico |
+- `Tire`
+- `WheelPosition`
+- `TireInstallation`
+- `TireRotationEvent`
+- `TireStatus`
+- `WheelSide`
+- `WheelSlot`
+- `TireRules`
+
+## Classi del package
+
+| Classe | Tipo | Ruolo sintetico |
 |---|---|---|
-| `Tire` | Classe | Singola gomma fisica, tracciabile separatamente dal veicolo. |
-| `TireStatus` | Enum | Valori controllati usati dalle regole di dominio. |
-| `WheelPosition` | Classe | Posizione ruota sul mezzo. |
-| `WheelSide` | Enum | Lato della ruota. |
-| `WheelSlot` | Enum | Slot ruota: singola, interna o esterna. |
+| `Tire` | final class | Singola copertura/pneumatico tracciata. |
+| `TireInstallation` | final class | Montaggio di uno pneumatico su una posizione ruota. |
+| `TireRotationEvent` | final class | Spostamento storico di una gomma. |
+| `TireRules` | final class | Regole su battistrada, rotazioni e stato pneumatici. |
+| `TireStatus` | enum | Enum di classificazione/valori ammessi. |
+| `WheelPosition` | final class | Entity o value object del package. |
+| `WheelSide` | enum | Enum di classificazione/valori ammessi. |
+| `WheelSlot` | enum | Enum di classificazione/valori ammessi. |
 
-## Enum principali
+## Enum e valori ammessi
 
-### `TireStatus`
+- `TireStatus`: `NEW`, `RETREADED`, `REGROOVED`, `IN_USE`, `STORED`, `DISPOSED`
+- `WheelSide`: `LEFT`, `RIGHT`, `CENTER`
+- `WheelSlot`: `SINGLE`, `INNER`, `OUTER`
 
-Valori: `NEW`, `RETREADED`, `REGROOVED`, `IN_USE`, `STORED`, `DISPOSED`.
+## Regole di business
 
-### `WheelSide`
-
-Valori: `LEFT`, `RIGHT`, `CENTER`.
-
-### `WheelSlot`
-
-Valori: `SINGLE`, `INNER`, `OUTER`.
-
-
-## Gestione gomme singole
-
-Nel trasporto pesante le gomme si gestiscono una per una.
-
-Il package modella:
-
-- singola gomma (`Tire`);
-- stato: nuova, ricostruita, riscolpita, in uso, in magazzino, dismessa;
-- posizione ruota;
-- lato e slot interno/esterno.
-
-In futuro si potrà aggiungere storico rotazioni, misurazioni battistrada e alert usura.
-
+- Ogni copertura può essere nuova, ricostruita o riscolpita.
+- Battistrada, km installazione e rotazioni devono essere tracciabili.
+- La posizione ruota dipende da asse, lato e slot interno/esterno.
 
 ## Collegamenti con altri package
 
-Questo package non vive isolato: le sue classi vengono usate dalle regole di business e dai casi d’uso futuri.
-
-Per capire il flusso completo leggere anche:
-
-- [`../domain-overview.md`](../domain-overview.md)
-- [`../domain-rules.md`](../domain-rules.md)
-- [`../domain-package-map.md`](../domain-package-map.md)
+- fleet, maintenance, telematics, fuel
 
 ## Test collegati
 
-I test si trovano sotto:
+- `TireManagementTest.java`
 
-```text
-src/test/java/it/gabriele/truckflow/domain/tire
-```
+## Note di progettazione
 
-Quando si modifica questo package, eseguire sempre:
+Questo package appartiene al domain puro. Non deve contenere codice di database, API esterne, controller web, query SQL, repository concreti o logica di framework.
 
-```bash
-mvn clean test
-```
+Le regole devono rimanere testabili con JUnit senza avviare servizi esterni.

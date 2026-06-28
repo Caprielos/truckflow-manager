@@ -1,52 +1,39 @@
-# Package `drivetime` — Tempi di guida e riposo
+# Package `drivetime` — Driver Time
 
 ## Scopo
 
-Regole base su guida giornaliera, pausa 4h30 e riposo giornaliero.
+Contiene regole base sui tempi di guida e riposo per la pianificazione del viaggio.
 
-## Classi ed enum
+## Concetti principali
 
-| Nome | Tipo | Ruolo sintetico |
+- `DriverTimeRules`
+
+## Classi del package
+
+| Classe | Tipo | Ruolo sintetico |
 |---|---|---|
-| `DriverTimeRules` | Classe | Regole base su guida, pausa e riposo. |
+| `DriverTimeRules` | final class | Classe statica di regole di business del package. |
 
-## Enum principali
+## Enum e valori ammessi
 
-In questo package non ci sono enum principali.
+_Nessuna enum nel package._
 
+## Regole di business
 
-## Tempi di guida e riposo
-
-Il package contiene le prime regole operative per pianificare viaggi realistici:
-
-- massimo guida giornaliera;
-- estensione a 10 ore limitata;
-- pausa 45 minuti ogni 4h30;
-- riposo giornaliero.
-
-In futuro questa parte potrà diventare un motore di pianificazione più avanzato.
-
+- Guida giornaliera ordinaria 9 ore, estensione a 10 in casi controllati.
+- Pausa dopo 4h30 di guida e riposo giornaliero minimo.
+- Limiti settimanali e bisettimanali usati per planning futuro.
 
 ## Collegamenti con altri package
 
-Questo package non vive isolato: le sue classi vengono usate dalle regole di business e dai casi d’uso futuri.
-
-Per capire il flusso completo leggere anche:
-
-- [`../domain-overview.md`](../domain-overview.md)
-- [`../domain-rules.md`](../domain-rules.md)
-- [`../domain-package-map.md`](../domain-package-map.md)
+- driver, route, operation, planning futuro
 
 ## Test collegati
 
-I test si trovano sotto:
+- `DriverTimeRulesTest.java`
 
-```text
-src/test/java/it/gabriele/truckflow/domain/drivetime
-```
+## Note di progettazione
 
-Quando si modifica questo package, eseguire sempre:
+Questo package appartiene al domain puro. Non deve contenere codice di database, API esterne, controller web, query SQL, repository concreti o logica di framework.
 
-```bash
-mvn clean test
-```
+Le regole devono rimanere testabili con JUnit senza avviare servizi esterni.

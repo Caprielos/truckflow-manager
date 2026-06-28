@@ -1,57 +1,42 @@
-# Package `fuel` — Carburante e rifornimenti
+# Package `fuel` — Fuel
 
 ## Scopo
 
-Registra rifornimenti, provider carte carburante e calcolo del consumo reale.
+Traccia rifornimenti, carte carburante, litri, costo e consumo reale.
 
-## Classi ed enum
+## Concetti principali
 
-| Nome | Tipo | Ruolo sintetico |
+- `FuelTransaction`
+- `FuelCardProvider`
+- `FuelConsumptionRules`
+
+## Classi del package
+
+| Classe | Tipo | Ruolo sintetico |
 |---|---|---|
-| `FuelCardProvider` | Enum | Provider carte carburante. |
-| `FuelTransaction` | Classe | Rifornimento carburante con litri, prezzo, odometro e provider carta. |
+| `FuelCardProvider` | enum | Enum di classificazione/valori ammessi. |
+| `FuelConsumptionRules` | final class | Calcoli e controlli su consumo reale/anomalie. |
+| `FuelTransaction` | final class | Rifornimento carburante. |
 
-## Enum principali
+## Enum e valori ammessi
 
-### `FuelCardProvider`
+- `FuelCardProvider`: `DKV`, `UTA`, `ENI`, `SHELL`, `OTHER`
 
-Valori: `DKV`, `UTA`, `ENI`, `SHELL`, `OTHER`.
+## Regole di business
 
-
-## Rifornimenti e consumi
-
-`FuelTransaction` registra ogni rifornimento con:
-
-- mezzo;
-- data/ora;
-- litri;
-- prezzo al litro;
-- odometro;
-- provider carta carburante.
-
-Il consumo reale viene calcolato confrontando due rifornimenti successivi.
-
+- Un rifornimento deve avere veicolo, data, litri, prezzo e odometro validi.
+- Il consumo reale può essere calcolato tra due rifornimenti e usato per alert/anomalie.
 
 ## Collegamenti con altri package
 
-Questo package non vive isolato: le sue classi vengono usate dalle regole di business e dai casi d’uso futuri.
-
-Per capire il flusso completo leggere anche:
-
-- [`../domain-overview.md`](../domain-overview.md)
-- [`../domain-rules.md`](../domain-rules.md)
-- [`../domain-package-map.md`](../domain-package-map.md)
+- fleet, pricing, sustainability, telematics
 
 ## Test collegati
 
-I test si trovano sotto:
+- `FuelTransactionTest.java`
 
-```text
-src/test/java/it/gabriele/truckflow/domain/fuel
-```
+## Note di progettazione
 
-Quando si modifica questo package, eseguire sempre:
+Questo package appartiene al domain puro. Non deve contenere codice di database, API esterne, controller web, query SQL, repository concreti o logica di framework.
 
-```bash
-mvn clean test
-```
+Le regole devono rimanere testabili con JUnit senza avviare servizi esterni.

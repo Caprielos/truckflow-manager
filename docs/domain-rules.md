@@ -1,59 +1,93 @@
-# Domain rules
+# Domain Rules
 
-Le regole di business sono concentrate in classi `*Rules`.
+## Regole generali
 
-## Perché usare classi Rules
+1. Il domain deve rimanere puro Java.
+2. Le regole di business devono stare nel domain.
+3. Database, API, file, Spring, JPA e web non devono entrare nel domain.
+4. Le Entity hanno identità.
+5. I Value Object sono immutabili e validano i dati.
+6. Le Rules sono classi statiche senza stato.
+7. Le enum rappresentano scelte chiuse, non dati tecnici variabili.
+8. I dati tecnici reali devono stare in value object o entity, non in enum enormi.
 
-Le entity devono rappresentare oggetti del dominio e proteggere la propria coerenza interna. Le regole che incrociano più oggetti stanno invece in classi dedicate.
+## Regola su Vehicle
 
-Esempio:
+Il mezzo non deve essere descritto con una sola macro-categoria.
+
+Modello corretto:
 
 ```text
-Driver + VehicleCombination + CargoLoad
+Vehicle
+├── VehicleUnitType / VehicleType
+├── VehicleStatus
+├── VehicleTechnicalSpecification
+├── VehicleBodyConfiguration
+├── VehicleCertificate
+└── Notes
 ```
 
-non è responsabilità solo di `Driver`, solo di `Vehicle` o solo di `CargoLoad`. È una regola trasversale, quindi sta in `DriverRules`, `VehicleBodyCompatibilityRules` o `ComplianceRules`.
+`VehicleType` rimane come compatibilità/ponte verso il modello storico, ma il modello realistico usa `VehicleUnitType`, `VehicleBodyConfiguration` e `VehicleTechnicalSpecification`.
 
-## Esempi principali
+## Regola su Cargo
 
-### CargoLoadRules
+La merce guida il sistema.
 
-Controlla peso, volume, temperatura, ADR, dimensioni e categorie del carico.
+Esempi:
 
-### CargoOperationalRules
+- ADR richiede profilo ADR, autista ADR e mezzo/cisterna idonea.
+- Frigo/isotermico richiede temperatura, ATP e allestimento compatibile.
+- Rifiuti richiedono EER/CER, FIR e licenza aziendale.
+- Animali vivi richiedono idoneità conducente e documentazione veterinaria.
+- Merci pallettizzate usano capacità EPAL.
+- Merci sfuse usano volume e allestimenti come ribaltabile, silo o walking floor.
 
-Deriva documenti e certificati richiesti da una categoria merce.
+## Regola su Driver
 
-### VehicleBodyCompatibilityRules
+La patente dipende da peso e combinazione.
 
-Verifica se un carico può viaggiare su un allestimento/convoglio.
+Le abilitazioni dipendono da trasporto e operazioni:
 
-### VehicleCombinationRules
+- CQC per guida professionale merci.
+- ADR per merci pericolose.
+- Gru, PLE, muletto, macchine movimento terra per operazioni specifiche.
+- Animali vivi per trasporto bestiame.
+- Temperatura controllata per frigo/farmaceutico.
 
-Controlla se una combinazione veicolare è assegnabile e coerente.
+## Regola su Company
 
-### VehicleCombinationTechnicalRules
+L’azienda deve essere autorizzata al tipo di trasporto.
 
-Calcola masse, tara, portata, traino e limiti tecnici/legali del convoglio.
+Esempi:
 
-### DriverRules
+- internazionale UE sopra soglie previste → licenza comunitaria;
+- rifiuti → Albo Gestori Ambientali;
+- conto proprio → licenza conto proprio;
+- autotrasporto conto terzi → Albo + REN.
 
-Controlla patente, CQC, ADR e qualifiche operative dell’autista.
+## Regola su Documents
 
-### ComplianceRules
+I documenti dipendono dalla missione.
 
-Coordina controlli più generali tra spedizione, convoglio e autista.
+Esempi:
 
-### DocumentRules
+- CMR per estero;
+- FIR per rifiuti;
+- SDS/Tremcards per ADR;
+- HACCP/sanificazione per alimentare;
+- veterinari per animali vivi;
+- autorizzazione per trasporto eccezionale.
 
-Gestisce stato, verifica e validità dei documenti.
+## Regola su Fleet Operations
 
-### MaintenanceRules
+Manutenzione, gomme, carburante e telematica non devono gonfiare `Vehicle`.
 
-Gestisce stati e validità degli interventi di manutenzione.
+Sono moduli collegati al mezzo:
 
-## Regola importante
-
-Nel domain evitiamo di hardcodare limiti normativi complessi quando possono cambiare per paese o contesto.
-
-Esempio: invece di scrivere ovunque `44000 kg`, usiamo profili configurabili come `VehicleCombinationLegalLimitProfile`.
+```text
+Vehicle -> Maintenance
+Vehicle -> Tire
+Vehicle -> Fuel
+Vehicle -> Telematics
+Vehicle -> Claim
+```

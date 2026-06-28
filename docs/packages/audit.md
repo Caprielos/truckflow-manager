@@ -1,56 +1,55 @@
-# Package `audit` — Audit e tracciabilità
+# Package `audit` — Audit
 
 ## Scopo
 
-Registra eventi importanti del dominio, chi li ha generati, quando sono avvenuti e se richiedono revisione.
+Registra gli eventi importanti del sistema: chi ha fatto cosa, quando, con che severità e su quale risorsa.
 
-## Classi ed enum
+## Concetti principali
 
-| Nome | Tipo | Ruolo sintetico |
+- `AuditEvent`
+- `AuditTrail`
+- `AuditActionType`
+- `AuditActorType`
+- `AuditSeverity`
+- `AuditRules`
+
+## Classi del package
+
+| Classe | Tipo | Ruolo sintetico |
 |---|---|---|
-| `AuditActionType` | Enum | Valori controllati usati dalle regole di dominio. |
-| `AuditActorType` | Enum | Valori controllati usati dalle regole di dominio. |
-| `AuditEvent` | Classe | Classe di dominio del package. |
-| `AuditRules` | Classe | Classe di regole di business del package. |
-| `AuditSeverity` | Enum | Valori controllati usati dalle regole di dominio. |
-| `AuditTrail` | Classe | Classe di dominio del package. |
+| `AuditActionType` | enum | Enum di classificazione/valori ammessi. |
+| `AuditActorType` | enum | Enum di classificazione/valori ammessi. |
+| `AuditEvent` | final class | Entity o value object del package. |
+| `AuditRules` | final class | Classe statica di regole di business del package. |
+| `AuditSeverity` | enum | Enum di classificazione/valori ammessi. |
+| `AuditTrail` | final class | Entity o value object del package. |
 
-## Enum principali
+## Enum e valori ammessi
 
-### `AuditActionType`
+- `AuditActionType`: `CREATED`, `UPDATED`, `STATUS_CHANGED`, `ASSIGNED`, `CANCELLED`, `DELETED`, `DOCUMENT_VERIFIED`, `PAYMENT_REGISTERED`, `CLAIM_SETTLED`, `EXTERNAL_ESTIMATE_IMPORTED`, `LOGIN`, `LOGIN_FAILED`, `PERMISSION_DENIED`
+- `AuditActorType`: `USER`, `SYSTEM`, `INTEGRATION`
+- `AuditSeverity`: `INFO`, `WARNING`, `ERROR`, `CRITICAL`
 
-Valori: `CREATED`, `UPDATED`, `STATUS_CHANGED`, `ASSIGNED`, `CANCELLED`, `DELETED`, `DOCUMENT_VERIFIED`, `PAYMENT_REGISTERED`, `CLAIM_SETTLED`, `EXTERNAL_ESTIMATE_IMPORTED`, `LOGIN`, `LOGIN_FAILED`, `PERMISSION_DENIED`.
+## Regole di business
 
-### `AuditActorType`
-
-Valori: `USER`, `SYSTEM`, `INTEGRATION`.
-
-### `AuditSeverity`
-
-Valori: `INFO`, `WARNING`, `ERROR`, `CRITICAL`.
-
-
+- Un audit event deve avere actor, action, timestamp e risorsa coerenti.
+- AuditTrail conserva una sequenza immutabile di eventi.
+- La severità permette di distinguere eventi informativi, warning e critici.
 
 ## Collegamenti con altri package
 
-Questo package non vive isolato: le sue classi vengono usate dalle regole di business e dai casi d’uso futuri.
-
-Per capire il flusso completo leggere anche:
-
-- [`../domain-overview.md`](../domain-overview.md)
-- [`../domain-rules.md`](../domain-rules.md)
-- [`../domain-package-map.md`](../domain-package-map.md)
+- identity per l’utente/attore
+- operation/order/shipment per tracciare azioni operative
+- compliance per eventi critici o blocchi
 
 ## Test collegati
 
-I test si trovano sotto:
+- `AuditEventTest.java`
+- `AuditRulesTest.java`
+- `AuditTrailTest.java`
 
-```text
-src/test/java/it/gabriele/truckflow/domain/audit
-```
+## Note di progettazione
 
-Quando si modifica questo package, eseguire sempre:
+Questo package appartiene al domain puro. Non deve contenere codice di database, API esterne, controller web, query SQL, repository concreti o logica di framework.
 
-```bash
-mvn clean test
-```
+Le regole devono rimanere testabili con JUnit senza avviare servizi esterni.

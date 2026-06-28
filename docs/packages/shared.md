@@ -1,71 +1,65 @@
-# Package `shared` — Value object condivisi
+# Package `shared` — Shared
 
 ## Scopo
 
-Oggetti riutilizzabili come peso, distanza, volume, money, date e time window.
+Contiene value object riutilizzabili e puri come peso, distanza, denaro, volume, dimensioni e finestre temporali.
 
-## Classi ed enum
+## Concetti principali
 
-| Nome | Tipo | Ruolo sintetico |
+- `Weight`
+- `Distance`
+- `Volume`
+- `Dimension`
+- `Money`
+- `Percentage`
+- `TemperatureRange`
+- `TimeWindow`
+- `DateRange`
+- `Notes`
+
+## Classi del package
+
+| Classe | Tipo | Ruolo sintetico |
 |---|---|---|
-| `DateRange` | Classe | Classe di dominio del package. |
-| `Dimension` | Classe | Classe di dominio del package. |
-| `Distance` | Classe | Classe di dominio del package. |
-| `Money` | Classe | Classe di dominio del package. |
-| `Notes` | Classe | Classe di dominio del package. |
-| `Percentage` | Classe | Classe di dominio del package. |
-| `TemperatureRange` | Classe | Classe di dominio del package. |
-| `TimeWindow` | Classe | Classe di dominio del package. |
-| `Volume` | Classe | Classe di dominio del package. |
-| `Weight` | Classe | Classe di dominio del package. |
+| `DateRange` | final class | Entity o value object del package. |
+| `Dimension` | final class | Entity o value object del package. |
+| `Distance` | final class | Entity o value object del package. |
+| `Money` | final class | Entity o value object del package. |
+| `Notes` | final class | Entity o value object del package. |
+| `Percentage` | final class | Entity o value object del package. |
+| `TemperatureRange` | final class | Entity o value object del package. |
+| `TimeWindow` | final class | Entity o value object del package. |
+| `Volume` | final class | Entity o value object del package. |
+| `Weight` | final class | Entity o value object del package. |
 
-## Enum principali
+## Enum e valori ammessi
 
-In questo package non ci sono enum principali.
+_Nessuna enum nel package._
 
+## Regole di business
 
-## Value object condivisi
-
-Questi oggetti proteggono unità di misura e valori fondamentali.
-
-Esempi:
-
-```text
-Weight -> kg/tons
-Distance -> km/metri
-Volume -> m3/litri
-Dimension -> metri
-Money -> importo + valuta
-Percentage -> percentuale
-TemperatureRange -> min/max Celsius
-DateRange -> intervallo date
-TimeWindow -> finestra oraria
-Notes -> note validate
-```
-
-Usarli evita di passare `double` o `String` senza significato nel domain.
-
+- Value object validano unità, valori negativi, NaN/infinito e coerenza.
+- Sono immutabili e riutilizzati da tutti i package.
 
 ## Collegamenti con altri package
 
-Questo package non vive isolato: le sue classi vengono usate dalle regole di business e dai casi d’uso futuri.
-
-Per capire il flusso completo leggere anche:
-
-- [`../domain-overview.md`](../domain-overview.md)
-- [`../domain-rules.md`](../domain-rules.md)
-- [`../domain-package-map.md`](../domain-package-map.md)
+- tutti i package domain
 
 ## Test collegati
 
-I test si trovano sotto:
+- `DateRangeTest.java`
+- `DimensionTest.java`
+- `DistanceTest.java`
+- `MoneyTest.java`
+- `NotesTest.java`
+- `PercentageTest.java`
+- `TemperatureRangeTest.java`
+- `TimeWindowTest.java`
+- `VolumeTest.java`
+- `WeightTest.java`
 
-```text
-src/test/java/it/gabriele/truckflow/domain/shared
-```
+## Note di progettazione
 
-Quando si modifica questo package, eseguire sempre:
+Questo package appartiene al domain puro. Non deve contenere codice di database, API esterne, controller web, query SQL, repository concreti o logica di framework.
 
-```bash
-mvn clean test
-```
+Le regole devono rimanere testabili con JUnit senza avviare servizi esterni.

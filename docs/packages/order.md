@@ -1,63 +1,43 @@
-# Package `order` — Ordini di trasporto
+# Package `order` — Order
 
 ## Scopo
 
-Richiesta commerciale del cliente prima di diventare spedizione/missione.
+Gestisce la richiesta commerciale del cliente prima che diventi spedizione/missione.
 
-## Classi ed enum
+## Concetti principali
 
-| Nome | Tipo | Ruolo sintetico |
+- `TransportOrder`
+- `TransportOrderStatus`
+- `TransportServiceType`
+
+## Classi del package
+
+| Classe | Tipo | Ruolo sintetico |
 |---|---|---|
-| `TransportOrder` | Classe | Classe di dominio del package. |
-| `TransportOrderStatus` | Enum | Valori controllati usati dalle regole di dominio. |
-| `TransportServiceType` | Enum | Valori controllati usati dalle regole di dominio. |
+| `TransportOrder` | final class | Richiesta commerciale del cliente. |
+| `TransportOrderStatus` | enum | Enum di classificazione/valori ammessi. |
+| `TransportServiceType` | enum | Enum di classificazione/valori ammessi. |
 
-## Enum principali
+## Enum e valori ammessi
 
-### `TransportOrderStatus`
+- `TransportOrderStatus`: `DRAFT`, `SUBMITTED`, `ACCEPTED`, `REJECTED`, `CANCELLED`
+- `TransportServiceType`: `STANDARD`, `EXPRESS`, `REFRIGERATED`, `HAZARDOUS`, `OVERSIZED`
 
-Valori: `DRAFT`, `SUBMITTED`, `ACCEPTED`, `REJECTED`, `CANCELLED`.
+## Regole di business
 
-### `TransportServiceType`
-
-Valori: `STANDARD`, `EXPRESS`, `REFRIGERATED`, `HAZARDOUS`, `OVERSIZED`.
-
-
-## Ordine di trasporto
-
-L’ordine è la richiesta commerciale del cliente.
-
-Può essere:
-
-- creato;
-- inviato;
-- accettato;
-- rifiutato;
-- cancellato.
-
-Solo un ordine accettato può diventare spedizione.
-
+- Ordine passa da bozza/inviato/accettato/rifiutato/cancellato secondo transizioni coerenti.
+- Un ordine accettato può generare una spedizione.
 
 ## Collegamenti con altri package
 
-Questo package non vive isolato: le sue classi vengono usate dalle regole di business e dai casi d’uso futuri.
-
-Per capire il flusso completo leggere anche:
-
-- [`../domain-overview.md`](../domain-overview.md)
-- [`../domain-rules.md`](../domain-rules.md)
-- [`../domain-package-map.md`](../domain-package-map.md)
+- customer, cargo, location, shipment, pricing
 
 ## Test collegati
 
-I test si trovano sotto:
+- `TransportOrderTest.java`
 
-```text
-src/test/java/it/gabriele/truckflow/domain/order
-```
+## Note di progettazione
 
-Quando si modifica questo package, eseguire sempre:
+Questo package appartiene al domain puro. Non deve contenere codice di database, API esterne, controller web, query SQL, repository concreti o logica di framework.
 
-```bash
-mvn clean test
-```
+Le regole devono rimanere testabili con JUnit senza avviare servizi esterni.

@@ -1,56 +1,43 @@
-# Package `shipment` — Spedizioni
+# Package `shipment` — Shipment
 
 ## Scopo
 
-Richiesta accettata pronta a essere pianificata e movimentata.
+Rappresenta la spedizione logistica derivata da un ordine accettato.
 
-## Classi ed enum
+## Concetti principali
 
-| Nome | Tipo | Ruolo sintetico |
+- `Shipment`
+- `ShipmentStatus`
+- `ShipmentRules`
+
+## Classi del package
+
+| Classe | Tipo | Ruolo sintetico |
 |---|---|---|
-| `Shipment` | Classe | Classe di dominio del package. |
-| `ShipmentRules` | Classe | Classe di regole di business del package. |
-| `ShipmentStatus` | Enum | Valori controllati usati dalle regole di dominio. |
+| `Shipment` | final class | Spedizione accettata derivata da ordine. |
+| `ShipmentRules` | final class | Classe statica di regole di business del package. |
+| `ShipmentStatus` | enum | Enum di classificazione/valori ammessi. |
 
-## Enum principali
+## Enum e valori ammessi
 
-### `ShipmentStatus`
+- `ShipmentStatus`: `CREATED`, `PLANNED`, `DISPATCHED`, `IN_TRANSIT`, `DELIVERED`, `CANCELLED`
 
-Valori: `CREATED`, `PLANNED`, `DISPATCHED`, `IN_TRANSIT`, `DELIVERED`, `CANCELLED`.
+## Regole di business
 
-
-## Spedizione
-
-La spedizione rappresenta la merce accettata da movimentare.
-
-È distinta dalla missione:
-
-```text
-Shipment -> cosa bisogna trasportare
-TransportMission -> viaggio operativo con mezzo e autista
-```
-
+- Una spedizione nasce da un ordine accettato.
+- Segue stati operativi propri separati dalla missione.
 
 ## Collegamenti con altri package
 
-Questo package non vive isolato: le sue classi vengono usate dalle regole di business e dai casi d’uso futuri.
-
-Per capire il flusso completo leggere anche:
-
-- [`../domain-overview.md`](../domain-overview.md)
-- [`../domain-rules.md`](../domain-rules.md)
-- [`../domain-package-map.md`](../domain-package-map.md)
+- order, cargo, operation, tracking, document
 
 ## Test collegati
 
-I test si trovano sotto:
+- `ShipmentRulesTest.java`
+- `ShipmentTest.java`
 
-```text
-src/test/java/it/gabriele/truckflow/domain/shipment
-```
+## Note di progettazione
 
-Quando si modifica questo package, eseguire sempre:
+Questo package appartiene al domain puro. Non deve contenere codice di database, API esterne, controller web, query SQL, repository concreti o logica di framework.
 
-```bash
-mvn clean test
-```
+Le regole devono rimanere testabili con JUnit senza avviare servizi esterni.

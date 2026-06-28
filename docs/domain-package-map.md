@@ -1,41 +1,52 @@
-# Domain package map
+# Domain Package Map
 
-Questa pagina mappa tutti i package presenti sotto:
+Questa mappa collega ogni package al suo ruolo.
 
-```text
-src/main/java/it/gabriele/truckflow/domain
-```
+| Package | Scopo | Documentazione |
+|---|---|---|
+| `audit` | Registra gli eventi importanti del sistema: chi ha fatto cosa, quando, con che severità e su quale risorsa. | [`packages/audit.md`](packages/audit.md) |
+| `availability` | Gestisce disponibilità o indisponibilità temporanea di risorse come veicoli, autisti o asset. | [`packages/availability.md`](packages/availability.md) |
+| `billing` | Gestisce fatture, pagamenti e regole amministrative economiche. | [`packages/billing.md`](packages/billing.md) |
+| `cargo` | Modella la merce, che è il centro delle regole: determina allestimento, documenti, requisiti autista, certificati mezzo e costi. | [`packages/cargo.md`](packages/cargo.md) |
+| `claim` | Gestisce reclami, danni, sinistri e controlli visivi legati a mezzi e missioni. | [`packages/claim.md`](packages/claim.md) |
+| `company` | Rappresenta l’azienda di trasporto e le licenze necessarie per operare legalmente. | [`packages/company.md`](packages/company.md) |
+| `compliance` | Coordina controlli di conformità tra merce, mezzo, autista, documenti e regole generali. | [`packages/compliance.md`](packages/compliance.md) |
+| `configuration` | Gestisce configurazioni di sistema, profili e valori configurabili senza hardcodare tutto nel codice. | [`packages/configuration.md`](packages/configuration.md) |
+| `customer` | Gestisce cliente, account e contatti commerciali/operativi. | [`packages/customer.md`](packages/customer.md) |
+| `document` | Gestisce documenti di trasporto, legali, sanitari, ADR, CMR, FIR e allegati di missione. | [`packages/document.md`](packages/document.md) |
+| `driver` | Gestisce anagrafica autista, patenti, CQC, ADR, certificati operativi e idoneità alla missione. | [`packages/driver.md`](packages/driver.md) |
+| `drivetime` | Contiene regole base sui tempi di guida e riposo per la pianificazione del viaggio. | [`packages/drivetime.md`](packages/drivetime.md) |
+| `facility` | Rappresenta luoghi operativi come magazzini, hub, terminal, officine o punti di carico/scarico. | [`packages/facility.md`](packages/facility.md) |
+| `fleet` | È il package più importante per mezzi, allestimenti, schede tecniche, convogli, certificati e compatibilità con il carico. | [`packages/fleet.md`](packages/fleet.md) |
+| `fuel` | Traccia rifornimenti, carte carburante, litri, costo e consumo reale. | [`packages/fuel.md`](packages/fuel.md) |
+| `identity` | Gestisce account utenti, ruoli e permessi applicativi. | [`packages/identity.md`](packages/identity.md) |
+| `loadsecurity` | Gestisce dispositivi di fissaggio del carico e checklist di sicurezza. | [`packages/loadsecurity.md`](packages/loadsecurity.md) |
+| `location` | Gestisce indirizzi, coordinate geografiche e fusi orari. | [`packages/location.md`](packages/location.md) |
+| `maintenance` | Gestisce manutenzioni preventive, straordinarie, ticket autista e fermi macchina. | [`packages/maintenance.md`](packages/maintenance.md) |
+| `notification` | Modella messaggi e notifiche verso utenti, clienti, autisti o operatori. | [`packages/notification.md`](packages/notification.md) |
+| `operation` | Rappresenta la missione reale: il viaggio operativo eseguito con autista, mezzo/convoglio e percorso. | [`packages/operation.md`](packages/operation.md) |
+| `order` | Gestisce la richiesta commerciale del cliente prima che diventi spedizione/missione. | [`packages/order.md`](packages/order.md) |
+| `pricing` | Gestisce preventivi, breakdown prezzo, costi tratta, supplementi e sconti. | [`packages/pricing.md`](packages/pricing.md) |
+| `reporting` | Modella definizioni report, metriche e report generati. | [`packages/reporting.md`](packages/reporting.md) |
+| `route` | Gestisce piano percorso, fermate, pickup, delivery e stop intermedi. | [`packages/route.md`](packages/route.md) |
+| `shared` | Contiene value object riutilizzabili e puri come peso, distanza, denaro, volume, dimensioni e finestre temporali. | [`packages/shared.md`](packages/shared.md) |
+| `shipment` | Rappresenta la spedizione logistica derivata da un ordine accettato. | [`packages/shipment.md`](packages/shipment.md) |
+| `sustainability` | Calcola emissioni, rating ambientale e informazioni su carburante/emission standard. | [`packages/sustainability.md`](packages/sustainability.md) |
+| `telematics` | Gestisce dati da GPS/blackbox/CAN-bus e comportamento di guida. | [`packages/telematics.md`](packages/telematics.md) |
+| `tire` | Gestisce pneumatici singoli, posizioni ruota, montaggi e rotazioni. | [`packages/tire.md`](packages/tire.md) |
+| `tracking` | Gestisce eventi di tracking logistico e timeline della spedizione/missione. | [`packages/tracking.md`](packages/tracking.md) |
 
-| Package | Scopo | Classi |
-|---|---|---:|
-| [`audit`](packages/audit.md) | Registra eventi importanti del dominio, chi li ha generati, quando sono avvenuti e se richiedono revisione. | 6 |
-| [`availability`](packages/availability.md) | Gestisce finestre di disponibilità per autisti, veicoli, convogli, trailer e facility. | 4 |
-| [`billing`](packages/billing.md) | Gestisce fatture, stati, importi e pagamenti collegati a spedizioni e prezzi. | 5 |
-| [`cargo`](packages/cargo.md) | Modella la merce come centro operativo: categoria, peso, volume, temperatura, ADR e documenti richiesti. | 9 |
-| [`claim`](packages/claim.md) | Gestisce danni merce, ritardi, contestazioni, sinistri, danni veicolo e pratiche assicurative. | 5 |
-| [`company`](packages/company.md) | Rappresenta licenze e iscrizioni aziendali necessarie per svolgere trasporti specifici. | 2 |
-| [`compliance`](packages/compliance.md) | Coordina regole tra autista, mezzo, carico e spedizione. | 1 |
-| [`configuration`](packages/configuration.md) | Parametri configurabili, scope e valori sensibili, senza dipendere da file o database. | 6 |
-| [`customer`](packages/customer.md) | Anagrafica clienti, account e contatti operativi/commerciali. | 6 |
-| [`document`](packages/document.md) | Documenti richiesti dalla missione, dal carico o dai certificati. | 4 |
-| [`driver`](packages/driver.md) | Patenti, CQC, ADR, patentini operativi e regole di assegnazione autista. | 7 |
-| [`drivetime`](packages/drivetime.md) | Regole base su guida giornaliera, pausa 4h30 e riposo giornaliero. | 1 |
-| [`facility`](packages/facility.md) | Depositi, magazzini, punti di carico/scarico e loro caratteristiche. | 2 |
-| [`fleet`](packages/fleet.md) | Anagrafica e regole tecniche per veicoli, rimorchi, allestimenti, certificati e convogli. | 37 |
-| [`fuel`](packages/fuel.md) | Registra rifornimenti, provider carte carburante e calcolo del consumo reale. | 2 |
-| [`identity`](packages/identity.md) | Account, ruoli e autorizzazioni applicative. | 5 |
-| [`loadsecurity`](packages/loadsecurity.md) | Checklist e dispositivi per bloccare fisicamente la merce durante il viaggio. | 3 |
-| [`location`](packages/location.md) | Indirizzi, coordinate geografiche e località operative. | 3 |
-| [`maintenance`](packages/maintenance.md) | Ordini di manutenzione, guasti, tagliandi, controlli tecnici e stati. | 4 |
-| [`notification`](packages/notification.md) | Messaggi, canali, destinatari, priorità e stati di invio. | 7 |
-| [`operation`](packages/operation.md) | Il viaggio reale assegnato a carico, mezzo, autista e pianificazione. | 3 |
-| [`order`](packages/order.md) | Richiesta commerciale del cliente prima di diventare spedizione/missione. | 3 |
-| [`pricing`](packages/pricing.md) | Costi tratta, pedaggi, carburante, usura, surcharge e breakdown prezzo. | 6 |
-| [`reporting`](packages/reporting.md) | Definizioni report, metriche e report generati. | 8 |
-| [`route`](packages/route.md) | Piani di rotta con stop, sequenza e regole operative. | 4 |
-| [`shared`](packages/shared.md) | Oggetti riutilizzabili come peso, distanza, volume, money, date e time window. | 10 |
-| [`shipment`](packages/shipment.md) | Richiesta accettata pronta a essere pianificata e movimentata. | 3 |
-| [`sustainability`](packages/sustainability.md) | Stime emissioni, rating e standard ambientali. | 5 |
-| [`telematics`](packages/telematics.md) | Snapshot GPS/CAN-bus e dati letti da centraline esterne. | 1 |
-| [`tire`](packages/tire.md) | Gomme singole, posizioni ruota e ciclo vita pneumatici. | 5 |
-| [`tracking`](packages/tracking.md) | Timeline di eventi di spedizione, missione e mezzo. | 4 |
+## Lettura consigliata
+
+Per capire il sistema completo:
+
+1. `shared`
+2. `cargo`
+3. `fleet`
+4. `driver`
+5. `company`
+6. `document`
+7. `compliance`
+8. `order`, `shipment`, `operation`
+9. moduli operativi: `maintenance`, `tire`, `fuel`, `telematics`, `loadsecurity`
+10. moduli gestionali: `pricing`, `billing`, `reporting`, `notification`, `audit`

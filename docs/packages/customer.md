@@ -1,56 +1,52 @@
-# Package `customer` — Clienti e contatti
+# Package `customer` — Customer
 
 ## Scopo
 
-Anagrafica clienti, account e contatti operativi/commerciali.
+Gestisce cliente, account e contatti commerciali/operativi.
 
-## Classi ed enum
+## Concetti principali
 
-| Nome | Tipo | Ruolo sintetico |
+- `Customer`
+- `CustomerAccount`
+- `CustomerContact`
+- `CustomerContactRole`
+- `CustomerStatus`
+- `CustomerType`
+
+## Classi del package
+
+| Classe | Tipo | Ruolo sintetico |
 |---|---|---|
-| `Customer` | Classe | Classe di dominio del package. |
-| `CustomerAccount` | Classe | Classe di dominio del package. |
-| `CustomerContact` | Classe | Classe di dominio del package. |
-| `CustomerContactRole` | Enum | Valori controllati usati dalle regole di dominio. |
-| `CustomerStatus` | Enum | Valori controllati usati dalle regole di dominio. |
-| `CustomerType` | Enum | Valori controllati usati dalle regole di dominio. |
+| `Customer` | final class | Entity o value object del package. |
+| `CustomerAccount` | final class | Entity o value object del package. |
+| `CustomerContact` | final class | Entity o value object del package. |
+| `CustomerContactRole` | enum | Enum di classificazione/valori ammessi. |
+| `CustomerStatus` | enum | Enum di classificazione/valori ammessi. |
+| `CustomerType` | enum | Enum di classificazione/valori ammessi. |
 
-## Enum principali
+## Enum e valori ammessi
 
-### `CustomerContactRole`
+- `CustomerContactRole`: `LOGISTICS`, `ADMINISTRATION`, `BILLING`, `OPERATIONS`, `SALES`, `MANAGEMENT`, `OTHER`
+- `CustomerStatus`: `ACTIVE`, `INACTIVE`, `SUSPENDED`
+- `CustomerType`: `INDIVIDUAL`, `COMPANY`, `PUBLIC_AUTHORITY`, `INTERNAL`
 
-Valori: `LOGISTICS`, `ADMINISTRATION`, `BILLING`, `OPERATIONS`, `SALES`, `MANAGEMENT`, `OTHER`.
+## Regole di business
 
-### `CustomerStatus`
-
-Valori: `ACTIVE`, `INACTIVE`, `SUSPENDED`.
-
-### `CustomerType`
-
-Valori: `INDIVIDUAL`, `COMPANY`, `PUBLIC_AUTHORITY`, `INTERNAL`.
-
-
+- Un cliente ha stato, tipo, contatti e account.
+- I contatti hanno ruoli come amministrativo, operativo o fatturazione.
 
 ## Collegamenti con altri package
 
-Questo package non vive isolato: le sue classi vengono usate dalle regole di business e dai casi d’uso futuri.
-
-Per capire il flusso completo leggere anche:
-
-- [`../domain-overview.md`](../domain-overview.md)
-- [`../domain-rules.md`](../domain-rules.md)
-- [`../domain-package-map.md`](../domain-package-map.md)
+- order, billing, notification
 
 ## Test collegati
 
-I test si trovano sotto:
+- `CustomerAccountTest.java`
+- `CustomerContactTest.java`
+- `CustomerTest.java`
 
-```text
-src/test/java/it/gabriele/truckflow/domain/customer
-```
+## Note di progettazione
 
-Quando si modifica questo package, eseguire sempre:
+Questo package appartiene al domain puro. Non deve contenere codice di database, API esterne, controller web, query SQL, repository concreti o logica di framework.
 
-```bash
-mvn clean test
-```
+Le regole devono rimanere testabili con JUnit senza avviare servizi esterni.

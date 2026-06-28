@@ -1,50 +1,46 @@
-# Package `availability` — Disponibilità risorse
+# Package `availability` — Availability
 
 ## Scopo
 
-Gestisce finestre di disponibilità per autisti, veicoli, convogli, trailer e facility.
+Gestisce disponibilità o indisponibilità temporanea di risorse come veicoli, autisti o asset.
 
-## Classi ed enum
+## Concetti principali
 
-| Nome | Tipo | Ruolo sintetico |
+- `ResourceAvailability`
+- `AvailabilityResourceType`
+- `AvailabilityStatus`
+- `AvailabilityRules`
+
+## Classi del package
+
+| Classe | Tipo | Ruolo sintetico |
 |---|---|---|
-| `AvailabilityResourceType` | Enum | Valori controllati usati dalle regole di dominio. |
-| `AvailabilityRules` | Classe | Classe di regole di business del package. |
-| `AvailabilityStatus` | Enum | Valori controllati usati dalle regole di dominio. |
-| `ResourceAvailability` | Classe | Classe di dominio del package. |
+| `AvailabilityResourceType` | enum | Enum di classificazione/valori ammessi. |
+| `AvailabilityRules` | final class | Classe statica di regole di business del package. |
+| `AvailabilityStatus` | enum | Enum di classificazione/valori ammessi. |
+| `ResourceAvailability` | final class | Entity o value object del package. |
 
-## Enum principali
+## Enum e valori ammessi
 
-### `AvailabilityResourceType`
+- `AvailabilityResourceType`: `DRIVER`, `VEHICLE`, `VEHICLE_COMBINATION`, `TRAILER`, `FACILITY`
+- `AvailabilityStatus`: `AVAILABLE`, `RESERVED`, `ASSIGNED`, `UNAVAILABLE`, `MAINTENANCE`, `ON_LEAVE`
 
-Valori: `DRIVER`, `VEHICLE`, `VEHICLE_COMBINATION`, `TRAILER`, `FACILITY`.
+## Regole di business
 
-### `AvailabilityStatus`
-
-Valori: `AVAILABLE`, `RESERVED`, `ASSIGNED`, `UNAVAILABLE`, `MAINTENANCE`, `ON_LEAVE`.
-
-
+- Le finestre temporali non devono sovrapporsi in modo incoerente.
+- Una risorsa bloccata o non disponibile non dovrebbe essere assegnata a missioni.
 
 ## Collegamenti con altri package
 
-Questo package non vive isolato: le sue classi vengono usate dalle regole di business e dai casi d’uso futuri.
-
-Per capire il flusso completo leggere anche:
-
-- [`../domain-overview.md`](../domain-overview.md)
-- [`../domain-rules.md`](../domain-rules.md)
-- [`../domain-package-map.md`](../domain-package-map.md)
+- fleet, driver, maintenance, operation
 
 ## Test collegati
 
-I test si trovano sotto:
+- `AvailabilityRulesTest.java`
+- `ResourceAvailabilityTest.java`
 
-```text
-src/test/java/it/gabriele/truckflow/domain/availability
-```
+## Note di progettazione
 
-Quando si modifica questo package, eseguire sempre:
+Questo package appartiene al domain puro. Non deve contenere codice di database, API esterne, controller web, query SQL, repository concreti o logica di framework.
 
-```bash
-mvn clean test
-```
+Le regole devono rimanere testabili con JUnit senza avviare servizi esterni.

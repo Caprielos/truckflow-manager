@@ -1,41 +1,38 @@
-# Package `compliance` — Compliance trasversale
+# Package `compliance` — Compliance
 
 ## Scopo
 
-Coordina regole tra autista, mezzo, carico e spedizione.
+Coordina controlli di conformità tra merce, mezzo, autista, documenti e regole generali.
 
-## Classi ed enum
+## Concetti principali
 
-| Nome | Tipo | Ruolo sintetico |
+- `ComplianceRules`
+
+## Classi del package
+
+| Classe | Tipo | Ruolo sintetico |
 |---|---|---|
-| `ComplianceRules` | Classe | Classe di regole di business del package. |
+| `ComplianceRules` | final class | Classe statica di regole di business del package. |
 
-## Enum principali
+## Enum e valori ammessi
 
-In questo package non ci sono enum principali.
+_Nessuna enum nel package._
 
+## Regole di business
 
+- Verifica se un carico richiede ADR, ATP, documenti o qualifiche speciali.
+- Centralizza controlli trasversali senza spostare logica tecnica fuori dai package proprietari.
 
 ## Collegamenti con altri package
 
-Questo package non vive isolato: le sue classi vengono usate dalle regole di business e dai casi d’uso futuri.
-
-Per capire il flusso completo leggere anche:
-
-- [`../domain-overview.md`](../domain-overview.md)
-- [`../domain-rules.md`](../domain-rules.md)
-- [`../domain-package-map.md`](../domain-package-map.md)
+- cargo, driver, fleet, document, company, operation
 
 ## Test collegati
 
-I test si trovano sotto:
+- `ComplianceRulesTest.java`
 
-```text
-src/test/java/it/gabriele/truckflow/domain/compliance
-```
+## Note di progettazione
 
-Quando si modifica questo package, eseguire sempre:
+Questo package appartiene al domain puro. Non deve contenere codice di database, API esterne, controller web, query SQL, repository concreti o logica di framework.
 
-```bash
-mvn clean test
-```
+Le regole devono rimanere testabili con JUnit senza avviare servizi esterni.

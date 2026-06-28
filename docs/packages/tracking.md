@@ -2,45 +2,45 @@
 
 ## Scopo
 
-Timeline di eventi di spedizione, missione e mezzo.
+Gestisce eventi di tracking logistico e timeline della spedizione/missione.
 
-## Classi ed enum
+## Concetti principali
 
-| Nome | Tipo | Ruolo sintetico |
+- `TrackingEvent`
+- `TrackingTimeline`
+- `TrackingEventType`
+- `TrackingRules`
+
+## Classi del package
+
+| Classe | Tipo | Ruolo sintetico |
 |---|---|---|
-| `TrackingEvent` | Classe | Classe di dominio del package. |
-| `TrackingEventType` | Enum | Valori controllati usati dalle regole di dominio. |
-| `TrackingRules` | Classe | Classe di regole di business del package. |
-| `TrackingTimeline` | Classe | Classe di dominio del package. |
+| `TrackingEvent` | final class | Entity o value object del package. |
+| `TrackingEventType` | enum | Enum di classificazione/valori ammessi. |
+| `TrackingRules` | final class | Classe statica di regole di business del package. |
+| `TrackingTimeline` | final class | Entity o value object del package. |
 
-## Enum principali
+## Enum e valori ammessi
 
-### `TrackingEventType`
+- `TrackingEventType`: `POSITION_RECORDED`, `DEPARTED`, `ARRIVED`, `PICKUP_COMPLETED`, `DELIVERY_COMPLETED`, `DELAY_REPORTED`, `INCIDENT_REPORTED`, `MISSION_COMPLETED`, `CAN_BUS_SNAPSHOT`, `HARSH_BRAKING`, `SPEEDING`, `FUEL_LEVEL_RECORDED`
 
-Valori: `POSITION_RECORDED`, `DEPARTED`, `ARRIVED`, `PICKUP_COMPLETED`, `DELIVERY_COMPLETED`, `DELAY_REPORTED`, `INCIDENT_REPORTED`, `MISSION_COMPLETED`, `CAN_BUS_SNAPSHOT`, `HARSH_BRAKING`, `SPEEDING`, `FUEL_LEVEL_RECORDED`.
+## Regole di business
 
-
+- Eventi devono avere timestamp e ordine coerente.
+- La timeline ricostruisce avanzamento e anomalie.
 
 ## Collegamenti con altri package
 
-Questo package non vive isolato: le sue classi vengono usate dalle regole di business e dai casi d’uso futuri.
-
-Per capire il flusso completo leggere anche:
-
-- [`../domain-overview.md`](../domain-overview.md)
-- [`../domain-rules.md`](../domain-rules.md)
-- [`../domain-package-map.md`](../domain-package-map.md)
+- shipment, operation, telematics, notification
 
 ## Test collegati
 
-I test si trovano sotto:
+- `TrackingEventTest.java`
+- `TrackingRulesTest.java`
+- `TrackingTimelineTest.java`
 
-```text
-src/test/java/it/gabriele/truckflow/domain/tracking
-```
+## Note di progettazione
 
-Quando si modifica questo package, eseguire sempre:
+Questo package appartiene al domain puro. Non deve contenere codice di database, API esterne, controller web, query SQL, repository concreti o logica di framework.
 
-```bash
-mvn clean test
-```
+Le regole devono rimanere testabili con JUnit senza avviare servizi esterni.

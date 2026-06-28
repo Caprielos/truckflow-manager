@@ -1,53 +1,44 @@
-# Package `telematics` — Telematica
+# Package `telematics` — Telematics
 
 ## Scopo
 
-Snapshot GPS/CAN-bus e dati letti da centraline esterne.
+Gestisce dati da GPS/blackbox/CAN-bus e comportamento di guida.
 
-## Classi ed enum
+## Concetti principali
 
-| Nome | Tipo | Ruolo sintetico |
+- `TelematicsSnapshot`
+- `DrivingBehaviorEvent`
+- `DrivingBehaviorEventType`
+- `TelematicsRules`
+
+## Classi del package
+
+| Classe | Tipo | Ruolo sintetico |
 |---|---|---|
-| `TelematicsSnapshot` | Classe | Fotografia telematica/GPS/CAN-bus del mezzo. |
+| `DrivingBehaviorEvent` | final class | Entity o value object del package. |
+| `DrivingBehaviorEventType` | enum | Enum di classificazione/valori ammessi. |
+| `TelematicsRules` | final class | Regole su eventi di guida e coerenza telematica. |
+| `TelematicsSnapshot` | final class | Snapshot da blackbox/CAN-bus/GPS. |
 
-## Enum principali
+## Enum e valori ammessi
 
-In questo package non ci sono enum principali.
+- `DrivingBehaviorEventType`: `HARSH_BRAKING`, `HARSH_ACCELERATION`, `SPEEDING`, `IDLING_TOO_LONG`, `LOW_FUEL_LEVEL`, `POSSIBLE_FUEL_THEFT`, `ENGINE_FAULT`
 
+## Regole di business
 
-## Telematica e GPS
-
-`TelematicsSnapshot` rappresenta una fotografia dati del mezzo:
-
-- coordinate GPS;
-- timestamp;
-- odometro;
-- livello carburante;
-- eventi guida.
-
-La chiamata reale alle API GPS starà in infrastructure, non nel domain.
-
+- Snapshot deve avere timestamp e dati coerenti.
+- Eventi come frenata brusca o eccesso velocità possono attivare alert.
 
 ## Collegamenti con altri package
 
-Questo package non vive isolato: le sue classi vengono usate dalle regole di business e dai casi d’uso futuri.
-
-Per capire il flusso completo leggere anche:
-
-- [`../domain-overview.md`](../domain-overview.md)
-- [`../domain-rules.md`](../domain-rules.md)
-- [`../domain-package-map.md`](../domain-package-map.md)
+- tracking, fuel, maintenance, driver, sustainability
 
 ## Test collegati
 
-I test si trovano sotto:
+- `TelematicsSnapshotTest.java`
 
-```text
-src/test/java/it/gabriele/truckflow/domain/telematics
-```
+## Note di progettazione
 
-Quando si modifica questo package, eseguire sempre:
+Questo package appartiene al domain puro. Non deve contenere codice di database, API esterne, controller web, query SQL, repository concreti o logica di framework.
 
-```bash
-mvn clean test
-```
+Le regole devono rimanere testabili con JUnit senza avviare servizi esterni.

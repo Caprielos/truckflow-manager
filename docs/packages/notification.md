@@ -1,65 +1,55 @@
-# Package `notification` — Notifiche
+# Package `notification` — Notification
 
 ## Scopo
 
-Messaggi, canali, destinatari, priorità e stati di invio.
+Modella messaggi e notifiche verso utenti, clienti, autisti o operatori.
 
-## Classi ed enum
+## Concetti principali
 
-| Nome | Tipo | Ruolo sintetico |
+- `NotificationMessage`
+- `NotificationType`
+- `NotificationChannel`
+- `NotificationRecipientType`
+- `NotificationPriority`
+- `NotificationStatus`
+- `NotificationRules`
+
+## Classi del package
+
+| Classe | Tipo | Ruolo sintetico |
 |---|---|---|
-| `NotificationChannel` | Enum | Valori controllati usati dalle regole di dominio. |
-| `NotificationMessage` | Classe | Classe di dominio del package. |
-| `NotificationPriority` | Enum | Valori controllati usati dalle regole di dominio. |
-| `NotificationRecipientType` | Enum | Valori controllati usati dalle regole di dominio. |
-| `NotificationRules` | Classe | Classe di regole di business del package. |
-| `NotificationStatus` | Enum | Valori controllati usati dalle regole di dominio. |
-| `NotificationType` | Enum | Valori controllati usati dalle regole di dominio. |
+| `NotificationChannel` | enum | Enum di classificazione/valori ammessi. |
+| `NotificationMessage` | final class | Entity o value object del package. |
+| `NotificationPriority` | enum | Enum di classificazione/valori ammessi. |
+| `NotificationRecipientType` | enum | Enum di classificazione/valori ammessi. |
+| `NotificationRules` | final class | Classe statica di regole di business del package. |
+| `NotificationStatus` | enum | Enum di classificazione/valori ammessi. |
+| `NotificationType` | enum | Enum di classificazione/valori ammessi. |
 
-## Enum principali
+## Enum e valori ammessi
 
-### `NotificationChannel`
+- `NotificationChannel`: `EMAIL`, `SMS`, `PUSH`, `IN_APP`, `WEBHOOK`
+- `NotificationPriority`: `LOW`, `NORMAL`, `HIGH`, `URGENT`
+- `NotificationRecipientType`: `CUSTOMER_CONTACT`, `DRIVER`, `DISPATCHER`, `ADMIN`, `INTEGRATION`, `SYSTEM`
+- `NotificationStatus`: `DRAFT`, `SCHEDULED`, `SENT`, `FAILED`, `CANCELLED`
+- `NotificationType`: `SHIPMENT_PLANNED`, `SHIPMENT_DELAYED`, `PICKUP_COMPLETED`, `DELIVERY_COMPLETED`, `DOCUMENT_REQUESTED`, `DOCUMENT_VERIFIED`, `INVOICE_ISSUED`, `PAYMENT_RECEIVED`, `CLAIM_UPDATED`, `MAINTENANCE_ALERT`, `SECURITY_ALERT`, `SYSTEM_ALERT`
 
-Valori: `EMAIL`, `SMS`, `PUSH`, `IN_APP`, `WEBHOOK`.
+## Regole di business
 
-### `NotificationPriority`
-
-Valori: `LOW`, `NORMAL`, `HIGH`, `URGENT`.
-
-### `NotificationRecipientType`
-
-Valori: `CUSTOMER_CONTACT`, `DRIVER`, `DISPATCHER`, `ADMIN`, `INTEGRATION`, `SYSTEM`.
-
-### `NotificationStatus`
-
-Valori: `DRAFT`, `SCHEDULED`, `SENT`, `FAILED`, `CANCELLED`.
-
-### `NotificationType`
-
-Valori: `SHIPMENT_PLANNED`, `SHIPMENT_DELAYED`, `PICKUP_COMPLETED`, `DELIVERY_COMPLETED`, `DOCUMENT_REQUESTED`, `DOCUMENT_VERIFIED`, `INVOICE_ISSUED`, `PAYMENT_RECEIVED`, `CLAIM_UPDATED`, `MAINTENANCE_ALERT`, `SECURITY_ALERT`, `SYSTEM_ALERT`.
-
-
+- Priorità e canale dipendono dal tipo notifica.
+- Scadenze e alert possono generare messaggi.
 
 ## Collegamenti con altri package
 
-Questo package non vive isolato: le sue classi vengono usate dalle regole di business e dai casi d’uso futuri.
-
-Per capire il flusso completo leggere anche:
-
-- [`../domain-overview.md`](../domain-overview.md)
-- [`../domain-rules.md`](../domain-rules.md)
-- [`../domain-package-map.md`](../domain-package-map.md)
+- compliance, maintenance, tracking, identity
 
 ## Test collegati
 
-I test si trovano sotto:
+- `NotificationMessageTest.java`
+- `NotificationRulesTest.java`
 
-```text
-src/test/java/it/gabriele/truckflow/domain/notification
-```
+## Note di progettazione
 
-Quando si modifica questo package, eseguire sempre:
+Questo package appartiene al domain puro. Non deve contenere codice di database, API esterne, controller web, query SQL, repository concreti o logica di framework.
 
-```bash
-mvn clean test
-```
+Le regole devono rimanere testabili con JUnit senza avviare servizi esterni.

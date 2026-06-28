@@ -1,65 +1,51 @@
-# Package `maintenance` — Manutenzione
+# Package `maintenance` — Maintenance
 
 ## Scopo
 
-Ordini di manutenzione, guasti, tagliandi, controlli tecnici e stati.
+Gestisce manutenzioni preventive, straordinarie, ticket autista e fermi macchina.
 
-## Classi ed enum
+## Concetti principali
 
-| Nome | Tipo | Ruolo sintetico |
+- `MaintenanceWorkOrder`
+- `MaintenanceType`
+- `MaintenanceStatus`
+- `MaintenanceRules`
+- `DriverDefectTicket`
+- `VehicleDowntime`
+
+## Classi del package
+
+| Classe | Tipo | Ruolo sintetico |
 |---|---|---|
-| `MaintenanceRules` | Classe | Classe di regole di business del package. |
-| `MaintenanceStatus` | Enum | Valori controllati usati dalle regole di dominio. |
-| `MaintenanceType` | Enum | Valori controllati usati dalle regole di dominio. |
-| `MaintenanceWorkOrder` | Classe | Classe di dominio del package. |
+| `DriverDefectTicket` | final class | Segnalazione guasto/difetto fatta dall’autista. |
+| `MaintenanceRules` | final class | Classe statica di regole di business del package. |
+| `MaintenanceStatus` | enum | Enum di classificazione/valori ammessi. |
+| `MaintenanceType` | enum | Enum di classificazione/valori ammessi. |
+| `MaintenanceWorkOrder` | final class | Ordine di manutenzione. |
+| `VehicleDowntime` | final class | Periodo di fermo macchina. |
 
-## Enum principali
+## Enum e valori ammessi
 
-### `MaintenanceStatus`
+- `MaintenanceStatus`: `OPEN`, `SCHEDULED`, `IN_PROGRESS`, `COMPLETED`, `CANCELLED`
+- `MaintenanceType`: `ROUTINE_SERVICE`, `SAFETY_INSPECTION`, `TIRE_REPLACEMENT`, `REPAIR`, `REFRIGERATION_UNIT_SERVICE`, `ADR_TANK_INSPECTION`, `BREAKDOWN`, `ENGINE_SERVICE`, `AIR_DRYER_FILTER_REPLACEMENT`, `BRAKE_WEAR_CHECK`, `TIRE_ROTATION`, `DRIVER_DEFECT_TICKET`, `DOWNTIME`
 
-Valori: `OPEN`, `SCHEDULED`, `IN_PROGRESS`, `COMPLETED`, `CANCELLED`.
+## Regole di business
 
-### `MaintenanceType`
-
-Valori: `ROUTINE_SERVICE`, `SAFETY_INSPECTION`, `TIRE_REPLACEMENT`, `REPAIR`, `REFRIGERATION_UNIT_SERVICE`, `ADR_TANK_INSPECTION`, `BREAKDOWN`, `ENGINE_SERVICE`, `AIR_DRYER_FILTER_REPLACEMENT`, `BRAKE_WEAR_CHECK`, `TIRE_ROTATION`, `DRIVER_DEFECT_TICKET`, `DOWNTIME`.
-
-
-## Manutenzione
-
-Il package gestisce manutenzioni programmate e guasti.
-
-Dopo il refactor sono presenti anche tipi più realistici:
-
-- tagliando motore;
-- filtro essiccatore;
-- controllo freni;
-- giro gomme;
-- ticket autista;
-- fermo macchina;
-- manutenzione gruppo frigo;
-- ispezione cisterna ADR.
-
+- Manutenzioni possono essere pianificate per km/data o generate da guasto.
+- Un mezzo in fermo macchina o manutenzione non dovrebbe essere assegnabile.
+- Costi e tempi permettono calcolo del costo di indisponibilità.
 
 ## Collegamenti con altri package
 
-Questo package non vive isolato: le sue classi vengono usate dalle regole di business e dai casi d’uso futuri.
-
-Per capire il flusso completo leggere anche:
-
-- [`../domain-overview.md`](../domain-overview.md)
-- [`../domain-rules.md`](../domain-rules.md)
-- [`../domain-package-map.md`](../domain-package-map.md)
+- fleet, availability, tire, claim, pricing
 
 ## Test collegati
 
-I test si trovano sotto:
+- `MaintenanceRulesTest.java`
+- `MaintenanceWorkOrderTest.java`
 
-```text
-src/test/java/it/gabriele/truckflow/domain/maintenance
-```
+## Note di progettazione
 
-Quando si modifica questo package, eseguire sempre:
+Questo package appartiene al domain puro. Non deve contenere codice di database, API esterne, controller web, query SQL, repository concreti o logica di framework.
 
-```bash
-mvn clean test
-```
+Le regole devono rimanere testabili con JUnit senza avviare servizi esterni.

@@ -1,47 +1,47 @@
-# Testing guide
+# Testing Guide
 
-Il progetto usa Maven e JUnit 5.
+## Obiettivo dei test
 
-## Eseguire tutti i test
+I test proteggono le regole di dominio.
+
+Ogni package principale ha test dedicati in:
+
+```text
+src/test/java/it/gabriele/truckflow/domain
+```
+
+## Comando principale
 
 ```bash
 mvn clean test
 ```
 
-## Strategia test
+Va eseguito prima di ogni commit.
 
-I test del domain verificano:
+## Cosa testare
 
-- validazioni dei value object;
-- transizioni di stato;
-- compatibilità carico/mezzo;
-- requisiti autista;
-- documenti richiesti;
-- calcoli di pesi, volumi e costi;
-- regole di disponibilità, manutenzione e tracking.
+Per ogni nuova regola:
 
-## Convenzione
+1. caso valido;
+2. caso non valido;
+3. boundary case;
+4. eccezioni attese;
+5. comportamento di calcolo.
 
-Ogni package importante ha almeno un test dedicato.
+## Test di integrazione domain
+
+Il package `domain.integration` contiene test che verificano l’integrazione trasversale dei nuovi concetti realistici.
 
 Esempi:
 
-```text
-VehicleTest
-VehicleCombinationRulesTest
-RealisticFleetModelTest
-CargoOperationalRulesTest
-DriverRulesTest
-FuelTransactionTest
-TireManagementTest
-LoadSecuringChecklistTest
-```
+- cargo → requisiti documentali;
+- vehicle → technical specification;
+- driver → certificati;
+- company → licenze;
+- mission readiness.
 
-## Prima di committare
+## Regola importante
 
-Eseguire sempre:
+Quando una regola di business cambia, non bisogna forzare il codice a rispettare un test vecchio.
 
-```bash
-mvn clean test
-git status
-```
+Esempio: il frigo non è più un `VehicleType`, ma un allestimento. Quindi un autocarro rigido con `REFRIGERATED_BOX` è valido se ha dati coerenti.

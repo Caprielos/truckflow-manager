@@ -1,55 +1,49 @@
-# Package `identity` — Utenti e permessi
+# Package `identity` — Identity
 
 ## Scopo
 
-Account, ruoli e autorizzazioni applicative.
+Gestisce account utenti, ruoli e permessi applicativi.
 
-## Classi ed enum
+## Concetti principali
 
-| Nome | Tipo | Ruolo sintetico |
+- `UserAccount`
+- `UserRole`
+- `UserPermission`
+- `UserAccountStatus`
+- `IdentityRules`
+
+## Classi del package
+
+| Classe | Tipo | Ruolo sintetico |
 |---|---|---|
-| `IdentityRules` | Classe | Classe di regole di business del package. |
-| `UserAccount` | Classe | Classe di dominio del package. |
-| `UserAccountStatus` | Enum | Valori controllati usati dalle regole di dominio. |
-| `UserPermission` | Enum | Valori controllati usati dalle regole di dominio. |
-| `UserRole` | Enum | Valori controllati usati dalle regole di dominio. |
+| `IdentityRules` | final class | Classe statica di regole di business del package. |
+| `UserAccount` | final class | Entity o value object del package. |
+| `UserAccountStatus` | enum | Enum di classificazione/valori ammessi. |
+| `UserPermission` | enum | Enum di classificazione/valori ammessi. |
+| `UserRole` | enum | Enum di classificazione/valori ammessi. |
 
-## Enum principali
+## Enum e valori ammessi
 
-### `UserAccountStatus`
+- `UserAccountStatus`: `INVITED`, `ACTIVE`, `LOCKED`, `DISABLED`, `DELETED`
+- `UserPermission`: `VIEW_SHIPMENTS`, `MANAGE_SHIPMENTS`, `VIEW_OPERATIONS`, `MANAGE_OPERATIONS`, `MANAGE_FLEET`, `MANAGE_DRIVERS`, `MANAGE_BILLING`, `MANAGE_DOCUMENTS`, `MANAGE_CLAIMS`, `VIEW_REPORTS`, `VIEW_AUDIT`, `MANAGE_USERS`, `MANAGE_CONFIGURATION`
+- `UserRole`: `ADMIN`, `DISPATCHER`, `PLANNER`, `ACCOUNTING`, `MAINTENANCE`, `DRIVER`, `CUSTOMER`, `VIEWER`
 
-Valori: `INVITED`, `ACTIVE`, `LOCKED`, `DISABLED`, `DELETED`.
+## Regole di business
 
-### `UserPermission`
-
-Valori: `VIEW_SHIPMENTS`, `MANAGE_SHIPMENTS`, `VIEW_OPERATIONS`, `MANAGE_OPERATIONS`, `MANAGE_FLEET`, `MANAGE_DRIVERS`, `MANAGE_BILLING`, `MANAGE_DOCUMENTS`, `MANAGE_CLAIMS`, `VIEW_REPORTS`, `VIEW_AUDIT`, `MANAGE_USERS`, `MANAGE_CONFIGURATION`.
-
-### `UserRole`
-
-Valori: `ADMIN`, `DISPATCHER`, `PLANNER`, `ACCOUNTING`, `MAINTENANCE`, `DRIVER`, `CUSTOMER`, `VIEWER`.
-
-
+- Account e permessi sono separati dalle entity operative come Driver o Customer.
+- Password/hash/JWT reali rimangono fuori dal domain puro.
 
 ## Collegamenti con altri package
 
-Questo package non vive isolato: le sue classi vengono usate dalle regole di business e dai casi d’uso futuri.
-
-Per capire il flusso completo leggere anche:
-
-- [`../domain-overview.md`](../domain-overview.md)
-- [`../domain-rules.md`](../domain-rules.md)
-- [`../domain-package-map.md`](../domain-package-map.md)
+- audit, notification, future security infrastructure
 
 ## Test collegati
 
-I test si trovano sotto:
+- `IdentityRulesTest.java`
+- `UserAccountTest.java`
 
-```text
-src/test/java/it/gabriele/truckflow/domain/identity
-```
+## Note di progettazione
 
-Quando si modifica questo package, eseguire sempre:
+Questo package appartiene al domain puro. Non deve contenere codice di database, API esterne, controller web, query SQL, repository concreti o logica di framework.
 
-```bash
-mvn clean test
-```
+Le regole devono rimanere testabili con JUnit senza avviare servizi esterni.

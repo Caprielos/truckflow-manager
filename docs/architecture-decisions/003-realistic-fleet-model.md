@@ -1,38 +1,33 @@
-# ADR 003 — Modello flotta realistico e componibile
+# ADR 003 — Realistic Fleet Model
 
 ## Decisione
 
-Il modello flotta non usa una sola enum gigante per rappresentare camion, rimorchi e allestimenti.
+Il mezzo non viene più modellato come una macro-categoria unica.
 
-Il mezzo viene composto con:
+La flotta viene modellata con concetti separati:
 
 ```text
 VehicleUnitType
+VehicleWeightClass
 VehicleBodyBaseType
 VehicleBodyConfiguration
-VehicleLoadingEquipment
-VehicleTechnicalFeature
 VehicleTechnicalSpecification
 VehicleCertificate
+VehicleCombination
 ```
 
 ## Motivazione
 
-Nel mondo reale un mezzo può essere:
+Nel mondo reale un camion non è solo “frigo” o “cisterna”.
+
+Esempio:
 
 ```text
-semirimorchio centinato mega
-furgonato frigo con sponda
-scarrabile con gru retrocabina
-pianale con rampe e verricello
-cisterna ADR
-trattore stradale con gru
+RIGID_TRUCK + REFRIGERATED_BOX + ATP
+TRACTOR_UNIT + SEMI_TRAILER + TANK + ADR
+RIGID_TRUCK + FIXED_OPEN_BOX + HYDRAULIC_CRANE
 ```
-
-Una enum unica diventerebbe ingestibile.
 
 ## Conseguenze
 
-- Gli allestimenti sono componibili.
-- Peso, assi e certificati stanno in specifiche tecniche.
-- `VehicleType` resta solo per compatibilità con il codice esistente.
+La compatibilità merce/mezzo viene calcolata con regole specifiche, non con booleani dentro una sola enum.

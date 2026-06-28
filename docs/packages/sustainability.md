@@ -1,55 +1,49 @@
-# Package `sustainability` — Sostenibilità
+# Package `sustainability` — Sustainability
 
 ## Scopo
 
-Stime emissioni, rating e standard ambientali.
+Calcola emissioni, rating ambientale e informazioni su carburante/emission standard.
 
-## Classi ed enum
+## Concetti principali
 
-| Nome | Tipo | Ruolo sintetico |
+- `EmissionEstimate`
+- `EmissionRating`
+- `EmissionStandard`
+- `FuelType`
+- `SustainabilityRules`
+
+## Classi del package
+
+| Classe | Tipo | Ruolo sintetico |
 |---|---|---|
-| `EmissionEstimate` | Classe | Classe di dominio del package. |
-| `EmissionRating` | Enum | Valori controllati usati dalle regole di dominio. |
-| `EmissionStandard` | Enum | Valori controllati usati dalle regole di dominio. |
-| `FuelType` | Enum | Valori controllati usati dalle regole di dominio. |
-| `SustainabilityRules` | Classe | Classe di regole di business del package. |
+| `EmissionEstimate` | final class | Entity o value object del package. |
+| `EmissionRating` | enum | Enum di classificazione/valori ammessi. |
+| `EmissionStandard` | enum | Enum di classificazione/valori ammessi. |
+| `FuelType` | enum | Enum di classificazione/valori ammessi. |
+| `SustainabilityRules` | final class | Classe statica di regole di business del package. |
 
-## Enum principali
+## Enum e valori ammessi
 
-### `EmissionRating`
+- `EmissionRating`: `LOW`, `MEDIUM`, `HIGH`, `VERY_HIGH`
+- `EmissionStandard`: `EURO_0`, `EURO_1`, `EURO_2`, `EURO_3`, `EURO_4`, `EURO_5`, `EURO_6`, `ZERO_EMISSION`, `UNKNOWN`
+- `FuelType`: `DIESEL`, `HVO`, `LNG`, `CNG`, `ELECTRIC`, `HYDROGEN`, `UNKNOWN`
 
-Valori: `LOW`, `MEDIUM`, `HIGH`, `VERY_HIGH`.
+## Regole di business
 
-### `EmissionStandard`
-
-Valori: `EURO_0`, `EURO_1`, `EURO_2`, `EURO_3`, `EURO_4`, `EURO_5`, `EURO_6`, `ZERO_EMISSION`, `UNKNOWN`.
-
-### `FuelType`
-
-Valori: `DIESEL`, `HVO`, `LNG`, `CNG`, `ELECTRIC`, `HYDROGEN`, `UNKNOWN`.
-
-
+- Emissioni dipendono da distanza, consumo e fattori emissivi.
+- Rating e standard Euro aiutano reporting e scelte operative.
 
 ## Collegamenti con altri package
 
-Questo package non vive isolato: le sue classi vengono usate dalle regole di business e dai casi d’uso futuri.
-
-Per capire il flusso completo leggere anche:
-
-- [`../domain-overview.md`](../domain-overview.md)
-- [`../domain-rules.md`](../domain-rules.md)
-- [`../domain-package-map.md`](../domain-package-map.md)
+- fleet, fuel, route, reporting
 
 ## Test collegati
 
-I test si trovano sotto:
+- `EmissionEstimateTest.java`
+- `SustainabilityRulesTest.java`
 
-```text
-src/test/java/it/gabriele/truckflow/domain/sustainability
-```
+## Note di progettazione
 
-Quando si modifica questo package, eseguire sempre:
+Questo package appartiene al domain puro. Non deve contenere codice di database, API esterne, controller web, query SQL, repository concreti o logica di framework.
 
-```bash
-mvn clean test
-```
+Le regole devono rimanere testabili con JUnit senza avviare servizi esterni.

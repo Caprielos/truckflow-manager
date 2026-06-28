@@ -1,66 +1,56 @@
-# Package `claim` — Reclami, sinistri e danni
+# Package `claim` — Claim
 
 ## Scopo
 
-Gestisce danni merce, ritardi, contestazioni, sinistri, danni veicolo e pratiche assicurative.
+Gestisce reclami, danni, sinistri e controlli visivi legati a mezzi e missioni.
 
-## Classi ed enum
+## Concetti principali
 
-| Nome | Tipo | Ruolo sintetico |
+- `TransportClaim`
+- `DamageInspection`
+- `DamageInspectionItem`
+- `ClaimType`
+- `ClaimSeverity`
+- `ClaimStatus`
+- `ClaimRules`
+
+## Classi del package
+
+| Classe | Tipo | Ruolo sintetico |
 |---|---|---|
-| `ClaimRules` | Classe | Classe di regole di business del package. |
-| `ClaimSeverity` | Enum | Valori controllati usati dalle regole di dominio. |
-| `ClaimStatus` | Enum | Valori controllati usati dalle regole di dominio. |
-| `ClaimType` | Enum | Valori controllati usati dalle regole di dominio. |
-| `TransportClaim` | Classe | Classe di dominio del package. |
+| `ClaimRules` | final class | Classe statica di regole di business del package. |
+| `ClaimSeverity` | enum | Enum di classificazione/valori ammessi. |
+| `ClaimStatus` | enum | Enum di classificazione/valori ammessi. |
+| `ClaimType` | enum | Enum di classificazione/valori ammessi. |
+| `DamageInspection` | final class | Controllo danni visivo pre/post viaggio. |
+| `DamageInspectionItem` | final class | Entity o value object del package. |
+| `TransportClaim` | final class | Pratica sinistro/reclamo. |
 
-## Enum principali
+## Enum e valori ammessi
 
-### `ClaimSeverity`
+- `ClaimSeverity`: `LOW`, `MEDIUM`, `HIGH`, `CRITICAL`
+- `ClaimStatus`: `OPEN`, `UNDER_REVIEW`, `ACCEPTED`, `SETTLED`, `REJECTED`, `CANCELLED`
+- `ClaimType`: `CARGO_DAMAGE`, `CARGO_LOSS`, `DELAY`, `TEMPERATURE_EXCURSION`, `DOCUMENT_DISPUTE`, `BILLING_DISPUTE`, `VEHICLE_DAMAGE`, `ACCIDENT`, `INSURANCE_CLAIM`, `OTHER`
 
-Valori: `LOW`, `MEDIUM`, `HIGH`, `CRITICAL`.
+## Regole di business
 
-### `ClaimStatus`
-
-Valori: `OPEN`, `UNDER_REVIEW`, `ACCEPTED`, `SETTLED`, `REJECTED`, `CANCELLED`.
-
-### `ClaimType`
-
-Valori: `CARGO_DAMAGE`, `CARGO_LOSS`, `DELAY`, `TEMPERATURE_EXCURSION`, `DOCUMENT_DISPUTE`, `BILLING_DISPUTE`, `VEHICLE_DAMAGE`, `ACCIDENT`, `INSURANCE_CLAIM`, `OTHER`.
-
-
-## Reclami, danni e sinistri
-
-Il package gestisce sia reclami di trasporto sia casi fleet:
-
-- danni merce;
-- ritardi;
-- temperatura fuori range;
-- danni veicolo;
-- sinistro;
-- pratica assicurativa.
-
+- Un sinistro deve avere gravità, stato e informazioni minime.
+- Le ispezioni danni permettono controlli pre-partenza o post-missione.
 
 ## Collegamenti con altri package
 
-Questo package non vive isolato: le sue classi vengono usate dalle regole di business e dai casi d’uso futuri.
-
-Per capire il flusso completo leggere anche:
-
-- [`../domain-overview.md`](../domain-overview.md)
-- [`../domain-rules.md`](../domain-rules.md)
-- [`../domain-package-map.md`](../domain-package-map.md)
+- fleet per mezzo danneggiato
+- operation/tracking per viaggio
+- document per CAI/foto/documenti
+- billing per costi o rimborsi
 
 ## Test collegati
 
-I test si trovano sotto:
+- `ClaimRulesTest.java`
+- `TransportClaimTest.java`
 
-```text
-src/test/java/it/gabriele/truckflow/domain/claim
-```
+## Note di progettazione
 
-Quando si modifica questo package, eseguire sempre:
+Questo package appartiene al domain puro. Non deve contenere codice di database, API esterne, controller web, query SQL, repository concreti o logica di framework.
 
-```bash
-mvn clean test
-```
+Le regole devono rimanere testabili con JUnit senza avviare servizi esterni.

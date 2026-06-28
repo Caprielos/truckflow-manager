@@ -1,62 +1,43 @@
-# Package `operation` — Missioni operative
+# Package `operation` — Operation
 
 ## Scopo
 
-Il viaggio reale assegnato a carico, mezzo, autista e pianificazione.
+Rappresenta la missione reale: il viaggio operativo eseguito con autista, mezzo/convoglio e percorso.
 
-## Classi ed enum
+## Concetti principali
 
-| Nome | Tipo | Ruolo sintetico |
+- `TransportMission`
+- `TransportMissionStatus`
+- `TransportMissionRules`
+
+## Classi del package
+
+| Classe | Tipo | Ruolo sintetico |
 |---|---|---|
-| `TransportMission` | Classe | Classe di dominio del package. |
-| `TransportMissionRules` | Classe | Classe di regole di business del package. |
-| `TransportMissionStatus` | Enum | Valori controllati usati dalle regole di dominio. |
+| `TransportMission` | final class | Missione operativa reale. |
+| `TransportMissionRules` | final class | Classe statica di regole di business del package. |
+| `TransportMissionStatus` | enum | Enum di classificazione/valori ammessi. |
 
-## Enum principali
+## Enum e valori ammessi
 
-### `TransportMissionStatus`
+- `TransportMissionStatus`: `PLANNED`, `DISPATCHED`, `IN_PROGRESS`, `COMPLETED`, `CANCELLED`
 
-Valori: `PLANNED`, `DISPATCHED`, `IN_PROGRESS`, `COMPLETED`, `CANCELLED`.
+## Regole di business
 
-
-## Missione operativa
-
-La missione è il viaggio reale.
-
-Collega:
-
-- spedizione;
-- convoglio;
-- autista;
-- rotta;
-- stato operativo;
-- tracking;
-- documenti;
-- costi.
-
-Non va confusa con l’ordine commerciale o con la spedizione.
-
+- Una missione non è una richiesta commerciale: è il lavoro reale da pianificare/eseguire.
+- Le assegnazioni devono rispettare disponibilità, compatibilità e compliance.
 
 ## Collegamenti con altri package
 
-Questo package non vive isolato: le sue classi vengono usate dalle regole di business e dai casi d’uso futuri.
-
-Per capire il flusso completo leggere anche:
-
-- [`../domain-overview.md`](../domain-overview.md)
-- [`../domain-rules.md`](../domain-rules.md)
-- [`../domain-package-map.md`](../domain-package-map.md)
+- shipment, driver, fleet, route, document, tracking, pricing
 
 ## Test collegati
 
-I test si trovano sotto:
+- `TransportMissionRulesTest.java`
+- `TransportMissionTest.java`
 
-```text
-src/test/java/it/gabriele/truckflow/domain/operation
-```
+## Note di progettazione
 
-Quando si modifica questo package, eseguire sempre:
+Questo package appartiene al domain puro. Non deve contenere codice di database, API esterne, controller web, query SQL, repository concreti o logica di framework.
 
-```bash
-mvn clean test
-```
+Le regole devono rimanere testabili con JUnit senza avviare servizi esterni.

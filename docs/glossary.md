@@ -1,77 +1,65 @@
-# Glossario
-
-## Autocarro / motrice
-
-Veicolo a motore con cabina e proprio vano/allestimento di carico.
-
-## Trattore stradale
-
-Veicolo a motore pensato per agganciare un semirimorchio. Normalmente non ha vano di carico proprio.
-
-## Rimorchio a timone
-
-Unità trainata con assi propri e timone.
-
-## Rimorchio ad assi centrali
-
-Rimorchio con gruppo assi vicino al centro, trainato da un veicolo motore.
-
-## Semirimorchio
-
-Unità trainata che poggia sulla ralla del trattore stradale.
-
-## Autotreno
-
-Convoglio composto da autocarro/motrice + rimorchio.
-
-## Autoarticolato / bilico
-
-Convoglio composto da trattore stradale + semirimorchio.
-
-## Allestimento base
-
-Struttura montata sul telaio: cassone, centinato, furgonato, frigo, cisterna, silo, pianale, scarrabile.
-
-## Accessorio di carico/scarico
-
-Modulo combinabile: gru, sponda idraulica, rampe, verricello, caricatore a polipo.
-
-## ATP
-
-Certificazione per trasporto a temperatura controllata di derrate deperibili.
+# Glossary
 
 ## ADR
 
-Normativa/certificazione per trasporto merci pericolose.
+Accordo per il trasporto di merci pericolose. Nel progetto appare in `DangerousGoodsProfile`, `DriverAdrCertificateType`, `VehicleCertificateType` e regole di compliance.
 
-## CQC merci
+## ATP
 
-Carta di Qualificazione del Conducente per trasporto professionale merci.
+Certificazione per trasporto a temperatura controllata di derrate deperibili. Usata per veicoli frigo/isotermici.
+
+## Autocarro / Motrice
+
+Veicolo a motore con cabina e struttura propria di carico.
+
+## Autotreno
+
+Convoglio formato da autocarro/motrice più rimorchio.
+
+## Autoarticolato / Bilico
+
+Convoglio formato da trattore stradale più semirimorchio.
+
+## CQC
+
+Carta di Qualificazione del Conducente per attività professionale merci.
+
+## EER / CER
+
+Codice a sei cifre per classificare i rifiuti.
 
 ## FIR
 
 Formulario Identificazione Rifiuti.
 
-## EER/CER
-
-Codice europeo del rifiuto.
-
-## P.B.C. / M.T.T.
-
-Massa complessiva a pieno carico.
-
-## Tara
-
-Massa a vuoto del mezzo.
-
-## Portata utile
-
-Carico massimo trasportabile, calcolato come massa complessiva meno tara.
-
-## Ralla / quinta ruota
-
-Dispositivo del trattore stradale su cui poggia il semirimorchio.
-
 ## Kingpin
 
-Perno del semirimorchio che si aggancia alla ralla.
+Perno di ralla del semirimorchio.
+
+## Ralla / Quinta ruota
+
+Sistema di aggancio del trattore stradale per semirimorchio.
+
+## Semirimorchio
+
+Unità trainata che poggia parzialmente sulla ralla del trattore.
+
+## Rimorchio a timone
+
+Rimorchio con assi propri e timone, trainato da autocarro.
+
+## Rimorchio ad assi centrali
+
+Rimorchio con assi centrali e aggancio tramite timone/occhione.
+
+## VehicleBodyConfiguration
+
+Composizione realistica dell’allestimento: base, accessori e feature.
+
+## VehicleCombination
+
+Convoglio operativo formato da veicolo motore e opzionale unità trainata.
+
+## VehicleTechnicalSpecification
+
+Scheda tecnica aggregata del mezzo: masse, dimensioni, assi, aggancio, certificati e allestimento.

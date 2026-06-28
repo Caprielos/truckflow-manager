@@ -1,59 +1,44 @@
-# Package `loadsecurity` — Fissaggio e sicurezza carico
+# Package `loadsecurity` — Load Security
 
 ## Scopo
 
-Checklist e dispositivi per bloccare fisicamente la merce durante il viaggio.
+Gestisce dispositivi di fissaggio del carico e checklist di sicurezza.
 
-## Classi ed enum
+## Concetti principali
 
-| Nome | Tipo | Ruolo sintetico |
+- `LoadSecuringChecklist`
+- `LoadSecuringEquipment`
+- `LoadSecuringEquipmentType`
+- `LoadSecuringRules`
+
+## Classi del package
+
+| Classe | Tipo | Ruolo sintetico |
 |---|---|---|
-| `LoadSecuringChecklist` | Classe | Checklist dei dispositivi di fissaggio disponibili/richiesti. |
-| `LoadSecuringEquipment` | Classe | Singolo dispositivo di fissaggio con quantità e capacità. |
-| `LoadSecuringEquipmentType` | Enum | Valori controllati usati dalle regole di dominio. |
+| `LoadSecuringChecklist` | final class | Checklist dispositivi di fissaggio del carico. |
+| `LoadSecuringEquipment` | final class | Entity o value object del package. |
+| `LoadSecuringEquipmentType` | enum | Enum di classificazione/valori ammessi. |
+| `LoadSecuringRules` | final class | Regole per verificare dotazione minima e sicurezza carico. |
 
-## Enum principali
+## Enum e valori ammessi
 
-### `LoadSecuringEquipmentType`
+- `LoadSecuringEquipmentType`: `RATCHET_STRAP`, `LOAD_BAR`, `ANTI_SLIP_MAT`, `CONTAINMENT_NET`, `EDGE_PROTECTOR`
 
-Valori: `RATCHET_STRAP`, `LOAD_BAR`, `ANTI_SLIP_MAT`, `CONTAINMENT_NET`, `EDGE_PROTECTOR`.
+## Regole di business
 
-
-## Sicurezza del carico
-
-Il carico deve essere bloccato fisicamente durante il viaggio.
-
-Il package modella:
-
-- cinghie a cricchetto;
-- barre fermacarico;
-- tappeti antiscivolo;
-- reti di contenimento;
-- angolari.
-
-La checklist potrà essere collegata alla missione e al controllo pre-partenza dell’autista.
-
+- Cinghie, barre, tappeti, reti e angolari possono essere richiesti in base al carico e all’allestimento.
+- La checklist verifica quantità e portata minima dei dispositivi.
 
 ## Collegamenti con altri package
 
-Questo package non vive isolato: le sue classi vengono usate dalle regole di business e dai casi d’uso futuri.
-
-Per capire il flusso completo leggere anche:
-
-- [`../domain-overview.md`](../domain-overview.md)
-- [`../domain-rules.md`](../domain-rules.md)
-- [`../domain-package-map.md`](../domain-package-map.md)
+- cargo, fleet, operation, compliance
 
 ## Test collegati
 
-I test si trovano sotto:
+- `LoadSecuringChecklistTest.java`
 
-```text
-src/test/java/it/gabriele/truckflow/domain/loadsecurity
-```
+## Note di progettazione
 
-Quando si modifica questo package, eseguire sempre:
+Questo package appartiene al domain puro. Non deve contenere codice di database, API esterne, controller web, query SQL, repository concreti o logica di framework.
 
-```bash
-mvn clean test
-```
+Le regole devono rimanere testabili con JUnit senza avviare servizi esterni.

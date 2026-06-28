@@ -1,122 +1,110 @@
-# Domain overview
+# Domain Overview
 
-Il domain di TruckFlow Manager è costruito intorno a una domanda:
+## Ragionamento generale
 
-> Questo trasporto può essere fatto in modo valido, sicuro, documentato e redditizio?
+TruckFlow Manager è stato modellato come dominio logistico realistico.
 
-Per rispondere, il dominio incrocia diversi blocchi.
-
-## 1. Merce
-
-La merce determina molte regole:
-
-- allestimento compatibile;
-- temperatura richiesta;
-- ADR;
-- documenti;
-- fissaggio;
-- certificati veicolo;
-- abilitazioni autista;
-- costi extra.
-
-Esempi:
+La regola principale è:
 
 ```text
-REFRIGERATED_FOOD -> frigo/isotermico + ATP + temperatura
-DANGEROUS_GOODS -> numero ONU + ADR autista + ADR veicolo
-WASTE_DANGEROUS -> EER/CER + FIR + licenza aziendale
-LIVESTOCK -> documenti veterinari + abilitazione animali vivi
+Non si forza la realtà dentro una sola enum.
+Si separano i concetti reali.
 ```
 
-## 2. Veicolo
-
-Un veicolo non è descritto da una sola categoria. Il modello separa:
+Esempio nel fleet:
 
 ```text
 VehicleUnitType
-VehicleBodyBaseType
+→ che unità fisica è
+
 VehicleBodyConfiguration
+→ che allestimento ha
+
 VehicleTechnicalSpecification
+→ quali dati tecnici possiede
+
 VehicleCertificate
+→ quali certificati e scadenze ha
+
+VehicleCombination
+→ come viene agganciato in un convoglio
 ```
 
-Questo permette di rappresentare casi realistici:
+## Merce come centro delle regole
 
-```text
-trattore stradale + gru
-semirimorchio centinato mega
-rimorchio ribaltabile trilaterale
-furgonato frigo con sponda
-cisterna ADR
-portacontainer con twist-lock
-```
+La merce non è una descrizione libera.
 
-## 3. Convoglio
+La categoria merce attiva vincoli:
 
-Il singolo mezzo è `Vehicle`.
-Il mezzo operativo può essere una combinazione `VehicleCombination`:
+- pallet;
+- temperatura;
+- ADR;
+- EER/CER rifiuti;
+- FIR;
+- ATP;
+- HACCP;
+- documentazione veterinaria;
+- allestimento compatibile;
+- driver qualificato;
+- azienda autorizzata;
+- surcharge di pricing.
 
-```text
-SINGLE_VEHICLE
-TRUCK_AND_TRAILER
-ARTICULATED_VEHICLE
-```
+## Mezzi e convogli
+
+Un mezzo singolo è `Vehicle`.
+
+Un convoglio è `VehicleCombination`.
 
 Esempi:
 
 ```text
-furgone singolo
-motrice/autocarro singolo
-autotreno = autocarro + rimorchio
-bilico = trattore stradale + semirimorchio
+Autocarro singolo
+→ VehicleCombinationType.SINGLE_VEHICLE
+
+Autotreno
+→ RIGID_TRUCK + DRAWBAR_TRAILER / CENTER_AXLE_TRAILER
+→ VehicleCombinationType.TRUCK_AND_TRAILER
+
+Bilico / autoarticolato
+→ TRACTOR_UNIT + SEMI_TRAILER
+→ VehicleCombinationType.ARTICULATED_VEHICLE
 ```
 
-## 4. Autista
+## Autista
 
-L’autista deve avere:
+L’autista non è solo una persona con patente.
 
-- stato assegnabile;
-- patente corretta;
+Può avere:
+
+- patenti B, C1, C, BE, C1E, CE;
 - CQC merci;
-- ADR se richiesto;
-- patentini operativi se richiesti.
+- ADR base/cisterne/classe 1/classe 7;
+- patentini operativi;
+- certificati con scadenza;
+- stato operativo.
 
-## 5. Azienda
+## Azienda
 
-Alcuni trasporti richiedono licenze aziendali:
+L’azienda può avere licenze:
 
-- albo autotrasportatori;
+- Albo Autotrasportatori;
 - REN;
 - licenza comunitaria;
 - conto proprio;
-- albo gestori ambientali.
+- Albo Gestori Ambientali.
 
-## 6. Missione
+## Missione
 
-La missione collega tutto:
+La missione è il punto dove tutto si incontra.
 
-```text
-ordine accettato
-spedizione
-carico
-convoglio
-autista
-rotta
-documenti
-tracking
-costi
-```
+Una missione corretta deve rispettare:
 
-## 7. Moduli operativi
-
-Il domain include già concetti per:
-
-- manutenzione;
-- pneumatici;
-- carburante;
-- telematica;
-- fissaggio carico;
-- sinistri/reclami;
-- sostenibilità;
-- pricing;
-- fatturazione.
+- compatibilità merce/allestimento;
+- idoneità driver;
+- idoneità veicolo/convoglio;
+- licenze azienda;
+- documenti obbligatori;
+- disponibilità;
+- manutenzione/scadenze;
+- tempi guida;
+- costi e marginalità.

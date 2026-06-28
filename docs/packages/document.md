@@ -1,68 +1,45 @@
-# Package `document` — Documenti di trasporto
+# Package `document` — Document
 
 ## Scopo
 
-Documenti richiesti dalla missione, dal carico o dai certificati.
+Gestisce documenti di trasporto, legali, sanitari, ADR, CMR, FIR e allegati di missione.
 
-## Classi ed enum
+## Concetti principali
 
-| Nome | Tipo | Ruolo sintetico |
+- `TransportDocument`
+- `TransportDocumentType`
+- `DocumentStatus`
+- `DocumentRules`
+
+## Classi del package
+
+| Classe | Tipo | Ruolo sintetico |
 |---|---|---|
-| `DocumentRules` | Classe | Classe di regole di business del package. |
-| `DocumentStatus` | Enum | Valori controllati usati dalle regole di dominio. |
-| `TransportDocument` | Classe | Documento associato a trasporto, veicolo, autista o missione. |
-| `TransportDocumentType` | Enum | Tipi documento: CMR, POD, FIR, SDS, HACCP, veterinario, ADR e altri. |
+| `DocumentRules` | final class | Classe statica di regole di business del package. |
+| `DocumentStatus` | enum | Enum di classificazione/valori ammessi. |
+| `TransportDocument` | final class | Entity o value object del package. |
+| `TransportDocumentType` | enum | Enum di classificazione/valori ammessi. |
 
-## Enum principali
+## Enum e valori ammessi
 
-### `DocumentStatus`
+- `DocumentStatus`: `DRAFT`, `REQUESTED`, `RECEIVED`, `VERIFIED`, `REJECTED`, `EXPIRED`
+- `TransportDocumentType`: `CMR_WAYBILL`, `PROOF_OF_DELIVERY`, `DELIVERY_NOTE`, `ADR_TRANSPORT_DOCUMENT`, `TEMPERATURE_LOG`, `INVOICE_COPY`, `INSURANCE_CERTIFICATE`, `VEHICLE_REGISTRATION`, `DRIVER_LICENSE_COPY`, `WASTE_IDENTIFICATION_FORM`, `SAFETY_DATA_SHEET`, `ADR_WRITTEN_INSTRUCTIONS`, `HACCP_SANITATION_DOCUMENT`, `VETERINARY_DOCUMENT`, `OVERSIZED_TRANSPORT_AUTHORIZATION`
 
-Valori: `DRAFT`, `REQUESTED`, `RECEIVED`, `VERIFIED`, `REJECTED`, `EXPIRED`.
+## Regole di business
 
-### `TransportDocumentType`
-
-Valori: `CMR_WAYBILL`, `PROOF_OF_DELIVERY`, `DELIVERY_NOTE`, `ADR_TRANSPORT_DOCUMENT`, `TEMPERATURE_LOG`, `INVOICE_COPY`, `INSURANCE_CERTIFICATE`, `VEHICLE_REGISTRATION`, `DRIVER_LICENSE_COPY`, `WASTE_IDENTIFICATION_FORM`, `SAFETY_DATA_SHEET`, `ADR_WRITTEN_INSTRUCTIONS`, `HACCP_SANITATION_DOCUMENT`, `VETERINARY_DOCUMENT`, `OVERSIZED_TRANSPORT_AUTHORIZATION`.
-
-
-## Documenti missione e compliance
-
-I documenti non sono semplici allegati: fanno parte della validità operativa del trasporto.
-
-Esempi:
-
-```text
-CMR_WAYBILL                   -> trasporti internazionali
-WASTE_IDENTIFICATION_FORM     -> rifiuti
-SAFETY_DATA_SHEET             -> ADR
-ADR_WRITTEN_INSTRUCTIONS      -> ADR
-HACCP_SANITATION_DOCUMENT     -> alimentari
-VETERINARY_DOCUMENT           -> animali vivi
-OVERSIZED_TRANSPORT_AUTHORIZATION -> trasporti eccezionali
-```
-
-`DocumentRules` gestisce stati e validazione.
-
+- I documenti obbligatori dipendono da carico e missione.
+- Un documento può essere richiesto, caricato, validato o scaduto.
 
 ## Collegamenti con altri package
 
-Questo package non vive isolato: le sue classi vengono usate dalle regole di business e dai casi d’uso futuri.
-
-Per capire il flusso completo leggere anche:
-
-- [`../domain-overview.md`](../domain-overview.md)
-- [`../domain-rules.md`](../domain-rules.md)
-- [`../domain-package-map.md`](../domain-package-map.md)
+- cargo, compliance, operation, company, claim
 
 ## Test collegati
 
-I test si trovano sotto:
+- `DocumentRulesTest.java`
 
-```text
-src/test/java/it/gabriele/truckflow/domain/document
-```
+## Note di progettazione
 
-Quando si modifica questo package, eseguire sempre:
+Questo package appartiene al domain puro. Non deve contenere codice di database, API esterne, controller web, query SQL, repository concreti o logica di framework.
 
-```bash
-mvn clean test
-```
+Le regole devono rimanere testabili con JUnit senza avviare servizi esterni.

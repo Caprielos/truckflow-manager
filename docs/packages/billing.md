@@ -1,51 +1,51 @@
-# Package `billing` — Fatturazione e pagamenti
+# Package `billing` — Billing
 
 ## Scopo
 
-Gestisce fatture, stati, importi e pagamenti collegati a spedizioni e prezzi.
+Gestisce fatture, pagamenti e regole amministrative economiche.
 
-## Classi ed enum
+## Concetti principali
 
-| Nome | Tipo | Ruolo sintetico |
+- `Invoice`
+- `PaymentRecord`
+- `InvoiceStatus`
+- `PaymentMethod`
+- `BillingRules`
+
+## Classi del package
+
+| Classe | Tipo | Ruolo sintetico |
 |---|---|---|
-| `BillingRules` | Classe | Classe di regole di business del package. |
-| `Invoice` | Classe | Classe di dominio del package. |
-| `InvoiceStatus` | Enum | Valori controllati usati dalle regole di dominio. |
-| `PaymentMethod` | Enum | Valori controllati usati dalle regole di dominio. |
-| `PaymentRecord` | Classe | Classe di dominio del package. |
+| `BillingRules` | final class | Classe statica di regole di business del package. |
+| `Invoice` | final class | Entity o value object del package. |
+| `InvoiceStatus` | enum | Enum di classificazione/valori ammessi. |
+| `PaymentMethod` | enum | Enum di classificazione/valori ammessi. |
+| `PaymentRecord` | final class | Entity o value object del package. |
 
-## Enum principali
+## Enum e valori ammessi
 
-### `InvoiceStatus`
+- `InvoiceStatus`: `DRAFT`, `ISSUED`, `PAID`, `CANCELLED`
+- `PaymentMethod`: `BANK_TRANSFER`, `CARD`, `CASH`, `DIRECT_DEBIT`, `CREDIT_NOTE`, `OTHER`
 
-Valori: `DRAFT`, `ISSUED`, `PAID`, `CANCELLED`.
+## Regole di business
 
-### `PaymentMethod`
-
-Valori: `BANK_TRANSFER`, `CARD`, `CASH`, `DIRECT_DEBIT`, `CREDIT_NOTE`, `OTHER`.
-
-
+- Una fattura segue stati coerenti da bozza/emessa/pagata/annullata.
+- I pagamenti devono essere collegati a importi e date validi.
 
 ## Collegamenti con altri package
 
-Questo package non vive isolato: le sue classi vengono usate dalle regole di business e dai casi d’uso futuri.
-
-Per capire il flusso completo leggere anche:
-
-- [`../domain-overview.md`](../domain-overview.md)
-- [`../domain-rules.md`](../domain-rules.md)
-- [`../domain-package-map.md`](../domain-package-map.md)
+- pricing per importi preventivati
+- customer per il cliente
+- order/shipment per fonte commerciale
 
 ## Test collegati
 
-I test si trovano sotto:
+- `BillingRulesTest.java`
+- `InvoiceTest.java`
+- `PaymentRecordTest.java`
 
-```text
-src/test/java/it/gabriele/truckflow/domain/billing
-```
+## Note di progettazione
 
-Quando si modifica questo package, eseguire sempre:
+Questo package appartiene al domain puro. Non deve contenere codice di database, API esterne, controller web, query SQL, repository concreti o logica di framework.
 
-```bash
-mvn clean test
-```
+Le regole devono rimanere testabili con JUnit senza avviare servizi esterni.

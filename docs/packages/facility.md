@@ -1,44 +1,39 @@
-# Package `facility` — Facility logistiche
+# Package `facility` — Facility
 
 ## Scopo
 
-Depositi, magazzini, punti di carico/scarico e loro caratteristiche.
+Rappresenta luoghi operativi come magazzini, hub, terminal, officine o punti di carico/scarico.
 
-## Classi ed enum
+## Concetti principali
 
-| Nome | Tipo | Ruolo sintetico |
+- `Facility`
+- `FacilityType`
+
+## Classi del package
+
+| Classe | Tipo | Ruolo sintetico |
 |---|---|---|
-| `Facility` | Classe | Classe di dominio del package. |
-| `FacilityType` | Enum | Valori controllati usati dalle regole di dominio. |
+| `Facility` | final class | Entity o value object del package. |
+| `FacilityType` | enum | Enum di classificazione/valori ammessi. |
 
-## Enum principali
+## Enum e valori ammessi
 
-### `FacilityType`
+- `FacilityType`: `WAREHOUSE`, `DEPOT`, `CUSTOMER_SITE`, `SUPPLIER_SITE`, `CROSS_DOCK`, `TERMINAL`, `PORT`, `AIRPORT`, `MAINTENANCE_CENTER`
 
-Valori: `WAREHOUSE`, `DEPOT`, `CUSTOMER_SITE`, `SUPPLIER_SITE`, `CROSS_DOCK`, `TERMINAL`, `PORT`, `AIRPORT`, `MAINTENANCE_CENTER`.
+## Regole di business
 
-
+- Una facility ha tipo, posizione e dati operativi di riferimento.
 
 ## Collegamenti con altri package
 
-Questo package non vive isolato: le sue classi vengono usate dalle regole di business e dai casi d’uso futuri.
-
-Per capire il flusso completo leggere anche:
-
-- [`../domain-overview.md`](../domain-overview.md)
-- [`../domain-rules.md`](../domain-rules.md)
-- [`../domain-package-map.md`](../domain-package-map.md)
+- route, order, shipment, operation
 
 ## Test collegati
 
-I test si trovano sotto:
+- `FacilityTest.java`
 
-```text
-src/test/java/it/gabriele/truckflow/domain/facility
-```
+## Note di progettazione
 
-Quando si modifica questo package, eseguire sempre:
+Questo package appartiene al domain puro. Non deve contenere codice di database, API esterne, controller web, query SQL, repository concreti o logica di framework.
 
-```bash
-mvn clean test
-```
+Le regole devono rimanere testabili con JUnit senza avviare servizi esterni.

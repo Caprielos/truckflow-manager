@@ -1,56 +1,51 @@
-# Package `configuration` — Configurazione sistema
+# Package `configuration` — Configuration
 
 ## Scopo
 
-Parametri configurabili, scope e valori sensibili, senza dipendere da file o database.
+Gestisce configurazioni di sistema, profili e valori configurabili senza hardcodare tutto nel codice.
 
-## Classi ed enum
+## Concetti principali
 
-| Nome | Tipo | Ruolo sintetico |
+- `SystemConfiguration`
+- `ConfigurationValue`
+- `ConfigurationCategory`
+- `ConfigurationScope`
+- `ConfigurationValueType`
+- `ConfigurationRules`
+
+## Classi del package
+
+| Classe | Tipo | Ruolo sintetico |
 |---|---|---|
-| `ConfigurationCategory` | Enum | Valori controllati usati dalle regole di dominio. |
-| `ConfigurationRules` | Classe | Classe di regole di business del package. |
-| `ConfigurationScope` | Enum | Valori controllati usati dalle regole di dominio. |
-| `ConfigurationValue` | Classe | Classe di dominio del package. |
-| `ConfigurationValueType` | Enum | Valori controllati usati dalle regole di dominio. |
-| `SystemConfiguration` | Classe | Classe di dominio del package. |
+| `ConfigurationCategory` | enum | Enum di classificazione/valori ammessi. |
+| `ConfigurationRules` | final class | Classe statica di regole di business del package. |
+| `ConfigurationScope` | enum | Enum di classificazione/valori ammessi. |
+| `ConfigurationValue` | final class | Entity o value object del package. |
+| `ConfigurationValueType` | enum | Enum di classificazione/valori ammessi. |
+| `SystemConfiguration` | final class | Entity o value object del package. |
 
-## Enum principali
+## Enum e valori ammessi
 
-### `ConfigurationCategory`
+- `ConfigurationCategory`: `OPERATION`, `PRICING`, `NOTIFICATION`, `DOCUMENT`, `SECURITY`, `SUSTAINABILITY`, `REPORTING`, `INTEGRATION`
+- `ConfigurationScope`: `GLOBAL`, `ORGANIZATION`, `CUSTOMER`, `FACILITY`, `USER`
+- `ConfigurationValueType`: `TEXT`, `BOOLEAN`, `INTEGER`, `DECIMAL`, `PERCENTAGE`, `DURATION_MINUTES`
 
-Valori: `OPERATION`, `PRICING`, `NOTIFICATION`, `DOCUMENT`, `SECURITY`, `SUSTAINABILITY`, `REPORTING`, `INTEGRATION`.
+## Regole di business
 
-### `ConfigurationScope`
-
-Valori: `GLOBAL`, `ORGANIZATION`, `CUSTOMER`, `FACILITY`, `USER`.
-
-### `ConfigurationValueType`
-
-Valori: `TEXT`, `BOOLEAN`, `INTEGER`, `DECIMAL`, `PERCENTAGE`, `DURATION_MINUTES`.
-
-
+- Chiavi sensibili come PASSWORD, SECRET, TOKEN o API_KEY devono essere considerate riservate.
+- Scope e tipo valore devono essere coerenti.
 
 ## Collegamenti con altri package
 
-Questo package non vive isolato: le sue classi vengono usate dalle regole di business e dai casi d’uso futuri.
-
-Per capire il flusso completo leggere anche:
-
-- [`../domain-overview.md`](../domain-overview.md)
-- [`../domain-rules.md`](../domain-rules.md)
-- [`../domain-package-map.md`](../domain-package-map.md)
+- infrastructure futura per lettura da file/DB
+- pricing/legal limits per configurazioni paese-specifiche
 
 ## Test collegati
 
-I test si trovano sotto:
+- `ConfigurationRulesTest.java`
 
-```text
-src/test/java/it/gabriele/truckflow/domain/configuration
-```
+## Note di progettazione
 
-Quando si modifica questo package, eseguire sempre:
+Questo package appartiene al domain puro. Non deve contenere codice di database, API esterne, controller web, query SQL, repository concreti o logica di framework.
 
-```bash
-mvn clean test
-```
+Le regole devono rimanere testabili con JUnit senza avviare servizi esterni.

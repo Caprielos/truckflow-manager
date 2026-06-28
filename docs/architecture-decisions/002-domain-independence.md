@@ -1,15 +1,16 @@
-# ADR 002 — Domain indipendente da framework e database
+# ADR 002 — Domain Independence
 
 ## Decisione
 
-Il package `domain` non dipende da Spring, JPA, database, API REST o filesystem.
+Il domain non dipende da Spring, JPA, database, REST API, filesystem o provider esterni.
 
 ## Motivazione
 
-Il domain deve contenere regole di business pure e testabili.
+Le regole di business devono essere testabili e leggibili senza infrastruttura.
 
 ## Conseguenze
 
-- Repository e persistenza stanno fuori dal domain.
-- Le API esterne stanno in infrastructure.
-- I test del domain sono veloci e non richiedono servizi esterni.
+- Le entity domain non sono annotate con JPA.
+- I repository concreti verranno creati in infrastructure.
+- I casi d’uso verranno creati in application.
+- Le API esterne saranno nascoste dietro port.

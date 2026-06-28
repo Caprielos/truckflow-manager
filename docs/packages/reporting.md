@@ -1,62 +1,56 @@
-# Package `reporting` — Reportistica
+# Package `reporting` — Reporting
 
 ## Scopo
 
-Definizioni report, metriche e report generati.
+Modella definizioni report, metriche e report generati.
 
-## Classi ed enum
+## Concetti principali
 
-| Nome | Tipo | Ruolo sintetico |
+- `ReportDefinition`
+- `GeneratedReport`
+- `ReportMetric`
+- `ReportType`
+- `ReportFormat`
+- `ReportStatus`
+- `ReportMetricType`
+- `ReportingRules`
+
+## Classi del package
+
+| Classe | Tipo | Ruolo sintetico |
 |---|---|---|
-| `GeneratedReport` | Classe | Classe di dominio del package. |
-| `ReportDefinition` | Classe | Classe di dominio del package. |
-| `ReportFormat` | Enum | Valori controllati usati dalle regole di dominio. |
-| `ReportMetric` | Classe | Classe di dominio del package. |
-| `ReportMetricType` | Enum | Valori controllati usati dalle regole di dominio. |
-| `ReportStatus` | Enum | Valori controllati usati dalle regole di dominio. |
-| `ReportType` | Enum | Valori controllati usati dalle regole di dominio. |
-| `ReportingRules` | Classe | Classe di regole di business del package. |
+| `GeneratedReport` | final class | Entity o value object del package. |
+| `ReportDefinition` | final class | Entity o value object del package. |
+| `ReportFormat` | enum | Enum di classificazione/valori ammessi. |
+| `ReportMetric` | final class | Entity o value object del package. |
+| `ReportMetricType` | enum | Enum di classificazione/valori ammessi. |
+| `ReportStatus` | enum | Enum di classificazione/valori ammessi. |
+| `ReportType` | enum | Enum di classificazione/valori ammessi. |
+| `ReportingRules` | final class | Classe statica di regole di business del package. |
 
-## Enum principali
+## Enum e valori ammessi
 
-### `ReportFormat`
+- `ReportFormat`: `PDF`, `CSV`, `XLSX`, `JSON`, `HTML`
+- `ReportMetricType`: `SHIPMENT_COUNT`, `COMPLETED_SHIPMENT_COUNT`, `DELAY_COUNT`, `CLAIM_COUNT`, `DOCUMENT_EXPIRATION_COUNT`, `MAINTENANCE_COUNT`, `TOTAL_DISTANCE_KM`, `TOTAL_REVENUE`, `TOTAL_COST`, `TOTAL_CO2_KG`, `VEHICLE_UTILIZATION_PERCENTAGE`, `ON_TIME_DELIVERY_PERCENTAGE`
+- `ReportStatus`: `DRAFT`, `GENERATED`, `PUBLISHED`, `ARCHIVED`, `FAILED`
+- `ReportType`: `OPERATIONS`, `FINANCIAL`, `FLEET`, `DRIVER`, `CUSTOMER`, `SUSTAINABILITY`, `COMPLIANCE`, `CLAIMS`, `DOCUMENTS`
 
-Valori: `PDF`, `CSV`, `XLSX`, `JSON`, `HTML`.
+## Regole di business
 
-### `ReportMetricType`
-
-Valori: `SHIPMENT_COUNT`, `COMPLETED_SHIPMENT_COUNT`, `DELAY_COUNT`, `CLAIM_COUNT`, `DOCUMENT_EXPIRATION_COUNT`, `MAINTENANCE_COUNT`, `TOTAL_DISTANCE_KM`, `TOTAL_REVENUE`, `TOTAL_COST`, `TOTAL_CO2_KG`, `VEHICLE_UTILIZATION_PERCENTAGE`, `ON_TIME_DELIVERY_PERCENTAGE`.
-
-### `ReportStatus`
-
-Valori: `DRAFT`, `GENERATED`, `PUBLISHED`, `ARCHIVED`, `FAILED`.
-
-### `ReportType`
-
-Valori: `OPERATIONS`, `FINANCIAL`, `FLEET`, `DRIVER`, `CUSTOMER`, `SUSTAINABILITY`, `COMPLIANCE`, `CLAIMS`, `DOCUMENTS`.
-
-
+- Report definisce tipo, formato e metriche.
+- Report generato segue uno stato e può fallire/completarsi.
 
 ## Collegamenti con altri package
 
-Questo package non vive isolato: le sue classi vengono usate dalle regole di business e dai casi d’uso futuri.
-
-Per capire il flusso completo leggere anche:
-
-- [`../domain-overview.md`](../domain-overview.md)
-- [`../domain-rules.md`](../domain-rules.md)
-- [`../domain-package-map.md`](../domain-package-map.md)
+- billing, fleet, operation, sustainability, maintenance
 
 ## Test collegati
 
-I test si trovano sotto:
+- `GeneratedReportTest.java`
+- `ReportingRulesTest.java`
 
-```text
-src/test/java/it/gabriele/truckflow/domain/reporting
-```
+## Note di progettazione
 
-Quando si modifica questo package, eseguire sempre:
+Questo package appartiene al domain puro. Non deve contenere codice di database, API esterne, controller web, query SQL, repository concreti o logica di framework.
 
-```bash
-mvn clean test
-```
+Le regole devono rimanere testabili con JUnit senza avviare servizi esterni.

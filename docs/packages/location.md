@@ -1,43 +1,44 @@
-# Package `location` — Indirizzi e coordinate
+# Package `location` — Location
 
 ## Scopo
 
-Indirizzi, coordinate geografiche e località operative.
+Gestisce indirizzi, coordinate geografiche e fusi orari.
 
-## Classi ed enum
+## Concetti principali
 
-| Nome | Tipo | Ruolo sintetico |
+- `Address`
+- `GeoCoordinates`
+- `Location`
+
+## Classi del package
+
+| Classe | Tipo | Ruolo sintetico |
 |---|---|---|
-| `Address` | Classe | Classe di dominio del package. |
-| `GeoCoordinates` | Classe | Classe di dominio del package. |
-| `Location` | Classe | Classe di dominio del package. |
+| `Address` | final class | Entity o value object del package. |
+| `GeoCoordinates` | final class | Entity o value object del package. |
+| `Location` | final class | Entity o value object del package. |
 
-## Enum principali
+## Enum e valori ammessi
 
-In questo package non ci sono enum principali.
+_Nessuna enum nel package._
 
+## Regole di business
 
+- Coordinate devono essere valide.
+- Una location può includere timezone per finestre temporali future.
 
 ## Collegamenti con altri package
 
-Questo package non vive isolato: le sue classi vengono usate dalle regole di business e dai casi d’uso futuri.
-
-Per capire il flusso completo leggere anche:
-
-- [`../domain-overview.md`](../domain-overview.md)
-- [`../domain-rules.md`](../domain-rules.md)
-- [`../domain-package-map.md`](../domain-package-map.md)
+- route, facility, tracking, order, shipment
 
 ## Test collegati
 
-I test si trovano sotto:
+- `AddressTest.java`
+- `GeoCoordinatesTest.java`
+- `LocationTest.java`
 
-```text
-src/test/java/it/gabriele/truckflow/domain/location
-```
+## Note di progettazione
 
-Quando si modifica questo package, eseguire sempre:
+Questo package appartiene al domain puro. Non deve contenere codice di database, API esterne, controller web, query SQL, repository concreti o logica di framework.
 
-```bash
-mvn clean test
-```
+Le regole devono rimanere testabili con JUnit senza avviare servizi esterni.
