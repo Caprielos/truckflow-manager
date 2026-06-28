@@ -9,8 +9,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Rappresenta un insieme di elementi di carico.
- * Esempio: tutti i bancali, scatole o lotti trasportati in una spedizione.
+ * Rappresenta un insieme di colli/articoli da trasportare insieme.
  */
 public final class CargoLoad {
 
@@ -22,7 +21,7 @@ public final class CargoLoad {
         }
 
         if (items.isEmpty()) {
-            throw new IllegalArgumentException("Il carico deve contenere almeno un elemento.");
+            throw new IllegalArgumentException("Il carico deve contenere almeno un articolo.");
         }
 
         if (items.stream().anyMatch(Objects::isNull)) {
@@ -38,7 +37,7 @@ public final class CargoLoad {
 
     public static CargoLoad of(CargoItem firstItem, CargoItem... otherItems) {
         if (firstItem == null) {
-            throw new IllegalArgumentException("Il primo elemento di carico è obbligatorio.");
+            throw new IllegalArgumentException("Il primo articolo del carico è obbligatorio.");
         }
 
         List<CargoItem> items = new ArrayList<>();
@@ -81,9 +80,33 @@ public final class CargoLoad {
         return items.stream().anyMatch(CargoItem::requiresTemperatureControl);
     }
 
+    public boolean containsDangerousGoods() {
+        return items.stream().anyMatch(CargoItem::isDangerousGoods);
+    }
+
+    public boolean hasDangerousGoodsProfile() {
+        return items.stream().anyMatch(CargoItem::hasDangerousGoodsProfile);
+    }
+
+    public boolean requiresAdrTransport() {
+        return items.stream().anyMatch(CargoItem::requiresAdrTransport);
+    }
+
+    public boolean requiresAdrTankTransport() {
+        return items.stream().anyMatch(CargoItem::requiresAdrTankTransport);
+    }
+
+    public boolean containsAdrClass(AdrClass adrClass) {
+        if (adrClass == null) {
+            throw new IllegalArgumentException("La classe ADR da verificare è obbligatoria.");
+        }
+
+        return items.stream().anyMatch(item -> item.isAdrClass(adrClass));
+    }
+
     public boolean hasCategory(CargoCategory category) {
         if (category == null) {
-            throw new IllegalArgumentException("La categoria da cercare è obbligatoria.");
+            throw new IllegalArgumentException("La categoria da verificare è obbligatoria.");
         }
 
         return items.stream().anyMatch(item -> item.getCategory() == category);
@@ -96,6 +119,19 @@ public final class CargoLoad {
 
         return items.stream()
                 .allMatch(item -> item.getDimension().fitsInside(cargoSpaceDimension));
+    }
+
+    public List<DangerousGoodsProfile> getDangerousGoodsProfiles() {
+        return items.stream()
+                .filter(CargoItem::hasDangerousGoodsProfile)
+                .map(CargoItem::getDangerousGoodsProfile)
+                .toList();
+    }
+
+    public String formatSingleLine() {
+        return "items: " + items.size()
+                + " - total weight: " + calculateTotalWeight()
+                + " - total volume: " + calculateTotalVolume();
     }
 
     @Override
@@ -112,8 +148,6 @@ public final class CargoLoad {
 
     @Override
     public String toString() {
-        return "CargoLoad{" +
-                "items=" + items.size() +
-                '}';
+        return formatSingleLine();
     }
 }
