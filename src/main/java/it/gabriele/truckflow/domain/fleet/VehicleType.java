@@ -1,40 +1,67 @@
 package it.gabriele.truckflow.domain.fleet;
 
 /**
- * Rappresenta il tipo di veicolo presente nella flotta.
+ * Tipo fisico del veicolo.
+ *
+ * Manteniamo il nome VehicleType per compatibilità con il codice esistente,
+ * ma il significato corretto è VehicleUnitType: non descrive più il tipo di carico,
+ * descrive l'unità fisica della flotta.
  */
 public enum VehicleType {
 
-    VAN(true, false, true),
-    RIGID_TRUCK(true, false, true),
-    REFRIGERATED_TRUCK(true, true, true),
-    TRACTOR_UNIT(false, false, true),
-    SEMI_TRAILER(true, false, false),
-    REFRIGERATED_TRAILER(true, true, false);
+    VAN(VehicleUnitType.VAN),
+    RIGID_TRUCK(VehicleUnitType.RIGID_TRUCK),
+    TRACTOR_UNIT(VehicleUnitType.TRACTOR_UNIT),
+    DRAWBAR_TRAILER(VehicleUnitType.DRAWBAR_TRAILER),
+    CENTER_AXLE_TRAILER(VehicleUnitType.CENTER_AXLE_TRAILER),
+    SEMI_TRAILER(VehicleUnitType.SEMI_TRAILER),
 
-    private final boolean cargoCapable;
-    private final boolean temperatureControlCapable;
-    private final boolean poweredUnit;
+    /** @deprecated usare RIGID_TRUCK + VehicleBodyBaseType.REFRIGERATED_BOX. */
+    @Deprecated
+    REFRIGERATED_TRUCK(VehicleUnitType.RIGID_TRUCK, true),
 
-    VehicleType(boolean cargoCapable, boolean temperatureControlCapable, boolean poweredUnit) {
-        this.cargoCapable = cargoCapable;
-        this.temperatureControlCapable = temperatureControlCapable;
-        this.poweredUnit = poweredUnit;
+    /** @deprecated usare SEMI_TRAILER + VehicleBodyBaseType.REFRIGERATED_BOX. */
+    @Deprecated
+    REFRIGERATED_TRAILER(VehicleUnitType.SEMI_TRAILER, true);
+
+    private final VehicleUnitType unitType;
+    private final boolean legacyTemperatureControlledType;
+
+    VehicleType(VehicleUnitType unitType) {
+        this(unitType, false);
+    }
+
+    VehicleType(VehicleUnitType unitType, boolean legacyTemperatureControlledType) {
+        this.unitType = unitType;
+        this.legacyTemperatureControlledType = legacyTemperatureControlledType;
+    }
+
+    public VehicleUnitType getUnitType() {
+        return unitType;
     }
 
     public boolean canCarryCargo() {
-        return cargoCapable;
+        return unitType.canCarryCargo();
     }
 
     public boolean supportsTemperatureControl() {
-        return temperatureControlCapable;
+        return legacyTemperatureControlledType;
     }
 
     public boolean isPoweredUnit() {
-        return poweredUnit;
+        return unitType.isPoweredUnit();
     }
 
     public boolean isTrailer() {
-        return !poweredUnit;
+        return unitType.isTowedUnit();
+    }
+
+    public boolean isSemiTrailer() {
+        return unitType == VehicleUnitType.SEMI_TRAILER;
+    }
+
+    public boolean isDrawbarTrailer() {
+        return unitType == VehicleUnitType.DRAWBAR_TRAILER
+                || unitType == VehicleUnitType.CENTER_AXLE_TRAILER;
     }
 }

@@ -1,13 +1,19 @@
 package it.gabriele.truckflow.domain.driver;
 
 /**
- * Rappresenta le categorie di patente usate nel dominio.
- * In questo progetto usiamo solo B, C ed E.
+ * Categorie patente per autotrasporto.
  */
 public enum DriverLicenseCategory {
 
     B(false, false),
+    C1(true, false),
     C(true, false),
+    BE(false, true),
+    C1E(true, true),
+    CE(true, true),
+
+    /** @deprecated usare BE, C1E o CE in base alla categoria principale. */
+    @Deprecated
     E(false, true);
 
     private final boolean heavyGoodsLicense;

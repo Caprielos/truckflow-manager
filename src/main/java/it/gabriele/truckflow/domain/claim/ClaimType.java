@@ -11,6 +11,9 @@ public enum ClaimType {
     TEMPERATURE_EXCURSION(true, true, false, false),
     DOCUMENT_DISPUTE(false, false, true, false),
     BILLING_DISPUTE(false, false, false, true),
+    VEHICLE_DAMAGE(false, false, false, true),
+    ACCIDENT(false, true, true, true),
+    INSURANCE_CLAIM(false, false, true, true),
     OTHER(false, false, false, false);
 
     private final boolean cargoRelated;

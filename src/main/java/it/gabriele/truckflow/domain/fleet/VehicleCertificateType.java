@@ -1,0 +1,14 @@
+package it.gabriele.truckflow.domain.fleet;
+
+public enum VehicleCertificateType {
+    ROADWORTHINESS_INSPECTION,
+    TACHOGRAPH_CALIBRATION,
+    ATP,
+    ADR_VEHICLE_APPROVAL,
+    XL_CODE,
+    TANK_PERIODIC_INSPECTION,
+    CRANE_PERIODIC_INSPECTION,
+    TAIL_LIFT_PERIODIC_INSPECTION,
+    INSURANCE,
+    ROAD_TAX
+}

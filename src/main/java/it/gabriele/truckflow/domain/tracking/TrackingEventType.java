@@ -12,7 +12,11 @@ public enum TrackingEventType {
     DELIVERY_COMPLETED(true, false, false),
     DELAY_REPORTED(false, true, false),
     INCIDENT_REPORTED(false, true, false),
-    MISSION_COMPLETED(true, false, false);
+    MISSION_COMPLETED(true, false, false),
+    CAN_BUS_SNAPSHOT(false, false, false),
+    HARSH_BRAKING(false, true, true),
+    SPEEDING(false, true, true),
+    FUEL_LEVEL_RECORDED(false, false, true);
 
     private final boolean operationalMilestone;
     private final boolean exceptionEvent;

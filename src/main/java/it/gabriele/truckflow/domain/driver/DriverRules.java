@@ -39,7 +39,8 @@ public final class DriverRules {
         }
 
         if (poweredUnit.getType() == VehicleType.RIGID_TRUCK
-                || poweredUnit.getType() == VehicleType.REFRIGERATED_TRUCK) {
+                || poweredUnit.getType() == VehicleType.REFRIGERATED_TRUCK
+                || poweredUnit.getType() == VehicleType.TRACTOR_UNIT) {
             return driver.canDriveRigidTruck();
         }
 

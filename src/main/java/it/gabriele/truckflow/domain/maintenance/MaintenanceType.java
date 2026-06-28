@@ -11,7 +11,13 @@ public enum MaintenanceType {
     REPAIR(false, true, false, false),
     REFRIGERATION_UNIT_SERVICE(true, true, false, false),
     ADR_TANK_INSPECTION(true, true, false, true),
-    BREAKDOWN(false, true, false, false);
+    BREAKDOWN(false, true, false, false),
+    ENGINE_SERVICE(true, false, false, false),
+    AIR_DRYER_FILTER_REPLACEMENT(true, true, false, false),
+    BRAKE_WEAR_CHECK(true, true, false, false),
+    TIRE_ROTATION(true, true, true, false),
+    DRIVER_DEFECT_TICKET(false, true, false, false),
+    DOWNTIME(false, false, false, false);
 
     private final boolean plannedMaintenance;
     private final boolean safetyCritical;

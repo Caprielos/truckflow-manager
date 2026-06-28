@@ -65,11 +65,11 @@ public final class VehicleBodyCompatibilityRules {
 
         Vehicle cargoUnit = vehicleCombination.getCargoUnit();
 
-        if (containsGasDangerousGoods(cargoLoad)) {
+        if (containsGasDangerousGoods(cargoLoad) || cargoLoad.hasCategory(CargoCategory.GAS)) {
             return cargoUnit.hasGasTankBody();
         }
 
-        if (containsFuelDangerousGoods(cargoLoad)) {
+        if (containsFuelDangerousGoods(cargoLoad) || cargoLoad.hasCategory(CargoCategory.FUEL)) {
             return cargoUnit.hasFuelTankBody();
         }
 
@@ -83,24 +83,48 @@ public final class VehicleBodyCompatibilityRules {
         CargoCategory category = item.getCategory();
 
         return switch (category) {
-            case GENERAL -> isGeneralCargoBody(bodyType);
+            case GENERAL, PALLETIZED_DRY_GOODS -> isGeneralCargoBody(bodyType);
             case FOOD -> isFoodCargoBody(bodyType);
-            case REFRIGERATED_FOOD, PHARMACEUTICAL -> bodyType == VehicleBodyType.REFRIGERATED_BOX;
-            case FRAGILE, ELECTRONICS -> isProtectedCargoBody(bodyType);
-            case HAZARDOUS_MATERIAL -> isHazardousCargoBody(bodyType);
-            case OVERSIZED -> bodyType == VehicleBodyType.FLATBED
+            case REFRIGERATED_FOOD, PHARMACEUTICAL, TEMPERATURE_CONTROLLED_GOODS -> isTemperatureControlledBody(bodyType);
+            case FRAGILE, ELECTRONICS, HIGH_VALUE_GOODS -> isProtectedCargoBody(bodyType);
+            case HAZARDOUS_MATERIAL, DANGEROUS_GOODS -> isHazardousCargoBody(bodyType);
+            case OVERSIZED, MACHINERY -> isOversizedCargoBody(bodyType);
+            case VEHICLES -> bodyType == VehicleBodyType.CAR_TRANSPORTER
+                    || bodyType == VehicleBodyType.FLATBED
                     || bodyType == VehicleBodyType.LOW_LOADER;
             case LIQUID -> bodyType == VehicleBodyType.TANK_LIQUID
-                    || bodyType == VehicleBodyType.TANK_FUEL;
-            case CONSTRUCTION_MATERIAL -> bodyType == VehicleBodyType.FLATBED
+                    || bodyType == VehicleBodyType.FOOD_GRADE_TANK;
+            case FOOD_GRADE_LIQUID -> bodyType == VehicleBodyType.FOOD_GRADE_TANK
+                    || bodyType == VehicleBodyType.TANK_LIQUID;
+            case FUEL -> bodyType == VehicleBodyType.TANK_FUEL;
+            case GAS -> bodyType == VehicleBodyType.TANK_GAS;
+            case CONSTRUCTION_MATERIAL, BULK_INERT_GOODS, CONCRETE -> bodyType == VehicleBodyType.FLATBED
+                    || bodyType == VehicleBodyType.FIXED_OPEN_BOX
                     || bodyType == VehicleBodyType.TIPPER
+                    || bodyType == VehicleBodyType.REAR_TIPPER
+                    || bodyType == VehicleBodyType.THREE_WAY_TIPPER
                     || bodyType == VehicleBodyType.CURTAIN_SIDE;
+            case BULK_DRY, AGRICULTURAL_BULK, HAY_BALES -> bodyType == VehicleBodyType.SILO
+                    || bodyType == VehicleBodyType.WALKING_FLOOR
+                    || bodyType == VehicleBodyType.TIPPER
+                    || bodyType == VehicleBodyType.REAR_TIPPER
+                    || bodyType == VehicleBodyType.THREE_WAY_TIPPER
+                    || bodyType == VehicleBodyType.FLATBED;
+            case WASTE_NON_DANGEROUS, WASTE_DANGEROUS -> bodyType == VehicleBodyType.WALKING_FLOOR
+                    || bodyType == VehicleBodyType.TIPPER
+                    || bodyType == VehicleBodyType.REAR_TIPPER
+                    || bodyType == VehicleBodyType.THREE_WAY_TIPPER
+                    || bodyType == VehicleBodyType.HOOKLIFT_CHASSIS;
+            case LIVESTOCK -> bodyType == VehicleBodyType.LIVESTOCK;
+            case CONTAINERIZED_GOODS -> bodyType == VehicleBodyType.CONTAINER_CHASSIS;
+            case COILS -> bodyType == VehicleBodyType.COIL_CARRIER;
         };
     }
 
     private static boolean isGeneralCargoBody(VehicleBodyType bodyType) {
         return bodyType == VehicleBodyType.VAN_BODY
                 || bodyType == VehicleBodyType.BOX
+                || bodyType == VehicleBodyType.DRY_BOX
                 || bodyType == VehicleBodyType.CURTAIN_SIDE
                 || bodyType == VehicleBodyType.ISOTHERMAL_BOX
                 || bodyType == VehicleBodyType.REFRIGERATED_BOX;
@@ -108,23 +132,38 @@ public final class VehicleBodyCompatibilityRules {
 
     private static boolean isFoodCargoBody(VehicleBodyType bodyType) {
         return bodyType == VehicleBodyType.BOX
+                || bodyType == VehicleBodyType.DRY_BOX
                 || bodyType == VehicleBodyType.ISOTHERMAL_BOX
                 || bodyType == VehicleBodyType.REFRIGERATED_BOX;
+    }
+
+    private static boolean isTemperatureControlledBody(VehicleBodyType bodyType) {
+        return bodyType == VehicleBodyType.REFRIGERATED_BOX
+                || bodyType == VehicleBodyType.ISOTHERMAL_BOX;
     }
 
     private static boolean isProtectedCargoBody(VehicleBodyType bodyType) {
         return bodyType == VehicleBodyType.VAN_BODY
                 || bodyType == VehicleBodyType.BOX
+                || bodyType == VehicleBodyType.DRY_BOX
                 || bodyType == VehicleBodyType.REFRIGERATED_BOX;
     }
 
     private static boolean isHazardousCargoBody(VehicleBodyType bodyType) {
         return bodyType == VehicleBodyType.BOX
+                || bodyType == VehicleBodyType.DRY_BOX
                 || bodyType == VehicleBodyType.CURTAIN_SIDE
                 || bodyType == VehicleBodyType.TANK_LIQUID
                 || bodyType == VehicleBodyType.TANK_FUEL
                 || bodyType == VehicleBodyType.TANK_GAS
                 || bodyType == VehicleBodyType.SILO;
+    }
+
+    private static boolean isOversizedCargoBody(VehicleBodyType bodyType) {
+        return bodyType == VehicleBodyType.FLATBED
+                || bodyType == VehicleBodyType.FLATBED_WITH_RAMPS
+                || bodyType == VehicleBodyType.LOW_LOADER
+                || bodyType == VehicleBodyType.EXTENDABLE_FLATBED;
     }
 
     private static boolean containsGasDangerousGoods(CargoLoad cargoLoad) {

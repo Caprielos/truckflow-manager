@@ -13,7 +13,13 @@ public enum TransportDocumentType {
     INVOICE_COPY(false, true, false, false, false),
     INSURANCE_CERTIFICATE(false, false, false, false, true),
     VEHICLE_REGISTRATION(false, false, false, false, true),
-    DRIVER_LICENSE_COPY(false, false, false, false, true);
+    DRIVER_LICENSE_COPY(false, false, false, false, true),
+    WASTE_IDENTIFICATION_FORM(true, false, false, false, false),
+    SAFETY_DATA_SHEET(true, false, true, false, false),
+    ADR_WRITTEN_INSTRUCTIONS(true, false, true, false, false),
+    HACCP_SANITATION_DOCUMENT(true, false, false, false, true),
+    VETERINARY_DOCUMENT(true, false, false, false, true),
+    OVERSIZED_TRANSPORT_AUTHORIZATION(true, false, false, false, true);
 
     private final boolean shipmentRelated;
     private final boolean invoiceRelated;

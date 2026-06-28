@@ -343,16 +343,23 @@ public final class Driver {
 
     public boolean canDriveLightVehicle() {
         return hasLicenseCategory(DriverLicenseCategory.B)
-                || hasLicenseCategory(DriverLicenseCategory.C);
+                || hasLicenseCategory(DriverLicenseCategory.C1)
+                || hasLicenseCategory(DriverLicenseCategory.C)
+                || hasLicenseCategory(DriverLicenseCategory.CE);
     }
 
     public boolean canDriveRigidTruck() {
-        return hasLicenseCategory(DriverLicenseCategory.C);
+        return hasLicenseCategory(DriverLicenseCategory.C1)
+                || hasLicenseCategory(DriverLicenseCategory.C)
+                || hasLicenseCategory(DriverLicenseCategory.CE);
     }
 
     public boolean canDriveVehicleCombinationWithTrailer() {
-        return hasLicenseCategory(DriverLicenseCategory.C)
-                && hasLicenseCategory(DriverLicenseCategory.E);
+        return hasLicenseCategory(DriverLicenseCategory.CE)
+                || hasLicenseCategory(DriverLicenseCategory.C1E)
+                || hasLicenseCategory(DriverLicenseCategory.BE)
+                || (hasLicenseCategory(DriverLicenseCategory.C)
+                && hasLicenseCategory(DriverLicenseCategory.E));
     }
 
     public boolean hasGoodsCqc() {
