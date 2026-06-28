@@ -1,59 +1,70 @@
-# TruckFlow Manager
+# TruckFlow Manager — Documentazione
 
-TruckFlow Manager è un progetto personale sviluppato in Java con l'obiettivo di simulare un'applicazione gestionale per il settore dei trasporti su camion.
+Questa cartella contiene la documentazione aggiornata del progetto **TruckFlow Manager**.
 
-Il progetto nasce come percorso di apprendimento per costruire un'applicazione backend professionale, documentata e adatta a un portfolio GitHub.
+La documentazione è stata riscritta per descrivere il dominio attuale dopo il refactor realistico della flotta, dei mezzi, delle merci, degli autisti, della compliance e dei moduli operativi.
 
-## Obiettivo del progetto
+## Come leggere questi documenti
 
-L'applicazione permetterà di gestire:
+1. Parti da `project-overview.md`.
+2. Leggi `architecture.md` per capire la separazione tra domain, application, infrastructure e web.
+3. Leggi `domain-overview.md` per capire il ragionamento generale del dominio.
+4. Usa `domain-package-map.md` per navigare i package.
+5. Apri `packages/*.md` quando vuoi capire un package specifico.
+6. Usa `domain-reference-complete.md` come catalogo tecnico completo.
 
-- clienti;
-- autisti;
-- camion;
-- spedizioni;
-- stati di consegna;
-- tratte;
-- costi di trasporto.
+## Struttura
 
-## Tecnologie previste
+```text
+docs/
+├── README.md
+├── project-overview.md
+├── architecture.md
+├── domain-overview.md
+├── domain-package-map.md
+├── domain-rules.md
+├── glossary.md
+├── testing-guide.md
+├── implementation-roadmap.md
+├── domain-reference-complete.md
+├── packages/
+└── architecture-decisions/
+```
 
-- Java 21 LTS
-- Spring Boot
-- Maven
-- PostgreSQL
-- Git
-- GitHub
-- JUnit
-- GitHub Actions
-- Docker
+## Principio base
 
-## Stato del progetto
+Il dominio deve rappresentare la realtà del trasporto, ma senza diventare dipendente da database, Spring, API esterne, frontend o file system.
 
-Il progetto è in fase iniziale.
+Per questo il progetto usa:
 
-Attualmente sono stati configurati:
+- Entity per oggetti con identità.
+- Value Object per dati immutabili e validati.
+- Enum per liste chiuse di valori.
+- Rules per regole di business pure.
+- Application layer futuro per i casi d’uso.
+- Infrastructure futura per database, file, API esterne e integrazioni.
 
-- JDK Java 21;
-- IntelliJ IDEA;
-- Git;
-- repository locale.
+## Stato attuale
 
-## Roadmap iniziale
+Il progetto contiene un dominio ampio e già molto realistico:
 
-1. Configurazione ambiente di sviluppo
-2. Creazione progetto Maven
-3. Introduzione a Spring Boot
-4. Creazione API REST
-5. Gestione clienti
-6. Gestione autisti
-7. Gestione camion
-8. Gestione spedizioni
-9. Collegamento a PostgreSQL
-10. Test automatici
-11. Documentazione tecnica
-12. Pubblicazione su GitHub
+- ordini, spedizioni e missioni;
+- merci e profili ADR;
+- mezzi, allestimenti, schede tecniche e convogli;
+- autisti, patenti, CQC, ADR e certificati;
+- aziende e licenze operative;
+- documenti obbligatori;
+- disponibilità;
+- manutenzione;
+- pneumatici;
+- carburante;
+- telematica;
+- tracking;
+- pricing;
+- billing;
+- sostenibilità;
+- notifiche;
+- audit;
+- reporting.
 
-## Autore
-
-Gabriele Di Egidio
+Il prossimo grande passo architetturale sarà costruire l’**application layer** sopra questo domain.
