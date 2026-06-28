@@ -6,7 +6,10 @@ import it.gabriele.truckflow.domain.shared.TemperatureRange;
 import it.gabriele.truckflow.domain.shared.Volume;
 import it.gabriele.truckflow.domain.shared.Weight;
 
+import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.Objects;
+import java.util.Optional;
 
 /**
  * Rappresenta una combinazione veicolare operativa.
@@ -115,6 +118,58 @@ public final class VehicleCombination {
 
     public boolean hasTrailer() {
         return trailer != null;
+    }
+
+    public VehicleCombinationType getCombinationType() {
+        if (trailer == null) {
+            return VehicleCombinationType.SINGLE_VEHICLE;
+        }
+        if (poweredUnit.getUnitType() == VehicleUnitType.TRACTOR_UNIT && trailer.getUnitType() == VehicleUnitType.SEMI_TRAILER) {
+            return VehicleCombinationType.ARTICULATED_VEHICLE;
+        }
+        return VehicleCombinationType.TRUCK_AND_TRAILER;
+    }
+
+    public int calculateTotalAxleCount() {
+        int poweredAxles = poweredUnit.hasTechnicalSpecification()
+                ? poweredUnit.getTechnicalSpecification().getAxleSpecification().getAxleCount()
+                : 0;
+        int trailerAxles = trailer != null && trailer.hasTechnicalSpecification()
+                ? trailer.getTechnicalSpecification().getAxleSpecification().getAxleCount()
+                : 0;
+        return poweredAxles + trailerAxles;
+    }
+
+    public Weight calculateGrossCombinationWeight() {
+        if (!poweredUnit.hasTechnicalSpecification()) {
+            throw new IllegalStateException("L'unità motrice non ha scheda tecnica.");
+        }
+        if (trailer == null) {
+            return poweredUnit.getTechnicalSpecification().getMassSpecification().getGrossVehicleWeight();
+        }
+        if (!trailer.hasTechnicalSpecification()) {
+            throw new IllegalStateException("Il rimorchio non ha scheda tecnica.");
+        }
+        return VehicleCombinationTechnicalRules.calculateGrossCombinationWeight(
+                poweredUnit.getTechnicalSpecification().getMassSpecification(),
+                trailer.getTechnicalSpecification().getMassSpecification()
+        );
+    }
+
+    public Optional<VehicleCertificate> findNextCertificateDeadline(LocalDate today) {
+        if (today == null) {
+            throw new IllegalArgumentException("La data verifica scadenze è obbligatoria.");
+        }
+        return java.util.stream.Stream.concat(
+                        poweredUnit.hasTechnicalSpecification()
+                                ? poweredUnit.getTechnicalSpecification().getCertificates().stream()
+                                : java.util.stream.Stream.empty(),
+                        trailer != null && trailer.hasTechnicalSpecification()
+                                ? trailer.getTechnicalSpecification().getCertificates().stream()
+                                : java.util.stream.Stream.empty()
+                )
+                .filter(certificate -> !certificate.getExpiresAt().isBefore(today))
+                .min(Comparator.comparing(VehicleCertificate::getExpiresAt));
     }
 
     public Vehicle getCargoUnit() {

@@ -2,6 +2,8 @@ package it.gabriele.truckflow.domain.driver;
 
 import it.gabriele.truckflow.domain.shared.Notes;
 
+import java.time.LocalDate;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -21,6 +23,7 @@ public final class Driver {
     private final Set<DriverProfessionalQualification> professionalQualifications;
     private final Set<DriverAdrCertificateType> adrCertificates;
     private final Set<DriverOperationalQualification> operationalQualifications;
+    private final List<DriverCertificate> certificates;
     private final Notes notes;
 
     private Driver(
@@ -32,6 +35,20 @@ public final class Driver {
             Set<DriverAdrCertificateType> adrCertificates,
             Set<DriverOperationalQualification> operationalQualifications,
             Notes notes
+    ) {
+        this(driverCode, fullName, status, licenseCategories, professionalQualifications, adrCertificates, operationalQualifications, notes, List.of());
+    }
+
+    private Driver(
+            String driverCode,
+            String fullName,
+            DriverStatus status,
+            Set<DriverLicenseCategory> licenseCategories,
+            Set<DriverProfessionalQualification> professionalQualifications,
+            Set<DriverAdrCertificateType> adrCertificates,
+            Set<DriverOperationalQualification> operationalQualifications,
+            Notes notes,
+            List<DriverCertificate> certificates
     ) {
         this.driverCode = validateDriverCode(driverCode);
         this.fullName = validateFullName(fullName);
@@ -69,7 +86,15 @@ public final class Driver {
             throw new IllegalArgumentException("Le note dell'autista sono obbligatorie.");
         }
 
+        if (certificates == null) {
+            throw new IllegalArgumentException("I certificati dell'autista sono obbligatori.");
+        }
+        if (certificates.stream().anyMatch(Objects::isNull)) {
+            throw new IllegalArgumentException("I certificati dell'autista non possono contenere valori nulli.");
+        }
+
         this.status = status;
+        this.certificates = List.copyOf(certificates);
         this.notes = notes;
     }
 
@@ -91,6 +116,30 @@ public final class Driver {
                 adrCertificates,
                 operationalQualifications,
                 notes
+        );
+    }
+
+
+    public static Driver availableWithCertificates(
+            String driverCode,
+            String fullName,
+            Set<DriverLicenseCategory> licenseCategories,
+            Set<DriverProfessionalQualification> professionalQualifications,
+            Set<DriverAdrCertificateType> adrCertificates,
+            Set<DriverOperationalQualification> operationalQualifications,
+            Notes notes,
+            List<DriverCertificate> certificates
+    ) {
+        return new Driver(
+                driverCode,
+                fullName,
+                DriverStatus.AVAILABLE,
+                licenseCategories,
+                professionalQualifications,
+                adrCertificates,
+                operationalQualifications,
+                notes,
+                certificates
         );
     }
 
@@ -283,6 +332,10 @@ public final class Driver {
         return operationalQualifications;
     }
 
+    public List<DriverCertificate> getCertificates() {
+        return certificates;
+    }
+
     public Notes getNotes() {
         return notes;
     }
@@ -339,6 +392,33 @@ public final class Driver {
         }
 
         return operationalQualifications.contains(operationalQualification);
+    }
+
+    public boolean hasCertificate(DriverCertificateType certificateType) {
+        if (certificateType == null) {
+            throw new IllegalArgumentException("Il tipo certificato da verificare è obbligatorio.");
+        }
+        return certificates.stream().anyMatch(certificate -> certificate.getType() == certificateType);
+    }
+
+    public boolean hasValidCertificate(DriverCertificateType certificateType, LocalDate date) {
+        if (certificateType == null) {
+            throw new IllegalArgumentException("Il tipo certificato da verificare è obbligatorio.");
+        }
+        if (date == null) {
+            throw new IllegalArgumentException("La data verifica certificato è obbligatoria.");
+        }
+        return certificates.stream().anyMatch(certificate -> certificate.getType() == certificateType && certificate.isValidOn(date));
+    }
+
+    public boolean hasExpiringCertificateWithin(LocalDate date, int warningDays) {
+        if (date == null) {
+            throw new IllegalArgumentException("La data verifica certificato è obbligatoria.");
+        }
+        if (warningDays < 0) {
+            throw new IllegalArgumentException("I giorni di preavviso non possono essere negativi.");
+        }
+        return certificates.stream().anyMatch(certificate -> certificate.expiresWithin(date, warningDays));
     }
 
     public boolean canDriveLightVehicle() {
@@ -403,6 +483,7 @@ public final class Driver {
                 && professionalQualifications.equals(driver.professionalQualifications)
                 && adrCertificates.equals(driver.adrCertificates)
                 && operationalQualifications.equals(driver.operationalQualifications)
+                && certificates.equals(driver.certificates)
                 && notes.equals(driver.notes);
     }
 

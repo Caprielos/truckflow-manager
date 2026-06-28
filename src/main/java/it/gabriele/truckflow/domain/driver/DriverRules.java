@@ -5,6 +5,8 @@ import it.gabriele.truckflow.domain.cargo.CargoLoadRules;
 import it.gabriele.truckflow.domain.fleet.Vehicle;
 import it.gabriele.truckflow.domain.fleet.VehicleCombination;
 import it.gabriele.truckflow.domain.fleet.VehicleType;
+
+import java.time.LocalDate;
 import it.gabriele.truckflow.domain.shipment.Shipment;
 
 /**
@@ -106,6 +108,94 @@ public final class DriverRules {
         return true;
     }
 
+    public static boolean hasValidProfessionalCertificatesForGoodsTransport(
+            Driver driver,
+            LocalDate date
+    ) {
+        validateDriver(driver);
+        if (date == null) {
+            throw new IllegalArgumentException("La data verifica certificati è obbligatoria.");
+        }
+        if (driver.getCertificates().isEmpty()) {
+            return hasRequiredProfessionalQualificationForGoodsTransport(driver);
+        }
+        return driver.hasValidCertificate(DriverCertificateType.CQC_GOODS, date);
+    }
+
+    public static boolean hasValidAdrCertificatesForCargoLoad(
+            Driver driver,
+            CargoLoad cargoLoad,
+            LocalDate date
+    ) {
+        validateDriver(driver);
+        validateCargoLoad(cargoLoad);
+        if (date == null) {
+            throw new IllegalArgumentException("La data verifica certificati è obbligatoria.");
+        }
+        if (driver.getCertificates().isEmpty()) {
+            return hasRequiredAdrCertificatesForCargoLoad(driver, cargoLoad);
+        }
+        if (!CargoLoadRules.containsHazardousMaterial(cargoLoad)) {
+            return true;
+        }
+        if (!driver.hasValidCertificate(DriverCertificateType.ADR_BASIC, date)) {
+            return false;
+        }
+        if (CargoLoadRules.requiresAdrTankTransport(cargoLoad)
+                && !driver.hasValidCertificate(DriverCertificateType.ADR_TANK, date)) {
+            return false;
+        }
+        if (CargoLoadRules.containsExplosives(cargoLoad)
+                && !driver.hasValidCertificate(DriverCertificateType.ADR_CLASS_1_EXPLOSIVES, date)) {
+            return false;
+        }
+        if (CargoLoadRules.containsRadioactiveMaterial(cargoLoad)
+                && !driver.hasValidCertificate(DriverCertificateType.ADR_CLASS_7_RADIOACTIVE, date)) {
+            return false;
+        }
+        return true;
+    }
+
+    public static boolean hasValidOperationalCertificatesForShipment(
+            Driver driver,
+            Shipment shipment,
+            LocalDate date
+    ) {
+        validateDriver(driver);
+        validateShipment(shipment);
+        if (date == null) {
+            throw new IllegalArgumentException("La data verifica certificati è obbligatoria.");
+        }
+        if (driver.getCertificates().isEmpty()) {
+            return hasRequiredOperationalQualificationsForShipment(driver, shipment);
+        }
+        if (shipment.requiresTemperatureControlledTransport()
+                && !driver.hasValidCertificate(DriverCertificateType.TEMPERATURE_CONTROLLED_TRANSPORT, date)) {
+            return false;
+        }
+        if (shipment.isInternational()
+                && !driver.hasValidCertificate(DriverCertificateType.INTERNATIONAL_TRANSPORT, date)) {
+            return false;
+        }
+        return true;
+    }
+
+    public static boolean canDriveVehicleCombinationOnDate(
+            Driver driver,
+            VehicleCombination vehicleCombination,
+            LocalDate date
+    ) {
+        validateDriver(driver);
+        validateVehicleCombination(vehicleCombination);
+        if (date == null) {
+            throw new IllegalArgumentException("La data verifica certificati è obbligatoria.");
+        }
+        return driver.canBeAssigned()
+                && vehicleCombination.canBeAssigned()
+                && hasRequiredLicenseForVehicleCombination(driver, vehicleCombination)
+                && hasValidProfessionalCertificatesForGoodsTransport(driver, date);
+    }
+
     public static boolean canDriveVehicleCombination(
             Driver driver,
             VehicleCombination vehicleCombination
@@ -131,6 +221,23 @@ public final class DriverRules {
         return canDriveVehicleCombination(driver, vehicleCombination)
                 && hasRequiredAdrCertificatesForCargoLoad(driver, shipment.getCargoLoad())
                 && hasRequiredOperationalQualificationsForShipment(driver, shipment);
+    }
+
+    public static boolean canBeAssignedToShipmentOnDate(
+            Driver driver,
+            VehicleCombination vehicleCombination,
+            Shipment shipment,
+            LocalDate date
+    ) {
+        validateDriver(driver);
+        validateVehicleCombination(vehicleCombination);
+        validateShipment(shipment);
+        if (date == null) {
+            throw new IllegalArgumentException("La data verifica certificati è obbligatoria.");
+        }
+        return canDriveVehicleCombinationOnDate(driver, vehicleCombination, date)
+                && hasValidAdrCertificatesForCargoLoad(driver, shipment.getCargoLoad(), date)
+                && hasValidOperationalCertificatesForShipment(driver, shipment, date);
     }
 
     private static void validateDriver(Driver driver) {

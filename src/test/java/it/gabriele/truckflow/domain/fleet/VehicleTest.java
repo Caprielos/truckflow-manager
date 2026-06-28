@@ -367,8 +367,8 @@ class VehicleTest {
     }
 
     @Test
-    void shouldNotAllowRefrigeratedBodyForNonRefrigeratedVehicleType() {
-        assertThrows(IllegalArgumentException.class, () -> Vehicle.cargoVehicle(
+    void shouldAllowRefrigeratedBodyForRigidTruckWhenTemperatureRangeIsProvided() {
+        Vehicle vehicle = Vehicle.cargoVehicle(
                 "TRUCK-001",
                 "AB 123 CD",
                 "1HGCM82633A004352",
@@ -380,7 +380,10 @@ class VehicleTest {
                 Dimension.ofMeters(7, 2.4, 2.5),
                 TemperatureRange.ofCelsius(0, 8),
                 Notes.empty()
-        ));
+        );
+
+        assertTrue(vehicle.supportsTemperatureControl());
+        assertEquals(TemperatureRange.ofCelsius(0, 8), vehicle.getTemperatureRange());
     }
 
     @Test
