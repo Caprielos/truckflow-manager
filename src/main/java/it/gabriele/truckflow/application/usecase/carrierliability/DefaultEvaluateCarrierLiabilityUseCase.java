@@ -1,6 +1,6 @@
 package it.gabriele.truckflow.application.usecase.carrierliability;
 
-import it.gabriele.truckflow.application.port.in.EvaluateCarrierLiabilityUseCase;
+import it.gabriele.truckflow.application.port.in.carrierliability.EvaluateCarrierLiabilityUseCase;
 import it.gabriele.truckflow.application.port.out.AlertEventRepository;
 import it.gabriele.truckflow.application.port.out.CarrierLiabilityCaseRepository;
 import it.gabriele.truckflow.application.usecase.EnterpriseAlertFactory;

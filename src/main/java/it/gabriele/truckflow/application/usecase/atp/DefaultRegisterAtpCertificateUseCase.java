@@ -1,6 +1,6 @@
 package it.gabriele.truckflow.application.usecase.atp;
 
-import it.gabriele.truckflow.application.port.in.RegisterAtpCertificateUseCase;
+import it.gabriele.truckflow.application.port.in.atp.RegisterAtpCertificateUseCase;
 import it.gabriele.truckflow.application.port.out.AtpCertificateRepository;
 import it.gabriele.truckflow.domain.atp.AtpCertificate;
 import java.util.Objects;

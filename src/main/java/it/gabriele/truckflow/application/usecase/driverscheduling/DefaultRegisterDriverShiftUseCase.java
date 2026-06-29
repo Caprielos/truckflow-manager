@@ -1,6 +1,6 @@
 package it.gabriele.truckflow.application.usecase.driverscheduling;
 
-import it.gabriele.truckflow.application.port.in.RegisterDriverShiftUseCase;
+import it.gabriele.truckflow.application.port.in.driverscheduling.RegisterDriverShiftUseCase;
 import it.gabriele.truckflow.application.port.out.DriverShiftRepository;
 import it.gabriele.truckflow.domain.driverscheduling.DriverShift;
 import java.util.Objects;

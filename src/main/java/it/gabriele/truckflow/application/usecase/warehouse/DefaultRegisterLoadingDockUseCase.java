@@ -1,6 +1,6 @@
 package it.gabriele.truckflow.application.usecase.warehouse;
 
-import it.gabriele.truckflow.application.port.in.RegisterLoadingDockUseCase;
+import it.gabriele.truckflow.application.port.in.warehouse.RegisterLoadingDockUseCase;
 import it.gabriele.truckflow.application.port.out.LoadingDockRepository;
 import it.gabriele.truckflow.domain.warehouse.LoadingDock;
 import java.util.Objects;

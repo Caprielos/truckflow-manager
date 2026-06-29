@@ -3,8 +3,8 @@ package it.gabriele.truckflow.application.usecase;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import it.gabriele.truckflow.application.port.in.EvaluateKpiThresholdUseCase;
-import it.gabriele.truckflow.application.port.in.RegisterIntegrationRunUseCase;
+import it.gabriele.truckflow.application.port.in.integration.RegisterIntegrationRunUseCase;
+import it.gabriele.truckflow.application.port.in.kpi.EvaluateKpiThresholdUseCase;
 import it.gabriele.truckflow.application.usecase.integration.DefaultRegisterIntegrationRunUseCase;
 import it.gabriele.truckflow.application.usecase.kpi.DefaultEvaluateKpiThresholdUseCase;
 import it.gabriele.truckflow.domain.integration.ExternalSystemType;

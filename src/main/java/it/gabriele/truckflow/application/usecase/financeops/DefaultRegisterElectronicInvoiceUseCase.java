@@ -1,6 +1,6 @@
 package it.gabriele.truckflow.application.usecase.financeops;
 
-import it.gabriele.truckflow.application.port.in.RegisterElectronicInvoiceUseCase;
+import it.gabriele.truckflow.application.port.in.financeops.RegisterElectronicInvoiceUseCase;
 import it.gabriele.truckflow.application.port.out.ElectronicInvoiceEnvelopeRepository;
 import it.gabriele.truckflow.domain.financeops.ElectronicInvoiceEnvelope;
 import java.util.Objects;

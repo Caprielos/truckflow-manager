@@ -1,6 +1,6 @@
 package it.gabriele.truckflow.application.usecase.enterpriseevent;
 
-import it.gabriele.truckflow.application.port.in.ApplyAuditAutomationUseCase;
+import it.gabriele.truckflow.application.port.in.enterpriseevent.ApplyAuditAutomationUseCase;
 import it.gabriele.truckflow.application.port.out.DomainEventEnvelopeRepository;
 import it.gabriele.truckflow.domain.enterpriseevent.AuditAutomationRules;
 import it.gabriele.truckflow.domain.enterpriseevent.AuditDecision;

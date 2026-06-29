@@ -45,7 +45,7 @@ class AssignParkingSpotUseCaseTest {
 
     ParkingAssignment assignment =
         useCase.handle(
-            new it.gabriele.truckflow.application.port.in.AssignParkingSpotUseCase.Command(
+            new it.gabriele.truckflow.application.port.in.parking.AssignParkingSpotUseCase.Command(
                 "PARK-001",
                 "DEPOT-MIL/A100",
                 resource,

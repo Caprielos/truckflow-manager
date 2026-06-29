@@ -1,6 +1,6 @@
 package it.gabriele.truckflow.application.usecase.foodsafety;
 
-import it.gabriele.truckflow.application.port.in.ValidateFoodSafetyComplianceUseCase;
+import it.gabriele.truckflow.application.port.in.foodsafety.ValidateFoodSafetyComplianceUseCase;
 import it.gabriele.truckflow.application.port.out.AlertEventRepository;
 import it.gabriele.truckflow.application.port.out.FoodSafetyProfileRepository;
 import it.gabriele.truckflow.application.usecase.EnterpriseAlertFactory;

@@ -1,6 +1,6 @@
 package it.gabriele.truckflow.application.usecase.regulation;
 
-import it.gabriele.truckflow.application.port.in.SelectCountryRegulationUseCase;
+import it.gabriele.truckflow.application.port.in.regulation.SelectCountryRegulationUseCase;
 import it.gabriele.truckflow.application.port.out.TransportRegulatorySelectionRepository;
 import it.gabriele.truckflow.domain.regulation.CountryRegulatoryProfile;
 import it.gabriele.truckflow.domain.regulation.RoadTransportRegulationCatalog;

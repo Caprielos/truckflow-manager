@@ -1,6 +1,6 @@
 package it.gabriele.truckflow.application.usecase.inventory;
 
-import it.gabriele.truckflow.application.port.in.RecordInventoryStockMovementUseCase;
+import it.gabriele.truckflow.application.port.in.inventory.RecordInventoryStockMovementUseCase;
 import it.gabriele.truckflow.application.port.out.InventoryBalanceRepository;
 import it.gabriele.truckflow.application.port.out.InventoryItemRepository;
 import it.gabriele.truckflow.application.port.out.InventoryStockMovementRepository;

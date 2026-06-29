@@ -1,6 +1,6 @@
 package it.gabriele.truckflow.application.usecase.sla;
 
-import it.gabriele.truckflow.application.port.in.DetectSlaViolationUseCase;
+import it.gabriele.truckflow.application.port.in.sla.DetectSlaViolationUseCase;
 import it.gabriele.truckflow.application.port.out.AlertEventRepository;
 import it.gabriele.truckflow.application.port.out.ServiceLevelAgreementRepository;
 import it.gabriele.truckflow.application.port.out.SlaViolationRepository;

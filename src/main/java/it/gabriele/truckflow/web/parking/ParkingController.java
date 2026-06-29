@@ -2,7 +2,7 @@ package it.gabriele.truckflow.web.parking;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import it.gabriele.truckflow.application.port.in.AssignParkingSpotUseCase;
+import it.gabriele.truckflow.application.port.in.parking.AssignParkingSpotUseCase;
 import it.gabriele.truckflow.application.port.out.ParkingAssignmentRepository;
 import it.gabriele.truckflow.application.port.out.ParkingSpotRepository;
 import it.gabriele.truckflow.domain.parking.ParkedResource;

@@ -1,6 +1,6 @@
 package it.gabriele.truckflow.application.usecase.adr;
 
-import it.gabriele.truckflow.application.port.in.RegisterAdrComplianceProfileUseCase;
+import it.gabriele.truckflow.application.port.in.adr.RegisterAdrComplianceProfileUseCase;
 import it.gabriele.truckflow.application.port.out.AdrComplianceProfileRepository;
 import it.gabriele.truckflow.domain.adr.AdrComplianceProfile;
 import java.util.Objects;

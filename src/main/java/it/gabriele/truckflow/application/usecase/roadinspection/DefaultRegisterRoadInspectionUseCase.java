@@ -1,6 +1,6 @@
 package it.gabriele.truckflow.application.usecase.roadinspection;
 
-import it.gabriele.truckflow.application.port.in.RegisterRoadInspectionUseCase;
+import it.gabriele.truckflow.application.port.in.roadinspection.RegisterRoadInspectionUseCase;
 import it.gabriele.truckflow.application.port.out.RoadInspectionRepository;
 import it.gabriele.truckflow.domain.roadinspection.RoadInspection;
 import java.util.Objects;

@@ -1,6 +1,6 @@
 package it.gabriele.truckflow.application.usecase.customs;
 
-import it.gabriele.truckflow.application.port.in.RecordBorderCrossingUseCase;
+import it.gabriele.truckflow.application.port.in.customs.RecordBorderCrossingUseCase;
 import it.gabriele.truckflow.application.port.out.BorderCrossingRepository;
 import it.gabriele.truckflow.domain.customs.BorderCrossing;
 import java.util.Objects;

@@ -1,6 +1,6 @@
 package it.gabriele.truckflow.application.usecase.workflow;
 
-import it.gabriele.truckflow.application.port.in.StartWorkflowInstanceUseCase;
+import it.gabriele.truckflow.application.port.in.workflow.StartWorkflowInstanceUseCase;
 import it.gabriele.truckflow.application.port.out.WorkflowDefinitionRepository;
 import it.gabriele.truckflow.application.port.out.WorkflowInstanceRepository;
 import it.gabriele.truckflow.domain.workflow.WorkflowDefinition;

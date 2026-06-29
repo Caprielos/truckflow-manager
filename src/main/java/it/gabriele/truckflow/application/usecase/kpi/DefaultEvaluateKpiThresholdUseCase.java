@@ -1,6 +1,6 @@
 package it.gabriele.truckflow.application.usecase.kpi;
 
-import it.gabriele.truckflow.application.port.in.EvaluateKpiThresholdUseCase;
+import it.gabriele.truckflow.application.port.in.kpi.EvaluateKpiThresholdUseCase;
 import it.gabriele.truckflow.application.port.out.AlertEventRepository;
 import it.gabriele.truckflow.application.port.out.KpiResultRepository;
 import it.gabriele.truckflow.application.port.out.KpiThresholdRepository;

@@ -4,12 +4,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import it.gabriele.truckflow.application.port.in.AssignParkingSpotUseCase;
-import it.gabriele.truckflow.application.port.in.CalculateDriverMissionPayrollUseCase;
-import it.gabriele.truckflow.application.port.in.CalculateMissionEconomicsUseCase;
-import it.gabriele.truckflow.application.port.in.CreateShipmentFromAcceptedOrderUseCase;
-import it.gabriele.truckflow.application.port.in.PlanTransportMissionUseCase;
-import it.gabriele.truckflow.application.port.in.RecordInventoryStockMovementUseCase;
+import it.gabriele.truckflow.application.port.in.economics.CalculateMissionEconomicsUseCase;
+import it.gabriele.truckflow.application.port.in.inventory.RecordInventoryStockMovementUseCase;
+import it.gabriele.truckflow.application.port.in.operation.PlanTransportMissionUseCase;
+import it.gabriele.truckflow.application.port.in.parking.AssignParkingSpotUseCase;
+import it.gabriele.truckflow.application.port.in.payroll.CalculateDriverMissionPayrollUseCase;
+import it.gabriele.truckflow.application.port.in.shipment.CreateShipmentFromAcceptedOrderUseCase;
 import it.gabriele.truckflow.application.usecase.economics.DefaultCalculateMissionEconomicsUseCase;
 import it.gabriele.truckflow.application.usecase.inventory.DefaultRecordInventoryStockMovementUseCase;
 import it.gabriele.truckflow.application.usecase.operation.DefaultCloseTransportMissionUseCase;
@@ -197,8 +197,8 @@ class TruckFlowApplicationScenarioTest {
     TransportMission completed =
         new DefaultCloseTransportMissionUseCase(missionRepository)
             .handle(
-                new it.gabriele.truckflow.application.port.in.CloseTransportMissionUseCase.Command(
-                    "MIS-APP-001"));
+                new it.gabriele.truckflow.application.port.in.operation.CloseTransportMissionUseCase
+                    .Command("MIS-APP-001"));
 
     assertEquals(TransportMissionStatus.COMPLETED, completed.getStatus());
     assertTrue(shipmentRepository.findById("SHP-APP-001").isPresent());

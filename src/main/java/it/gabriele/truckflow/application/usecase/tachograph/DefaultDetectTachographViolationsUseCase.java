@@ -1,6 +1,6 @@
 package it.gabriele.truckflow.application.usecase.tachograph;
 
-import it.gabriele.truckflow.application.port.in.DetectTachographViolationsUseCase;
+import it.gabriele.truckflow.application.port.in.tachograph.DetectTachographViolationsUseCase;
 import it.gabriele.truckflow.application.port.out.AlertEventRepository;
 import it.gabriele.truckflow.application.port.out.DrivingTimeViolationRepository;
 import it.gabriele.truckflow.application.port.out.TachographActivityRepository;

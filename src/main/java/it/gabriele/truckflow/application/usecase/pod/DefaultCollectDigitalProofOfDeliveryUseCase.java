@@ -1,6 +1,6 @@
 package it.gabriele.truckflow.application.usecase.pod;
 
-import it.gabriele.truckflow.application.port.in.CollectDigitalProofOfDeliveryUseCase;
+import it.gabriele.truckflow.application.port.in.pod.CollectDigitalProofOfDeliveryUseCase;
 import it.gabriele.truckflow.application.port.out.DigitalProofOfDeliveryRepository;
 import it.gabriele.truckflow.domain.pod.DigitalProofOfDelivery;
 import java.util.Objects;

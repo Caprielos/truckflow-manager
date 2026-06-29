@@ -1,6 +1,6 @@
 package it.gabriele.truckflow.application.usecase.workflow;
 
-import it.gabriele.truckflow.application.port.in.CompleteWorkflowInstanceUseCase;
+import it.gabriele.truckflow.application.port.in.workflow.CompleteWorkflowInstanceUseCase;
 import it.gabriele.truckflow.application.port.out.WorkflowInstanceRepository;
 import it.gabriele.truckflow.domain.workflow.WorkflowInstance;
 import java.util.Objects;

@@ -1,6 +1,6 @@
 package it.gabriele.truckflow.application.usecase.driverscheduling;
 
-import it.gabriele.truckflow.application.port.in.EvaluateDriverAssignmentUseCase;
+import it.gabriele.truckflow.application.port.in.driverscheduling.EvaluateDriverAssignmentUseCase;
 import it.gabriele.truckflow.application.port.out.AlertEventRepository;
 import it.gabriele.truckflow.application.port.out.DriverAbsenceRepository;
 import it.gabriele.truckflow.application.port.out.DriverDisciplinaryRecordRepository;

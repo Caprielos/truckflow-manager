@@ -1,6 +1,6 @@
 package it.gabriele.truckflow.application.usecase.regulation;
 
-import it.gabriele.truckflow.application.port.in.EvaluateRegulatoryRequirementUseCase;
+import it.gabriele.truckflow.application.port.in.regulation.EvaluateRegulatoryRequirementUseCase;
 import it.gabriele.truckflow.application.port.out.AlertEventRepository;
 import it.gabriele.truckflow.application.port.out.TransportRegulatorySelectionRepository;
 import it.gabriele.truckflow.application.usecase.EnterpriseAlertFactory;

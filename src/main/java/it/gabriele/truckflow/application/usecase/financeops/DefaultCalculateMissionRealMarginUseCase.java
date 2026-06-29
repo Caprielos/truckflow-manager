@@ -1,6 +1,6 @@
 package it.gabriele.truckflow.application.usecase.financeops;
 
-import it.gabriele.truckflow.application.port.in.CalculateMissionRealMarginUseCase;
+import it.gabriele.truckflow.application.port.in.financeops.CalculateMissionRealMarginUseCase;
 import it.gabriele.truckflow.application.port.out.CostAllocationRepository;
 import it.gabriele.truckflow.domain.financeops.CostAllocation;
 import it.gabriele.truckflow.domain.financeops.FinanceOperationRules;

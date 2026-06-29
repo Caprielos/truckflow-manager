@@ -44,17 +44,18 @@ class EnterpriseQualityAndDocumentUseCaseTest {
 
     new DefaultOpenQualityEventUseCase(repository)
         .handle(
-            new it.gabriele.truckflow.application.port.in.OpenQualityEventUseCase.Command(event));
+            new it.gabriele.truckflow.application.port.in.quality.OpenQualityEventUseCase.Command(
+                event));
     QualityEvent updated =
         new DefaultAssignCorrectiveActionUseCase(repository)
             .handle(
-                new it.gabriele.truckflow.application.port.in.AssignCorrectiveActionUseCase.Command(
-                    "QE-001", action.complete()));
+                new it.gabriele.truckflow.application.port.in.quality.AssignCorrectiveActionUseCase
+                    .Command("QE-001", action.complete()));
     QualityEvent closed =
         new DefaultCloseQualityEventUseCase(repository)
             .handle(
-                new it.gabriele.truckflow.application.port.in.CloseQualityEventUseCase.Command(
-                    "QE-001", Instant.parse("2026-06-30T10:00:00Z")));
+                new it.gabriele.truckflow.application.port.in.quality.CloseQualityEventUseCase
+                    .Command("QE-001", Instant.parse("2026-06-30T10:00:00Z")));
 
     assertEquals(QualityStatus.CORRECTIVE_ACTION_ASSIGNED, updated.getStatus());
     assertEquals(QualityStatus.CLOSED, closed.getStatus());
@@ -75,8 +76,8 @@ class EnterpriseQualityAndDocumentUseCaseTest {
     DocumentVersion saved =
         new DefaultRegisterDocumentVersionUseCase(repository)
             .handle(
-                new it.gabriele.truckflow.application.port.in.RegisterDocumentVersionUseCase
-                    .Command(version));
+                new it.gabriele.truckflow.application.port.in.document
+                    .RegisterDocumentVersionUseCase.Command(version));
 
     assertTrue(saved.isCurrent());
     assertEquals(1, repository.findAll().size());

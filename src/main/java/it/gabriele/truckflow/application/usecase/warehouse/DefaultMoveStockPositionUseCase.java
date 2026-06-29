@@ -1,6 +1,6 @@
 package it.gabriele.truckflow.application.usecase.warehouse;
 
-import it.gabriele.truckflow.application.port.in.MoveStockPositionUseCase;
+import it.gabriele.truckflow.application.port.in.warehouse.MoveStockPositionUseCase;
 import it.gabriele.truckflow.application.port.out.WarehouseStockPositionRepository;
 import it.gabriele.truckflow.domain.warehouse.StockPosition;
 import java.util.Objects;

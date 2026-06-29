@@ -1,6 +1,6 @@
 package it.gabriele.truckflow.application.usecase.sla;
 
-import it.gabriele.truckflow.application.port.in.RegisterServiceLevelAgreementUseCase;
+import it.gabriele.truckflow.application.port.in.sla.RegisterServiceLevelAgreementUseCase;
 import it.gabriele.truckflow.application.port.out.ServiceLevelAgreementRepository;
 import it.gabriele.truckflow.domain.sla.ServiceLevelAgreement;
 import java.util.Objects;

@@ -1,6 +1,6 @@
 package it.gabriele.truckflow.application.usecase.parking;
 
-import it.gabriele.truckflow.application.port.in.AssignParkingSpotUseCase;
+import it.gabriele.truckflow.application.port.in.parking.AssignParkingSpotUseCase;
 import it.gabriele.truckflow.application.port.out.ParkingAssignmentRepository;
 import it.gabriele.truckflow.application.port.out.ParkingSpotRepository;
 import it.gabriele.truckflow.domain.parking.ParkingAssignment;

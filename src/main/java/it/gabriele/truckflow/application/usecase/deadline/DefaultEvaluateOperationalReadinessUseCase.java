@@ -1,6 +1,6 @@
 package it.gabriele.truckflow.application.usecase.deadline;
 
-import it.gabriele.truckflow.application.port.in.EvaluateOperationalReadinessUseCase;
+import it.gabriele.truckflow.application.port.in.deadline.EvaluateOperationalReadinessUseCase;
 import it.gabriele.truckflow.application.port.out.AlertEventRepository;
 import it.gabriele.truckflow.application.port.out.EnterpriseDeadlineRepository;
 import it.gabriele.truckflow.domain.alerting.AlertRules;

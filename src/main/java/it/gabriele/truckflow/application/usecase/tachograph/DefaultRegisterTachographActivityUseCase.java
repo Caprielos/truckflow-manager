@@ -1,6 +1,6 @@
 package it.gabriele.truckflow.application.usecase.tachograph;
 
-import it.gabriele.truckflow.application.port.in.RegisterTachographActivityUseCase;
+import it.gabriele.truckflow.application.port.in.tachograph.RegisterTachographActivityUseCase;
 import it.gabriele.truckflow.application.port.out.TachographActivityRepository;
 import it.gabriele.truckflow.domain.tachograph.TachographActivity;
 import java.util.Objects;

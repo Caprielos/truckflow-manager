@@ -1,6 +1,6 @@
 package it.gabriele.truckflow.application.usecase.document;
 
-import it.gabriele.truckflow.application.port.in.GenerateShipmentDocumentBundleUseCase;
+import it.gabriele.truckflow.application.port.in.document.GenerateShipmentDocumentBundleUseCase;
 import it.gabriele.truckflow.application.port.out.ShipmentDocumentBundleRepository;
 import it.gabriele.truckflow.application.port.out.ShipmentRepository;
 import it.gabriele.truckflow.domain.document.ShipmentDocumentBundle;

@@ -1,6 +1,6 @@
 package it.gabriele.truckflow.application.usecase.tachograph;
 
-import it.gabriele.truckflow.application.port.in.ImportDriverCardDownloadUseCase;
+import it.gabriele.truckflow.application.port.in.tachograph.ImportDriverCardDownloadUseCase;
 import it.gabriele.truckflow.application.port.out.DriverCardDownloadRepository;
 import it.gabriele.truckflow.domain.tachograph.DriverCardDownload;
 import java.util.Objects;

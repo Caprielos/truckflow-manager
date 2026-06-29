@@ -1,6 +1,6 @@
 package it.gabriele.truckflow.application.usecase.integration;
 
-import it.gabriele.truckflow.application.port.in.RegisterIntegrationRunUseCase;
+import it.gabriele.truckflow.application.port.in.integration.RegisterIntegrationRunUseCase;
 import it.gabriele.truckflow.application.port.out.AlertEventRepository;
 import it.gabriele.truckflow.application.port.out.IntegrationConnectorRepository;
 import it.gabriele.truckflow.application.port.out.IntegrationRunRepository;

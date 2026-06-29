@@ -1,6 +1,6 @@
 package it.gabriele.truckflow.application.usecase.carrierliability;
 
-import it.gabriele.truckflow.application.port.in.OpenCarrierLiabilityCaseUseCase;
+import it.gabriele.truckflow.application.port.in.carrierliability.OpenCarrierLiabilityCaseUseCase;
 import it.gabriele.truckflow.application.port.out.CarrierLiabilityCaseRepository;
 import it.gabriele.truckflow.domain.carrierliability.CarrierLiabilityCase;
 import java.util.Objects;

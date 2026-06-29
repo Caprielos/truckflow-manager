@@ -1,6 +1,6 @@
 package it.gabriele.truckflow.application.usecase.financeops;
 
-import it.gabriele.truckflow.application.port.in.RegisterBankTransactionUseCase;
+import it.gabriele.truckflow.application.port.in.financeops.RegisterBankTransactionUseCase;
 import it.gabriele.truckflow.application.port.out.BankTransactionRepository;
 import it.gabriele.truckflow.domain.financeops.BankTransaction;
 import java.util.Objects;

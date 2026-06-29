@@ -1,6 +1,6 @@
 package it.gabriele.truckflow.application.usecase.reportexport;
 
-import it.gabriele.truckflow.application.port.in.CompleteReportExportUseCase;
+import it.gabriele.truckflow.application.port.in.reportexport.CompleteReportExportUseCase;
 import it.gabriele.truckflow.application.port.out.ReportExportJobRepository;
 import it.gabriele.truckflow.domain.reportexport.ReportExportJob;
 import it.gabriele.truckflow.domain.reportexport.ReportExportStatus;

@@ -1,6 +1,6 @@
 package it.gabriele.truckflow.application.usecase.foodsafety;
 
-import it.gabriele.truckflow.application.port.in.RegisterFoodSafetyProfileUseCase;
+import it.gabriele.truckflow.application.port.in.foodsafety.RegisterFoodSafetyProfileUseCase;
 import it.gabriele.truckflow.application.port.out.FoodSafetyProfileRepository;
 import it.gabriele.truckflow.domain.foodsafety.FoodSafetyProfile;
 import java.util.Objects;

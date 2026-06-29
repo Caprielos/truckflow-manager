@@ -1,6 +1,6 @@
 package it.gabriele.truckflow.application.usecase.economics;
 
-import it.gabriele.truckflow.application.port.in.CalculateMissionEconomicsUseCase;
+import it.gabriele.truckflow.application.port.in.economics.CalculateMissionEconomicsUseCase;
 import it.gabriele.truckflow.application.port.out.MissionEconomicsRepository;
 import it.gabriele.truckflow.application.port.out.ShipmentRepository;
 import it.gabriele.truckflow.application.port.out.TransportMissionRepository;

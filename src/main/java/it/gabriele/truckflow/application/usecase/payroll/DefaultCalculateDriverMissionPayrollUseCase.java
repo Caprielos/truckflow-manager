@@ -1,6 +1,6 @@
 package it.gabriele.truckflow.application.usecase.payroll;
 
-import it.gabriele.truckflow.application.port.in.CalculateDriverMissionPayrollUseCase;
+import it.gabriele.truckflow.application.port.in.payroll.CalculateDriverMissionPayrollUseCase;
 import it.gabriele.truckflow.application.port.out.DriverMissionPayrollRepository;
 import it.gabriele.truckflow.application.port.out.DriverMissionWorkReportRepository;
 import it.gabriele.truckflow.application.port.out.DriverPayrollPolicyRepository;

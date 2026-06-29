@@ -1,6 +1,6 @@
 package it.gabriele.truckflow.application.usecase.routeoptimization;
 
-import it.gabriele.truckflow.application.port.in.EvaluateRouteOptimizationPlanUseCase;
+import it.gabriele.truckflow.application.port.in.routeoptimization.EvaluateRouteOptimizationPlanUseCase;
 import it.gabriele.truckflow.application.port.out.AlertEventRepository;
 import it.gabriele.truckflow.application.port.out.RouteOptimizationPlanRepository;
 import it.gabriele.truckflow.application.usecase.EnterpriseAlertFactory;

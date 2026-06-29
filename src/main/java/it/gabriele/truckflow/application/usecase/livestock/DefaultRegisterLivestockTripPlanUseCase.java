@@ -1,6 +1,6 @@
 package it.gabriele.truckflow.application.usecase.livestock;
 
-import it.gabriele.truckflow.application.port.in.RegisterLivestockTripPlanUseCase;
+import it.gabriele.truckflow.application.port.in.livestock.RegisterLivestockTripPlanUseCase;
 import it.gabriele.truckflow.application.port.out.LivestockTripPlanRepository;
 import it.gabriele.truckflow.domain.livestock.LivestockTripPlan;
 import java.util.Objects;

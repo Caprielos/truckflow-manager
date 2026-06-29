@@ -1,6 +1,6 @@
 package it.gabriele.truckflow.application.usecase.financeops;
 
-import it.gabriele.truckflow.application.port.in.ReconcileBankTransactionUseCase;
+import it.gabriele.truckflow.application.port.in.financeops.ReconcileBankTransactionUseCase;
 import it.gabriele.truckflow.application.port.out.BankTransactionRepository;
 import it.gabriele.truckflow.domain.financeops.BankTransaction;
 

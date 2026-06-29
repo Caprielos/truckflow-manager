@@ -1,6 +1,6 @@
 package it.gabriele.truckflow.application.usecase.roadtransport;
 
-import it.gabriele.truckflow.application.port.in.RegisterVehicleRoadUnitProfileUseCase;
+import it.gabriele.truckflow.application.port.in.roadtransport.RegisterVehicleRoadUnitProfileUseCase;
 import it.gabriele.truckflow.application.port.out.VehicleRoadUnitProfileRepository;
 import it.gabriele.truckflow.domain.roadtransport.VehicleRoadUnitProfile;
 import java.util.Objects;

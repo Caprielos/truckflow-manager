@@ -1,6 +1,6 @@
 package it.gabriele.truckflow.application.usecase.quality;
 
-import it.gabriele.truckflow.application.port.in.CloseQualityEventUseCase;
+import it.gabriele.truckflow.application.port.in.quality.CloseQualityEventUseCase;
 import it.gabriele.truckflow.application.port.out.QualityEventRepository;
 import it.gabriele.truckflow.domain.quality.QualityEvent;
 import java.util.Objects;

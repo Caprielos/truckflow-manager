@@ -1,6 +1,6 @@
 package it.gabriele.truckflow.application.usecase.oversized;
 
-import it.gabriele.truckflow.application.port.in.ValidateOversizedComplianceUseCase;
+import it.gabriele.truckflow.application.port.in.oversized.ValidateOversizedComplianceUseCase;
 import it.gabriele.truckflow.application.port.out.AlertEventRepository;
 import it.gabriele.truckflow.application.port.out.OversizedLoadProfileRepository;
 import it.gabriele.truckflow.application.port.out.OversizedPermitRepository;

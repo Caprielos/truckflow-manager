@@ -1,6 +1,6 @@
 package it.gabriele.truckflow.application.usecase.document;
 
-import it.gabriele.truckflow.application.port.in.RegisterDocumentVersionUseCase;
+import it.gabriele.truckflow.application.port.in.document.RegisterDocumentVersionUseCase;
 import it.gabriele.truckflow.application.port.out.DocumentVersionRepository;
 import it.gabriele.truckflow.domain.document.DocumentVersion;
 import java.util.Objects;

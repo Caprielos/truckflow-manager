@@ -1,6 +1,6 @@
 package it.gabriele.truckflow.application.usecase.reportexport;
 
-import it.gabriele.truckflow.application.port.in.RequestReportExportUseCase;
+import it.gabriele.truckflow.application.port.in.reportexport.RequestReportExportUseCase;
 import it.gabriele.truckflow.application.port.out.ReportExportJobRepository;
 import it.gabriele.truckflow.domain.reportexport.ReportExportJob;
 import java.util.Objects;

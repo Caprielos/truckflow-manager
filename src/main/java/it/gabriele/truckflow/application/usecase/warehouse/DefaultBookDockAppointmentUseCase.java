@@ -1,6 +1,6 @@
 package it.gabriele.truckflow.application.usecase.warehouse;
 
-import it.gabriele.truckflow.application.port.in.BookDockAppointmentUseCase;
+import it.gabriele.truckflow.application.port.in.warehouse.BookDockAppointmentUseCase;
 import it.gabriele.truckflow.application.port.out.DockAppointmentRepository;
 import it.gabriele.truckflow.domain.warehouse.DockAppointment;
 import java.util.Objects;

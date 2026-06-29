@@ -1,6 +1,6 @@
 package it.gabriele.truckflow.application.usecase.adr;
 
-import it.gabriele.truckflow.application.port.in.ValidateAdrComplianceUseCase;
+import it.gabriele.truckflow.application.port.in.adr.ValidateAdrComplianceUseCase;
 import it.gabriele.truckflow.application.port.out.AdrComplianceProfileRepository;
 import it.gabriele.truckflow.application.port.out.AlertEventRepository;
 import it.gabriele.truckflow.application.usecase.EnterpriseAlertFactory;

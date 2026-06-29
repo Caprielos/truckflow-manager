@@ -1,6 +1,6 @@
 package it.gabriele.truckflow.application.usecase.operation;
 
-import it.gabriele.truckflow.application.port.in.PlanTransportMissionUseCase;
+import it.gabriele.truckflow.application.port.in.operation.PlanTransportMissionUseCase;
 import it.gabriele.truckflow.application.port.out.DriverRepository;
 import it.gabriele.truckflow.application.port.out.RoutePlanRepository;
 import it.gabriele.truckflow.application.port.out.ShipmentRepository;

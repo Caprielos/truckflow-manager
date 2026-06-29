@@ -1,6 +1,6 @@
 package it.gabriele.truckflow.application.usecase.dataimport;
 
-import it.gabriele.truckflow.application.port.in.RegisterImportBatchUseCase;
+import it.gabriele.truckflow.application.port.in.dataimport.RegisterImportBatchUseCase;
 import it.gabriele.truckflow.application.port.out.ImportBatchRepository;
 import it.gabriele.truckflow.domain.dataimport.ImportBatch;
 import java.util.Objects;

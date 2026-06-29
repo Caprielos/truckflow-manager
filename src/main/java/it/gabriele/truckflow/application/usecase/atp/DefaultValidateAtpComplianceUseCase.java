@@ -1,6 +1,6 @@
 package it.gabriele.truckflow.application.usecase.atp;
 
-import it.gabriele.truckflow.application.port.in.ValidateAtpComplianceUseCase;
+import it.gabriele.truckflow.application.port.in.atp.ValidateAtpComplianceUseCase;
 import it.gabriele.truckflow.application.port.out.AlertEventRepository;
 import it.gabriele.truckflow.application.port.out.AtpCertificateRepository;
 import it.gabriele.truckflow.application.usecase.EnterpriseAlertFactory;

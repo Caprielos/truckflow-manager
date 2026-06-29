@@ -1,6 +1,6 @@
 package it.gabriele.truckflow.application.usecase.driverscheduling;
 
-import it.gabriele.truckflow.application.port.in.RegisterDriverDisciplinaryRecordUseCase;
+import it.gabriele.truckflow.application.port.in.driverscheduling.RegisterDriverDisciplinaryRecordUseCase;
 import it.gabriele.truckflow.application.port.out.DriverDisciplinaryRecordRepository;
 import it.gabriele.truckflow.domain.driverscheduling.DriverDisciplinaryRecord;
 import java.util.Objects;
