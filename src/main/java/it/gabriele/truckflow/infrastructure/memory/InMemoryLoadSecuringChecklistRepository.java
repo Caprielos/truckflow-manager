@@ -4,9 +4,10 @@ import it.gabriele.truckflow.application.port.out.LoadSecuringChecklistRepositor
 import it.gabriele.truckflow.domain.loadsecurity.LoadSecuringChecklist;
 
 /** Repository in memoria per LoadSecuringChecklist. */
-public final class InMemoryLoadSecuringChecklistRepository extends InMemoryRepository<LoadSecuringChecklist> implements LoadSecuringChecklistRepository {
+public final class InMemoryLoadSecuringChecklistRepository
+    extends InMemoryRepository<LoadSecuringChecklist> implements LoadSecuringChecklistRepository {
 
-    public InMemoryLoadSecuringChecklistRepository() {
-        super(item -> "CHECKLIST-" + System.identityHashCode(item));
-    }
+  public InMemoryLoadSecuringChecklistRepository() {
+    super(item -> "CHECKLIST-" + System.identityHashCode(item));
+  }
 }

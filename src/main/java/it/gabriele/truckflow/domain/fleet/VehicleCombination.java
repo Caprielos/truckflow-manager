@@ -5,259 +5,256 @@ import it.gabriele.truckflow.domain.shared.Notes;
 import it.gabriele.truckflow.domain.shared.TemperatureRange;
 import it.gabriele.truckflow.domain.shared.Volume;
 import it.gabriele.truckflow.domain.shared.Weight;
-
 import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.Objects;
 import java.util.Optional;
 
 /**
- * Rappresenta una combinazione veicolare operativa.
- * Esempio: furgone singolo, camion rigido, trattore stradale + semirimorchio.
+ * Rappresenta una combinazione veicolare operativa. Esempio: furgone singolo, camion rigido,
+ * trattore stradale + semirimorchio.
  */
 public final class VehicleCombination {
 
-    private static final int MAX_COMBINATION_NUMBER_LENGTH = 50;
+  private static final int MAX_COMBINATION_NUMBER_LENGTH = 50;
 
-    private final String combinationNumber;
-    private final Vehicle poweredUnit;
-    private final Vehicle trailer;
-    private final Notes notes;
+  private final String combinationNumber;
+  private final Vehicle poweredUnit;
+  private final Vehicle trailer;
+  private final Notes notes;
 
-    private VehicleCombination(
-            String combinationNumber,
-            Vehicle poweredUnit,
-            Vehicle trailer,
-            Notes notes
-    ) {
-        this.combinationNumber = validateCombinationNumber(combinationNumber);
+  private VehicleCombination(
+      String combinationNumber, Vehicle poweredUnit, Vehicle trailer, Notes notes) {
+    this.combinationNumber = validateCombinationNumber(combinationNumber);
 
-        if (poweredUnit == null) {
-            throw new IllegalArgumentException("L'unità motrice è obbligatoria.");
-        }
-
-        if (!poweredUnit.isPoweredUnit()) {
-            throw new IllegalArgumentException("L'unità motrice deve essere un veicolo motorizzato.");
-        }
-
-        if (trailer != null && !trailer.isTrailer()) {
-            throw new IllegalArgumentException("Il rimorchio deve essere un veicolo rimorchiato.");
-        }
-
-        if (trailer == null && !poweredUnit.canCarryCargo()) {
-            throw new IllegalArgumentException("Una combinazione senza rimorchio deve avere un veicolo cargo.");
-        }
-
-        if (notes == null) {
-            throw new IllegalArgumentException("Le note della combinazione sono obbligatorie.");
-        }
-
-        this.poweredUnit = poweredUnit;
-        this.trailer = trailer;
-        this.notes = notes;
+    if (poweredUnit == null) {
+      throw new IllegalArgumentException("L'unità motrice è obbligatoria.");
     }
 
-    public static VehicleCombination singleVehicle(
-            String combinationNumber,
-            Vehicle vehicle,
-            Notes notes
-    ) {
-        return new VehicleCombination(combinationNumber, vehicle, null, notes);
+    if (!poweredUnit.isPoweredUnit()) {
+      throw new IllegalArgumentException("L'unità motrice deve essere un veicolo motorizzato.");
     }
 
-    public static VehicleCombination withTrailer(
-            String combinationNumber,
-            Vehicle poweredUnit,
-            Vehicle trailer,
-            Notes notes
-    ) {
-        if (trailer == null) {
-            throw new IllegalArgumentException("Il rimorchio è obbligatorio.");
-        }
-
-        return new VehicleCombination(combinationNumber, poweredUnit, trailer, notes);
+    if (trailer != null && !trailer.isTrailer()) {
+      throw new IllegalArgumentException("Il rimorchio deve essere un veicolo rimorchiato.");
     }
 
-    private static String validateCombinationNumber(String combinationNumber) {
-        if (combinationNumber == null) {
-            throw new IllegalArgumentException("Il numero combinazione è obbligatorio.");
-        }
-
-        String normalizedCombinationNumber = combinationNumber.trim().toUpperCase();
-
-        if (normalizedCombinationNumber.isEmpty()) {
-            throw new IllegalArgumentException("Il numero combinazione non può essere vuoto.");
-        }
-
-        if (normalizedCombinationNumber.length() > MAX_COMBINATION_NUMBER_LENGTH) {
-            throw new IllegalArgumentException("Il numero combinazione non può superare " + MAX_COMBINATION_NUMBER_LENGTH + " caratteri.");
-        }
-
-        if (!normalizedCombinationNumber.matches("[A-Z0-9_-]+")) {
-            throw new IllegalArgumentException("Il numero combinazione può contenere solo lettere, numeri, trattini e underscore.");
-        }
-
-        return normalizedCombinationNumber;
+    if (trailer == null && !poweredUnit.canCarryCargo()) {
+      throw new IllegalArgumentException(
+          "Una combinazione senza rimorchio deve avere un veicolo cargo.");
     }
 
-    public String getCombinationNumber() {
-        return combinationNumber;
+    if (notes == null) {
+      throw new IllegalArgumentException("Le note della combinazione sono obbligatorie.");
     }
 
-    public Vehicle getPoweredUnit() {
-        return poweredUnit;
+    this.poweredUnit = poweredUnit;
+    this.trailer = trailer;
+    this.notes = notes;
+  }
+
+  public static VehicleCombination singleVehicle(
+      String combinationNumber, Vehicle vehicle, Notes notes) {
+    return new VehicleCombination(combinationNumber, vehicle, null, notes);
+  }
+
+  public static VehicleCombination withTrailer(
+      String combinationNumber, Vehicle poweredUnit, Vehicle trailer, Notes notes) {
+    if (trailer == null) {
+      throw new IllegalArgumentException("Il rimorchio è obbligatorio.");
     }
 
-    public Vehicle getTrailer() {
-        return trailer;
+    return new VehicleCombination(combinationNumber, poweredUnit, trailer, notes);
+  }
+
+  private static String validateCombinationNumber(String combinationNumber) {
+    if (combinationNumber == null) {
+      throw new IllegalArgumentException("Il numero combinazione è obbligatorio.");
     }
 
-    public Notes getNotes() {
-        return notes;
+    String normalizedCombinationNumber = combinationNumber.trim().toUpperCase();
+
+    if (normalizedCombinationNumber.isEmpty()) {
+      throw new IllegalArgumentException("Il numero combinazione non può essere vuoto.");
     }
 
-    public boolean hasTrailer() {
-        return trailer != null;
+    if (normalizedCombinationNumber.length() > MAX_COMBINATION_NUMBER_LENGTH) {
+      throw new IllegalArgumentException(
+          "Il numero combinazione non può superare "
+              + MAX_COMBINATION_NUMBER_LENGTH
+              + " caratteri.");
     }
 
-    public VehicleCombinationType getCombinationType() {
-        if (trailer == null) {
-            return VehicleCombinationType.SINGLE_VEHICLE;
-        }
-        if (poweredUnit.getUnitType() == VehicleUnitType.TRACTOR_UNIT && trailer.getUnitType() == VehicleUnitType.SEMI_TRAILER) {
-            return VehicleCombinationType.ARTICULATED_VEHICLE;
-        }
-        return VehicleCombinationType.TRUCK_AND_TRAILER;
+    if (!normalizedCombinationNumber.matches("[A-Z0-9_-]+")) {
+      throw new IllegalArgumentException(
+          "Il numero combinazione può contenere solo lettere, numeri, trattini e underscore.");
     }
 
-    public int calculateTotalAxleCount() {
-        int poweredAxles = poweredUnit.hasTechnicalSpecification()
-                ? poweredUnit.getTechnicalSpecification().getAxleSpecification().getAxleCount()
-                : 0;
-        int trailerAxles = trailer != null && trailer.hasTechnicalSpecification()
-                ? trailer.getTechnicalSpecification().getAxleSpecification().getAxleCount()
-                : 0;
-        return poweredAxles + trailerAxles;
+    return normalizedCombinationNumber;
+  }
+
+  public String getCombinationNumber() {
+    return combinationNumber;
+  }
+
+  public Vehicle getPoweredUnit() {
+    return poweredUnit;
+  }
+
+  public Vehicle getTrailer() {
+    return trailer;
+  }
+
+  public Notes getNotes() {
+    return notes;
+  }
+
+  public boolean hasTrailer() {
+    return trailer != null;
+  }
+
+  public VehicleCombinationType getCombinationType() {
+    if (trailer == null) {
+      return VehicleCombinationType.SINGLE_VEHICLE;
+    }
+    if (poweredUnit.getUnitType() == VehicleUnitType.TRACTOR_UNIT
+        && trailer.getUnitType() == VehicleUnitType.SEMI_TRAILER) {
+      return VehicleCombinationType.ARTICULATED_VEHICLE;
+    }
+    return VehicleCombinationType.TRUCK_AND_TRAILER;
+  }
+
+  public int calculateTotalAxleCount() {
+    int poweredAxles =
+        poweredUnit.hasTechnicalSpecification()
+            ? poweredUnit.getTechnicalSpecification().getAxleSpecification().getAxleCount()
+            : 0;
+    int trailerAxles =
+        trailer != null && trailer.hasTechnicalSpecification()
+            ? trailer.getTechnicalSpecification().getAxleSpecification().getAxleCount()
+            : 0;
+    return poweredAxles + trailerAxles;
+  }
+
+  public Weight calculateGrossCombinationWeight() {
+    if (!poweredUnit.hasTechnicalSpecification()) {
+      throw new IllegalStateException("L'unità motrice non ha scheda tecnica.");
+    }
+    if (trailer == null) {
+      return poweredUnit.getTechnicalSpecification().getMassSpecification().getGrossVehicleWeight();
+    }
+    if (!trailer.hasTechnicalSpecification()) {
+      throw new IllegalStateException("Il rimorchio non ha scheda tecnica.");
+    }
+    return VehicleCombinationTechnicalRules.calculateGrossCombinationWeight(
+        poweredUnit.getTechnicalSpecification().getMassSpecification(),
+        trailer.getTechnicalSpecification().getMassSpecification());
+  }
+
+  public Optional<VehicleCertificate> findNextCertificateDeadline(LocalDate today) {
+    if (today == null) {
+      throw new IllegalArgumentException("La data verifica scadenze è obbligatoria.");
+    }
+    return java.util.stream.Stream.concat(
+            poweredUnit.hasTechnicalSpecification()
+                ? poweredUnit.getTechnicalSpecification().getCertificates().stream()
+                : java.util.stream.Stream.empty(),
+            trailer != null && trailer.hasTechnicalSpecification()
+                ? trailer.getTechnicalSpecification().getCertificates().stream()
+                : java.util.stream.Stream.empty())
+        .filter(certificate -> !certificate.getExpiresAt().isBefore(today))
+        .min(Comparator.comparing(VehicleCertificate::getExpiresAt));
+  }
+
+  public Vehicle getCargoUnit() {
+    if (trailer != null && trailer.canCarryCargo()) {
+      return trailer;
     }
 
-    public Weight calculateGrossCombinationWeight() {
-        if (!poweredUnit.hasTechnicalSpecification()) {
-            throw new IllegalStateException("L'unità motrice non ha scheda tecnica.");
-        }
-        if (trailer == null) {
-            return poweredUnit.getTechnicalSpecification().getMassSpecification().getGrossVehicleWeight();
-        }
-        if (!trailer.hasTechnicalSpecification()) {
-            throw new IllegalStateException("Il rimorchio non ha scheda tecnica.");
-        }
-        return VehicleCombinationTechnicalRules.calculateGrossCombinationWeight(
-                poweredUnit.getTechnicalSpecification().getMassSpecification(),
-                trailer.getTechnicalSpecification().getMassSpecification()
-        );
+    if (poweredUnit.canCarryCargo()) {
+      return poweredUnit;
     }
 
-    public Optional<VehicleCertificate> findNextCertificateDeadline(LocalDate today) {
-        if (today == null) {
-            throw new IllegalArgumentException("La data verifica scadenze è obbligatoria.");
-        }
-        return java.util.stream.Stream.concat(
-                        poweredUnit.hasTechnicalSpecification()
-                                ? poweredUnit.getTechnicalSpecification().getCertificates().stream()
-                                : java.util.stream.Stream.empty(),
-                        trailer != null && trailer.hasTechnicalSpecification()
-                                ? trailer.getTechnicalSpecification().getCertificates().stream()
-                                : java.util.stream.Stream.empty()
-                )
-                .filter(certificate -> !certificate.getExpiresAt().isBefore(today))
-                .min(Comparator.comparing(VehicleCertificate::getExpiresAt));
+    throw new IllegalStateException("La combinazione non ha un'unità cargo.");
+  }
+
+  public Weight getMaxPayload() {
+    return getCargoUnit().getMaxPayload();
+  }
+
+  public Dimension getCargoSpaceDimension() {
+    return getCargoUnit().getCargoSpaceDimension();
+  }
+
+  public Volume calculateCargoSpaceVolume() {
+    return getCargoUnit().calculateCargoSpaceVolume();
+  }
+
+  public boolean canBeAssigned() {
+    return poweredUnit.canBeAssigned() && (trailer == null || trailer.canBeAssigned());
+  }
+
+  public boolean canCarryWeight(Weight weight) {
+    if (weight == null) {
+      throw new IllegalArgumentException("Il peso da verificare è obbligatorio.");
     }
 
-    public Vehicle getCargoUnit() {
-        if (trailer != null && trailer.canCarryCargo()) {
-            return trailer;
-        }
+    return getCargoUnit().canCarryWeight(weight);
+  }
 
-        if (poweredUnit.canCarryCargo()) {
-            return poweredUnit;
-        }
-
-        throw new IllegalStateException("La combinazione non ha un'unità cargo.");
+  public boolean canFitDimension(Dimension dimension) {
+    if (dimension == null) {
+      throw new IllegalArgumentException("Le dimensioni da verificare sono obbligatorie.");
     }
 
-    public Weight getMaxPayload() {
-        return getCargoUnit().getMaxPayload();
+    return getCargoUnit().canFitDimension(dimension);
+  }
+
+  public boolean supportsTemperatureControl() {
+    return getCargoUnit().supportsTemperatureControl();
+  }
+
+  public boolean canSupportTemperatureRange(TemperatureRange requiredTemperatureRange) {
+    if (requiredTemperatureRange == null) {
+      throw new IllegalArgumentException("L'intervallo di temperatura richiesto è obbligatorio.");
     }
 
-    public Dimension getCargoSpaceDimension() {
-        return getCargoUnit().getCargoSpaceDimension();
+    return getCargoUnit().canSupportTemperatureRange(requiredTemperatureRange);
+  }
+
+  public boolean hasNotes() {
+    return notes.hasText();
+  }
+
+  public String formatSingleLine() {
+    if (trailer == null) {
+      return combinationNumber + " - " + poweredUnit.getFleetNumber();
     }
 
-    public Volume calculateCargoSpaceVolume() {
-        return getCargoUnit().calculateCargoSpaceVolume();
-    }
+    return combinationNumber
+        + " - "
+        + poweredUnit.getFleetNumber()
+        + " + "
+        + trailer.getFleetNumber();
+  }
 
-    public boolean canBeAssigned() {
-        return poweredUnit.canBeAssigned()
-                && (trailer == null || trailer.canBeAssigned());
-    }
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (!(o instanceof VehicleCombination that)) return false;
+    return combinationNumber.equals(that.combinationNumber)
+        && poweredUnit.equals(that.poweredUnit)
+        && Objects.equals(trailer, that.trailer)
+        && notes.equals(that.notes);
+  }
 
-    public boolean canCarryWeight(Weight weight) {
-        if (weight == null) {
-            throw new IllegalArgumentException("Il peso da verificare è obbligatorio.");
-        }
+  @Override
+  public int hashCode() {
+    return Objects.hash(combinationNumber, poweredUnit, trailer, notes);
+  }
 
-        return getCargoUnit().canCarryWeight(weight);
-    }
-
-    public boolean canFitDimension(Dimension dimension) {
-        if (dimension == null) {
-            throw new IllegalArgumentException("Le dimensioni da verificare sono obbligatorie.");
-        }
-
-        return getCargoUnit().canFitDimension(dimension);
-    }
-
-    public boolean supportsTemperatureControl() {
-        return getCargoUnit().supportsTemperatureControl();
-    }
-
-    public boolean canSupportTemperatureRange(TemperatureRange requiredTemperatureRange) {
-        if (requiredTemperatureRange == null) {
-            throw new IllegalArgumentException("L'intervallo di temperatura richiesto è obbligatorio.");
-        }
-
-        return getCargoUnit().canSupportTemperatureRange(requiredTemperatureRange);
-    }
-
-    public boolean hasNotes() {
-        return notes.hasText();
-    }
-
-    public String formatSingleLine() {
-        if (trailer == null) {
-            return combinationNumber + " - " + poweredUnit.getFleetNumber();
-        }
-
-        return combinationNumber + " - " + poweredUnit.getFleetNumber() + " + " + trailer.getFleetNumber();
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof VehicleCombination that)) return false;
-        return combinationNumber.equals(that.combinationNumber)
-                && poweredUnit.equals(that.poweredUnit)
-                && Objects.equals(trailer, that.trailer)
-                && notes.equals(that.notes);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(combinationNumber, poweredUnit, trailer, notes);
-    }
-
-    @Override
-    public String toString() {
-        return formatSingleLine();
-    }
+  @Override
+  public String toString() {
+    return formatSingleLine();
+  }
 }

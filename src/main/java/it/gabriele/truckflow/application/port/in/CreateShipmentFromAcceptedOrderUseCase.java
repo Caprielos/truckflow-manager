@@ -5,8 +5,7 @@ import it.gabriele.truckflow.domain.shipment.Shipment;
 
 public interface CreateShipmentFromAcceptedOrderUseCase {
 
-    Shipment handle(Command command);
+  Shipment handle(Command command);
 
-    record Command(String shipmentNumber, String orderNumber, Notes notes) {
-    }
+  record Command(String shipmentNumber, String orderNumber, Notes notes) {}
 }

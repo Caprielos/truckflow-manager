@@ -6,285 +6,278 @@ import it.gabriele.truckflow.domain.fleet.VehicleCombination;
 import it.gabriele.truckflow.domain.route.RoutePlan;
 import it.gabriele.truckflow.domain.shared.Notes;
 import it.gabriele.truckflow.domain.shipment.Shipment;
-
 import java.util.Objects;
 
 /**
- * Rappresenta la missione operativa reale.
- * Una missione collega una spedizione con autista, mezzo e piano di tratta.
+ * Rappresenta la missione operativa reale. Una missione collega una spedizione con autista, mezzo e
+ * piano di tratta.
  */
 public final class TransportMission {
 
-    private static final int MAX_MISSION_NUMBER_LENGTH = 50;
+  private static final int MAX_MISSION_NUMBER_LENGTH = 50;
 
-    private final String missionNumber;
-    private final Shipment shipment;
-    private final Driver driver;
-    private final VehicleCombination vehicleCombination;
-    private final RoutePlan routePlan;
-    private final TransportMissionStatus status;
-    private final Notes notes;
+  private final String missionNumber;
+  private final Shipment shipment;
+  private final Driver driver;
+  private final VehicleCombination vehicleCombination;
+  private final RoutePlan routePlan;
+  private final TransportMissionStatus status;
+  private final Notes notes;
 
-    private TransportMission(
-            String missionNumber,
-            Shipment shipment,
-            Driver driver,
-            VehicleCombination vehicleCombination,
-            RoutePlan routePlan,
-            TransportMissionStatus status,
-            Notes notes
-    ) {
-        this.missionNumber = validateMissionNumber(missionNumber);
+  private TransportMission(
+      String missionNumber,
+      Shipment shipment,
+      Driver driver,
+      VehicleCombination vehicleCombination,
+      RoutePlan routePlan,
+      TransportMissionStatus status,
+      Notes notes) {
+    this.missionNumber = validateMissionNumber(missionNumber);
 
-        if (shipment == null) {
-            throw new IllegalArgumentException("La spedizione della missione è obbligatoria.");
-        }
-
-        if (driver == null) {
-            throw new IllegalArgumentException("L'autista della missione è obbligatorio.");
-        }
-
-        if (vehicleCombination == null) {
-            throw new IllegalArgumentException("La combinazione veicolare della missione è obbligatoria.");
-        }
-
-        if (routePlan == null) {
-            throw new IllegalArgumentException("Il piano di tratta della missione è obbligatorio.");
-        }
-
-        if (status == null) {
-            throw new IllegalArgumentException("Lo stato della missione è obbligatorio.");
-        }
-
-        if (notes == null) {
-            throw new IllegalArgumentException("Le note della missione sono obbligatorie.");
-        }
-
-        this.shipment = shipment;
-        this.driver = driver;
-        this.vehicleCombination = vehicleCombination;
-        this.routePlan = routePlan;
-        this.status = status;
-        this.notes = notes;
+    if (shipment == null) {
+      throw new IllegalArgumentException("La spedizione della missione è obbligatoria.");
     }
 
-    public static TransportMission planned(
-            String missionNumber,
-            Shipment shipment,
-            Driver driver,
-            VehicleCombination vehicleCombination,
-            RoutePlan routePlan,
-            Notes notes
-    ) {
-        if (!ComplianceRules.isAssignmentCompliant(driver, vehicleCombination, routePlan, shipment)) {
-            throw new IllegalArgumentException("La missione non può essere pianificata perché l'assegnazione non è conforme.");
-        }
-
-        return new TransportMission(
-                missionNumber,
-                shipment,
-                driver,
-                vehicleCombination,
-                routePlan,
-                TransportMissionStatus.PLANNED,
-                notes
-        );
+    if (driver == null) {
+      throw new IllegalArgumentException("L'autista della missione è obbligatorio.");
     }
 
-    private static String validateMissionNumber(String missionNumber) {
-        if (missionNumber == null) {
-            throw new IllegalArgumentException("Il numero missione è obbligatorio.");
-        }
-
-        String normalizedMissionNumber = missionNumber.trim().toUpperCase();
-
-        if (normalizedMissionNumber.isEmpty()) {
-            throw new IllegalArgumentException("Il numero missione non può essere vuoto.");
-        }
-
-        if (normalizedMissionNumber.length() > MAX_MISSION_NUMBER_LENGTH) {
-            throw new IllegalArgumentException("Il numero missione non può superare " + MAX_MISSION_NUMBER_LENGTH + " caratteri.");
-        }
-
-        if (!normalizedMissionNumber.matches("[A-Z0-9_-]+")) {
-            throw new IllegalArgumentException("Il numero missione può contenere solo lettere, numeri, trattini e underscore.");
-        }
-
-        return normalizedMissionNumber;
+    if (vehicleCombination == null) {
+      throw new IllegalArgumentException(
+          "La combinazione veicolare della missione è obbligatoria.");
     }
 
-    public TransportMission dispatch() {
-        if (!TransportMissionRules.canBeDispatched(this)) {
-            throw new IllegalStateException("La missione non può essere inviata.");
-        }
-
-        return new TransportMission(
-                missionNumber,
-                shipment,
-                driver,
-                vehicleCombination,
-                routePlan,
-                TransportMissionStatus.DISPATCHED,
-                notes
-        );
+    if (routePlan == null) {
+      throw new IllegalArgumentException("Il piano di tratta della missione è obbligatorio.");
     }
 
-    public TransportMission start() {
-        if (!TransportMissionRules.canBeStarted(this)) {
-            throw new IllegalStateException("La missione non può essere avviata.");
-        }
-
-        return new TransportMission(
-                missionNumber,
-                shipment,
-                driver,
-                vehicleCombination,
-                routePlan,
-                TransportMissionStatus.IN_PROGRESS,
-                notes
-        );
+    if (status == null) {
+      throw new IllegalArgumentException("Lo stato della missione è obbligatorio.");
     }
 
-    public TransportMission complete() {
-        if (!TransportMissionRules.canBeCompleted(this)) {
-            throw new IllegalStateException("La missione non può essere completata.");
-        }
-
-        return new TransportMission(
-                missionNumber,
-                shipment,
-                driver,
-                vehicleCombination,
-                routePlan,
-                TransportMissionStatus.COMPLETED,
-                notes
-        );
+    if (notes == null) {
+      throw new IllegalArgumentException("Le note della missione sono obbligatorie.");
     }
 
-    public TransportMission cancel() {
-        if (!TransportMissionRules.canBeCancelled(this)) {
-            throw new IllegalStateException("La missione non può essere cancellata.");
-        }
+    this.shipment = shipment;
+    this.driver = driver;
+    this.vehicleCombination = vehicleCombination;
+    this.routePlan = routePlan;
+    this.status = status;
+    this.notes = notes;
+  }
 
-        return new TransportMission(
-                missionNumber,
-                shipment,
-                driver,
-                vehicleCombination,
-                routePlan,
-                TransportMissionStatus.CANCELLED,
-                notes
-        );
+  public static TransportMission planned(
+      String missionNumber,
+      Shipment shipment,
+      Driver driver,
+      VehicleCombination vehicleCombination,
+      RoutePlan routePlan,
+      Notes notes) {
+    if (!ComplianceRules.isAssignmentCompliant(driver, vehicleCombination, routePlan, shipment)) {
+      throw new IllegalArgumentException(
+          "La missione non può essere pianificata perché l'assegnazione non è conforme.");
     }
 
-    public String getMissionNumber() {
-        return missionNumber;
+    return new TransportMission(
+        missionNumber,
+        shipment,
+        driver,
+        vehicleCombination,
+        routePlan,
+        TransportMissionStatus.PLANNED,
+        notes);
+  }
+
+  private static String validateMissionNumber(String missionNumber) {
+    if (missionNumber == null) {
+      throw new IllegalArgumentException("Il numero missione è obbligatorio.");
     }
 
-    public Shipment getShipment() {
-        return shipment;
+    String normalizedMissionNumber = missionNumber.trim().toUpperCase();
+
+    if (normalizedMissionNumber.isEmpty()) {
+      throw new IllegalArgumentException("Il numero missione non può essere vuoto.");
     }
 
-    public Driver getDriver() {
-        return driver;
+    if (normalizedMissionNumber.length() > MAX_MISSION_NUMBER_LENGTH) {
+      throw new IllegalArgumentException(
+          "Il numero missione non può superare " + MAX_MISSION_NUMBER_LENGTH + " caratteri.");
     }
 
-    public VehicleCombination getVehicleCombination() {
-        return vehicleCombination;
+    if (!normalizedMissionNumber.matches("[A-Z0-9_-]+")) {
+      throw new IllegalArgumentException(
+          "Il numero missione può contenere solo lettere, numeri, trattini e underscore.");
     }
 
-    public RoutePlan getRoutePlan() {
-        return routePlan;
+    return normalizedMissionNumber;
+  }
+
+  public TransportMission dispatch() {
+    if (!TransportMissionRules.canBeDispatched(this)) {
+      throw new IllegalStateException("La missione non può essere inviata.");
     }
 
-    public TransportMissionStatus getStatus() {
-        return status;
+    return new TransportMission(
+        missionNumber,
+        shipment,
+        driver,
+        vehicleCombination,
+        routePlan,
+        TransportMissionStatus.DISPATCHED,
+        notes);
+  }
+
+  public TransportMission start() {
+    if (!TransportMissionRules.canBeStarted(this)) {
+      throw new IllegalStateException("La missione non può essere avviata.");
     }
 
-    public Notes getNotes() {
-        return notes;
+    return new TransportMission(
+        missionNumber,
+        shipment,
+        driver,
+        vehicleCombination,
+        routePlan,
+        TransportMissionStatus.IN_PROGRESS,
+        notes);
+  }
+
+  public TransportMission complete() {
+    if (!TransportMissionRules.canBeCompleted(this)) {
+      throw new IllegalStateException("La missione non può essere completata.");
     }
 
-    public boolean isPlanned() {
-        return status == TransportMissionStatus.PLANNED;
+    return new TransportMission(
+        missionNumber,
+        shipment,
+        driver,
+        vehicleCombination,
+        routePlan,
+        TransportMissionStatus.COMPLETED,
+        notes);
+  }
+
+  public TransportMission cancel() {
+    if (!TransportMissionRules.canBeCancelled(this)) {
+      throw new IllegalStateException("La missione non può essere cancellata.");
     }
 
-    public boolean isDispatched() {
-        return status == TransportMissionStatus.DISPATCHED;
-    }
+    return new TransportMission(
+        missionNumber,
+        shipment,
+        driver,
+        vehicleCombination,
+        routePlan,
+        TransportMissionStatus.CANCELLED,
+        notes);
+  }
 
-    public boolean isInProgress() {
-        return status == TransportMissionStatus.IN_PROGRESS;
-    }
+  public String getMissionNumber() {
+    return missionNumber;
+  }
 
-    public boolean isCompleted() {
-        return status == TransportMissionStatus.COMPLETED;
-    }
+  public Shipment getShipment() {
+    return shipment;
+  }
 
-    public boolean isCancelled() {
-        return status == TransportMissionStatus.CANCELLED;
-    }
+  public Driver getDriver() {
+    return driver;
+  }
 
-    public boolean isTerminal() {
-        return status.isTerminal();
-    }
+  public VehicleCombination getVehicleCombination() {
+    return vehicleCombination;
+  }
 
-    public boolean isInternational() {
-        return shipment.isInternational();
-    }
+  public RoutePlan getRoutePlan() {
+    return routePlan;
+  }
 
-    public boolean requiresTemperatureControlledTransport() {
-        return shipment.requiresTemperatureControlledTransport();
-    }
+  public TransportMissionStatus getStatus() {
+    return status;
+  }
 
-    public boolean containsHazardousMaterial() {
-        return shipment.containsHazardousMaterial();
-    }
+  public Notes getNotes() {
+    return notes;
+  }
 
-    public boolean requiresSpecialComplianceChecks() {
-        return ComplianceRules.requiresSpecialComplianceChecks(shipment);
-    }
+  public boolean isPlanned() {
+    return status == TransportMissionStatus.PLANNED;
+  }
 
-    public boolean hasNotes() {
-        return notes.hasText();
-    }
+  public boolean isDispatched() {
+    return status == TransportMissionStatus.DISPATCHED;
+  }
 
-    public String formatSingleLine() {
-        return missionNumber
-                + " - shipment: " + shipment.getShipmentNumber()
-                + " - driver: " + driver.getDriverCode()
-                + " - vehicle: " + vehicleCombination.getCombinationNumber()
-                + " - " + status;
-    }
+  public boolean isInProgress() {
+    return status == TransportMissionStatus.IN_PROGRESS;
+  }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof TransportMission that)) return false;
-        return missionNumber.equals(that.missionNumber)
-                && shipment.equals(that.shipment)
-                && driver.equals(that.driver)
-                && vehicleCombination.equals(that.vehicleCombination)
-                && routePlan.equals(that.routePlan)
-                && status == that.status
-                && notes.equals(that.notes);
-    }
+  public boolean isCompleted() {
+    return status == TransportMissionStatus.COMPLETED;
+  }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(
-                missionNumber,
-                shipment,
-                driver,
-                vehicleCombination,
-                routePlan,
-                status,
-                notes
-        );
-    }
+  public boolean isCancelled() {
+    return status == TransportMissionStatus.CANCELLED;
+  }
 
-    @Override
-    public String toString() {
-        return formatSingleLine();
-    }
+  public boolean isTerminal() {
+    return status.isTerminal();
+  }
+
+  public boolean isInternational() {
+    return shipment.isInternational();
+  }
+
+  public boolean requiresTemperatureControlledTransport() {
+    return shipment.requiresTemperatureControlledTransport();
+  }
+
+  public boolean containsHazardousMaterial() {
+    return shipment.containsHazardousMaterial();
+  }
+
+  public boolean requiresSpecialComplianceChecks() {
+    return ComplianceRules.requiresSpecialComplianceChecks(shipment);
+  }
+
+  public boolean hasNotes() {
+    return notes.hasText();
+  }
+
+  public String formatSingleLine() {
+    return missionNumber
+        + " - shipment: "
+        + shipment.getShipmentNumber()
+        + " - driver: "
+        + driver.getDriverCode()
+        + " - vehicle: "
+        + vehicleCombination.getCombinationNumber()
+        + " - "
+        + status;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (!(o instanceof TransportMission that)) return false;
+    return missionNumber.equals(that.missionNumber)
+        && shipment.equals(that.shipment)
+        && driver.equals(that.driver)
+        && vehicleCombination.equals(that.vehicleCombination)
+        && routePlan.equals(that.routePlan)
+        && status == that.status
+        && notes.equals(that.notes);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(
+        missionNumber, shipment, driver, vehicleCombination, routePlan, status, notes);
+  }
+
+  @Override
+  public String toString() {
+    return formatSingleLine();
+  }
 }

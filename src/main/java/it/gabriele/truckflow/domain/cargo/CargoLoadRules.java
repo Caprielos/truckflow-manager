@@ -4,102 +4,99 @@ import it.gabriele.truckflow.domain.shared.Dimension;
 import it.gabriele.truckflow.domain.shared.Volume;
 import it.gabriele.truckflow.domain.shared.Weight;
 
-/**
- * Contiene regole di dominio relative a un carico.
- */
+/** Contiene regole di dominio relative a un carico. */
 public final class CargoLoadRules {
 
-    private CargoLoadRules() {
+  private CargoLoadRules() {}
+
+  public static boolean isWithinMaxWeight(CargoLoad cargoLoad, Weight maxWeight) {
+    validateCargoLoad(cargoLoad);
+
+    if (maxWeight == null) {
+      throw new IllegalArgumentException("Il peso massimo è obbligatorio.");
     }
 
-    public static boolean isWithinMaxWeight(CargoLoad cargoLoad, Weight maxWeight) {
-        validateCargoLoad(cargoLoad);
+    return cargoLoad.calculateTotalWeight().isLessThanOrEqualTo(maxWeight);
+  }
 
-        if (maxWeight == null) {
-            throw new IllegalArgumentException("Il peso massimo è obbligatorio.");
-        }
+  public static boolean isWithinMaxVolume(CargoLoad cargoLoad, Volume maxVolume) {
+    validateCargoLoad(cargoLoad);
 
-        return cargoLoad.calculateTotalWeight().isLessThanOrEqualTo(maxWeight);
+    if (maxVolume == null) {
+      throw new IllegalArgumentException("Il volume massimo è obbligatorio.");
     }
 
-    public static boolean isWithinMaxVolume(CargoLoad cargoLoad, Volume maxVolume) {
-        validateCargoLoad(cargoLoad);
+    return cargoLoad.calculateTotalVolume().isLessThanOrEqualTo(maxVolume);
+  }
 
-        if (maxVolume == null) {
-            throw new IllegalArgumentException("Il volume massimo è obbligatorio.");
-        }
+  public static boolean fitsInsideCargoSpace(CargoLoad cargoLoad, Dimension cargoSpaceDimension) {
+    validateCargoLoad(cargoLoad);
 
-        return cargoLoad.calculateTotalVolume().isLessThanOrEqualTo(maxVolume);
+    if (cargoSpaceDimension == null) {
+      throw new IllegalArgumentException("Le dimensioni dello spazio di carico sono obbligatorie.");
     }
 
-    public static boolean fitsInsideCargoSpace(CargoLoad cargoLoad, Dimension cargoSpaceDimension) {
-        validateCargoLoad(cargoLoad);
+    return cargoLoad.allItemsFitInside(cargoSpaceDimension);
+  }
 
-        if (cargoSpaceDimension == null) {
-            throw new IllegalArgumentException("Le dimensioni dello spazio di carico sono obbligatorie.");
-        }
+  public static boolean requiresTemperatureControlledTransport(CargoLoad cargoLoad) {
+    validateCargoLoad(cargoLoad);
 
-        return cargoLoad.allItemsFitInside(cargoSpaceDimension);
+    return cargoLoad.requiresTemperatureControl();
+  }
+
+  public static boolean containsHazardousMaterial(CargoLoad cargoLoad) {
+    validateCargoLoad(cargoLoad);
+
+    return cargoLoad.hasCategory(CargoCategory.HAZARDOUS_MATERIAL)
+        || cargoLoad.containsDangerousGoods();
+  }
+
+  public static boolean containsDangerousGoods(CargoLoad cargoLoad) {
+    validateCargoLoad(cargoLoad);
+
+    return cargoLoad.containsDangerousGoods();
+  }
+
+  public static boolean requiresAdrTransport(CargoLoad cargoLoad) {
+    validateCargoLoad(cargoLoad);
+
+    return cargoLoad.requiresAdrTransport();
+  }
+
+  public static boolean requiresAdrTankTransport(CargoLoad cargoLoad) {
+    validateCargoLoad(cargoLoad);
+
+    return cargoLoad.requiresAdrTankTransport();
+  }
+
+  public static boolean containsExplosives(CargoLoad cargoLoad) {
+    validateCargoLoad(cargoLoad);
+
+    return cargoLoad.containsAdrClass(AdrClass.CLASS_1_EXPLOSIVES);
+  }
+
+  public static boolean containsRadioactiveMaterial(CargoLoad cargoLoad) {
+    validateCargoLoad(cargoLoad);
+
+    return cargoLoad.containsAdrClass(AdrClass.CLASS_7_RADIOACTIVE_MATERIAL);
+  }
+
+  public static boolean containsFragileCargo(CargoLoad cargoLoad) {
+    validateCargoLoad(cargoLoad);
+
+    return cargoLoad.hasCategory(CargoCategory.FRAGILE);
+  }
+
+  public static boolean containsOversizedCargo(CargoLoad cargoLoad) {
+    validateCargoLoad(cargoLoad);
+
+    return cargoLoad.hasCategory(CargoCategory.OVERSIZED);
+  }
+
+  private static void validateCargoLoad(CargoLoad cargoLoad) {
+    if (cargoLoad == null) {
+      throw new IllegalArgumentException("Il carico è obbligatorio.");
     }
-
-    public static boolean requiresTemperatureControlledTransport(CargoLoad cargoLoad) {
-        validateCargoLoad(cargoLoad);
-
-        return cargoLoad.requiresTemperatureControl();
-    }
-
-    public static boolean containsHazardousMaterial(CargoLoad cargoLoad) {
-        validateCargoLoad(cargoLoad);
-
-        return cargoLoad.hasCategory(CargoCategory.HAZARDOUS_MATERIAL)
-                || cargoLoad.containsDangerousGoods();
-    }
-
-    public static boolean containsDangerousGoods(CargoLoad cargoLoad) {
-        validateCargoLoad(cargoLoad);
-
-        return cargoLoad.containsDangerousGoods();
-    }
-
-    public static boolean requiresAdrTransport(CargoLoad cargoLoad) {
-        validateCargoLoad(cargoLoad);
-
-        return cargoLoad.requiresAdrTransport();
-    }
-
-    public static boolean requiresAdrTankTransport(CargoLoad cargoLoad) {
-        validateCargoLoad(cargoLoad);
-
-        return cargoLoad.requiresAdrTankTransport();
-    }
-
-    public static boolean containsExplosives(CargoLoad cargoLoad) {
-        validateCargoLoad(cargoLoad);
-
-        return cargoLoad.containsAdrClass(AdrClass.CLASS_1_EXPLOSIVES);
-    }
-
-    public static boolean containsRadioactiveMaterial(CargoLoad cargoLoad) {
-        validateCargoLoad(cargoLoad);
-
-        return cargoLoad.containsAdrClass(AdrClass.CLASS_7_RADIOACTIVE_MATERIAL);
-    }
-
-    public static boolean containsFragileCargo(CargoLoad cargoLoad) {
-        validateCargoLoad(cargoLoad);
-
-        return cargoLoad.hasCategory(CargoCategory.FRAGILE);
-    }
-
-    public static boolean containsOversizedCargo(CargoLoad cargoLoad) {
-        validateCargoLoad(cargoLoad);
-
-        return cargoLoad.hasCategory(CargoCategory.OVERSIZED);
-    }
-
-    private static void validateCargoLoad(CargoLoad cargoLoad) {
-        if (cargoLoad == null) {
-            throw new IllegalArgumentException("Il carico è obbligatorio.");
-        }
-    }
+  }
 }

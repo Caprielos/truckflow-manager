@@ -4,8 +4,7 @@ import it.gabriele.truckflow.domain.contract.CustomerContract;
 
 public interface RegisterCustomerContractUseCase {
 
-    CustomerContract handle(Command command);
+  CustomerContract handle(Command command);
 
-    record Command(CustomerContract contract) {
-    }
+  record Command(CustomerContract contract) {}
 }

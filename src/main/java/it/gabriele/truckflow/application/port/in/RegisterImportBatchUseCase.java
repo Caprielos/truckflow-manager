@@ -4,8 +4,7 @@ import it.gabriele.truckflow.domain.dataimport.ImportBatch;
 
 public interface RegisterImportBatchUseCase {
 
-    ImportBatch handle(Command command);
+  ImportBatch handle(Command command);
 
-    record Command(ImportBatch batch) {
-    }
+  record Command(ImportBatch batch) {}
 }

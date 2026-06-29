@@ -4,9 +4,11 @@ import it.gabriele.truckflow.application.port.out.FleetFinancialStatementReposit
 import it.gabriele.truckflow.domain.economics.FleetFinancialStatement;
 
 /** Repository in memoria per FleetFinancialStatement. */
-public final class InMemoryFleetFinancialStatementRepository extends InMemoryRepository<FleetFinancialStatement> implements FleetFinancialStatementRepository {
+public final class InMemoryFleetFinancialStatementRepository
+    extends InMemoryRepository<FleetFinancialStatement>
+    implements FleetFinancialStatementRepository {
 
-    public InMemoryFleetFinancialStatementRepository() {
-        super(item -> item.getStatementNumber());
-    }
+  public InMemoryFleetFinancialStatementRepository() {
+    super(item -> item.getStatementNumber());
+  }
 }

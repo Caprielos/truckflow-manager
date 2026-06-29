@@ -2,412 +2,406 @@ package it.gabriele.truckflow.domain.claim;
 
 import it.gabriele.truckflow.domain.shared.Money;
 import it.gabriele.truckflow.domain.shared.Notes;
-
 import java.time.LocalDate;
 import java.util.Objects;
 
-/**
- * Rappresenta un reclamo collegato a una spedizione e a un cliente.
- */
+/** Rappresenta un reclamo collegato a una spedizione e a un cliente. */
 public final class TransportClaim {
 
-    private static final int MAX_CODE_LENGTH = 50;
+  private static final int MAX_CODE_LENGTH = 50;
 
-    private final String claimNumber;
-    private final String shipmentNumber;
-    private final String customerCode;
-    private final ClaimType type;
-    private final ClaimSeverity severity;
-    private final ClaimStatus status;
-    private final Money requestedCompensation;
-    private final Money acceptedCompensation;
-    private final LocalDate openedDate;
-    private final LocalDate closedDate;
-    private final Notes notes;
+  private final String claimNumber;
+  private final String shipmentNumber;
+  private final String customerCode;
+  private final ClaimType type;
+  private final ClaimSeverity severity;
+  private final ClaimStatus status;
+  private final Money requestedCompensation;
+  private final Money acceptedCompensation;
+  private final LocalDate openedDate;
+  private final LocalDate closedDate;
+  private final Notes notes;
 
-    private TransportClaim(
-            String claimNumber,
-            String shipmentNumber,
-            String customerCode,
-            ClaimType type,
-            ClaimSeverity severity,
-            ClaimStatus status,
-            Money requestedCompensation,
-            Money acceptedCompensation,
-            LocalDate openedDate,
-            LocalDate closedDate,
-            Notes notes
-    ) {
-        this.claimNumber = validateCode(claimNumber, "Il numero reclamo è obbligatorio.");
-        this.shipmentNumber = validateCode(shipmentNumber, "Il numero spedizione del reclamo è obbligatorio.");
-        this.customerCode = validateCode(customerCode, "Il codice cliente del reclamo è obbligatorio.");
+  private TransportClaim(
+      String claimNumber,
+      String shipmentNumber,
+      String customerCode,
+      ClaimType type,
+      ClaimSeverity severity,
+      ClaimStatus status,
+      Money requestedCompensation,
+      Money acceptedCompensation,
+      LocalDate openedDate,
+      LocalDate closedDate,
+      Notes notes) {
+    this.claimNumber = validateCode(claimNumber, "Il numero reclamo è obbligatorio.");
+    this.shipmentNumber =
+        validateCode(shipmentNumber, "Il numero spedizione del reclamo è obbligatorio.");
+    this.customerCode = validateCode(customerCode, "Il codice cliente del reclamo è obbligatorio.");
 
-        if (type == null) {
-            throw new IllegalArgumentException("Il tipo reclamo è obbligatorio.");
-        }
-
-        if (severity == null) {
-            throw new IllegalArgumentException("La gravità reclamo è obbligatoria.");
-        }
-
-        if (status == null) {
-            throw new IllegalArgumentException("Lo stato reclamo è obbligatorio.");
-        }
-
-        if (requestedCompensation == null) {
-            throw new IllegalArgumentException("L'importo richiesto del reclamo è obbligatorio.");
-        }
-
-        if (openedDate == null) {
-            throw new IllegalArgumentException("La data apertura reclamo è obbligatoria.");
-        }
-
-        if (notes == null) {
-            throw new IllegalArgumentException("Le note reclamo sono obbligatorie.");
-        }
-
-        validateCompensation(status, requestedCompensation, acceptedCompensation);
-        validateClosedDate(status, openedDate, closedDate);
-
-        this.type = type;
-        this.severity = severity;
-        this.status = status;
-        this.requestedCompensation = requestedCompensation;
-        this.acceptedCompensation = acceptedCompensation;
-        this.openedDate = openedDate;
-        this.closedDate = closedDate;
-        this.notes = notes;
+    if (type == null) {
+      throw new IllegalArgumentException("Il tipo reclamo è obbligatorio.");
     }
 
-    public static TransportClaim open(
-            String claimNumber,
-            String shipmentNumber,
-            String customerCode,
-            ClaimType type,
-            ClaimSeverity severity,
-            Money requestedCompensation,
-            LocalDate openedDate,
-            Notes notes
-    ) {
-        return new TransportClaim(
-                claimNumber,
-                shipmentNumber,
-                customerCode,
-                type,
-                severity,
-                ClaimStatus.OPEN,
-                requestedCompensation,
-                null,
-                openedDate,
-                null,
-                notes
-        );
+    if (severity == null) {
+      throw new IllegalArgumentException("La gravità reclamo è obbligatoria.");
     }
 
-    private static String validateCode(String code, String nullMessage) {
-        if (code == null) {
-            throw new IllegalArgumentException(nullMessage);
-        }
-
-        String normalizedCode = code.trim().toUpperCase();
-
-        if (normalizedCode.isEmpty()) {
-            throw new IllegalArgumentException(nullMessage);
-        }
-
-        if (normalizedCode.length() > MAX_CODE_LENGTH) {
-            throw new IllegalArgumentException("Il codice non può superare " + MAX_CODE_LENGTH + " caratteri.");
-        }
-
-        if (!normalizedCode.matches("[A-Z0-9_-]+")) {
-            throw new IllegalArgumentException("Il codice può contenere solo lettere, numeri, trattini e underscore.");
-        }
-
-        return normalizedCode;
+    if (status == null) {
+      throw new IllegalArgumentException("Lo stato reclamo è obbligatorio.");
     }
 
-    private static void validateCompensation(
-            ClaimStatus status,
-            Money requestedCompensation,
-            Money acceptedCompensation
-    ) {
-        if (status == ClaimStatus.ACCEPTED || status == ClaimStatus.SETTLED) {
-            if (acceptedCompensation == null) {
-                throw new IllegalArgumentException("Un reclamo accettato o liquidato deve avere un importo accettato.");
-            }
-
-            try {
-                requestedCompensation.subtract(acceptedCompensation);
-            } catch (IllegalArgumentException exception) {
-                throw new IllegalArgumentException("L'importo accettato non può superare l'importo richiesto.", exception);
-            }
-
-            return;
-        }
-
-        if (acceptedCompensation != null) {
-            throw new IllegalArgumentException("Un reclamo non accettato non può avere un importo accettato.");
-        }
+    if (requestedCompensation == null) {
+      throw new IllegalArgumentException("L'importo richiesto del reclamo è obbligatorio.");
     }
 
-    private static void validateClosedDate(
-            ClaimStatus status,
-            LocalDate openedDate,
-            LocalDate closedDate
-    ) {
-        if (closedDate != null && closedDate.isBefore(openedDate)) {
-            throw new IllegalArgumentException("La data chiusura reclamo non può essere precedente alla data apertura.");
-        }
-
-        if (status.isTerminal() && closedDate == null) {
-            throw new IllegalArgumentException("Un reclamo terminale deve avere una data chiusura.");
-        }
-
-        if (!status.isTerminal() && closedDate != null) {
-            throw new IllegalArgumentException("Un reclamo non terminale non può avere una data chiusura.");
-        }
+    if (openedDate == null) {
+      throw new IllegalArgumentException("La data apertura reclamo è obbligatoria.");
     }
 
-    public TransportClaim startReview() {
-        if (!ClaimRules.canBeReviewed(this)) {
-            throw new IllegalStateException("Il reclamo non può passare in revisione.");
-        }
-
-        return new TransportClaim(
-                claimNumber,
-                shipmentNumber,
-                customerCode,
-                type,
-                severity,
-                ClaimStatus.UNDER_REVIEW,
-                requestedCompensation,
-                null,
-                openedDate,
-                null,
-                notes
-        );
+    if (notes == null) {
+      throw new IllegalArgumentException("Le note reclamo sono obbligatorie.");
     }
 
-    public TransportClaim accept(Money acceptedCompensation) {
-        if (!ClaimRules.canBeAccepted(this)) {
-            throw new IllegalStateException("Il reclamo non può essere accettato.");
-        }
+    validateCompensation(status, requestedCompensation, acceptedCompensation);
+    validateClosedDate(status, openedDate, closedDate);
 
-        return new TransportClaim(
-                claimNumber,
-                shipmentNumber,
-                customerCode,
-                type,
-                severity,
-                ClaimStatus.ACCEPTED,
-                requestedCompensation,
-                acceptedCompensation,
-                openedDate,
-                null,
-                notes
-        );
+    this.type = type;
+    this.severity = severity;
+    this.status = status;
+    this.requestedCompensation = requestedCompensation;
+    this.acceptedCompensation = acceptedCompensation;
+    this.openedDate = openedDate;
+    this.closedDate = closedDate;
+    this.notes = notes;
+  }
+
+  public static TransportClaim open(
+      String claimNumber,
+      String shipmentNumber,
+      String customerCode,
+      ClaimType type,
+      ClaimSeverity severity,
+      Money requestedCompensation,
+      LocalDate openedDate,
+      Notes notes) {
+    return new TransportClaim(
+        claimNumber,
+        shipmentNumber,
+        customerCode,
+        type,
+        severity,
+        ClaimStatus.OPEN,
+        requestedCompensation,
+        null,
+        openedDate,
+        null,
+        notes);
+  }
+
+  private static String validateCode(String code, String nullMessage) {
+    if (code == null) {
+      throw new IllegalArgumentException(nullMessage);
     }
 
-    public TransportClaim settle(LocalDate closedDate) {
-        if (!ClaimRules.canBeSettled(this)) {
-            throw new IllegalStateException("Il reclamo non può essere liquidato.");
-        }
+    String normalizedCode = code.trim().toUpperCase();
 
-        return new TransportClaim(
-                claimNumber,
-                shipmentNumber,
-                customerCode,
-                type,
-                severity,
-                ClaimStatus.SETTLED,
-                requestedCompensation,
-                acceptedCompensation,
-                openedDate,
-                closedDate,
-                notes
-        );
+    if (normalizedCode.isEmpty()) {
+      throw new IllegalArgumentException(nullMessage);
     }
 
-    public TransportClaim reject(LocalDate closedDate) {
-        if (!ClaimRules.canBeRejected(this)) {
-            throw new IllegalStateException("Il reclamo non può essere rifiutato.");
-        }
-
-        return new TransportClaim(
-                claimNumber,
-                shipmentNumber,
-                customerCode,
-                type,
-                severity,
-                ClaimStatus.REJECTED,
-                requestedCompensation,
-                null,
-                openedDate,
-                closedDate,
-                notes
-        );
+    if (normalizedCode.length() > MAX_CODE_LENGTH) {
+      throw new IllegalArgumentException(
+          "Il codice non può superare " + MAX_CODE_LENGTH + " caratteri.");
     }
 
-    public TransportClaim cancel(LocalDate closedDate) {
-        if (!ClaimRules.canBeCancelled(this)) {
-            throw new IllegalStateException("Il reclamo non può essere cancellato.");
-        }
-
-        return new TransportClaim(
-                claimNumber,
-                shipmentNumber,
-                customerCode,
-                type,
-                severity,
-                ClaimStatus.CANCELLED,
-                requestedCompensation,
-                null,
-                openedDate,
-                closedDate,
-                notes
-        );
+    if (!normalizedCode.matches("[A-Z0-9_-]+")) {
+      throw new IllegalArgumentException(
+          "Il codice può contenere solo lettere, numeri, trattini e underscore.");
     }
 
-    public String getClaimNumber() {
-        return claimNumber;
+    return normalizedCode;
+  }
+
+  private static void validateCompensation(
+      ClaimStatus status, Money requestedCompensation, Money acceptedCompensation) {
+    if (status == ClaimStatus.ACCEPTED || status == ClaimStatus.SETTLED) {
+      if (acceptedCompensation == null) {
+        throw new IllegalArgumentException(
+            "Un reclamo accettato o liquidato deve avere un importo accettato.");
+      }
+
+      try {
+        requestedCompensation.subtract(acceptedCompensation);
+      } catch (IllegalArgumentException exception) {
+        throw new IllegalArgumentException(
+            "L'importo accettato non può superare l'importo richiesto.", exception);
+      }
+
+      return;
     }
 
-    public String getShipmentNumber() {
-        return shipmentNumber;
+    if (acceptedCompensation != null) {
+      throw new IllegalArgumentException(
+          "Un reclamo non accettato non può avere un importo accettato.");
+    }
+  }
+
+  private static void validateClosedDate(
+      ClaimStatus status, LocalDate openedDate, LocalDate closedDate) {
+    if (closedDate != null && closedDate.isBefore(openedDate)) {
+      throw new IllegalArgumentException(
+          "La data chiusura reclamo non può essere precedente alla data apertura.");
     }
 
-    public String getCustomerCode() {
-        return customerCode;
+    if (status.isTerminal() && closedDate == null) {
+      throw new IllegalArgumentException("Un reclamo terminale deve avere una data chiusura.");
     }
 
-    public ClaimType getType() {
-        return type;
+    if (!status.isTerminal() && closedDate != null) {
+      throw new IllegalArgumentException(
+          "Un reclamo non terminale non può avere una data chiusura.");
+    }
+  }
+
+  public TransportClaim startReview() {
+    if (!ClaimRules.canBeReviewed(this)) {
+      throw new IllegalStateException("Il reclamo non può passare in revisione.");
     }
 
-    public ClaimSeverity getSeverity() {
-        return severity;
+    return new TransportClaim(
+        claimNumber,
+        shipmentNumber,
+        customerCode,
+        type,
+        severity,
+        ClaimStatus.UNDER_REVIEW,
+        requestedCompensation,
+        null,
+        openedDate,
+        null,
+        notes);
+  }
+
+  public TransportClaim accept(Money acceptedCompensation) {
+    if (!ClaimRules.canBeAccepted(this)) {
+      throw new IllegalStateException("Il reclamo non può essere accettato.");
     }
 
-    public ClaimStatus getStatus() {
-        return status;
+    return new TransportClaim(
+        claimNumber,
+        shipmentNumber,
+        customerCode,
+        type,
+        severity,
+        ClaimStatus.ACCEPTED,
+        requestedCompensation,
+        acceptedCompensation,
+        openedDate,
+        null,
+        notes);
+  }
+
+  public TransportClaim settle(LocalDate closedDate) {
+    if (!ClaimRules.canBeSettled(this)) {
+      throw new IllegalStateException("Il reclamo non può essere liquidato.");
     }
 
-    public Money getRequestedCompensation() {
-        return requestedCompensation;
+    return new TransportClaim(
+        claimNumber,
+        shipmentNumber,
+        customerCode,
+        type,
+        severity,
+        ClaimStatus.SETTLED,
+        requestedCompensation,
+        acceptedCompensation,
+        openedDate,
+        closedDate,
+        notes);
+  }
+
+  public TransportClaim reject(LocalDate closedDate) {
+    if (!ClaimRules.canBeRejected(this)) {
+      throw new IllegalStateException("Il reclamo non può essere rifiutato.");
     }
 
-    public Money getAcceptedCompensation() {
-        return acceptedCompensation;
+    return new TransportClaim(
+        claimNumber,
+        shipmentNumber,
+        customerCode,
+        type,
+        severity,
+        ClaimStatus.REJECTED,
+        requestedCompensation,
+        null,
+        openedDate,
+        closedDate,
+        notes);
+  }
+
+  public TransportClaim cancel(LocalDate closedDate) {
+    if (!ClaimRules.canBeCancelled(this)) {
+      throw new IllegalStateException("Il reclamo non può essere cancellato.");
     }
 
-    public LocalDate getOpenedDate() {
-        return openedDate;
-    }
+    return new TransportClaim(
+        claimNumber,
+        shipmentNumber,
+        customerCode,
+        type,
+        severity,
+        ClaimStatus.CANCELLED,
+        requestedCompensation,
+        null,
+        openedDate,
+        closedDate,
+        notes);
+  }
 
-    public LocalDate getClosedDate() {
-        return closedDate;
-    }
+  public String getClaimNumber() {
+    return claimNumber;
+  }
 
-    public Notes getNotes() {
-        return notes;
-    }
+  public String getShipmentNumber() {
+    return shipmentNumber;
+  }
 
-    public boolean isOpen() {
-        return status == ClaimStatus.OPEN;
-    }
+  public String getCustomerCode() {
+    return customerCode;
+  }
 
-    public boolean isUnderReview() {
-        return status == ClaimStatus.UNDER_REVIEW;
-    }
+  public ClaimType getType() {
+    return type;
+  }
 
-    public boolean isAccepted() {
-        return status == ClaimStatus.ACCEPTED;
-    }
+  public ClaimSeverity getSeverity() {
+    return severity;
+  }
 
-    public boolean isSettled() {
-        return status == ClaimStatus.SETTLED;
-    }
+  public ClaimStatus getStatus() {
+    return status;
+  }
 
-    public boolean isRejected() {
-        return status == ClaimStatus.REJECTED;
-    }
+  public Money getRequestedCompensation() {
+    return requestedCompensation;
+  }
 
-    public boolean isCancelled() {
-        return status == ClaimStatus.CANCELLED;
-    }
+  public Money getAcceptedCompensation() {
+    return acceptedCompensation;
+  }
 
-    public boolean isTerminal() {
-        return status.isTerminal();
-    }
+  public LocalDate getOpenedDate() {
+    return openedDate;
+  }
 
-    public boolean hasAcceptedCompensation() {
-        return acceptedCompensation != null;
-    }
+  public LocalDate getClosedDate() {
+    return closedDate;
+  }
 
-    public boolean hasClosedDate() {
-        return closedDate != null;
-    }
+  public Notes getNotes() {
+    return notes;
+  }
 
-    public boolean hasNotes() {
-        return notes.hasText();
-    }
+  public boolean isOpen() {
+    return status == ClaimStatus.OPEN;
+  }
 
-    public boolean isCargoRelated() {
-        return type.isCargoRelated();
-    }
+  public boolean isUnderReview() {
+    return status == ClaimStatus.UNDER_REVIEW;
+  }
 
-    public boolean isTimeRelated() {
-        return type.isTimeRelated();
-    }
+  public boolean isAccepted() {
+    return status == ClaimStatus.ACCEPTED;
+  }
 
-    public boolean isFinancialDispute() {
-        return type.isFinancialDispute();
-    }
+  public boolean isSettled() {
+    return status == ClaimStatus.SETTLED;
+  }
 
-    public String formatSingleLine() {
-        return claimNumber
-                + " - shipment: " + shipmentNumber
-                + " - customer: " + customerCode
-                + " - " + type
-                + " - " + status;
-    }
+  public boolean isRejected() {
+    return status == ClaimStatus.REJECTED;
+  }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof TransportClaim that)) return false;
-        return claimNumber.equals(that.claimNumber)
-                && shipmentNumber.equals(that.shipmentNumber)
-                && customerCode.equals(that.customerCode)
-                && type == that.type
-                && severity == that.severity
-                && status == that.status
-                && requestedCompensation.equals(that.requestedCompensation)
-                && Objects.equals(acceptedCompensation, that.acceptedCompensation)
-                && openedDate.equals(that.openedDate)
-                && Objects.equals(closedDate, that.closedDate)
-                && notes.equals(that.notes);
-    }
+  public boolean isCancelled() {
+    return status == ClaimStatus.CANCELLED;
+  }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(
-                claimNumber,
-                shipmentNumber,
-                customerCode,
-                type,
-                severity,
-                status,
-                requestedCompensation,
-                acceptedCompensation,
-                openedDate,
-                closedDate,
-                notes
-        );
-    }
+  public boolean isTerminal() {
+    return status.isTerminal();
+  }
 
-    @Override
-    public String toString() {
-        return formatSingleLine();
-    }
+  public boolean hasAcceptedCompensation() {
+    return acceptedCompensation != null;
+  }
+
+  public boolean hasClosedDate() {
+    return closedDate != null;
+  }
+
+  public boolean hasNotes() {
+    return notes.hasText();
+  }
+
+  public boolean isCargoRelated() {
+    return type.isCargoRelated();
+  }
+
+  public boolean isTimeRelated() {
+    return type.isTimeRelated();
+  }
+
+  public boolean isFinancialDispute() {
+    return type.isFinancialDispute();
+  }
+
+  public String formatSingleLine() {
+    return claimNumber
+        + " - shipment: "
+        + shipmentNumber
+        + " - customer: "
+        + customerCode
+        + " - "
+        + type
+        + " - "
+        + status;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (!(o instanceof TransportClaim that)) return false;
+    return claimNumber.equals(that.claimNumber)
+        && shipmentNumber.equals(that.shipmentNumber)
+        && customerCode.equals(that.customerCode)
+        && type == that.type
+        && severity == that.severity
+        && status == that.status
+        && requestedCompensation.equals(that.requestedCompensation)
+        && Objects.equals(acceptedCompensation, that.acceptedCompensation)
+        && openedDate.equals(that.openedDate)
+        && Objects.equals(closedDate, that.closedDate)
+        && notes.equals(that.notes);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(
+        claimNumber,
+        shipmentNumber,
+        customerCode,
+        type,
+        severity,
+        status,
+        requestedCompensation,
+        acceptedCompensation,
+        openedDate,
+        closedDate,
+        notes);
+  }
+
+  @Override
+  public String toString() {
+    return formatSingleLine();
+  }
 }

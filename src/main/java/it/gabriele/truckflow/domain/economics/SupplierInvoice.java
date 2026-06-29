@@ -2,252 +2,274 @@ package it.gabriele.truckflow.domain.economics;
 
 import it.gabriele.truckflow.domain.shared.Money;
 import it.gabriele.truckflow.domain.shared.Notes;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-/**
- * Fattura fornitore: registra tutto ciò che l'azienda compra o paga.
- */
+/** Fattura fornitore: registra tutto ciò che l'azienda compra o paga. */
 public final class SupplierInvoice {
 
-    private static final int MAX_CODE_LENGTH = 50;
+  private static final int MAX_CODE_LENGTH = 50;
 
-    private final String invoiceNumber;
-    private final String supplierCode;
-    private final LocalDate issueDate;
-    private final LocalDate dueDate;
-    private final SupplierInvoiceStatus status;
-    private final List<PurchaseLine> lines;
-    private final Notes notes;
+  private final String invoiceNumber;
+  private final String supplierCode;
+  private final LocalDate issueDate;
+  private final LocalDate dueDate;
+  private final SupplierInvoiceStatus status;
+  private final List<PurchaseLine> lines;
+  private final Notes notes;
 
-    private SupplierInvoice(
-            String invoiceNumber,
-            String supplierCode,
-            LocalDate issueDate,
-            LocalDate dueDate,
-            SupplierInvoiceStatus status,
-            List<PurchaseLine> lines,
-            Notes notes
-    ) {
-        this.invoiceNumber = validateCode(invoiceNumber, "Il numero fattura fornitore è obbligatorio.");
-        this.supplierCode = validateCode(supplierCode, "Il codice fornitore è obbligatorio.");
-        if (issueDate == null) {
-            throw new IllegalArgumentException("La data fattura fornitore è obbligatoria.");
-        }
-        if (dueDate == null) {
-            throw new IllegalArgumentException("La scadenza fattura fornitore è obbligatoria.");
-        }
-        if (dueDate.isBefore(issueDate)) {
-            throw new IllegalArgumentException("La scadenza non può essere precedente alla data fattura.");
-        }
-        if (status == null) {
-            throw new IllegalArgumentException("Lo stato fattura fornitore è obbligatorio.");
-        }
-        this.lines = validateLines(lines);
-        if (notes == null) {
-            throw new IllegalArgumentException("Le note fattura fornitore sono obbligatorie.");
-        }
-        this.issueDate = issueDate;
-        this.dueDate = dueDate;
-        this.status = status;
-        this.notes = notes;
+  private SupplierInvoice(
+      String invoiceNumber,
+      String supplierCode,
+      LocalDate issueDate,
+      LocalDate dueDate,
+      SupplierInvoiceStatus status,
+      List<PurchaseLine> lines,
+      Notes notes) {
+    this.invoiceNumber = validateCode(invoiceNumber, "Il numero fattura fornitore è obbligatorio.");
+    this.supplierCode = validateCode(supplierCode, "Il codice fornitore è obbligatorio.");
+    if (issueDate == null) {
+      throw new IllegalArgumentException("La data fattura fornitore è obbligatoria.");
     }
-
-    public static SupplierInvoice received(
-            String invoiceNumber,
-            String supplierCode,
-            LocalDate issueDate,
-            LocalDate dueDate,
-            List<PurchaseLine> lines,
-            Notes notes
-    ) {
-        return new SupplierInvoice(invoiceNumber, supplierCode, issueDate, dueDate,
-                SupplierInvoiceStatus.RECEIVED, lines, notes);
+    if (dueDate == null) {
+      throw new IllegalArgumentException("La scadenza fattura fornitore è obbligatoria.");
     }
-
-    public static SupplierInvoice received(
-            String invoiceNumber,
-            String supplierCode,
-            LocalDate issueDate,
-            LocalDate dueDate,
-            PurchaseLine firstLine,
-            PurchaseLine... otherLines
-    ) {
-        if (firstLine == null) {
-            throw new IllegalArgumentException("La prima riga fattura fornitore è obbligatoria.");
-        }
-        List<PurchaseLine> lines = new ArrayList<>();
-        lines.add(firstLine);
-        if (otherLines != null) {
-            for (PurchaseLine line : otherLines) {
-                lines.add(line);
-            }
-        }
-        return received(invoiceNumber, supplierCode, issueDate, dueDate, lines, Notes.empty());
+    if (dueDate.isBefore(issueDate)) {
+      throw new IllegalArgumentException(
+          "La scadenza non può essere precedente alla data fattura.");
     }
-
-    private static List<PurchaseLine> validateLines(List<PurchaseLine> lines) {
-        if (lines == null) {
-            throw new IllegalArgumentException("Le righe fattura fornitore sono obbligatorie.");
-        }
-        if (lines.isEmpty()) {
-            throw new IllegalArgumentException("La fattura fornitore deve avere almeno una riga.");
-        }
-        if (lines.stream().anyMatch(Objects::isNull)) {
-            throw new IllegalArgumentException("Le righe fattura fornitore non possono contenere null.");
-        }
-        long uniqueCodes = lines.stream().map(PurchaseLine::getLineCode).distinct().count();
-        if (uniqueCodes != lines.size()) {
-            throw new IllegalArgumentException("La fattura fornitore non può contenere codici riga duplicati.");
-        }
-        validateCurrencyCompatibility(lines);
-        return List.copyOf(lines);
+    if (status == null) {
+      throw new IllegalArgumentException("Lo stato fattura fornitore è obbligatorio.");
     }
-
-    private static void validateCurrencyCompatibility(List<PurchaseLine> lines) {
-        Money reference = lines.get(0).getAmount();
-        for (int i = 1; i < lines.size(); i++) {
-            reference.add(lines.get(i).getAmount());
-        }
+    this.lines = validateLines(lines);
+    if (notes == null) {
+      throw new IllegalArgumentException("Le note fattura fornitore sono obbligatorie.");
     }
+    this.issueDate = issueDate;
+    this.dueDate = dueDate;
+    this.status = status;
+    this.notes = notes;
+  }
 
-    private static String validateCode(String code, String nullMessage) {
-        if (code == null) {
-            throw new IllegalArgumentException(nullMessage);
-        }
-        String normalized = code.trim().toUpperCase();
-        if (normalized.isEmpty()) {
-            throw new IllegalArgumentException(nullMessage);
-        }
-        if (normalized.length() > MAX_CODE_LENGTH) {
-            throw new IllegalArgumentException("Il codice non può superare " + MAX_CODE_LENGTH + " caratteri.");
-        }
-        if (!normalized.matches("[A-Z0-9_-]+")) {
-            throw new IllegalArgumentException("Il codice può contenere solo lettere, numeri, trattini e underscore.");
-        }
-        return normalized;
-    }
+  public static SupplierInvoice received(
+      String invoiceNumber,
+      String supplierCode,
+      LocalDate issueDate,
+      LocalDate dueDate,
+      List<PurchaseLine> lines,
+      Notes notes) {
+    return new SupplierInvoice(
+        invoiceNumber,
+        supplierCode,
+        issueDate,
+        dueDate,
+        SupplierInvoiceStatus.RECEIVED,
+        lines,
+        notes);
+  }
 
-    public SupplierInvoice approve() {
-        if (status != SupplierInvoiceStatus.RECEIVED) {
-            throw new IllegalStateException("Solo una fattura ricevuta può essere approvata.");
-        }
-        return new SupplierInvoice(invoiceNumber, supplierCode, issueDate, dueDate,
-                SupplierInvoiceStatus.APPROVED, lines, notes);
+  public static SupplierInvoice received(
+      String invoiceNumber,
+      String supplierCode,
+      LocalDate issueDate,
+      LocalDate dueDate,
+      PurchaseLine firstLine,
+      PurchaseLine... otherLines) {
+    if (firstLine == null) {
+      throw new IllegalArgumentException("La prima riga fattura fornitore è obbligatoria.");
     }
+    List<PurchaseLine> lines = new ArrayList<>();
+    lines.add(firstLine);
+    if (otherLines != null) {
+      for (PurchaseLine line : otherLines) {
+        lines.add(line);
+      }
+    }
+    return received(invoiceNumber, supplierCode, issueDate, dueDate, lines, Notes.empty());
+  }
 
-    public SupplierInvoice markPaid() {
-        if (!status.isPayable()) {
-            throw new IllegalStateException("La fattura fornitore non può essere pagata nello stato attuale.");
-        }
-        return new SupplierInvoice(invoiceNumber, supplierCode, issueDate, dueDate,
-                SupplierInvoiceStatus.PAID, lines, notes);
+  private static List<PurchaseLine> validateLines(List<PurchaseLine> lines) {
+    if (lines == null) {
+      throw new IllegalArgumentException("Le righe fattura fornitore sono obbligatorie.");
     }
+    if (lines.isEmpty()) {
+      throw new IllegalArgumentException("La fattura fornitore deve avere almeno una riga.");
+    }
+    if (lines.stream().anyMatch(Objects::isNull)) {
+      throw new IllegalArgumentException("Le righe fattura fornitore non possono contenere null.");
+    }
+    long uniqueCodes = lines.stream().map(PurchaseLine::getLineCode).distinct().count();
+    if (uniqueCodes != lines.size()) {
+      throw new IllegalArgumentException(
+          "La fattura fornitore non può contenere codici riga duplicati.");
+    }
+    validateCurrencyCompatibility(lines);
+    return List.copyOf(lines);
+  }
 
-    public String getInvoiceNumber() {
-        return invoiceNumber;
+  private static void validateCurrencyCompatibility(List<PurchaseLine> lines) {
+    Money reference = lines.get(0).getAmount();
+    for (int i = 1; i < lines.size(); i++) {
+      reference.add(lines.get(i).getAmount());
     }
+  }
 
-    public String getSupplierCode() {
-        return supplierCode;
+  private static String validateCode(String code, String nullMessage) {
+    if (code == null) {
+      throw new IllegalArgumentException(nullMessage);
     }
+    String normalized = code.trim().toUpperCase();
+    if (normalized.isEmpty()) {
+      throw new IllegalArgumentException(nullMessage);
+    }
+    if (normalized.length() > MAX_CODE_LENGTH) {
+      throw new IllegalArgumentException(
+          "Il codice non può superare " + MAX_CODE_LENGTH + " caratteri.");
+    }
+    if (!normalized.matches("[A-Z0-9_-]+")) {
+      throw new IllegalArgumentException(
+          "Il codice può contenere solo lettere, numeri, trattini e underscore.");
+    }
+    return normalized;
+  }
 
-    public LocalDate getIssueDate() {
-        return issueDate;
+  public SupplierInvoice approve() {
+    if (status != SupplierInvoiceStatus.RECEIVED) {
+      throw new IllegalStateException("Solo una fattura ricevuta può essere approvata.");
     }
+    return new SupplierInvoice(
+        invoiceNumber,
+        supplierCode,
+        issueDate,
+        dueDate,
+        SupplierInvoiceStatus.APPROVED,
+        lines,
+        notes);
+  }
 
-    public LocalDate getDueDate() {
-        return dueDate;
+  public SupplierInvoice markPaid() {
+    if (!status.isPayable()) {
+      throw new IllegalStateException(
+          "La fattura fornitore non può essere pagata nello stato attuale.");
     }
+    return new SupplierInvoice(
+        invoiceNumber, supplierCode, issueDate, dueDate, SupplierInvoiceStatus.PAID, lines, notes);
+  }
 
-    public SupplierInvoiceStatus getStatus() {
-        return status;
-    }
+  public String getInvoiceNumber() {
+    return invoiceNumber;
+  }
 
-    public List<PurchaseLine> getLines() {
-        return lines;
-    }
+  public String getSupplierCode() {
+    return supplierCode;
+  }
 
-    public Notes getNotes() {
-        return notes;
-    }
+  public LocalDate getIssueDate() {
+    return issueDate;
+  }
 
-    /**
-     * Totale lordo da pagare al fornitore.
-     */
-    public Money calculateTotal() {
-        return sum(lines.stream().map(PurchaseLine::getAmount).toList());
-    }
+  public LocalDate getDueDate() {
+    return dueDate;
+  }
 
-    public Money calculateNetTotal() {
-        return sum(lines.stream().map(PurchaseLine::calculateNetAmount).toList());
-    }
+  public SupplierInvoiceStatus getStatus() {
+    return status;
+  }
 
-    public Money calculateVatTotal() {
-        return sum(lines.stream().map(PurchaseLine::calculateVatAmount).toList());
-    }
+  public List<PurchaseLine> getLines() {
+    return lines;
+  }
 
-    public Money calculateRecoverableVatTotal() {
-        return sum(lines.stream().map(PurchaseLine::calculateRecoverableVatAmount).toList());
-    }
+  public Notes getNotes() {
+    return notes;
+  }
 
-    public Money calculateAccountingCostTotal() {
-        return sum(lines.stream().map(PurchaseLine::calculateAccountingCost).toList());
-    }
+  /** Totale lordo da pagare al fornitore. */
+  public Money calculateTotal() {
+    return sum(lines.stream().map(PurchaseLine::getAmount).toList());
+  }
 
-    public Money calculateCapitalAssetTotal() {
-        return sum(lines.stream().filter(PurchaseLine::isCapitalAsset).map(PurchaseLine::getAmount).toList());
-    }
+  public Money calculateNetTotal() {
+    return sum(lines.stream().map(PurchaseLine::calculateNetAmount).toList());
+  }
 
-    public Money calculateCapitalAssetAccountingCostTotal() {
-        return sum(lines.stream().filter(PurchaseLine::isCapitalAsset).map(PurchaseLine::calculateAccountingCost).toList());
-    }
+  public Money calculateVatTotal() {
+    return sum(lines.stream().map(PurchaseLine::calculateVatAmount).toList());
+  }
 
-    public Money calculateOperatingExpenseTotal() {
-        return sum(lines.stream().filter(PurchaseLine::isOperatingExpense).map(PurchaseLine::getAmount).toList());
-    }
+  public Money calculateRecoverableVatTotal() {
+    return sum(lines.stream().map(PurchaseLine::calculateRecoverableVatAmount).toList());
+  }
 
-    public Money calculateOperatingExpenseAccountingCostTotal() {
-        return sum(lines.stream().filter(PurchaseLine::isOperatingExpense).map(PurchaseLine::calculateAccountingCost).toList());
-    }
+  public Money calculateAccountingCostTotal() {
+    return sum(lines.stream().map(PurchaseLine::calculateAccountingCost).toList());
+  }
 
-    private Money sum(List<Money> selectedAmounts) {
-        if (selectedAmounts.isEmpty()) {
-            return Money.of(java.math.BigDecimal.ZERO, lines.get(0).getAmount().getCurrency());
-        }
-        Money total = Money.of(java.math.BigDecimal.ZERO, selectedAmounts.get(0).getCurrency());
-        for (Money amount : selectedAmounts) {
-            total = total.add(amount);
-        }
-        return total;
-    }
+  public Money calculateCapitalAssetTotal() {
+    return sum(
+        lines.stream().filter(PurchaseLine::isCapitalAsset).map(PurchaseLine::getAmount).toList());
+  }
 
-    public boolean containsCapitalAssets() {
-        return lines.stream().anyMatch(PurchaseLine::isCapitalAsset);
-    }
+  public Money calculateCapitalAssetAccountingCostTotal() {
+    return sum(
+        lines.stream()
+            .filter(PurchaseLine::isCapitalAsset)
+            .map(PurchaseLine::calculateAccountingCost)
+            .toList());
+  }
 
-    public boolean containsOperatingExpenses() {
-        return lines.stream().anyMatch(PurchaseLine::isOperatingExpense);
-    }
+  public Money calculateOperatingExpenseTotal() {
+    return sum(
+        lines.stream()
+            .filter(PurchaseLine::isOperatingExpense)
+            .map(PurchaseLine::getAmount)
+            .toList());
+  }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof SupplierInvoice that)) return false;
-        return invoiceNumber.equals(that.invoiceNumber)
-                && supplierCode.equals(that.supplierCode)
-                && issueDate.equals(that.issueDate)
-                && dueDate.equals(that.dueDate)
-                && status == that.status
-                && lines.equals(that.lines)
-                && notes.equals(that.notes);
-    }
+  public Money calculateOperatingExpenseAccountingCostTotal() {
+    return sum(
+        lines.stream()
+            .filter(PurchaseLine::isOperatingExpense)
+            .map(PurchaseLine::calculateAccountingCost)
+            .toList());
+  }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(invoiceNumber, supplierCode, issueDate, dueDate, status, lines, notes);
+  private Money sum(List<Money> selectedAmounts) {
+    if (selectedAmounts.isEmpty()) {
+      return Money.of(java.math.BigDecimal.ZERO, lines.get(0).getAmount().getCurrency());
     }
+    Money total = Money.of(java.math.BigDecimal.ZERO, selectedAmounts.get(0).getCurrency());
+    for (Money amount : selectedAmounts) {
+      total = total.add(amount);
+    }
+    return total;
+  }
+
+  public boolean containsCapitalAssets() {
+    return lines.stream().anyMatch(PurchaseLine::isCapitalAsset);
+  }
+
+  public boolean containsOperatingExpenses() {
+    return lines.stream().anyMatch(PurchaseLine::isOperatingExpense);
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (!(o instanceof SupplierInvoice that)) return false;
+    return invoiceNumber.equals(that.invoiceNumber)
+        && supplierCode.equals(that.supplierCode)
+        && issueDate.equals(that.issueDate)
+        && dueDate.equals(that.dueDate)
+        && status == that.status
+        && lines.equals(that.lines)
+        && notes.equals(that.notes);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(invoiceNumber, supplierCode, issueDate, dueDate, status, lines, notes);
+  }
 }

@@ -5,8 +5,7 @@ import it.gabriele.truckflow.domain.shared.Notes;
 
 public interface CalculateDriverMissionPayrollUseCase {
 
-    DriverMissionPayroll handle(Command command);
+  DriverMissionPayroll handle(Command command);
 
-    record Command(String payrollCode, String workReportId, String payrollPolicyId, Notes notes) {
-    }
+  record Command(String payrollCode, String workReportId, String payrollPolicyId, Notes notes) {}
 }

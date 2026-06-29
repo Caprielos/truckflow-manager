@@ -2,7 +2,6 @@ package it.gabriele.truckflow.domain.economics;
 
 import it.gabriele.truckflow.domain.shared.Money;
 import it.gabriele.truckflow.domain.shared.Notes;
-
 import java.util.Objects;
 
 /**
@@ -11,188 +10,191 @@ import java.util.Objects;
  */
 public final class PurchaseLine {
 
-    private static final int MAX_CODE_LENGTH = 50;
-    private static final int MAX_DESCRIPTION_LENGTH = 200;
+  private static final int MAX_CODE_LENGTH = 50;
+  private static final int MAX_DESCRIPTION_LENGTH = 200;
 
-    private final String lineCode;
-    private final PurchaseCategory category;
-    private final String description;
-    private final Money amount;
-    private final VatBreakdown vatBreakdown;
-    private final Notes notes;
+  private final String lineCode;
+  private final PurchaseCategory category;
+  private final String description;
+  private final Money amount;
+  private final VatBreakdown vatBreakdown;
+  private final Notes notes;
 
-    private PurchaseLine(
-            String lineCode,
-            PurchaseCategory category,
-            String description,
-            Money amount,
-            VatBreakdown vatBreakdown,
-            Notes notes
-    ) {
-        this.lineCode = validateCode(lineCode, "Il codice riga acquisto è obbligatorio.");
-        if (category == null) {
-            throw new IllegalArgumentException("La categoria acquisto è obbligatoria.");
-        }
-        this.description = validateDescription(description);
-        if (amount == null) {
-            throw new IllegalArgumentException("L'importo riga acquisto è obbligatorio.");
-        }
-        if (amount.getAmount().signum() == 0) {
-            throw new IllegalArgumentException("L'importo riga acquisto deve essere maggiore di zero.");
-        }
-        if (vatBreakdown != null && !vatBreakdown.getGrossAmount().equals(amount)) {
-            throw new IllegalArgumentException("L'importo riga acquisto deve coincidere con il lordo IVA.");
-        }
-        if (notes == null) {
-            throw new IllegalArgumentException("Le note riga acquisto sono obbligatorie.");
-        }
-        this.category = category;
-        this.amount = amount;
-        this.vatBreakdown = vatBreakdown;
-        this.notes = notes;
+  private PurchaseLine(
+      String lineCode,
+      PurchaseCategory category,
+      String description,
+      Money amount,
+      VatBreakdown vatBreakdown,
+      Notes notes) {
+    this.lineCode = validateCode(lineCode, "Il codice riga acquisto è obbligatorio.");
+    if (category == null) {
+      throw new IllegalArgumentException("La categoria acquisto è obbligatoria.");
     }
-
-    public static PurchaseLine of(String lineCode, PurchaseCategory category, String description, Money amount, Notes notes) {
-        return new PurchaseLine(lineCode, category, description, amount, null, notes);
+    this.description = validateDescription(description);
+    if (amount == null) {
+      throw new IllegalArgumentException("L'importo riga acquisto è obbligatorio.");
     }
-
-    public static PurchaseLine taxed(
-            String lineCode,
-            PurchaseCategory category,
-            String description,
-            VatBreakdown vatBreakdown,
-            Notes notes
-    ) {
-        if (vatBreakdown == null) {
-            throw new IllegalArgumentException("Il dettaglio IVA riga acquisto è obbligatorio.");
-        }
-        return new PurchaseLine(lineCode, category, description, vatBreakdown.getGrossAmount(), vatBreakdown, notes);
+    if (amount.getAmount().signum() == 0) {
+      throw new IllegalArgumentException("L'importo riga acquisto deve essere maggiore di zero.");
     }
-
-    public static PurchaseLine taxableNet(
-            String lineCode,
-            PurchaseCategory category,
-            String description,
-            Money netAmount,
-            VatRate vatRate,
-            Notes notes
-    ) {
-        return taxed(lineCode, category, description, VatBreakdown.taxableFromNet(netAmount, vatRate), notes);
+    if (vatBreakdown != null && !vatBreakdown.getGrossAmount().equals(amount)) {
+      throw new IllegalArgumentException(
+          "L'importo riga acquisto deve coincidere con il lordo IVA.");
     }
-
-    private static String validateCode(String code, String nullMessage) {
-        if (code == null) {
-            throw new IllegalArgumentException(nullMessage);
-        }
-        String normalized = code.trim().toUpperCase();
-        if (normalized.isEmpty()) {
-            throw new IllegalArgumentException(nullMessage);
-        }
-        if (normalized.length() > MAX_CODE_LENGTH) {
-            throw new IllegalArgumentException("Il codice non può superare " + MAX_CODE_LENGTH + " caratteri.");
-        }
-        if (!normalized.matches("[A-Z0-9_-]+")) {
-            throw new IllegalArgumentException("Il codice può contenere solo lettere, numeri, trattini e underscore.");
-        }
-        return normalized;
+    if (notes == null) {
+      throw new IllegalArgumentException("Le note riga acquisto sono obbligatorie.");
     }
+    this.category = category;
+    this.amount = amount;
+    this.vatBreakdown = vatBreakdown;
+    this.notes = notes;
+  }
 
-    private static String validateDescription(String description) {
-        if (description == null) {
-            throw new IllegalArgumentException("La descrizione riga acquisto è obbligatoria.");
-        }
-        String normalized = description.trim();
-        if (normalized.isEmpty()) {
-            throw new IllegalArgumentException("La descrizione riga acquisto non può essere vuota.");
-        }
-        if (normalized.length() > MAX_DESCRIPTION_LENGTH) {
-            throw new IllegalArgumentException("La descrizione riga acquisto non può superare "
-                    + MAX_DESCRIPTION_LENGTH + " caratteri.");
-        }
-        return normalized;
-    }
+  public static PurchaseLine of(
+      String lineCode, PurchaseCategory category, String description, Money amount, Notes notes) {
+    return new PurchaseLine(lineCode, category, description, amount, null, notes);
+  }
 
-    public String getLineCode() {
-        return lineCode;
+  public static PurchaseLine taxed(
+      String lineCode,
+      PurchaseCategory category,
+      String description,
+      VatBreakdown vatBreakdown,
+      Notes notes) {
+    if (vatBreakdown == null) {
+      throw new IllegalArgumentException("Il dettaglio IVA riga acquisto è obbligatorio.");
     }
+    return new PurchaseLine(
+        lineCode, category, description, vatBreakdown.getGrossAmount(), vatBreakdown, notes);
+  }
 
-    public PurchaseCategory getCategory() {
-        return category;
-    }
+  public static PurchaseLine taxableNet(
+      String lineCode,
+      PurchaseCategory category,
+      String description,
+      Money netAmount,
+      VatRate vatRate,
+      Notes notes) {
+    return taxed(
+        lineCode, category, description, VatBreakdown.taxableFromNet(netAmount, vatRate), notes);
+  }
 
-    public String getDescription() {
-        return description;
+  private static String validateCode(String code, String nullMessage) {
+    if (code == null) {
+      throw new IllegalArgumentException(nullMessage);
     }
+    String normalized = code.trim().toUpperCase();
+    if (normalized.isEmpty()) {
+      throw new IllegalArgumentException(nullMessage);
+    }
+    if (normalized.length() > MAX_CODE_LENGTH) {
+      throw new IllegalArgumentException(
+          "Il codice non può superare " + MAX_CODE_LENGTH + " caratteri.");
+    }
+    if (!normalized.matches("[A-Z0-9_-]+")) {
+      throw new IllegalArgumentException(
+          "Il codice può contenere solo lettere, numeri, trattini e underscore.");
+    }
+    return normalized;
+  }
 
-    /**
-     * Totale lordo da pagare. Per le vecchie righe senza dettaglio IVA rimane l'importo storico.
-     */
-    public Money getAmount() {
-        return amount;
+  private static String validateDescription(String description) {
+    if (description == null) {
+      throw new IllegalArgumentException("La descrizione riga acquisto è obbligatoria.");
     }
+    String normalized = description.trim();
+    if (normalized.isEmpty()) {
+      throw new IllegalArgumentException("La descrizione riga acquisto non può essere vuota.");
+    }
+    if (normalized.length() > MAX_DESCRIPTION_LENGTH) {
+      throw new IllegalArgumentException(
+          "La descrizione riga acquisto non può superare "
+              + MAX_DESCRIPTION_LENGTH
+              + " caratteri.");
+    }
+    return normalized;
+  }
 
-    public VatBreakdown getVatBreakdown() {
-        return vatBreakdown;
-    }
+  public String getLineCode() {
+    return lineCode;
+  }
 
-    public boolean hasVatBreakdown() {
-        return vatBreakdown != null;
-    }
+  public PurchaseCategory getCategory() {
+    return category;
+  }
 
-    public Notes getNotes() {
-        return notes;
-    }
+  public String getDescription() {
+    return description;
+  }
 
-    public Money calculateNetAmount() {
-        if (vatBreakdown == null) {
-            return amount;
-        }
-        return vatBreakdown.getNetAmount();
-    }
+  /** Totale lordo da pagare. Per le vecchie righe senza dettaglio IVA rimane l'importo storico. */
+  public Money getAmount() {
+    return amount;
+  }
 
-    public Money calculateVatAmount() {
-        if (vatBreakdown == null) {
-            return Money.of(java.math.BigDecimal.ZERO, amount.getCurrency());
-        }
-        return vatBreakdown.getVatAmount();
-    }
+  public VatBreakdown getVatBreakdown() {
+    return vatBreakdown;
+  }
 
-    public Money calculateRecoverableVatAmount() {
-        if (vatBreakdown == null) {
-            return Money.of(java.math.BigDecimal.ZERO, amount.getCurrency());
-        }
-        return vatBreakdown.calculateRecoverableVatAmount();
-    }
+  public boolean hasVatBreakdown() {
+    return vatBreakdown != null;
+  }
 
-    public Money calculateAccountingCost() {
-        if (vatBreakdown == null) {
-            return amount;
-        }
-        return vatBreakdown.calculateAccountingCost();
-    }
+  public Notes getNotes() {
+    return notes;
+  }
 
-    public boolean isCapitalAsset() {
-        return category.isCapitalAsset();
+  public Money calculateNetAmount() {
+    if (vatBreakdown == null) {
+      return amount;
     }
+    return vatBreakdown.getNetAmount();
+  }
 
-    public boolean isOperatingExpense() {
-        return category.isOperatingExpense();
+  public Money calculateVatAmount() {
+    if (vatBreakdown == null) {
+      return Money.of(java.math.BigDecimal.ZERO, amount.getCurrency());
     }
+    return vatBreakdown.getVatAmount();
+  }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof PurchaseLine that)) return false;
-        return lineCode.equals(that.lineCode)
-                && category == that.category
-                && description.equals(that.description)
-                && amount.equals(that.amount)
-                && Objects.equals(vatBreakdown, that.vatBreakdown)
-                && notes.equals(that.notes);
+  public Money calculateRecoverableVatAmount() {
+    if (vatBreakdown == null) {
+      return Money.of(java.math.BigDecimal.ZERO, amount.getCurrency());
     }
+    return vatBreakdown.calculateRecoverableVatAmount();
+  }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(lineCode, category, description, amount, vatBreakdown, notes);
+  public Money calculateAccountingCost() {
+    if (vatBreakdown == null) {
+      return amount;
     }
+    return vatBreakdown.calculateAccountingCost();
+  }
+
+  public boolean isCapitalAsset() {
+    return category.isCapitalAsset();
+  }
+
+  public boolean isOperatingExpense() {
+    return category.isOperatingExpense();
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (!(o instanceof PurchaseLine that)) return false;
+    return lineCode.equals(that.lineCode)
+        && category == that.category
+        && description.equals(that.description)
+        && amount.equals(that.amount)
+        && Objects.equals(vatBreakdown, that.vatBreakdown)
+        && notes.equals(that.notes);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(lineCode, category, description, amount, vatBreakdown, notes);
+  }
 }

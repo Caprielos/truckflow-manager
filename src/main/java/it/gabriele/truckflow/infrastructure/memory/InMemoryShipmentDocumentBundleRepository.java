@@ -4,9 +4,10 @@ import it.gabriele.truckflow.application.port.out.ShipmentDocumentBundleReposito
 import it.gabriele.truckflow.domain.document.ShipmentDocumentBundle;
 
 /** Repository in memoria per ShipmentDocumentBundle. */
-public final class InMemoryShipmentDocumentBundleRepository extends InMemoryRepository<ShipmentDocumentBundle> implements ShipmentDocumentBundleRepository {
+public final class InMemoryShipmentDocumentBundleRepository
+    extends InMemoryRepository<ShipmentDocumentBundle> implements ShipmentDocumentBundleRepository {
 
-    public InMemoryShipmentDocumentBundleRepository() {
-        super(item -> item.getBundleCode());
-    }
+  public InMemoryShipmentDocumentBundleRepository() {
+    super(item -> item.getBundleCode());
+  }
 }

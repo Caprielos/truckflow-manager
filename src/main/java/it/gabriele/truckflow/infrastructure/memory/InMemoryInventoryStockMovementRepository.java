@@ -4,9 +4,10 @@ import it.gabriele.truckflow.application.port.out.InventoryStockMovementReposito
 import it.gabriele.truckflow.domain.inventory.InventoryStockMovement;
 
 /** Repository in memoria per InventoryStockMovement. */
-public final class InMemoryInventoryStockMovementRepository extends InMemoryRepository<InventoryStockMovement> implements InventoryStockMovementRepository {
+public final class InMemoryInventoryStockMovementRepository
+    extends InMemoryRepository<InventoryStockMovement> implements InventoryStockMovementRepository {
 
-    public InMemoryInventoryStockMovementRepository() {
-        super(item -> item.getMovementCode());
-    }
+  public InMemoryInventoryStockMovementRepository() {
+    super(item -> item.getMovementCode());
+  }
 }

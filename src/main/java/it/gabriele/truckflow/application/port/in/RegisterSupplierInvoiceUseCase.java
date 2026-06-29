@@ -4,8 +4,7 @@ import it.gabriele.truckflow.domain.economics.SupplierInvoice;
 
 public interface RegisterSupplierInvoiceUseCase {
 
-    SupplierInvoice handle(Command command);
+  SupplierInvoice handle(Command command);
 
-    record Command(SupplierInvoice invoice) {
-    }
+  record Command(SupplierInvoice invoice) {}
 }

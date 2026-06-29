@@ -1,295 +1,242 @@
 package it.gabriele.truckflow.domain.customer;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import it.gabriele.truckflow.domain.location.Address;
 import it.gabriele.truckflow.domain.location.Location;
 import it.gabriele.truckflow.domain.shared.Notes;
-import org.junit.jupiter.api.Test;
-
 import java.util.Arrays;
 import java.util.List;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-/**
- * Testa CustomerAccount.
- */
+/** Testa CustomerAccount. */
 class CustomerAccountTest {
 
-    @Test
-    void shouldCreateCustomerAccountFromList() {
-        Customer customer = activeCustomer();
-        CustomerContact primaryContact = primaryLogisticsContact();
-        CustomerContact billingContact = secondaryBillingContact();
+  @Test
+  void shouldCreateCustomerAccountFromList() {
+    Customer customer = activeCustomer();
+    CustomerContact primaryContact = primaryLogisticsContact();
+    CustomerContact billingContact = secondaryBillingContact();
 
-        CustomerAccount account = CustomerAccount.of(
-                customer,
-                List.of(primaryContact, billingContact)
-        );
+    CustomerAccount account = CustomerAccount.of(customer, List.of(primaryContact, billingContact));
 
-        assertEquals(customer, account.getCustomer());
-        assertEquals(2, account.getContactCount());
-        assertEquals(List.of(primaryContact, billingContact), account.getContacts());
-        assertEquals(primaryContact, account.getPrimaryContact());
-    }
+    assertEquals(customer, account.getCustomer());
+    assertEquals(2, account.getContactCount());
+    assertEquals(List.of(primaryContact, billingContact), account.getContacts());
+    assertEquals(primaryContact, account.getPrimaryContact());
+  }
 
-    @Test
-    void shouldCreateCustomerAccountFromContacts() {
-        CustomerAccount account = CustomerAccount.of(
+  @Test
+  void shouldCreateCustomerAccountFromContacts() {
+    CustomerAccount account =
+        CustomerAccount.of(activeCustomer(), primaryLogisticsContact(), secondaryBillingContact());
+
+    assertEquals(2, account.getContactCount());
+  }
+
+  @Test
+  void shouldNotAllowNullCustomer() {
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> CustomerAccount.of(null, List.of(primaryLogisticsContact())));
+  }
+
+  @Test
+  void shouldNotAllowNullOrEmptyContactList() {
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> CustomerAccount.of(activeCustomer(), (List<CustomerContact>) null));
+
+    assertThrows(
+        IllegalArgumentException.class, () -> CustomerAccount.of(activeCustomer(), List.of()));
+  }
+
+  @Test
+  void shouldNotAllowNullContactsInsideList() {
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> CustomerAccount.of(activeCustomer(), Arrays.asList(primaryLogisticsContact(), null)));
+  }
+
+  @Test
+  void shouldNotAllowNullPrimaryContactInFactory() {
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> CustomerAccount.of(activeCustomer(), (CustomerContact) null));
+  }
+
+  @Test
+  void shouldRequireExactlyOnePrimaryContact() {
+    assertThrows(
+        IllegalArgumentException.class,
+        () ->
+            CustomerAccount.of(
                 activeCustomer(),
-                primaryLogisticsContact(),
-                secondaryBillingContact()
-        );
+                List.of(secondaryBillingContact(), secondaryOperationsContact())));
 
-        assertEquals(2, account.getContactCount());
-    }
+    assertThrows(
+        IllegalArgumentException.class,
+        () ->
+            CustomerAccount.of(
+                activeCustomer(), List.of(primaryLogisticsContact(), anotherPrimaryContact())));
+  }
 
-    @Test
-    void shouldNotAllowNullCustomer() {
-        assertThrows(IllegalArgumentException.class, () -> CustomerAccount.of(
-                null,
-                List.of(primaryLogisticsContact())
-        ));
-    }
+  @Test
+  void shouldReturnUnmodifiableContacts() {
+    CustomerAccount account = CustomerAccount.of(activeCustomer(), primaryLogisticsContact());
 
-    @Test
-    void shouldNotAllowNullOrEmptyContactList() {
-        assertThrows(IllegalArgumentException.class, () -> CustomerAccount.of(
-                activeCustomer(),
-                (List<CustomerContact>) null
-        ));
+    assertThrows(
+        UnsupportedOperationException.class,
+        () -> account.getContacts().add(secondaryBillingContact()));
+  }
 
-        assertThrows(IllegalArgumentException.class, () -> CustomerAccount.of(
-                activeCustomer(),
-                List.of()
-        ));
-    }
+  @Test
+  void shouldGetContactsByRole() {
+    CustomerAccount account =
+        CustomerAccount.of(activeCustomer(), primaryLogisticsContact(), secondaryBillingContact());
 
-    @Test
-    void shouldNotAllowNullContactsInsideList() {
-        assertThrows(IllegalArgumentException.class, () -> CustomerAccount.of(
-                activeCustomer(),
-                Arrays.asList(primaryLogisticsContact(), null)
-        ));
-    }
+    List<CustomerContact> billingContacts = account.getContactsByRole(CustomerContactRole.BILLING);
 
-    @Test
-    void shouldNotAllowNullPrimaryContactInFactory() {
-        assertThrows(IllegalArgumentException.class, () -> CustomerAccount.of(
-                activeCustomer(),
-                (CustomerContact) null
-        ));
-    }
+    assertEquals(1, billingContacts.size());
+    assertEquals(CustomerContactRole.BILLING, billingContacts.get(0).getRole());
+  }
 
-    @Test
-    void shouldRequireExactlyOnePrimaryContact() {
-        assertThrows(IllegalArgumentException.class, () -> CustomerAccount.of(
-                activeCustomer(),
-                List.of(secondaryBillingContact(), secondaryOperationsContact())
-        ));
+  @Test
+  void shouldCheckContactRole() {
+    CustomerAccount account =
+        CustomerAccount.of(activeCustomer(), primaryLogisticsContact(), secondaryBillingContact());
 
-        assertThrows(IllegalArgumentException.class, () -> CustomerAccount.of(
-                activeCustomer(),
-                List.of(primaryLogisticsContact(), anotherPrimaryContact())
-        ));
-    }
+    assertTrue(account.hasContactRole(CustomerContactRole.LOGISTICS));
+    assertTrue(account.hasBillingContact());
+    assertFalse(account.hasContactRole(CustomerContactRole.MANAGEMENT));
+  }
 
-    @Test
-    void shouldReturnUnmodifiableContacts() {
-        CustomerAccount account = CustomerAccount.of(
-                activeCustomer(),
-                primaryLogisticsContact()
-        );
+  @Test
+  void shouldNotCheckNullContactRole() {
+    CustomerAccount account = CustomerAccount.of(activeCustomer(), primaryLogisticsContact());
 
-        assertThrows(UnsupportedOperationException.class,
-                () -> account.getContacts().add(secondaryBillingContact()));
-    }
+    assertThrows(IllegalArgumentException.class, () -> account.hasContactRole(null));
+    assertThrows(IllegalArgumentException.class, () -> account.getContactsByRole(null));
+  }
 
-    @Test
-    void shouldGetContactsByRole() {
-        CustomerAccount account = CustomerAccount.of(
-                activeCustomer(),
-                primaryLogisticsContact(),
-                secondaryBillingContact()
-        );
+  @Test
+  void shouldAllowActiveCustomerToRequestTransportOrder() {
+    CustomerAccount account = CustomerAccount.of(activeCustomer(), primaryLogisticsContact());
 
-        List<CustomerContact> billingContacts = account.getContactsByRole(CustomerContactRole.BILLING);
+    assertTrue(account.canRequestTransportOrder());
+  }
 
-        assertEquals(1, billingContacts.size());
-        assertEquals(CustomerContactRole.BILLING, billingContacts.get(0).getRole());
-    }
+  @Test
+  void shouldNotAllowInactiveCustomerToRequestTransportOrder() {
+    CustomerAccount account = CustomerAccount.of(inactiveCustomer(), primaryLogisticsContact());
 
-    @Test
-    void shouldCheckContactRole() {
-        CustomerAccount account = CustomerAccount.of(
-                activeCustomer(),
-                primaryLogisticsContact(),
-                secondaryBillingContact()
-        );
+    assertFalse(account.canRequestTransportOrder());
+  }
 
-        assertTrue(account.hasContactRole(CustomerContactRole.LOGISTICS));
-        assertTrue(account.hasBillingContact());
-        assertFalse(account.hasContactRole(CustomerContactRole.MANAGEMENT));
-    }
+  @Test
+  void shouldDetectSuspendedCustomer() {
+    CustomerAccount account = CustomerAccount.of(suspendedCustomer(), primaryLogisticsContact());
 
-    @Test
-    void shouldNotCheckNullContactRole() {
-        CustomerAccount account = CustomerAccount.of(
-                activeCustomer(),
-                primaryLogisticsContact()
-        );
+    assertTrue(account.isSuspended());
+    assertFalse(account.canRequestTransportOrder());
+  }
 
-        assertThrows(IllegalArgumentException.class, () -> account.hasContactRole(null));
-        assertThrows(IllegalArgumentException.class, () -> account.getContactsByRole(null));
-    }
+  @Test
+  void shouldExposeCustomerCode() {
+    CustomerAccount account = CustomerAccount.of(activeCustomer(), primaryLogisticsContact());
 
-    @Test
-    void shouldAllowActiveCustomerToRequestTransportOrder() {
-        CustomerAccount account = CustomerAccount.of(
-                activeCustomer(),
-                primaryLogisticsContact()
-        );
+    assertEquals("CUST-001", account.getCustomerCode());
+  }
 
-        assertTrue(account.canRequestTransportOrder());
-    }
+  @Test
+  void shouldFormatSingleLine() {
+    CustomerAccount account =
+        CustomerAccount.of(activeCustomer(), primaryLogisticsContact(), secondaryBillingContact());
 
-    @Test
-    void shouldNotAllowInactiveCustomerToRequestTransportOrder() {
-        CustomerAccount account = CustomerAccount.of(
-                inactiveCustomer(),
-                primaryLogisticsContact()
-        );
+    assertEquals(
+        "CUST-001 - ACME Logistics S.r.l. - COMPANY - ACTIVE - contacts: 2",
+        account.formatSingleLine());
+  }
 
-        assertFalse(account.canRequestTransportOrder());
-    }
+  @Test
+  void shouldConsiderEquivalentCustomerAccountsEqual() {
+    CustomerAccount first =
+        CustomerAccount.of(activeCustomer(), primaryLogisticsContact(), secondaryBillingContact());
 
-    @Test
-    void shouldDetectSuspendedCustomer() {
-        CustomerAccount account = CustomerAccount.of(
-                suspendedCustomer(),
-                primaryLogisticsContact()
-        );
+    CustomerAccount second =
+        CustomerAccount.of(activeCustomer(), primaryLogisticsContact(), secondaryBillingContact());
 
-        assertTrue(account.isSuspended());
-        assertFalse(account.canRequestTransportOrder());
-    }
+    assertEquals(first, second);
+    assertEquals(first.hashCode(), second.hashCode());
+  }
 
-    @Test
-    void shouldExposeCustomerCode() {
-        CustomerAccount account = CustomerAccount.of(
-                activeCustomer(),
-                primaryLogisticsContact()
-        );
+  private static Customer activeCustomer() {
+    return Customer.active(
+        "CUST-001",
+        "ACME Logistics S.r.l.",
+        CustomerType.COMPANY,
+        customerLocation(),
+        Notes.empty());
+  }
 
-        assertEquals("CUST-001", account.getCustomerCode());
-    }
+  private static Customer inactiveCustomer() {
+    return Customer.inactive(
+        "CUST-001",
+        "ACME Logistics S.r.l.",
+        CustomerType.COMPANY,
+        customerLocation(),
+        Notes.empty());
+  }
 
-    @Test
-    void shouldFormatSingleLine() {
-        CustomerAccount account = CustomerAccount.of(
-                activeCustomer(),
-                primaryLogisticsContact(),
-                secondaryBillingContact()
-        );
+  private static Customer suspendedCustomer() {
+    return Customer.suspended(
+        "CUST-001",
+        "ACME Logistics S.r.l.",
+        CustomerType.COMPANY,
+        customerLocation(),
+        Notes.empty());
+  }
 
-        assertEquals(
-                "CUST-001 - ACME Logistics S.r.l. - COMPANY - ACTIVE - contacts: 2",
-                account.formatSingleLine()
-        );
-    }
+  private static CustomerContact primaryLogisticsContact() {
+    return CustomerContact.primary(
+        "Mario Rossi",
+        CustomerContactRole.LOGISTICS,
+        "mario.rossi@example.com",
+        "+39 333 1234567",
+        Notes.empty());
+  }
 
-    @Test
-    void shouldConsiderEquivalentCustomerAccountsEqual() {
-        CustomerAccount first = CustomerAccount.of(
-                activeCustomer(),
-                primaryLogisticsContact(),
-                secondaryBillingContact()
-        );
+  private static CustomerContact anotherPrimaryContact() {
+    return CustomerContact.primary(
+        "Laura Verdi",
+        CustomerContactRole.OPERATIONS,
+        "laura.verdi@example.com",
+        "+39 333 2223333",
+        Notes.empty());
+  }
 
-        CustomerAccount second = CustomerAccount.of(
-                activeCustomer(),
-                primaryLogisticsContact(),
-                secondaryBillingContact()
-        );
+  private static CustomerContact secondaryBillingContact() {
+    return CustomerContact.secondary(
+        "Laura Bianchi",
+        CustomerContactRole.BILLING,
+        "laura.bianchi@example.com",
+        "+39 333 7654321",
+        Notes.empty());
+  }
 
-        assertEquals(first, second);
-        assertEquals(first.hashCode(), second.hashCode());
-    }
+  private static CustomerContact secondaryOperationsContact() {
+    return CustomerContact.secondary(
+        "Giuseppe Neri",
+        CustomerContactRole.OPERATIONS,
+        "giuseppe.neri@example.com",
+        "+39 333 4445555",
+        Notes.empty());
+  }
 
-    private static Customer activeCustomer() {
-        return Customer.active(
-                "CUST-001",
-                "ACME Logistics S.r.l.",
-                CustomerType.COMPANY,
-                customerLocation(),
-                Notes.empty()
-        );
-    }
-
-    private static Customer inactiveCustomer() {
-        return Customer.inactive(
-                "CUST-001",
-                "ACME Logistics S.r.l.",
-                CustomerType.COMPANY,
-                customerLocation(),
-                Notes.empty()
-        );
-    }
-
-    private static Customer suspendedCustomer() {
-        return Customer.suspended(
-                "CUST-001",
-                "ACME Logistics S.r.l.",
-                CustomerType.COMPANY,
-                customerLocation(),
-                Notes.empty()
-        );
-    }
-
-    private static CustomerContact primaryLogisticsContact() {
-        return CustomerContact.primary(
-                "Mario Rossi",
-                CustomerContactRole.LOGISTICS,
-                "mario.rossi@example.com",
-                "+39 333 1234567",
-                Notes.empty()
-        );
-    }
-
-    private static CustomerContact anotherPrimaryContact() {
-        return CustomerContact.primary(
-                "Laura Verdi",
-                CustomerContactRole.OPERATIONS,
-                "laura.verdi@example.com",
-                "+39 333 2223333",
-                Notes.empty()
-        );
-    }
-
-    private static CustomerContact secondaryBillingContact() {
-        return CustomerContact.secondary(
-                "Laura Bianchi",
-                CustomerContactRole.BILLING,
-                "laura.bianchi@example.com",
-                "+39 333 7654321",
-                Notes.empty()
-        );
-    }
-
-    private static CustomerContact secondaryOperationsContact() {
-        return CustomerContact.secondary(
-                "Giuseppe Neri",
-                CustomerContactRole.OPERATIONS,
-                "giuseppe.neri@example.com",
-                "+39 333 4445555",
-                Notes.empty()
-        );
-    }
-
-    private static Location customerLocation() {
-        return Location.of(
-                "Sede Cliente Milano",
-                Address.of("Via Cliente 10", "Milano", "20100", "IT"),
-                "Europe/Rome"
-        );
-    }
+  private static Location customerLocation() {
+    return Location.of(
+        "Sede Cliente Milano",
+        Address.of("Via Cliente 10", "Milano", "20100", "IT"),
+        "Europe/Rome");
+  }
 }

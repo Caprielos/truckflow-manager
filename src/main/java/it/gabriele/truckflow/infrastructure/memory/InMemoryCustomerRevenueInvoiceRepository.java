@@ -4,9 +4,10 @@ import it.gabriele.truckflow.application.port.out.CustomerRevenueInvoiceReposito
 import it.gabriele.truckflow.domain.economics.CustomerRevenueInvoice;
 
 /** Repository in memoria per CustomerRevenueInvoice. */
-public final class InMemoryCustomerRevenueInvoiceRepository extends InMemoryRepository<CustomerRevenueInvoice> implements CustomerRevenueInvoiceRepository {
+public final class InMemoryCustomerRevenueInvoiceRepository
+    extends InMemoryRepository<CustomerRevenueInvoice> implements CustomerRevenueInvoiceRepository {
 
-    public InMemoryCustomerRevenueInvoiceRepository() {
-        super(item -> item.getInvoiceNumber());
-    }
+  public InMemoryCustomerRevenueInvoiceRepository() {
+    super(item -> item.getInvoiceNumber());
+  }
 }

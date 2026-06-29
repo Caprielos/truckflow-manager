@@ -4,9 +4,11 @@ import it.gabriele.truckflow.application.port.out.DriverMissionWorkReportReposit
 import it.gabriele.truckflow.domain.payroll.DriverMissionWorkReport;
 
 /** Repository in memoria per DriverMissionWorkReport. */
-public final class InMemoryDriverMissionWorkReportRepository extends InMemoryRepository<DriverMissionWorkReport> implements DriverMissionWorkReportRepository {
+public final class InMemoryDriverMissionWorkReportRepository
+    extends InMemoryRepository<DriverMissionWorkReport>
+    implements DriverMissionWorkReportRepository {
 
-    public InMemoryDriverMissionWorkReportRepository() {
-        super(item -> item.getReportCode());
-    }
+  public InMemoryDriverMissionWorkReportRepository() {
+    super(item -> item.getReportCode());
+  }
 }

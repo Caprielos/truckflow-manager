@@ -2,74 +2,70 @@ package it.gabriele.truckflow.domain.route;
 
 import it.gabriele.truckflow.domain.shared.Distance;
 
-/**
- * Contiene regole di dominio relative a un piano di tratta.
- */
+/** Contiene regole di dominio relative a un piano di tratta. */
 public final class RoutePlanRules {
 
-    private RoutePlanRules() {
+  private RoutePlanRules() {}
+
+  public static boolean hasCargoOperations(RoutePlan routePlan) {
+    if (routePlan == null) {
+      throw new IllegalArgumentException("Il piano di tratta è obbligatorio.");
     }
 
-    public static boolean hasCargoOperations(RoutePlan routePlan) {
-        if (routePlan == null) {
-            throw new IllegalArgumentException("Il piano di tratta è obbligatorio.");
-        }
+    return !routePlan.getCargoOperationStops().isEmpty();
+  }
 
-        return !routePlan.getCargoOperationStops().isEmpty();
+  public static boolean hasPickupAndDelivery(RoutePlan routePlan) {
+    if (routePlan == null) {
+      throw new IllegalArgumentException("Il piano di tratta è obbligatorio.");
     }
 
-    public static boolean hasPickupAndDelivery(RoutePlan routePlan) {
-        if (routePlan == null) {
-            throw new IllegalArgumentException("Il piano di tratta è obbligatorio.");
-        }
+    return routePlan.hasPickupStop() && routePlan.hasDeliveryStop();
+  }
 
-        return routePlan.hasPickupStop() && routePlan.hasDeliveryStop();
+  public static boolean isWithinMaxDistance(RoutePlan routePlan, Distance maxDistance) {
+    if (routePlan == null) {
+      throw new IllegalArgumentException("Il piano di tratta è obbligatorio.");
     }
 
-    public static boolean isWithinMaxDistance(RoutePlan routePlan, Distance maxDistance) {
-        if (routePlan == null) {
-            throw new IllegalArgumentException("Il piano di tratta è obbligatorio.");
-        }
-
-        if (maxDistance == null) {
-            throw new IllegalArgumentException("La distanza massima è obbligatoria.");
-        }
-
-        return routePlan.getEstimatedDistance().isLessThanOrEqualTo(maxDistance);
+    if (maxDistance == null) {
+      throw new IllegalArgumentException("La distanza massima è obbligatoria.");
     }
 
-    public static boolean startsAndEndsAtDifferentFacilities(RoutePlan routePlan) {
-        if (routePlan == null) {
-            throw new IllegalArgumentException("Il piano di tratta è obbligatorio.");
-        }
+    return routePlan.getEstimatedDistance().isLessThanOrEqualTo(maxDistance);
+  }
 
-        return !routePlan.getStartStop().getFacility().equals(routePlan.getEndStop().getFacility());
+  public static boolean startsAndEndsAtDifferentFacilities(RoutePlan routePlan) {
+    if (routePlan == null) {
+      throw new IllegalArgumentException("Il piano di tratta è obbligatorio.");
     }
 
-    public static boolean usesOnlyActiveFacilities(RoutePlan routePlan) {
-        if (routePlan == null) {
-            throw new IllegalArgumentException("Il piano di tratta è obbligatorio.");
-        }
+    return !routePlan.getStartStop().getFacility().equals(routePlan.getEndStop().getFacility());
+  }
 
-        return routePlan.getStops().stream()
-                .allMatch(stop -> stop.getFacility().isActive());
+  public static boolean usesOnlyActiveFacilities(RoutePlan routePlan) {
+    if (routePlan == null) {
+      throw new IllegalArgumentException("Il piano di tratta è obbligatorio.");
     }
 
-    public static boolean isInternational(RoutePlan routePlan) {
-        if (routePlan == null) {
-            throw new IllegalArgumentException("Il piano di tratta è obbligatorio.");
-        }
+    return routePlan.getStops().stream().allMatch(stop -> stop.getFacility().isActive());
+  }
 
-        return routePlan.isInternational();
+  public static boolean isInternational(RoutePlan routePlan) {
+    if (routePlan == null) {
+      throw new IllegalArgumentException("Il piano di tratta è obbligatorio.");
     }
 
-    public static boolean isOperationallyUsable(RoutePlan routePlan) {
-        if (routePlan == null) {
-            throw new IllegalArgumentException("Il piano di tratta è obbligatorio.");
-        }
+    return routePlan.isInternational();
+  }
 
-        return hasPickupAndDelivery(routePlan)
-                && startsAndEndsAtDifferentFacilities(routePlan)
-                && usesOnlyActiveFacilities(routePlan);
+  public static boolean isOperationallyUsable(RoutePlan routePlan) {
+    if (routePlan == null) {
+      throw new IllegalArgumentException("Il piano di tratta è obbligatorio.");
     }
+
+    return hasPickupAndDelivery(routePlan)
+        && startsAndEndsAtDifferentFacilities(routePlan)
+        && usesOnlyActiveFacilities(routePlan);
+  }
 }

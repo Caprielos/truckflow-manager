@@ -1,193 +1,187 @@
 package it.gabriele.truckflow.domain.customer;
 
 import it.gabriele.truckflow.domain.shared.Notes;
-
 import java.util.Objects;
 
 /**
- * Rappresenta una persona di contatto associata a un cliente.
- * Esempio: referente logistico, amministrativo o fatturazione.
+ * Rappresenta una persona di contatto associata a un cliente. Esempio: referente logistico,
+ * amministrativo o fatturazione.
  */
 public final class CustomerContact {
 
-    private static final int MAX_NAME_LENGTH = 150;
-    private static final int MAX_EMAIL_LENGTH = 254;
-    private static final int MAX_PHONE_LENGTH = 30;
+  private static final int MAX_NAME_LENGTH = 150;
+  private static final int MAX_EMAIL_LENGTH = 254;
+  private static final int MAX_PHONE_LENGTH = 30;
 
-    private final String fullName;
-    private final CustomerContactRole role;
-    private final String email;
-    private final String phoneNumber;
-    private final boolean primaryContact;
-    private final Notes notes;
+  private final String fullName;
+  private final CustomerContactRole role;
+  private final String email;
+  private final String phoneNumber;
+  private final boolean primaryContact;
+  private final Notes notes;
 
-    private CustomerContact(
-            String fullName,
-            CustomerContactRole role,
-            String email,
-            String phoneNumber,
-            boolean primaryContact,
-            Notes notes
-    ) {
-        this.fullName = validateFullName(fullName);
+  private CustomerContact(
+      String fullName,
+      CustomerContactRole role,
+      String email,
+      String phoneNumber,
+      boolean primaryContact,
+      Notes notes) {
+    this.fullName = validateFullName(fullName);
 
-        if (role == null) {
-            throw new IllegalArgumentException("Il ruolo del contatto è obbligatorio.");
-        }
-
-        this.email = validateEmail(email);
-        this.phoneNumber = validatePhoneNumber(phoneNumber);
-
-        if (notes == null) {
-            throw new IllegalArgumentException("Le note del contatto sono obbligatorie.");
-        }
-
-        this.role = role;
-        this.primaryContact = primaryContact;
-        this.notes = notes;
+    if (role == null) {
+      throw new IllegalArgumentException("Il ruolo del contatto è obbligatorio.");
     }
 
-    public static CustomerContact primary(
-            String fullName,
-            CustomerContactRole role,
-            String email,
-            String phoneNumber,
-            Notes notes
-    ) {
-        return new CustomerContact(fullName, role, email, phoneNumber, true, notes);
+    this.email = validateEmail(email);
+    this.phoneNumber = validatePhoneNumber(phoneNumber);
+
+    if (notes == null) {
+      throw new IllegalArgumentException("Le note del contatto sono obbligatorie.");
     }
 
-    public static CustomerContact secondary(
-            String fullName,
-            CustomerContactRole role,
-            String email,
-            String phoneNumber,
-            Notes notes
-    ) {
-        return new CustomerContact(fullName, role, email, phoneNumber, false, notes);
+    this.role = role;
+    this.primaryContact = primaryContact;
+    this.notes = notes;
+  }
+
+  public static CustomerContact primary(
+      String fullName, CustomerContactRole role, String email, String phoneNumber, Notes notes) {
+    return new CustomerContact(fullName, role, email, phoneNumber, true, notes);
+  }
+
+  public static CustomerContact secondary(
+      String fullName, CustomerContactRole role, String email, String phoneNumber, Notes notes) {
+    return new CustomerContact(fullName, role, email, phoneNumber, false, notes);
+  }
+
+  private static String validateFullName(String fullName) {
+    if (fullName == null) {
+      throw new IllegalArgumentException("Il nome completo del contatto è obbligatorio.");
     }
 
-    private static String validateFullName(String fullName) {
-        if (fullName == null) {
-            throw new IllegalArgumentException("Il nome completo del contatto è obbligatorio.");
-        }
+    String normalizedFullName = fullName.trim();
 
-        String normalizedFullName = fullName.trim();
-
-        if (normalizedFullName.isEmpty()) {
-            throw new IllegalArgumentException("Il nome completo del contatto non può essere vuoto.");
-        }
-
-        if (normalizedFullName.length() > MAX_NAME_LENGTH) {
-            throw new IllegalArgumentException("Il nome completo del contatto non può superare " + MAX_NAME_LENGTH + " caratteri.");
-        }
-
-        return normalizedFullName;
+    if (normalizedFullName.isEmpty()) {
+      throw new IllegalArgumentException("Il nome completo del contatto non può essere vuoto.");
     }
 
-    private static String validateEmail(String email) {
-        if (email == null) {
-            throw new IllegalArgumentException("L'email del contatto è obbligatoria.");
-        }
-
-        String normalizedEmail = email.trim().toLowerCase();
-
-        if (normalizedEmail.isEmpty()) {
-            throw new IllegalArgumentException("L'email del contatto non può essere vuota.");
-        }
-
-        if (normalizedEmail.length() > MAX_EMAIL_LENGTH) {
-            throw new IllegalArgumentException("L'email del contatto non può superare " + MAX_EMAIL_LENGTH + " caratteri.");
-        }
-
-        if (!normalizedEmail.contains("@")) {
-            throw new IllegalArgumentException("L'email del contatto deve contenere il carattere @.");
-        }
-
-        return normalizedEmail;
+    if (normalizedFullName.length() > MAX_NAME_LENGTH) {
+      throw new IllegalArgumentException(
+          "Il nome completo del contatto non può superare " + MAX_NAME_LENGTH + " caratteri.");
     }
 
-    private static String validatePhoneNumber(String phoneNumber) {
-        if (phoneNumber == null) {
-            throw new IllegalArgumentException("Il numero di telefono del contatto è obbligatorio.");
-        }
+    return normalizedFullName;
+  }
 
-        String normalizedPhoneNumber = phoneNumber.trim();
-
-        if (normalizedPhoneNumber.isEmpty()) {
-            throw new IllegalArgumentException("Il numero di telefono del contatto non può essere vuoto.");
-        }
-
-        if (normalizedPhoneNumber.length() > MAX_PHONE_LENGTH) {
-            throw new IllegalArgumentException("Il numero di telefono del contatto non può superare " + MAX_PHONE_LENGTH + " caratteri.");
-        }
-
-        if (!normalizedPhoneNumber.matches("[0-9+() .-]+")) {
-            throw new IllegalArgumentException("Il numero di telefono contiene caratteri non validi.");
-        }
-
-        return normalizedPhoneNumber;
+  private static String validateEmail(String email) {
+    if (email == null) {
+      throw new IllegalArgumentException("L'email del contatto è obbligatoria.");
     }
 
-    public String getFullName() {
-        return fullName;
+    String normalizedEmail = email.trim().toLowerCase();
+
+    if (normalizedEmail.isEmpty()) {
+      throw new IllegalArgumentException("L'email del contatto non può essere vuota.");
     }
 
-    public CustomerContactRole getRole() {
-        return role;
+    if (normalizedEmail.length() > MAX_EMAIL_LENGTH) {
+      throw new IllegalArgumentException(
+          "L'email del contatto non può superare " + MAX_EMAIL_LENGTH + " caratteri.");
     }
 
-    public String getEmail() {
-        return email;
+    if (!normalizedEmail.contains("@")) {
+      throw new IllegalArgumentException("L'email del contatto deve contenere il carattere @.");
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    return normalizedEmail;
+  }
+
+  private static String validatePhoneNumber(String phoneNumber) {
+    if (phoneNumber == null) {
+      throw new IllegalArgumentException("Il numero di telefono del contatto è obbligatorio.");
     }
 
-    public boolean isPrimaryContact() {
-        return primaryContact;
+    String normalizedPhoneNumber = phoneNumber.trim();
+
+    if (normalizedPhoneNumber.isEmpty()) {
+      throw new IllegalArgumentException(
+          "Il numero di telefono del contatto non può essere vuoto.");
     }
 
-    public Notes getNotes() {
-        return notes;
+    if (normalizedPhoneNumber.length() > MAX_PHONE_LENGTH) {
+      throw new IllegalArgumentException(
+          "Il numero di telefono del contatto non può superare "
+              + MAX_PHONE_LENGTH
+              + " caratteri.");
     }
 
-    public boolean hasRole(CustomerContactRole role) {
-        if (role == null) {
-            throw new IllegalArgumentException("Il ruolo da confrontare è obbligatorio.");
-        }
-
-        return this.role == role;
+    if (!normalizedPhoneNumber.matches("[0-9+() .-]+")) {
+      throw new IllegalArgumentException("Il numero di telefono contiene caratteri non validi.");
     }
 
-    public boolean hasNotes() {
-        return notes.hasText();
+    return normalizedPhoneNumber;
+  }
+
+  public String getFullName() {
+    return fullName;
+  }
+
+  public CustomerContactRole getRole() {
+    return role;
+  }
+
+  public String getEmail() {
+    return email;
+  }
+
+  public String getPhoneNumber() {
+    return phoneNumber;
+  }
+
+  public boolean isPrimaryContact() {
+    return primaryContact;
+  }
+
+  public Notes getNotes() {
+    return notes;
+  }
+
+  public boolean hasRole(CustomerContactRole role) {
+    if (role == null) {
+      throw new IllegalArgumentException("Il ruolo da confrontare è obbligatorio.");
     }
 
-    public String formatSingleLine() {
-        return fullName + " - " + role + " - " + email + " - " + phoneNumber;
-    }
+    return this.role == role;
+  }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof CustomerContact that)) return false;
-        return primaryContact == that.primaryContact
-                && fullName.equals(that.fullName)
-                && role == that.role
-                && email.equals(that.email)
-                && phoneNumber.equals(that.phoneNumber)
-                && notes.equals(that.notes);
-    }
+  public boolean hasNotes() {
+    return notes.hasText();
+  }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(fullName, role, email, phoneNumber, primaryContact, notes);
-    }
+  public String formatSingleLine() {
+    return fullName + " - " + role + " - " + email + " - " + phoneNumber;
+  }
 
-    @Override
-    public String toString() {
-        return formatSingleLine();
-    }
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (!(o instanceof CustomerContact that)) return false;
+    return primaryContact == that.primaryContact
+        && fullName.equals(that.fullName)
+        && role == that.role
+        && email.equals(that.email)
+        && phoneNumber.equals(that.phoneNumber)
+        && notes.equals(that.notes);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(fullName, role, email, phoneNumber, primaryContact, notes);
+  }
+
+  @Override
+  public String toString() {
+    return formatSingleLine();
+  }
 }

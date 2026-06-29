@@ -5,8 +5,7 @@ import it.gabriele.truckflow.domain.inventory.InventoryStockMovement;
 
 public interface RecordInventoryStockMovementUseCase {
 
-    InventoryBalance handle(Command command);
+  InventoryBalance handle(Command command);
 
-    record Command(String itemCode, String locationId, InventoryStockMovement movement) {
-    }
+  record Command(String itemCode, String locationId, InventoryStockMovement movement) {}
 }
