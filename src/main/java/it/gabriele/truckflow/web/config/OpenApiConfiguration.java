@@ -22,6 +22,9 @@ import org.springframework.context.annotation.Configuration;
     tags = {
       @Tag(
           name = "Parking",
-          description = "API per consultare posti parcheggio e assegnare risorse in piazzale")
+          description = "API per consultare posti parcheggio e assegnare risorse in piazzale"),
+      @Tag(
+          name = "Deadline Service",
+          description = "API interne del futuro microservizio compliance-deadline-service")
     })
 public class OpenApiConfiguration {}

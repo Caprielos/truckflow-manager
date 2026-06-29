@@ -24,6 +24,8 @@ class OpenApiDocumentationTest {
         .andExpect(jsonPath("$.openapi").exists())
         .andExpect(jsonPath("$.info.title").value("TruckFlow Manager API"))
         .andExpect(jsonPath("$.paths['/api/parking/spots']").exists())
-        .andExpect(jsonPath("$.paths['/api/parking/assignments']").exists());
+        .andExpect(jsonPath("$.paths['/api/parking/assignments']").exists())
+        .andExpect(jsonPath("$.paths['/api/deadline-service/evaluations']").exists())
+        .andExpect(jsonPath("$.paths['/api/deadline-service/evaluations/batch']").exists());
   }
 }
