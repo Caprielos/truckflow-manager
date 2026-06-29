@@ -1,0 +1,20 @@
+package it.gabriele.truckflow.domain.enterpriseevent;
+
+/** Evento domain enterprise tracciabile. */
+public enum DomainEventType {
+  ORDER_CREATED,
+  SHIPMENT_PLANNED,
+  MISSION_DISPATCHED,
+  MISSION_DELAYED,
+  POD_COLLECTED,
+  CLAIM_OPENED,
+  SLA_VIOLATED,
+  DEADLINE_EXPIRED,
+  ALERT_RAISED,
+  DOCUMENT_VERSIONED,
+  COST_ALLOCATED,
+  DRIVER_BLOCKED,
+  VEHICLE_BLOCKED,
+  ROAD_INSPECTION_FAILED,
+  INTEGRATION_FAILED
+}
