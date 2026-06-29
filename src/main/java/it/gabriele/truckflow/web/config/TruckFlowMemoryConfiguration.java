@@ -7,8 +7,8 @@ import it.gabriele.truckflow.application.usecase.DefaultAssignParkingSpotUseCase
 import it.gabriele.truckflow.domain.parking.ParkingSpot;
 import it.gabriele.truckflow.domain.parking.ParkingSpotType;
 import it.gabriele.truckflow.domain.shared.Notes;
-import it.gabriele.truckflow.infrastructure.memory.InMemoryParkingAssignmentRepository;
-import it.gabriele.truckflow.infrastructure.memory.InMemoryParkingSpotRepository;
+import it.gabriele.truckflow.infrastructure.memory.parking.InMemoryParkingAssignmentRepository;
+import it.gabriele.truckflow.infrastructure.memory.parking.InMemoryParkingSpotRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
