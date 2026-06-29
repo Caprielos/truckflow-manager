@@ -70,3 +70,11 @@
 - `docs/reference/class-catalog.md`
 - `docs/reference/test-catalog.md`
 - `docs/testing-guide.md`
+
+## Compliance Deadline Service
+
+- [Compliance Deadline Service](architecture/compliance-deadline-service.md)
+- [Deadline Rule Pack Specification](architecture/deadline-rule-pack-specification.md)
+- [Managed Element Catalog](architecture/managed-element-catalog.md)
+- [Deadline Service Migration Plan](architecture/deadline-service-migration-plan.md)
+- [ADR 011 - Compliance Deadline Service](architecture-decisions/011-compliance-deadline-service.md)
