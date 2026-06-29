@@ -1,8 +1,9 @@
 /**
- * Outbound port deadline.
+ * Porte in uscita verso repository scadenze e verso il futuro compliance-deadline-service.
  *
- * <p>Definisce repository e porte in uscita richieste dagli use case per le scadenze obbligatorie,
- * gli owner, le severità e le regole di blocco o avviso.
+ * <p>Questo package mantiene separato il dominio principale dal motore delle scadenze: gli use case
+ * applicativi usano {@code DeadlineGateway}, mentre l'implementazione concreta può essere
+ * in-process, HTTP, gRPC o event-driven.
  *
  * <p>Questo file documenta il contenuto del package e non contiene logica applicativa.
  */
