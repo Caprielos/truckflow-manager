@@ -1,7 +1,9 @@
 /**
- * In-memory repositories for warehouses, stock positions, loading docks and cross-docking flows.
+ * Repository in memoria warehouse.
  *
- * <p>These adapters are temporary persistence implementations used for tests, demos and the
- * pre-database phase of TruckFlow Manager.
+ * <p>Contiene adapter in memoria temporanei per il magazzino enterprise, ubicazioni, baie, slot,
+ * cross-docking, stock e check-in/check-out.
+ *
+ * <p>Questo file documenta il contenuto del package e non contiene logica applicativa.
  */
 package it.gabriele.truckflow.infrastructure.memory.warehouse;

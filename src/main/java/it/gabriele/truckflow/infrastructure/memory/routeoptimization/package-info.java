@@ -1,7 +1,9 @@
 /**
- * In-memory repositories for route-optimization plans and constraints.
+ * Repository in memoria routeoptimization.
  *
- * <p>These adapters are temporary persistence implementations used for tests, demos and the
- * pre-database phase of TruckFlow Manager.
+ * <p>Contiene adapter in memoria temporanei per l’ottimizzazione del percorso, i vincoli, gli
+ * obiettivi, i costi e la revisione planner.
+ *
+ * <p>Questo file documenta il contenuto del package e non contiene logica applicativa.
  */
 package it.gabriele.truckflow.infrastructure.memory.routeoptimization;

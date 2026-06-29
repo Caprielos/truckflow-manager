@@ -1,7 +1,9 @@
 /**
- * In-memory repositories for transport documents, document bundles and document versions.
+ * Repository in memoria document.
  *
- * <p>These adapters are temporary persistence implementations used for tests, demos and the
- * pre-database phase of TruckFlow Manager.
+ * <p>Contiene adapter in memoria temporanei per i documenti di trasporto, i fascicoli documentali,
+ * il versioning e le prove di consegna.
+ *
+ * <p>Questo file documenta il contenuto del package e non contiene logica applicativa.
  */
 package it.gabriele.truckflow.infrastructure.memory.document;

@@ -1,7 +1,9 @@
 /**
- * In-memory repositories for oversized-load profiles and permits.
+ * Repository in memoria oversized.
  *
- * <p>These adapters are temporary persistence implementations used for tests, demos and the
- * pre-database phase of TruckFlow Manager.
+ * <p>Contiene adapter in memoria temporanei per i trasporti eccezionali, i permessi, le scorte, i
+ * limiti dimensionali e i vincoli di rotta.
+ *
+ * <p>Questo file documenta il contenuto del package e non contiene logica applicativa.
  */
 package it.gabriele.truckflow.infrastructure.memory.oversized;

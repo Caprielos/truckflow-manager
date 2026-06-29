@@ -1,7 +1,9 @@
 /**
- * In-memory repositories for inventory items, balances and stock movements.
+ * Repository in memoria inventory.
  *
- * <p>These adapters are temporary persistence implementations used for tests, demos and the
- * pre-database phase of TruckFlow Manager.
+ * <p>Contiene adapter in memoria temporanei per gli articoli, le giacenze, i movimenti, le scorte e
+ * le regole di magazzino.
+ *
+ * <p>Questo file documenta il contenuto del package e non contiene logica applicativa.
  */
 package it.gabriele.truckflow.infrastructure.memory.inventory;

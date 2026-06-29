@@ -1,7 +1,9 @@
 /**
- * In-memory repositories for fuel transactions and fuel card imports.
+ * Repository in memoria fuel.
  *
- * <p>These adapters are temporary persistence implementations used for tests, demos and the
- * pre-database phase of TruckFlow Manager.
+ * <p>Contiene adapter in memoria temporanei per il carburante, le transazioni fuel card, i consumi
+ * e le regole di controllo dei rifornimenti.
+ *
+ * <p>Questo file documenta il contenuto del package e non contiene logica applicativa.
  */
 package it.gabriele.truckflow.infrastructure.memory.fuel;

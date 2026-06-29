@@ -1,2 +1,9 @@
-/** Oversized transport permit and compliance application use cases. */
+/**
+ * Use case oversized.
+ *
+ * <p>Contiene le implementazioni applicative dei processi per i trasporti eccezionali, i permessi,
+ * le scorte, i limiti dimensionali e i vincoli di rotta.
+ *
+ * <p>Questo file documenta il contenuto del package e non contiene logica applicativa.
+ */
 package it.gabriele.truckflow.application.usecase.oversized;

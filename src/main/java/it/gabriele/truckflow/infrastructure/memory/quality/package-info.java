@@ -1,7 +1,9 @@
 /**
- * In-memory repositories for quality events and corrective actions.
+ * Repository in memoria quality.
  *
- * <p>These adapters are temporary persistence implementations used for tests, demos and the
- * pre-database phase of TruckFlow Manager.
+ * <p>Contiene adapter in memoria temporanei per la qualità del servizio, gli eventi qualità, le non
+ * conformità e le azioni correttive.
+ *
+ * <p>Questo file documenta il contenuto del package e non contiene logica applicativa.
  */
 package it.gabriele.truckflow.infrastructure.memory.quality;

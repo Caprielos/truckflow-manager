@@ -1,7 +1,9 @@
 /**
- * In-memory repositories for physical road-transport unit profiles.
+ * Repository in memoria roadtransport.
  *
- * <p>These adapters are temporary persistence implementations used for tests, demos and the
- * pre-database phase of TruckFlow Manager.
+ * <p>Contiene adapter in memoria temporanei per il trasporto fisico su strada, categorie N, assi,
+ * masse, profili veicolo e capacità operative.
+ *
+ * <p>Questo file documenta il contenuto del package e non contiene logica applicativa.
  */
 package it.gabriele.truckflow.infrastructure.memory.roadtransport;

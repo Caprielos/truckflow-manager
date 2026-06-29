@@ -1,7 +1,9 @@
 /**
- * In-memory repositories for operational alert events.
+ * Repository in memoria alerting.
  *
- * <p>These adapters are temporary persistence implementations used for tests, demos and the
- * pre-database phase of TruckFlow Manager.
+ * <p>Contiene adapter in memoria temporanei per gli alert enterprise, le severità, gli stati e le
+ * regole di attenzione operativa.
+ *
+ * <p>Questo file documenta il contenuto del package e non contiene logica applicativa.
  */
 package it.gabriele.truckflow.infrastructure.memory.alerting;

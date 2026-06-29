@@ -1,8 +1,9 @@
 /**
- * In-memory repositories for finance operations such as bank transactions, e-invoices and cost
- * allocation.
+ * Repository in memoria financeops.
  *
- * <p>These adapters are temporary persistence implementations used for tests, demos and the
- * pre-database phase of TruckFlow Manager.
+ * <p>Contiene adapter in memoria temporanei per le operazioni finanziarie, fatture elettroniche,
+ * movimenti bancari e allocazioni di costo reale.
+ *
+ * <p>Questo file documenta il contenuto del package e non contiene logica applicativa.
  */
 package it.gabriele.truckflow.infrastructure.memory.financeops;

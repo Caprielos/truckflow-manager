@@ -1,7 +1,9 @@
 /**
- * In-memory repositories for external connectors and integration runs.
+ * Repository in memoria integration.
  *
- * <p>These adapters are temporary persistence implementations used for tests, demos and the
- * pre-database phase of TruckFlow Manager.
+ * <p>Contiene adapter in memoria temporanei per i connettori, i job, le esecuzioni e gli errori di
+ * integrazione con sistemi esterni.
+ *
+ * <p>Questo file documenta il contenuto del package e non contiene logica applicativa.
  */
 package it.gabriele.truckflow.infrastructure.memory.integration;

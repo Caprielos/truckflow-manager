@@ -1,7 +1,9 @@
 /**
- * In-memory repositories for customs declarations and border crossings.
+ * Repository in memoria customs.
  *
- * <p>These adapters are temporary persistence implementations used for tests, demos and the
- * pre-database phase of TruckFlow Manager.
+ * <p>Contiene adapter in memoria temporanei per la dogana, le dichiarazioni, i documenti
+ * internazionali, i costi e gli attraversamenti di confine.
+ *
+ * <p>Questo file documenta il contenuto del package e non contiene logica applicativa.
  */
 package it.gabriele.truckflow.infrastructure.memory.customs;

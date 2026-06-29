@@ -1,8 +1,9 @@
 /**
- * In-memory repositories for tachograph activities, driver-card downloads and driving-time
- * violations.
+ * Repository in memoria tachograph.
  *
- * <p>These adapters are temporary persistence implementations used for tests, demos and the
- * pre-database phase of TruckFlow Manager.
+ * <p>Contiene adapter in memoria temporanei per il tachigrafo digitale, le attività conducente, i
+ * download carta e le violazioni rilevate.
+ *
+ * <p>Questo file documenta il contenuto del package e non contiene logica applicativa.
  */
 package it.gabriele.truckflow.infrastructure.memory.tachograph;

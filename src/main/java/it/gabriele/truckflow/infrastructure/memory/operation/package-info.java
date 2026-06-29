@@ -1,7 +1,9 @@
 /**
- * In-memory repositories for operational transport missions.
+ * Repository in memoria operation.
  *
- * <p>These adapters are temporary persistence implementations used for tests, demos and the
- * pre-database phase of TruckFlow Manager.
+ * <p>Contiene adapter in memoria temporanei per le missioni operative, le assegnazioni, gli stati
+ * missione e la chiusura operativa.
+ *
+ * <p>Questo file documenta il contenuto del package e non contiene logica applicativa.
  */
 package it.gabriele.truckflow.infrastructure.memory.operation;

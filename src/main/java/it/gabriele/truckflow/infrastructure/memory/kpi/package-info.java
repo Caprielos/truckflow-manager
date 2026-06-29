@@ -1,7 +1,9 @@
 /**
- * In-memory repositories for KPI results and KPI thresholds.
+ * Repository in memoria kpi.
  *
- * <p>These adapters are temporary persistence implementations used for tests, demos and the
- * pre-database phase of TruckFlow Manager.
+ * <p>Contiene adapter in memoria temporanei per i KPI, le metriche, le soglie, le categorie e i
+ * risultati di controllo direzionale.
+ *
+ * <p>Questo file documenta il contenuto del package e non contiene logica applicativa.
  */
 package it.gabriele.truckflow.infrastructure.memory.kpi;

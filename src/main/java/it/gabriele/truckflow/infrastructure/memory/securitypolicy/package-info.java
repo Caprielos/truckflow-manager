@@ -1,7 +1,9 @@
 /**
- * In-memory repositories for enterprise access policies.
+ * Repository in memoria securitypolicy.
  *
- * <p>These adapters are temporary persistence implementations used for tests, demos and the
- * pre-database phase of TruckFlow Manager.
+ * <p>Contiene adapter in memoria temporanei per le policy di sicurezza enterprise, i reparti, le
+ * risorse protette e i livelli di accesso.
+ *
+ * <p>Questo file documenta il contenuto del package e non contiene logica applicativa.
  */
 package it.gabriele.truckflow.infrastructure.memory.securitypolicy;

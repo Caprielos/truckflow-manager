@@ -1,7 +1,9 @@
 /**
- * In-memory repositories for digital proof-of-delivery evidence.
+ * Repository in memoria pod.
  *
- * <p>These adapters are temporary persistence implementations used for tests, demos and the
- * pre-database phase of TruckFlow Manager.
+ * <p>Contiene adapter in memoria temporanei per le prove digitali di consegna, foto, firma,
+ * timestamp, geolocalizzazione e riserve.
+ *
+ * <p>Questo file documenta il contenuto del package e non contiene logica applicativa.
  */
 package it.gabriele.truckflow.infrastructure.memory.pod;

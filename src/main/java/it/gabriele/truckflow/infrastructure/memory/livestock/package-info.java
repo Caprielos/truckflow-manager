@@ -1,7 +1,9 @@
 /**
- * In-memory repositories for livestock vehicle profiles and livestock trip plans.
+ * Repository in memoria livestock.
  *
- * <p>These adapters are temporary persistence implementations used for tests, demos and the
- * pre-database phase of TruckFlow Manager.
+ * <p>Contiene adapter in memoria temporanei per il trasporto animali vivi, il benessere animale, lo
+ * spazio minimo, le soste e i documenti veterinari.
+ *
+ * <p>Questo file documenta il contenuto del package e non contiene logica applicativa.
  */
 package it.gabriele.truckflow.infrastructure.memory.livestock;

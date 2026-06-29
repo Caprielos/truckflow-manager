@@ -1,7 +1,9 @@
 /**
- * In-memory repositories for route plans.
+ * Repository in memoria route.
  *
- * <p>These adapters are temporary persistence implementations used for tests, demos and the
- * pre-database phase of TruckFlow Manager.
+ * <p>Contiene adapter in memoria temporanei per le rotte, le tratte, gli stop, le finestre
+ * temporali e le regole di pianificazione percorso.
+ *
+ * <p>Questo file documenta il contenuto del package e non contiene logica applicativa.
  */
 package it.gabriele.truckflow.infrastructure.memory.route;

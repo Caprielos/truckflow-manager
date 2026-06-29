@@ -1,7 +1,9 @@
 /**
- * In-memory infrastructure adapters.
+ * Repository in memoria condivisi.
  *
- * <p>This package keeps shared in-memory repository infrastructure only. Concrete repositories are
- * grouped in subpackages by bounded context.
+ * <p>Contiene solo la base generica dei repository in memoria; le implementazioni concrete stanno
+ * nei sottopackage per area.
+ *
+ * <p>Questo file documenta il contenuto del package e non contiene logica applicativa.
  */
 package it.gabriele.truckflow.infrastructure.memory;

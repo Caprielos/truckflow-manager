@@ -1,7 +1,8 @@
 /**
- * In-memory repositories for workflow definitions and workflow instances.
+ * Repository in memoria workflow.
  *
- * <p>These adapters are temporary persistence implementations used for tests, demos and the
- * pre-database phase of TruckFlow Manager.
+ * <p>Contiene adapter in memoria temporanei per l’area workflow.
+ *
+ * <p>Questo file documenta il contenuto del package e non contiene logica applicativa.
  */
 package it.gabriele.truckflow.infrastructure.memory.workflow;

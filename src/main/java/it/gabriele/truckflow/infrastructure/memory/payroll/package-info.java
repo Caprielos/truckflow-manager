@@ -1,7 +1,9 @@
 /**
- * In-memory repositories for driver payroll policies, work reports and payroll results.
+ * Repository in memoria payroll.
  *
- * <p>These adapters are temporary persistence implementations used for tests, demos and the
- * pre-database phase of TruckFlow Manager.
+ * <p>Contiene adapter in memoria temporanei per il payroll autisti, le policy paga, le componenti
+ * retributive e i calcoli collegati alle missioni.
+ *
+ * <p>Questo file documenta il contenuto del package e non contiene logica applicativa.
  */
 package it.gabriele.truckflow.infrastructure.memory.payroll;

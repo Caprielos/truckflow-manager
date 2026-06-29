@@ -1,2 +1,9 @@
-/** Inbound ports for route optimization plans and constraint evaluation. */
+/**
+ * Inbound port routeoptimization.
+ *
+ * <p>Definisce i contratti applicativi in ingresso per l’ottimizzazione del percorso, i vincoli,
+ * gli obiettivi, i costi e la revisione planner.
+ *
+ * <p>Questo file documenta il contenuto del package e non contiene logica applicativa.
+ */
 package it.gabriele.truckflow.application.port.in.routeoptimization;

@@ -1,0 +1,9 @@
+/**
+ * Dominio claim.
+ *
+ * <p>Contiene il modello business e le regole di dominio per i reclami, i sinistri, i danni, le
+ * responsabilità e le regole di chiusura claim.
+ *
+ * <p>Questo file documenta il contenuto del package e non contiene logica applicativa.
+ */
+package it.gabriele.truckflow.domain.claim;

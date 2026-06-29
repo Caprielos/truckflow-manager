@@ -1,7 +1,9 @@
 /**
- * In-memory repositories for maintenance work orders and driver defect tickets.
+ * Repository in memoria maintenance.
  *
- * <p>These adapters are temporary persistence implementations used for tests, demos and the
- * pre-database phase of TruckFlow Manager.
+ * <p>Contiene adapter in memoria temporanei per la manutenzione flotta, i work order, i difetti, il
+ * fermo tecnico e i costi di intervento.
+ *
+ * <p>Questo file documenta il contenuto del package e non contiene logica applicativa.
  */
 package it.gabriele.truckflow.infrastructure.memory.maintenance;

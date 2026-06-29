@@ -1,7 +1,9 @@
 /**
- * In-memory repositories for report export jobs.
+ * Repository in memoria reportexport.
  *
- * <p>These adapters are temporary persistence implementations used for tests, demos and the
- * pre-database phase of TruckFlow Manager.
+ * <p>Contiene adapter in memoria temporanei per gli export report, i formati
+ * PDF/Excel/CSV/JSON/HTML e gli stati di generazione.
+ *
+ * <p>Questo file documenta il contenuto del package e non contiene logica applicativa.
  */
 package it.gabriele.truckflow.infrastructure.memory.reportexport;

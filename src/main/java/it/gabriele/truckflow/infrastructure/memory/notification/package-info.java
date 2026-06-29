@@ -1,7 +1,9 @@
 /**
- * In-memory repositories for notification messages.
+ * Repository in memoria notification.
  *
- * <p>These adapters are temporary persistence implementations used for tests, demos and the
- * pre-database phase of TruckFlow Manager.
+ * <p>Contiene adapter in memoria temporanei per le notifiche, i canali, i destinatari, gli stati e
+ * le regole di invio messaggi.
+ *
+ * <p>Questo file documenta il contenuto del package e non contiene logica applicativa.
  */
 package it.gabriele.truckflow.infrastructure.memory.notification;

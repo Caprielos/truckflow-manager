@@ -1,7 +1,9 @@
 /**
- * In-memory repositories for tracking timelines.
+ * Repository in memoria tracking.
  *
- * <p>These adapters are temporary persistence implementations used for tests, demos and the
- * pre-database phase of TruckFlow Manager.
+ * <p>Contiene adapter in memoria temporanei per il tracking missione, la timeline eventi, le prove
+ * operative e lo stato avanzamento consegna.
+ *
+ * <p>Questo file documenta il contenuto del package e non contiene logica applicativa.
  */
 package it.gabriele.truckflow.infrastructure.memory.tracking;

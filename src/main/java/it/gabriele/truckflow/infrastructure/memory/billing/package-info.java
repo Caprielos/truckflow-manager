@@ -1,7 +1,9 @@
 /**
- * In-memory repositories for customer billing and revenue invoices.
+ * Repository in memoria billing.
  *
- * <p>These adapters are temporary persistence implementations used for tests, demos and the
- * pre-database phase of TruckFlow Manager.
+ * <p>Contiene adapter in memoria temporanei per la fatturazione cliente, i pagamenti, gli stati
+ * contabili e le regole di incasso.
+ *
+ * <p>Questo file documenta il contenuto del package e non contiene logica applicativa.
  */
 package it.gabriele.truckflow.infrastructure.memory.billing;

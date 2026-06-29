@@ -1,7 +1,8 @@
 /**
- * Outbound application ports.
+ * Porte in uscita del livello applicativo.
  *
- * <p>Repository interfaces are grouped into subpackages by bounded context. The base package only
- * contains shared outbound-port abstractions such as {@code RepositoryPort}.
+ * <p>Ogni sottopackage espone repository o servizi esterni richiesti dagli use case.
+ *
+ * <p>Questo file documenta il contenuto del package e non contiene logica applicativa.
  */
 package it.gabriele.truckflow.application.port.out;

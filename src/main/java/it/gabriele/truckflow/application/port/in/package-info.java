@@ -1,8 +1,9 @@
 /**
- * Inbound application ports for TruckFlow use cases.
+ * Porte in ingresso del livello applicativo.
  *
- * <p>This root package only documents the inbound port layer. Concrete use case interfaces are
- * organized by business area in subpackages, for example {@code parking}, {@code sla}, {@code
- * warehouse}, {@code financeops}, and {@code tachograph}.
+ * <p>Ogni sottopackage espone i contratti invocati da controller, test, scheduler o adapter
+ * esterni.
+ *
+ * <p>Questo file documenta il contenuto del package e non contiene logica applicativa.
  */
 package it.gabriele.truckflow.application.port.in;

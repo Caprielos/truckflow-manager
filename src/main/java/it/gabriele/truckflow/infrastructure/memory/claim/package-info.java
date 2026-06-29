@@ -1,7 +1,9 @@
 /**
- * In-memory repositories for transport claims and customer complaints.
+ * Repository in memoria claim.
  *
- * <p>These adapters are temporary persistence implementations used for tests, demos and the
- * pre-database phase of TruckFlow Manager.
+ * <p>Contiene adapter in memoria temporanei per i reclami, i sinistri, i danni, le responsabilità e
+ * le regole di chiusura claim.
+ *
+ * <p>Questo file documenta il contenuto del package e non contiene logica applicativa.
  */
 package it.gabriele.truckflow.infrastructure.memory.claim;

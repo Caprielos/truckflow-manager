@@ -1,7 +1,9 @@
 /**
- * In-memory repositories for vehicles and vehicle combinations.
+ * Repository in memoria fleet.
  *
- * <p>These adapters are temporary persistence implementations used for tests, demos and the
- * pre-database phase of TruckFlow Manager.
+ * <p>Contiene adapter in memoria temporanei per la flotta, i veicoli, i rimorchi, le combinazioni,
+ * le masse, le dimensioni e le certificazioni.
+ *
+ * <p>Questo file documenta il contenuto del package e non contiene logica applicativa.
  */
 package it.gabriele.truckflow.infrastructure.memory.fleet;
