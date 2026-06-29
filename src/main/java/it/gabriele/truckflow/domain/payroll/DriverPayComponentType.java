@@ -1,0 +1,90 @@
+package it.gabriele.truckflow.domain.payroll;
+
+/**
+ * Tipi di voce economica che possono comporre il costo reale di un autista.
+ * Il modello è volutamente esteso: nella realtà una missione può pagare base, ore,
+ * indennità, rischi, qualifiche, rimorchi/allestimenti e maggiorazioni operative.
+ */
+public enum DriverPayComponentType {
+    BASE_DRIVING_TIME,
+    BASE_OTHER_WORK,
+    WAITING_TIME,
+    LOADING_UNLOADING,
+    OVERTIME,
+    NIGHT_WORK,
+    SUNDAY_WORK,
+    HOLIDAY_WORK,
+
+    DOMESTIC_DAILY_ALLOWANCE,
+    INTERNATIONAL_DAILY_ALLOWANCE,
+    OVERNIGHT_ALLOWANCE,
+    MEAL_REIMBURSEMENT,
+    HOTEL_REIMBURSEMENT,
+    PARKING_REIMBURSEMENT,
+
+    LICENSE_C1_PREMIUM,
+    LICENSE_C_PREMIUM,
+    LICENSE_CE_PREMIUM,
+    CQC_GOODS_PREMIUM,
+    SENIORITY_PREMIUM,
+
+    ADR_BASIC_PREMIUM,
+    ADR_TANK_PREMIUM,
+    ADR_CLASS_1_PREMIUM,
+    ADR_CLASS_7_PREMIUM,
+    DANGEROUS_WASTE_PREMIUM,
+    WASTE_TRANSPORT_PREMIUM,
+
+    REFRIGERATED_TRANSPORT_PREMIUM,
+    PHARMA_TRANSPORT_PREMIUM,
+    FOOD_GRADE_TRANSPORT_PREMIUM,
+    LIVESTOCK_TRANSPORT_PREMIUM,
+    HIGH_VALUE_CARGO_PREMIUM,
+    OVERSIZED_CARGO_PREMIUM,
+    BULK_TRANSPORT_PREMIUM,
+    LIQUID_TANKER_PREMIUM,
+
+    ARTICULATED_VEHICLE_PREMIUM,
+    TRUCK_AND_TRAILER_PREMIUM,
+    SEMI_TRAILER_PREMIUM,
+    DRAWBAR_TRAILER_PREMIUM,
+    TANK_BODY_PREMIUM,
+    TIPPER_BODY_PREMIUM,
+    LOW_LOADER_BODY_PREMIUM,
+    REFRIGERATED_BODY_PREMIUM,
+    CRANE_OPERATION_PREMIUM,
+    TAIL_LIFT_OPERATION_PREMIUM,
+
+    SOCIAL_CONTRIBUTIONS,
+    EMPLOYER_INSURANCE,
+    TRAINING_AMORTIZATION,
+    HEALTH_SURVEILLANCE,
+    OTHER;
+
+    public boolean isAllowanceOrReimbursement() {
+        return switch (this) {
+            case DOMESTIC_DAILY_ALLOWANCE, INTERNATIONAL_DAILY_ALLOWANCE, OVERNIGHT_ALLOWANCE,
+                 MEAL_REIMBURSEMENT, HOTEL_REIMBURSEMENT, PARKING_REIMBURSEMENT -> true;
+            default -> false;
+        };
+    }
+
+    public boolean isRiskOrQualificationPremium() {
+        return switch (this) {
+            case LICENSE_C1_PREMIUM, LICENSE_C_PREMIUM, LICENSE_CE_PREMIUM, CQC_GOODS_PREMIUM,
+                 ADR_BASIC_PREMIUM, ADR_TANK_PREMIUM, ADR_CLASS_1_PREMIUM, ADR_CLASS_7_PREMIUM,
+                 DANGEROUS_WASTE_PREMIUM, WASTE_TRANSPORT_PREMIUM, REFRIGERATED_TRANSPORT_PREMIUM,
+                 PHARMA_TRANSPORT_PREMIUM, FOOD_GRADE_TRANSPORT_PREMIUM, LIVESTOCK_TRANSPORT_PREMIUM,
+                 HIGH_VALUE_CARGO_PREMIUM, OVERSIZED_CARGO_PREMIUM, BULK_TRANSPORT_PREMIUM,
+                 LIQUID_TANKER_PREMIUM -> true;
+            default -> false;
+        };
+    }
+
+    public boolean isEmployerCost() {
+        return switch (this) {
+            case SOCIAL_CONTRIBUTIONS, EMPLOYER_INSURANCE, TRAINING_AMORTIZATION, HEALTH_SURVEILLANCE -> true;
+            default -> false;
+        };
+    }
+}

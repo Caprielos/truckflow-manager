@@ -175,25 +175,52 @@ public final class SupplierInvoice {
         return notes;
     }
 
+    /**
+     * Totale lordo da pagare al fornitore.
+     */
     public Money calculateTotal() {
-        return sum(lines);
+        return sum(lines.stream().map(PurchaseLine::getAmount).toList());
+    }
+
+    public Money calculateNetTotal() {
+        return sum(lines.stream().map(PurchaseLine::calculateNetAmount).toList());
+    }
+
+    public Money calculateVatTotal() {
+        return sum(lines.stream().map(PurchaseLine::calculateVatAmount).toList());
+    }
+
+    public Money calculateRecoverableVatTotal() {
+        return sum(lines.stream().map(PurchaseLine::calculateRecoverableVatAmount).toList());
+    }
+
+    public Money calculateAccountingCostTotal() {
+        return sum(lines.stream().map(PurchaseLine::calculateAccountingCost).toList());
     }
 
     public Money calculateCapitalAssetTotal() {
-        return sum(lines.stream().filter(PurchaseLine::isCapitalAsset).toList());
+        return sum(lines.stream().filter(PurchaseLine::isCapitalAsset).map(PurchaseLine::getAmount).toList());
+    }
+
+    public Money calculateCapitalAssetAccountingCostTotal() {
+        return sum(lines.stream().filter(PurchaseLine::isCapitalAsset).map(PurchaseLine::calculateAccountingCost).toList());
     }
 
     public Money calculateOperatingExpenseTotal() {
-        return sum(lines.stream().filter(PurchaseLine::isOperatingExpense).toList());
+        return sum(lines.stream().filter(PurchaseLine::isOperatingExpense).map(PurchaseLine::getAmount).toList());
     }
 
-    private Money sum(List<PurchaseLine> selectedLines) {
-        if (selectedLines.isEmpty()) {
+    public Money calculateOperatingExpenseAccountingCostTotal() {
+        return sum(lines.stream().filter(PurchaseLine::isOperatingExpense).map(PurchaseLine::calculateAccountingCost).toList());
+    }
+
+    private Money sum(List<Money> selectedAmounts) {
+        if (selectedAmounts.isEmpty()) {
             return Money.of(java.math.BigDecimal.ZERO, lines.get(0).getAmount().getCurrency());
         }
-        Money total = selectedLines.get(0).getAmount();
-        for (int i = 1; i < selectedLines.size(); i++) {
-            total = total.add(selectedLines.get(i).getAmount());
+        Money total = Money.of(java.math.BigDecimal.ZERO, selectedAmounts.get(0).getCurrency());
+        for (Money amount : selectedAmounts) {
+            total = total.add(amount);
         }
         return total;
     }

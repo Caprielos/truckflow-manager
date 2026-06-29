@@ -50,9 +50,37 @@ public final class EconomicsRules {
         return statement.calculateOperatingProfitability().isProfitable();
     }
 
+
+    public static boolean ledgerHasCashDebt(FleetEconomicLedger ledger) {
+        validateLedger(ledger);
+        return ledger.isCashNegative();
+    }
+
+    public static boolean ledgerHasVatDebt(FleetEconomicLedger ledger) {
+        validateLedger(ledger);
+        return ledger.hasVatDebt();
+    }
+
+    public static boolean ledgerHasVatCredit(FleetEconomicLedger ledger) {
+        validateLedger(ledger);
+        return ledger.hasVatCredit();
+    }
+
+    public static boolean ledgerIsLossMakingAfterAllKnownCosts(FleetEconomicLedger ledger) {
+        validateLedger(ledger);
+        return ledger.calculateAccountingProfitability().isLossMaking();
+    }
+
     private static void validateMission(MissionEconomics economics) {
         if (economics == null) {
             throw new IllegalArgumentException("L'economics missione è obbligatorio.");
+        }
+    }
+
+
+    private static void validateLedger(FleetEconomicLedger ledger) {
+        if (ledger == null) {
+            throw new IllegalArgumentException("Il libro economico è obbligatorio.");
         }
     }
 

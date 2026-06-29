@@ -7,6 +7,8 @@ public enum FacilityType {
 
     WAREHOUSE,
     DEPOT,
+    PARKING_YARD,
+    COMPANY_HEADQUARTERS,
     CUSTOMER_SITE,
     SUPPLIER_SITE,
     CROSS_DOCK,
