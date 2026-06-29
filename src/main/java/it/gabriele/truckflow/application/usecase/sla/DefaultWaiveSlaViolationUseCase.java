@@ -1,7 +1,7 @@
 package it.gabriele.truckflow.application.usecase.sla;
 
 import it.gabriele.truckflow.application.port.in.sla.WaiveSlaViolationUseCase;
-import it.gabriele.truckflow.application.port.out.SlaViolationRepository;
+import it.gabriele.truckflow.application.port.out.sla.SlaViolationRepository;
 import it.gabriele.truckflow.domain.sla.SlaViolation;
 import java.util.Objects;
 

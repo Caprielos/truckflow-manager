@@ -1,6 +1,6 @@
 package it.gabriele.truckflow.infrastructure.memory.tire;
 
-import it.gabriele.truckflow.application.port.out.TireInstallationRepository;
+import it.gabriele.truckflow.application.port.out.tire.TireInstallationRepository;
 import it.gabriele.truckflow.domain.tire.TireInstallation;
 import it.gabriele.truckflow.infrastructure.memory.InMemoryRepository;
 

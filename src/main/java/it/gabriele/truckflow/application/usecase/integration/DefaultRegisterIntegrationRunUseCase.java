@@ -1,9 +1,9 @@
 package it.gabriele.truckflow.application.usecase.integration;
 
 import it.gabriele.truckflow.application.port.in.integration.RegisterIntegrationRunUseCase;
-import it.gabriele.truckflow.application.port.out.AlertEventRepository;
-import it.gabriele.truckflow.application.port.out.IntegrationConnectorRepository;
-import it.gabriele.truckflow.application.port.out.IntegrationRunRepository;
+import it.gabriele.truckflow.application.port.out.alerting.AlertEventRepository;
+import it.gabriele.truckflow.application.port.out.integration.IntegrationConnectorRepository;
+import it.gabriele.truckflow.application.port.out.integration.IntegrationRunRepository;
 import it.gabriele.truckflow.application.usecase.EnterpriseAlertFactory;
 import it.gabriele.truckflow.domain.alerting.AlertEvent;
 import it.gabriele.truckflow.domain.alerting.AlertSeverity;

@@ -1,6 +1,6 @@
 package it.gabriele.truckflow.infrastructure.memory.tracking;
 
-import it.gabriele.truckflow.application.port.out.TrackingTimelineRepository;
+import it.gabriele.truckflow.application.port.out.tracking.TrackingTimelineRepository;
 import it.gabriele.truckflow.domain.tracking.TrackingTimeline;
 import it.gabriele.truckflow.infrastructure.memory.InMemoryRepository;
 

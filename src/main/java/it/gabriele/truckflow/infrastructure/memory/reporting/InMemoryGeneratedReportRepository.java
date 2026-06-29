@@ -1,6 +1,6 @@
 package it.gabriele.truckflow.infrastructure.memory.reporting;
 
-import it.gabriele.truckflow.application.port.out.GeneratedReportRepository;
+import it.gabriele.truckflow.application.port.out.reporting.GeneratedReportRepository;
 import it.gabriele.truckflow.domain.reporting.GeneratedReport;
 import it.gabriele.truckflow.infrastructure.memory.InMemoryRepository;
 

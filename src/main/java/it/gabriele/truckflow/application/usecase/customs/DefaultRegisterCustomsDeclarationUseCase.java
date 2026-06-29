@@ -1,7 +1,7 @@
 package it.gabriele.truckflow.application.usecase.customs;
 
 import it.gabriele.truckflow.application.port.in.customs.RegisterCustomsDeclarationUseCase;
-import it.gabriele.truckflow.application.port.out.CustomsDeclarationRepository;
+import it.gabriele.truckflow.application.port.out.customs.CustomsDeclarationRepository;
 import it.gabriele.truckflow.domain.customs.CustomsDeclaration;
 import java.util.Objects;
 

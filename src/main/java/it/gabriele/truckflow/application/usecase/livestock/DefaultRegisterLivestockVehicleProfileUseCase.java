@@ -1,7 +1,7 @@
 package it.gabriele.truckflow.application.usecase.livestock;
 
 import it.gabriele.truckflow.application.port.in.livestock.RegisterLivestockVehicleProfileUseCase;
-import it.gabriele.truckflow.application.port.out.LivestockVehicleProfileRepository;
+import it.gabriele.truckflow.application.port.out.livestock.LivestockVehicleProfileRepository;
 import it.gabriele.truckflow.domain.livestock.LivestockVehicleProfile;
 import java.util.Objects;
 

@@ -1,7 +1,7 @@
 package it.gabriele.truckflow.application.usecase.waste;
 
 import it.gabriele.truckflow.application.port.in.waste.RegisterWasteTransportDocumentUseCase;
-import it.gabriele.truckflow.application.port.out.WasteTransportDocumentRepository;
+import it.gabriele.truckflow.application.port.out.waste.WasteTransportDocumentRepository;
 import it.gabriele.truckflow.domain.waste.WasteTransportDocument;
 import java.util.Objects;
 

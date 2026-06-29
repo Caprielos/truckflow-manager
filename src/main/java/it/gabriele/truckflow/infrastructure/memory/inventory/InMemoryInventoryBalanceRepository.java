@@ -1,6 +1,6 @@
 package it.gabriele.truckflow.infrastructure.memory.inventory;
 
-import it.gabriele.truckflow.application.port.out.InventoryBalanceRepository;
+import it.gabriele.truckflow.application.port.out.inventory.InventoryBalanceRepository;
 import it.gabriele.truckflow.domain.inventory.InventoryBalance;
 import it.gabriele.truckflow.infrastructure.memory.InMemoryRepository;
 

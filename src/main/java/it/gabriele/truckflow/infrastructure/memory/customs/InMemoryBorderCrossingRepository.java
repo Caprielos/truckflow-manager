@@ -1,6 +1,6 @@
 package it.gabriele.truckflow.infrastructure.memory.customs;
 
-import it.gabriele.truckflow.application.port.out.BorderCrossingRepository;
+import it.gabriele.truckflow.application.port.out.customs.BorderCrossingRepository;
 import it.gabriele.truckflow.domain.customs.BorderCrossing;
 import it.gabriele.truckflow.infrastructure.memory.InMemoryRepository;
 

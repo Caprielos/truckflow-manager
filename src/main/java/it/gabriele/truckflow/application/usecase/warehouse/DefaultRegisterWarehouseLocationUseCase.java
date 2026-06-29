@@ -1,7 +1,7 @@
 package it.gabriele.truckflow.application.usecase.warehouse;
 
 import it.gabriele.truckflow.application.port.in.warehouse.RegisterWarehouseLocationUseCase;
-import it.gabriele.truckflow.application.port.out.EnterpriseWarehouseLocationRepository;
+import it.gabriele.truckflow.application.port.out.warehouse.EnterpriseWarehouseLocationRepository;
 import it.gabriele.truckflow.domain.warehouse.WarehouseLocation;
 import java.util.Objects;
 

@@ -1,6 +1,6 @@
 package it.gabriele.truckflow.infrastructure.memory.driver;
 
-import it.gabriele.truckflow.application.port.out.DriverRepository;
+import it.gabriele.truckflow.application.port.out.driver.DriverRepository;
 import it.gabriele.truckflow.domain.driver.Driver;
 import it.gabriele.truckflow.infrastructure.memory.InMemoryRepository;
 

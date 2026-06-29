@@ -1,6 +1,6 @@
 package it.gabriele.truckflow.infrastructure.memory.dispatch;
 
-import it.gabriele.truckflow.application.port.out.DispatchPlanRepository;
+import it.gabriele.truckflow.application.port.out.dispatch.DispatchPlanRepository;
 import it.gabriele.truckflow.domain.dispatch.DispatchPlan;
 import it.gabriele.truckflow.infrastructure.memory.InMemoryRepository;
 

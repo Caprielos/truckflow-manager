@@ -1,8 +1,8 @@
 package it.gabriele.truckflow.application.usecase.suppliercontract;
 
 import it.gabriele.truckflow.application.port.in.suppliercontract.EvaluateSubcontractorEligibilityUseCase;
-import it.gabriele.truckflow.application.port.out.AlertEventRepository;
-import it.gabriele.truckflow.application.port.out.SupplierContractRepository;
+import it.gabriele.truckflow.application.port.out.alerting.AlertEventRepository;
+import it.gabriele.truckflow.application.port.out.suppliercontract.SupplierContractRepository;
 import it.gabriele.truckflow.application.usecase.EnterpriseAlertFactory;
 import it.gabriele.truckflow.application.usecase.EnterpriseValidationResult;
 import it.gabriele.truckflow.domain.alerting.*;

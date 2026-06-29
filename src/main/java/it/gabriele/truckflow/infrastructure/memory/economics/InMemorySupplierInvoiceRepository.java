@@ -1,6 +1,6 @@
 package it.gabriele.truckflow.infrastructure.memory.economics;
 
-import it.gabriele.truckflow.application.port.out.SupplierInvoiceRepository;
+import it.gabriele.truckflow.application.port.out.economics.SupplierInvoiceRepository;
 import it.gabriele.truckflow.domain.economics.SupplierInvoice;
 import it.gabriele.truckflow.infrastructure.memory.InMemoryRepository;
 

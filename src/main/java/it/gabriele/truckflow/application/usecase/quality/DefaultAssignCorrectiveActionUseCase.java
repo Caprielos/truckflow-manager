@@ -1,7 +1,7 @@
 package it.gabriele.truckflow.application.usecase.quality;
 
 import it.gabriele.truckflow.application.port.in.quality.AssignCorrectiveActionUseCase;
-import it.gabriele.truckflow.application.port.out.QualityEventRepository;
+import it.gabriele.truckflow.application.port.out.quality.QualityEventRepository;
 import it.gabriele.truckflow.domain.quality.QualityEvent;
 import java.util.Objects;
 

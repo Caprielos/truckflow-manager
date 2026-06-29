@@ -1,6 +1,6 @@
 package it.gabriele.truckflow.infrastructure.memory.deadline;
 
-import it.gabriele.truckflow.application.port.out.EnterpriseDeadlineRepository;
+import it.gabriele.truckflow.application.port.out.deadline.EnterpriseDeadlineRepository;
 import it.gabriele.truckflow.domain.deadline.EnterpriseDeadline;
 import it.gabriele.truckflow.infrastructure.memory.InMemoryRepository;
 

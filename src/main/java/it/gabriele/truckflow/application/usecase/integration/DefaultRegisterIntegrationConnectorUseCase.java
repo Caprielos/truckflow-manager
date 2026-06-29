@@ -1,7 +1,7 @@
 package it.gabriele.truckflow.application.usecase.integration;
 
 import it.gabriele.truckflow.application.port.in.integration.RegisterIntegrationConnectorUseCase;
-import it.gabriele.truckflow.application.port.out.IntegrationConnectorRepository;
+import it.gabriele.truckflow.application.port.out.integration.IntegrationConnectorRepository;
 import it.gabriele.truckflow.domain.integration.IntegrationConnector;
 import java.util.Objects;
 

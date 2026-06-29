@@ -1,6 +1,6 @@
 package it.gabriele.truckflow.infrastructure.memory.financeops;
 
-import it.gabriele.truckflow.application.port.out.ElectronicInvoiceEnvelopeRepository;
+import it.gabriele.truckflow.application.port.out.financeops.ElectronicInvoiceEnvelopeRepository;
 import it.gabriele.truckflow.domain.financeops.ElectronicInvoiceEnvelope;
 import it.gabriele.truckflow.infrastructure.memory.InMemoryRepository;
 

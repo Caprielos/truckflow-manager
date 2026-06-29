@@ -1,7 +1,7 @@
 package it.gabriele.truckflow.application.usecase.oversized;
 
 import it.gabriele.truckflow.application.port.in.oversized.RegisterOversizedLoadProfileUseCase;
-import it.gabriele.truckflow.application.port.out.OversizedLoadProfileRepository;
+import it.gabriele.truckflow.application.port.out.oversized.OversizedLoadProfileRepository;
 import it.gabriele.truckflow.domain.oversized.OversizedLoadProfile;
 import java.util.Objects;
 

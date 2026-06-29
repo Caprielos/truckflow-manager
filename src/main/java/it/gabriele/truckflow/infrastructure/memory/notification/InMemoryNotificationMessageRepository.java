@@ -1,6 +1,6 @@
 package it.gabriele.truckflow.infrastructure.memory.notification;
 
-import it.gabriele.truckflow.application.port.out.NotificationMessageRepository;
+import it.gabriele.truckflow.application.port.out.notification.NotificationMessageRepository;
 import it.gabriele.truckflow.domain.notification.NotificationMessage;
 import it.gabriele.truckflow.infrastructure.memory.InMemoryRepository;
 

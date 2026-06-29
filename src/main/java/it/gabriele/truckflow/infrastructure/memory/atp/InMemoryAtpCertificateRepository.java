@@ -1,6 +1,6 @@
 package it.gabriele.truckflow.infrastructure.memory.atp;
 
-import it.gabriele.truckflow.application.port.out.AtpCertificateRepository;
+import it.gabriele.truckflow.application.port.out.atp.AtpCertificateRepository;
 import it.gabriele.truckflow.domain.atp.AtpCertificate;
 import it.gabriele.truckflow.infrastructure.memory.InMemoryRepository;
 

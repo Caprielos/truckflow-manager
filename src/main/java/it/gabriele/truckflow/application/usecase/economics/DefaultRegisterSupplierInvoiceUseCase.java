@@ -1,7 +1,7 @@
 package it.gabriele.truckflow.application.usecase.economics;
 
 import it.gabriele.truckflow.application.port.in.economics.RegisterSupplierInvoiceUseCase;
-import it.gabriele.truckflow.application.port.out.SupplierInvoiceRepository;
+import it.gabriele.truckflow.application.port.out.economics.SupplierInvoiceRepository;
 import it.gabriele.truckflow.domain.economics.SupplierInvoice;
 import java.util.Objects;
 

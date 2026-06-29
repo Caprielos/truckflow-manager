@@ -1,6 +1,6 @@
 package it.gabriele.truckflow.infrastructure.memory.livestock;
 
-import it.gabriele.truckflow.application.port.out.LivestockVehicleProfileRepository;
+import it.gabriele.truckflow.application.port.out.livestock.LivestockVehicleProfileRepository;
 import it.gabriele.truckflow.domain.livestock.LivestockVehicleProfile;
 import it.gabriele.truckflow.infrastructure.memory.InMemoryRepository;
 

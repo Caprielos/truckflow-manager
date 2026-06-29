@@ -1,6 +1,6 @@
 package it.gabriele.truckflow.infrastructure.memory.parking;
 
-import it.gabriele.truckflow.application.port.out.ParkingSpotRepository;
+import it.gabriele.truckflow.application.port.out.parking.ParkingSpotRepository;
 import it.gabriele.truckflow.domain.parking.ParkingSpot;
 import it.gabriele.truckflow.infrastructure.memory.InMemoryRepository;
 import java.util.Optional;

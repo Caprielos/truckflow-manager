@@ -1,6 +1,6 @@
 package it.gabriele.truckflow.infrastructure.memory.warehouse;
 
-import it.gabriele.truckflow.application.port.out.LoadingDockRepository;
+import it.gabriele.truckflow.application.port.out.warehouse.LoadingDockRepository;
 import it.gabriele.truckflow.domain.warehouse.LoadingDock;
 import it.gabriele.truckflow.infrastructure.memory.InMemoryRepository;
 

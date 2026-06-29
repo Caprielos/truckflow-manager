@@ -1,7 +1,7 @@
 package it.gabriele.truckflow.application.usecase.kpi;
 
 import it.gabriele.truckflow.application.port.in.kpi.RegisterKpiThresholdUseCase;
-import it.gabriele.truckflow.application.port.out.KpiThresholdRepository;
+import it.gabriele.truckflow.application.port.out.kpi.KpiThresholdRepository;
 import it.gabriele.truckflow.domain.kpi.KpiThreshold;
 import java.util.Objects;
 

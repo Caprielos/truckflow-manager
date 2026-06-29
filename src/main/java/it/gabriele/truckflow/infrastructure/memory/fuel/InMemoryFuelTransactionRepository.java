@@ -1,6 +1,6 @@
 package it.gabriele.truckflow.infrastructure.memory.fuel;
 
-import it.gabriele.truckflow.application.port.out.FuelTransactionRepository;
+import it.gabriele.truckflow.application.port.out.fuel.FuelTransactionRepository;
 import it.gabriele.truckflow.domain.fuel.FuelTransaction;
 import it.gabriele.truckflow.infrastructure.memory.InMemoryRepository;
 

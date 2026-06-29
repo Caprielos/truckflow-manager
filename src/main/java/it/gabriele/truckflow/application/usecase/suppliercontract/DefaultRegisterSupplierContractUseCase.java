@@ -1,7 +1,7 @@
 package it.gabriele.truckflow.application.usecase.suppliercontract;
 
 import it.gabriele.truckflow.application.port.in.suppliercontract.RegisterSupplierContractUseCase;
-import it.gabriele.truckflow.application.port.out.SupplierContractRepository;
+import it.gabriele.truckflow.application.port.out.suppliercontract.SupplierContractRepository;
 import it.gabriele.truckflow.domain.suppliercontract.SupplierContract;
 import java.util.Objects;
 

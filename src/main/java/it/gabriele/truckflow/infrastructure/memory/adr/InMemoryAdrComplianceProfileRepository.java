@@ -1,6 +1,6 @@
 package it.gabriele.truckflow.infrastructure.memory.adr;
 
-import it.gabriele.truckflow.application.port.out.AdrComplianceProfileRepository;
+import it.gabriele.truckflow.application.port.out.adr.AdrComplianceProfileRepository;
 import it.gabriele.truckflow.domain.adr.AdrComplianceProfile;
 import it.gabriele.truckflow.infrastructure.memory.InMemoryRepository;
 

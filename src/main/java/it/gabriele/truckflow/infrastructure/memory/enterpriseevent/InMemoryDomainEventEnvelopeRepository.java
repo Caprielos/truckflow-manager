@@ -1,6 +1,6 @@
 package it.gabriele.truckflow.infrastructure.memory.enterpriseevent;
 
-import it.gabriele.truckflow.application.port.out.DomainEventEnvelopeRepository;
+import it.gabriele.truckflow.application.port.out.enterpriseevent.DomainEventEnvelopeRepository;
 import it.gabriele.truckflow.domain.enterpriseevent.DomainEventEnvelope;
 import it.gabriele.truckflow.infrastructure.memory.InMemoryRepository;
 

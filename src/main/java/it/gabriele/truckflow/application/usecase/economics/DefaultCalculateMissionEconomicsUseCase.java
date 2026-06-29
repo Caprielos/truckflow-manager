@@ -1,9 +1,9 @@
 package it.gabriele.truckflow.application.usecase.economics;
 
 import it.gabriele.truckflow.application.port.in.economics.CalculateMissionEconomicsUseCase;
-import it.gabriele.truckflow.application.port.out.MissionEconomicsRepository;
-import it.gabriele.truckflow.application.port.out.ShipmentRepository;
-import it.gabriele.truckflow.application.port.out.TransportMissionRepository;
+import it.gabriele.truckflow.application.port.out.economics.MissionEconomicsRepository;
+import it.gabriele.truckflow.application.port.out.operation.TransportMissionRepository;
+import it.gabriele.truckflow.application.port.out.shipment.ShipmentRepository;
 import it.gabriele.truckflow.domain.economics.MissionEconomics;
 import java.util.Objects;
 

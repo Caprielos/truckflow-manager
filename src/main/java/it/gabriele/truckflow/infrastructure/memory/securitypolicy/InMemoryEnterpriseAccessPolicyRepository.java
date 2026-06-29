@@ -1,6 +1,6 @@
 package it.gabriele.truckflow.infrastructure.memory.securitypolicy;
 
-import it.gabriele.truckflow.application.port.out.EnterpriseAccessPolicyRepository;
+import it.gabriele.truckflow.application.port.out.securitypolicy.EnterpriseAccessPolicyRepository;
 import it.gabriele.truckflow.domain.securitypolicy.EnterpriseAccessPolicy;
 import it.gabriele.truckflow.infrastructure.memory.InMemoryRepository;
 

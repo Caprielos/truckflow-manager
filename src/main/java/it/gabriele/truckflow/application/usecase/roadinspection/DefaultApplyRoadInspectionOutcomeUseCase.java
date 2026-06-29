@@ -1,8 +1,8 @@
 package it.gabriele.truckflow.application.usecase.roadinspection;
 
 import it.gabriele.truckflow.application.port.in.roadinspection.ApplyRoadInspectionOutcomeUseCase;
-import it.gabriele.truckflow.application.port.out.AlertEventRepository;
-import it.gabriele.truckflow.application.port.out.RoadInspectionRepository;
+import it.gabriele.truckflow.application.port.out.alerting.AlertEventRepository;
+import it.gabriele.truckflow.application.port.out.roadinspection.RoadInspectionRepository;
 import it.gabriele.truckflow.application.usecase.EnterpriseAlertFactory;
 import it.gabriele.truckflow.application.usecase.EnterpriseValidationResult;
 import it.gabriele.truckflow.domain.alerting.*;

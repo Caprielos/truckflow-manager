@@ -1,9 +1,9 @@
 package it.gabriele.truckflow.application.usecase.waste;
 
 import it.gabriele.truckflow.application.port.in.waste.ValidateWasteComplianceUseCase;
-import it.gabriele.truckflow.application.port.out.AlertEventRepository;
-import it.gabriele.truckflow.application.port.out.EnvironmentalManagerRegistrationRepository;
-import it.gabriele.truckflow.application.port.out.WasteTransportDocumentRepository;
+import it.gabriele.truckflow.application.port.out.alerting.AlertEventRepository;
+import it.gabriele.truckflow.application.port.out.waste.EnvironmentalManagerRegistrationRepository;
+import it.gabriele.truckflow.application.port.out.waste.WasteTransportDocumentRepository;
 import it.gabriele.truckflow.application.usecase.EnterpriseAlertFactory;
 import it.gabriele.truckflow.application.usecase.EnterpriseValidationResult;
 import it.gabriele.truckflow.domain.alerting.*;

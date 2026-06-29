@@ -1,7 +1,7 @@
 package it.gabriele.truckflow.application.usecase.enterpriseevent;
 
 import it.gabriele.truckflow.application.port.in.enterpriseevent.RecordDomainEventUseCase;
-import it.gabriele.truckflow.application.port.out.DomainEventEnvelopeRepository;
+import it.gabriele.truckflow.application.port.out.enterpriseevent.DomainEventEnvelopeRepository;
 import it.gabriele.truckflow.domain.enterpriseevent.DomainEventEnvelope;
 import java.util.Objects;
 

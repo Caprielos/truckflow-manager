@@ -1,6 +1,6 @@
 package it.gabriele.truckflow.infrastructure.memory.foodsafety;
 
-import it.gabriele.truckflow.application.port.out.FoodSafetyProfileRepository;
+import it.gabriele.truckflow.application.port.out.foodsafety.FoodSafetyProfileRepository;
 import it.gabriele.truckflow.domain.foodsafety.FoodSafetyProfile;
 import it.gabriele.truckflow.infrastructure.memory.InMemoryRepository;
 

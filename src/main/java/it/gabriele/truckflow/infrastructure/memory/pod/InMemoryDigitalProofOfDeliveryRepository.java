@@ -1,6 +1,6 @@
 package it.gabriele.truckflow.infrastructure.memory.pod;
 
-import it.gabriele.truckflow.application.port.out.DigitalProofOfDeliveryRepository;
+import it.gabriele.truckflow.application.port.out.pod.DigitalProofOfDeliveryRepository;
 import it.gabriele.truckflow.domain.pod.DigitalProofOfDelivery;
 import it.gabriele.truckflow.infrastructure.memory.InMemoryRepository;
 

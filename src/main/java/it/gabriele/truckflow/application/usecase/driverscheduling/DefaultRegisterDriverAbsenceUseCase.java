@@ -1,7 +1,7 @@
 package it.gabriele.truckflow.application.usecase.driverscheduling;
 
 import it.gabriele.truckflow.application.port.in.driverscheduling.RegisterDriverAbsenceUseCase;
-import it.gabriele.truckflow.application.port.out.DriverAbsenceRepository;
+import it.gabriele.truckflow.application.port.out.driverscheduling.DriverAbsenceRepository;
 import it.gabriele.truckflow.domain.driverscheduling.DriverAbsence;
 import java.util.Objects;
 

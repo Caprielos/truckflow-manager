@@ -1,6 +1,6 @@
 package it.gabriele.truckflow.infrastructure.memory.driverscheduling;
 
-import it.gabriele.truckflow.application.port.out.DriverDisciplinaryRecordRepository;
+import it.gabriele.truckflow.application.port.out.driverscheduling.DriverDisciplinaryRecordRepository;
 import it.gabriele.truckflow.domain.driverscheduling.DriverDisciplinaryRecord;
 import it.gabriele.truckflow.infrastructure.memory.InMemoryRepository;
 

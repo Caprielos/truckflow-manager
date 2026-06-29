@@ -1,6 +1,6 @@
 package it.gabriele.truckflow.infrastructure.memory.integration;
 
-import it.gabriele.truckflow.application.port.out.IntegrationRunRepository;
+import it.gabriele.truckflow.application.port.out.integration.IntegrationRunRepository;
 import it.gabriele.truckflow.domain.integration.IntegrationRun;
 import it.gabriele.truckflow.infrastructure.memory.InMemoryRepository;
 

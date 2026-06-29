@@ -1,6 +1,6 @@
 package it.gabriele.truckflow.infrastructure.memory.telematics;
 
-import it.gabriele.truckflow.application.port.out.TelematicsSnapshotRepository;
+import it.gabriele.truckflow.application.port.out.telematics.TelematicsSnapshotRepository;
 import it.gabriele.truckflow.domain.telematics.TelematicsSnapshot;
 import it.gabriele.truckflow.infrastructure.memory.InMemoryRepository;
 

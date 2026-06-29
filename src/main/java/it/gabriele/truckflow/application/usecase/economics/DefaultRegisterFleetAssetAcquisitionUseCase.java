@@ -1,7 +1,7 @@
 package it.gabriele.truckflow.application.usecase.economics;
 
 import it.gabriele.truckflow.application.port.in.economics.RegisterFleetAssetAcquisitionUseCase;
-import it.gabriele.truckflow.application.port.out.FleetAssetAcquisitionRepository;
+import it.gabriele.truckflow.application.port.out.economics.FleetAssetAcquisitionRepository;
 import it.gabriele.truckflow.domain.economics.FleetAssetAcquisition;
 import java.util.Objects;
 

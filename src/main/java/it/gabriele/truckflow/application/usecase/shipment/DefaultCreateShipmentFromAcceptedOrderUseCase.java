@@ -1,8 +1,8 @@
 package it.gabriele.truckflow.application.usecase.shipment;
 
 import it.gabriele.truckflow.application.port.in.shipment.CreateShipmentFromAcceptedOrderUseCase;
-import it.gabriele.truckflow.application.port.out.ShipmentRepository;
-import it.gabriele.truckflow.application.port.out.TransportOrderRepository;
+import it.gabriele.truckflow.application.port.out.order.TransportOrderRepository;
+import it.gabriele.truckflow.application.port.out.shipment.ShipmentRepository;
 import it.gabriele.truckflow.domain.order.TransportOrder;
 import it.gabriele.truckflow.domain.shipment.Shipment;
 import java.util.Objects;

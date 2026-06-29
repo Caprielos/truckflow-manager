@@ -1,6 +1,6 @@
 package it.gabriele.truckflow.infrastructure.memory.financeops;
 
-import it.gabriele.truckflow.application.port.out.CostAllocationRepository;
+import it.gabriele.truckflow.application.port.out.financeops.CostAllocationRepository;
 import it.gabriele.truckflow.domain.financeops.CostAllocation;
 import it.gabriele.truckflow.infrastructure.memory.InMemoryRepository;
 

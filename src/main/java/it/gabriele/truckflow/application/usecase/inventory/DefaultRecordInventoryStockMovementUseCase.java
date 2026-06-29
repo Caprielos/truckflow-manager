@@ -1,10 +1,10 @@
 package it.gabriele.truckflow.application.usecase.inventory;
 
 import it.gabriele.truckflow.application.port.in.inventory.RecordInventoryStockMovementUseCase;
-import it.gabriele.truckflow.application.port.out.InventoryBalanceRepository;
-import it.gabriele.truckflow.application.port.out.InventoryItemRepository;
-import it.gabriele.truckflow.application.port.out.InventoryStockMovementRepository;
-import it.gabriele.truckflow.application.port.out.WarehouseLocationRepository;
+import it.gabriele.truckflow.application.port.out.inventory.InventoryBalanceRepository;
+import it.gabriele.truckflow.application.port.out.inventory.InventoryItemRepository;
+import it.gabriele.truckflow.application.port.out.inventory.InventoryStockMovementRepository;
+import it.gabriele.truckflow.application.port.out.warehouse.WarehouseLocationRepository;
 import it.gabriele.truckflow.domain.inventory.InventoryBalance;
 import it.gabriele.truckflow.domain.inventory.InventoryItem;
 import it.gabriele.truckflow.domain.inventory.InventoryStockMovement;

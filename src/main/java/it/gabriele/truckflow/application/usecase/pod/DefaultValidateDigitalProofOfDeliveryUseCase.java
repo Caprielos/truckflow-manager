@@ -1,8 +1,8 @@
 package it.gabriele.truckflow.application.usecase.pod;
 
 import it.gabriele.truckflow.application.port.in.pod.ValidateDigitalProofOfDeliveryUseCase;
-import it.gabriele.truckflow.application.port.out.AlertEventRepository;
-import it.gabriele.truckflow.application.port.out.DigitalProofOfDeliveryRepository;
+import it.gabriele.truckflow.application.port.out.alerting.AlertEventRepository;
+import it.gabriele.truckflow.application.port.out.pod.DigitalProofOfDeliveryRepository;
 import it.gabriele.truckflow.application.usecase.EnterpriseAlertFactory;
 import it.gabriele.truckflow.application.usecase.EnterpriseValidationResult;
 import it.gabriele.truckflow.domain.alerting.*;

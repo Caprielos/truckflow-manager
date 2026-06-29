@@ -1,6 +1,6 @@
 package it.gabriele.truckflow.infrastructure.memory.audit;
 
-import it.gabriele.truckflow.application.port.out.AuditTrailRepository;
+import it.gabriele.truckflow.application.port.out.audit.AuditTrailRepository;
 import it.gabriele.truckflow.domain.audit.AuditTrail;
 import it.gabriele.truckflow.infrastructure.memory.InMemoryRepository;
 

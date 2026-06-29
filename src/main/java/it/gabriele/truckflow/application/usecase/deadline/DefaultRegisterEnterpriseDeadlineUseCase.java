@@ -1,7 +1,7 @@
 package it.gabriele.truckflow.application.usecase.deadline;
 
 import it.gabriele.truckflow.application.port.in.deadline.RegisterEnterpriseDeadlineUseCase;
-import it.gabriele.truckflow.application.port.out.EnterpriseDeadlineRepository;
+import it.gabriele.truckflow.application.port.out.deadline.EnterpriseDeadlineRepository;
 import it.gabriele.truckflow.domain.deadline.EnterpriseDeadline;
 import java.util.Objects;
 

@@ -1,6 +1,6 @@
 package it.gabriele.truckflow.infrastructure.memory.shipment;
 
-import it.gabriele.truckflow.application.port.out.ShipmentRepository;
+import it.gabriele.truckflow.application.port.out.shipment.ShipmentRepository;
 import it.gabriele.truckflow.domain.shipment.Shipment;
 import it.gabriele.truckflow.infrastructure.memory.InMemoryRepository;
 

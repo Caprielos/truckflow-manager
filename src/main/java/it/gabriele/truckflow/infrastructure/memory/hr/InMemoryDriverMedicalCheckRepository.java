@@ -1,6 +1,6 @@
 package it.gabriele.truckflow.infrastructure.memory.hr;
 
-import it.gabriele.truckflow.application.port.out.DriverMedicalCheckRepository;
+import it.gabriele.truckflow.application.port.out.hr.DriverMedicalCheckRepository;
 import it.gabriele.truckflow.domain.hr.DriverMedicalCheck;
 import it.gabriele.truckflow.infrastructure.memory.InMemoryRepository;
 

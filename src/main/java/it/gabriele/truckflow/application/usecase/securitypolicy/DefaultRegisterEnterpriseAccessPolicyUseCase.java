@@ -1,7 +1,7 @@
 package it.gabriele.truckflow.application.usecase.securitypolicy;
 
 import it.gabriele.truckflow.application.port.in.securitypolicy.RegisterEnterpriseAccessPolicyUseCase;
-import it.gabriele.truckflow.application.port.out.EnterpriseAccessPolicyRepository;
+import it.gabriele.truckflow.application.port.out.securitypolicy.EnterpriseAccessPolicyRepository;
 import it.gabriele.truckflow.domain.securitypolicy.EnterpriseAccessPolicy;
 import java.util.Objects;
 

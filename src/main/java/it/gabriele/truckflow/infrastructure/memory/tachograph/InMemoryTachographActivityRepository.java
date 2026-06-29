@@ -1,6 +1,6 @@
 package it.gabriele.truckflow.infrastructure.memory.tachograph;
 
-import it.gabriele.truckflow.application.port.out.TachographActivityRepository;
+import it.gabriele.truckflow.application.port.out.tachograph.TachographActivityRepository;
 import it.gabriele.truckflow.domain.tachograph.TachographActivity;
 import it.gabriele.truckflow.infrastructure.memory.InMemoryRepository;
 

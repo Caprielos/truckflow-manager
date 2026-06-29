@@ -1,6 +1,6 @@
 package it.gabriele.truckflow.infrastructure.memory.reportexport;
 
-import it.gabriele.truckflow.application.port.out.ReportExportJobRepository;
+import it.gabriele.truckflow.application.port.out.reportexport.ReportExportJobRepository;
 import it.gabriele.truckflow.domain.reportexport.ReportExportJob;
 import it.gabriele.truckflow.infrastructure.memory.InMemoryRepository;
 

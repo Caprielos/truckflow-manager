@@ -1,8 +1,8 @@
 package it.gabriele.truckflow.application.usecase.securitypolicy;
 
 import it.gabriele.truckflow.application.port.in.securitypolicy.EvaluateSecurityPolicyUseCase;
-import it.gabriele.truckflow.application.port.out.AlertEventRepository;
-import it.gabriele.truckflow.application.port.out.EnterpriseAccessPolicyRepository;
+import it.gabriele.truckflow.application.port.out.alerting.AlertEventRepository;
+import it.gabriele.truckflow.application.port.out.securitypolicy.EnterpriseAccessPolicyRepository;
 import it.gabriele.truckflow.application.usecase.EnterpriseAlertFactory;
 import it.gabriele.truckflow.application.usecase.EnterpriseValidationResult;
 import it.gabriele.truckflow.domain.alerting.*;

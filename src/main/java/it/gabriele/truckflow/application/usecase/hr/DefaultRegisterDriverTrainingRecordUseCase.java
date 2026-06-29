@@ -1,7 +1,7 @@
 package it.gabriele.truckflow.application.usecase.hr;
 
 import it.gabriele.truckflow.application.port.in.hr.RegisterDriverTrainingRecordUseCase;
-import it.gabriele.truckflow.application.port.out.DriverTrainingRecordRepository;
+import it.gabriele.truckflow.application.port.out.hr.DriverTrainingRecordRepository;
 import it.gabriele.truckflow.domain.hr.DriverTrainingRecord;
 import java.util.Objects;
 

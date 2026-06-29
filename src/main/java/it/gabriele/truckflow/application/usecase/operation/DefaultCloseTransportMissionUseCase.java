@@ -1,7 +1,7 @@
 package it.gabriele.truckflow.application.usecase.operation;
 
 import it.gabriele.truckflow.application.port.in.operation.CloseTransportMissionUseCase;
-import it.gabriele.truckflow.application.port.out.TransportMissionRepository;
+import it.gabriele.truckflow.application.port.out.operation.TransportMissionRepository;
 import it.gabriele.truckflow.domain.operation.TransportMission;
 import java.util.Objects;
 

@@ -3,8 +3,8 @@ package it.gabriele.truckflow.application.usecase;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import it.gabriele.truckflow.application.port.out.ParkingAssignmentRepository;
-import it.gabriele.truckflow.application.port.out.ParkingSpotRepository;
+import it.gabriele.truckflow.application.port.out.parking.ParkingAssignmentRepository;
+import it.gabriele.truckflow.application.port.out.parking.ParkingSpotRepository;
 import it.gabriele.truckflow.application.usecase.parking.DefaultAssignParkingSpotUseCase;
 import it.gabriele.truckflow.domain.parking.ParkedResource;
 import it.gabriele.truckflow.domain.parking.ParkingAssignment;

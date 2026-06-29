@@ -1,6 +1,6 @@
 package it.gabriele.truckflow.infrastructure.memory.workflow;
 
-import it.gabriele.truckflow.application.port.out.WorkflowDefinitionRepository;
+import it.gabriele.truckflow.application.port.out.workflow.WorkflowDefinitionRepository;
 import it.gabriele.truckflow.domain.workflow.WorkflowDefinition;
 import it.gabriele.truckflow.infrastructure.memory.InMemoryRepository;
 

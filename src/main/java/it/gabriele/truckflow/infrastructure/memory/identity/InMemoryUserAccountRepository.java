@@ -1,6 +1,6 @@
 package it.gabriele.truckflow.infrastructure.memory.identity;
 
-import it.gabriele.truckflow.application.port.out.UserAccountRepository;
+import it.gabriele.truckflow.application.port.out.identity.UserAccountRepository;
 import it.gabriele.truckflow.domain.identity.UserAccount;
 import it.gabriele.truckflow.infrastructure.memory.InMemoryRepository;
 

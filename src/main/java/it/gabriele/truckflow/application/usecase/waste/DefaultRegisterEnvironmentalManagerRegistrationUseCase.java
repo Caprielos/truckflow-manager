@@ -1,7 +1,7 @@
 package it.gabriele.truckflow.application.usecase.waste;
 
 import it.gabriele.truckflow.application.port.in.waste.RegisterEnvironmentalManagerRegistrationUseCase;
-import it.gabriele.truckflow.application.port.out.EnvironmentalManagerRegistrationRepository;
+import it.gabriele.truckflow.application.port.out.waste.EnvironmentalManagerRegistrationRepository;
 import it.gabriele.truckflow.domain.waste.EnvironmentalManagerRegistration;
 import java.util.Objects;
 

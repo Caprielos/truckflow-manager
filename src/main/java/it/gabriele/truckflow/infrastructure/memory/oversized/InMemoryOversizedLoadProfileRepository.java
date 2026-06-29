@@ -1,6 +1,6 @@
 package it.gabriele.truckflow.infrastructure.memory.oversized;
 
-import it.gabriele.truckflow.application.port.out.OversizedLoadProfileRepository;
+import it.gabriele.truckflow.application.port.out.oversized.OversizedLoadProfileRepository;
 import it.gabriele.truckflow.domain.oversized.OversizedLoadProfile;
 import it.gabriele.truckflow.infrastructure.memory.InMemoryRepository;
 

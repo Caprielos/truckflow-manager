@@ -1,6 +1,6 @@
 package it.gabriele.truckflow.infrastructure.memory.quality;
 
-import it.gabriele.truckflow.application.port.out.QualityEventRepository;
+import it.gabriele.truckflow.application.port.out.quality.QualityEventRepository;
 import it.gabriele.truckflow.domain.quality.QualityEvent;
 import it.gabriele.truckflow.infrastructure.memory.InMemoryRepository;
 

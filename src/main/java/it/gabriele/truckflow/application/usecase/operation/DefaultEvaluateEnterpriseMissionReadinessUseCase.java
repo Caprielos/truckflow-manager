@@ -1,9 +1,9 @@
 package it.gabriele.truckflow.application.usecase.operation;
 
 import it.gabriele.truckflow.application.port.in.operation.EvaluateEnterpriseMissionReadinessUseCase;
-import it.gabriele.truckflow.application.port.out.AlertEventRepository;
-import it.gabriele.truckflow.application.port.out.TransportRegulatorySelectionRepository;
-import it.gabriele.truckflow.application.port.out.VehicleRoadUnitProfileRepository;
+import it.gabriele.truckflow.application.port.out.alerting.AlertEventRepository;
+import it.gabriele.truckflow.application.port.out.regulation.TransportRegulatorySelectionRepository;
+import it.gabriele.truckflow.application.port.out.roadtransport.VehicleRoadUnitProfileRepository;
 import it.gabriele.truckflow.application.usecase.EnterpriseAlertFactory;
 import it.gabriele.truckflow.application.usecase.EnterpriseValidationResult;
 import it.gabriele.truckflow.domain.alerting.*;

@@ -1,6 +1,6 @@
 package it.gabriele.truckflow.infrastructure.memory.hr;
 
-import it.gabriele.truckflow.application.port.out.DriverTrainingRecordRepository;
+import it.gabriele.truckflow.application.port.out.hr.DriverTrainingRecordRepository;
 import it.gabriele.truckflow.domain.hr.DriverTrainingRecord;
 import it.gabriele.truckflow.infrastructure.memory.InMemoryRepository;
 

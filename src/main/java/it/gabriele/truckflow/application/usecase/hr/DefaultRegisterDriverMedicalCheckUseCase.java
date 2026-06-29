@@ -1,7 +1,7 @@
 package it.gabriele.truckflow.application.usecase.hr;
 
 import it.gabriele.truckflow.application.port.in.hr.RegisterDriverMedicalCheckUseCase;
-import it.gabriele.truckflow.application.port.out.DriverMedicalCheckRepository;
+import it.gabriele.truckflow.application.port.out.hr.DriverMedicalCheckRepository;
 import it.gabriele.truckflow.domain.hr.DriverMedicalCheck;
 import java.util.Objects;
 

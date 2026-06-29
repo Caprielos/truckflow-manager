@@ -1,7 +1,7 @@
 package it.gabriele.truckflow.application.usecase.warehouse;
 
 import it.gabriele.truckflow.application.port.in.warehouse.RegisterCrossDockFlowUseCase;
-import it.gabriele.truckflow.application.port.out.CrossDockFlowRepository;
+import it.gabriele.truckflow.application.port.out.warehouse.CrossDockFlowRepository;
 import it.gabriele.truckflow.domain.warehouse.CrossDockFlow;
 import java.util.Objects;
 

@@ -1,7 +1,7 @@
 package it.gabriele.truckflow.application.usecase.kpi;
 
 import it.gabriele.truckflow.application.port.in.kpi.RegisterKpiResultUseCase;
-import it.gabriele.truckflow.application.port.out.KpiResultRepository;
+import it.gabriele.truckflow.application.port.out.kpi.KpiResultRepository;
 import it.gabriele.truckflow.domain.kpi.KpiResult;
 import java.util.Objects;
 

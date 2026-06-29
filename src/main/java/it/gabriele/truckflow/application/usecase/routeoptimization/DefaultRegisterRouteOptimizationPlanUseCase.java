@@ -1,7 +1,7 @@
 package it.gabriele.truckflow.application.usecase.routeoptimization;
 
 import it.gabriele.truckflow.application.port.in.routeoptimization.RegisterRouteOptimizationPlanUseCase;
-import it.gabriele.truckflow.application.port.out.RouteOptimizationPlanRepository;
+import it.gabriele.truckflow.application.port.out.routeoptimization.RouteOptimizationPlanRepository;
 import it.gabriele.truckflow.domain.routeoptimization.RouteOptimizationPlan;
 import java.util.Objects;
 

@@ -1,6 +1,6 @@
 package it.gabriele.truckflow.infrastructure.memory.roadtransport;
 
-import it.gabriele.truckflow.application.port.out.VehicleRoadUnitProfileRepository;
+import it.gabriele.truckflow.application.port.out.roadtransport.VehicleRoadUnitProfileRepository;
 import it.gabriele.truckflow.domain.roadtransport.VehicleRoadUnitProfile;
 import it.gabriele.truckflow.infrastructure.memory.InMemoryRepository;
 

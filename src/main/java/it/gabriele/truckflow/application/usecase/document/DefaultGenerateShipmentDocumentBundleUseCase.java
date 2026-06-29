@@ -1,8 +1,8 @@
 package it.gabriele.truckflow.application.usecase.document;
 
 import it.gabriele.truckflow.application.port.in.document.GenerateShipmentDocumentBundleUseCase;
-import it.gabriele.truckflow.application.port.out.ShipmentDocumentBundleRepository;
-import it.gabriele.truckflow.application.port.out.ShipmentRepository;
+import it.gabriele.truckflow.application.port.out.document.ShipmentDocumentBundleRepository;
+import it.gabriele.truckflow.application.port.out.shipment.ShipmentRepository;
 import it.gabriele.truckflow.domain.document.ShipmentDocumentBundle;
 import java.util.Objects;
 

@@ -1,6 +1,6 @@
 package it.gabriele.truckflow.infrastructure.memory.regulation;
 
-import it.gabriele.truckflow.application.port.out.TransportRegulatorySelectionRepository;
+import it.gabriele.truckflow.application.port.out.regulation.TransportRegulatorySelectionRepository;
 import it.gabriele.truckflow.domain.regulation.TransportRegulatorySelection;
 import it.gabriele.truckflow.infrastructure.memory.InMemoryRepository;
 

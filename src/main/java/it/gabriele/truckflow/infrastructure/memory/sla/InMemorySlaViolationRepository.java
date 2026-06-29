@@ -1,6 +1,6 @@
 package it.gabriele.truckflow.infrastructure.memory.sla;
 
-import it.gabriele.truckflow.application.port.out.SlaViolationRepository;
+import it.gabriele.truckflow.application.port.out.sla.SlaViolationRepository;
 import it.gabriele.truckflow.domain.sla.SlaViolation;
 import it.gabriele.truckflow.infrastructure.memory.InMemoryRepository;
 

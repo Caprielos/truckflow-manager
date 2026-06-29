@@ -1,6 +1,6 @@
 package it.gabriele.truckflow.infrastructure.memory.driverscheduling;
 
-import it.gabriele.truckflow.application.port.out.DriverAbsenceRepository;
+import it.gabriele.truckflow.application.port.out.driverscheduling.DriverAbsenceRepository;
 import it.gabriele.truckflow.domain.driverscheduling.DriverAbsence;
 import it.gabriele.truckflow.infrastructure.memory.InMemoryRepository;
 

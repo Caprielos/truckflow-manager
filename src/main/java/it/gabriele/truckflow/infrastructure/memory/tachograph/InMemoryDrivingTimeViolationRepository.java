@@ -1,6 +1,6 @@
 package it.gabriele.truckflow.infrastructure.memory.tachograph;
 
-import it.gabriele.truckflow.application.port.out.DrivingTimeViolationRepository;
+import it.gabriele.truckflow.application.port.out.tachograph.DrivingTimeViolationRepository;
 import it.gabriele.truckflow.domain.tachograph.DrivingTimeViolation;
 import it.gabriele.truckflow.infrastructure.memory.InMemoryRepository;
 

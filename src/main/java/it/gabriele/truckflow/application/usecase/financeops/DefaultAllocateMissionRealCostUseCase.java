@@ -1,7 +1,7 @@
 package it.gabriele.truckflow.application.usecase.financeops;
 
 import it.gabriele.truckflow.application.port.in.financeops.AllocateMissionRealCostUseCase;
-import it.gabriele.truckflow.application.port.out.CostAllocationRepository;
+import it.gabriele.truckflow.application.port.out.financeops.CostAllocationRepository;
 import it.gabriele.truckflow.domain.financeops.CostAllocation;
 import java.util.Objects;
 

@@ -1,6 +1,6 @@
 package it.gabriele.truckflow.infrastructure.memory.billing;
 
-import it.gabriele.truckflow.application.port.out.CustomerRevenueInvoiceRepository;
+import it.gabriele.truckflow.application.port.out.billing.CustomerRevenueInvoiceRepository;
 import it.gabriele.truckflow.domain.economics.CustomerRevenueInvoice;
 import it.gabriele.truckflow.infrastructure.memory.InMemoryRepository;
 

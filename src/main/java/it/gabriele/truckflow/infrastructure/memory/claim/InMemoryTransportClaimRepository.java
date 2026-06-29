@@ -1,6 +1,6 @@
 package it.gabriele.truckflow.infrastructure.memory.claim;
 
-import it.gabriele.truckflow.application.port.out.TransportClaimRepository;
+import it.gabriele.truckflow.application.port.out.claim.TransportClaimRepository;
 import it.gabriele.truckflow.domain.claim.TransportClaim;
 import it.gabriele.truckflow.infrastructure.memory.InMemoryRepository;
 

@@ -1,6 +1,6 @@
 package it.gabriele.truckflow.infrastructure.memory.route;
 
-import it.gabriele.truckflow.application.port.out.RoutePlanRepository;
+import it.gabriele.truckflow.application.port.out.route.RoutePlanRepository;
 import it.gabriele.truckflow.domain.route.RoutePlan;
 import it.gabriele.truckflow.infrastructure.memory.InMemoryRepository;
 

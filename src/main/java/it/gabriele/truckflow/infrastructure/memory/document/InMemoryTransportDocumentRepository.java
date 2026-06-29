@@ -1,6 +1,6 @@
 package it.gabriele.truckflow.infrastructure.memory.document;
 
-import it.gabriele.truckflow.application.port.out.TransportDocumentRepository;
+import it.gabriele.truckflow.application.port.out.document.TransportDocumentRepository;
 import it.gabriele.truckflow.domain.document.TransportDocument;
 import it.gabriele.truckflow.infrastructure.memory.InMemoryRepository;
 

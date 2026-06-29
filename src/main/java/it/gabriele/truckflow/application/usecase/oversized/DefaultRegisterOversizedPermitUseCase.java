@@ -1,7 +1,7 @@
 package it.gabriele.truckflow.application.usecase.oversized;
 
 import it.gabriele.truckflow.application.port.in.oversized.RegisterOversizedPermitUseCase;
-import it.gabriele.truckflow.application.port.out.OversizedPermitRepository;
+import it.gabriele.truckflow.application.port.out.oversized.OversizedPermitRepository;
 import it.gabriele.truckflow.domain.oversized.OversizedPermit;
 import java.util.Objects;
 

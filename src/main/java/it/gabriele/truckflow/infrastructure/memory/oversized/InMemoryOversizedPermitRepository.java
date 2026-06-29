@@ -1,6 +1,6 @@
 package it.gabriele.truckflow.infrastructure.memory.oversized;
 
-import it.gabriele.truckflow.application.port.out.OversizedPermitRepository;
+import it.gabriele.truckflow.application.port.out.oversized.OversizedPermitRepository;
 import it.gabriele.truckflow.domain.oversized.OversizedPermit;
 import it.gabriele.truckflow.infrastructure.memory.InMemoryRepository;
 

@@ -1,7 +1,7 @@
 package it.gabriele.truckflow.application.usecase.tachograph;
 
 import it.gabriele.truckflow.application.port.in.tachograph.RegisterDrivingTimeViolationUseCase;
-import it.gabriele.truckflow.application.port.out.DrivingTimeViolationRepository;
+import it.gabriele.truckflow.application.port.out.tachograph.DrivingTimeViolationRepository;
 import it.gabriele.truckflow.domain.tachograph.DrivingTimeViolation;
 import java.util.Objects;
 

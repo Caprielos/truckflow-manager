@@ -1,6 +1,6 @@
 package it.gabriele.truckflow.infrastructure.memory.contract;
 
-import it.gabriele.truckflow.application.port.out.ContractRateCardRepository;
+import it.gabriele.truckflow.application.port.out.contract.ContractRateCardRepository;
 import it.gabriele.truckflow.domain.contract.ContractRateCard;
 import it.gabriele.truckflow.infrastructure.memory.InMemoryRepository;
 

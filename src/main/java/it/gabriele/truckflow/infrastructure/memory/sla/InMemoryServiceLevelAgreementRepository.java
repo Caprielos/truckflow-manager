@@ -1,6 +1,6 @@
 package it.gabriele.truckflow.infrastructure.memory.sla;
 
-import it.gabriele.truckflow.application.port.out.ServiceLevelAgreementRepository;
+import it.gabriele.truckflow.application.port.out.sla.ServiceLevelAgreementRepository;
 import it.gabriele.truckflow.domain.sla.ServiceLevelAgreement;
 import it.gabriele.truckflow.infrastructure.memory.InMemoryRepository;
 

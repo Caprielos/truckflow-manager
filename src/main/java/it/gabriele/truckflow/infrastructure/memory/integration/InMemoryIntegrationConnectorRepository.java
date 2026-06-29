@@ -1,6 +1,6 @@
 package it.gabriele.truckflow.infrastructure.memory.integration;
 
-import it.gabriele.truckflow.application.port.out.IntegrationConnectorRepository;
+import it.gabriele.truckflow.application.port.out.integration.IntegrationConnectorRepository;
 import it.gabriele.truckflow.domain.integration.IntegrationConnector;
 import it.gabriele.truckflow.infrastructure.memory.InMemoryRepository;
 

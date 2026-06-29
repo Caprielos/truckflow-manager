@@ -1,6 +1,6 @@
 package it.gabriele.truckflow.infrastructure.memory.payroll;
 
-import it.gabriele.truckflow.application.port.out.DriverMissionPayrollRepository;
+import it.gabriele.truckflow.application.port.out.payroll.DriverMissionPayrollRepository;
 import it.gabriele.truckflow.domain.payroll.DriverMissionPayroll;
 import it.gabriele.truckflow.infrastructure.memory.InMemoryRepository;
 

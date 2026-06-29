@@ -1,6 +1,6 @@
 package it.gabriele.truckflow.infrastructure.memory.kpi;
 
-import it.gabriele.truckflow.application.port.out.KpiThresholdRepository;
+import it.gabriele.truckflow.application.port.out.kpi.KpiThresholdRepository;
 import it.gabriele.truckflow.domain.kpi.KpiThreshold;
 import it.gabriele.truckflow.infrastructure.memory.InMemoryRepository;
 

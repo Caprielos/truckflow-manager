@@ -1,9 +1,9 @@
 package it.gabriele.truckflow.application.usecase.tachograph;
 
 import it.gabriele.truckflow.application.port.in.tachograph.DetectTachographViolationsUseCase;
-import it.gabriele.truckflow.application.port.out.AlertEventRepository;
-import it.gabriele.truckflow.application.port.out.DrivingTimeViolationRepository;
-import it.gabriele.truckflow.application.port.out.TachographActivityRepository;
+import it.gabriele.truckflow.application.port.out.alerting.AlertEventRepository;
+import it.gabriele.truckflow.application.port.out.tachograph.DrivingTimeViolationRepository;
+import it.gabriele.truckflow.application.port.out.tachograph.TachographActivityRepository;
 import it.gabriele.truckflow.application.usecase.EnterpriseAlertFactory;
 import it.gabriele.truckflow.domain.alerting.*;
 import it.gabriele.truckflow.domain.shared.Notes;

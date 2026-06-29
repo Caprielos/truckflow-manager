@@ -1,6 +1,6 @@
 package it.gabriele.truckflow.infrastructure.memory.customer;
 
-import it.gabriele.truckflow.application.port.out.CustomerAccountRepository;
+import it.gabriele.truckflow.application.port.out.customer.CustomerAccountRepository;
 import it.gabriele.truckflow.domain.customer.CustomerAccount;
 import it.gabriele.truckflow.infrastructure.memory.InMemoryRepository;
 

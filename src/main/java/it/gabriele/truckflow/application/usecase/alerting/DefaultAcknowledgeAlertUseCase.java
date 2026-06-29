@@ -1,7 +1,7 @@
 package it.gabriele.truckflow.application.usecase.alerting;
 
 import it.gabriele.truckflow.application.port.in.alerting.AcknowledgeAlertUseCase;
-import it.gabriele.truckflow.application.port.out.AlertEventRepository;
+import it.gabriele.truckflow.application.port.out.alerting.AlertEventRepository;
 import it.gabriele.truckflow.domain.alerting.AlertEvent;
 import java.util.Objects;
 

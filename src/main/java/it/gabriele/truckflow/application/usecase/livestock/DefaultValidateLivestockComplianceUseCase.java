@@ -1,9 +1,9 @@
 package it.gabriele.truckflow.application.usecase.livestock;
 
 import it.gabriele.truckflow.application.port.in.livestock.ValidateLivestockComplianceUseCase;
-import it.gabriele.truckflow.application.port.out.AlertEventRepository;
-import it.gabriele.truckflow.application.port.out.LivestockTripPlanRepository;
-import it.gabriele.truckflow.application.port.out.LivestockVehicleProfileRepository;
+import it.gabriele.truckflow.application.port.out.alerting.AlertEventRepository;
+import it.gabriele.truckflow.application.port.out.livestock.LivestockTripPlanRepository;
+import it.gabriele.truckflow.application.port.out.livestock.LivestockVehicleProfileRepository;
 import it.gabriele.truckflow.application.usecase.EnterpriseAlertFactory;
 import it.gabriele.truckflow.application.usecase.EnterpriseValidationResult;
 import it.gabriele.truckflow.domain.alerting.*;
