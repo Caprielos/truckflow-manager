@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import it.gabriele.truckflow.application.port.in.EvaluateKpiThresholdUseCase;
 import it.gabriele.truckflow.application.port.in.RegisterIntegrationRunUseCase;
+import it.gabriele.truckflow.application.usecase.integration.DefaultRegisterIntegrationRunUseCase;
+import it.gabriele.truckflow.application.usecase.kpi.DefaultEvaluateKpiThresholdUseCase;
 import it.gabriele.truckflow.domain.integration.ExternalSystemType;
 import it.gabriele.truckflow.domain.integration.IntegrationConnector;
 import it.gabriele.truckflow.domain.integration.IntegrationRun;

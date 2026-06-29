@@ -4,6 +4,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import it.gabriele.truckflow.application.port.in.StartWorkflowInstanceUseCase;
+import it.gabriele.truckflow.application.usecase.workflow.DefaultActivateWorkflowDefinitionUseCase;
+import it.gabriele.truckflow.application.usecase.workflow.DefaultCompleteWorkflowInstanceUseCase;
+import it.gabriele.truckflow.application.usecase.workflow.DefaultMoveWorkflowInstanceUseCase;
+import it.gabriele.truckflow.application.usecase.workflow.DefaultRegisterWorkflowDefinitionUseCase;
+import it.gabriele.truckflow.application.usecase.workflow.DefaultStartWorkflowInstanceUseCase;
 import it.gabriele.truckflow.domain.shared.Notes;
 import it.gabriele.truckflow.domain.workflow.WorkflowDefinition;
 import it.gabriele.truckflow.domain.workflow.WorkflowInstance;

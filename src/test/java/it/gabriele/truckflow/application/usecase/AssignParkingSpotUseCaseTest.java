@@ -5,11 +5,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import it.gabriele.truckflow.application.port.out.ParkingAssignmentRepository;
 import it.gabriele.truckflow.application.port.out.ParkingSpotRepository;
+import it.gabriele.truckflow.application.usecase.parking.DefaultAssignParkingSpotUseCase;
 import it.gabriele.truckflow.domain.parking.ParkedResource;
 import it.gabriele.truckflow.domain.parking.ParkingAssignment;
 import it.gabriele.truckflow.domain.parking.ParkingSpot;
 import it.gabriele.truckflow.domain.parking.ParkingSpotType;
 import it.gabriele.truckflow.domain.shared.Notes;
+import it.gabriele.truckflow.infrastructure.memory.parking.InMemoryParkingAssignmentRepository;
+import it.gabriele.truckflow.infrastructure.memory.parking.InMemoryParkingSpotRepository;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;

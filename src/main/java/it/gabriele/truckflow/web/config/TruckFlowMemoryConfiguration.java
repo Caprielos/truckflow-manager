@@ -3,7 +3,7 @@ package it.gabriele.truckflow.web.config;
 import it.gabriele.truckflow.application.port.in.AssignParkingSpotUseCase;
 import it.gabriele.truckflow.application.port.out.ParkingAssignmentRepository;
 import it.gabriele.truckflow.application.port.out.ParkingSpotRepository;
-import it.gabriele.truckflow.application.usecase.DefaultAssignParkingSpotUseCase;
+import it.gabriele.truckflow.application.usecase.parking.DefaultAssignParkingSpotUseCase;
 import it.gabriele.truckflow.domain.parking.ParkingSpot;
 import it.gabriele.truckflow.domain.parking.ParkingSpotType;
 import it.gabriele.truckflow.domain.shared.Notes;

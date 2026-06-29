@@ -6,6 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import it.gabriele.truckflow.application.port.in.EvaluateEnterpriseDeadlinesUseCase;
 import it.gabriele.truckflow.application.port.in.EvaluateOperationalReadinessUseCase;
+import it.gabriele.truckflow.application.usecase.deadline.DefaultEvaluateEnterpriseDeadlinesUseCase;
+import it.gabriele.truckflow.application.usecase.deadline.DefaultEvaluateOperationalReadinessUseCase;
 import it.gabriele.truckflow.domain.alerting.AlertStatus;
 import it.gabriele.truckflow.domain.deadline.DeadlineOwnerType;
 import it.gabriele.truckflow.domain.deadline.DeadlineSeverity;

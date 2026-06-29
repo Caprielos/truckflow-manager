@@ -3,6 +3,10 @@ package it.gabriele.truckflow.application.usecase;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import it.gabriele.truckflow.application.usecase.document.DefaultRegisterDocumentVersionUseCase;
+import it.gabriele.truckflow.application.usecase.quality.DefaultAssignCorrectiveActionUseCase;
+import it.gabriele.truckflow.application.usecase.quality.DefaultCloseQualityEventUseCase;
+import it.gabriele.truckflow.application.usecase.quality.DefaultOpenQualityEventUseCase;
 import it.gabriele.truckflow.domain.document.DocumentVersion;
 import it.gabriele.truckflow.domain.quality.CorrectiveAction;
 import it.gabriele.truckflow.domain.quality.QualityEvent;

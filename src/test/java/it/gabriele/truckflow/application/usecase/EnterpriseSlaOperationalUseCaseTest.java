@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import it.gabriele.truckflow.application.port.in.DetectSlaViolationUseCase;
+import it.gabriele.truckflow.application.usecase.sla.DefaultDetectSlaViolationUseCase;
 import it.gabriele.truckflow.domain.shared.DateRange;
 import it.gabriele.truckflow.domain.shared.Money;
 import it.gabriele.truckflow.domain.shared.Notes;

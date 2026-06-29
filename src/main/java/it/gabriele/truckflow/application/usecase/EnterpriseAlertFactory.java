@@ -10,13 +10,13 @@ import java.time.Instant;
 import java.util.Locale;
 
 /** Factory applicativa per creare alert standardizzati da controlli enterprise. */
-final class EnterpriseAlertFactory {
+public final class EnterpriseAlertFactory {
 
   private static final int MAX_CODE_LENGTH = 50;
 
   private EnterpriseAlertFactory() {}
 
-  static AlertEvent open(
+  public static AlertEvent open(
       String prefix,
       String sourceCode,
       String suffix,
@@ -39,7 +39,7 @@ final class EnterpriseAlertFactory {
         notes);
   }
 
-  static AlertSeverity fromDeadlineSeverity(DeadlineSeverity severity) {
+  public static AlertSeverity fromDeadlineSeverity(DeadlineSeverity severity) {
     return switch (severity) {
       case CRITICAL -> AlertSeverity.CRITICAL;
       case HIGH -> AlertSeverity.HIGH;
@@ -48,7 +48,7 @@ final class EnterpriseAlertFactory {
     };
   }
 
-  static String buildCode(String prefix, String sourceCode, String suffix) {
+  public static String buildCode(String prefix, String sourceCode, String suffix) {
     String normalizedPrefix = normalize(prefix);
     String normalizedSource = normalize(sourceCode);
     String normalizedSuffix = normalize(suffix);

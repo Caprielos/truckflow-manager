@@ -21,6 +21,23 @@ import it.gabriele.truckflow.application.port.in.ValidateLivestockComplianceUseC
 import it.gabriele.truckflow.application.port.in.ValidateOversizedComplianceUseCase;
 import it.gabriele.truckflow.application.port.in.ValidatePhysicalTransportComplianceUseCase;
 import it.gabriele.truckflow.application.port.in.ValidateWasteComplianceUseCase;
+import it.gabriele.truckflow.application.usecase.adr.DefaultValidateAdrComplianceUseCase;
+import it.gabriele.truckflow.application.usecase.atp.DefaultValidateAtpComplianceUseCase;
+import it.gabriele.truckflow.application.usecase.driverscheduling.DefaultEvaluateDriverAssignmentUseCase;
+import it.gabriele.truckflow.application.usecase.financeops.DefaultCalculateMissionRealMarginUseCase;
+import it.gabriele.truckflow.application.usecase.foodsafety.DefaultValidateFoodSafetyComplianceUseCase;
+import it.gabriele.truckflow.application.usecase.livestock.DefaultValidateLivestockComplianceUseCase;
+import it.gabriele.truckflow.application.usecase.operation.DefaultEvaluateEnterpriseMissionReadinessUseCase;
+import it.gabriele.truckflow.application.usecase.oversized.DefaultValidateOversizedComplianceUseCase;
+import it.gabriele.truckflow.application.usecase.pod.DefaultValidateDigitalProofOfDeliveryUseCase;
+import it.gabriele.truckflow.application.usecase.regulation.DefaultSelectCountryRegulationUseCase;
+import it.gabriele.truckflow.application.usecase.roadinspection.DefaultApplyRoadInspectionOutcomeUseCase;
+import it.gabriele.truckflow.application.usecase.roadtransport.DefaultValidatePhysicalTransportComplianceUseCase;
+import it.gabriele.truckflow.application.usecase.routeoptimization.DefaultEvaluateRouteOptimizationPlanUseCase;
+import it.gabriele.truckflow.application.usecase.securitypolicy.DefaultEvaluateSecurityPolicyUseCase;
+import it.gabriele.truckflow.application.usecase.suppliercontract.DefaultEvaluateSubcontractorEligibilityUseCase;
+import it.gabriele.truckflow.application.usecase.tachograph.DefaultDetectTachographViolationsUseCase;
+import it.gabriele.truckflow.application.usecase.waste.DefaultValidateWasteComplianceUseCase;
 import org.junit.jupiter.api.Test;
 
 class EnterpriseUseCaseCompletionCatalogTest {
