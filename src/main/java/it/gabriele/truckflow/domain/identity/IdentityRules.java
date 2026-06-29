@@ -63,6 +63,53 @@ public final class IdentityRules {
                 && (account.isAdmin() || account.hasPermission(UserPermission.MANAGE_CONFIGURATION));
     }
 
+
+    public static boolean canViewEconomics(UserAccount account) {
+        validateAccount(account);
+
+        return account.canLogin()
+                && (account.isAdmin()
+                || account.hasPermission(UserPermission.VIEW_ECONOMICS)
+                || account.hasPermission(UserPermission.MANAGE_ECONOMICS));
+    }
+
+    public static boolean canManageEconomics(UserAccount account) {
+        validateAccount(account);
+
+        return account.canLogin()
+                && (account.isAdmin() || account.hasPermission(UserPermission.MANAGE_ECONOMICS));
+    }
+
+    public static boolean canViewPayroll(UserAccount account) {
+        validateAccount(account);
+
+        return account.canLogin()
+                && (account.isAdmin()
+                || account.hasPermission(UserPermission.VIEW_PAYROLL)
+                || account.hasPermission(UserPermission.MANAGE_PAYROLL));
+    }
+
+    public static boolean canManagePayroll(UserAccount account) {
+        validateAccount(account);
+
+        return account.canLogin()
+                && (account.isAdmin() || account.hasPermission(UserPermission.MANAGE_PAYROLL));
+    }
+
+    public static boolean canManageInventory(UserAccount account) {
+        validateAccount(account);
+
+        return account.canLogin()
+                && (account.isAdmin() || account.hasPermission(UserPermission.MANAGE_INVENTORY));
+    }
+
+    public static boolean canImportExternalData(UserAccount account) {
+        validateAccount(account);
+
+        return account.canLogin()
+                && (account.isAdmin() || account.hasPermission(UserPermission.IMPORT_EXTERNAL_DATA));
+    }
+
     public static boolean canAccessBackOffice(UserAccount account) {
         validateAccount(account);
 
