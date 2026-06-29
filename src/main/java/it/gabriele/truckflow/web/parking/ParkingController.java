@@ -1,5 +1,7 @@
 package it.gabriele.truckflow.web.parking;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import it.gabriele.truckflow.application.port.in.AssignParkingSpotUseCase;
 import it.gabriele.truckflow.application.port.out.ParkingAssignmentRepository;
 import it.gabriele.truckflow.application.port.out.ParkingSpotRepository;
@@ -22,6 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
  * <p>Il controller è la porta HTTP: riceve JSON da Postman/browser e chiama gli use case
  * applicativi. Non contiene regole aziendali profonde: quelle restano in domain e application.
  */
+@Tag(name = "Parking")
 @RestController
 @RequestMapping("/api/parking")
 public class ParkingController {
@@ -39,11 +42,17 @@ public class ParkingController {
     this.parkingAssignmentRepository = parkingAssignmentRepository;
   }
 
+  @Operation(
+      summary = "Lista posti parcheggio",
+      description = "Restituisce i posti parcheggio demo caricati nel repository in memoria.")
   @GetMapping("/spots")
   public List<ParkingSpotResponse> findParkingSpots() {
     return parkingSpotRepository.findAll().stream().map(ParkingSpotResponse::fromDomain).toList();
   }
 
+  @Operation(
+      summary = "Lista assegnazioni parcheggio",
+      description = "Restituisce le assegnazioni parcheggio attualmente presenti in memoria.")
   @GetMapping("/assignments")
   public List<ParkingAssignmentResponse> findParkingAssignments() {
     return parkingAssignmentRepository.findAll().stream()
@@ -51,6 +60,10 @@ public class ParkingController {
         .toList();
   }
 
+  @Operation(
+      summary = "Assegna un posto parcheggio",
+      description =
+          "Assegna una risorsa, per esempio furgone o camion, a un posto parcheggio disponibile.")
   @PostMapping("/assignments")
   @ResponseStatus(HttpStatus.CREATED)
   public ParkingAssignmentResponse assignParkingSpot(
