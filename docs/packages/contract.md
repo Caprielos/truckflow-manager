@@ -1,12 +1,6 @@
-# Package `contract` — Contratti cliente e listini
+# Package `contract`
 
-Gestisce contratti, rate card, tariff rules, supplementi e logiche tariffarie realistiche.
-
-## Percorso
-
-```text
-src/main/java/it/gabriele/truckflow/domain/contract
-```
+Contratti cliente, rate card, tariff rules e supplementi.
 
 ## Classi
 
@@ -17,10 +11,6 @@ src/main/java/it/gabriele/truckflow/domain/contract
 - `TariffRule`
 - `TariffRuleType`
 
-## Test collegati
-
-- `CustomerContractModelTest`
-
 ## Ruolo nel sistema
 
-Questo package contribuisce al domain model e deve restare indipendente da database, controller REST e framework esterni.
+Questo package fa parte del domain e contribuisce al modello business senza dipendere da application, infrastructure o web.

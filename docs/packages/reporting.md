@@ -1,12 +1,6 @@
-# Package `reporting` — Reportistica domain
+# Package `reporting`
 
-Modella definizioni report, metriche, formato, stato e regole di generazione logica.
-
-## Percorso
-
-```text
-src/main/java/it/gabriele/truckflow/domain/reporting
-```
+Report e metriche.
 
 ## Classi
 
@@ -19,11 +13,6 @@ src/main/java/it/gabriele/truckflow/domain/reporting
 - `ReportType`
 - `ReportingRules`
 
-## Test collegati
-
-- `GeneratedReportTest`
-- `ReportingRulesTest`
-
 ## Ruolo nel sistema
 
-Questo package contribuisce al domain model e deve restare indipendente da database, controller REST e framework esterni.
+Questo package fa parte del domain e contribuisce al modello business senza dipendere da application, infrastructure o web.

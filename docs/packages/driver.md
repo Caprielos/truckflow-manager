@@ -1,12 +1,6 @@
-# Package `driver` — Autisti e abilitazioni
+# Package `driver`
 
-Modella autisti, patenti, CQC, ADR, qualifiche operative, certificati con validità e stato autista.
-
-## Percorso
-
-```text
-src/main/java/it/gabriele/truckflow/domain/driver
-```
+Autisti, patenti, CQC, ADR, qualifiche operative e regole.
 
 ## Classi
 
@@ -20,11 +14,6 @@ src/main/java/it/gabriele/truckflow/domain/driver
 - `DriverRules`
 - `DriverStatus`
 
-## Test collegati
-
-- `DriverRulesTest`
-- `DriverTest`
-
 ## Ruolo nel sistema
 
-Questo package contribuisce al domain model e deve restare indipendente da database, controller REST e framework esterni.
+Questo package fa parte del domain e contribuisce al modello business senza dipendere da application, infrastructure o web.

@@ -1,12 +1,6 @@
-# Package `fuel` — Carburante e consumi
+# Package `fuel`
 
-Gestisce rifornimenti, provider carte carburante e regole di consumo.
-
-## Percorso
-
-```text
-src/main/java/it/gabriele/truckflow/domain/fuel
-```
+Rifornimenti, fuel card e consumo carburante.
 
 ## Classi
 
@@ -14,10 +8,6 @@ src/main/java/it/gabriele/truckflow/domain/fuel
 - `FuelConsumptionRules`
 - `FuelTransaction`
 
-## Test collegati
-
-- `FuelTransactionTest`
-
 ## Ruolo nel sistema
 
-Questo package contribuisce al domain model e deve restare indipendente da database, controller REST e framework esterni.
+Questo package fa parte del domain e contribuisce al modello business senza dipendere da application, infrastructure o web.

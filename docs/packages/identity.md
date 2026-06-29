@@ -1,12 +1,6 @@
-# Package `identity` — Utenti, ruoli e permessi
+# Package `identity`
 
-Gestisce account utente, ruoli e permessi per distinguere accesso operativo, amministrativo ed economico.
-
-## Percorso
-
-```text
-src/main/java/it/gabriele/truckflow/domain/identity
-```
+Utenti, ruoli e permessi.
 
 ## Classi
 
@@ -16,12 +10,6 @@ src/main/java/it/gabriele/truckflow/domain/identity
 - `UserPermission`
 - `UserRole`
 
-## Test collegati
-
-- `ExpandedIdentityPermissionsTest`
-- `IdentityRulesTest`
-- `UserAccountTest`
-
 ## Ruolo nel sistema
 
-Questo package contribuisce al domain model e deve restare indipendente da database, controller REST e framework esterni.
+Questo package fa parte del domain e contribuisce al modello business senza dipendere da application, infrastructure o web.

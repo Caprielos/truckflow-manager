@@ -1,12 +1,6 @@
-# Package `payroll` — Costo autista e stipendio missione
+# Package `payroll`
 
-Calcola voci paga in base a ore, patenti, ADR, rimorchio, trasporto speciale, straordinari, trasferte e costo aziendale.
-
-## Percorso
-
-```text
-src/main/java/it/gabriele/truckflow/domain/payroll
-```
+Ore lavoro, premi, patenti, ADR, rimorchi e costo aziendale autista.
 
 ## Classi
 
@@ -20,10 +14,6 @@ src/main/java/it/gabriele/truckflow/domain/payroll
 - `DriverPayrollRules`
 - `MissionPayrollProjection`
 
-## Test collegati
-
-- `DriverPayrollRulesTest`
-
 ## Ruolo nel sistema
 
-Questo package contribuisce al domain model e deve restare indipendente da database, controller REST e framework esterni.
+Questo package fa parte del domain e contribuisce al modello business senza dipendere da application, infrastructure o web.

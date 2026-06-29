@@ -1,54 +1,37 @@
 # TruckFlow Manager
 
-**TruckFlow Manager** è un progetto Java 21 che modella il dominio di un gestionale realistico per trasporti, flotta, spedizioni, costi, documenti, magazzino, parcheggi, stipendi autisti e controllo della marginalità.
+TruckFlow Manager è un progetto Java pensato come base di un gestionale reale per aziende di trasporto, logistica e gestione flotta.
 
-La versione documentata in questo pacchetto descrive lo stato dopo il completamento del domain layer prima dell'application layer.
+Questa documentazione contiene tre livelli:
+
+1. **Documentazione cliente / business**: spiega a cosa serve l’applicazione, a chi è rivolta, quali servizi offre e quali requisiti copre.
+2. **Documentazione tecnica**: spiega architettura, package, classi, use case, repository e infrastruttura in memoria.
+3. **Documentazione didattica**: spiega il codice in modo semplice, anche per chi sta imparando Java e architettura software.
 
 ## Stato attuale
 
-- Linguaggio: **Java 21**.
-- Build tool: **Maven**.
-- Architettura attuale: **domain layer puro**.
-- Framework esterni nel dominio: **nessuno**.
-- Stato test rilevato dallo zip: **816 test, 0 failure, 0 errori, 0 skipped**.
-- Package Java principali: **38 package domain**.
-- Classi sorgenti principali: **265**.
+- Linguaggio: Java 21
+- Build: Maven
+- Test: JUnit 5
+- Classi main rilevate: 384
+- Classi test rilevate: 94
+- Test Maven nel report incluso nello zip: 823 test, 0 failure, 0 errori, 0 skipped
 
-## Cosa rappresenta
-
-Il progetto non modella solo camion e spedizioni. Modella una base realistica da Fleet/Transport Management System:
+## Cartelle principali
 
 ```text
-cliente / ordine
-→ spedizione
-→ pianificazione ufficio traffico
-→ missione operativa
-→ autista + mezzo + rimorchio/convoglio
-→ documenti e compliance
-→ tracking e chiusura missione
-→ fatturazione cliente
-→ costi, IVA, stipendi, asset, struttura, magazzino
-→ utile/perdita e controllo economico
+src/main/java/it/gabriele/truckflow/domain
+src/main/java/it/gabriele/truckflow/application
+src/main/java/it/gabriele/truckflow/infrastructure/memory
+src/test/java/it/gabriele/truckflow
 ```
 
-## Dove leggere
+## Lettura consigliata
 
-1. `docs/project-overview.md`
-2. `docs/architecture.md`
-3. `docs/domain-overview.md`
-4. `docs/business-flow.md`
-5. `docs/guides/economics-profitability.md`
-6. `docs/guides/facilities-parking-inventory.md`
-7. `docs/guides/driver-payroll.md`
-8. `docs/guides/application-layer-next.md`
-9. `docs/domain-reference-complete.md`
-
-## Comando principale
-
-```bash
-mvn clean test
-```
-
-## Principio architetturale
-
-Il dominio contiene regole e modelli di business. Non contiene database, REST API, Spring, UI, filesystem o chiamate a servizi esterni. Queste parti saranno introdotte dopo nel layer `application`, `infrastructure` e `web`.
+1. `docs/client/solution-overview.md`
+2. `docs/requirements/functional-requirements.md`
+3. `docs/technical/architecture-overview.md`
+4. `docs/learning/01-project-structure-for-beginners.md`
+5. `docs/learning/04-use-cases-command-and-result.md`
+6. `docs/class-reference/README.md`
+7. `docs/operations/git-commands-used.md`

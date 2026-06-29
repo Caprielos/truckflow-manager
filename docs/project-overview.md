@@ -1,55 +1,65 @@
 # Project overview
 
-TruckFlow Manager è pensato come base backend Java per un gestionale di trasporti e flotta.
+TruckFlow Manager è una base backend Java per un Fleet / Transport Management System.
+
+Il progetto modella quattro livelli concettuali:
+
+```text
+cliente / ordine
+→ cosa chiede il cliente
+
+shipment
+→ spedizione da organizzare
+
+operation / mission
+→ viaggio reale con autista, convoglio e route plan
+
+economics / billing / payroll
+→ costi, ricavi, utile/perdita, stipendio autista e fatturazione
+```
 
 ## Obiettivo
 
-Rappresentare in modo realistico le regole di un'azienda che gestisce:
+L'obiettivo non è creare un semplice esercizio con `Truck`, `Driver` e `Shipment`, ma un modello vicino a un gestionale reale, dove entrano in gioco:
 
-- clienti e ordini;
-- spedizioni e missioni;
-- autisti, patenti, CQC, ADR e qualifiche;
-- veicoli, rimorchi, semirimorchi, combinazioni e certificati;
-- cargo secco, frigo, ADR, rifiuti, animali vivi, alimentare e merci speciali;
-- costi, ricavi, IVA, asset acquistati, debiti, utile/perdita;
-- magazzino ricambi, gomme, attrezzature e materiali;
-- depositi, piazzali, parcheggi, posti numerati e convogli già pronti;
-- manutenzione, fuel, gomme, telematica, tracking e documenti.
+- veicoli e rimorchi;
+- convogli già agganciati;
+- autisti, patenti, CQC e ADR;
+- merce normale, ADR, rifiuti, refrigerata, alimentare, animali vivi;
+- documenti come bolla/DDT, CMR, POD, ADR, FIR e temperature log;
+- costi camion, rimorchi, allestimenti, gomme, assicurazioni, manutenzione;
+- IVA, ricavi, spese, debito e cassa;
+- payroll autista con ore guida, attesa, notturno, festivo e premi;
+- depositi, magazzini, piazzali, parcheggi e posti numerati;
+- magazzino ricambi e materiali;
+- import dati esterni;
+- use case application e repository in memoria.
 
-## Stato tecnico
-
-Il progetto attuale è volontariamente concentrato sul domain layer. Questo significa:
-
-```text
-presente: entità, value object, enum, regole di business, test
-assente: Spring, REST API, database, JPA, frontend, login reale, servizi esterni
-```
-
-Questa scelta è corretta per costruire prima il motore logico del progetto e poi appoggiarci application layer e infrastruttura.
-
-## Perché è realistico
-
-Il modello evita una struttura troppo semplice tipo:
-
-```java
-Shipment {
-    Driver driver;
-    Truck truck;
-    Cargo cargo;
-}
-```
-
-Al contrario distingue responsabilità reali:
+## Cosa è già presente
 
 ```text
-Order = richiesta commerciale
-Shipment = spedizione nata dall'ordine
-TransportMission = viaggio operativo reale
-Fleet = mezzi e combinazioni
-Driver = persona/abilitazioni/stato
-Payroll = costo lavoro autista
-Economics = costi/ricavi/IVA/margine
-Facility/Parking = dove stanno fisicamente mezzi e rimorchi
-Inventory = scorte e magazzino
-Dispatch = scelta operativa delle risorse
+domain
+→ completo e ricco
+
+application
+→ use case e repository port
+
+infrastructure/memory
+→ repository in memoria per test e demo
+
+test di scenario
+→ prove realistiche di flussi completi
 ```
+
+## Cosa manca ancora
+
+Il progetto non ha ancora:
+
+- API REST;
+- database persistente;
+- autenticazione reale web;
+- frontend;
+- generazione PDF vera;
+- integrazioni esterne reali.
+
+Questi saranno step successivi, dopo aver stabilizzato application + memory.

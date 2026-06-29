@@ -1,12 +1,6 @@
-# Package `operation` — Missione operativa
+# Package `operation`
 
-Rappresenta il viaggio reale: missione, stato, regole operative, assegnazioni e chiusura.
-
-## Percorso
-
-```text
-src/main/java/it/gabriele/truckflow/domain/operation
-```
+TransportMission: missione operativa reale.
 
 ## Classi
 
@@ -14,11 +8,6 @@ src/main/java/it/gabriele/truckflow/domain/operation
 - `TransportMissionRules`
 - `TransportMissionStatus`
 
-## Test collegati
-
-- `TransportMissionRulesTest`
-- `TransportMissionTest`
-
 ## Ruolo nel sistema
 
-Questo package contribuisce al domain model e deve restare indipendente da database, controller REST e framework esterni.
+Questo package fa parte del domain e contribuisce al modello business senza dipendere da application, infrastructure o web.

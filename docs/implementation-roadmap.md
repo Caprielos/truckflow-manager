@@ -1,72 +1,35 @@
-# Implementation roadmap
+# Roadmap implementativa
 
-## Stato attuale
-
-Il domain layer è molto ricco. La prossima evoluzione non dovrebbe essere aggiungere altri enum a caso, ma costruire sopra al domain.
-
-## Step 1 — Application layer
-
-Creare package:
+## Fatto
 
 ```text
-src/main/java/it/gabriele/truckflow/application
+domain model realistico
+application layer
+repository port
+repository in memoria
+test di scenario
 ```
 
-Use case consigliati:
+## Prossimo step consigliato
 
-- `CreateTransportOrderUseCase`
-- `CreateShipmentFromAcceptedOrderUseCase`
-- `PlanTransportMissionUseCase`
-- `CalculateMissionProfitabilityUseCase`
-- `AssignParkingSpotUseCase`
-- `RegisterFleetAssetAcquisitionUseCase`
-- `RegisterDriverPayrollForMissionUseCase`
-- `CloseMissionAndGenerateBillingUseCase`
-
-## Step 2 — Repository ports
-
-Creare interfacce:
+Il prossimo step naturale è il web layer:
 
 ```text
-VehicleRepository
-DriverRepository
-ShipmentRepository
-MissionRepository
-CustomerRepository
-EconomicsRepository
-FacilityRepository
-ParkingRepository
-InventoryRepository
+src/main/java/it/gabriele/truckflow/web
 ```
 
-## Step 3 — Infrastructure memory
+con controller REST per chiamare gli use case.
 
-Implementazioni in memoria per demo e test:
+## Step dopo
 
-```text
-infrastructure/memory
-```
+1. REST API.
+2. DTO request/response.
+3. Infrastructure persistence con database.
+4. Autenticazione e autorizzazione reali.
+5. Generazione PDF documenti.
+6. Import CSV/API reali.
+7. Frontend o demo API.
 
-## Step 4 — Web/API
+## Nota
 
-Solo dopo application e repository:
-
-```text
-web/rest
-```
-
-Endpoint possibili:
-
-```text
-POST /orders
-POST /shipments/{id}/plan-mission
-POST /missions/{id}/close
-GET /vehicles
-GET /parking/spots
-GET /economics/statement
-GET /drivers/{id}/payroll
-```
-
-## Step 5 — Persistence
-
-Database e JPA solo dopo avere use case e repository chiari.
+Non conviene aggiungere altri 200 enum nel domain senza flussi applicativi. Ora il progetto ha bisogno soprattutto di API e persistenza reale.

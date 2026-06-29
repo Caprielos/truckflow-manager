@@ -1,0 +1,4877 @@
+[
+  {
+    "package": "",
+    "name": "Main",
+    "kind": "class",
+    "description": "Classe del package ; rappresenta un concetto del modello TruckFlow.",
+    "methods": [
+      "main"
+    ]
+  },
+  {
+    "package": "application.common",
+    "name": "ApplicationError",
+    "kind": "record",
+    "description": "Errore applicativo strutturato usabile da controller, CLI o test.",
+    "methods": [
+      "ApplicationError",
+      "of"
+    ]
+  },
+  {
+    "package": "application.common",
+    "name": "ApplicationResult",
+    "kind": "class",
+    "description": "Risultato applicativo generico: incapsula un successo con valore o un fallimento con errori.",
+    "methods": [
+      "success",
+      "failure",
+      "isSuccess",
+      "isFailure",
+      "getValue",
+      "getValueOrThrow",
+      "getErrors"
+    ]
+  },
+  {
+    "package": "application.common",
+    "name": "ResourceNotFoundException",
+    "kind": "class",
+    "description": "Eccezione applicativa quando un repository non trova una risorsa richiesta.",
+    "methods": []
+  },
+  {
+    "package": "application.port.in",
+    "name": "AssignParkingSpotUseCase",
+    "kind": "interface",
+    "description": "Porta di ingresso per assegnare una risorsa a un posto parcheggio.",
+    "methods": []
+  },
+  {
+    "package": "application.port.in",
+    "name": "CalculateDriverMissionPayrollUseCase",
+    "kind": "interface",
+    "description": "Porta per calcolare il costo/stipendio autista da report lavoro e policy paghe.",
+    "methods": []
+  },
+  {
+    "package": "application.port.in",
+    "name": "CalculateMissionEconomicsUseCase",
+    "kind": "interface",
+    "description": "Porta di ingresso per calcolare ricavi, costi e margine di una missione.",
+    "methods": []
+  },
+  {
+    "package": "application.port.in",
+    "name": "CloseTransportMissionUseCase",
+    "kind": "interface",
+    "description": "Interfaccia di caso d’uso applicativo per l’azione CloseTransportMission.",
+    "methods": []
+  },
+  {
+    "package": "application.port.in",
+    "name": "CreateShipmentFromAcceptedOrderUseCase",
+    "kind": "interface",
+    "description": "Interfaccia di caso d’uso applicativo per l’azione CreateShipmentFromAcceptedOrder.",
+    "methods": []
+  },
+  {
+    "package": "application.port.in",
+    "name": "GenerateShipmentDocumentBundleUseCase",
+    "kind": "interface",
+    "description": "Interfaccia di caso d’uso applicativo per l’azione GenerateShipmentDocumentBundle.",
+    "methods": []
+  },
+  {
+    "package": "application.port.in",
+    "name": "PlanTransportMissionUseCase",
+    "kind": "interface",
+    "description": "Porta di ingresso per pianificare una missione da spedizione, autista, convoglio e rotta.",
+    "methods": []
+  },
+  {
+    "package": "application.port.in",
+    "name": "RecordInventoryStockMovementUseCase",
+    "kind": "interface",
+    "description": "Interfaccia di caso d’uso applicativo per l’azione RecordInventoryStockMovement.",
+    "methods": []
+  },
+  {
+    "package": "application.port.in",
+    "name": "RegisterCustomerContractUseCase",
+    "kind": "interface",
+    "description": "Interfaccia di caso d’uso applicativo per l’azione RegisterCustomerContract.",
+    "methods": []
+  },
+  {
+    "package": "application.port.in",
+    "name": "RegisterFleetAssetAcquisitionUseCase",
+    "kind": "interface",
+    "description": "Interfaccia di caso d’uso applicativo per l’azione RegisterFleetAssetAcquisition.",
+    "methods": []
+  },
+  {
+    "package": "application.port.in",
+    "name": "RegisterImportBatchUseCase",
+    "kind": "interface",
+    "description": "Interfaccia di caso d’uso applicativo per l’azione RegisterImportBatch.",
+    "methods": []
+  },
+  {
+    "package": "application.port.in",
+    "name": "RegisterSupplierInvoiceUseCase",
+    "kind": "interface",
+    "description": "Interfaccia di caso d’uso applicativo per l’azione RegisterSupplierInvoice.",
+    "methods": []
+  },
+  {
+    "package": "application.port.out",
+    "name": "AuditTrailRepository",
+    "kind": "interface",
+    "description": "Porta repository per salvare/caricare oggetti AuditTrail senza dipendere dal database.",
+    "methods": []
+  },
+  {
+    "package": "application.port.out",
+    "name": "ContractRateCardRepository",
+    "kind": "interface",
+    "description": "Porta repository per salvare/caricare oggetti ContractRateCard senza dipendere dal database.",
+    "methods": []
+  },
+  {
+    "package": "application.port.out",
+    "name": "CustomerAccountRepository",
+    "kind": "interface",
+    "description": "Porta repository per salvare/caricare oggetti CustomerAccount senza dipendere dal database.",
+    "methods": []
+  },
+  {
+    "package": "application.port.out",
+    "name": "CustomerContractRepository",
+    "kind": "interface",
+    "description": "Porta repository per salvare/caricare oggetti CustomerContract senza dipendere dal database.",
+    "methods": []
+  },
+  {
+    "package": "application.port.out",
+    "name": "CustomerRepository",
+    "kind": "interface",
+    "description": "Porta repository per salvare/caricare oggetti Customer senza dipendere dal database.",
+    "methods": []
+  },
+  {
+    "package": "application.port.out",
+    "name": "CustomerRevenueInvoiceRepository",
+    "kind": "interface",
+    "description": "Porta repository per salvare/caricare oggetti CustomerRevenueInvoice senza dipendere dal database.",
+    "methods": []
+  },
+  {
+    "package": "application.port.out",
+    "name": "DeliveryNoteRepository",
+    "kind": "interface",
+    "description": "Porta repository per salvare/caricare oggetti DeliveryNote senza dipendere dal database.",
+    "methods": []
+  },
+  {
+    "package": "application.port.out",
+    "name": "DispatchPlanRepository",
+    "kind": "interface",
+    "description": "Porta repository per salvare/caricare oggetti DispatchPlan senza dipendere dal database.",
+    "methods": []
+  },
+  {
+    "package": "application.port.out",
+    "name": "DriverDefectTicketRepository",
+    "kind": "interface",
+    "description": "Porta repository per salvare/caricare oggetti DriverDefectTicket senza dipendere dal database.",
+    "methods": []
+  },
+  {
+    "package": "application.port.out",
+    "name": "DriverMissionPayrollRepository",
+    "kind": "interface",
+    "description": "Porta repository per salvare/caricare oggetti DriverMissionPayroll senza dipendere dal database.",
+    "methods": []
+  },
+  {
+    "package": "application.port.out",
+    "name": "DriverMissionWorkReportRepository",
+    "kind": "interface",
+    "description": "Porta repository per salvare/caricare oggetti DriverMissionWorkReport senza dipendere dal database.",
+    "methods": []
+  },
+  {
+    "package": "application.port.out",
+    "name": "DriverPayrollPolicyRepository",
+    "kind": "interface",
+    "description": "Porta repository per salvare/caricare oggetti DriverPayrollPolicy senza dipendere dal database.",
+    "methods": []
+  },
+  {
+    "package": "application.port.out",
+    "name": "DriverRepository",
+    "kind": "interface",
+    "description": "Porta repository per salvare/caricare oggetti Driver senza dipendere dal database.",
+    "methods": []
+  },
+  {
+    "package": "application.port.out",
+    "name": "FacilityRepository",
+    "kind": "interface",
+    "description": "Porta repository per salvare/caricare oggetti Facility senza dipendere dal database.",
+    "methods": []
+  },
+  {
+    "package": "application.port.out",
+    "name": "FleetAssetAcquisitionRepository",
+    "kind": "interface",
+    "description": "Porta repository per salvare/caricare oggetti FleetAssetAcquisition senza dipendere dal database.",
+    "methods": []
+  },
+  {
+    "package": "application.port.out",
+    "name": "FleetAssetPurchaseRepository",
+    "kind": "interface",
+    "description": "Porta repository per salvare/caricare oggetti FleetAssetPurchase senza dipendere dal database.",
+    "methods": []
+  },
+  {
+    "package": "application.port.out",
+    "name": "FleetFinancialStatementRepository",
+    "kind": "interface",
+    "description": "Porta repository per salvare/caricare oggetti FleetFinancialStatement senza dipendere dal database.",
+    "methods": []
+  },
+  {
+    "package": "application.port.out",
+    "name": "FuelTransactionRepository",
+    "kind": "interface",
+    "description": "Porta repository per salvare/caricare oggetti FuelTransaction senza dipendere dal database.",
+    "methods": []
+  },
+  {
+    "package": "application.port.out",
+    "name": "GeneratedReportRepository",
+    "kind": "interface",
+    "description": "Porta repository per salvare/caricare oggetti GeneratedReport senza dipendere dal database.",
+    "methods": []
+  },
+  {
+    "package": "application.port.out",
+    "name": "ImportBatchRepository",
+    "kind": "interface",
+    "description": "Porta repository per salvare/caricare oggetti ImportBatch senza dipendere dal database.",
+    "methods": []
+  },
+  {
+    "package": "application.port.out",
+    "name": "InventoryBalanceRepository",
+    "kind": "interface",
+    "description": "Porta repository per salvare/caricare oggetti InventoryBalance senza dipendere dal database.",
+    "methods": []
+  },
+  {
+    "package": "application.port.out",
+    "name": "InventoryItemRepository",
+    "kind": "interface",
+    "description": "Porta repository per salvare/caricare oggetti InventoryItem senza dipendere dal database.",
+    "methods": []
+  },
+  {
+    "package": "application.port.out",
+    "name": "InventoryStockMovementRepository",
+    "kind": "interface",
+    "description": "Porta repository per salvare/caricare oggetti InventoryStockMovement senza dipendere dal database.",
+    "methods": []
+  },
+  {
+    "package": "application.port.out",
+    "name": "LoadSecuringChecklistRepository",
+    "kind": "interface",
+    "description": "Porta repository per salvare/caricare oggetti LoadSecuringChecklist senza dipendere dal database.",
+    "methods": []
+  },
+  {
+    "package": "application.port.out",
+    "name": "MaintenanceWorkOrderRepository",
+    "kind": "interface",
+    "description": "Porta repository per salvare/caricare oggetti MaintenanceWorkOrder senza dipendere dal database.",
+    "methods": []
+  },
+  {
+    "package": "application.port.out",
+    "name": "MissionEconomicsRepository",
+    "kind": "interface",
+    "description": "Porta repository per salvare/caricare oggetti MissionEconomics senza dipendere dal database.",
+    "methods": []
+  },
+  {
+    "package": "application.port.out",
+    "name": "NotificationMessageRepository",
+    "kind": "interface",
+    "description": "Porta repository per salvare/caricare oggetti NotificationMessage senza dipendere dal database.",
+    "methods": []
+  },
+  {
+    "package": "application.port.out",
+    "name": "ParkingAssignmentRepository",
+    "kind": "interface",
+    "description": "Porta repository per salvare/caricare oggetti ParkingAssignment senza dipendere dal database.",
+    "methods": []
+  },
+  {
+    "package": "application.port.out",
+    "name": "ParkingSpotRepository",
+    "kind": "interface",
+    "description": "Porta repository per salvare/caricare oggetti ParkingSpot senza dipendere dal database.",
+    "methods": []
+  },
+  {
+    "package": "application.port.out",
+    "name": "RepositoryPort",
+    "kind": "interface",
+    "description": "Interfaccia base dei repository: findById, save, findAll e getRequired.",
+    "methods": []
+  },
+  {
+    "package": "application.port.out",
+    "name": "RoutePlanRepository",
+    "kind": "interface",
+    "description": "Porta repository per salvare/caricare oggetti RoutePlan senza dipendere dal database.",
+    "methods": []
+  },
+  {
+    "package": "application.port.out",
+    "name": "ShipmentDocumentBundleRepository",
+    "kind": "interface",
+    "description": "Porta repository per salvare/caricare oggetti ShipmentDocumentBundle senza dipendere dal database.",
+    "methods": []
+  },
+  {
+    "package": "application.port.out",
+    "name": "ShipmentRepository",
+    "kind": "interface",
+    "description": "Porta repository per salvare/caricare oggetti Shipment senza dipendere dal database.",
+    "methods": []
+  },
+  {
+    "package": "application.port.out",
+    "name": "SupplierInvoiceRepository",
+    "kind": "interface",
+    "description": "Porta repository per salvare/caricare oggetti SupplierInvoice senza dipendere dal database.",
+    "methods": []
+  },
+  {
+    "package": "application.port.out",
+    "name": "TelematicsSnapshotRepository",
+    "kind": "interface",
+    "description": "Porta repository per salvare/caricare oggetti TelematicsSnapshot senza dipendere dal database.",
+    "methods": []
+  },
+  {
+    "package": "application.port.out",
+    "name": "TireInstallationRepository",
+    "kind": "interface",
+    "description": "Porta repository per salvare/caricare oggetti TireInstallation senza dipendere dal database.",
+    "methods": []
+  },
+  {
+    "package": "application.port.out",
+    "name": "TireRepository",
+    "kind": "interface",
+    "description": "Porta repository per salvare/caricare oggetti Tire senza dipendere dal database.",
+    "methods": []
+  },
+  {
+    "package": "application.port.out",
+    "name": "TrackingTimelineRepository",
+    "kind": "interface",
+    "description": "Porta repository per salvare/caricare oggetti TrackingTimeline senza dipendere dal database.",
+    "methods": []
+  },
+  {
+    "package": "application.port.out",
+    "name": "TransportClaimRepository",
+    "kind": "interface",
+    "description": "Porta repository per salvare/caricare oggetti TransportClaim senza dipendere dal database.",
+    "methods": []
+  },
+  {
+    "package": "application.port.out",
+    "name": "TransportDocumentRepository",
+    "kind": "interface",
+    "description": "Porta repository per salvare/caricare oggetti TransportDocument senza dipendere dal database.",
+    "methods": []
+  },
+  {
+    "package": "application.port.out",
+    "name": "TransportMissionRepository",
+    "kind": "interface",
+    "description": "Porta repository per salvare/caricare oggetti TransportMission senza dipendere dal database.",
+    "methods": []
+  },
+  {
+    "package": "application.port.out",
+    "name": "TransportOrderRepository",
+    "kind": "interface",
+    "description": "Porta repository per salvare/caricare oggetti TransportOrder senza dipendere dal database.",
+    "methods": []
+  },
+  {
+    "package": "application.port.out",
+    "name": "UserAccountRepository",
+    "kind": "interface",
+    "description": "Porta repository per salvare/caricare oggetti UserAccount senza dipendere dal database.",
+    "methods": []
+  },
+  {
+    "package": "application.port.out",
+    "name": "VehicleCombinationRepository",
+    "kind": "interface",
+    "description": "Porta repository per salvare/caricare oggetti VehicleCombination senza dipendere dal database.",
+    "methods": []
+  },
+  {
+    "package": "application.port.out",
+    "name": "VehicleRepository",
+    "kind": "interface",
+    "description": "Porta repository per salvare/caricare oggetti Vehicle senza dipendere dal database.",
+    "methods": []
+  },
+  {
+    "package": "application.port.out",
+    "name": "WarehouseLocationRepository",
+    "kind": "interface",
+    "description": "Porta repository per salvare/caricare oggetti WarehouseLocation senza dipendere dal database.",
+    "methods": []
+  },
+  {
+    "package": "application.usecase",
+    "name": "DefaultAssignParkingSpotUseCase",
+    "kind": "class",
+    "description": "Implementazione dello use case di parcheggio: carica lo spot, crea assegnazione e salva.",
+    "methods": [
+      "handle"
+    ]
+  },
+  {
+    "package": "application.usecase",
+    "name": "DefaultCalculateDriverMissionPayrollUseCase",
+    "kind": "class",
+    "description": "Implementazione del calcolo payroll autista.",
+    "methods": [
+      "handle"
+    ]
+  },
+  {
+    "package": "application.usecase",
+    "name": "DefaultCalculateMissionEconomicsUseCase",
+    "kind": "class",
+    "description": "Implementazione del calcolo economics missione.",
+    "methods": [
+      "handle"
+    ]
+  },
+  {
+    "package": "application.usecase",
+    "name": "DefaultCloseTransportMissionUseCase",
+    "kind": "class",
+    "description": "Implementazione concreta dello use case CloseTransportMissionUseCase; coordina repository e domain.",
+    "methods": [
+      "handle"
+    ]
+  },
+  {
+    "package": "application.usecase",
+    "name": "DefaultCreateShipmentFromAcceptedOrderUseCase",
+    "kind": "class",
+    "description": "Implementazione concreta dello use case CreateShipmentFromAcceptedOrderUseCase; coordina repository e domain.",
+    "methods": [
+      "handle"
+    ]
+  },
+  {
+    "package": "application.usecase",
+    "name": "DefaultGenerateShipmentDocumentBundleUseCase",
+    "kind": "class",
+    "description": "Implementazione concreta dello use case GenerateShipmentDocumentBundleUseCase; coordina repository e domain.",
+    "methods": [
+      "handle"
+    ]
+  },
+  {
+    "package": "application.usecase",
+    "name": "DefaultPlanTransportMissionUseCase",
+    "kind": "class",
+    "description": "Implementazione della pianificazione missione: recupera dati, crea TransportMission e salva.",
+    "methods": [
+      "handle"
+    ]
+  },
+  {
+    "package": "application.usecase",
+    "name": "DefaultRecordInventoryStockMovementUseCase",
+    "kind": "class",
+    "description": "Implementazione concreta dello use case RecordInventoryStockMovementUseCase; coordina repository e domain.",
+    "methods": [
+      "handle"
+    ]
+  },
+  {
+    "package": "application.usecase",
+    "name": "DefaultRegisterCustomerContractUseCase",
+    "kind": "class",
+    "description": "Implementazione concreta dello use case RegisterCustomerContractUseCase; coordina repository e domain.",
+    "methods": [
+      "handle"
+    ]
+  },
+  {
+    "package": "application.usecase",
+    "name": "DefaultRegisterFleetAssetAcquisitionUseCase",
+    "kind": "class",
+    "description": "Implementazione concreta dello use case RegisterFleetAssetAcquisitionUseCase; coordina repository e domain.",
+    "methods": [
+      "handle"
+    ]
+  },
+  {
+    "package": "application.usecase",
+    "name": "DefaultRegisterImportBatchUseCase",
+    "kind": "class",
+    "description": "Implementazione concreta dello use case RegisterImportBatchUseCase; coordina repository e domain.",
+    "methods": [
+      "handle"
+    ]
+  },
+  {
+    "package": "application.usecase",
+    "name": "DefaultRegisterSupplierInvoiceUseCase",
+    "kind": "class",
+    "description": "Implementazione concreta dello use case RegisterSupplierInvoiceUseCase; coordina repository e domain.",
+    "methods": [
+      "handle"
+    ]
+  },
+  {
+    "package": "domain.audit",
+    "name": "AuditActionType",
+    "kind": "enum",
+    "description": "Enum/tipo di classificazione usato nelle regole di dominio.",
+    "methods": [
+      "isDataChange",
+      "isSecuritySensitive",
+      "hasFinancialImpact"
+    ]
+  },
+  {
+    "package": "domain.audit",
+    "name": "AuditActorType",
+    "kind": "enum",
+    "description": "Enum/tipo di classificazione usato nelle regole di dominio.",
+    "methods": [
+      "isHumanActor"
+    ]
+  },
+  {
+    "package": "domain.audit",
+    "name": "AuditEvent",
+    "kind": "class",
+    "description": "Evento puntuale nella timeline operativa o audit.",
+    "methods": [
+      "of",
+      "userAction",
+      "systemAction",
+      "integrationAction",
+      "getEventId",
+      "getAggregateType",
+      "getAggregateId",
+      "getActorType",
+      "getActorId",
+      "getActionType",
+      "getSeverity",
+      "getOccurredAt",
+      "getNotes",
+      "isHumanAction",
+      "isSystemAction"
+    ]
+  },
+  {
+    "package": "domain.audit",
+    "name": "AuditRules",
+    "kind": "class",
+    "description": "Classe di regole per validare e calcolare comportamenti nel package domain.audit.",
+    "methods": [
+      "canAppendEvent",
+      "requiresReview",
+      "containsSecuritySensitiveEvents",
+      "containsFinancialImpactEvents",
+      "isChronological"
+    ]
+  },
+  {
+    "package": "domain.audit",
+    "name": "AuditSeverity",
+    "kind": "enum",
+    "description": "Enum: insieme chiuso di valori ammessi dal dominio.",
+    "methods": [
+      "getLevel",
+      "requiresReview",
+      "isAtLeast"
+    ]
+  },
+  {
+    "package": "domain.audit",
+    "name": "AuditTrail",
+    "kind": "class",
+    "description": "Classe del package domain.audit; rappresenta un concetto del modello TruckFlow.",
+    "methods": [
+      "of",
+      "getEvents",
+      "getEventCount",
+      "getAggregateType",
+      "getAggregateId",
+      "getFirstEvent",
+      "getLatestEvent",
+      "containsEventId",
+      "hasActionType",
+      "hasSecuritySensitiveEvents",
+      "hasFinancialImpactEvents",
+      "hasReviewRequiredEvents",
+      "getEventsByActionType",
+      "formatSingleLine",
+      "equals"
+    ]
+  },
+  {
+    "package": "domain.availability",
+    "name": "AvailabilityResourceType",
+    "kind": "enum",
+    "description": "Enum/tipo di classificazione usato nelle regole di dominio.",
+    "methods": []
+  },
+  {
+    "package": "domain.availability",
+    "name": "AvailabilityRules",
+    "kind": "class",
+    "description": "Classe di regole per validare e calcolare comportamenti nel package domain.availability.",
+    "methods": [
+      "isResourceAvailableForWindow",
+      "hasBlockingRecordForWindow",
+      "canAddAvailabilityRecord",
+      "findRecordsForResource"
+    ]
+  },
+  {
+    "package": "domain.availability",
+    "name": "AvailabilityStatus",
+    "kind": "enum",
+    "description": "Enum di stato del ciclo di vita.",
+    "methods": [
+      "isBookable",
+      "isBlocking"
+    ]
+  },
+  {
+    "package": "domain.availability",
+    "name": "ResourceAvailability",
+    "kind": "class",
+    "description": "Classe del package domain.availability; rappresenta un concetto del modello TruckFlow.",
+    "methods": [
+      "of",
+      "available",
+      "reserved",
+      "assigned",
+      "unavailable",
+      "maintenance",
+      "onLeave",
+      "getResourceType",
+      "getResourceCode",
+      "getDateRange",
+      "getTimeWindow",
+      "getStatus",
+      "getNotes",
+      "isAvailable",
+      "isBookable"
+    ]
+  },
+  {
+    "package": "domain.billing",
+    "name": "BillingRules",
+    "kind": "class",
+    "description": "Classe di regole per validare e calcolare comportamenti nel package domain.billing.",
+    "methods": [
+      "canBeIssued",
+      "canBeMarkedPaid",
+      "canBeCancelled",
+      "hasReceivableAmount",
+      "isOverdue",
+      "isPaymentMatchingInvoice",
+      "canRegisterPayment",
+      "paymentsCoverInvoice"
+    ]
+  },
+  {
+    "package": "domain.billing",
+    "name": "Invoice",
+    "kind": "class",
+    "description": "Classe del package domain.billing; rappresenta un concetto del modello TruckFlow.",
+    "methods": [
+      "draft",
+      "issued",
+      "issue",
+      "markPaid",
+      "cancel",
+      "getInvoiceNumber",
+      "getCustomerCode",
+      "getShipmentNumber",
+      "getPriceBreakdown",
+      "getIssueDate",
+      "getDueDate",
+      "getStatus",
+      "getNotes",
+      "calculateTotal",
+      "isDraft"
+    ]
+  },
+  {
+    "package": "domain.billing",
+    "name": "InvoiceStatus",
+    "kind": "enum",
+    "description": "Enum di stato del ciclo di vita.",
+    "methods": [
+      "isTerminal",
+      "canReceivePayment"
+    ]
+  },
+  {
+    "package": "domain.billing",
+    "name": "PaymentMethod",
+    "kind": "enum",
+    "description": "Enum: insieme chiuso di valori ammessi dal dominio.",
+    "methods": [
+      "isElectronic"
+    ]
+  },
+  {
+    "package": "domain.billing",
+    "name": "PaymentRecord",
+    "kind": "class",
+    "description": "Classe del package domain.billing; rappresenta un concetto del modello TruckFlow.",
+    "methods": [
+      "of",
+      "bankTransfer",
+      "getPaymentNumber",
+      "getInvoiceNumber",
+      "getAmount",
+      "getMethod",
+      "getReceivedDate",
+      "getNotes",
+      "isElectronicPayment",
+      "hasNotes",
+      "isForInvoice",
+      "isForInvoiceNumber",
+      "formatSingleLine",
+      "equals",
+      "hashCode"
+    ]
+  },
+  {
+    "package": "domain.cargo",
+    "name": "AdrClass",
+    "kind": "enum",
+    "description": "Enum: insieme chiuso di valori ammessi dal dominio.",
+    "methods": [
+      "getCode",
+      "isExplosives",
+      "isGas",
+      "isFlammableLiquid",
+      "isRadioactive"
+    ]
+  },
+  {
+    "package": "domain.cargo",
+    "name": "CargoCategory",
+    "kind": "enum",
+    "description": "Categoria funzionale usata per distinguere casi operativi o contabili.",
+    "methods": [
+      "requiresTemperatureControl",
+      "isPalletized",
+      "requiresAdrData",
+      "isLiquid",
+      "isBulk",
+      "isWaste",
+      "requiresSanitaryOrVeterinaryDocuments",
+      "requiresFirDocument",
+      "requiresEerCode",
+      "isOversized",
+      "isHighValueOrVehicle"
+    ]
+  },
+  {
+    "package": "domain.cargo",
+    "name": "CargoItem",
+    "kind": "class",
+    "description": "Classe del package domain.cargo; rappresenta un concetto del modello TruckFlow.",
+    "methods": [
+      "of",
+      "temperatureControlled",
+      "dangerousGoods",
+      "temperatureControlledDangerousGoods",
+      "getDescription",
+      "getCategory",
+      "getWeight",
+      "getDimension",
+      "getRequiredTemperatureRange",
+      "getDangerousGoodsProfile",
+      "getNotes",
+      "calculateVolume",
+      "requiresTemperatureControl",
+      "hasDangerousGoodsProfile",
+      "isDangerousGoods"
+    ]
+  },
+  {
+    "package": "domain.cargo",
+    "name": "CargoLoad",
+    "kind": "class",
+    "description": "Classe del package domain.cargo; rappresenta un concetto del modello TruckFlow.",
+    "methods": [
+      "of",
+      "getItems",
+      "getItemCount",
+      "calculateTotalWeight",
+      "calculateTotalVolume",
+      "requiresTemperatureControl",
+      "containsDangerousGoods",
+      "hasDangerousGoodsProfile",
+      "requiresAdrTransport",
+      "requiresAdrTankTransport",
+      "containsAdrClass",
+      "hasCategory",
+      "allItemsFitInside",
+      "getDangerousGoodsProfiles",
+      "formatSingleLine"
+    ]
+  },
+  {
+    "package": "domain.cargo",
+    "name": "CargoLoadRules",
+    "kind": "class",
+    "description": "Classe di regole per validare e calcolare comportamenti nel package domain.cargo.",
+    "methods": [
+      "isWithinMaxWeight",
+      "isWithinMaxVolume",
+      "fitsInsideCargoSpace",
+      "requiresTemperatureControlledTransport",
+      "containsHazardousMaterial",
+      "containsDangerousGoods",
+      "requiresAdrTransport",
+      "requiresAdrTankTransport",
+      "containsExplosives",
+      "containsRadioactiveMaterial",
+      "containsFragileCargo",
+      "containsOversizedCargo"
+    ]
+  },
+  {
+    "package": "domain.cargo",
+    "name": "CargoOperationalRules",
+    "kind": "class",
+    "description": "Classe di regole per validare e calcolare comportamenti nel package domain.cargo.",
+    "methods": [
+      "requiredDocumentsFor",
+      "requiredVehicleCertificatesFor",
+      "requiresEerCode",
+      "requiresUnNumber"
+    ]
+  },
+  {
+    "package": "domain.cargo",
+    "name": "DangerousGoodsProfile",
+    "kind": "class",
+    "description": "Profilo che raggruppa informazioni tecniche, operative o economiche.",
+    "methods": [
+      "of",
+      "getUnNumber",
+      "getProperShippingName",
+      "getAdrClass",
+      "getClassificationCode",
+      "getPackingGroup",
+      "getHazardLabels",
+      "getTunnelRestrictionCode",
+      "getTransportCategory",
+      "requiresTankTransport",
+      "hasPackingGroup",
+      "isGas",
+      "isFlammableLiquid",
+      "isExplosive",
+      "isRadioactive"
+    ]
+  },
+  {
+    "package": "domain.cargo",
+    "name": "HazardLabel",
+    "kind": "enum",
+    "description": "Enum: insieme chiuso di valori ammessi dal dominio.",
+    "methods": [
+      "getCode",
+      "isGasLabel",
+      "isTankRelevantLabel"
+    ]
+  },
+  {
+    "package": "domain.cargo",
+    "name": "PackingGroup",
+    "kind": "enum",
+    "description": "Enum: insieme chiuso di valori ammessi dal dominio.",
+    "methods": [
+      "getDescription",
+      "isHighDanger",
+      "isMediumDanger",
+      "isLowDanger"
+    ]
+  },
+  {
+    "package": "domain.claim",
+    "name": "ClaimRules",
+    "kind": "class",
+    "description": "Classe di regole per validare e calcolare comportamenti nel package domain.claim.",
+    "methods": [
+      "canBeReviewed",
+      "canBeAccepted",
+      "canBeRejected",
+      "canBeSettled",
+      "canBeCancelled",
+      "isOpenForAction",
+      "isResolved",
+      "requiresUrgentReview",
+      "isAcceptedCompensationWithinRequestedAmount"
+    ]
+  },
+  {
+    "package": "domain.claim",
+    "name": "ClaimSeverity",
+    "kind": "enum",
+    "description": "Enum: insieme chiuso di valori ammessi dal dominio.",
+    "methods": [
+      "getLevel",
+      "isUrgent",
+      "isAtLeast"
+    ]
+  },
+  {
+    "package": "domain.claim",
+    "name": "ClaimStatus",
+    "kind": "enum",
+    "description": "Enum di stato del ciclo di vita.",
+    "methods": [
+      "isTerminal"
+    ]
+  },
+  {
+    "package": "domain.claim",
+    "name": "ClaimType",
+    "kind": "enum",
+    "description": "Enum/tipo di classificazione usato nelle regole di dominio.",
+    "methods": [
+      "isCargoRelated",
+      "isTimeRelated",
+      "isDocumentRelated",
+      "isFinancialDispute"
+    ]
+  },
+  {
+    "package": "domain.claim",
+    "name": "DamageInspection",
+    "kind": "class",
+    "description": "Classe del package domain.claim; rappresenta un concetto del modello TruckFlow.",
+    "methods": [
+      "of",
+      "getInspectionNumber",
+      "getVehicleFleetNumber",
+      "getDriverCode",
+      "getPerformedAt",
+      "getItems",
+      "getNotes",
+      "hasNewDamage"
+    ]
+  },
+  {
+    "package": "domain.claim",
+    "name": "DamageInspectionItem",
+    "kind": "class",
+    "description": "Classe del package domain.claim; rappresenta un concetto del modello TruckFlow.",
+    "methods": [
+      "of",
+      "getArea",
+      "isDamaged",
+      "getNotes",
+      "equals",
+      "hashCode"
+    ]
+  },
+  {
+    "package": "domain.claim",
+    "name": "TransportClaim",
+    "kind": "class",
+    "description": "Classe del package domain.claim; rappresenta un concetto del modello TruckFlow.",
+    "methods": [
+      "open",
+      "startReview",
+      "accept",
+      "settle",
+      "reject",
+      "cancel",
+      "getClaimNumber",
+      "getShipmentNumber",
+      "getCustomerCode",
+      "getType",
+      "getSeverity",
+      "getStatus",
+      "getRequestedCompensation",
+      "getAcceptedCompensation",
+      "getOpenedDate"
+    ]
+  },
+  {
+    "package": "domain.company",
+    "name": "CompanyComplianceRules",
+    "kind": "class",
+    "description": "Classe di regole per validare e calcolare comportamenti nel package domain.company.",
+    "methods": [
+      "hasBaseRoadHaulageAuthorizations",
+      "canOperateInternationalTransport",
+      "canTransportCargo"
+    ]
+  },
+  {
+    "package": "domain.company",
+    "name": "CompanyLicense",
+    "kind": "class",
+    "description": "Classe del package domain.company; rappresenta un concetto del modello TruckFlow.",
+    "methods": [
+      "of",
+      "getType",
+      "getExpiresAt",
+      "getNotes",
+      "isValidOn",
+      "equals",
+      "hashCode"
+    ]
+  },
+  {
+    "package": "domain.company",
+    "name": "CompanyLicenseType",
+    "kind": "enum",
+    "description": "Enum/tipo di classificazione usato nelle regole di dominio.",
+    "methods": []
+  },
+  {
+    "package": "domain.company",
+    "name": "TransportCompany",
+    "kind": "class",
+    "description": "Classe del package domain.company; rappresenta un concetto del modello TruckFlow.",
+    "methods": [
+      "of",
+      "getCompanyCode",
+      "getBusinessName",
+      "getVatNumber",
+      "getLicenses",
+      "getNotes",
+      "hasLicense",
+      "hasValidLicense",
+      "hasAnyValidEnvironmentalLicense"
+    ]
+  },
+  {
+    "package": "domain.compliance",
+    "name": "ComplianceRules",
+    "kind": "class",
+    "description": "Classe di regole per validare e calcolare comportamenti nel package domain.compliance.",
+    "methods": [
+      "isVehicleCompliantForShipment",
+      "isDriverCompliantForShipment",
+      "isRouteCompliantForShipment",
+      "isAssignmentCompliant",
+      "requiresSpecialComplianceChecks"
+    ]
+  },
+  {
+    "package": "domain.configuration",
+    "name": "ConfigurationCategory",
+    "kind": "enum",
+    "description": "Categoria funzionale usata per distinguere casi operativi o contabili.",
+    "methods": [
+      "isSensitive"
+    ]
+  },
+  {
+    "package": "domain.configuration",
+    "name": "ConfigurationRules",
+    "kind": "class",
+    "description": "Classe di regole per validare e calcolare comportamenti nel package domain.configuration.",
+    "methods": [
+      "canBeApplied",
+      "canOverride",
+      "isApplicableTo",
+      "isSensitiveConfiguration",
+      "requiresRestrictedAccess",
+      "isNumericConfiguration",
+      "isPricingConfiguration",
+      "isSecurityConfiguration"
+    ]
+  },
+  {
+    "package": "domain.configuration",
+    "name": "ConfigurationScope",
+    "kind": "enum",
+    "description": "Enum: insieme chiuso di valori ammessi dal dominio.",
+    "methods": [
+      "requiresReference",
+      "isGlobal"
+    ]
+  },
+  {
+    "package": "domain.configuration",
+    "name": "ConfigurationValue",
+    "kind": "class",
+    "description": "Classe del package domain.configuration; rappresenta un concetto del modello TruckFlow.",
+    "methods": [
+      "ofText",
+      "ofBoolean",
+      "ofInteger",
+      "ofDecimal",
+      "ofPercentage",
+      "ofDurationMinutes",
+      "getType",
+      "getRawValue",
+      "asText",
+      "asBoolean",
+      "asInteger",
+      "asDecimal",
+      "asPercentage",
+      "asDurationMinutes",
+      "isNumeric"
+    ]
+  },
+  {
+    "package": "domain.configuration",
+    "name": "ConfigurationValueType",
+    "kind": "enum",
+    "description": "Enum/tipo di classificazione usato nelle regole di dominio.",
+    "methods": [
+      "isNumeric"
+    ]
+  },
+  {
+    "package": "domain.configuration",
+    "name": "SystemConfiguration",
+    "kind": "class",
+    "description": "Classe del package domain.configuration; rappresenta un concetto del modello TruckFlow.",
+    "methods": [
+      "activeGlobal",
+      "activeForScope",
+      "inactiveForScope",
+      "activate",
+      "deactivate",
+      "changeValue",
+      "getConfigurationKey",
+      "getCategory",
+      "getScope",
+      "getScopeReference",
+      "getValue",
+      "getDescription",
+      "isActive",
+      "getNotes",
+      "isGlobal"
+    ]
+  },
+  {
+    "package": "domain.contract",
+    "name": "ChargeUnit",
+    "kind": "enum",
+    "description": "Enum: insieme chiuso di valori ammessi dal dominio.",
+    "methods": [
+      "isPercentageBased"
+    ]
+  },
+  {
+    "package": "domain.contract",
+    "name": "ContractRateCard",
+    "kind": "class",
+    "description": "Classe del package domain.contract; rappresenta un concetto del modello TruckFlow.",
+    "methods": [
+      "of",
+      "getRateCardCode",
+      "getName",
+      "getRules",
+      "getNotes",
+      "findRule",
+      "containsRule"
+    ]
+  },
+  {
+    "package": "domain.contract",
+    "name": "CustomerContract",
+    "kind": "class",
+    "description": "Classe del package domain.contract; rappresenta un concetto del modello TruckFlow.",
+    "methods": [
+      "active",
+      "inactive",
+      "getContractCode",
+      "getCustomerCode",
+      "getValidity",
+      "getRateCard",
+      "isActive",
+      "getNotes",
+      "isValidOn",
+      "hasTariff",
+      "equals",
+      "hashCode"
+    ]
+  },
+  {
+    "package": "domain.contract",
+    "name": "CustomerContractRules",
+    "kind": "class",
+    "description": "Classe di regole per validare e calcolare comportamenti nel package domain.contract.",
+    "methods": [
+      "canPriceShipmentOn",
+      "requiresManualPricingForAdr",
+      "requiresManualPricingForTemperatureControlledTransport"
+    ]
+  },
+  {
+    "package": "domain.contract",
+    "name": "TariffRule",
+    "kind": "class",
+    "description": "Classe del package domain.contract; rappresenta un concetto del modello TruckFlow.",
+    "methods": [
+      "amount",
+      "percentage",
+      "getRuleCode",
+      "getType",
+      "getDescription",
+      "getUnit",
+      "getAmount",
+      "getPercentage",
+      "isMandatory",
+      "getNotes",
+      "appliesTo",
+      "equals",
+      "hashCode"
+    ]
+  },
+  {
+    "package": "domain.contract",
+    "name": "TariffRuleType",
+    "kind": "enum",
+    "description": "Enum/tipo di classificazione usato nelle regole di dominio.",
+    "methods": [
+      "isOperationalCircumstance"
+    ]
+  },
+  {
+    "package": "domain.customer",
+    "name": "Customer",
+    "kind": "class",
+    "description": "Classe del package domain.customer; rappresenta un concetto del modello TruckFlow.",
+    "methods": [
+      "active",
+      "inactive",
+      "suspended",
+      "getCode",
+      "getLegalName",
+      "getType",
+      "getStatus",
+      "getPrimaryLocation",
+      "getNotes",
+      "isActive",
+      "isSuspended",
+      "isBusinessCustomer",
+      "isInCountry",
+      "hasNotes",
+      "formatSingleLine"
+    ]
+  },
+  {
+    "package": "domain.customer",
+    "name": "CustomerAccount",
+    "kind": "class",
+    "description": "Classe del package domain.customer; rappresenta un concetto del modello TruckFlow.",
+    "methods": [
+      "of",
+      "getCustomer",
+      "getContacts",
+      "getContactCount",
+      "getPrimaryContact",
+      "getContactsByRole",
+      "hasContactRole",
+      "hasBillingContact",
+      "canRequestTransportOrder",
+      "isSuspended",
+      "getCustomerCode",
+      "formatSingleLine",
+      "equals",
+      "hashCode",
+      "toString"
+    ]
+  },
+  {
+    "package": "domain.customer",
+    "name": "CustomerContact",
+    "kind": "class",
+    "description": "Classe del package domain.customer; rappresenta un concetto del modello TruckFlow.",
+    "methods": [
+      "primary",
+      "secondary",
+      "getFullName",
+      "getRole",
+      "getEmail",
+      "getPhoneNumber",
+      "isPrimaryContact",
+      "getNotes",
+      "hasRole",
+      "hasNotes",
+      "formatSingleLine",
+      "equals",
+      "hashCode",
+      "toString"
+    ]
+  },
+  {
+    "package": "domain.customer",
+    "name": "CustomerContactRole",
+    "kind": "enum",
+    "description": "Enum: insieme chiuso di valori ammessi dal dominio.",
+    "methods": []
+  },
+  {
+    "package": "domain.customer",
+    "name": "CustomerStatus",
+    "kind": "enum",
+    "description": "Enum di stato del ciclo di vita.",
+    "methods": []
+  },
+  {
+    "package": "domain.customer",
+    "name": "CustomerType",
+    "kind": "enum",
+    "description": "Enum/tipo di classificazione usato nelle regole di dominio.",
+    "methods": [
+      "isBusinessCustomer"
+    ]
+  },
+  {
+    "package": "domain.dataimport",
+    "name": "ExternalDataSourceType",
+    "kind": "enum",
+    "description": "Enum/tipo di classificazione usato nelle regole di dominio.",
+    "methods": [
+      "usuallyContainsEconomicData"
+    ]
+  },
+  {
+    "package": "domain.dataimport",
+    "name": "ImportBatch",
+    "kind": "class",
+    "description": "Classe del package domain.dataimport; rappresenta un concetto del modello TruckFlow.",
+    "methods": [
+      "of",
+      "getBatchCode",
+      "getSourceType",
+      "getImportedAt",
+      "getRecords",
+      "getNotes",
+      "countValidatedRecords",
+      "countRejectedRecords",
+      "hasRejectedRecords",
+      "calculateAmountTotal"
+    ]
+  },
+  {
+    "package": "domain.dataimport",
+    "name": "ImportRecord",
+    "kind": "class",
+    "description": "Classe del package domain.dataimport; rappresenta un concetto del modello TruckFlow.",
+    "methods": [
+      "of",
+      "getRecordCode",
+      "getSourceType",
+      "getExternalRowId",
+      "getStatus",
+      "getReferenceNumber",
+      "getAmount",
+      "getOccurredAt",
+      "getNotes",
+      "hasAmount",
+      "canBePostedToDomain",
+      "equals",
+      "hashCode"
+    ]
+  },
+  {
+    "package": "domain.dataimport",
+    "name": "ImportRecordStatus",
+    "kind": "enum",
+    "description": "Enum di stato del ciclo di vita.",
+    "methods": [
+      "isTerminal",
+      "canBePosted"
+    ]
+  },
+  {
+    "package": "domain.dataimport",
+    "name": "ImportRules",
+    "kind": "class",
+    "description": "Classe di regole per validare e calcolare comportamenti nel package domain.dataimport.",
+    "methods": [
+      "batchCanBePostedToDomain",
+      "batchRequiresManualReview",
+      "sourceUsuallyCreatesEconomicEntries"
+    ]
+  },
+  {
+    "package": "domain.dispatch",
+    "name": "DispatchAssignmentCandidate",
+    "kind": "class",
+    "description": "Classe del package domain.dispatch; rappresenta un concetto del modello TruckFlow.",
+    "methods": [
+      "of",
+      "getCandidateCode",
+      "getMissionNumber",
+      "getDriverId",
+      "getVehicleFleetNumber",
+      "getTrailerFleetNumber",
+      "getParkedResourceCode",
+      "getEstimatedRevenue",
+      "getEstimatedCost",
+      "getChecks",
+      "getNotes",
+      "hasTrailer",
+      "isParkedCombinationReady",
+      "hasBlockingIssue",
+      "requiresManualReview"
+    ]
+  },
+  {
+    "package": "domain.dispatch",
+    "name": "DispatchCheckResult",
+    "kind": "class",
+    "description": "Risultato di una valutazione o calcolo.",
+    "methods": [
+      "ready",
+      "warning",
+      "blocked",
+      "getType",
+      "getStatus",
+      "getMessage",
+      "blocksAssignment",
+      "requiresManualReview",
+      "equals",
+      "hashCode"
+    ]
+  },
+  {
+    "package": "domain.dispatch",
+    "name": "DispatchCheckType",
+    "kind": "enum",
+    "description": "Enum/tipo di classificazione usato nelle regole di dominio.",
+    "methods": []
+  },
+  {
+    "package": "domain.dispatch",
+    "name": "DispatchPlan",
+    "kind": "class",
+    "description": "Piano composto da più elementi e usato per organizzare un processo operativo.",
+    "methods": [
+      "of",
+      "getPlanCode",
+      "getPlanningDate",
+      "getCandidates",
+      "getNotes",
+      "getAssignableCandidates",
+      "getBlockedCandidates",
+      "chooseBestAssignableByMargin"
+    ]
+  },
+  {
+    "package": "domain.dispatch",
+    "name": "DispatchReadinessStatus",
+    "kind": "enum",
+    "description": "Enum di stato del ciclo di vita.",
+    "methods": [
+      "blocksAssignment",
+      "requiresManualReview"
+    ]
+  },
+  {
+    "package": "domain.dispatch",
+    "name": "DispatchRules",
+    "kind": "class",
+    "description": "Classe di regole per validare e calcolare comportamenti nel package domain.dispatch.",
+    "methods": [
+      "canAssign",
+      "shouldReviewBeforeAssigning",
+      "planHasAssignableCandidate"
+    ]
+  },
+  {
+    "package": "domain.document",
+    "name": "DeliveryNote",
+    "kind": "class",
+    "description": "Classe del package domain.document; rappresenta un concetto del modello TruckFlow.",
+    "methods": [
+      "of",
+      "getDocumentNumber",
+      "getShipmentNumber",
+      "getSenderCode",
+      "getReceiverCode",
+      "getLoadingLocationCode",
+      "getUnloadingLocationCode",
+      "getIssueDate",
+      "getLines",
+      "getRequiredTemperatureRange",
+      "getNotes",
+      "calculateTotalPackages",
+      "calculateTotalGrossWeightKilograms",
+      "calculateTotalPallets",
+      "requiresTemperatureControl"
+    ]
+  },
+  {
+    "package": "domain.document",
+    "name": "DeliveryNoteLine",
+    "kind": "class",
+    "description": "Riga di dettaglio: rappresenta una voce numerabile/economica/documentale.",
+    "methods": [
+      "of",
+      "getLineCode",
+      "getDescription",
+      "getPackagesCount",
+      "getGrossWeightKilograms",
+      "getVolumeCubicMeters",
+      "getPalletCount",
+      "getNotes",
+      "equals",
+      "hashCode"
+    ]
+  },
+  {
+    "package": "domain.document",
+    "name": "DocumentRules",
+    "kind": "class",
+    "description": "Classe di regole per validare e calcolare comportamenti nel package domain.document.",
+    "methods": [
+      "canBeRequested",
+      "canBeReceived",
+      "canBeVerified",
+      "canBeRejected",
+      "canBeExpired",
+      "isExpiredOn",
+      "isValidForOperation",
+      "requiresExpirationDate",
+      "containsAdrDocument",
+      "containsProofOfDelivery",
+      "allDocumentsValidForOperation"
+    ]
+  },
+  {
+    "package": "domain.document",
+    "name": "DocumentStatus",
+    "kind": "enum",
+    "description": "Enum di stato del ciclo di vita.",
+    "methods": [
+      "isTerminal",
+      "isUsableForOperation"
+    ]
+  },
+  {
+    "package": "domain.document",
+    "name": "ShipmentDocumentBundle",
+    "kind": "class",
+    "description": "Fascicolo/raccolta di elementi collegati alla stessa spedizione o processo.",
+    "methods": [
+      "of",
+      "getBundleCode",
+      "getShipmentNumber",
+      "getRequiredTypes",
+      "getDocuments",
+      "getNotes",
+      "presentTypes",
+      "missingRequiredTypes",
+      "isComplete",
+      "allPresentDocumentsAreVerified",
+      "isReadyForOperation"
+    ]
+  },
+  {
+    "package": "domain.document",
+    "name": "TransportDocument",
+    "kind": "class",
+    "description": "Classe del package domain.document; rappresenta un concetto del modello TruckFlow.",
+    "methods": [
+      "draft",
+      "received",
+      "verified",
+      "request",
+      "receive",
+      "verify",
+      "reject",
+      "expire",
+      "getDocumentNumber",
+      "getType",
+      "getReferenceNumber",
+      "getIssueDate",
+      "getExpirationDate",
+      "getStatus",
+      "getNotes"
+    ]
+  },
+  {
+    "package": "domain.document",
+    "name": "TransportDocumentType",
+    "kind": "enum",
+    "description": "Enum/tipo di classificazione usato nelle regole di dominio.",
+    "methods": [
+      "isShipmentRelated",
+      "isInvoiceRelated",
+      "isRequiredForAdr",
+      "isProofOfDelivery",
+      "isExpirable"
+    ]
+  },
+  {
+    "package": "domain.driver",
+    "name": "Driver",
+    "kind": "class",
+    "description": "Classe del package domain.driver; rappresenta un concetto del modello TruckFlow.",
+    "methods": [
+      "available",
+      "availableWithCertificates",
+      "assigned",
+      "onLeave",
+      "suspended",
+      "inactive",
+      "getDriverCode",
+      "getFullName",
+      "getStatus",
+      "getLicenseCategories",
+      "getProfessionalQualifications",
+      "getAdrCertificates",
+      "getOperationalQualifications",
+      "getCertificates",
+      "getNotes"
+    ]
+  },
+  {
+    "package": "domain.driver",
+    "name": "DriverAdrCertificateType",
+    "kind": "enum",
+    "description": "Enum/tipo di classificazione usato nelle regole di dominio.",
+    "methods": [
+      "isSpecialization"
+    ]
+  },
+  {
+    "package": "domain.driver",
+    "name": "DriverCertificate",
+    "kind": "class",
+    "description": "Classe del package domain.driver; rappresenta un concetto del modello TruckFlow.",
+    "methods": [
+      "of",
+      "getType",
+      "getIssuedAt",
+      "getExpiresAt",
+      "getDocumentNumber",
+      "getNotes",
+      "isValidOn",
+      "expiresWithin",
+      "equals",
+      "hashCode"
+    ]
+  },
+  {
+    "package": "domain.driver",
+    "name": "DriverCertificateType",
+    "kind": "enum",
+    "description": "Enum/tipo di classificazione usato nelle regole di dominio.",
+    "methods": []
+  },
+  {
+    "package": "domain.driver",
+    "name": "DriverLicenseCategory",
+    "kind": "enum",
+    "description": "Categoria funzionale usata per distinguere casi operativi o contabili.",
+    "methods": [
+      "isHeavyGoodsLicense",
+      "isTrailerExtension"
+    ]
+  },
+  {
+    "package": "domain.driver",
+    "name": "DriverOperationalQualification",
+    "kind": "enum",
+    "description": "Enum: insieme chiuso di valori ammessi dal dominio.",
+    "methods": []
+  },
+  {
+    "package": "domain.driver",
+    "name": "DriverProfessionalQualification",
+    "kind": "enum",
+    "description": "Enum: insieme chiuso di valori ammessi dal dominio.",
+    "methods": [
+      "getHarmonizedCode"
+    ]
+  },
+  {
+    "package": "domain.driver",
+    "name": "DriverRules",
+    "kind": "class",
+    "description": "Classe di regole per validare e calcolare comportamenti nel package domain.driver.",
+    "methods": [
+      "canBeAssigned",
+      "hasRequiredLicenseForVehicleCombination",
+      "hasRequiredProfessionalQualificationForGoodsTransport",
+      "hasRequiredAdrCertificatesForCargoLoad",
+      "hasRequiredOperationalQualificationsForShipment",
+      "hasValidProfessionalCertificatesForGoodsTransport",
+      "hasValidAdrCertificatesForCargoLoad",
+      "hasValidOperationalCertificatesForShipment",
+      "canDriveVehicleCombinationOnDate",
+      "canDriveVehicleCombination",
+      "canBeAssignedToShipment",
+      "canBeAssignedToShipmentOnDate"
+    ]
+  },
+  {
+    "package": "domain.driver",
+    "name": "DriverStatus",
+    "kind": "enum",
+    "description": "Enum di stato del ciclo di vita.",
+    "methods": [
+      "canBeAssigned"
+    ]
+  },
+  {
+    "package": "domain.drivetime",
+    "name": "DriverTimeRules",
+    "kind": "class",
+    "description": "Classe di regole per validare e calcolare comportamenti nel package domain.drivetime.",
+    "methods": [
+      "requiresBreakAfter",
+      "isWithinStandardDailyDriving",
+      "isWithinExtendedDailyDriving",
+      "requiredBreak",
+      "standardDailyRest",
+      "isWithinWeeklyDriving",
+      "isWithinTwoWeekDriving"
+    ]
+  },
+  {
+    "package": "domain.economics",
+    "name": "CustomerRevenueInvoice",
+    "kind": "class",
+    "description": "Classe del package domain.economics; rappresenta un concetto del modello TruckFlow.",
+    "methods": [
+      "of",
+      "getInvoiceNumber",
+      "getCustomerCode",
+      "getShipmentNumber",
+      "getIssueDate",
+      "getDueDate",
+      "getLines",
+      "getNotes",
+      "calculateNetTotal",
+      "calculateVatTotal",
+      "calculateGrossTotal",
+      "toMissionRevenueLines",
+      "equals",
+      "hashCode"
+    ]
+  },
+  {
+    "package": "domain.economics",
+    "name": "EconomicsRules",
+    "kind": "class",
+    "description": "Classe di regole per validare e calcolare comportamenti nel package domain.economics.",
+    "methods": [
+      "isMissionProfitable",
+      "isMissionLossMaking",
+      "missionMeetsMinimumMargin",
+      "shouldReviewMissionBeforeAcceptance",
+      "isCompanyCashNegative",
+      "operatingPeriodIsProfitable",
+      "ledgerHasCashDebt",
+      "ledgerHasVatDebt",
+      "ledgerHasVatCredit",
+      "ledgerIsLossMakingAfterAllKnownCosts"
+    ]
+  },
+  {
+    "package": "domain.economics",
+    "name": "FinancialBalance",
+    "kind": "class",
+    "description": "Classe del package domain.economics; rappresenta un concetto del modello TruckFlow.",
+    "methods": [
+      "of",
+      "zero",
+      "from",
+      "getAmount",
+      "getCurrency",
+      "getCurrencyCode",
+      "isPositive",
+      "isZero",
+      "isNegative",
+      "add",
+      "subtract",
+      "absoluteMoney",
+      "equals",
+      "hashCode",
+      "toString"
+    ]
+  },
+  {
+    "package": "domain.economics",
+    "name": "FinancingAgreement",
+    "kind": "class",
+    "description": "Classe del package domain.economics; rappresenta un concetto del modello TruckFlow.",
+    "methods": [
+      "of",
+      "getAgreementNumber",
+      "getAssetCode",
+      "getProviderCode",
+      "getStartDate",
+      "getNumberOfInstallments",
+      "getFinancedAmount",
+      "getDownPayment",
+      "getInstallmentAmount",
+      "getFinalBalloonPayment",
+      "getAnnualInterestRate",
+      "getNotes",
+      "calculateInstallmentTotal",
+      "calculateTotalCashOutflow",
+      "calculateFinanceCost"
+    ]
+  },
+  {
+    "package": "domain.economics",
+    "name": "FleetAssetAcquisition",
+    "kind": "class",
+    "description": "Classe del package domain.economics; rappresenta un concetto del modello TruckFlow.",
+    "methods": [
+      "of",
+      "getAcquisitionNumber",
+      "getSupplierCode",
+      "getSupplierInvoiceNumber",
+      "getPurchaseDate",
+      "getComponents",
+      "getNotes",
+      "calculateNetTotal",
+      "calculateVatTotal",
+      "calculateGrossTotal",
+      "calculateRecoverableVatTotal",
+      "calculateAccountingCostTotal",
+      "calculateVehicleUnitCost",
+      "calculateBodyAndEquipmentCost",
+      "calculateTireCost"
+    ]
+  },
+  {
+    "package": "domain.economics",
+    "name": "FleetAssetCategory",
+    "kind": "enum",
+    "description": "Categoria funzionale usata per distinguere casi operativi o contabili.",
+    "methods": [
+      "isVehicleUnit",
+      "isEquipment",
+      "isTireRelated"
+    ]
+  },
+  {
+    "package": "domain.economics",
+    "name": "FleetAssetCostComponent",
+    "kind": "class",
+    "description": "Classe del package domain.economics; rappresenta un concetto del modello TruckFlow.",
+    "methods": [
+      "of",
+      "taxableNet",
+      "getComponentCode",
+      "getType",
+      "getDescription",
+      "getPrice",
+      "getAssignedVehicleFleetNumber",
+      "isAssignedToVehicle",
+      "getNotes",
+      "getNetAmount",
+      "getVatAmount",
+      "getGrossAmount",
+      "calculateAccountingCost",
+      "calculateRecoverableVatAmount",
+      "isVehicleUnitCost"
+    ]
+  },
+  {
+    "package": "domain.economics",
+    "name": "FleetAssetCostComponentType",
+    "kind": "enum",
+    "description": "Enum/tipo di classificazione usato nelle regole di dominio.",
+    "methods": [
+      "isVehicleUnit",
+      "isBodyOrEquipment",
+      "isTireRelated",
+      "isAdministrativePurchaseCost"
+    ]
+  },
+  {
+    "package": "domain.economics",
+    "name": "FleetAssetPurchase",
+    "kind": "class",
+    "description": "Classe del package domain.economics; rappresenta un concetto del modello TruckFlow.",
+    "methods": [
+      "of",
+      "vehicle",
+      "getAssetCode",
+      "getCategory",
+      "getSupplierInvoiceNumber",
+      "getAssignedVehicleFleetNumber",
+      "isAssignedToVehicle",
+      "getDescription",
+      "getPurchaseDate",
+      "getPurchasePrice",
+      "getResidualValue",
+      "getUsefulLifeMonths",
+      "getNotes",
+      "calculateDepreciableValue",
+      "calculateMonthlyDepreciation"
+    ]
+  },
+  {
+    "package": "domain.economics",
+    "name": "FleetEconomicLedger",
+    "kind": "class",
+    "description": "Classe del package domain.economics; rappresenta un concetto del modello TruckFlow.",
+    "methods": [
+      "of",
+      "getLedgerNumber",
+      "getPeriod",
+      "getOpeningCash",
+      "getCustomerInvoices",
+      "getMissions",
+      "getSupplierInvoices",
+      "getAssetAcquisitions",
+      "getRecurringExpenses",
+      "getFinancingAgreements",
+      "getNotes",
+      "calculateCustomerRevenueNet",
+      "calculateCustomerGrossInvoiced",
+      "calculateSalesVatCollected",
+      "calculateMissionCosts"
+    ]
+  },
+  {
+    "package": "domain.economics",
+    "name": "FleetFinancialStatement",
+    "kind": "class",
+    "description": "Classe del package domain.economics; rappresenta un concetto del modello TruckFlow.",
+    "methods": [
+      "of",
+      "getStatementNumber",
+      "getPeriod",
+      "getMissions",
+      "getSupplierInvoices",
+      "getAssetPurchases",
+      "getNotes",
+      "calculateTotalRevenue",
+      "calculateMissionCosts",
+      "calculateSupplierInvoiceTotal",
+      "calculateAssetInvestmentTotal",
+      "calculateDepreciationForPeriod",
+      "calculateOperatingProfitability",
+      "calculateCashResult",
+      "isCashNegative"
+    ]
+  },
+  {
+    "package": "domain.economics",
+    "name": "InsurancePolicy",
+    "kind": "class",
+    "description": "Policy configurabile: contiene regole aziendali parametrizzabili.",
+    "methods": [
+      "of",
+      "getPolicyNumber",
+      "getProviderName",
+      "getInsuredAssetCode",
+      "getCoveragePeriod",
+      "getAnnualPremium",
+      "getDeductible",
+      "getNotes",
+      "covers",
+      "calculateDailyPremiumCost",
+      "equals",
+      "hashCode"
+    ]
+  },
+  {
+    "package": "domain.economics",
+    "name": "MissionCostLine",
+    "kind": "class",
+    "description": "Riga di dettaglio: rappresenta una voce numerabile/economica/documentale.",
+    "methods": [
+      "of",
+      "fuelFromTransaction",
+      "fuelFromEstimate",
+      "tollsFromEstimate",
+      "vehicleWearFromEstimate",
+      "depreciation",
+      "getLineCode",
+      "getType",
+      "getDescription",
+      "getAmount",
+      "getNotes",
+      "isVariableOperationalCost",
+      "equals",
+      "hashCode"
+    ]
+  },
+  {
+    "package": "domain.economics",
+    "name": "MissionCostType",
+    "kind": "enum",
+    "description": "Enum/tipo di classificazione usato nelle regole di dominio.",
+    "methods": [
+      "isVariableOperationalCost"
+    ]
+  },
+  {
+    "package": "domain.economics",
+    "name": "MissionEconomics",
+    "kind": "class",
+    "description": "Classe del package domain.economics; rappresenta un concetto del modello TruckFlow.",
+    "methods": [
+      "of",
+      "getMissionNumber",
+      "getShipmentNumber",
+      "getRevenueLines",
+      "getCostLines",
+      "getNotes",
+      "calculateTotalRevenue",
+      "calculateTotalCosts",
+      "calculateVariableCosts",
+      "calculateProfitability",
+      "isProfitable",
+      "isLossMaking",
+      "hasCostType",
+      "hasRevenueType",
+      "addCost"
+    ]
+  },
+  {
+    "package": "domain.economics",
+    "name": "MissionRevenueLine",
+    "kind": "class",
+    "description": "Riga di dettaglio: rappresenta una voce numerabile/economica/documentale.",
+    "methods": [
+      "of",
+      "baseTransportFee",
+      "fromPricingLine",
+      "getLineCode",
+      "getType",
+      "getDescription",
+      "getAmount",
+      "getNotes",
+      "equals",
+      "hashCode"
+    ]
+  },
+  {
+    "package": "domain.economics",
+    "name": "MissionRevenueType",
+    "kind": "enum",
+    "description": "Enum/tipo di classificazione usato nelle regole di dominio.",
+    "methods": [
+      "isSurcharge"
+    ]
+  },
+  {
+    "package": "domain.economics",
+    "name": "ProfitabilityResult",
+    "kind": "class",
+    "description": "Risultato di una valutazione o calcolo.",
+    "methods": [
+      "of",
+      "getTotalRevenue",
+      "getTotalCosts",
+      "getNetResult",
+      "getMarginPercentage",
+      "getStatus",
+      "isProfitable",
+      "isLossMaking",
+      "isInDebt",
+      "getDebtAmount",
+      "equals",
+      "hashCode"
+    ]
+  },
+  {
+    "package": "domain.economics",
+    "name": "ProfitabilityStatus",
+    "kind": "enum",
+    "description": "Enum di stato del ciclo di vita.",
+    "methods": [
+      "isCritical"
+    ]
+  },
+  {
+    "package": "domain.economics",
+    "name": "PurchaseCategory",
+    "kind": "enum",
+    "description": "Categoria funzionale usata per distinguere casi operativi o contabili.",
+    "methods": [
+      "isCapitalAsset",
+      "isOperatingExpense"
+    ]
+  },
+  {
+    "package": "domain.economics",
+    "name": "PurchaseLine",
+    "kind": "class",
+    "description": "Riga di dettaglio: rappresenta una voce numerabile/economica/documentale.",
+    "methods": [
+      "of",
+      "taxed",
+      "taxableNet",
+      "getLineCode",
+      "getCategory",
+      "getDescription",
+      "getAmount",
+      "getVatBreakdown",
+      "hasVatBreakdown",
+      "getNotes",
+      "calculateNetAmount",
+      "calculateVatAmount",
+      "calculateRecoverableVatAmount",
+      "calculateAccountingCost",
+      "isCapitalAsset"
+    ]
+  },
+  {
+    "package": "domain.economics",
+    "name": "RecurringExpense",
+    "kind": "class",
+    "description": "Classe del package domain.economics; rappresenta un concetto del modello TruckFlow.",
+    "methods": [
+      "of",
+      "noVat",
+      "getExpenseCode",
+      "getCategory",
+      "getDescription",
+      "getPeriod",
+      "getAmount",
+      "getAssignedVehicleFleetNumber",
+      "isAssignedToVehicle",
+      "getNotes",
+      "calculateGrossAmount",
+      "calculateAccountingCost",
+      "calculateRecoverableVatAmount",
+      "overlaps",
+      "equals"
+    ]
+  },
+  {
+    "package": "domain.economics",
+    "name": "RecurringExpenseCategory",
+    "kind": "enum",
+    "description": "Categoria funzionale usata per distinguere casi operativi o contabili.",
+    "methods": [
+      "isVehicleRelated"
+    ]
+  },
+  {
+    "package": "domain.economics",
+    "name": "SupplierInvoice",
+    "kind": "class",
+    "description": "Classe del package domain.economics; rappresenta un concetto del modello TruckFlow.",
+    "methods": [
+      "received",
+      "approve",
+      "markPaid",
+      "getInvoiceNumber",
+      "getSupplierCode",
+      "getIssueDate",
+      "getDueDate",
+      "getStatus",
+      "getLines",
+      "getNotes",
+      "calculateTotal",
+      "calculateNetTotal",
+      "calculateVatTotal",
+      "calculateRecoverableVatTotal",
+      "calculateAccountingCostTotal"
+    ]
+  },
+  {
+    "package": "domain.economics",
+    "name": "SupplierInvoiceStatus",
+    "kind": "enum",
+    "description": "Enum di stato del ciclo di vita.",
+    "methods": [
+      "isPayable"
+    ]
+  },
+  {
+    "package": "domain.economics",
+    "name": "TaxableRevenueLine",
+    "kind": "class",
+    "description": "Riga di dettaglio: rappresenta una voce numerabile/economica/documentale.",
+    "methods": [
+      "of",
+      "taxableNet",
+      "baseTransportFee",
+      "getLineCode",
+      "getType",
+      "getDescription",
+      "getPrice",
+      "getNotes",
+      "getNetAmount",
+      "getVatAmount",
+      "getGrossAmount",
+      "toMissionRevenueLine",
+      "equals",
+      "hashCode"
+    ]
+  },
+  {
+    "package": "domain.economics",
+    "name": "VatBreakdown",
+    "kind": "class",
+    "description": "Classe del package domain.economics; rappresenta un concetto del modello TruckFlow.",
+    "methods": [
+      "taxableFromNet",
+      "taxableFromGross",
+      "exempt",
+      "reverseCharge",
+      "outOfScope",
+      "noVatKnown",
+      "nonDeductibleFromNet",
+      "getNetAmount",
+      "getVatRate",
+      "getTreatment",
+      "getVatAmount",
+      "getGrossAmount",
+      "getRecoverableVatPercentage",
+      "calculateRecoverableVatAmount",
+      "calculateNonRecoverableVatAmount"
+    ]
+  },
+  {
+    "package": "domain.economics",
+    "name": "VatRate",
+    "kind": "class",
+    "description": "Classe del package domain.economics; rappresenta un concetto del modello TruckFlow.",
+    "methods": [
+      "of",
+      "italianStandard22",
+      "italianReduced10",
+      "italianReduced5",
+      "italianReduced4",
+      "zero",
+      "getCode",
+      "getPercentage",
+      "toMultiplier",
+      "isZero",
+      "equals",
+      "hashCode",
+      "toString"
+    ]
+  },
+  {
+    "package": "domain.economics",
+    "name": "VatTreatment",
+    "kind": "enum",
+    "description": "Enum: insieme chiuso di valori ammessi dal dominio.",
+    "methods": [
+      "generatesVatAmount"
+    ]
+  },
+  {
+    "package": "domain.facility",
+    "name": "Facility",
+    "kind": "class",
+    "description": "Classe del package domain.facility; rappresenta un concetto del modello TruckFlow.",
+    "methods": [
+      "active",
+      "inactive",
+      "getCode",
+      "getType",
+      "getLocation",
+      "getOperatingHours",
+      "getNotes",
+      "isActive",
+      "isOpenAt",
+      "isInCountry",
+      "hasCoordinates",
+      "hasNotes",
+      "formatSingleLine",
+      "equals",
+      "hashCode"
+    ]
+  },
+  {
+    "package": "domain.facility",
+    "name": "FacilityCostFrequency",
+    "kind": "enum",
+    "description": "Enum: insieme chiuso di valori ammessi dal dominio.",
+    "methods": [
+      "isRecurring"
+    ]
+  },
+  {
+    "package": "domain.facility",
+    "name": "FacilityCostLine",
+    "kind": "class",
+    "description": "Riga di dettaglio: rappresenta una voce numerabile/economica/documentale.",
+    "methods": [
+      "of",
+      "monthly",
+      "yearly",
+      "oneTime",
+      "getCode",
+      "getType",
+      "getDescription",
+      "getAmount",
+      "getFrequency",
+      "getCoveragePeriod",
+      "getNotes",
+      "isRecurring",
+      "hasCoveragePeriod",
+      "monthlyEquivalent",
+      "isRentLikeCost"
+    ]
+  },
+  {
+    "package": "domain.facility",
+    "name": "FacilityCostType",
+    "kind": "enum",
+    "description": "Enum/tipo di classificazione usato nelle regole di dominio.",
+    "methods": []
+  },
+  {
+    "package": "domain.facility",
+    "name": "FacilityFinancialProfile",
+    "kind": "class",
+    "description": "Profilo che raggruppa informazioni tecniche, operative o economiche.",
+    "methods": [
+      "owned",
+      "rented",
+      "leased",
+      "thirdPartyYard",
+      "getFacilityCode",
+      "getOwnershipType",
+      "getPurchasePrice",
+      "getMonthlyRent",
+      "getDepositAmount",
+      "getCostLines",
+      "getNotes",
+      "isOwned",
+      "hasRecurringOccupancyPayment",
+      "calculateMonthlyRecurringCost",
+      "calculateOneTimeCashOut"
+    ]
+  },
+  {
+    "package": "domain.facility",
+    "name": "FacilityOwnershipType",
+    "kind": "enum",
+    "description": "Enum/tipo di classificazione usato nelle regole di dominio.",
+    "methods": [
+      "isOwnedAsset",
+      "requiresRecurringOccupancyPayment"
+    ]
+  },
+  {
+    "package": "domain.facility",
+    "name": "FacilityType",
+    "kind": "enum",
+    "description": "Enum/tipo di classificazione usato nelle regole di dominio.",
+    "methods": []
+  },
+  {
+    "package": "domain.fleet",
+    "name": "AxleSteeringType",
+    "kind": "enum",
+    "description": "Enum/tipo di classificazione usato nelle regole di dominio.",
+    "methods": []
+  },
+  {
+    "package": "domain.fleet",
+    "name": "BrakeSafetySystem",
+    "kind": "enum",
+    "description": "Enum: insieme chiuso di valori ammessi dal dominio.",
+    "methods": []
+  },
+  {
+    "package": "domain.fleet",
+    "name": "BrakeType",
+    "kind": "enum",
+    "description": "Enum/tipo di classificazione usato nelle regole di dominio.",
+    "methods": []
+  },
+  {
+    "package": "domain.fleet",
+    "name": "CouplingType",
+    "kind": "enum",
+    "description": "Enum/tipo di classificazione usato nelle regole di dominio.",
+    "methods": []
+  },
+  {
+    "package": "domain.fleet",
+    "name": "DeadlineStatus",
+    "kind": "enum",
+    "description": "Enum di stato del ciclo di vita.",
+    "methods": []
+  },
+  {
+    "package": "domain.fleet",
+    "name": "KingpinDiameter",
+    "kind": "enum",
+    "description": "Enum: insieme chiuso di valori ammessi dal dominio.",
+    "methods": []
+  },
+  {
+    "package": "domain.fleet",
+    "name": "RetarderType",
+    "kind": "enum",
+    "description": "Enum/tipo di classificazione usato nelle regole di dominio.",
+    "methods": []
+  },
+  {
+    "package": "domain.fleet",
+    "name": "SuspensionType",
+    "kind": "enum",
+    "description": "Enum/tipo di classificazione usato nelle regole di dominio.",
+    "methods": []
+  },
+  {
+    "package": "domain.fleet",
+    "name": "TireSpecification",
+    "kind": "class",
+    "description": "Classe del package domain.fleet; rappresenta un concetto del modello TruckFlow.",
+    "methods": [
+      "of",
+      "getBrand",
+      "getModel",
+      "getSize",
+      "getLoadIndex",
+      "getSpeedRating",
+      "formatSingleLine",
+      "equals",
+      "hashCode",
+      "toString"
+    ]
+  },
+  {
+    "package": "domain.fleet",
+    "name": "TransmissionType",
+    "kind": "enum",
+    "description": "Enum/tipo di classificazione usato nelle regole di dominio.",
+    "methods": []
+  },
+  {
+    "package": "domain.fleet",
+    "name": "Vehicle",
+    "kind": "class",
+    "description": "Classe del package domain.fleet; rappresenta un concetto del modello TruckFlow.",
+    "methods": [
+      "cargoVehicle",
+      "nonCargoVehicle",
+      "technicalVehicle",
+      "getFleetNumber",
+      "getLicensePlate",
+      "getChassisNumber",
+      "getType",
+      "getUnitType",
+      "getTechnicalSpecification",
+      "hasTechnicalSpecification",
+      "getBodyType",
+      "getStatus",
+      "getTireSpecification",
+      "getMaxPayload",
+      "getCargoSpaceDimension"
+    ]
+  },
+  {
+    "package": "domain.fleet",
+    "name": "VehicleAxle",
+    "kind": "class",
+    "description": "Classe del package domain.fleet; rappresenta un concetto del modello TruckFlow.",
+    "methods": [
+      "of",
+      "getAxleNumber",
+      "getWheelConfiguration",
+      "isLiftable",
+      "getSteeringType",
+      "isSteering",
+      "equals",
+      "hashCode"
+    ]
+  },
+  {
+    "package": "domain.fleet",
+    "name": "VehicleAxleSpecification",
+    "kind": "class",
+    "description": "Classe del package domain.fleet; rappresenta un concetto del modello TruckFlow.",
+    "methods": [
+      "of",
+      "getAxles",
+      "getAxleCount",
+      "countLiftableAxles",
+      "countSteeringAxles",
+      "getSuspensionType",
+      "getBrakeType",
+      "getBrakeSafetySystems",
+      "getAxleBrand"
+    ]
+  },
+  {
+    "package": "domain.fleet",
+    "name": "VehicleBodyBaseType",
+    "kind": "enum",
+    "description": "Enum/tipo di classificazione usato nelle regole di dominio.",
+    "methods": [
+      "isCargoBody",
+      "supportsTemperatureControl",
+      "isTank",
+      "isLiquidTankCompatible",
+      "isBulkBody",
+      "isOpenBody"
+    ]
+  },
+  {
+    "package": "domain.fleet",
+    "name": "VehicleBodyCompatibilityRules",
+    "kind": "class",
+    "description": "Classe di regole per validare e calcolare comportamenti nel package domain.fleet.",
+    "methods": [
+      "isBodyCompatibleWithCargoLoad",
+      "supportsCargoCategories",
+      "supportsTemperatureRequirements",
+      "supportsAdrTankRequirements"
+    ]
+  },
+  {
+    "package": "domain.fleet",
+    "name": "VehicleBodyConfiguration",
+    "kind": "class",
+    "description": "Classe del package domain.fleet; rappresenta un concetto del modello TruckFlow.",
+    "methods": [
+      "of",
+      "baseOnly",
+      "none",
+      "getBaseType",
+      "getLoadingEquipment",
+      "getTechnicalFeatures",
+      "hasEquipment",
+      "hasFeature",
+      "supportsTemperatureControl",
+      "isCargoBody",
+      "equals",
+      "hashCode"
+    ]
+  },
+  {
+    "package": "domain.fleet",
+    "name": "VehicleBodyType",
+    "kind": "enum",
+    "description": "Enum/tipo di classificazione usato nelle regole di dominio.",
+    "methods": [
+      "isCargoBody",
+      "supportsTemperatureControl",
+      "isTank",
+      "isLiquidTank",
+      "isGasTank",
+      "isFuelTank",
+      "isBulkDryBody",
+      "isOpenBody"
+    ]
+  },
+  {
+    "package": "domain.fleet",
+    "name": "VehicleCertificate",
+    "kind": "class",
+    "description": "Classe del package domain.fleet; rappresenta un concetto del modello TruckFlow.",
+    "methods": [
+      "of",
+      "getType",
+      "getValidFrom",
+      "getExpiresAt",
+      "getNotes",
+      "isValidOn",
+      "calculateStatus",
+      "equals",
+      "hashCode"
+    ]
+  },
+  {
+    "package": "domain.fleet",
+    "name": "VehicleCertificateType",
+    "kind": "enum",
+    "description": "Enum/tipo di classificazione usato nelle regole di dominio.",
+    "methods": []
+  },
+  {
+    "package": "domain.fleet",
+    "name": "VehicleCombination",
+    "kind": "class",
+    "description": "Classe del package domain.fleet; rappresenta un concetto del modello TruckFlow.",
+    "methods": [
+      "singleVehicle",
+      "withTrailer",
+      "getCombinationNumber",
+      "getPoweredUnit",
+      "getTrailer",
+      "getNotes",
+      "hasTrailer",
+      "getCombinationType",
+      "calculateTotalAxleCount",
+      "calculateGrossCombinationWeight",
+      "findNextCertificateDeadline",
+      "getCargoUnit",
+      "getMaxPayload",
+      "getCargoSpaceDimension",
+      "calculateCargoSpaceVolume"
+    ]
+  },
+  {
+    "package": "domain.fleet",
+    "name": "VehicleCombinationLegalLimitProfile",
+    "kind": "class",
+    "description": "Profilo che raggruppa informazioni tecniche, operative o economiche.",
+    "methods": [
+      "italianStandardAutotreno",
+      "italianStandardRefrigeratedAutotreno",
+      "getMaximumGrossCombinationWeight",
+      "getMaximumExternalDimension"
+    ]
+  },
+  {
+    "package": "domain.fleet",
+    "name": "VehicleCombinationRules",
+    "kind": "class",
+    "description": "Classe di regole per validare e calcolare comportamenti nel package domain.fleet.",
+    "methods": [
+      "hasEnoughWeightCapacity",
+      "hasEnoughVolumeCapacity",
+      "hasEnoughSpaceForEveryItem",
+      "supportsRequiredTemperature",
+      "canPhysicallyCarry",
+      "canBeAssignedToCargoLoad",
+      "canBeAssignedToShipment"
+    ]
+  },
+  {
+    "package": "domain.fleet",
+    "name": "VehicleCombinationTechnicalRules",
+    "kind": "class",
+    "description": "Classe di regole per validare e calcolare comportamenti nel package domain.fleet.",
+    "methods": [
+      "calculateGrossCombinationWeight",
+      "calculateTotalTareWeight",
+      "calculateTotalPayload",
+      "isWithinGrossWeightLimit",
+      "canTow",
+      "isWithinExternalDimensionLimit"
+    ]
+  },
+  {
+    "package": "domain.fleet",
+    "name": "VehicleCombinationType",
+    "kind": "enum",
+    "description": "Enum/tipo di classificazione usato nelle regole di dominio.",
+    "methods": [
+      "hasTowedUnit",
+      "requiresTrailerLicense"
+    ]
+  },
+  {
+    "package": "domain.fleet",
+    "name": "VehicleCouplingSpecification",
+    "kind": "class",
+    "description": "Classe del package domain.fleet; rappresenta un concetto del modello TruckFlow.",
+    "methods": [
+      "none",
+      "fifthWheel",
+      "drawbar",
+      "getCouplingType",
+      "getFifthWheelHeightMeters",
+      "getKingpinDiameter",
+      "getDrawbarLengthMeters",
+      "getDrawbarEyeType",
+      "hasFifthWheelData",
+      "hasDrawbarData",
+      "equals",
+      "hashCode"
+    ]
+  },
+  {
+    "package": "domain.fleet",
+    "name": "VehicleDimensionSpecification",
+    "kind": "class",
+    "description": "Classe del package domain.fleet; rappresenta un concetto del modello TruckFlow.",
+    "methods": [
+      "of",
+      "getExternalDimension",
+      "getCargoSpaceDimension",
+      "getLoadFloorHeightMeters",
+      "getEpalCapacity",
+      "hasCargoSpace",
+      "calculateCargoVolume",
+      "estimateEpalCapacity",
+      "equals",
+      "hashCode"
+    ]
+  },
+  {
+    "package": "domain.fleet",
+    "name": "VehicleEquipmentPosition",
+    "kind": "enum",
+    "description": "Enum: insieme chiuso di valori ammessi dal dominio.",
+    "methods": []
+  },
+  {
+    "package": "domain.fleet",
+    "name": "VehicleLoadingEquipment",
+    "kind": "class",
+    "description": "Classe del package domain.fleet; rappresenta un concetto del modello TruckFlow.",
+    "methods": [
+      "of",
+      "getType",
+      "getPosition",
+      "getCapacity",
+      "getNotes",
+      "isType",
+      "equals",
+      "hashCode"
+    ]
+  },
+  {
+    "package": "domain.fleet",
+    "name": "VehicleLoadingEquipmentType",
+    "kind": "enum",
+    "description": "Enum/tipo di classificazione usato nelle regole di dominio.",
+    "methods": [
+      "requiresOperatorQualification"
+    ]
+  },
+  {
+    "package": "domain.fleet",
+    "name": "VehicleMassSpecification",
+    "kind": "class",
+    "description": "Classe del package domain.fleet; rappresenta un concetto del modello TruckFlow.",
+    "methods": [
+      "of",
+      "getGrossVehicleWeight",
+      "getTareWeight",
+      "getMaxTowableWeight",
+      "getMaximumFifthWheelLoad",
+      "calculateNetPayload",
+      "calculateWeightClass",
+      "canTow",
+      "equals",
+      "hashCode"
+    ]
+  },
+  {
+    "package": "domain.fleet",
+    "name": "VehicleStatus",
+    "kind": "enum",
+    "description": "Enum di stato del ciclo di vita.",
+    "methods": [
+      "canBeAssigned"
+    ]
+  },
+  {
+    "package": "domain.fleet",
+    "name": "VehicleTechnicalFeature",
+    "kind": "enum",
+    "description": "Enum: insieme chiuso di valori ammessi dal dominio.",
+    "methods": []
+  },
+  {
+    "package": "domain.fleet",
+    "name": "VehicleTechnicalSpecification",
+    "kind": "class",
+    "description": "Classe del package domain.fleet; rappresenta un concetto del modello TruckFlow.",
+    "methods": [
+      "of",
+      "getMassSpecification",
+      "getDimensionSpecification",
+      "getAxleSpecification",
+      "getCouplingSpecification",
+      "getBodyConfiguration",
+      "getCertificates",
+      "hasValidCertificate"
+    ]
+  },
+  {
+    "package": "domain.fleet",
+    "name": "VehicleType",
+    "kind": "enum",
+    "description": "Enum/tipo di classificazione usato nelle regole di dominio.",
+    "methods": [
+      "getUnitType",
+      "canCarryCargo",
+      "supportsTemperatureControl",
+      "isPoweredUnit",
+      "isTrailer",
+      "isSemiTrailer",
+      "isDrawbarTrailer"
+    ]
+  },
+  {
+    "package": "domain.fleet",
+    "name": "VehicleUnitType",
+    "kind": "enum",
+    "description": "Enum/tipo di classificazione usato nelle regole di dominio.",
+    "methods": [
+      "isPoweredUnit",
+      "canCarryCargo",
+      "isTowedUnit",
+      "isTrailer",
+      "isSemiTrailer"
+    ]
+  },
+  {
+    "package": "domain.fleet",
+    "name": "VehicleWeightClass",
+    "kind": "enum",
+    "description": "Enum: insieme chiuso di valori ammessi dal dominio.",
+    "methods": [
+      "fromGrossWeight",
+      "requiresHeavyGoodsLicense"
+    ]
+  },
+  {
+    "package": "domain.fleet",
+    "name": "WheelConfiguration",
+    "kind": "enum",
+    "description": "Enum: insieme chiuso di valori ammessi dal dominio.",
+    "methods": []
+  },
+  {
+    "package": "domain.fuel",
+    "name": "FuelCardProvider",
+    "kind": "enum",
+    "description": "Enum: insieme chiuso di valori ammessi dal dominio.",
+    "methods": []
+  },
+  {
+    "package": "domain.fuel",
+    "name": "FuelConsumptionRules",
+    "kind": "class",
+    "description": "Classe di regole per validare e calcolare comportamenti nel package domain.fuel.",
+    "methods": [
+      "calculateKilometersPerLiter",
+      "isConsumptionAnomaly"
+    ]
+  },
+  {
+    "package": "domain.fuel",
+    "name": "FuelTransaction",
+    "kind": "class",
+    "description": "Classe del package domain.fuel; rappresenta un concetto del modello TruckFlow.",
+    "methods": [
+      "of",
+      "getVehicleFleetNumber",
+      "getOccurredAt",
+      "getLiters",
+      "getPricePerLiter",
+      "getOdometerKilometers",
+      "getCardProvider",
+      "calculateKilometersPerLiter",
+      "equals",
+      "hashCode"
+    ]
+  },
+  {
+    "package": "domain.identity",
+    "name": "IdentityRules",
+    "kind": "class",
+    "description": "Classe di regole per validare e calcolare comportamenti nel package domain.identity.",
+    "methods": [
+      "canLogin",
+      "canBeActivated",
+      "canBeLocked",
+      "canBeDisabled",
+      "canBeDeleted",
+      "canManageUsers",
+      "canViewAudit",
+      "canManageConfiguration",
+      "canViewEconomics",
+      "canManageEconomics",
+      "canViewPayroll",
+      "canManagePayroll",
+      "canManageInventory",
+      "canImportExternalData",
+      "canAccessBackOffice"
+    ]
+  },
+  {
+    "package": "domain.identity",
+    "name": "UserAccount",
+    "kind": "class",
+    "description": "Classe del package domain.identity; rappresenta un concetto del modello TruckFlow.",
+    "methods": [
+      "active",
+      "invited",
+      "locked",
+      "disabled",
+      "activate",
+      "lock",
+      "disable",
+      "delete",
+      "getAccountId",
+      "getEmail",
+      "getDisplayName",
+      "getStatus",
+      "getRoles",
+      "getPermissions",
+      "getNotes"
+    ]
+  },
+  {
+    "package": "domain.identity",
+    "name": "UserAccountStatus",
+    "kind": "enum",
+    "description": "Enum di stato del ciclo di vita.",
+    "methods": [
+      "canLogin",
+      "isTerminal"
+    ]
+  },
+  {
+    "package": "domain.identity",
+    "name": "UserPermission",
+    "kind": "enum",
+    "description": "Enum: insieme chiuso di valori ammessi dal dominio.",
+    "methods": [
+      "isSensitive"
+    ]
+  },
+  {
+    "package": "domain.identity",
+    "name": "UserRole",
+    "kind": "enum",
+    "description": "Enum: insieme chiuso di valori ammessi dal dominio.",
+    "methods": [
+      "isBackOfficeRole",
+      "isDriverPortalRole",
+      "isCustomerPortalRole",
+      "isAdministrativeRole"
+    ]
+  },
+  {
+    "package": "domain.inventory",
+    "name": "InventoryBalance",
+    "kind": "class",
+    "description": "Classe del package domain.inventory; rappresenta un concetto del modello TruckFlow.",
+    "methods": [
+      "of",
+      "fromMovements",
+      "getItem",
+      "getLocation",
+      "getAvailableQuantity",
+      "isBelowMinimumStock",
+      "calculateStockValue",
+      "canReserve"
+    ]
+  },
+  {
+    "package": "domain.inventory",
+    "name": "InventoryItem",
+    "kind": "class",
+    "description": "Classe del package domain.inventory; rappresenta un concetto del modello TruckFlow.",
+    "methods": [
+      "of",
+      "getItemCode",
+      "getType",
+      "getDescription",
+      "getUnitOfMeasure",
+      "getUnitCost",
+      "getMinimumStockQuantity",
+      "getNotes",
+      "calculateStockValue",
+      "isBelowMinimumStock",
+      "equals",
+      "hashCode"
+    ]
+  },
+  {
+    "package": "domain.inventory",
+    "name": "InventoryItemType",
+    "kind": "enum",
+    "description": "Enum/tipo di classificazione usato nelle regole di dominio.",
+    "methods": [
+      "isSafetyCritical"
+    ]
+  },
+  {
+    "package": "domain.inventory",
+    "name": "InventoryRules",
+    "kind": "class",
+    "description": "Classe di regole per validare e calcolare comportamenti nel package domain.inventory.",
+    "methods": [
+      "canReserve",
+      "shouldReorder",
+      "safetyCriticalItemShouldHaveStock"
+    ]
+  },
+  {
+    "package": "domain.inventory",
+    "name": "InventoryStockMovement",
+    "kind": "class",
+    "description": "Classe del package domain.inventory; rappresenta un concetto del modello TruckFlow.",
+    "methods": [
+      "of",
+      "getMovementCode",
+      "getItemCode",
+      "getLocation",
+      "getType",
+      "getQuantity",
+      "getUnitCost",
+      "getOccurredAt",
+      "getReferenceNumber",
+      "getNotes",
+      "signedQuantity",
+      "isRelatedTo",
+      "equals",
+      "hashCode"
+    ]
+  },
+  {
+    "package": "domain.inventory",
+    "name": "StockMovementType",
+    "kind": "enum",
+    "description": "Enum/tipo di classificazione usato nelle regole di dominio.",
+    "methods": [
+      "getSign",
+      "increasesStock",
+      "decreasesStock"
+    ]
+  },
+  {
+    "package": "domain.inventory",
+    "name": "WarehouseLocation",
+    "kind": "class",
+    "description": "Classe del package domain.inventory; rappresenta un concetto del modello TruckFlow.",
+    "methods": [
+      "of",
+      "getFacilityCode",
+      "getZoneCode",
+      "getShelfCode",
+      "getBinCode",
+      "getFullCode",
+      "equals",
+      "hashCode"
+    ]
+  },
+  {
+    "package": "domain.loadsecurity",
+    "name": "LoadSecuringChecklist",
+    "kind": "class",
+    "description": "Classe del package domain.loadsecurity; rappresenta un concetto del modello TruckFlow.",
+    "methods": [
+      "of",
+      "getEquipment",
+      "countByType",
+      "hasAtLeast"
+    ]
+  },
+  {
+    "package": "domain.loadsecurity",
+    "name": "LoadSecuringEquipment",
+    "kind": "class",
+    "description": "Classe del package domain.loadsecurity; rappresenta un concetto del modello TruckFlow.",
+    "methods": [
+      "of",
+      "getType",
+      "getQuantity",
+      "getCapacityDan",
+      "totalCapacityDan",
+      "equals",
+      "hashCode"
+    ]
+  },
+  {
+    "package": "domain.loadsecurity",
+    "name": "LoadSecuringEquipmentType",
+    "kind": "enum",
+    "description": "Enum/tipo di classificazione usato nelle regole di dominio.",
+    "methods": []
+  },
+  {
+    "package": "domain.loadsecurity",
+    "name": "LoadSecuringRules",
+    "kind": "class",
+    "description": "Classe di regole per validare e calcolare comportamenti nel package domain.loadsecurity.",
+    "methods": [
+      "hasMinimumEquipmentForCargo",
+      "estimateMinimumStraps"
+    ]
+  },
+  {
+    "package": "domain.location",
+    "name": "Address",
+    "kind": "class",
+    "description": "Classe del package domain.location; rappresenta un concetto del modello TruckFlow.",
+    "methods": [
+      "of",
+      "withCoordinates",
+      "getStreet",
+      "getCity",
+      "getPostalCode",
+      "getCountryCode",
+      "getCoordinates",
+      "hasCoordinates",
+      "isInCountry",
+      "formatSingleLine",
+      "equals",
+      "hashCode",
+      "toString"
+    ]
+  },
+  {
+    "package": "domain.location",
+    "name": "GeoCoordinates",
+    "kind": "class",
+    "description": "Classe del package domain.location; rappresenta un concetto del modello TruckFlow.",
+    "methods": [
+      "of",
+      "getLatitude",
+      "getLongitude",
+      "isNorthernHemisphere",
+      "isSouthernHemisphere",
+      "isEasternHemisphere",
+      "isWesternHemisphere",
+      "equals",
+      "hashCode",
+      "toString"
+    ]
+  },
+  {
+    "package": "domain.location",
+    "name": "Location",
+    "kind": "class",
+    "description": "Classe del package domain.location; rappresenta un concetto del modello TruckFlow.",
+    "methods": [
+      "of",
+      "getName",
+      "getAddress",
+      "getZoneId",
+      "hasCoordinates",
+      "getCoordinates",
+      "isInCountry",
+      "isInSameTimeZone",
+      "formatSingleLine",
+      "equals",
+      "hashCode",
+      "toString"
+    ]
+  },
+  {
+    "package": "domain.maintenance",
+    "name": "DriverDefectTicket",
+    "kind": "class",
+    "description": "Classe del package domain.maintenance; rappresenta un concetto del modello TruckFlow.",
+    "methods": [
+      "of",
+      "getTicketNumber",
+      "getVehicleFleetNumber",
+      "getDriverCode",
+      "getReportedAt",
+      "getDefectDescription",
+      "isVehicleBlocked",
+      "getNotes",
+      "equals",
+      "hashCode"
+    ]
+  },
+  {
+    "package": "domain.maintenance",
+    "name": "MaintenanceRules",
+    "kind": "class",
+    "description": "Classe di regole per validare e calcolare comportamenti nel package domain.maintenance.",
+    "methods": [
+      "canBeScheduled",
+      "canBeStarted",
+      "canBeCompleted",
+      "canBeCancelled",
+      "blocksVehicleAvailability",
+      "shouldMakeVehicleUnavailable",
+      "requiresAdrSpecialist",
+      "requiresTireService",
+      "isTerminal"
+    ]
+  },
+  {
+    "package": "domain.maintenance",
+    "name": "MaintenanceStatus",
+    "kind": "enum",
+    "description": "Enum di stato del ciclo di vita.",
+    "methods": [
+      "isTerminal",
+      "blocksVehicleAvailability"
+    ]
+  },
+  {
+    "package": "domain.maintenance",
+    "name": "MaintenanceType",
+    "kind": "enum",
+    "description": "Enum/tipo di classificazione usato nelle regole di dominio.",
+    "methods": [
+      "isPlannedMaintenance",
+      "isSafetyCritical",
+      "isTireRelated",
+      "isAdrRelated"
+    ]
+  },
+  {
+    "package": "domain.maintenance",
+    "name": "MaintenanceWorkOrder",
+    "kind": "class",
+    "description": "Classe del package domain.maintenance; rappresenta un concetto del modello TruckFlow.",
+    "methods": [
+      "open",
+      "scheduled",
+      "schedule",
+      "start",
+      "complete",
+      "cancel",
+      "getWorkOrderNumber",
+      "getVehicle",
+      "getType",
+      "getStatus",
+      "getPlannedDateRange",
+      "getNotes",
+      "getVehicleFleetNumber",
+      "getVehicleLicensePlate",
+      "isOpen"
+    ]
+  },
+  {
+    "package": "domain.maintenance",
+    "name": "VehicleDowntime",
+    "kind": "class",
+    "description": "Classe del package domain.maintenance; rappresenta un concetto del modello TruckFlow.",
+    "methods": [
+      "of",
+      "getVehicleFleetNumber",
+      "getStartedAt",
+      "getEndedAt",
+      "getPartsCost",
+      "getLaborCost",
+      "getNotes",
+      "isOpen",
+      "calculateTotalCost",
+      "equals",
+      "hashCode"
+    ]
+  },
+  {
+    "package": "domain.notification",
+    "name": "NotificationChannel",
+    "kind": "enum",
+    "description": "Enum: insieme chiuso di valori ammessi dal dominio.",
+    "methods": [
+      "isExternalChannel",
+      "isRealTime"
+    ]
+  },
+  {
+    "package": "domain.notification",
+    "name": "NotificationMessage",
+    "kind": "class",
+    "description": "Classe del package domain.notification; rappresenta un concetto del modello TruckFlow.",
+    "methods": [
+      "draft",
+      "scheduled",
+      "schedule",
+      "send",
+      "fail",
+      "cancel",
+      "getNotificationNumber",
+      "getType",
+      "getChannel",
+      "getRecipientType",
+      "getRecipientReference",
+      "getPriority",
+      "getSubject",
+      "getBody",
+      "getScheduledAt"
+    ]
+  },
+  {
+    "package": "domain.notification",
+    "name": "NotificationPriority",
+    "kind": "enum",
+    "description": "Enum: insieme chiuso di valori ammessi dal dominio.",
+    "methods": [
+      "getLevel",
+      "requiresImmediateAttention",
+      "isAtLeast"
+    ]
+  },
+  {
+    "package": "domain.notification",
+    "name": "NotificationRecipientType",
+    "kind": "enum",
+    "description": "Enum/tipo di classificazione usato nelle regole di dominio.",
+    "methods": [
+      "isHumanRecipient"
+    ]
+  },
+  {
+    "package": "domain.notification",
+    "name": "NotificationRules",
+    "kind": "class",
+    "description": "Classe di regole per validare e calcolare comportamenti nel package domain.notification.",
+    "methods": [
+      "canBeScheduled",
+      "canBeSent",
+      "canBeFailed",
+      "canBeCancelled",
+      "isTerminal",
+      "requiresImmediateAttention",
+      "shouldNotifyCustomer",
+      "isOperationalNotification",
+      "isFinancialNotification",
+      "isSecurityNotification",
+      "usesExternalChannel"
+    ]
+  },
+  {
+    "package": "domain.notification",
+    "name": "NotificationStatus",
+    "kind": "enum",
+    "description": "Enum di stato del ciclo di vita.",
+    "methods": [
+      "isTerminal",
+      "isDelivered"
+    ]
+  },
+  {
+    "package": "domain.notification",
+    "name": "NotificationType",
+    "kind": "enum",
+    "description": "Enum/tipo di classificazione usato nelle regole di dominio.",
+    "methods": [
+      "isCustomerVisible",
+      "isOperational",
+      "isFinancial",
+      "isSecurity"
+    ]
+  },
+  {
+    "package": "domain.operation",
+    "name": "TransportMission",
+    "kind": "class",
+    "description": "Classe del package domain.operation; rappresenta un concetto del modello TruckFlow.",
+    "methods": [
+      "planned",
+      "dispatch",
+      "start",
+      "complete",
+      "cancel",
+      "getMissionNumber",
+      "getShipment",
+      "getDriver",
+      "getVehicleCombination",
+      "getRoutePlan",
+      "getStatus",
+      "getNotes",
+      "isPlanned",
+      "isDispatched",
+      "isInProgress"
+    ]
+  },
+  {
+    "package": "domain.operation",
+    "name": "TransportMissionRules",
+    "kind": "class",
+    "description": "Classe di regole per validare e calcolare comportamenti nel package domain.operation.",
+    "methods": [
+      "isCompliant",
+      "canBeDispatched",
+      "canBeStarted",
+      "canBeCompleted",
+      "canBeCancelled",
+      "isCompleted",
+      "isTerminal",
+      "requiresSpecialHandling"
+    ]
+  },
+  {
+    "package": "domain.operation",
+    "name": "TransportMissionStatus",
+    "kind": "enum",
+    "description": "Enum di stato del ciclo di vita.",
+    "methods": [
+      "isTerminal"
+    ]
+  },
+  {
+    "package": "domain.order",
+    "name": "TransportOrder",
+    "kind": "class",
+    "description": "Classe del package domain.order; rappresenta un concetto del modello TruckFlow.",
+    "methods": [
+      "draft",
+      "submitted",
+      "getOrderNumber",
+      "getCustomerAccount",
+      "getCargoLoad",
+      "getPickupFacility",
+      "getDeliveryFacility",
+      "getPickupWindow",
+      "getDeliveryWindow",
+      "getServiceType",
+      "getQuotedPrice",
+      "getStatus",
+      "getNotes",
+      "isInternational",
+      "requiresTemperatureControlledTransport"
+    ]
+  },
+  {
+    "package": "domain.order",
+    "name": "TransportOrderStatus",
+    "kind": "enum",
+    "description": "Enum di stato del ciclo di vita.",
+    "methods": [
+      "isTerminal"
+    ]
+  },
+  {
+    "package": "domain.order",
+    "name": "TransportServiceType",
+    "kind": "enum",
+    "description": "Enum/tipo di classificazione usato nelle regole di dominio.",
+    "methods": [
+      "supportsTemperatureControl",
+      "supportsHazardousMaterial"
+    ]
+  },
+  {
+    "package": "domain.parking",
+    "name": "ParkedResource",
+    "kind": "class",
+    "description": "Classe del package domain.parking; rappresenta un concetto del modello TruckFlow.",
+    "methods": [
+      "van",
+      "rigidTruck",
+      "tractorUnit",
+      "trailer",
+      "semiTrailer",
+      "articulatedVehicle",
+      "truckAndTrailer",
+      "equipment",
+      "getType",
+      "getResourceId",
+      "getDisplayName",
+      "getComponentResourceIds",
+      "getTotalLengthMeters",
+      "isReadyForMission",
+      "isCombination"
+    ]
+  },
+  {
+    "package": "domain.parking",
+    "name": "ParkingAssignment",
+    "kind": "class",
+    "description": "Classe del package domain.parking; rappresenta un concetto del modello TruckFlow.",
+    "methods": [
+      "active",
+      "closed",
+      "getAssignmentCode",
+      "getFacilityCode",
+      "getSpotNumber",
+      "getParkedResource",
+      "getStartedAt",
+      "getEndedAt",
+      "getNotes",
+      "isActive",
+      "isActiveAt",
+      "parksCombination",
+      "isReadyForMission",
+      "occupiesSpot",
+      "containsResource"
+    ]
+  },
+  {
+    "package": "domain.parking",
+    "name": "ParkingResourceType",
+    "kind": "enum",
+    "description": "Enum/tipo di classificazione usato nelle regole di dominio.",
+    "methods": [
+      "isCombination",
+      "isTowedUnit",
+      "isPoweredSingleUnit"
+    ]
+  },
+  {
+    "package": "domain.parking",
+    "name": "ParkingRules",
+    "kind": "class",
+    "description": "Classe di regole per validare e calcolare comportamenti nel package domain.parking.",
+    "methods": [
+      "canPark",
+      "isReadyCombinationParked",
+      "isSpotFreeAt",
+      "isResourceAlreadyParkedAt"
+    ]
+  },
+  {
+    "package": "domain.parking",
+    "name": "ParkingSpot",
+    "kind": "class",
+    "description": "Classe del package domain.parking; rappresenta un concetto del modello TruckFlow.",
+    "methods": [
+      "of",
+      "available",
+      "occupied",
+      "getFacilityCode",
+      "getSpotNumber",
+      "getType",
+      "getStatus",
+      "getMaxLengthMeters",
+      "getMaxWidthMeters",
+      "isPowerSupplyAvailable",
+      "getNotes",
+      "isAvailable",
+      "technicallyFits",
+      "canReceive",
+      "isSamePhysicalSpot"
+    ]
+  },
+  {
+    "package": "domain.parking",
+    "name": "ParkingSpotStatus",
+    "kind": "enum",
+    "description": "Enum di stato del ciclo di vita.",
+    "methods": [
+      "canReceiveNewAssignment"
+    ]
+  },
+  {
+    "package": "domain.parking",
+    "name": "ParkingSpotType",
+    "kind": "enum",
+    "description": "Enum/tipo di classificazione usato nelle regole di dominio.",
+    "methods": [
+      "canHost"
+    ]
+  },
+  {
+    "package": "domain.payroll",
+    "name": "DriverMissionPayLine",
+    "kind": "class",
+    "description": "Riga di dettaglio: rappresenta una voce numerabile/economica/documentale.",
+    "methods": [
+      "of",
+      "getLineCode",
+      "getComponentType",
+      "getUnit",
+      "getDescription",
+      "getQuantity",
+      "getAmount",
+      "getNotes",
+      "isAllowanceOrReimbursement",
+      "isEmployerCost",
+      "equals",
+      "hashCode"
+    ]
+  },
+  {
+    "package": "domain.payroll",
+    "name": "DriverMissionPayroll",
+    "kind": "class",
+    "description": "Classe del package domain.payroll; rappresenta un concetto del modello TruckFlow.",
+    "methods": [
+      "of",
+      "calculateTotalEmployerCost",
+      "calculateAllowancesAndReimbursements",
+      "calculateEmployerCharges",
+      "containsComponent",
+      "toMissionCostLine",
+      "getPayrollCode",
+      "getMissionNumber",
+      "getDriverCode",
+      "getPayrollPolicyCode",
+      "getPayLines",
+      "getNotes",
+      "equals",
+      "hashCode"
+    ]
+  },
+  {
+    "package": "domain.payroll",
+    "name": "DriverMissionWorkReport",
+    "kind": "class",
+    "description": "Classe del package domain.payroll; rappresenta un concetto del modello TruckFlow.",
+    "methods": [
+      "builder",
+      "getDrivingHours",
+      "getOtherWorkHours",
+      "getWaitingHours",
+      "getLoadingUnloadingHours",
+      "getOvertimeHours",
+      "getNightWorkHours",
+      "getSundayWorkHours",
+      "getHolidayWorkHours",
+      "hasCargoCategory",
+      "transportsAdrCargo",
+      "transportsWaste",
+      "transportsDangerousWaste",
+      "transportsTemperatureControlledCargo",
+      "transportsPharmaceuticals"
+    ]
+  },
+  {
+    "package": "domain.payroll",
+    "name": "DriverPayComponentType",
+    "kind": "enum",
+    "description": "Enum/tipo di classificazione usato nelle regole di dominio.",
+    "methods": [
+      "isAllowanceOrReimbursement",
+      "isRiskOrQualificationPremium",
+      "isEmployerCost"
+    ]
+  },
+  {
+    "package": "domain.payroll",
+    "name": "DriverPayRule",
+    "kind": "class",
+    "description": "Classe del package domain.payroll; rappresenta un concetto del modello TruckFlow.",
+    "methods": [
+      "amount",
+      "percentageOfBase",
+      "calculateLine",
+      "getRuleCode",
+      "getComponentType",
+      "getUnit",
+      "getDescription",
+      "getAmount",
+      "getPercentage",
+      "getNotes",
+      "equals",
+      "hashCode"
+    ]
+  },
+  {
+    "package": "domain.payroll",
+    "name": "DriverPayUnit",
+    "kind": "enum",
+    "description": "Enum: insieme chiuso di valori ammessi dal dominio.",
+    "methods": [
+      "usesWorkedQuantity",
+      "usesPercentage"
+    ]
+  },
+  {
+    "package": "domain.payroll",
+    "name": "DriverPayrollPolicy",
+    "kind": "class",
+    "description": "Policy configurabile: contiene regole aziendali parametrizzabili.",
+    "methods": [
+      "of",
+      "isValidOn",
+      "findRule",
+      "hasRule",
+      "getPolicyCode",
+      "getDescription",
+      "getValidFrom",
+      "getValidTo",
+      "getRules",
+      "getNotes",
+      "equals",
+      "hashCode"
+    ]
+  },
+  {
+    "package": "domain.payroll",
+    "name": "DriverPayrollRules",
+    "kind": "class",
+    "description": "Classe di regole per validare e calcolare comportamenti nel package domain.payroll.",
+    "methods": [
+      "calculateMissionPayroll",
+      "missionHasDriverCost"
+    ]
+  },
+  {
+    "package": "domain.payroll",
+    "name": "MissionPayrollProjection",
+    "kind": "class",
+    "description": "Classe del package domain.payroll; rappresenta un concetto del modello TruckFlow.",
+    "methods": [
+      "fromPayroll",
+      "getPayroll",
+      "getMissionCostLine",
+      "equals",
+      "hashCode"
+    ]
+  },
+  {
+    "package": "domain.pricing",
+    "name": "CostEstimationSource",
+    "kind": "enum",
+    "description": "Enum: insieme chiuso di valori ammessi dal dominio.",
+    "methods": [
+      "isExternalProvider",
+      "isManual"
+    ]
+  },
+  {
+    "package": "domain.pricing",
+    "name": "PriceBreakdown",
+    "kind": "class",
+    "description": "Classe del package domain.pricing; rappresenta un concetto del modello TruckFlow.",
+    "methods": [
+      "of",
+      "getQuoteNumber",
+      "getLines",
+      "getNotes",
+      "getLineCount",
+      "hasNotes",
+      "hasDiscounts",
+      "hasSurcharges",
+      "hasLineType",
+      "getChargeLines",
+      "getDiscountLines",
+      "calculateTotal",
+      "formatSingleLine",
+      "equals",
+      "hashCode"
+    ]
+  },
+  {
+    "package": "domain.pricing",
+    "name": "PricingLine",
+    "kind": "class",
+    "description": "Riga di dettaglio: rappresenta una voce numerabile/economica/documentale.",
+    "methods": [
+      "of",
+      "baseFreight",
+      "surcharge",
+      "discount",
+      "fuelFromEstimate",
+      "tollsFromEstimate",
+      "vehicleWearFromEstimate",
+      "getLineCode",
+      "getType",
+      "getDescription",
+      "getAmount",
+      "getNotes",
+      "isSurcharge",
+      "isDiscount",
+      "increasesTotal"
+    ]
+  },
+  {
+    "package": "domain.pricing",
+    "name": "PricingLineType",
+    "kind": "enum",
+    "description": "Enum/tipo di classificazione usato nelle regole di dominio.",
+    "methods": [
+      "isSurcharge",
+      "isDiscount",
+      "increasesTotal",
+      "decreasesTotal"
+    ]
+  },
+  {
+    "package": "domain.pricing",
+    "name": "PricingRules",
+    "kind": "class",
+    "description": "Classe di regole per validare e calcolare comportamenti nel package domain.pricing.",
+    "methods": [
+      "requiresAdrSurcharge",
+      "requiresTemperatureControlSurcharge",
+      "requiresInternationalSurcharge",
+      "hasDiscounts",
+      "hasSurcharges",
+      "hasBaseFreightLine",
+      "hasFuelSurchargeLine",
+      "hasTollChargeLine",
+      "hasVehicleWearChargeLine",
+      "hasAdrSurchargeLine",
+      "hasTemperatureControlSurchargeLine"
+    ]
+  },
+  {
+    "package": "domain.pricing",
+    "name": "RouteCostEstimate",
+    "kind": "class",
+    "description": "Stima calcolata prima del dato finale effettivo.",
+    "methods": [
+      "of",
+      "getEstimateCode",
+      "getSource",
+      "getEstimatedDistance",
+      "getEstimatedFuelCost",
+      "getEstimatedTollCost",
+      "getEstimatedVehicleWearCost",
+      "getNotes",
+      "isFromExternalProvider",
+      "isManualEstimate",
+      "hasNotes",
+      "calculateEstimatedRouteCost",
+      "formatSingleLine",
+      "equals",
+      "hashCode"
+    ]
+  },
+  {
+    "package": "domain.reporting",
+    "name": "GeneratedReport",
+    "kind": "class",
+    "description": "Classe del package domain.reporting; rappresenta un concetto del modello TruckFlow.",
+    "methods": [
+      "draft",
+      "generated",
+      "generate",
+      "publish",
+      "archive",
+      "fail",
+      "getReportNumber",
+      "getDefinition",
+      "getMetrics",
+      "getStatus",
+      "getGeneratedAt",
+      "getNotes",
+      "getMetricCount",
+      "isDraft",
+      "isGenerated"
+    ]
+  },
+  {
+    "package": "domain.reporting",
+    "name": "ReportDefinition",
+    "kind": "class",
+    "description": "Classe del package domain.reporting; rappresenta un concetto del modello TruckFlow.",
+    "methods": [
+      "of",
+      "getReportCode",
+      "getType",
+      "getFormat",
+      "getPeriod",
+      "getRequestedByAccountId",
+      "getNotes",
+      "isFinancialReport",
+      "isComplianceReport",
+      "isSustainabilityReport",
+      "requiresRestrictedAccess",
+      "isDownloadable",
+      "isMachineReadable",
+      "hasNotes",
+      "formatSingleLine"
+    ]
+  },
+  {
+    "package": "domain.reporting",
+    "name": "ReportFormat",
+    "kind": "enum",
+    "description": "Enum: insieme chiuso di valori ammessi dal dominio.",
+    "methods": [
+      "isDownloadable",
+      "isMachineReadable"
+    ]
+  },
+  {
+    "package": "domain.reporting",
+    "name": "ReportMetric",
+    "kind": "class",
+    "description": "Classe del package domain.reporting; rappresenta un concetto del modello TruckFlow.",
+    "methods": [
+      "of",
+      "ofDefaultUnit",
+      "getMetricCode",
+      "getType",
+      "getLabel",
+      "getValue",
+      "getUnit",
+      "getNotes",
+      "isMonetary",
+      "isPercentage",
+      "hasNotes",
+      "formatSingleLine",
+      "equals",
+      "hashCode",
+      "toString"
+    ]
+  },
+  {
+    "package": "domain.reporting",
+    "name": "ReportMetricType",
+    "kind": "enum",
+    "description": "Enum/tipo di classificazione usato nelle regole di dominio.",
+    "methods": [
+      "isMonetary",
+      "isPercentage",
+      "getDefaultUnit"
+    ]
+  },
+  {
+    "package": "domain.reporting",
+    "name": "ReportStatus",
+    "kind": "enum",
+    "description": "Enum di stato del ciclo di vita.",
+    "methods": [
+      "isTerminal",
+      "isReadable"
+    ]
+  },
+  {
+    "package": "domain.reporting",
+    "name": "ReportType",
+    "kind": "enum",
+    "description": "Enum/tipo di classificazione usato nelle regole di dominio.",
+    "methods": [
+      "isOperationalReport",
+      "isFinancialReport",
+      "isComplianceReport",
+      "isSustainabilityReport",
+      "requiresRestrictedAccess"
+    ]
+  },
+  {
+    "package": "domain.reporting",
+    "name": "ReportingRules",
+    "kind": "class",
+    "description": "Classe di regole per validare e calcolare comportamenti nel package domain.reporting.",
+    "methods": [
+      "canBeGenerated",
+      "canBePublished",
+      "canBeArchived",
+      "canBeFailed",
+      "isReadyForPublication",
+      "containsFinancialMetrics",
+      "containsSustainabilityMetrics",
+      "requiresRestrictedAccess",
+      "containsMetricType",
+      "calculateMetricTotal"
+    ]
+  },
+  {
+    "package": "domain.route",
+    "name": "RoutePlan",
+    "kind": "class",
+    "description": "Piano composto da più elementi e usato per organizzare un processo operativo.",
+    "methods": [
+      "of",
+      "getRouteNumber",
+      "getStops",
+      "getEstimatedDistance",
+      "getNotes",
+      "getStopCount",
+      "getStartStop",
+      "getEndStop",
+      "getCargoOperationStops",
+      "hasPickupStop",
+      "hasDeliveryStop",
+      "isInternational",
+      "hasNotes",
+      "formatSingleLine",
+      "equals"
+    ]
+  },
+  {
+    "package": "domain.route",
+    "name": "RoutePlanRules",
+    "kind": "class",
+    "description": "Classe di regole per validare e calcolare comportamenti nel package domain.route.",
+    "methods": [
+      "hasCargoOperations",
+      "hasPickupAndDelivery",
+      "isWithinMaxDistance",
+      "startsAndEndsAtDifferentFacilities",
+      "usesOnlyActiveFacilities",
+      "isInternational",
+      "isOperationallyUsable"
+    ]
+  },
+  {
+    "package": "domain.route",
+    "name": "RouteStop",
+    "kind": "class",
+    "description": "Classe del package domain.route; rappresenta un concetto del modello TruckFlow.",
+    "methods": [
+      "of",
+      "getSequenceNumber",
+      "getType",
+      "getFacility",
+      "getPlannedTimeWindow",
+      "getNotes",
+      "isStart",
+      "isEnd",
+      "isPickup",
+      "isDelivery",
+      "isCargoOperation",
+      "isAtSameFacility",
+      "isBefore",
+      "formatSingleLine",
+      "equals"
+    ]
+  },
+  {
+    "package": "domain.route",
+    "name": "RouteStopType",
+    "kind": "enum",
+    "description": "Enum/tipo di classificazione usato nelle regole di dominio.",
+    "methods": [
+      "isCargoOperation"
+    ]
+  },
+  {
+    "package": "domain.shared",
+    "name": "DateRange",
+    "kind": "class",
+    "description": "Classe del package domain.shared; rappresenta un concetto del modello TruckFlow.",
+    "methods": [
+      "of",
+      "getStartDate",
+      "getEndDate",
+      "contains",
+      "overlapsWith",
+      "isInside",
+      "daysInclusive",
+      "equals",
+      "hashCode",
+      "toString"
+    ]
+  },
+  {
+    "package": "domain.shared",
+    "name": "Dimension",
+    "kind": "class",
+    "description": "Classe del package domain.shared; rappresenta un concetto del modello TruckFlow.",
+    "methods": [
+      "ofMeters",
+      "ofCentimeters",
+      "getLengthMeters",
+      "getWidthMeters",
+      "getHeightMeters",
+      "calculateVolume",
+      "fitsInside",
+      "equals",
+      "hashCode",
+      "toString"
+    ]
+  },
+  {
+    "package": "domain.shared",
+    "name": "Distance",
+    "kind": "class",
+    "description": "Classe del package domain.shared; rappresenta un concetto del modello TruckFlow.",
+    "methods": [
+      "ofKilometers",
+      "ofMeters",
+      "getKilometers",
+      "isGreaterThan",
+      "isLessThanOrEqualTo",
+      "equals",
+      "hashCode",
+      "toString"
+    ]
+  },
+  {
+    "package": "domain.shared",
+    "name": "Money",
+    "kind": "class",
+    "description": "Classe del package domain.shared; rappresenta un concetto del modello TruckFlow.",
+    "methods": [
+      "of",
+      "getAmount",
+      "getCurrency",
+      "getCurrencyCode",
+      "add",
+      "subtract",
+      "isGreaterThan",
+      "isLessThanOrEqualTo",
+      "equals",
+      "hashCode",
+      "toString"
+    ]
+  },
+  {
+    "package": "domain.shared",
+    "name": "Notes",
+    "kind": "class",
+    "description": "Classe del package domain.shared; rappresenta un concetto del modello TruckFlow.",
+    "methods": [
+      "of",
+      "empty",
+      "getText",
+      "isEmpty",
+      "hasText",
+      "contains",
+      "equals",
+      "hashCode",
+      "toString"
+    ]
+  },
+  {
+    "package": "domain.shared",
+    "name": "Percentage",
+    "kind": "class",
+    "description": "Classe del package domain.shared; rappresenta un concetto del modello TruckFlow.",
+    "methods": [
+      "of",
+      "getValue",
+      "toMultiplier",
+      "isGreaterThan",
+      "isLessThanOrEqualTo",
+      "equals",
+      "hashCode",
+      "toString"
+    ]
+  },
+  {
+    "package": "domain.shared",
+    "name": "TemperatureRange",
+    "kind": "class",
+    "description": "Classe del package domain.shared; rappresenta un concetto del modello TruckFlow.",
+    "methods": [
+      "ofCelsius",
+      "getMinCelsius",
+      "getMaxCelsius",
+      "contains",
+      "isCoveredBy",
+      "equals",
+      "hashCode",
+      "toString"
+    ]
+  },
+  {
+    "package": "domain.shared",
+    "name": "TimeWindow",
+    "kind": "class",
+    "description": "Classe del package domain.shared; rappresenta un concetto del modello TruckFlow.",
+    "methods": [
+      "of",
+      "getStartTime",
+      "getEndTime",
+      "contains",
+      "overlapsWith",
+      "isInside",
+      "equals",
+      "hashCode",
+      "toString"
+    ]
+  },
+  {
+    "package": "domain.shared",
+    "name": "Volume",
+    "kind": "class",
+    "description": "Classe del package domain.shared; rappresenta un concetto del modello TruckFlow.",
+    "methods": [
+      "ofCubicMeters",
+      "ofLiters",
+      "getCubicMeters",
+      "isGreaterThan",
+      "isLessThanOrEqualTo",
+      "equals",
+      "hashCode",
+      "toString"
+    ]
+  },
+  {
+    "package": "domain.shared",
+    "name": "Weight",
+    "kind": "class",
+    "description": "Classe del package domain.shared; rappresenta un concetto del modello TruckFlow.",
+    "methods": [
+      "ofKilograms",
+      "ofTons",
+      "getKilograms",
+      "isGreaterThan",
+      "isLessThanOrEqualTo",
+      "equals",
+      "hashCode",
+      "toString"
+    ]
+  },
+  {
+    "package": "domain.shipment",
+    "name": "Shipment",
+    "kind": "class",
+    "description": "Classe del package domain.shipment; rappresenta un concetto del modello TruckFlow.",
+    "methods": [
+      "fromAcceptedOrder",
+      "getShipmentNumber",
+      "getTransportOrder",
+      "getStatus",
+      "getNotes",
+      "getCustomerAccount",
+      "getCargoLoad",
+      "getPickupFacility",
+      "getDeliveryFacility",
+      "isInternational",
+      "requiresTemperatureControlledTransport",
+      "containsHazardousMaterial",
+      "canBePlanned",
+      "canBeDispatched",
+      "canBeMarkedInTransit"
+    ]
+  },
+  {
+    "package": "domain.shipment",
+    "name": "ShipmentRules",
+    "kind": "class",
+    "description": "Classe di regole per validare e calcolare comportamenti nel package domain.shipment.",
+    "methods": [
+      "canBePlanned",
+      "canBeDispatched",
+      "canBeMarkedInTransit",
+      "canBeDelivered",
+      "canBeCancelled",
+      "requiresSpecialHandling",
+      "isCompleted",
+      "isTerminal"
+    ]
+  },
+  {
+    "package": "domain.shipment",
+    "name": "ShipmentStatus",
+    "kind": "enum",
+    "description": "Enum di stato del ciclo di vita.",
+    "methods": [
+      "isTerminal"
+    ]
+  },
+  {
+    "package": "domain.sustainability",
+    "name": "EmissionEstimate",
+    "kind": "class",
+    "description": "Stima calcolata prima del dato finale effettivo.",
+    "methods": [
+      "of",
+      "getEstimateNumber",
+      "getShipmentNumber",
+      "getRouteNumber",
+      "getDistance",
+      "getFuelType",
+      "getEmissionStandard",
+      "getEstimatedEnergyAmount",
+      "getEstimatedCo2Kg",
+      "getRating",
+      "getNotes",
+      "isZeroTailpipeEmission",
+      "isLowEmissionVehicle",
+      "isHighImpact",
+      "hasNotes"
+    ]
+  },
+  {
+    "package": "domain.sustainability",
+    "name": "EmissionRating",
+    "kind": "enum",
+    "description": "Enum: insieme chiuso di valori ammessi dal dominio.",
+    "methods": [
+      "getLevel",
+      "isWorseThan"
+    ]
+  },
+  {
+    "package": "domain.sustainability",
+    "name": "EmissionStandard",
+    "kind": "enum",
+    "description": "Enum: insieme chiuso di valori ammessi dal dominio.",
+    "methods": [
+      "getLevel",
+      "isLowEmissionStandard",
+      "isAtLeast"
+    ]
+  },
+  {
+    "package": "domain.sustainability",
+    "name": "FuelType",
+    "kind": "enum",
+    "description": "Enum/tipo di classificazione usato nelle regole di dominio.",
+    "methods": [
+      "isCombustionBased",
+      "isLowerEmissionAlternative",
+      "isZeroTailpipeEmission"
+    ]
+  },
+  {
+    "package": "domain.sustainability",
+    "name": "SustainabilityRules",
+    "kind": "class",
+    "description": "Classe di regole per validare e calcolare comportamenti nel package domain.sustainability.",
+    "methods": [
+      "isLowEmissionTransport",
+      "isHighImpactTransport",
+      "requiresSustainabilityReview",
+      "isZeroTailpipeEmission",
+      "hasBetterEmissionStandard",
+      "calculateTotalCo2Kg",
+      "containsHighImpactEstimate",
+      "allEstimatesAreLowEmission"
+    ]
+  },
+  {
+    "package": "domain.telematics",
+    "name": "DrivingBehaviorEvent",
+    "kind": "class",
+    "description": "Evento puntuale nella timeline operativa o audit.",
+    "methods": [
+      "of",
+      "getVehicleFleetNumber",
+      "getType",
+      "getOccurredAt",
+      "getCoordinates",
+      "getNotes",
+      "equals",
+      "hashCode"
+    ]
+  },
+  {
+    "package": "domain.telematics",
+    "name": "DrivingBehaviorEventType",
+    "kind": "enum",
+    "description": "Enum/tipo di classificazione usato nelle regole di dominio.",
+    "methods": []
+  },
+  {
+    "package": "domain.telematics",
+    "name": "TelematicsRules",
+    "kind": "class",
+    "description": "Classe di regole per validare e calcolare comportamenti nel package domain.telematics.",
+    "methods": [
+      "isFuelDropAnomaly",
+      "isSpeeding"
+    ]
+  },
+  {
+    "package": "domain.telematics",
+    "name": "TelematicsSnapshot",
+    "kind": "class",
+    "description": "Classe del package domain.telematics; rappresenta un concetto del modello TruckFlow.",
+    "methods": [
+      "of",
+      "getVehicleFleetNumber",
+      "getRecordedAt",
+      "getLatitude",
+      "getLongitude",
+      "getOdometerKilometers",
+      "getFuelLevelPercentage",
+      "equals",
+      "hashCode"
+    ]
+  },
+  {
+    "package": "domain.tire",
+    "name": "Tire",
+    "kind": "class",
+    "description": "Classe del package domain.tire; rappresenta un concetto del modello TruckFlow.",
+    "methods": [
+      "of",
+      "getTireCode",
+      "getStatus",
+      "getTreadDepthMillimeters",
+      "getInstalledAtKilometers",
+      "getCurrentKilometers",
+      "calculateKilometersInUse",
+      "isBelowLegalMinimum",
+      "equals",
+      "hashCode"
+    ]
+  },
+  {
+    "package": "domain.tire",
+    "name": "TireInstallation",
+    "kind": "class",
+    "description": "Classe del package domain.tire; rappresenta un concetto del modello TruckFlow.",
+    "methods": [
+      "active",
+      "remove",
+      "getTire",
+      "getVehicleFleetNumber",
+      "getWheelPosition",
+      "getInstalledAt",
+      "getInstalledAtKilometers",
+      "getRemovedAt",
+      "getRemovedAtKilometers",
+      "isActive",
+      "calculateKilometersMounted",
+      "equals",
+      "hashCode"
+    ]
+  },
+  {
+    "package": "domain.tire",
+    "name": "TireRotationEvent",
+    "kind": "class",
+    "description": "Evento puntuale nella timeline operativa o audit.",
+    "methods": [
+      "of",
+      "getTireCode",
+      "getVehicleFleetNumber",
+      "getFromPosition",
+      "getToPosition",
+      "getOccurredAt",
+      "getOdometerKilometers",
+      "getNotes",
+      "equals",
+      "hashCode"
+    ]
+  },
+  {
+    "package": "domain.tire",
+    "name": "TireRules",
+    "kind": "class",
+    "description": "Classe di regole per validare e calcolare comportamenti nel package domain.tire.",
+    "methods": [
+      "isLegallyUsable",
+      "shouldScheduleReplacement"
+    ]
+  },
+  {
+    "package": "domain.tire",
+    "name": "TireStatus",
+    "kind": "enum",
+    "description": "Enum di stato del ciclo di vita.",
+    "methods": []
+  },
+  {
+    "package": "domain.tire",
+    "name": "WheelPosition",
+    "kind": "class",
+    "description": "Classe del package domain.tire; rappresenta un concetto del modello TruckFlow.",
+    "methods": [
+      "of",
+      "getAxleNumber",
+      "getSide",
+      "getSlot",
+      "formatLabel",
+      "equals",
+      "hashCode"
+    ]
+  },
+  {
+    "package": "domain.tire",
+    "name": "WheelSide",
+    "kind": "enum",
+    "description": "Enum: insieme chiuso di valori ammessi dal dominio.",
+    "methods": []
+  },
+  {
+    "package": "domain.tire",
+    "name": "WheelSlot",
+    "kind": "enum",
+    "description": "Enum: insieme chiuso di valori ammessi dal dominio.",
+    "methods": []
+  },
+  {
+    "package": "domain.tracking",
+    "name": "TrackingEvent",
+    "kind": "class",
+    "description": "Evento puntuale nella timeline operativa o audit.",
+    "methods": [
+      "of",
+      "fromMission",
+      "positionRecorded",
+      "delayReported",
+      "incidentReported",
+      "getEventCode",
+      "getMissionNumber",
+      "getShipmentNumber",
+      "getType",
+      "getOccurredAt",
+      "getCoordinates",
+      "getNotes",
+      "hasCoordinates",
+      "hasNotes",
+      "isOperationalMilestone"
+    ]
+  },
+  {
+    "package": "domain.tracking",
+    "name": "TrackingEventType",
+    "kind": "enum",
+    "description": "Enum/tipo di classificazione usato nelle regole di dominio.",
+    "methods": [
+      "isOperationalMilestone",
+      "isExceptionEvent",
+      "requiresCoordinates"
+    ]
+  },
+  {
+    "package": "domain.tracking",
+    "name": "TrackingRules",
+    "kind": "class",
+    "description": "Classe di regole per validare e calcolare comportamenti nel package domain.tracking.",
+    "methods": [
+      "canAddEvent",
+      "requiresOperationalReview",
+      "isPickupAndDeliveryCompleted",
+      "isMissionTrackingCompleted",
+      "hasExceptionEvents"
+    ]
+  },
+  {
+    "package": "domain.tracking",
+    "name": "TrackingTimeline",
+    "kind": "class",
+    "description": "Sequenza ordinata di eventi.",
+    "methods": [
+      "of",
+      "getEvents",
+      "getEventCount",
+      "getMissionNumber",
+      "getShipmentNumber",
+      "getFirstEvent",
+      "getLatestEvent",
+      "containsEventCode",
+      "hasEventType",
+      "hasDelays",
+      "hasIncidents",
+      "hasPickupCompleted",
+      "hasDeliveryCompleted",
+      "hasMissionCompleted",
+      "getEventsByType"
+    ]
+  },
+  {
+    "package": "infrastructure.memory",
+    "name": "InMemoryAuditTrailRepository",
+    "kind": "class",
+    "description": "Porta repository per salvare/caricare oggetti InMemoryAuditTrail senza dipendere dal database.",
+    "methods": []
+  },
+  {
+    "package": "infrastructure.memory",
+    "name": "InMemoryContractRateCardRepository",
+    "kind": "class",
+    "description": "Porta repository per salvare/caricare oggetti InMemoryContractRateCard senza dipendere dal database.",
+    "methods": []
+  },
+  {
+    "package": "infrastructure.memory",
+    "name": "InMemoryCustomerAccountRepository",
+    "kind": "class",
+    "description": "Porta repository per salvare/caricare oggetti InMemoryCustomerAccount senza dipendere dal database.",
+    "methods": []
+  },
+  {
+    "package": "infrastructure.memory",
+    "name": "InMemoryCustomerContractRepository",
+    "kind": "class",
+    "description": "Porta repository per salvare/caricare oggetti InMemoryCustomerContract senza dipendere dal database.",
+    "methods": []
+  },
+  {
+    "package": "infrastructure.memory",
+    "name": "InMemoryCustomerRepository",
+    "kind": "class",
+    "description": "Porta repository per salvare/caricare oggetti InMemoryCustomer senza dipendere dal database.",
+    "methods": []
+  },
+  {
+    "package": "infrastructure.memory",
+    "name": "InMemoryCustomerRevenueInvoiceRepository",
+    "kind": "class",
+    "description": "Porta repository per salvare/caricare oggetti InMemoryCustomerRevenueInvoice senza dipendere dal database.",
+    "methods": []
+  },
+  {
+    "package": "infrastructure.memory",
+    "name": "InMemoryDeliveryNoteRepository",
+    "kind": "class",
+    "description": "Porta repository per salvare/caricare oggetti InMemoryDeliveryNote senza dipendere dal database.",
+    "methods": []
+  },
+  {
+    "package": "infrastructure.memory",
+    "name": "InMemoryDispatchPlanRepository",
+    "kind": "class",
+    "description": "Porta repository per salvare/caricare oggetti InMemoryDispatchPlan senza dipendere dal database.",
+    "methods": []
+  },
+  {
+    "package": "infrastructure.memory",
+    "name": "InMemoryDriverDefectTicketRepository",
+    "kind": "class",
+    "description": "Porta repository per salvare/caricare oggetti InMemoryDriverDefectTicket senza dipendere dal database.",
+    "methods": []
+  },
+  {
+    "package": "infrastructure.memory",
+    "name": "InMemoryDriverMissionPayrollRepository",
+    "kind": "class",
+    "description": "Porta repository per salvare/caricare oggetti InMemoryDriverMissionPayroll senza dipendere dal database.",
+    "methods": []
+  },
+  {
+    "package": "infrastructure.memory",
+    "name": "InMemoryDriverMissionWorkReportRepository",
+    "kind": "class",
+    "description": "Porta repository per salvare/caricare oggetti InMemoryDriverMissionWorkReport senza dipendere dal database.",
+    "methods": []
+  },
+  {
+    "package": "infrastructure.memory",
+    "name": "InMemoryDriverPayrollPolicyRepository",
+    "kind": "class",
+    "description": "Porta repository per salvare/caricare oggetti InMemoryDriverPayrollPolicy senza dipendere dal database.",
+    "methods": []
+  },
+  {
+    "package": "infrastructure.memory",
+    "name": "InMemoryDriverRepository",
+    "kind": "class",
+    "description": "Porta repository per salvare/caricare oggetti InMemoryDriver senza dipendere dal database.",
+    "methods": []
+  },
+  {
+    "package": "infrastructure.memory",
+    "name": "InMemoryFacilityRepository",
+    "kind": "class",
+    "description": "Porta repository per salvare/caricare oggetti InMemoryFacility senza dipendere dal database.",
+    "methods": []
+  },
+  {
+    "package": "infrastructure.memory",
+    "name": "InMemoryFleetAssetAcquisitionRepository",
+    "kind": "class",
+    "description": "Porta repository per salvare/caricare oggetti InMemoryFleetAssetAcquisition senza dipendere dal database.",
+    "methods": []
+  },
+  {
+    "package": "infrastructure.memory",
+    "name": "InMemoryFleetAssetPurchaseRepository",
+    "kind": "class",
+    "description": "Porta repository per salvare/caricare oggetti InMemoryFleetAssetPurchase senza dipendere dal database.",
+    "methods": []
+  },
+  {
+    "package": "infrastructure.memory",
+    "name": "InMemoryFleetFinancialStatementRepository",
+    "kind": "class",
+    "description": "Porta repository per salvare/caricare oggetti InMemoryFleetFinancialStatement senza dipendere dal database.",
+    "methods": []
+  },
+  {
+    "package": "infrastructure.memory",
+    "name": "InMemoryFuelTransactionRepository",
+    "kind": "class",
+    "description": "Porta repository per salvare/caricare oggetti InMemoryFuelTransaction senza dipendere dal database.",
+    "methods": []
+  },
+  {
+    "package": "infrastructure.memory",
+    "name": "InMemoryGeneratedReportRepository",
+    "kind": "class",
+    "description": "Porta repository per salvare/caricare oggetti InMemoryGeneratedReport senza dipendere dal database.",
+    "methods": []
+  },
+  {
+    "package": "infrastructure.memory",
+    "name": "InMemoryImportBatchRepository",
+    "kind": "class",
+    "description": "Porta repository per salvare/caricare oggetti InMemoryImportBatch senza dipendere dal database.",
+    "methods": []
+  },
+  {
+    "package": "infrastructure.memory",
+    "name": "InMemoryInventoryBalanceRepository",
+    "kind": "class",
+    "description": "Porta repository per salvare/caricare oggetti InMemoryInventoryBalance senza dipendere dal database.",
+    "methods": []
+  },
+  {
+    "package": "infrastructure.memory",
+    "name": "InMemoryInventoryItemRepository",
+    "kind": "class",
+    "description": "Porta repository per salvare/caricare oggetti InMemoryInventoryItem senza dipendere dal database.",
+    "methods": []
+  },
+  {
+    "package": "infrastructure.memory",
+    "name": "InMemoryInventoryStockMovementRepository",
+    "kind": "class",
+    "description": "Porta repository per salvare/caricare oggetti InMemoryInventoryStockMovement senza dipendere dal database.",
+    "methods": []
+  },
+  {
+    "package": "infrastructure.memory",
+    "name": "InMemoryLoadSecuringChecklistRepository",
+    "kind": "class",
+    "description": "Porta repository per salvare/caricare oggetti InMemoryLoadSecuringChecklist senza dipendere dal database.",
+    "methods": []
+  },
+  {
+    "package": "infrastructure.memory",
+    "name": "InMemoryMaintenanceWorkOrderRepository",
+    "kind": "class",
+    "description": "Porta repository per salvare/caricare oggetti InMemoryMaintenanceWorkOrder senza dipendere dal database.",
+    "methods": []
+  },
+  {
+    "package": "infrastructure.memory",
+    "name": "InMemoryMissionEconomicsRepository",
+    "kind": "class",
+    "description": "Porta repository per salvare/caricare oggetti InMemoryMissionEconomics senza dipendere dal database.",
+    "methods": []
+  },
+  {
+    "package": "infrastructure.memory",
+    "name": "InMemoryNotificationMessageRepository",
+    "kind": "class",
+    "description": "Porta repository per salvare/caricare oggetti InMemoryNotificationMessage senza dipendere dal database.",
+    "methods": []
+  },
+  {
+    "package": "infrastructure.memory",
+    "name": "InMemoryParkingAssignmentRepository",
+    "kind": "class",
+    "description": "Porta repository per salvare/caricare oggetti InMemoryParkingAssignment senza dipendere dal database.",
+    "methods": []
+  },
+  {
+    "package": "infrastructure.memory",
+    "name": "InMemoryParkingSpotRepository",
+    "kind": "class",
+    "description": "Porta repository per salvare/caricare oggetti InMemoryParkingSpot senza dipendere dal database.",
+    "methods": [
+      "findById"
+    ]
+  },
+  {
+    "package": "infrastructure.memory",
+    "name": "InMemoryRepository",
+    "kind": "class",
+    "description": "Repository generico basato su ConcurrentHashMap; base per tutti i repository in memoria.",
+    "methods": [
+      "findById",
+      "save",
+      "findAll",
+      "deleteById",
+      "clear"
+    ]
+  },
+  {
+    "package": "infrastructure.memory",
+    "name": "InMemoryRoutePlanRepository",
+    "kind": "class",
+    "description": "Porta repository per salvare/caricare oggetti InMemoryRoutePlan senza dipendere dal database.",
+    "methods": []
+  },
+  {
+    "package": "infrastructure.memory",
+    "name": "InMemoryShipmentDocumentBundleRepository",
+    "kind": "class",
+    "description": "Porta repository per salvare/caricare oggetti InMemoryShipmentDocumentBundle senza dipendere dal database.",
+    "methods": []
+  },
+  {
+    "package": "infrastructure.memory",
+    "name": "InMemoryShipmentRepository",
+    "kind": "class",
+    "description": "Porta repository per salvare/caricare oggetti InMemoryShipment senza dipendere dal database.",
+    "methods": []
+  },
+  {
+    "package": "infrastructure.memory",
+    "name": "InMemorySupplierInvoiceRepository",
+    "kind": "class",
+    "description": "Porta repository per salvare/caricare oggetti InMemorySupplierInvoice senza dipendere dal database.",
+    "methods": []
+  },
+  {
+    "package": "infrastructure.memory",
+    "name": "InMemoryTelematicsSnapshotRepository",
+    "kind": "class",
+    "description": "Porta repository per salvare/caricare oggetti InMemoryTelematicsSnapshot senza dipendere dal database.",
+    "methods": []
+  },
+  {
+    "package": "infrastructure.memory",
+    "name": "InMemoryTireInstallationRepository",
+    "kind": "class",
+    "description": "Porta repository per salvare/caricare oggetti InMemoryTireInstallation senza dipendere dal database.",
+    "methods": []
+  },
+  {
+    "package": "infrastructure.memory",
+    "name": "InMemoryTireRepository",
+    "kind": "class",
+    "description": "Porta repository per salvare/caricare oggetti InMemoryTire senza dipendere dal database.",
+    "methods": []
+  },
+  {
+    "package": "infrastructure.memory",
+    "name": "InMemoryTrackingTimelineRepository",
+    "kind": "class",
+    "description": "Porta repository per salvare/caricare oggetti InMemoryTrackingTimeline senza dipendere dal database.",
+    "methods": []
+  },
+  {
+    "package": "infrastructure.memory",
+    "name": "InMemoryTransportClaimRepository",
+    "kind": "class",
+    "description": "Porta repository per salvare/caricare oggetti InMemoryTransportClaim senza dipendere dal database.",
+    "methods": []
+  },
+  {
+    "package": "infrastructure.memory",
+    "name": "InMemoryTransportDocumentRepository",
+    "kind": "class",
+    "description": "Porta repository per salvare/caricare oggetti InMemoryTransportDocument senza dipendere dal database.",
+    "methods": []
+  },
+  {
+    "package": "infrastructure.memory",
+    "name": "InMemoryTransportMissionRepository",
+    "kind": "class",
+    "description": "Porta repository per salvare/caricare oggetti InMemoryTransportMission senza dipendere dal database.",
+    "methods": []
+  },
+  {
+    "package": "infrastructure.memory",
+    "name": "InMemoryTransportOrderRepository",
+    "kind": "class",
+    "description": "Porta repository per salvare/caricare oggetti InMemoryTransportOrder senza dipendere dal database.",
+    "methods": []
+  },
+  {
+    "package": "infrastructure.memory",
+    "name": "InMemoryUserAccountRepository",
+    "kind": "class",
+    "description": "Porta repository per salvare/caricare oggetti InMemoryUserAccount senza dipendere dal database.",
+    "methods": []
+  },
+  {
+    "package": "infrastructure.memory",
+    "name": "InMemoryVehicleCombinationRepository",
+    "kind": "class",
+    "description": "Porta repository per salvare/caricare oggetti InMemoryVehicleCombination senza dipendere dal database.",
+    "methods": []
+  },
+  {
+    "package": "infrastructure.memory",
+    "name": "InMemoryVehicleRepository",
+    "kind": "class",
+    "description": "Porta repository per salvare/caricare oggetti InMemoryVehicle senza dipendere dal database.",
+    "methods": []
+  },
+  {
+    "package": "infrastructure.memory",
+    "name": "InMemoryWarehouseLocationRepository",
+    "kind": "class",
+    "description": "Porta repository per salvare/caricare oggetti InMemoryWarehouseLocation senza dipendere dal database.",
+    "methods": []
+  }
+]

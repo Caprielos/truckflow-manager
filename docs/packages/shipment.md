@@ -1,12 +1,6 @@
-# Package `shipment` — Spedizione
+# Package `shipment`
 
-Rappresenta la spedizione nata da un ordine accettato, con stato e regole; non contiene direttamente driver e mezzo.
-
-## Percorso
-
-```text
-src/main/java/it/gabriele/truckflow/domain/shipment
-```
+Spedizione nata da ordine accettato.
 
 ## Classi
 
@@ -14,11 +8,6 @@ src/main/java/it/gabriele/truckflow/domain/shipment
 - `ShipmentRules`
 - `ShipmentStatus`
 
-## Test collegati
-
-- `ShipmentRulesTest`
-- `ShipmentTest`
-
 ## Ruolo nel sistema
 
-Questo package contribuisce al domain model e deve restare indipendente da database, controller REST e framework esterni.
+Questo package fa parte del domain e contribuisce al modello business senza dipendere da application, infrastructure o web.

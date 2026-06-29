@@ -1,12 +1,6 @@
-# Package `billing` — Fatturazione cliente
+# Package `billing`
 
-Rappresenta fatture emesse, stato fattura, pagamenti e regole base di incasso.
-
-## Percorso
-
-```text
-src/main/java/it/gabriele/truckflow/domain/billing
-```
+Fatture cliente, pagamenti, stato fattura e regole di billing.
 
 ## Classi
 
@@ -16,12 +10,6 @@ src/main/java/it/gabriele/truckflow/domain/billing
 - `PaymentMethod`
 - `PaymentRecord`
 
-## Test collegati
-
-- `BillingRulesTest`
-- `InvoiceTest`
-- `PaymentRecordTest`
-
 ## Ruolo nel sistema
 
-Questo package contribuisce al domain model e deve restare indipendente da database, controller REST e framework esterni.
+Questo package fa parte del domain e contribuisce al modello business senza dipendere da application, infrastructure o web.

@@ -1,12 +1,6 @@
-# Package `claim` — Danni, sinistri e reclami
+# Package `claim`
 
-Gestisce danni, ispezioni, reclami cliente, severità e stato delle pratiche.
-
-## Percorso
-
-```text
-src/main/java/it/gabriele/truckflow/domain/claim
-```
+Danni, sinistri, claim di trasporto e ispezioni danni.
 
 ## Classi
 
@@ -18,11 +12,6 @@ src/main/java/it/gabriele/truckflow/domain/claim
 - `DamageInspectionItem`
 - `TransportClaim`
 
-## Test collegati
-
-- `ClaimRulesTest`
-- `TransportClaimTest`
-
 ## Ruolo nel sistema
 
-Questo package contribuisce al domain model e deve restare indipendente da database, controller REST e framework esterni.
+Questo package fa parte del domain e contribuisce al modello business senza dipendere da application, infrastructure o web.

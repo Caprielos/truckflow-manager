@@ -1,12 +1,6 @@
-# Package `notification` — Notifiche
+# Package `notification`
 
-Modella messaggi, canali, priorità, destinatari e stato notifica.
-
-## Percorso
-
-```text
-src/main/java/it/gabriele/truckflow/domain/notification
-```
+Messaggi e notifiche operative.
 
 ## Classi
 
@@ -18,11 +12,6 @@ src/main/java/it/gabriele/truckflow/domain/notification
 - `NotificationStatus`
 - `NotificationType`
 
-## Test collegati
-
-- `NotificationMessageTest`
-- `NotificationRulesTest`
-
 ## Ruolo nel sistema
 
-Questo package contribuisce al domain model e deve restare indipendente da database, controller REST e framework esterni.
+Questo package fa parte del domain e contribuisce al modello business senza dipendere da application, infrastructure o web.

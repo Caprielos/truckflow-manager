@@ -1,12 +1,6 @@
-# Package `maintenance` — Manutenzione e fermi mezzo
+# Package `maintenance`
 
-Gestisce work order, difetti segnalati dall’autista, fermi mezzo, stati e tipi manutenzione.
-
-## Percorso
-
-```text
-src/main/java/it/gabriele/truckflow/domain/maintenance
-```
+Manutenzione, ticket difetti autista e downtime.
 
 ## Classi
 
@@ -17,11 +11,6 @@ src/main/java/it/gabriele/truckflow/domain/maintenance
 - `MaintenanceWorkOrder`
 - `VehicleDowntime`
 
-## Test collegati
-
-- `MaintenanceRulesTest`
-- `MaintenanceWorkOrderTest`
-
 ## Ruolo nel sistema
 
-Questo package contribuisce al domain model e deve restare indipendente da database, controller REST e framework esterni.
+Questo package fa parte del domain e contribuisce al modello business senza dipendere da application, infrastructure o web.

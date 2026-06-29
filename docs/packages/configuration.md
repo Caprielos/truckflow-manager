@@ -1,12 +1,6 @@
-# Package `configuration` — Configurazioni dominio
+# Package `configuration`
 
-Permette di rappresentare valori configurabili per regole aziendali, soglie, parametri e impostazioni.
-
-## Percorso
-
-```text
-src/main/java/it/gabriele/truckflow/domain/configuration
-```
+Configurazioni del sistema e valori configurabili.
 
 ## Classi
 
@@ -17,10 +11,6 @@ src/main/java/it/gabriele/truckflow/domain/configuration
 - `ConfigurationValueType`
 - `SystemConfiguration`
 
-## Test collegati
-
-- `ConfigurationRulesTest`
-
 ## Ruolo nel sistema
 
-Questo package contribuisce al domain model e deve restare indipendente da database, controller REST e framework esterni.
+Questo package fa parte del domain e contribuisce al modello business senza dipendere da application, infrastructure o web.

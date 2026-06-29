@@ -1,12 +1,6 @@
-# Package `dataimport` — Import dati esterni
+# Package `dataimport`
 
-Rappresenta batch e record importati da carburante, pedaggi, telematica, banca, paghe o fatture fornitore.
-
-## Percorso
-
-```text
-src/main/java/it/gabriele/truckflow/domain/dataimport
-```
+Import da fonti esterne: fuel card, pedaggi, telematica, paghe, fatture.
 
 ## Classi
 
@@ -16,10 +10,6 @@ src/main/java/it/gabriele/truckflow/domain/dataimport
 - `ImportRecordStatus`
 - `ImportRules`
 
-## Test collegati
-
-- `DataImportModelTest`
-
 ## Ruolo nel sistema
 
-Questo package contribuisce al domain model e deve restare indipendente da database, controller REST e framework esterni.
+Questo package fa parte del domain e contribuisce al modello business senza dipendere da application, infrastructure o web.

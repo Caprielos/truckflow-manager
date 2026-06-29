@@ -1,12 +1,6 @@
-# Package `loadsecurity` — Fissaggio carico
+# Package `loadsecurity`
 
-Gestisce attrezzature e checklist per fissaggio carico, cinghie, barre, tappeti antiscivolo e controlli.
-
-## Percorso
-
-```text
-src/main/java/it/gabriele/truckflow/domain/loadsecurity
-```
+Attrezzature e checklist di fissaggio carico.
 
 ## Classi
 
@@ -15,10 +9,6 @@ src/main/java/it/gabriele/truckflow/domain/loadsecurity
 - `LoadSecuringEquipmentType`
 - `LoadSecuringRules`
 
-## Test collegati
-
-- `LoadSecuringChecklistTest`
-
 ## Ruolo nel sistema
 
-Questo package contribuisce al domain model e deve restare indipendente da database, controller REST e framework esterni.
+Questo package fa parte del domain e contribuisce al modello business senza dipendere da application, infrastructure o web.

@@ -1,74 +1,79 @@
 # Architettura
 
-## Architettura attuale
-
-Il progetto è organizzato principalmente così:
+L'architettura è organizzata in stile pulito/esagonale.
 
 ```text
-src/main/java/it/gabriele/truckflow
-├── Main.java
-└── domain/
-    ├── shared/
-    ├── customer/
-    ├── order/
-    ├── shipment/
-    ├── operation/
-    ├── fleet/
-    ├── driver/
-    ├── economics/
-    ├── payroll/
-    ├── facility/
-    ├── parking/
-    ├── inventory/
-    └── ...
-```
-
-## Regola principale
-
-Il domain layer non deve sapere nulla di:
-
-- database;
-- API REST;
-- frontend;
-- file system;
-- Spring/JPA;
-- servizi esterni;
-- controller;
-- repository concreti.
-
-Il domain deve contenere solo concetti e regole di business.
-
-## Layer futuri
-
-La prossima evoluzione naturale è:
-
-```text
+web / CLI / test scenario
+        ↓
+application/port/in
+        ↓
+application/usecase
+        ↓
 domain
-→ modelli e regole pure
-
-application
-→ use case: pianifica missione, calcola margine, chiudi missione, genera fattura
-
-application/ports
-→ interfacce repository e servizi esterni
-
-infrastructure/memory
-→ implementazioni in memoria per test e demo
-
-infrastructure/persistence
-→ database/JPA più avanti
-
-web
-→ REST API
+        ↓
+application/port/out
+        ↓
+infrastructure/memory o futuro database
 ```
 
-## Dipendenze consigliate
+## Domain
 
-La direzione delle dipendenze deve essere:
+Il `domain` contiene le regole del business. Non deve conoscere database, REST API, file, JSON o Spring.
+
+Esempi:
 
 ```text
-web → application → domain
-infrastructure → application/domain
+Vehicle
+Driver
+Shipment
+TransportMission
+MissionEconomics
+DriverMissionPayroll
+ParkingAssignment
+InventoryBalance
 ```
 
-Il domain non deve dipendere da application, web o infrastructure.
+## Application
+
+L'`application` contiene le azioni reali del sistema.
+
+Esempi:
+
+```text
+PlanTransportMissionUseCase
+AssignParkingSpotUseCase
+CalculateMissionEconomicsUseCase
+CalculateDriverMissionPayrollUseCase
+```
+
+Non deve contenere dettagli di database. Coordina domain object e repository port.
+
+## Infrastructure
+
+L'`infrastructure` contiene implementazioni tecniche.
+
+Per ora è presente:
+
+```text
+infrastructure/memory
+```
+
+Questa cartella contiene repository in memoria, utili per test, demo e sviluppo iniziale.
+
+## Perché questa separazione
+
+La separazione evita che il codice business dipenda da dettagli tecnici.
+
+In futuro potrai sostituire:
+
+```text
+InMemoryVehicleRepository
+```
+
+con:
+
+```text
+JpaVehicleRepository
+```
+
+senza cambiare le regole del domain e senza riscrivere gli use case.

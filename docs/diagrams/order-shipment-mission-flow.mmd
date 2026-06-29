@@ -1,0 +1,10 @@
+flowchart LR
+    Customer[Cliente] --> Order[TransportOrder]
+    Order -->|ordine accettato| Shipment[Shipment]
+    Shipment -->|pianificazione| Mission[TransportMission]
+    Mission --> Driver[Driver]
+    Mission --> Combo[VehicleCombination]
+    Mission --> Route[RoutePlan]
+    Mission --> Economics[MissionEconomics]
+    Mission --> Payroll[DriverMissionPayroll]
+    Shipment --> Documents[ShipmentDocumentBundle]

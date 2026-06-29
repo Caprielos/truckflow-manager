@@ -1,12 +1,6 @@
-# Package `inventory` — Magazzino ricambi e materiali
+# Package `inventory`
 
-Gestisce articoli, giacenze, ubicazioni, movimenti stock, scorte minime e reorder signal.
-
-## Percorso
-
-```text
-src/main/java/it/gabriele/truckflow/domain/inventory
-```
+Magazzino ricambi/materiali, giacenze, movimenti e riordino.
 
 ## Classi
 
@@ -18,10 +12,6 @@ src/main/java/it/gabriele/truckflow/domain/inventory
 - `StockMovementType`
 - `WarehouseLocation`
 
-## Test collegati
-
-- `InventoryManagementTest`
-
 ## Ruolo nel sistema
 
-Questo package contribuisce al domain model e deve restare indipendente da database, controller REST e framework esterni.
+Questo package fa parte del domain e contribuisce al modello business senza dipendere da application, infrastructure o web.

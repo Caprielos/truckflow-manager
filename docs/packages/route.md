@@ -1,12 +1,6 @@
-# Package `route` — Percorsi e soste
+# Package `route`
 
-Gestisce route plan, stop, carico/scarico, sequenza e regole di coerenza della rotta.
-
-## Percorso
-
-```text
-src/main/java/it/gabriele/truckflow/domain/route
-```
+Route plan, stop e regole tratta.
 
 ## Classi
 
@@ -15,12 +9,6 @@ src/main/java/it/gabriele/truckflow/domain/route
 - `RouteStop`
 - `RouteStopType`
 
-## Test collegati
-
-- `RoutePlanRulesTest`
-- `RoutePlanTest`
-- `RouteStopTest`
-
 ## Ruolo nel sistema
 
-Questo package contribuisce al domain model e deve restare indipendente da database, controller REST e framework esterni.
+Questo package fa parte del domain e contribuisce al modello business senza dipendere da application, infrastructure o web.

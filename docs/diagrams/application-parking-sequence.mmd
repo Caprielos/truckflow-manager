@@ -1,0 +1,16 @@
+sequenceDiagram
+    participant Test as Test/Controller futuro
+    participant UseCase as AssignParkingSpotUseCase
+    participant Service as DefaultAssignParkingSpotUseCase
+    participant SpotRepo as ParkingSpotRepository
+    participant AssignRepo as ParkingAssignmentRepository
+    participant Domain as ParkingAssignment
+
+    Test->>UseCase: handle(Command)
+    UseCase->>Service: implementazione
+    Service->>SpotRepo: getRequired(parkingSpotId)
+    SpotRepo-->>Service: ParkingSpot
+    Service->>Domain: active(...)
+    Domain-->>Service: ParkingAssignment
+    Service->>AssignRepo: save(assignment)
+    Service-->>Test: ParkingAssignment

@@ -1,12 +1,6 @@
-# Package `shared` — Value object condivisi
+# Package `shared`
 
-Contiene Money, Weight, Distance, Dimension, Volume, TemperatureRange, TimeWindow, DateRange, Notes e Percentage.
-
-## Percorso
-
-```text
-src/main/java/it/gabriele/truckflow/domain/shared
-```
+Value object comuni: Money, Weight, Distance, Notes, TimeWindow, ecc.
 
 ## Classi
 
@@ -21,19 +15,6 @@ src/main/java/it/gabriele/truckflow/domain/shared
 - `Volume`
 - `Weight`
 
-## Test collegati
-
-- `DateRangeTest`
-- `DimensionTest`
-- `DistanceTest`
-- `MoneyTest`
-- `NotesTest`
-- `PercentageTest`
-- `TemperatureRangeTest`
-- `TimeWindowTest`
-- `VolumeTest`
-- `WeightTest`
-
 ## Ruolo nel sistema
 
-Questo package contribuisce al domain model e deve restare indipendente da database, controller REST e framework esterni.
+Questo package fa parte del domain e contribuisce al modello business senza dipendere da application, infrastructure o web.

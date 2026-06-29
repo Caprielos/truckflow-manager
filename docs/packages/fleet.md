@@ -1,12 +1,6 @@
-# Package `fleet` — Flotta e mezzi
+# Package `fleet`
 
-Modella veicoli, unità, allestimenti, assi, masse, dimensioni, certificati, combinazioni e compatibilità tecnica.
-
-## Percorso
-
-```text
-src/main/java/it/gabriele/truckflow/domain/fleet
-```
+Veicoli, rimorchi, convogli, allestimenti, assi, certificati e schede tecniche.
 
 ## Classi
 
@@ -48,14 +42,6 @@ src/main/java/it/gabriele/truckflow/domain/fleet
 - `VehicleWeightClass`
 - `WheelConfiguration`
 
-## Test collegati
-
-- `RealisticFleetModelTest`
-- `TireSpecificationTest`
-- `VehicleCombinationRulesTest`
-- `VehicleCombinationTest`
-- `VehicleTest`
-
 ## Ruolo nel sistema
 
-Questo package contribuisce al domain model e deve restare indipendente da database, controller REST e framework esterni.
+Questo package fa parte del domain e contribuisce al modello business senza dipendere da application, infrastructure o web.

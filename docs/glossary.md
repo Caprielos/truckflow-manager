@@ -1,69 +1,53 @@
 # Glossario
 
-## Order
+## Domain
 
-Richiesta commerciale del cliente. È il punto di partenza.
+Regole e oggetti del business.
+
+## Application
+
+Livello che coordina le azioni reali del sistema.
+
+## Use case
+
+Azione aziendale eseguibile: pianificare missione, assegnare parcheggio, calcolare costi.
+
+## Port in
+
+Interfaccia d'ingresso: cosa puoi chiedere al sistema.
+
+## Port out
+
+Interfaccia d'uscita: cosa serve al sistema dal mondo esterno.
+
+## Repository port
+
+Interfaccia per salvare/caricare dati senza sapere dove stanno fisicamente.
+
+## Infrastructure
+
+Implementazione tecnica dei port out.
+
+## InMemoryRepository
+
+Repository che salva in RAM tramite mappa. Utile per test e demo.
 
 ## Shipment
 
-Spedizione nata da un ordine accettato. Descrive cosa trasportare e quali requisiti ha.
+Spedizione da organizzare.
 
 ## TransportMission
 
-Missione operativa reale: viaggio concreto con autista, mezzo, route plan, tracking e documenti.
+Viaggio operativo reale.
 
-## Dispatch
+## MissionEconomics
 
-Attività dell'ufficio traffico che sceglie la combinazione migliore tra autista, mezzo, rimorchio, parcheggio e margine.
+Conto economico missione: ricavi, costi, margine.
 
-## Fleet
+## DriverMissionPayroll
 
-Insieme di veicoli, rimorchi, semirimorchi, allestimenti, certificati e combinazioni.
+Costo autista per una missione.
 
-## Tractor unit
+## ParkingAssignment
 
-Trattore stradale. Da solo non trasporta il carico; lavora con semirimorchio.
-
-## Semi-trailer
-
-Semirimorchio agganciato a trattore tramite ralla/kingpin.
-
-## Truck and trailer / autotreno
-
-Motrice + rimorchio. Può essere parcheggiato già agganciato e pronto.
-
-## DDT / bolla
-
-Documento di trasporto/delivery note con righe merce, mittente, destinatario, luoghi, quantità, peso e firme.
-
-## Revenue
-
-Ricavo: quanto fatturi o chiedi al cliente.
-
-## Cost
-
-Costo: quanto spendi per fare il lavoro.
-
-## Profit / margin
-
-Guadagno o margine: ricavi meno costi.
-
-## VAT / IVA
-
-Imposta sul valore aggiunto. Non coincide con il guadagno.
-
-## Payroll
-
-Costo del lavoro autista: paga, indennità, maggiorazioni, rimborsi e costo aziendale.
-
-## Facility
-
-Struttura fisica: deposito, piazzale, magazzino, parcheggio aziendale o terzi.
-
-## Parking spot
-
-Posto numerato dentro una struttura.
-
-## Inventory
-
-Magazzino ricambi, materiali, DPI, gomme, olio, AdBlue e attrezzature.
+Assegnazione di una risorsa a un posto parcheggio.

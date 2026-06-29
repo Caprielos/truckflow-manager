@@ -1,12 +1,6 @@
-# Package `telematics` — Telematica e comportamento guida
+# Package `telematics`
 
-Gestisce snapshot GPS/CAN-bus e eventi comportamento guida come frenate, accelerazioni, consumo e odometro.
-
-## Percorso
-
-```text
-src/main/java/it/gabriele/truckflow/domain/telematics
-```
+Snapshot telematici e comportamento di guida.
 
 ## Classi
 
@@ -15,10 +9,6 @@ src/main/java/it/gabriele/truckflow/domain/telematics
 - `TelematicsRules`
 - `TelematicsSnapshot`
 
-## Test collegati
-
-- `TelematicsSnapshotTest`
-
 ## Ruolo nel sistema
 
-Questo package contribuisce al domain model e deve restare indipendente da database, controller REST e framework esterni.
+Questo package fa parte del domain e contribuisce al modello business senza dipendere da application, infrastructure o web.

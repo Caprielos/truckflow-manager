@@ -1,0 +1,13 @@
+flowchart TD
+    Mission[TransportMission] --> Revenue[MissionRevenueLine]
+    Mission --> Costs[MissionCostLine]
+    Work[DriverMissionWorkReport] --> PayrollPolicy[DriverPayrollPolicy]
+    PayrollPolicy --> Payroll[DriverMissionPayroll]
+    Payroll --> Costs
+    Costs --> Economics[MissionEconomics]
+    Revenue --> Economics
+    Economics --> Result[ProfitabilityResult]
+
+    Facility[FacilityFinancialProfile] --> FacilityCosts[FacilityCostLine]
+    ParkingSpot[ParkingSpot] --> ParkingAssignment[ParkingAssignment]
+    ParkingAssignment --> Ready[Convoglio pronto]

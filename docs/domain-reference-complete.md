@@ -1,12 +1,10 @@
-# Domain reference complete
+# Domain reference completo
 
-Catalogo completo dei package e delle classi principali rilevate dal progetto.
+Elenco automatico dei package domain e delle classi presenti.
 
-## `audit` — Tracciamento audit
+## `audit`
 
-Registra azioni importanti, attori, severità e trail degli eventi. Serve per sapere chi ha fatto cosa e con quale impatto.
-
-Classi:
+Audit trail, attori, azioni, severità e regole di tracciabilità.
 
 - `AuditActionType`
 - `AuditActorType`
@@ -15,31 +13,18 @@ Classi:
 - `AuditSeverity`
 - `AuditTrail`
 
-Test:
-- `AuditEventTest`
-- `AuditRulesTest`
-- `AuditTrailTest`
+## `availability`
 
-## `availability` — Disponibilità risorse
-
-Gestisce disponibilità e indisponibilità di autisti, veicoli, rimorchi, strutture o altre risorse operative.
-
-Classi:
+Disponibilità di risorse come autisti, mezzi e strutture.
 
 - `AvailabilityResourceType`
 - `AvailabilityRules`
 - `AvailabilityStatus`
 - `ResourceAvailability`
 
-Test:
-- `AvailabilityRulesTest`
-- `ResourceAvailabilityTest`
+## `billing`
 
-## `billing` — Fatturazione cliente
-
-Rappresenta fatture emesse, stato fattura, pagamenti e regole base di incasso.
-
-Classi:
+Fatture cliente, pagamenti, stato fattura e regole di billing.
 
 - `BillingRules`
 - `Invoice`
@@ -47,16 +32,9 @@ Classi:
 - `PaymentMethod`
 - `PaymentRecord`
 
-Test:
-- `BillingRulesTest`
-- `InvoiceTest`
-- `PaymentRecordTest`
+## `cargo`
 
-## `cargo` — Merce e requisiti di carico
-
-Descrive il carico, categorie merce, ADR, temperatura, rifiuti, animali vivi, alimentare e regole operative richieste dalla merce.
-
-Classi:
+Merce, carichi, ADR, temperatura, rifiuti, alimentare, animali vivi e regole operative.
 
 - `AdrClass`
 - `CargoCategory`
@@ -68,19 +46,9 @@ Classi:
 - `HazardLabel`
 - `PackingGroup`
 
-Test:
-- `CargoItemTest`
-- `CargoLoadRulesTest`
-- `CargoLoadTest`
-- `CargoOperationalRulesTest`
-- `DangerousCargoTest`
-- `DangerousGoodsProfileTest`
+## `claim`
 
-## `claim` — Danni, sinistri e reclami
-
-Gestisce danni, ispezioni, reclami cliente, severità e stato delle pratiche.
-
-Classi:
+Danni, sinistri, claim di trasporto e ispezioni danni.
 
 - `ClaimRules`
 - `ClaimSeverity`
@@ -90,37 +58,24 @@ Classi:
 - `DamageInspectionItem`
 - `TransportClaim`
 
-Test:
-- `ClaimRulesTest`
-- `TransportClaimTest`
+## `company`
 
-## `company` — Azienda e licenze operative
-
-Modella l’impresa di trasporto, le licenze aziendali e le verifiche di conformità aziendale.
-
-Classi:
+Azienda di trasporto, licenze aziendali e compliance aziendale.
 
 - `CompanyComplianceRules`
 - `CompanyLicense`
 - `CompanyLicenseType`
 - `TransportCompany`
 
-## `compliance` — Conformità generale
+## `compliance`
 
-Contiene regole trasversali per verificare requisiti di spedizione, autista, mezzo, cargo, documenti e missione.
-
-Classi:
+Regole trasversali di conformità.
 
 - `ComplianceRules`
 
-Test:
-- `ComplianceRulesTest`
+## `configuration`
 
-## `configuration` — Configurazioni dominio
-
-Permette di rappresentare valori configurabili per regole aziendali, soglie, parametri e impostazioni.
-
-Classi:
+Configurazioni del sistema e valori configurabili.
 
 - `ConfigurationCategory`
 - `ConfigurationRules`
@@ -129,14 +84,9 @@ Classi:
 - `ConfigurationValueType`
 - `SystemConfiguration`
 
-Test:
-- `ConfigurationRulesTest`
+## `contract`
 
-## `contract` — Contratti cliente e listini
-
-Gestisce contratti, rate card, tariff rules, supplementi e logiche tariffarie realistiche.
-
-Classi:
+Contratti cliente, rate card, tariff rules e supplementi.
 
 - `ChargeUnit`
 - `ContractRateCard`
@@ -145,14 +95,9 @@ Classi:
 - `TariffRule`
 - `TariffRuleType`
 
-Test:
-- `CustomerContractModelTest`
+## `customer`
 
-## `customer` — Clienti e contatti
-
-Gestisce cliente, account cliente, contatti, ruoli di contatto, stato e tipologia cliente.
-
-Classi:
+Clienti, account cliente e contatti logistici.
 
 - `Customer`
 - `CustomerAccount`
@@ -161,16 +106,9 @@ Classi:
 - `CustomerStatus`
 - `CustomerType`
 
-Test:
-- `CustomerAccountTest`
-- `CustomerContactTest`
-- `CustomerTest`
+## `dataimport`
 
-## `dataimport` — Import dati esterni
-
-Rappresenta batch e record importati da carburante, pedaggi, telematica, banca, paghe o fatture fornitore.
-
-Classi:
+Import da fonti esterne: fuel card, pedaggi, telematica, paghe, fatture.
 
 - `ExternalDataSourceType`
 - `ImportBatch`
@@ -178,14 +116,9 @@ Classi:
 - `ImportRecordStatus`
 - `ImportRules`
 
-Test:
-- `DataImportModelTest`
+## `dispatch`
 
-## `dispatch` — Ufficio traffico / pianificazione
-
-Valuta candidati di assegnazione autista/mezzo/convoglio, readiness e scelta del candidato migliore.
-
-Classi:
+Ufficio traffico, candidati assegnazione e readiness check.
 
 - `DispatchAssignmentCandidate`
 - `DispatchCheckResult`
@@ -194,14 +127,9 @@ Classi:
 - `DispatchReadinessStatus`
 - `DispatchRules`
 
-Test:
-- `DispatchPlanningTest`
+## `document`
 
-## `document` — Documenti trasporto
-
-Gestisce documenti richiesti, bolla/DDT strutturata, bundle documentale spedizione e stati documentali.
-
-Classi:
+Documenti di trasporto, bolla/DDT, bundle documentale spedizione.
 
 - `DeliveryNote`
 - `DeliveryNoteLine`
@@ -211,15 +139,9 @@ Classi:
 - `TransportDocument`
 - `TransportDocumentType`
 
-Test:
-- `DeliveryNoteAndDocumentBundleTest`
-- `DocumentRulesTest`
+## `driver`
 
-## `driver` — Autisti e abilitazioni
-
-Modella autisti, patenti, CQC, ADR, qualifiche operative, certificati con validità e stato autista.
-
-Classi:
+Autisti, patenti, CQC, ADR, qualifiche operative e regole.
 
 - `Driver`
 - `DriverAdrCertificateType`
@@ -231,26 +153,15 @@ Classi:
 - `DriverRules`
 - `DriverStatus`
 
-Test:
-- `DriverRulesTest`
-- `DriverTest`
+## `drivetime`
 
-## `drivetime` — Ore guida e riposo
-
-Contiene regole per limiti di guida, pausa, riposo e compatibilità temporale del lavoro autista.
-
-Classi:
+Regole di guida, lavoro e riposo.
 
 - `DriverTimeRules`
 
-Test:
-- `DriverTimeRulesTest`
+## `economics`
 
-## `economics` — Economia, costi, IVA e marginalità
-
-Centro economico: acquisti asset, IVA, fatture fornitore, costi missione, ricavi, ledger, utile/perdita e debito/cassa negativa.
-
-Classi:
+Acquisti, IVA, ricavi, costi, assicurazioni, finanziamenti, utile/perdita e debito.
 
 - `CustomerRevenueInvoice`
 - `EconomicsRules`
@@ -282,21 +193,9 @@ Classi:
 - `VatRate`
 - `VatTreatment`
 
-Test:
-- `FleetAssetAcquisitionTest`
-- `FleetAssetPurchaseTest`
-- `FleetEconomicLedgerTest`
-- `FleetFinancialStatementTest`
-- `MissionEconomicsTest`
-- `SupplierInvoiceTest`
-- `TaxedSupplierInvoiceTest`
-- `VatBreakdownTest`
+## `facility`
 
-## `facility` — Strutture aziendali e costi immobiliari
-
-Gestisce depositi, piazzali, magazzini, proprietà/affitto/leasing e spese di struttura.
-
-Classi:
+Depositi, magazzini, piazzali, proprietà/affitto e costi struttura.
 
 - `Facility`
 - `FacilityCostFrequency`
@@ -306,15 +205,9 @@ Classi:
 - `FacilityOwnershipType`
 - `FacilityType`
 
-Test:
-- `FacilityFinancialProfileTest`
-- `FacilityTest`
+## `fleet`
 
-## `fleet` — Flotta e mezzi
-
-Modella veicoli, unità, allestimenti, assi, masse, dimensioni, certificati, combinazioni e compatibilità tecnica.
-
-Classi:
+Veicoli, rimorchi, convogli, allestimenti, assi, certificati e schede tecniche.
 
 - `AxleSteeringType`
 - `BrakeSafetySystem`
@@ -354,31 +247,17 @@ Classi:
 - `VehicleWeightClass`
 - `WheelConfiguration`
 
-Test:
-- `RealisticFleetModelTest`
-- `TireSpecificationTest`
-- `VehicleCombinationRulesTest`
-- `VehicleCombinationTest`
-- `VehicleTest`
+## `fuel`
 
-## `fuel` — Carburante e consumi
-
-Gestisce rifornimenti, provider carte carburante e regole di consumo.
-
-Classi:
+Rifornimenti, fuel card e consumo carburante.
 
 - `FuelCardProvider`
 - `FuelConsumptionRules`
 - `FuelTransaction`
 
-Test:
-- `FuelTransactionTest`
+## `identity`
 
-## `identity` — Utenti, ruoli e permessi
-
-Gestisce account utente, ruoli e permessi per distinguere accesso operativo, amministrativo ed economico.
-
-Classi:
+Utenti, ruoli e permessi.
 
 - `IdentityRules`
 - `UserAccount`
@@ -386,16 +265,9 @@ Classi:
 - `UserPermission`
 - `UserRole`
 
-Test:
-- `ExpandedIdentityPermissionsTest`
-- `IdentityRulesTest`
-- `UserAccountTest`
+## `inventory`
 
-## `inventory` — Magazzino ricambi e materiali
-
-Gestisce articoli, giacenze, ubicazioni, movimenti stock, scorte minime e reorder signal.
-
-Classi:
+Magazzino ricambi/materiali, giacenze, movimenti e riordino.
 
 - `InventoryBalance`
 - `InventoryItem`
@@ -405,43 +277,26 @@ Classi:
 - `StockMovementType`
 - `WarehouseLocation`
 
-Test:
-- `InventoryManagementTest`
+## `loadsecurity`
 
-## `loadsecurity` — Fissaggio carico
-
-Gestisce attrezzature e checklist per fissaggio carico, cinghie, barre, tappeti antiscivolo e controlli.
-
-Classi:
+Attrezzature e checklist di fissaggio carico.
 
 - `LoadSecuringChecklist`
 - `LoadSecuringEquipment`
 - `LoadSecuringEquipmentType`
 - `LoadSecuringRules`
 
-Test:
-- `LoadSecuringChecklistTest`
+## `location`
 
-## `location` — Luoghi e coordinate
-
-Rappresenta indirizzi, coordinate geografiche e location operative.
-
-Classi:
+Indirizzi, coordinate e luoghi.
 
 - `Address`
 - `GeoCoordinates`
 - `Location`
 
-Test:
-- `AddressTest`
-- `GeoCoordinatesTest`
-- `LocationTest`
+## `maintenance`
 
-## `maintenance` — Manutenzione e fermi mezzo
-
-Gestisce work order, difetti segnalati dall’autista, fermi mezzo, stati e tipi manutenzione.
-
-Classi:
+Manutenzione, ticket difetti autista e downtime.
 
 - `DriverDefectTicket`
 - `MaintenanceRules`
@@ -450,15 +305,9 @@ Classi:
 - `MaintenanceWorkOrder`
 - `VehicleDowntime`
 
-Test:
-- `MaintenanceRulesTest`
-- `MaintenanceWorkOrderTest`
+## `notification`
 
-## `notification` — Notifiche
-
-Modella messaggi, canali, priorità, destinatari e stato notifica.
-
-Classi:
+Messaggi e notifiche operative.
 
 - `NotificationChannel`
 - `NotificationMessage`
@@ -468,42 +317,25 @@ Classi:
 - `NotificationStatus`
 - `NotificationType`
 
-Test:
-- `NotificationMessageTest`
-- `NotificationRulesTest`
+## `operation`
 
-## `operation` — Missione operativa
-
-Rappresenta il viaggio reale: missione, stato, regole operative, assegnazioni e chiusura.
-
-Classi:
+TransportMission: missione operativa reale.
 
 - `TransportMission`
 - `TransportMissionRules`
 - `TransportMissionStatus`
 
-Test:
-- `TransportMissionRulesTest`
-- `TransportMissionTest`
+## `order`
 
-## `order` — Ordini di trasporto
-
-Rappresenta richiesta commerciale cliente prima che diventi spedizione pianificata.
-
-Classi:
+Ordine/richiesta commerciale cliente.
 
 - `TransportOrder`
 - `TransportOrderStatus`
 - `TransportServiceType`
 
-Test:
-- `TransportOrderTest`
+## `parking`
 
-## `parking` — Parcheggi e posti numerati
-
-Gestisce posti, risorse parcheggiate, furgoni, rimorchi, trattori, convogli agganciati e readiness.
-
-Classi:
+Posti parcheggio, risorse parcheggiate e convogli pronti.
 
 - `ParkedResource`
 - `ParkingAssignment`
@@ -513,14 +345,9 @@ Classi:
 - `ParkingSpotStatus`
 - `ParkingSpotType`
 
-Test:
-- `ParkingAssignmentTest`
+## `payroll`
 
-## `payroll` — Costo autista e stipendio missione
-
-Calcola voci paga in base a ore, patenti, ADR, rimorchio, trasporto speciale, straordinari, trasferte e costo aziendale.
-
-Classi:
+Ore lavoro, premi, patenti, ADR, rimorchi e costo aziendale autista.
 
 - `DriverMissionPayLine`
 - `DriverMissionPayroll`
@@ -532,14 +359,9 @@ Classi:
 - `DriverPayrollRules`
 - `MissionPayrollProjection`
 
-Test:
-- `DriverPayrollRulesTest`
+## `pricing`
 
-## `pricing` — Preventivi e prezzo cliente
-
-Gestisce prezzo da proporre/fatturare al cliente, voci prezzo e breakdown commerciale.
-
-Classi:
+Preventivo/prezzo cliente e breakdown tariffario.
 
 - `CostEstimationSource`
 - `PriceBreakdown`
@@ -548,17 +370,9 @@ Classi:
 - `PricingRules`
 - `RouteCostEstimate`
 
-Test:
-- `PriceBreakdownTest`
-- `PricingLineTest`
-- `PricingRulesTest`
-- `RouteCostEstimateTest`
+## `reporting`
 
-## `reporting` — Reportistica domain
-
-Modella definizioni report, metriche, formato, stato e regole di generazione logica.
-
-Classi:
+Report e metriche.
 
 - `GeneratedReport`
 - `ReportDefinition`
@@ -569,31 +383,18 @@ Classi:
 - `ReportType`
 - `ReportingRules`
 
-Test:
-- `GeneratedReportTest`
-- `ReportingRulesTest`
+## `route`
 
-## `route` — Percorsi e soste
-
-Gestisce route plan, stop, carico/scarico, sequenza e regole di coerenza della rotta.
-
-Classi:
+Route plan, stop e regole tratta.
 
 - `RoutePlan`
 - `RoutePlanRules`
 - `RouteStop`
 - `RouteStopType`
 
-Test:
-- `RoutePlanRulesTest`
-- `RoutePlanTest`
-- `RouteStopTest`
+## `shared`
 
-## `shared` — Value object condivisi
-
-Contiene Money, Weight, Distance, Dimension, Volume, TemperatureRange, TimeWindow, DateRange, Notes e Percentage.
-
-Classi:
+Value object comuni: Money, Weight, Distance, Notes, TimeWindow, ecc.
 
 - `DateRange`
 - `Dimension`
@@ -606,37 +407,17 @@ Classi:
 - `Volume`
 - `Weight`
 
-Test:
-- `DateRangeTest`
-- `DimensionTest`
-- `DistanceTest`
-- `MoneyTest`
-- `NotesTest`
-- `PercentageTest`
-- `TemperatureRangeTest`
-- `TimeWindowTest`
-- `VolumeTest`
-- `WeightTest`
+## `shipment`
 
-## `shipment` — Spedizione
-
-Rappresenta la spedizione nata da un ordine accettato, con stato e regole; non contiene direttamente driver e mezzo.
-
-Classi:
+Spedizione nata da ordine accettato.
 
 - `Shipment`
 - `ShipmentRules`
 - `ShipmentStatus`
 
-Test:
-- `ShipmentRulesTest`
-- `ShipmentTest`
+## `sustainability`
 
-## `sustainability` — Emissioni e sostenibilità
-
-Modella stime emissioni, standard, rating e regole di sostenibilità.
-
-Classi:
+Emissioni, fuel type e rating sostenibilità.
 
 - `EmissionEstimate`
 - `EmissionRating`
@@ -644,29 +425,18 @@ Classi:
 - `FuelType`
 - `SustainabilityRules`
 
-Test:
-- `EmissionEstimateTest`
-- `SustainabilityRulesTest`
+## `telematics`
 
-## `telematics` — Telematica e comportamento guida
-
-Gestisce snapshot GPS/CAN-bus e eventi comportamento guida come frenate, accelerazioni, consumo e odometro.
-
-Classi:
+Snapshot telematici e comportamento di guida.
 
 - `DrivingBehaviorEvent`
 - `DrivingBehaviorEventType`
 - `TelematicsRules`
 - `TelematicsSnapshot`
 
-Test:
-- `TelematicsSnapshotTest`
+## `tire`
 
-## `tire` — Pneumatici
-
-Gestisce gomma fisica, installazioni, rotazioni, stato, posizioni ruota e regole usura/sicurezza.
-
-Classi:
+Gomme fisiche, installazioni, rotazioni, posizioni ruota e regole.
 
 - `Tire`
 - `TireInstallation`
@@ -677,21 +447,11 @@ Classi:
 - `WheelSide`
 - `WheelSlot`
 
-Test:
-- `TireManagementTest`
+## `tracking`
 
-## `tracking` — Tracking spedizione/missione
-
-Gestisce eventi tracking e timeline di avanzamento operativo.
-
-Classi:
+Eventi tracking e timeline spedizione/missione.
 
 - `TrackingEvent`
 - `TrackingEventType`
 - `TrackingRules`
 - `TrackingTimeline`
-
-Test:
-- `TrackingEventTest`
-- `TrackingRulesTest`
-- `TrackingTimelineTest`

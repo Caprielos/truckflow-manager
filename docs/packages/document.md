@@ -1,12 +1,6 @@
-# Package `document` — Documenti trasporto
+# Package `document`
 
-Gestisce documenti richiesti, bolla/DDT strutturata, bundle documentale spedizione e stati documentali.
-
-## Percorso
-
-```text
-src/main/java/it/gabriele/truckflow/domain/document
-```
+Documenti di trasporto, bolla/DDT, bundle documentale spedizione.
 
 ## Classi
 
@@ -18,11 +12,6 @@ src/main/java/it/gabriele/truckflow/domain/document
 - `TransportDocument`
 - `TransportDocumentType`
 
-## Test collegati
-
-- `DeliveryNoteAndDocumentBundleTest`
-- `DocumentRulesTest`
-
 ## Ruolo nel sistema
 
-Questo package contribuisce al domain model e deve restare indipendente da database, controller REST e framework esterni.
+Questo package fa parte del domain e contribuisce al modello business senza dipendere da application, infrastructure o web.

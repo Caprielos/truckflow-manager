@@ -1,12 +1,6 @@
-# Package `audit` — Tracciamento audit
+# Package `audit`
 
-Registra azioni importanti, attori, severità e trail degli eventi. Serve per sapere chi ha fatto cosa e con quale impatto.
-
-## Percorso
-
-```text
-src/main/java/it/gabriele/truckflow/domain/audit
-```
+Audit trail, attori, azioni, severità e regole di tracciabilità.
 
 ## Classi
 
@@ -17,12 +11,6 @@ src/main/java/it/gabriele/truckflow/domain/audit
 - `AuditSeverity`
 - `AuditTrail`
 
-## Test collegati
-
-- `AuditEventTest`
-- `AuditRulesTest`
-- `AuditTrailTest`
-
 ## Ruolo nel sistema
 
-Questo package contribuisce al domain model e deve restare indipendente da database, controller REST e framework esterni.
+Questo package fa parte del domain e contribuisce al modello business senza dipendere da application, infrastructure o web.

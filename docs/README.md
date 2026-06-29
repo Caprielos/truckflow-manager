@@ -1,38 +1,60 @@
-# Documentazione TruckFlow Manager
+# Indice documentazione
 
-Questa documentazione è stata riscritta sulla versione del progetto dopo:
+Questa cartella è organizzata per scopo.
 
-- integrazione del modello realistico flotta/autisti/certificati;
-- rimozione del vecchio package `it.gabriele.truckflow.shipment` fuori da `domain`;
-- aggiunta di economia reale: IVA, costi, ricavi, asset, fatture fornitore e marginalità;
-- aggiunta di depositi, strutture, parcheggi, posti numerati e convogli parcheggiati;
-- aggiunta di payroll autista basato su ore, qualifiche, ADR, tipo trasporto, rimorchio e missione;
-- aggiunta di contract, inventory, dispatch, data import e documenti operativi più strutturati.
+## Per un cliente o un’azienda
 
-## Indice rapido
+- `client/solution-overview.md`
+- `client/target-customers.md`
+- `client/service-catalog.md`
+- `client/business-value.md`
+- `client/future-technologies.md`
 
-| File | Contenuto |
-| --- | --- |
-| project-overview.md | Visione generale del progetto |
-| architecture.md | Architettura e confini del dominio |
-| domain-overview.md | Mappa dei moduli domain |
-| business-flow.md | Flussi reali del trasporto |
-| domain-package-map.md | Tabella package/classi/test |
-| domain-reference-complete.md | Catalogo completo dei package |
-| domain-rules.md | Regole business principali |
-| testing-guide.md | Come testare e leggere i test |
-| implementation-roadmap.md | Roadmap verso application/database/API |
-| glossary.md | Glossario italiano/tecnico |
+## Requisiti
 
-## Guide principali
+- `requirements/functional-requirements.md`
+- `requirements/non-functional-requirements.md`
+- `requirements/roles-and-permissions.md`
+- `requirements/data-and-integration-requirements.md`
+- `requirements/assumptions-and-boundaries.md`
 
-| Guida | Tema |
-| --- | --- |
-| guides/economics-profitability.md | Costi, ricavi, IVA, debito, utile/perdita |
-| guides/facilities-parking-inventory.md | Depositi, parcheggi, magazzino, posti numerati |
-| guides/driver-payroll.md | Costo autista e stipendio missione |
-| guides/contracts-pricing-billing.md | Contratti, listini, pricing e fatturazione |
-| guides/dispatch-readiness.md | Ufficio traffico e scelta mezzi/autisti |
-| guides/shipment-vs-mission.md | Differenza tra ordine, spedizione e missione |
-| guides/realistic-fleet-model.md | Flotta, combinazioni e allestimenti reali |
-| guides/application-layer-next.md | Come iniziare application layer |
+## Tecnica
+
+- `technical/architecture-overview.md`
+- `technical/package-structure.md`
+- `technical/application-layer.md`
+- `technical/domain-layer.md`
+- `technical/infrastructure-memory.md`
+- `technical/scenario-tests.md`
+
+## Didattica
+
+- `learning/01-project-structure-for-beginners.md`
+- `learning/02-java-terms-used-in-project.md`
+- `learning/03-domain-application-infrastructure.md`
+- `learning/04-use-cases-command-and-result.md`
+- `learning/05-ports-in-and-out.md`
+- `learning/06-repositories-and-memory.md`
+- `learning/07-scenario-test-explained.md`
+- `learning/08-how-to-read-a-class.md`
+
+## Riferimento classi
+
+- `class-reference/README.md`
+- `class-reference/application.md`
+- `class-reference/infrastructure-memory.md`
+- `class-reference/domain-*.md`
+
+## Diagrammi
+
+- `diagrams/architecture-overview.mmd`
+- `diagrams/application-parking-sequence.mmd`
+- `diagrams/domain-main-class-diagram.mmd`
+- `diagrams/economics-payroll-parking-diagram.mmd`
+- `diagrams/order-shipment-mission-flow.mmd`
+
+## Operazioni
+
+- `operations/setup-and-test.md`
+- `operations/git-commands-used.md`
+- `operations/release-checklist.md`

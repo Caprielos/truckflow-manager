@@ -1,0 +1,51 @@
+# Package `infrastructure/memory`
+
+Implementazioni in memoria dei repository port.
+
+## Classi
+- `InMemoryAuditTrailRepository`
+- `InMemoryContractRateCardRepository`
+- `InMemoryCustomerAccountRepository`
+- `InMemoryCustomerContractRepository`
+- `InMemoryCustomerRepository`
+- `InMemoryCustomerRevenueInvoiceRepository`
+- `InMemoryDeliveryNoteRepository`
+- `InMemoryDispatchPlanRepository`
+- `InMemoryDriverDefectTicketRepository`
+- `InMemoryDriverMissionPayrollRepository`
+- `InMemoryDriverMissionWorkReportRepository`
+- `InMemoryDriverPayrollPolicyRepository`
+- `InMemoryDriverRepository`
+- `InMemoryFacilityRepository`
+- `InMemoryFleetAssetAcquisitionRepository`
+- `InMemoryFleetAssetPurchaseRepository`
+- `InMemoryFleetFinancialStatementRepository`
+- `InMemoryFuelTransactionRepository`
+- `InMemoryGeneratedReportRepository`
+- `InMemoryImportBatchRepository`
+- `InMemoryInventoryBalanceRepository`
+- `InMemoryInventoryItemRepository`
+- `InMemoryInventoryStockMovementRepository`
+- `InMemoryLoadSecuringChecklistRepository`
+- `InMemoryMaintenanceWorkOrderRepository`
+- `InMemoryMissionEconomicsRepository`
+- `InMemoryNotificationMessageRepository`
+- `InMemoryParkingAssignmentRepository`
+- `InMemoryParkingSpotRepository`
+- `InMemoryRepository`
+- `InMemoryRoutePlanRepository`
+- `InMemoryShipmentDocumentBundleRepository`
+- `InMemoryShipmentRepository`
+- `InMemorySupplierInvoiceRepository`
+- `InMemoryTelematicsSnapshotRepository`
+- `InMemoryTireInstallationRepository`
+- `InMemoryTireRepository`
+- `InMemoryTrackingTimelineRepository`
+- `InMemoryTransportClaimRepository`
+- `InMemoryTransportDocumentRepository`
+- `InMemoryTransportMissionRepository`
+- `InMemoryTransportOrderRepository`
+- `InMemoryUserAccountRepository`
+- `InMemoryVehicleCombinationRepository`
+- `InMemoryVehicleRepository`
+- `InMemoryWarehouseLocationRepository`

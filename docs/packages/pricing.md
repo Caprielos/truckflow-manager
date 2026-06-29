@@ -1,12 +1,6 @@
-# Package `pricing` — Preventivi e prezzo cliente
+# Package `pricing`
 
-Gestisce prezzo da proporre/fatturare al cliente, voci prezzo e breakdown commerciale.
-
-## Percorso
-
-```text
-src/main/java/it/gabriele/truckflow/domain/pricing
-```
+Preventivo/prezzo cliente e breakdown tariffario.
 
 ## Classi
 
@@ -17,13 +11,6 @@ src/main/java/it/gabriele/truckflow/domain/pricing
 - `PricingRules`
 - `RouteCostEstimate`
 
-## Test collegati
-
-- `PriceBreakdownTest`
-- `PricingLineTest`
-- `PricingRulesTest`
-- `RouteCostEstimateTest`
-
 ## Ruolo nel sistema
 
-Questo package contribuisce al domain model e deve restare indipendente da database, controller REST e framework esterni.
+Questo package fa parte del domain e contribuisce al modello business senza dipendere da application, infrastructure o web.

@@ -1,12 +1,6 @@
-# Package `location` — Luoghi e coordinate
+# Package `location`
 
-Rappresenta indirizzi, coordinate geografiche e location operative.
-
-## Percorso
-
-```text
-src/main/java/it/gabriele/truckflow/domain/location
-```
+Indirizzi, coordinate e luoghi.
 
 ## Classi
 
@@ -14,12 +8,6 @@ src/main/java/it/gabriele/truckflow/domain/location
 - `GeoCoordinates`
 - `Location`
 
-## Test collegati
-
-- `AddressTest`
-- `GeoCoordinatesTest`
-- `LocationTest`
-
 ## Ruolo nel sistema
 
-Questo package contribuisce al domain model e deve restare indipendente da database, controller REST e framework esterni.
+Questo package fa parte del domain e contribuisce al modello business senza dipendere da application, infrastructure o web.

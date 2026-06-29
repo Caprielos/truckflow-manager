@@ -1,12 +1,6 @@
-# Package `cargo` — Merce e requisiti di carico
+# Package `cargo`
 
-Descrive il carico, categorie merce, ADR, temperatura, rifiuti, animali vivi, alimentare e regole operative richieste dalla merce.
-
-## Percorso
-
-```text
-src/main/java/it/gabriele/truckflow/domain/cargo
-```
+Merce, carichi, ADR, temperatura, rifiuti, alimentare, animali vivi e regole operative.
 
 ## Classi
 
@@ -20,15 +14,6 @@ src/main/java/it/gabriele/truckflow/domain/cargo
 - `HazardLabel`
 - `PackingGroup`
 
-## Test collegati
-
-- `CargoItemTest`
-- `CargoLoadRulesTest`
-- `CargoLoadTest`
-- `CargoOperationalRulesTest`
-- `DangerousCargoTest`
-- `DangerousGoodsProfileTest`
-
 ## Ruolo nel sistema
 
-Questo package contribuisce al domain model e deve restare indipendente da database, controller REST e framework esterni.
+Questo package fa parte del domain e contribuisce al modello business senza dipendere da application, infrastructure o web.

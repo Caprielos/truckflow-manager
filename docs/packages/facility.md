@@ -1,12 +1,6 @@
-# Package `facility` — Strutture aziendali e costi immobiliari
+# Package `facility`
 
-Gestisce depositi, piazzali, magazzini, proprietà/affitto/leasing e spese di struttura.
-
-## Percorso
-
-```text
-src/main/java/it/gabriele/truckflow/domain/facility
-```
+Depositi, magazzini, piazzali, proprietà/affitto e costi struttura.
 
 ## Classi
 
@@ -18,11 +12,6 @@ src/main/java/it/gabriele/truckflow/domain/facility
 - `FacilityOwnershipType`
 - `FacilityType`
 
-## Test collegati
-
-- `FacilityFinancialProfileTest`
-- `FacilityTest`
-
 ## Ruolo nel sistema
 
-Questo package contribuisce al domain model e deve restare indipendente da database, controller REST e framework esterni.
+Questo package fa parte del domain e contribuisce al modello business senza dipendere da application, infrastructure o web.

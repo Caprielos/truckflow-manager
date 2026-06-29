@@ -1,12 +1,6 @@
-# Package `tracking` — Tracking spedizione/missione
+# Package `tracking`
 
-Gestisce eventi tracking e timeline di avanzamento operativo.
-
-## Percorso
-
-```text
-src/main/java/it/gabriele/truckflow/domain/tracking
-```
+Eventi tracking e timeline spedizione/missione.
 
 ## Classi
 
@@ -15,12 +9,6 @@ src/main/java/it/gabriele/truckflow/domain/tracking
 - `TrackingRules`
 - `TrackingTimeline`
 
-## Test collegati
-
-- `TrackingEventTest`
-- `TrackingRulesTest`
-- `TrackingTimelineTest`
-
 ## Ruolo nel sistema
 
-Questo package contribuisce al domain model e deve restare indipendente da database, controller REST e framework esterni.
+Questo package fa parte del domain e contribuisce al modello business senza dipendere da application, infrastructure o web.
