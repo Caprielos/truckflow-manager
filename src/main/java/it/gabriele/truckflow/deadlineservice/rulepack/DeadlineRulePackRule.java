@@ -11,7 +11,35 @@ public record DeadlineRulePackRule(
     Set<DeadlineRuleSourceType> sourceTypes,
     DeadlineRuleSlotStatus status,
     boolean fillableFromUi,
-    String description) {
+    String description,
+    DeadlineRuleIntervalType intervalType,
+    Integer intervalDays,
+    Long intervalKm,
+    int warningDaysBefore,
+    long warningKmBefore,
+    boolean blocksOperation) {
+
+  public DeadlineRulePackRule(
+      String ruleId,
+      ManagedElementCode elementCode,
+      Set<DeadlineRuleSourceType> sourceTypes,
+      DeadlineRuleSlotStatus status,
+      boolean fillableFromUi,
+      String description) {
+    this(
+        ruleId,
+        elementCode,
+        sourceTypes,
+        status,
+        fillableFromUi,
+        description,
+        DeadlineRuleIntervalType.NOT_CONFIGURED,
+        null,
+        null,
+        0,
+        0,
+        false);
+  }
 
   public DeadlineRulePackRule {
     ruleId = requireText(ruleId, "ruleId");
@@ -26,6 +54,19 @@ public record DeadlineRulePackRule(
       throw new IllegalArgumentException("status è obbligatorio.");
     }
     description = description == null ? "" : description.strip();
+    intervalType = intervalType == null ? DeadlineRuleIntervalType.NOT_CONFIGURED : intervalType;
+    if (warningDaysBefore < 0) {
+      throw new IllegalArgumentException("warningDaysBefore non può essere negativo.");
+    }
+    if (warningKmBefore < 0) {
+      throw new IllegalArgumentException("warningKmBefore non può essere negativo.");
+    }
+    if (intervalDays != null && intervalDays <= 0) {
+      throw new IllegalArgumentException("intervalDays deve essere positivo quando configurato.");
+    }
+    if (intervalKm != null && intervalKm <= 0) {
+      throw new IllegalArgumentException("intervalKm deve essere positivo quando configurato.");
+    }
   }
 
   public boolean isEmptySlot() {

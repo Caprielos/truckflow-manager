@@ -92,7 +92,13 @@ public final class DeadlineRulePackResourceLoader {
         parseSourceTypes(require(values, "sourceTypes")),
         DeadlineRuleSlotStatus.valueOf(require(values, "status")),
         Boolean.parseBoolean(require(values, "fillableFromUi")),
-        values.getOrDefault("description", ""));
+        values.getOrDefault("description", ""),
+        parseIntervalType(values.get("intervalType")),
+        parseInteger(values.get("intervalDays")),
+        parseLong(values.get("intervalKm")),
+        parseInteger(values.get("warningDaysBefore"), 0),
+        parseLong(values.get("warningKmBefore"), 0L),
+        Boolean.parseBoolean(values.getOrDefault("blocksOperation", "false")));
   }
 
   private static List<String> readLines(InputStream inputStream) throws IOException {
@@ -110,6 +116,37 @@ public final class DeadlineRulePackResourceLoader {
     String key = line.substring(0, separatorIndex).strip();
     String value = line.substring(separatorIndex + 1).strip();
     target.put(key, unquote(value));
+  }
+
+  private static DeadlineRuleIntervalType parseIntervalType(String value) {
+    if (value == null || value.isBlank()) {
+      return DeadlineRuleIntervalType.NOT_CONFIGURED;
+    }
+    return DeadlineRuleIntervalType.valueOf(unquote(value));
+  }
+
+  private static Integer parseInteger(String value) {
+    if (value == null || value.isBlank() || value.equals("null")) {
+      return null;
+    }
+    return Integer.parseInt(unquote(value));
+  }
+
+  private static int parseInteger(String value, int defaultValue) {
+    Integer parsed = parseInteger(value);
+    return parsed == null ? defaultValue : parsed;
+  }
+
+  private static Long parseLong(String value) {
+    if (value == null || value.isBlank() || value.equals("null")) {
+      return null;
+    }
+    return Long.parseLong(unquote(value));
+  }
+
+  private static long parseLong(String value, long defaultValue) {
+    Long parsed = parseLong(value);
+    return parsed == null ? defaultValue : parsed;
   }
 
   private static Set<DeadlineRuleSourceType> parseSourceTypes(String value) {
