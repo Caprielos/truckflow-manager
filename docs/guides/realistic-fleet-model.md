@@ -1,60 +1,55 @@
-# Realistic Fleet Model
+# Realistic fleet model
 
-## Idea principale
-
-Il vecchio modello con pochi tipi veicolo non basta per un gestionale reale.
-
-Un mezzo vero non è solo:
+## Dove si trova
 
 ```text
-TRUCK + REFRIGERATED
+src/main/java/it/gabriele/truckflow/domain/fleet
 ```
 
-È una combinazione di:
+## Cosa modella
 
-- unità veicolo;
-- massa tecnica;
+Il package `fleet` non descrive solo un camion generico. Modella:
+
+- veicoli singoli;
+- furgoni;
+- camion rigidi;
+- trattori stradali;
+- rimorchi;
+- semirimorchi;
+- autotreni;
+- autoarticolati;
+- assi;
+- masse;
 - dimensioni;
-- configurazione assi;
-- tipo aggancio;
-- allestimento;
-- equipaggiamenti;
+- allestimenti;
+- sponda;
+- gru;
+- frigo;
 - certificati;
-- stato operativo.
+- compatibilità tecnica.
 
-## Classi principali
-
-- `Vehicle`
-- `VehicleUnitType`
-- `VehicleTechnicalSpecification`
-- `VehicleMassSpecification`
-- `VehicleDimensionSpecification`
-- `VehicleAxleSpecification`
-- `VehicleCouplingSpecification`
-- `VehicleBodyConfiguration`
-- `VehicleCertificate`
-- `VehicleCombination`
-- `VehicleCombinationTechnicalRules`
-
-## Refrigerato
-
-Il refrigerato non deve essere modellato come tipo veicolo separato. È più corretto modellarlo come:
+## Classi chiave
 
 ```text
-VehicleUnitType.RIGID_TRUCK
-VehicleBodyBaseType.REFRIGERATED_BOX
-VehicleTechnicalFeature.ACTIVE_REFRIGERATION
-VehicleCertificateType.ATP
+Vehicle
+VehicleUnitType
+VehicleTechnicalSpecification
+VehicleMassSpecification
+VehicleDimensionSpecification
+VehicleBodyConfiguration
+VehicleAxleSpecification
+VehicleCombination
+VehicleCombinationType
+VehicleCombinationTechnicalRules
+VehicleCombinationLegalLimitProfile
+VehicleCertificate
 ```
 
-Questo permette di rappresentare anche semirimorchi frigo, motrici frigo, isotermici, body swap e mezzi misti.
+## Separazione corretta
 
-## Convogli
-
-`VehicleCombination` distingue:
-
-- veicolo singolo;
-- camion + rimorchio;
-- trattore + semirimorchio.
-
-Questo è più realistico rispetto ad assegnare una spedizione a un semplice `Truck`.
+- `fleet` descrive il mezzo e la sua compatibilità.
+- `tire` descrive le gomme fisiche.
+- `parking` descrive dove il mezzo è parcheggiato.
+- `economics` descrive quanto è costato il mezzo.
+- `maintenance` descrive la manutenzione.
+- `telematics` descrive posizione e dati CAN-bus.

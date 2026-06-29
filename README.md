@@ -1,65 +1,54 @@
 # TruckFlow Manager
 
-**TruckFlow Manager** è un progetto Java 21 che modella il dominio di un gestionale realistico per trasporti, flotta e logistica.
+**TruckFlow Manager** è un progetto Java 21 che modella il dominio di un gestionale realistico per trasporti, flotta, spedizioni, costi, documenti, magazzino, parcheggi, stipendi autisti e controllo della marginalità.
 
-Il progetto attuale è concentrato sul **domain layer**: regole di business pure, entità, value object, enum e modelli operativi. Non dipende ancora da Spring, database, JPA, REST API, frontend, filesystem o servizi esterni.
+La versione documentata in questo pacchetto descrive lo stato dopo il completamento del domain layer prima dell'application layer.
 
-## Stato della versione documentata
+## Stato attuale
 
-Questa documentazione descrive la versione aggiornata dopo:
+- Linguaggio: **Java 21**.
+- Build tool: **Maven**.
+- Architettura attuale: **domain layer puro**.
+- Framework esterni nel dominio: **nessuno**.
+- Stato test rilevato dallo zip: **816 test, 0 failure, 0 errori, 0 skipped**.
+- Package Java principali: **38 package domain**.
+- Classi sorgenti principali: **265**.
 
-- integrazione del modello realistico flotta/autisti/azienda;
-- aggiunta di moduli operativi reali per carburante, pneumatici, manutenzione, telematica, fissaggio carico e danni;
-- introduzione di certificati e scadenze per mezzi, autisti e azienda;
-- pulizia del vecchio package `it.gabriele.truckflow.shipment` fuori da `domain`;
-- mantenimento di una sola implementazione corretta: `it.gabriele.truckflow.domain.shipment`.
+## Cosa rappresenta
 
-## Struttura documentazione
+Il progetto non modella solo camion e spedizioni. Modella una base realistica da Fleet/Transport Management System:
 
 ```text
-docs/
-├── README.md
-├── project-overview.md
-├── architecture.md
-├── domain-overview.md
-├── domain-package-map.md
-├── domain-rules.md
-├── glossary.md
-├── testing-guide.md
-├── implementation-roadmap.md
-├── domain-reference-complete.md
-├── current-version-notes.md
-├── guides/
-│   ├── shipment-vs-mission.md
-│   ├── realistic-fleet-model.md
-│   ├── operational-modules.md
-│   └── next-application-layer.md
-├── packages/
-└── architecture-decisions/
+cliente / ordine
+→ spedizione
+→ pianificazione ufficio traffico
+→ missione operativa
+→ autista + mezzo + rimorchio/convoglio
+→ documenti e compliance
+→ tracking e chiusura missione
+→ fatturazione cliente
+→ costi, IVA, stipendi, asset, struttura, magazzino
+→ utile/perdita e controllo economico
 ```
 
-## Comandi principali
+## Dove leggere
+
+1. `docs/project-overview.md`
+2. `docs/architecture.md`
+3. `docs/domain-overview.md`
+4. `docs/business-flow.md`
+5. `docs/guides/economics-profitability.md`
+6. `docs/guides/facilities-parking-inventory.md`
+7. `docs/guides/driver-payroll.md`
+8. `docs/guides/application-layer-next.md`
+9. `docs/domain-reference-complete.md`
+
+## Comando principale
 
 ```bash
 mvn clean test
 ```
 
-```bash
-git status
-```
+## Principio architetturale
 
-## Lettura consigliata
-
-1. `docs/project-overview.md`
-2. `docs/architecture.md`
-3. `docs/current-version-notes.md`
-4. `docs/domain-overview.md`
-5. `docs/domain-package-map.md`
-6. `docs/guides/shipment-vs-mission.md`
-7. `docs/packages/fleet.md`
-8. `docs/packages/driver.md`
-9. `docs/packages/shipment.md`
-
-## Principio base
-
-Il dominio deve rappresentare la realtà del trasporto, ma deve restare pulito: niente database, niente API esterne, niente UI e niente framework dentro le classi di dominio.
+Il dominio contiene regole e modelli di business. Non contiene database, REST API, Spring, UI, filesystem o chiamate a servizi esterni. Queste parti saranno introdotte dopo nel layer `application`, `infrastructure` e `web`.

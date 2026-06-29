@@ -1,31 +1,39 @@
-# Package `shared` — Value Object comuni
+# Package `shared` — Value object condivisi
 
-Contiene tipi immutabili e validati usati da tutto il dominio: peso, denaro, distanze, volumi, dimensioni, finestre temporali, range date, temperatura e note.
+Contiene Money, Weight, Distance, Dimension, Volume, TemperatureRange, TimeWindow, DateRange, Notes e Percentage.
 
-## Responsabilità
+## Percorso
 
-- Usato da quasi tutti i package.
-- Evita primitive obsession: non si passa un double generico quando serve Weight, Money o Distance.
+```text
+src/main/java/it/gabriele/truckflow/domain/shared
+```
 
 ## Classi
 
-- `DateRange` — modello/domain object del package.
-- `Dimension` — modello/domain object del package.
-- `Distance` — modello/domain object del package.
-- `Money` — modello/domain object del package.
-- `Notes` — modello/domain object del package.
-- `Percentage` — modello/domain object del package.
-- `TemperatureRange` — modello/domain object del package.
-- `TimeWindow` — modello/domain object del package.
-- `Volume` — modello/domain object del package.
-- `Weight` — modello/domain object del package.
+- `DateRange`
+- `Dimension`
+- `Distance`
+- `Money`
+- `Notes`
+- `Percentage`
+- `TemperatureRange`
+- `TimeWindow`
+- `Volume`
+- `Weight`
 
-## Regole importanti
+## Test collegati
 
-- Valori nulli, vuoti o negativi vengono rifiutati quando non ammessi.
-- Ogni value object espone factory statiche leggibili.
+- `DateRangeTest`
+- `DimensionTest`
+- `DistanceTest`
+- `MoneyTest`
+- `NotesTest`
+- `PercentageTest`
+- `TemperatureRangeTest`
+- `TimeWindowTest`
+- `VolumeTest`
+- `WeightTest`
 
-## Collegamenti
+## Ruolo nel sistema
 
-- Usato da quasi tutti i package.
-- Evita primitive obsession: non si passa un double generico quando serve Weight, Money o Distance.
+Questo package contribuisce al domain model e deve restare indipendente da database, controller REST e framework esterni.

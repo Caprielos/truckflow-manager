@@ -1,20 +1,26 @@
-# Package `tracking` — Timeline eventi
+# Package `tracking` — Tracking spedizione/missione
 
-Registra eventi di viaggio: partenza, arrivo, pickup, delivery, ritardi, incidenti, snapshot telematici.
+Gestisce eventi tracking e timeline di avanzamento operativo.
 
-## Responsabilità
+## Percorso
 
-- TrackingTimeline conserva sequenza eventi.
-- TrackingEventType include eventi operativi e telematici.
+```text
+src/main/java/it/gabriele/truckflow/domain/tracking
+```
 
 ## Classi
 
-- `TrackingEvent` — modello/domain object del package.
-- `TrackingEventType` — enum con valori: `POSITION_RECORDED`, `DEPARTED`, `ARRIVED`, `PICKUP_COMPLETED`, `DELIVERY_COMPLETED`, `DELAY_REPORTED`, `INCIDENT_REPORTED`, `MISSION_COMPLETED`, `CAN_BUS_SNAPSHOT`, `HARSH_BRAKING`, `SPEEDING`, `FUEL_LEVEL_RECORDED`.
-- `TrackingRules` — classe di regole pure del package.
-- `TrackingTimeline` — modello/domain object del package.
+- `TrackingEvent`
+- `TrackingEventType`
+- `TrackingRules`
+- `TrackingTimeline`
 
-## Collegamenti
+## Test collegati
 
-- TrackingTimeline conserva sequenza eventi.
-- TrackingEventType include eventi operativi e telematici.
+- `TrackingEventTest`
+- `TrackingRulesTest`
+- `TrackingTimelineTest`
+
+## Ruolo nel sistema
+
+Questo package contribuisce al domain model e deve restare indipendente da database, controller REST e framework esterni.

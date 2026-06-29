@@ -1,19 +1,25 @@
-# Package `location` — Indirizzi e coordinate
+# Package `location` — Luoghi e coordinate
 
-Modella coordinate geografiche, indirizzi e punti logistici geolocalizzabili.
+Rappresenta indirizzi, coordinate geografiche e location operative.
 
-## Responsabilità
+## Percorso
 
-- Location viene usata da Facility.
-- Facility viene usata da Order, Shipment e Route.
+```text
+src/main/java/it/gabriele/truckflow/domain/location
+```
 
 ## Classi
 
-- `Address` — modello/domain object del package.
-- `GeoCoordinates` — modello/domain object del package.
-- `Location` — modello/domain object del package.
+- `Address`
+- `GeoCoordinates`
+- `Location`
 
-## Collegamenti
+## Test collegati
 
-- Location viene usata da Facility.
-- Facility viene usata da Order, Shipment e Route.
+- `AddressTest`
+- `GeoCoordinatesTest`
+- `LocationTest`
+
+## Ruolo nel sistema
+
+Questo package contribuisce al domain model e deve restare indipendente da database, controller REST e framework esterni.

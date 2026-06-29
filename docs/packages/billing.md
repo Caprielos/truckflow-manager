@@ -1,21 +1,27 @@
-# Package `billing` — Fatturazione e pagamenti
+# Package `billing` — Fatturazione cliente
 
-Gestisce fatture, stato fattura, pagamenti e regole economiche base.
+Rappresenta fatture emesse, stato fattura, pagamenti e regole base di incasso.
 
-## Responsabilità
+## Percorso
 
-- Invoice nasce da ordine/spedizione completata.
-- PaymentRecord traccia incassi.
+```text
+src/main/java/it/gabriele/truckflow/domain/billing
+```
 
 ## Classi
 
-- `BillingRules` — classe di regole pure del package.
-- `Invoice` — modello/domain object del package.
-- `InvoiceStatus` — enum con valori: `DRAFT`, `ISSUED`, `PAID`, `CANCELLED`.
-- `PaymentMethod` — enum con valori: `BANK_TRANSFER`, `CARD`, `CASH`, `DIRECT_DEBIT`, `CREDIT_NOTE`, `OTHER`.
-- `PaymentRecord` — modello/domain object del package.
+- `BillingRules`
+- `Invoice`
+- `InvoiceStatus`
+- `PaymentMethod`
+- `PaymentRecord`
 
-## Collegamenti
+## Test collegati
 
-- Invoice nasce da ordine/spedizione completata.
-- PaymentRecord traccia incassi.
+- `BillingRulesTest`
+- `InvoiceTest`
+- `PaymentRecordTest`
+
+## Ruolo nel sistema
+
+Questo package contribuisce al domain model e deve restare indipendente da database, controller REST e framework esterni.

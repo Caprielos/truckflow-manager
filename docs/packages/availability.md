@@ -1,20 +1,25 @@
 # Package `availability` — Disponibilità risorse
 
-Rappresenta disponibilità, assegnazione, manutenzione, ferie e indisponibilità di driver, veicoli, convogli e facility.
+Gestisce disponibilità e indisponibilità di autisti, veicoli, rimorchi, strutture o altre risorse operative.
 
-## Responsabilità
+## Percorso
 
-- Serve per bloccare risorse già assegnate, in manutenzione o non disponibili.
-- Application layer futuro userà queste regole prima di creare missioni.
+```text
+src/main/java/it/gabriele/truckflow/domain/availability
+```
 
 ## Classi
 
-- `AvailabilityResourceType` — enum con valori: `DRIVER`, `VEHICLE`, `VEHICLE_COMBINATION`, `TRAILER`, `FACILITY`.
-- `AvailabilityRules` — classe di regole pure del package.
-- `AvailabilityStatus` — enum con valori: `AVAILABLE`, `RESERVED`, `ASSIGNED`, `UNAVAILABLE`, `MAINTENANCE`, `ON_LEAVE`.
-- `ResourceAvailability` — modello/domain object del package.
+- `AvailabilityResourceType`
+- `AvailabilityRules`
+- `AvailabilityStatus`
+- `ResourceAvailability`
 
-## Collegamenti
+## Test collegati
 
-- Serve per bloccare risorse già assegnate, in manutenzione o non disponibili.
-- Application layer futuro userà queste regole prima di creare missioni.
+- `AvailabilityRulesTest`
+- `ResourceAvailabilityTest`
+
+## Ruolo nel sistema
+
+Questo package contribuisce al domain model e deve restare indipendente da database, controller REST e framework esterni.

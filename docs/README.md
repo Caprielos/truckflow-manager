@@ -1,32 +1,38 @@
 # Documentazione TruckFlow Manager
 
-Questa cartella contiene la documentazione completa del dominio **TruckFlow Manager**.
+Questa documentazione è stata riscritta sulla versione del progetto dopo:
 
-La documentazione è stata riscritta sulla versione aggiornata del progetto, dove il vecchio package `shipment` fuori da `domain` è stato rimosso e il dominio è organizzato attorno a package coerenti sotto:
+- integrazione del modello realistico flotta/autisti/certificati;
+- rimozione del vecchio package `it.gabriele.truckflow.shipment` fuori da `domain`;
+- aggiunta di economia reale: IVA, costi, ricavi, asset, fatture fornitore e marginalità;
+- aggiunta di depositi, strutture, parcheggi, posti numerati e convogli parcheggiati;
+- aggiunta di payroll autista basato su ore, qualifiche, ADR, tipo trasporto, rimorchio e missione;
+- aggiunta di contract, inventory, dispatch, data import e documenti operativi più strutturati.
 
-```text
-it.gabriele.truckflow.domain
-```
+## Indice rapido
 
-## Documenti principali
+| File | Contenuto |
+| --- | --- |
+| project-overview.md | Visione generale del progetto |
+| architecture.md | Architettura e confini del dominio |
+| domain-overview.md | Mappa dei moduli domain |
+| business-flow.md | Flussi reali del trasporto |
+| domain-package-map.md | Tabella package/classi/test |
+| domain-reference-complete.md | Catalogo completo dei package |
+| domain-rules.md | Regole business principali |
+| testing-guide.md | Come testare e leggere i test |
+| implementation-roadmap.md | Roadmap verso application/database/API |
+| glossary.md | Glossario italiano/tecnico |
 
-- `project-overview.md`: visione generale del progetto.
-- `architecture.md`: architettura e separazione dei layer.
-- `current-version-notes.md`: cosa è cambiato nella versione attuale.
-- `domain-overview.md`: modello di dominio complessivo.
-- `domain-package-map.md`: mappa dei package.
-- `domain-rules.md`: regole principali.
-- `domain-reference-complete.md`: catalogo tecnico completo.
-- `testing-guide.md`: guida ai test.
-- `implementation-roadmap.md`: prossimi step realistici.
+## Guide principali
 
-## Guide consigliate
-
-- `guides/shipment-vs-mission.md`
-- `guides/realistic-fleet-model.md`
-- `guides/operational-modules.md`
-- `guides/next-application-layer.md`
-
-## Package documentati
-
-Ogni package del dominio ha un file dedicato dentro `packages/`.
+| Guida | Tema |
+| --- | --- |
+| guides/economics-profitability.md | Costi, ricavi, IVA, debito, utile/perdita |
+| guides/facilities-parking-inventory.md | Depositi, parcheggi, magazzino, posti numerati |
+| guides/driver-payroll.md | Costo autista e stipendio missione |
+| guides/contracts-pricing-billing.md | Contratti, listini, pricing e fatturazione |
+| guides/dispatch-readiness.md | Ufficio traffico e scelta mezzi/autisti |
+| guides/shipment-vs-mission.md | Differenza tra ordine, spedizione e missione |
+| guides/realistic-fleet-model.md | Flotta, combinazioni e allestimenti reali |
+| guides/application-layer-next.md | Come iniziare application layer |

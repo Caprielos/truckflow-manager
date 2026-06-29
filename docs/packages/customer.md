@@ -1,22 +1,28 @@
-# Package `customer` — Clienti e account
+# Package `customer` — Clienti e contatti
 
-Gestisce cliente, stato commerciale, account operativo e contatti per logistica, amministrazione e fatturazione.
+Gestisce cliente, account cliente, contatti, ruoli di contatto, stato e tipologia cliente.
 
-## Responsabilità
+## Percorso
 
-- CustomerAccount viene usato da TransportOrder.
-- CustomerContact può ricevere notifiche e documenti.
+```text
+src/main/java/it/gabriele/truckflow/domain/customer
+```
 
 ## Classi
 
-- `Customer` — modello/domain object del package.
-- `CustomerAccount` — modello/domain object del package.
-- `CustomerContact` — modello/domain object del package.
-- `CustomerContactRole` — enum con valori: `LOGISTICS`, `ADMINISTRATION`, `BILLING`, `OPERATIONS`, `SALES`, `MANAGEMENT`, `OTHER`.
-- `CustomerStatus` — enum con valori: `ACTIVE`, `INACTIVE`, `SUSPENDED`.
-- `CustomerType` — enum con valori: `INDIVIDUAL`, `COMPANY`, `PUBLIC_AUTHORITY`, `INTERNAL`.
+- `Customer`
+- `CustomerAccount`
+- `CustomerContact`
+- `CustomerContactRole`
+- `CustomerStatus`
+- `CustomerType`
 
-## Collegamenti
+## Test collegati
 
-- CustomerAccount viene usato da TransportOrder.
-- CustomerContact può ricevere notifiche e documenti.
+- `CustomerAccountTest`
+- `CustomerContactTest`
+- `CustomerTest`
+
+## Ruolo nel sistema
+
+Questo package contribuisce al domain model e deve restare indipendente da database, controller REST e framework esterni.

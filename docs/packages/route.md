@@ -1,20 +1,26 @@
-# Package `route` — Piani di viaggio
+# Package `route` — Percorsi e soste
 
-Modella soste, pickup, delivery, pause, carburante e sequenza di viaggio.
+Gestisce route plan, stop, carico/scarico, sequenza e regole di coerenza della rotta.
 
-## Responsabilità
+## Percorso
 
-- RoutePlan entra nella TransportMission.
-- RouteStop permette pickup, delivery, fuel stop, rest break e fine viaggio.
+```text
+src/main/java/it/gabriele/truckflow/domain/route
+```
 
 ## Classi
 
-- `RoutePlan` — modello/domain object del package.
-- `RoutePlanRules` — classe di regole pure del package.
-- `RouteStop` — modello/domain object del package.
-- `RouteStopType` — enum con valori: `START`, `PICKUP`, `DELIVERY`, `REST_BREAK`, `FUEL_STOP`, `END`.
+- `RoutePlan`
+- `RoutePlanRules`
+- `RouteStop`
+- `RouteStopType`
 
-## Collegamenti
+## Test collegati
 
-- RoutePlan entra nella TransportMission.
-- RouteStop permette pickup, delivery, fuel stop, rest break e fine viaggio.
+- `RoutePlanRulesTest`
+- `RoutePlanTest`
+- `RouteStopTest`
+
+## Ruolo nel sistema
+
+Questo package contribuisce al domain model e deve restare indipendente da database, controller REST e framework esterni.

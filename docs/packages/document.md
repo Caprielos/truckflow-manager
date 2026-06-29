@@ -1,20 +1,28 @@
-# Package `document` — Documenti di trasporto
+# Package `document` — Documenti trasporto
 
-Gestisce documenti richiesti, ricevuti, verificati, scaduti o rifiutati: CMR, POD, FIR, ADR, ATP, HACCP, veterinari.
+Gestisce documenti richiesti, bolla/DDT strutturata, bundle documentale spedizione e stati documentali.
 
-## Responsabilità
+## Percorso
 
-- DocumentRules collega cargo/servizio a documenti richiesti.
-- TransportDocument traccia stato e verifica.
+```text
+src/main/java/it/gabriele/truckflow/domain/document
+```
 
 ## Classi
 
-- `DocumentRules` — classe di regole pure del package.
-- `DocumentStatus` — enum con valori: `DRAFT`, `REQUESTED`, `RECEIVED`, `VERIFIED`, `REJECTED`, `EXPIRED`.
-- `TransportDocument` — modello/domain object del package.
-- `TransportDocumentType` — enum con valori: `CMR_WAYBILL`, `PROOF_OF_DELIVERY`, `DELIVERY_NOTE`, `ADR_TRANSPORT_DOCUMENT`, `TEMPERATURE_LOG`, `INVOICE_COPY`, `INSURANCE_CERTIFICATE`, `VEHICLE_REGISTRATION`, `DRIVER_LICENSE_COPY`, `WASTE_IDENTIFICATION_FORM`, `SAFETY_DATA_SHEET`, `ADR_WRITTEN_INSTRUCTIONS`, `HACCP_SANITATION_DOCUMENT`, `VETERINARY_DOCUMENT`, `OVERSIZED_TRANSPORT_AUTHORIZATION`.
+- `DeliveryNote`
+- `DeliveryNoteLine`
+- `DocumentRules`
+- `DocumentStatus`
+- `ShipmentDocumentBundle`
+- `TransportDocument`
+- `TransportDocumentType`
 
-## Collegamenti
+## Test collegati
 
-- DocumentRules collega cargo/servizio a documenti richiesti.
-- TransportDocument traccia stato e verifica.
+- `DeliveryNoteAndDocumentBundleTest`
+- `DocumentRulesTest`
+
+## Ruolo nel sistema
+
+Questo package contribuisce al domain model e deve restare indipendente da database, controller REST e framework esterni.

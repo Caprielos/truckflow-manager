@@ -1,19 +1,23 @@
 # Package `order` — Ordini di trasporto
 
-Rappresenta la richiesta commerciale accettabile o rifiutabile prima di diventare spedizione.
+Rappresenta richiesta commerciale cliente prima che diventi spedizione pianificata.
 
-## Responsabilità
+## Percorso
 
-- TransportOrder nasce da cliente, cargo, pickup/delivery, finestre orarie e prezzo.
-- Solo un ordine ACCEPTED può generare una Shipment.
+```text
+src/main/java/it/gabriele/truckflow/domain/order
+```
 
 ## Classi
 
-- `TransportOrder` — modello/domain object del package.
-- `TransportOrderStatus` — enum con valori: `DRAFT`, `SUBMITTED`, `ACCEPTED`, `REJECTED`, `CANCELLED`.
-- `TransportServiceType` — enum con valori: `STANDARD`, `EXPRESS`, `REFRIGERATED`, `HAZARDOUS`, `OVERSIZED`.
+- `TransportOrder`
+- `TransportOrderStatus`
+- `TransportServiceType`
 
-## Collegamenti
+## Test collegati
 
-- TransportOrder nasce da cliente, cargo, pickup/delivery, finestre orarie e prezzo.
-- Solo un ordine ACCEPTED può generare una Shipment.
+- `TransportOrderTest`
+
+## Ruolo nel sistema
+
+Questo package contribuisce al domain model e deve restare indipendente da database, controller REST e framework esterni.

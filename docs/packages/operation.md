@@ -1,19 +1,24 @@
-# Package `operation` — Missioni operative
+# Package `operation` — Missione operativa
 
-Rappresenta l’esecuzione reale: spedizione + route plan + convoglio + autista + stato operativo.
+Rappresenta il viaggio reale: missione, stato, regole operative, assegnazioni e chiusura.
 
-## Responsabilità
+## Percorso
 
-- TransportMission combina Shipment, RoutePlan, VehicleCombination e Driver.
-- È il punto operativo dove la spedizione diventa viaggio reale.
+```text
+src/main/java/it/gabriele/truckflow/domain/operation
+```
 
 ## Classi
 
-- `TransportMission` — modello/domain object del package.
-- `TransportMissionRules` — classe di regole pure del package.
-- `TransportMissionStatus` — enum con valori: `PLANNED`, `DISPATCHED`, `IN_PROGRESS`, `COMPLETED`, `CANCELLED`.
+- `TransportMission`
+- `TransportMissionRules`
+- `TransportMissionStatus`
 
-## Collegamenti
+## Test collegati
 
-- TransportMission combina Shipment, RoutePlan, VehicleCombination e Driver.
-- È il punto operativo dove la spedizione diventa viaggio reale.
+- `TransportMissionRulesTest`
+- `TransportMissionTest`
+
+## Ruolo nel sistema
+
+Questo package contribuisce al domain model e deve restare indipendente da database, controller REST e framework esterni.

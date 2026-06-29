@@ -1,70 +1,55 @@
-# Project Overview
+# Project overview
+
+TruckFlow Manager è pensato come base backend Java per un gestionale di trasporti e flotta.
 
 ## Obiettivo
 
-**TruckFlow Manager** vuole rappresentare il cuore di un sistema TMS/FMS realistico, cioè un software per gestire trasporti, spedizioni, mezzi, autisti, documenti, costi e operazioni quotidiane di una flotta.
+Rappresentare in modo realistico le regole di un'azienda che gestisce:
 
-Il progetto non è un semplice CRUD. Il valore principale è nel dominio:
+- clienti e ordini;
+- spedizioni e missioni;
+- autisti, patenti, CQC, ADR e qualifiche;
+- veicoli, rimorchi, semirimorchi, combinazioni e certificati;
+- cargo secco, frigo, ADR, rifiuti, animali vivi, alimentare e merci speciali;
+- costi, ricavi, IVA, asset acquistati, debiti, utile/perdita;
+- magazzino ricambi, gomme, attrezzature e materiali;
+- depositi, piazzali, parcheggi, posti numerati e convogli già pronti;
+- manutenzione, fuel, gomme, telematica, tracking e documenti.
 
-- validare dati importanti;
-- modellare i concetti reali del trasporto;
-- impedire stati incoerenti;
-- preparare regole riutilizzabili dall'application layer;
-- separare ciò che è commerciale da ciò che è operativo;
-- mantenere indipendenza da database e framework.
+## Stato tecnico
 
-## Cosa contiene adesso
-
-Il dominio copre:
-
-- clienti, contatti e account;
-- ordini di trasporto;
-- spedizioni;
-- missioni operative;
-- carichi e merci speciali;
-- ADR, temperatura controllata, rifiuti, animali vivi, liquidi alimentari;
-- flotta con veicoli, allestimenti, assi, masse, dimensioni, agganci e certificati;
-- convogli: veicolo singolo, autotreno, articolato;
-- autisti con patenti, CQC, ADR, qualifiche e certificati a scadenza;
-- azienda di trasporto e licenze operative;
-- documenti di trasporto;
-- disponibilità risorse;
-- tracking operativo;
-- telematica;
-- carburante;
-- pneumatici;
-- manutenzione e downtime;
-- fissaggio carico;
-- reclami e danni;
-- pricing e billing;
-- sostenibilità;
-- notifiche;
-- audit;
-- identity;
-- configuration;
-- reporting.
-
-## Numeri del progetto documentato
-
-- Package domain: **31**
-- Classi Java nel domain: **187**
-- Test class rilevate: **74**
-- Test rilevati dai report presenti nello zip: **788**
-- Failure/Error nei report presenti: **0**
-
-Nota: la documentazione è stata generata analizzando il codice sorgente e i report già presenti nello zip. Nel mio ambiente non è disponibile Maven, quindi il comando finale `mvn clean test` va sempre eseguito localmente.
-
-## Filosofia progettuale
-
-Il dominio deve essere abbastanza realistico da sembrare un sistema aziendale vero, ma non deve diventare confuso. Ogni package deve avere una responsabilità precisa.
-
-Esempio:
+Il progetto attuale è volontariamente concentrato sul domain layer. Questo significa:
 
 ```text
-Shipment  = spedizione commerciale/logistica
-Mission   = esecuzione operativa reale
-Vehicle   = mezzo fisico
-Tire      = gomma fisica tracciabile
-Document  = evidenza/documento richiesto
-Compliance = regole che incrociano requisiti diversi
+presente: entità, value object, enum, regole di business, test
+assente: Spring, REST API, database, JPA, frontend, login reale, servizi esterni
+```
+
+Questa scelta è corretta per costruire prima il motore logico del progetto e poi appoggiarci application layer e infrastruttura.
+
+## Perché è realistico
+
+Il modello evita una struttura troppo semplice tipo:
+
+```java
+Shipment {
+    Driver driver;
+    Truck truck;
+    Cargo cargo;
+}
+```
+
+Al contrario distingue responsabilità reali:
+
+```text
+Order = richiesta commerciale
+Shipment = spedizione nata dall'ordine
+TransportMission = viaggio operativo reale
+Fleet = mezzi e combinazioni
+Driver = persona/abilitazioni/stato
+Payroll = costo lavoro autista
+Economics = costi/ricavi/IVA/margine
+Facility/Parking = dove stanno fisicamente mezzi e rimorchi
+Inventory = scorte e magazzino
+Dispatch = scelta operativa delle risorse
 ```

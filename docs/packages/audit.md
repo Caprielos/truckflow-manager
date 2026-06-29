@@ -1,22 +1,28 @@
-# Package `audit` — Audit trail
+# Package `audit` — Tracciamento audit
 
-Registra eventi di audit per modifiche, login, permessi, verifiche documentali e azioni sensibili.
+Registra azioni importanti, attori, severità e trail degli eventi. Serve per sapere chi ha fatto cosa e con quale impatto.
 
-## Responsabilità
+## Percorso
 
-- AuditTrail registra azioni sensibili.
-- Separato dal tracking: audit riguarda il sistema, tracking il viaggio.
+```text
+src/main/java/it/gabriele/truckflow/domain/audit
+```
 
 ## Classi
 
-- `AuditActionType` — enum con valori: `CREATED`, `UPDATED`, `STATUS_CHANGED`, `ASSIGNED`, `CANCELLED`, `DELETED`, `DOCUMENT_VERIFIED`, `PAYMENT_REGISTERED`, `CLAIM_SETTLED`, `EXTERNAL_ESTIMATE_IMPORTED`, `LOGIN`, `LOGIN_FAILED`, `PERMISSION_DENIED`.
-- `AuditActorType` — enum con valori: `USER`, `SYSTEM`, `INTEGRATION`.
-- `AuditEvent` — modello/domain object del package.
-- `AuditRules` — classe di regole pure del package.
-- `AuditSeverity` — enum con valori: `INFO`, `WARNING`, `ERROR`, `CRITICAL`.
-- `AuditTrail` — modello/domain object del package.
+- `AuditActionType`
+- `AuditActorType`
+- `AuditEvent`
+- `AuditRules`
+- `AuditSeverity`
+- `AuditTrail`
 
-## Collegamenti
+## Test collegati
 
-- AuditTrail registra azioni sensibili.
-- Separato dal tracking: audit riguarda il sistema, tracking il viaggio.
+- `AuditEventTest`
+- `AuditRulesTest`
+- `AuditTrailTest`
+
+## Ruolo nel sistema
+
+Questo package contribuisce al domain model e deve restare indipendente da database, controller REST e framework esterni.

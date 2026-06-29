@@ -1,97 +1,72 @@
-# Implementation Roadmap
+# Implementation roadmap
 
 ## Stato attuale
 
-Il domain layer è ampio e realistico. Ha già molti concetti utili per un gestionale trasporti reale.
+Il domain layer è molto ricco. La prossima evoluzione non dovrebbe essere aggiungere altri enum a caso, ma costruire sopra al domain.
 
-Il prossimo salto non è aggiungere altri enum casuali. Il prossimo salto è costruire casi d'uso sopra il dominio.
+## Step 1 — Application layer
 
-## Fase 1 — Consolidamento domain
-
-Già in gran parte completata:
-
-- pulizia legacy shipment;
-- modello realistico flotta;
-- certificati driver;
-- licenze azienda;
-- moduli operativi tire/fuel/maintenance/telematics/loadsecurity;
-- documentazione aggiornata.
-
-Possibili piccoli miglioramenti futuri:
-
-- `ShipmentRequirementType`;
-- `ShipmentRequirementSummary`;
-- `MissionReadinessReport`;
-- maggiore integrazione documenti ↔ cargo ↔ missione.
-
-## Fase 2 — Application Layer
-
-Creare package futuri:
+Creare package:
 
 ```text
-application/order
-application/shipment
-application/operation
-application/fleet
-application/driver
-application/compliance
+src/main/java/it/gabriele/truckflow/application
 ```
 
-Casi d'uso realistici:
+Use case consigliati:
 
-- crea ordine;
-- accetta ordine;
-- genera shipment;
-- pianifica missione;
-- assegna driver;
-- assegna convoglio;
-- verifica mission readiness;
-- registra pickup;
-- registra delivery;
-- genera fattura;
-- apri reclamo;
-- registra rifornimento;
-- registra manutenzione;
-- importa telematica.
+- `CreateTransportOrderUseCase`
+- `CreateShipmentFromAcceptedOrderUseCase`
+- `PlanTransportMissionUseCase`
+- `CalculateMissionProfitabilityUseCase`
+- `AssignParkingSpotUseCase`
+- `RegisterFleetAssetAcquisitionUseCase`
+- `RegisterDriverPayrollForMissionUseCase`
+- `CloseMissionAndGenerateBillingUseCase`
 
-## Fase 3 — Repository Ports
+## Step 2 — Repository ports
 
-Definire interfacce, non implementazioni DB:
+Creare interfacce:
 
 ```text
-TransportOrderRepository
-ShipmentRepository
-TransportMissionRepository
 VehicleRepository
 DriverRepository
+ShipmentRepository
+MissionRepository
 CustomerRepository
-DocumentRepository
+EconomicsRepository
+FacilityRepository
+ParkingRepository
+InventoryRepository
 ```
 
-## Fase 4 — Infrastructure Memory
+## Step 3 — Infrastructure memory
 
-Prima implementazione in memoria per testare flussi end-to-end senza database.
+Implementazioni in memoria per demo e test:
 
 ```text
 infrastructure/memory
 ```
 
-## Fase 5 — Web/API
+## Step 4 — Web/API
 
-Solo dopo domain + application + repository:
+Solo dopo application e repository:
 
-- Spring Boot;
-- REST API;
-- DTO;
-- validation;
-- security;
-- database.
+```text
+web/rest
+```
 
-## Fase 6 — Integrazioni reali
+Endpoint possibili:
 
-- mappe e pedaggi;
-- provider fuel card;
-- GPS/telematica;
-- document storage;
-- notifiche email/SMS;
-- import/export CSV/XLSX.
+```text
+POST /orders
+POST /shipments/{id}/plan-mission
+POST /missions/{id}/close
+GET /vehicles
+GET /parking/spots
+GET /economics/statement
+GET /drivers/{id}/payroll
+```
+
+## Step 5 — Persistence
+
+Database e JPA solo dopo avere use case e repository chiari.

@@ -1,24 +1,23 @@
 # Package `fuel` — Carburante e consumi
 
-Gestisce transazioni carburante, fuel card provider e regole di consumo/anomalia tra rifornimenti.
+Gestisce rifornimenti, provider carte carburante e regole di consumo.
 
-## Responsabilità
+## Percorso
 
-- FuelTransaction viene confrontata con transazioni precedenti.
-- FuelConsumptionRules segnala consumi anomali.
+```text
+src/main/java/it/gabriele/truckflow/domain/fuel
+```
 
 ## Classi
 
-- `FuelCardProvider` — enum con valori: `DKV`, `UTA`, `ENI`, `SHELL`, `OTHER`.
-- `FuelConsumptionRules` — classe di regole pure del package.
-- `FuelTransaction` — modello/domain object del package.
+- `FuelCardProvider`
+- `FuelConsumptionRules`
+- `FuelTransaction`
 
-## Regole importanti
+## Test collegati
 
-- Consumi fuori soglia sono anomalie, non errori matematici.
-- La differenza odometrica deve essere coerente tra rifornimenti.
+- `FuelTransactionTest`
 
-## Collegamenti
+## Ruolo nel sistema
 
-- FuelTransaction viene confrontata con transazioni precedenti.
-- FuelConsumptionRules segnala consumi anomali.
+Questo package contribuisce al domain model e deve restare indipendente da database, controller REST e framework esterni.

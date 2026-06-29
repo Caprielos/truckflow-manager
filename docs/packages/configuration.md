@@ -1,22 +1,26 @@
 # Package `configuration` — Configurazioni dominio
 
-Modella configurazioni tipizzate, categorie e scope applicativi senza dipendere da un database.
+Permette di rappresentare valori configurabili per regole aziendali, soglie, parametri e impostazioni.
 
-## Responsabilità
+## Percorso
 
-- SystemConfiguration conserva parametri modificabili.
-- Scope permette configurazioni globali, per organizzazione, cliente, facility o utente.
+```text
+src/main/java/it/gabriele/truckflow/domain/configuration
+```
 
 ## Classi
 
-- `ConfigurationCategory` — enum con valori: `OPERATION`, `PRICING`, `NOTIFICATION`, `DOCUMENT`, `SECURITY`, `SUSTAINABILITY`, `REPORTING`, `INTEGRATION`.
-- `ConfigurationRules` — classe di regole pure del package.
-- `ConfigurationScope` — enum con valori: `GLOBAL`, `ORGANIZATION`, `CUSTOMER`, `FACILITY`, `USER`.
-- `ConfigurationValue` — modello/domain object del package.
-- `ConfigurationValueType` — enum con valori: `TEXT`, `BOOLEAN`, `INTEGER`, `DECIMAL`, `PERCENTAGE`, `DURATION_MINUTES`.
-- `SystemConfiguration` — modello/domain object del package.
+- `ConfigurationCategory`
+- `ConfigurationRules`
+- `ConfigurationScope`
+- `ConfigurationValue`
+- `ConfigurationValueType`
+- `SystemConfiguration`
 
-## Collegamenti
+## Test collegati
 
-- SystemConfiguration conserva parametri modificabili.
-- Scope permette configurazioni globali, per organizzazione, cliente, facility o utente.
+- `ConfigurationRulesTest`
+
+## Ruolo nel sistema
+
+Questo package contribuisce al domain model e deve restare indipendente da database, controller REST e framework esterni.

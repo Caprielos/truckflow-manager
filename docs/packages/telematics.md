@@ -1,25 +1,24 @@
-# Package `telematics` — Telematica e CAN bus
+# Package `telematics` — Telematica e comportamento guida
 
-Modella snapshot GPS/CAN-bus e anomalie di guida: velocità, fuel drop, frenate brusche, idling.
+Gestisce snapshot GPS/CAN-bus e eventi comportamento guida come frenate, accelerazioni, consumo e odometro.
 
-## Responsabilità
+## Percorso
 
-- TelematicsSnapshot rappresenta posizione, odometro, carburante e dati CAN.
-- TelematicsRules intercetta fuel drop e speeding.
+```text
+src/main/java/it/gabriele/truckflow/domain/telematics
+```
 
 ## Classi
 
-- `DrivingBehaviorEvent` — modello/domain object del package.
-- `DrivingBehaviorEventType` — enum con valori: `HARSH_BRAKING`, `HARSH_ACCELERATION`, `SPEEDING`, `IDLING_TOO_LONG`, `LOW_FUEL_LEVEL`, `POSSIBLE_FUEL_THEFT`, `ENGINE_FAULT`.
-- `TelematicsRules` — classe di regole pure del package.
-- `TelematicsSnapshot` — modello/domain object del package.
+- `DrivingBehaviorEvent`
+- `DrivingBehaviorEventType`
+- `TelematicsRules`
+- `TelematicsSnapshot`
 
-## Regole importanti
+## Test collegati
 
-- Fuel drop e speeding sono eventi rilevabili da regole pure.
-- Snapshot e behavior event restano separati da mission/tracking.
+- `TelematicsSnapshotTest`
 
-## Collegamenti
+## Ruolo nel sistema
 
-- TelematicsSnapshot rappresenta posizione, odometro, carburante e dati CAN.
-- TelematicsRules intercetta fuel drop e speeding.
+Questo package contribuisce al domain model e deve restare indipendente da database, controller REST e framework esterni.

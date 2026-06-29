@@ -1,29 +1,28 @@
 # Package `tire` — Pneumatici
 
-Traccia singole gomme fisiche, RFID, posizione ruota, installazioni, rotazioni, stato e soglia battistrada.
+Gestisce gomma fisica, installazioni, rotazioni, stato, posizioni ruota e regole usura/sicurezza.
 
-## Responsabilità
+## Percorso
 
-- TireInstallation lega temporaneamente una gomma fisica a veicolo e posizione.
-- TireRotationEvent permette storico rotazioni.
+```text
+src/main/java/it/gabriele/truckflow/domain/tire
+```
 
 ## Classi
 
-- `Tire` — modello/domain object del package.
-- `TireInstallation` — modello/domain object del package.
-- `TireRotationEvent` — modello/domain object del package.
-- `TireRules` — classe di regole pure del package.
-- `TireStatus` — enum con valori: `NEW`, `RETREADED`, `REGROOVED`, `IN_USE`, `STORED`, `DISPOSED`.
-- `WheelPosition` — modello/domain object del package.
-- `WheelSide` — enum con valori: `LEFT`, `RIGHT`, `CENTER`.
-- `WheelSlot` — enum con valori: `SINGLE`, `INNER`, `OUTER`.
+- `Tire`
+- `TireInstallation`
+- `TireRotationEvent`
+- `TireRules`
+- `TireStatus`
+- `WheelPosition`
+- `WheelSide`
+- `WheelSlot`
 
-## Regole importanti
+## Test collegati
 
-- Una gomma fisica può cambiare veicolo e posizione.
-- Il battistrada minimo genera alert/sostituzione.
+- `TireManagementTest`
 
-## Collegamenti
+## Ruolo nel sistema
 
-- TireInstallation lega temporaneamente una gomma fisica a veicolo e posizione.
-- TireRotationEvent permette storico rotazioni.
+Questo package contribuisce al domain model e deve restare indipendente da database, controller REST e framework esterni.

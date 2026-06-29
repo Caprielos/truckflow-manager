@@ -1,25 +1,20 @@
-# Package `company` — Azienda e licenze
+# Package `company` — Azienda e licenze operative
 
-Modella l’impresa di trasporto e le licenze operative necessarie: albo, REN, licenza comunitaria, albo gestori ambientali.
+Modella l’impresa di trasporto, le licenze aziendali e le verifiche di conformità aziendale.
 
-## Responsabilità
+## Percorso
 
-- TransportCompany conserva licenze aziendali.
-- CompanyComplianceRules decide se l’azienda può fare internazionale o rifiuti.
+```text
+src/main/java/it/gabriele/truckflow/domain/company
+```
 
 ## Classi
 
-- `CompanyComplianceRules` — classe di regole pure del package.
-- `CompanyLicense` — modello/domain object del package.
-- `CompanyLicenseType` — enum con valori: `ROAD_HAULAGE_REGISTER`, `REN`, `COMMUNITY_LICENSE`, `OWN_ACCOUNT_LICENSE`, `ENVIRONMENTAL_MANAGERS_REGISTER_CATEGORY_2_BIS`, `ENVIRONMENTAL_MANAGERS_REGISTER_CATEGORY_4`, `ENVIRONMENTAL_MANAGERS_REGISTER_CATEGORY_5`.
-- `TransportCompany` — modello/domain object del package.
+- `CompanyComplianceRules`
+- `CompanyLicense`
+- `CompanyLicenseType`
+- `TransportCompany`
 
-## Regole importanti
+## Ruolo nel sistema
 
-- Il trasporto internazionale richiede licenze aziendali valide.
-- Il trasporto rifiuti richiede categorie ambientali coerenti.
-
-## Collegamenti
-
-- TransportCompany conserva licenze aziendali.
-- CompanyComplianceRules decide se l’azienda può fare internazionale o rifiuti.
+Questo package contribuisce al domain model e deve restare indipendente da database, controller REST e framework esterni.

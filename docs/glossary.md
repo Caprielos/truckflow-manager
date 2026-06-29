@@ -1,46 +1,69 @@
 # Glossario
 
-## ADR
-Accordo europeo relativo al trasporto internazionale di merci pericolose su strada. Nel progetto compare tramite classi ADR cargo, certificati driver, documenti e certificati veicolo.
+## Order
 
-## ATP
-Accordo relativo ai trasporti internazionali di derrate deperibili e ai mezzi speciali da usare. Nel progetto è modellato come certificato veicolo e requisito per merci a temperatura controllata.
-
-## CMR
-Lettera di vettura internazionale. È un documento richiesto per trasporti internazionali.
-
-## CQC
-Carta di qualificazione del conducente. Nel progetto è una qualifica professionale/certificato driver.
-
-## Cargo
-Merce trasportata. Può essere generica, pallettizzata, refrigerata, ADR, rifiuto, animale vivo, liquido alimentare, bulk, oversized, ecc.
-
-## Carrier / Transport Company
-Azienda di trasporto. Nel progetto è `TransportCompany`, con licenze operative.
-
-## Convoglio
-Combinazione operativa di uno o più veicoli: mezzo singolo, autotreno, articolato.
-
-## Domain layer
-Strato del software che contiene regole e concetti di business puri.
-
-## Facility
-Sede fisica: magazzino, deposito, cliente, terminal, porto, aeroporto o centro manutenzione.
-
-## FIR
-Formulario identificazione rifiuto. Nel progetto è rappresentato dai documenti per rifiuti.
-
-## Missione
-Esecuzione reale del trasporto: spedizione + rotta + autista + convoglio.
+Richiesta commerciale del cliente. È il punto di partenza.
 
 ## Shipment
-Spedizione nata da un ordine accettato. Non è ancora la missione reale.
 
-## Telematics
-Dati GPS/CAN-bus del mezzo: posizione, odometro, fuel level, velocità, eventi guida.
+Spedizione nata da un ordine accettato. Descrive cosa trasportare e quali requisiti ha.
 
-## Tire
-Gomma fisica tracciabile, distinta dalla specifica pneumatico del veicolo.
+## TransportMission
 
-## VehicleTechnicalSpecification
-Scheda tecnica realistica del veicolo: masse, dimensioni, assi, agganci, body configuration e certificati.
+Missione operativa reale: viaggio concreto con autista, mezzo, route plan, tracking e documenti.
+
+## Dispatch
+
+Attività dell'ufficio traffico che sceglie la combinazione migliore tra autista, mezzo, rimorchio, parcheggio e margine.
+
+## Fleet
+
+Insieme di veicoli, rimorchi, semirimorchi, allestimenti, certificati e combinazioni.
+
+## Tractor unit
+
+Trattore stradale. Da solo non trasporta il carico; lavora con semirimorchio.
+
+## Semi-trailer
+
+Semirimorchio agganciato a trattore tramite ralla/kingpin.
+
+## Truck and trailer / autotreno
+
+Motrice + rimorchio. Può essere parcheggiato già agganciato e pronto.
+
+## DDT / bolla
+
+Documento di trasporto/delivery note con righe merce, mittente, destinatario, luoghi, quantità, peso e firme.
+
+## Revenue
+
+Ricavo: quanto fatturi o chiedi al cliente.
+
+## Cost
+
+Costo: quanto spendi per fare il lavoro.
+
+## Profit / margin
+
+Guadagno o margine: ricavi meno costi.
+
+## VAT / IVA
+
+Imposta sul valore aggiunto. Non coincide con il guadagno.
+
+## Payroll
+
+Costo del lavoro autista: paga, indennità, maggiorazioni, rimborsi e costo aziendale.
+
+## Facility
+
+Struttura fisica: deposito, piazzale, magazzino, parcheggio aziendale o terzi.
+
+## Parking spot
+
+Posto numerato dentro una struttura.
+
+## Inventory
+
+Magazzino ricambi, materiali, DPI, gomme, olio, AdBlue e attrezzature.

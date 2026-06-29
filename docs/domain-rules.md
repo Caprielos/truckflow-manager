@@ -1,49 +1,91 @@
-# Domain Rules
+# Regole domain principali
 
-Questo documento raccoglie le regole principali distribuite nei package `*Rules` e nelle entity/value object.
+## Regole di purezza
 
-## cargo
-- La categoria merce determina requisiti operativi e documentali.
-- ADR e profilo dangerous goods restano separati dai colli ordinari.
+- Le classi domain validano i propri dati in ingresso.
+- I value object non devono accettare valori nulli, negativi o incoerenti quando non hanno senso.
+- Le collezioni esposte devono essere copie immutabili o comunque protette.
+- Le regole non devono chiamare database, API, filesystem o servizi esterni.
 
-## company
-- Il trasporto internazionale richiede licenze aziendali valide.
-- Il trasporto rifiuti richiede categorie ambientali coerenti.
+## Regole operative
 
-## driver
-- Il driver può avere vecchie categorie compatibili e nuovi certificati con validità temporale.
-- La CQC e l’ADR non sono semplici booleani: sono requisiti professionali/documentali.
+### Cargo
 
-## fleet
-- Il modello realistico distingue unità veicolo, allestimento, massa, dimensione, assi, aggancio e certificati.
-- Il refrigerato è un allestimento/certificazione, non un tipo veicolo separato.
-- Le combinazioni calcolano tipo, assi totali, massa complessiva e scadenze certificate.
+Il cargo determina requisiti reali:
 
-## fuel
-- Consumi fuori soglia sono anomalie, non errori matematici.
-- La differenza odometrica deve essere coerente tra rifornimenti.
+- ADR;
+- temperatura controllata;
+- ATP;
+- rifiuti/FIR;
+- animali vivi;
+- alimentare/HACCP;
+- liquidi/cisterna;
+- carichi eccezionali;
+- fissaggio carico.
 
-## loadsecurity
-- La dotazione minima dipende da tipo merce e peso.
-- La checklist non sostituisce la missione, la abilita.
+### Driver
 
-## maintenance
-- Work order e downtime sono separati: uno è intervento, l’altro è indisponibilità del mezzo.
-- Ticket autista permette segnalazioni dal campo.
+L'autista deve avere abilitazioni coerenti con la missione:
 
-## shared
-- Valori nulli, vuoti o negativi vengono rifiutati quando non ammessi.
-- Ogni value object espone factory statiche leggibili.
+- patente corretta;
+- CQC merci;
+- ADR base/cisterna/classe speciale se richiesto;
+- qualifiche operative;
+- stato disponibile;
+- limiti ore guida rispettati.
 
-## shipment
-- Una Shipment può essere creata solo da un TransportOrder ACCEPTED.
-- Transizioni valide: CREATED → PLANNED → DISPATCHED → IN_TRANSIT → DELIVERED.
-- CANCELLED è consentito solo se la spedizione non è terminale.
+### Fleet
 
-## telematics
-- Fuel drop e speeding sono eventi rilevabili da regole pure.
-- Snapshot e behavior event restano separati da mission/tracking.
+Il mezzo deve essere compatibile con:
 
-## tire
-- Una gomma fisica può cambiare veicolo e posizione.
-- Il battistrada minimo genera alert/sostituzione.
+- peso;
+- volume;
+- temperatura;
+- tipo carrozzeria/allestimento;
+- rimorchio/semirimorchio;
+- certificati;
+- combinazione legale.
+
+### Economics
+
+IVA, ricavi e costi non vanno confusi:
+
+```text
+IVA incassata dal cliente ≠ guadagno
+IVA detraibile sugli acquisti ≠ costo reale
+IVA non detraibile = costo contabile reale
+ricavi - costi = margine
+cassa negativa = esposizione/debito operativo
+```
+
+### Payroll
+
+Il costo autista dipende da:
+
+- ore guida;
+- ore lavoro non guida;
+- attesa;
+- carico/scarico;
+- notturno;
+- festivo;
+- trasferta;
+- estero;
+- ADR;
+- patente/qualifica;
+- tipo rimorchio/convoglio;
+- tipo trasporto.
+
+### Parking
+
+Un posto può contenere una risorsa coerente:
+
+- furgone;
+- camion rigido;
+- trattore stradale;
+- rimorchio;
+- semirimorchio;
+- trattore + semirimorchio agganciati;
+- autotreno;
+- attrezzatura.
+
+La readiness del parcheggio può dire se il mezzo è già pronto per partire.

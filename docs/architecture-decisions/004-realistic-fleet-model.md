@@ -1,15 +1,15 @@
-# ADR — Modello flotta realistico
+# ADR — Flotta realistica
 
 ## Decisione
 
-Il veicolo viene modellato tramite unit type, scheda tecnica, masse, dimensioni, assi, agganci, allestimenti, certificati e convogli.
+Vehicle e VehicleCombination distinguono unità, rimorchi, allestimenti, assi, masse e certificati.
 
 ## Motivazione
 
-La scelta mantiene il progetto più pulito, più testabile e più vicino a un software reale.
+La decisione rende il progetto più vicino a un gestionale reale e mantiene confini chiari tra responsabilità diverse.
 
 ## Conseguenze
 
-- Il dominio resta indipendente.
-- Le regole possono essere testate senza infrastruttura.
-- Il progetto può crescere verso application, infrastructure e web senza riscrivere il cuore del sistema.
+- Il domain resta più pulito.
+- I test rimangono leggibili.
+- L'application layer potrà orchestrare i moduli senza duplicare regole.

@@ -2,81 +2,73 @@
 
 ## Architettura attuale
 
-Il progetto è costruito attorno al **domain layer**.
+Il progetto è organizzato principalmente così:
 
 ```text
 src/main/java/it/gabriele/truckflow
 ├── Main.java
 └── domain/
     ├── shared/
-    ├── cargo/
-    ├── fleet/
-    ├── driver/
+    ├── customer/
+    ├── order/
     ├── shipment/
     ├── operation/
+    ├── fleet/
+    ├── driver/
+    ├── economics/
+    ├── payroll/
+    ├── facility/
+    ├── parking/
+    ├── inventory/
     └── ...
 ```
 
-Il dominio non usa:
+## Regola principale
 
-- Spring;
-- JPA;
+Il domain layer non deve sapere nulla di:
+
 - database;
-- REST controller;
-- filesystem;
-- API esterne;
-- mapper JSON;
-- frontend.
+- API REST;
+- frontend;
+- file system;
+- Spring/JPA;
+- servizi esterni;
+- controller;
+- repository concreti.
 
-Questa scelta è voluta. Le classi domain devono essere riutilizzabili, testabili e indipendenti.
+Il domain deve contenere solo concetti e regole di business.
 
-## Layer previsti
+## Layer futuri
 
-Il progetto può evolvere così:
+La prossima evoluzione naturale è:
 
 ```text
 domain
-  regole pure, entità, value object, enum
+→ modelli e regole pure
 
 application
-  casi d'uso: crea ordine, pianifica missione, assegna driver, verifica compliance
+→ use case: pianifica missione, calcola margine, chiudi missione, genera fattura
 
-infrastructure
-  repository DB, file, provider mappe, fuel card, GPS, email
+application/ports
+→ interfacce repository e servizi esterni
+
+infrastructure/memory
+→ implementazioni in memoria per test e demo
+
+infrastructure/persistence
+→ database/JPA più avanti
 
 web
-  REST API, controller, DTO, sicurezza, frontend
+→ REST API
 ```
 
-## Dipendenze corrette
+## Dipendenze consigliate
 
-La dipendenza deve andare dall'esterno verso il dominio, mai il contrario.
+La direzione delle dipendenze deve essere:
 
 ```text
 web → application → domain
-infrastructure → application/domain ports
+infrastructure → application/domain
 ```
 
-Il dominio non deve conoscere controller, database o framework.
-
-## Package boundary
-
-Ogni package rappresenta un sotto-dominio.
-
-- `fleet` non contiene logica carburante dettagliata: per quello c'è `fuel`.
-- `fleet` non contiene storico pneumatici: per quello c'è `tire`.
-- `shipment` non contiene assegnazione driver/mezzo: per quello c'è `operation`.
-- `identity` non sostituisce `driver` o `customer`: rappresenta utenti software.
-- `tracking` non sostituisce `audit`: tracking riguarda il viaggio, audit riguarda il sistema.
-
-## Perché il vecchio shipment è stato rimosso
-
-Il vecchio package `it.gabriele.truckflow.shipment` era fuori dal domain layer. Era utile all'inizio come esercizio semplice, ma nella versione attuale avrebbe creato duplicazione.
-
-La versione corretta è:
-
-```text
-it.gabriele.truckflow.domain.shipment
-```
-
-Questa scelta mantiene l'architettura pulita.
+Il domain non deve dipendere da application, web o infrastructure.

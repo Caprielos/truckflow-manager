@@ -1,17 +1,21 @@
-# Package `drivetime` — Tempi guida/riposo
+# Package `drivetime` — Ore guida e riposo
 
-Contiene regole pure per limiti di guida, pause e riposi, preparate per una futura pianificazione più realistica.
+Contiene regole per limiti di guida, pausa, riposo e compatibilità temporale del lavoro autista.
 
-## Responsabilità
+## Percorso
 
-- Supporta planning operativo e mission readiness.
-- In futuro userà tachigrafo e log reali.
+```text
+src/main/java/it/gabriele/truckflow/domain/drivetime
+```
 
 ## Classi
 
-- `DriverTimeRules` — classe di regole pure del package.
+- `DriverTimeRules`
 
-## Collegamenti
+## Test collegati
 
-- Supporta planning operativo e mission readiness.
-- In futuro userà tachigrafo e log reali.
+- `DriverTimeRulesTest`
+
+## Ruolo nel sistema
+
+Questo package contribuisce al domain model e deve restare indipendente da database, controller REST e framework esterni.

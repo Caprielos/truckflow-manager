@@ -1,18 +1,28 @@
-# Package `facility` — Sedi operative
+# Package `facility` — Strutture aziendali e costi immobiliari
 
-Rappresenta magazzini, depositi, clienti, terminal, porti, aeroporti e centri manutenzione.
+Gestisce depositi, piazzali, magazzini, proprietà/affitto/leasing e spese di struttura.
 
-## Responsabilità
+## Percorso
 
-- Order collega pickupFacility e deliveryFacility.
-- RoutePlan organizza soste su punti logistici.
+```text
+src/main/java/it/gabriele/truckflow/domain/facility
+```
 
 ## Classi
 
-- `Facility` — modello/domain object del package.
-- `FacilityType` — enum con valori: `WAREHOUSE`, `DEPOT`, `CUSTOMER_SITE`, `SUPPLIER_SITE`, `CROSS_DOCK`, `TERMINAL`, `PORT`, `AIRPORT`, `MAINTENANCE_CENTER`.
+- `Facility`
+- `FacilityCostFrequency`
+- `FacilityCostLine`
+- `FacilityCostType`
+- `FacilityFinancialProfile`
+- `FacilityOwnershipType`
+- `FacilityType`
 
-## Collegamenti
+## Test collegati
 
-- Order collega pickupFacility e deliveryFacility.
-- RoutePlan organizza soste su punti logistici.
+- `FacilityFinancialProfileTest`
+- `FacilityTest`
+
+## Ruolo nel sistema
+
+Questo package contribuisce al domain model e deve restare indipendente da database, controller REST e framework esterni.

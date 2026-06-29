@@ -1,51 +1,55 @@
 # Shipment vs TransportMission
 
-Questa è una distinzione centrale del progetto.
+## Order
+
+`TransportOrder` è la richiesta commerciale del cliente.
 
 ## Shipment
 
-`Shipment` rappresenta la spedizione generata da un ordine accettato.
+`Shipment` è la spedizione creata da un ordine accettato.
 
-Risponde a domande come:
+Contiene il concetto logistico di cosa deve essere trasportato e con quale stato.
 
-- questa spedizione esiste?
-- da quale ordine nasce?
-- qual è il cliente?
-- qual è il carico?
-- da dove parte e dove arriva?
-- è creata, pianificata, spedita, in transito, consegnata o cancellata?
+Non deve contenere direttamente tutto:
 
-Non deve sapere quale gomma è montata, quanto gasolio è stato consumato o che evento CAN-bus è arrivato.
+```text
+autista
+camion
+rimorchio
+fuel
+manutenzione
+tracking GPS
+stipendio
+```
+
+Queste cose appartengono alla missione o ad altri moduli.
 
 ## TransportMission
 
-`TransportMission` rappresenta l’esecuzione reale del trasporto.
+`TransportMission` è il viaggio reale operativo.
 
-Risponde a domande come:
+Qui entrano:
 
-- quale driver è assegnato?
-- quale convoglio parte?
-- quale route plan segue?
-- quando viene dispatchata?
-- quando viene completata?
+- assegnazione operativa;
+- mission status;
+- rotta;
+- tracking;
+- documenti;
+- chiusura;
+- collegamento con costi e payroll.
 
-## Perché il vecchio package shipment è stato eliminato
+## Perché il vecchio shipment fuori da domain è stato rimosso
 
-Il vecchio `it.gabriele.truckflow.shipment` era un duplicato fuori dal domain layer. In un progetto reale questo è pericoloso: due modelli per la stessa cosa portano bug e confusione.
+Prima esisteva un package vecchio:
 
-La soluzione corretta è avere solo:
+```text
+it.gabriele.truckflow.shipment
+```
+
+Era un modello iniziale/didattico duplicato. È stato rimosso perché la sola fonte di verità deve essere:
 
 ```text
 it.gabriele.truckflow.domain.shipment
 ```
 
-## Evoluzione futura
-
-Si può aggiungere un modello di requisiti spedizione:
-
-```text
-ShipmentRequirementType
-ShipmentRequirementSummary
-```
-
-Così `Shipment` potrà dichiarare requisiti come ADR, ATP, FIR, CMR o checklist fissaggio, mentre `TransportMission` continuerà ad assegnare persone, mezzi e rotta.
+Questo evita confusione e rende l'architettura più pulita.

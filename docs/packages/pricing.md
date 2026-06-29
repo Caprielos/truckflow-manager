@@ -1,22 +1,29 @@
-# Package `pricing` — Preventivazione costi
+# Package `pricing` — Preventivi e prezzo cliente
 
-Modella stima costi rotta, breakdown prezzo e righe economiche: base freight, fuel surcharge, pedaggi, ADR, temperatura.
+Gestisce prezzo da proporre/fatturare al cliente, voci prezzo e breakdown commerciale.
 
-## Responsabilità
+## Percorso
 
-- RouteCostEstimate genera costi tecnici.
-- PriceBreakdown aggrega righe prezzo per preventivo o fattura.
+```text
+src/main/java/it/gabriele/truckflow/domain/pricing
+```
 
 ## Classi
 
-- `CostEstimationSource` — enum con valori: `MANUAL`, `INTERNAL_MODEL`, `VIAMICHELIN`, `HERE_MAPS`, `PTV`, `GOOGLE_MAPS`, `OTHER_EXTERNAL_PROVIDER`.
-- `PriceBreakdown` — modello/domain object del package.
-- `PricingLine` — modello/domain object del package.
-- `PricingLineType` — enum con valori: `BASE_FREIGHT`, `DISTANCE_CHARGE`, `FUEL_SURCHARGE`, `TOLL_CHARGE`, `VEHICLE_WEAR_CHARGE`, `ADR_SURCHARGE`, `TEMPERATURE_CONTROL_SURCHARGE`, `WAITING_TIME_CHARGE`, `HANDLING_CHARGE`, `DISCOUNT`.
-- `PricingRules` — classe di regole pure del package.
-- `RouteCostEstimate` — modello/domain object del package.
+- `CostEstimationSource`
+- `PriceBreakdown`
+- `PricingLine`
+- `PricingLineType`
+- `PricingRules`
+- `RouteCostEstimate`
 
-## Collegamenti
+## Test collegati
 
-- RouteCostEstimate genera costi tecnici.
-- PriceBreakdown aggrega righe prezzo per preventivo o fattura.
+- `PriceBreakdownTest`
+- `PricingLineTest`
+- `PricingRulesTest`
+- `RouteCostEstimateTest`
+
+## Ruolo nel sistema
+
+Questo package contribuisce al domain model e deve restare indipendente da database, controller REST e framework esterni.

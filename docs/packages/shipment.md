@@ -1,27 +1,24 @@
-# Package `shipment` — Spedizioni
+# Package `shipment` — Spedizione
 
-Rappresenta la spedizione generata da un ordine accettato. È il collegamento commerciale/logistico tra ordine e missione operativa.
+Rappresenta la spedizione nata da un ordine accettato, con stato e regole; non contiene direttamente driver e mezzo.
 
-## Responsabilità
+## Percorso
 
-- Shipment nasce solo da TransportOrder ACCEPTED.
-- Shipment rimane commerciale/logistica; TransportMission gestisce driver, mezzo e rotta reale.
-- Il vecchio package fuori da domain è stato eliminato: ora esiste una sola sorgente corretta.
+```text
+src/main/java/it/gabriele/truckflow/domain/shipment
+```
 
 ## Classi
 
-- `Shipment` — modello/domain object del package.
-- `ShipmentRules` — classe di regole pure del package.
-- `ShipmentStatus` — enum con valori: `CREATED`, `PLANNED`, `DISPATCHED`, `IN_TRANSIT`, `DELIVERED`, `CANCELLED`.
+- `Shipment`
+- `ShipmentRules`
+- `ShipmentStatus`
 
-## Regole importanti
+## Test collegati
 
-- Una Shipment può essere creata solo da un TransportOrder ACCEPTED.
-- Transizioni valide: CREATED → PLANNED → DISPATCHED → IN_TRANSIT → DELIVERED.
-- CANCELLED è consentito solo se la spedizione non è terminale.
+- `ShipmentRulesTest`
+- `ShipmentTest`
 
-## Collegamenti
+## Ruolo nel sistema
 
-- Shipment nasce solo da TransportOrder ACCEPTED.
-- Shipment rimane commerciale/logistica; TransportMission gestisce driver, mezzo e rotta reale.
-- Il vecchio package fuori da domain è stato eliminato: ora esiste una sola sorgente corretta.
+Questo package contribuisce al domain model e deve restare indipendente da database, controller REST e framework esterni.

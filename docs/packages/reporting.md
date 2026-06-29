@@ -1,24 +1,29 @@
-# Package `reporting` — Reportistica
+# Package `reporting` — Reportistica domain
 
-Definisce report, metriche, formato e stato di generazione per viste operative, economiche e compliance.
+Modella definizioni report, metriche, formato, stato e regole di generazione logica.
 
-## Responsabilità
+## Percorso
 
-- ReportDefinition definisce cosa generare.
-- GeneratedReport rappresenta output prodotto o fallito.
+```text
+src/main/java/it/gabriele/truckflow/domain/reporting
+```
 
 ## Classi
 
-- `GeneratedReport` — modello/domain object del package.
-- `ReportDefinition` — modello/domain object del package.
-- `ReportFormat` — enum con valori: `PDF`, `CSV`, `XLSX`, `JSON`, `HTML`.
-- `ReportMetric` — modello/domain object del package.
-- `ReportMetricType` — enum con valori: `SHIPMENT_COUNT`, `COMPLETED_SHIPMENT_COUNT`, `DELAY_COUNT`, `CLAIM_COUNT`, `DOCUMENT_EXPIRATION_COUNT`, `MAINTENANCE_COUNT`, `TOTAL_DISTANCE_KM`, `TOTAL_REVENUE`, `TOTAL_COST`, `TOTAL_CO2_KG`, `VEHICLE_UTILIZATION_PERCENTAGE`, `ON_TIME_DELIVERY_PERCENTAGE`.
-- `ReportStatus` — enum con valori: `DRAFT`, `GENERATED`, `PUBLISHED`, `ARCHIVED`, `FAILED`.
-- `ReportType` — enum con valori: `OPERATIONS`, `FINANCIAL`, `FLEET`, `DRIVER`, `CUSTOMER`, `SUSTAINABILITY`, `COMPLIANCE`, `CLAIMS`, `DOCUMENTS`.
-- `ReportingRules` — classe di regole pure del package.
+- `GeneratedReport`
+- `ReportDefinition`
+- `ReportFormat`
+- `ReportMetric`
+- `ReportMetricType`
+- `ReportStatus`
+- `ReportType`
+- `ReportingRules`
 
-## Collegamenti
+## Test collegati
 
-- ReportDefinition definisce cosa generare.
-- GeneratedReport rappresenta output prodotto o fallito.
+- `GeneratedReportTest`
+- `ReportingRulesTest`
+
+## Ruolo nel sistema
+
+Questo package contribuisce al domain model e deve restare indipendente da database, controller REST e framework esterni.
