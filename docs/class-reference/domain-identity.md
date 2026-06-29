@@ -1,17 +1,110 @@
-# Package `domain.identity`
+# Domain `identity` spiegato
 
-Utenti, ruoli, permessi e stato account.
+Account utente, ruoli e permessi applicativi.
 
-## Classi
+## Classi principali
 
-| Classe | Tipo | Cosa rappresenta/fa | Metodi principali |
-| --- | --- | --- | --- |
-| IdentityRules | class | Classe di regole per validare e calcolare comportamenti nel package domain.identity. | canLogin, canBeActivated, canBeLocked, canBeDisabled, canBeDeleted, canManageUsers, canViewAudit, canManageConfiguration, canViewEconomics, canManageEconomics |
-| UserAccount | class | Classe del package domain.identity; rappresenta un concetto del modello TruckFlow. | active, invited, locked, disabled, activate, lock, disable, delete, getAccountId, getEmail |
-| UserAccountStatus | enum | Enum di stato del ciclo di vita. | canLogin, isTerminal |
-| UserPermission | enum | Enum: insieme chiuso di valori ammessi dal dominio. | isSensitive |
-| UserRole | enum | Enum: insieme chiuso di valori ammessi dal dominio. | isBackOfficeRole, isDriverPortalRole, isCustomerPortalRole, isAdministrativeRole |
+### `IdentityRules`
 
-## Come ragionare su questo package
+Tipo: `class`.
 
-Questo package contiene concetti del dominio. Le classi non dovrebbero dipendere da database o controller web. Le regole dovrebbero rimanere testabili con JUnit.
+Classe di regole: contiene controlli e decisioni di business, senza salvare dati.
+
+Metodi pubblici principali:
+
+- `canLogin()`
+- `canBeActivated()`
+- `canBeLocked()`
+- `canBeDisabled()`
+- `canBeDeleted()`
+- `canManageUsers()`
+- `canViewAudit()`
+- `canManageConfiguration()`
+- `canViewEconomics()`
+- `canManageEconomics()`
+- `canViewPayroll()`
+- `canManagePayroll()`
+
+### `UserAccount`
+
+Tipo: `class`.
+
+Classe di dominio/applicazione del package: rappresenta un concetto reale usato dal sistema.
+
+Campi principali:
+
+- `MAX_ACCOUNT_ID_LENGTH`
+- `MAX_EMAIL_LENGTH`
+- `MAX_DISPLAY_NAME_LENGTH`
+- `accountId`
+- `email`
+- `displayName`
+- `status`
+- `roles`
+- `permissions`
+- `notes`
+
+Metodi pubblici principali:
+
+- `active()`
+- `invited()`
+- `locked()`
+- `disabled()`
+- `activate()`
+- `lock()`
+- `disable()`
+- `delete()`
+- `getAccountId()`
+- `getEmail()`
+- `getDisplayName()`
+- `getStatus()`
+
+### `UserAccountStatus`
+
+Tipo: `enum`.
+
+Enum: elenco chiuso di valori ammessi per evitare stringhe libere e errori di battitura.
+
+Campi principali:
+
+- `canLogin`
+- `terminal`
+
+Metodi pubblici principali:
+
+- `canLogin()`
+- `isTerminal()`
+
+### `UserPermission`
+
+Tipo: `enum`.
+
+Enum: elenco chiuso di valori ammessi per evitare stringhe libere e errori di battitura.
+
+Campi principali:
+
+- `sensitive`
+
+Metodi pubblici principali:
+
+- `isSensitive()`
+
+### `UserRole`
+
+Tipo: `enum`.
+
+Enum: elenco chiuso di valori ammessi per evitare stringhe libere e errori di battitura.
+
+Campi principali:
+
+- `backOfficeRole`
+- `driverPortalRole`
+- `customerPortalRole`
+- `administrativeRole`
+
+Metodi pubblici principali:
+
+- `isBackOfficeRole()`
+- `isDriverPortalRole()`
+- `isCustomerPortalRole()`
+- `isAdministrativeRole()`

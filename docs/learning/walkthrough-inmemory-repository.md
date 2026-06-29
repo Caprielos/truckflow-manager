@@ -1,45 +1,63 @@
-# Walkthrough - InMemoryRepository<T>
+# Walkthrough — InMemoryRepository
 
-`InMemoryRepository<T>` è una classe generica per salvare oggetti in RAM.
+`InMemoryRepository<T>` è una base comune per repository in RAM.
 
-## Campo principale
+## Cosa significa in RAM?
 
-```java
-private final ConcurrentMap<String, T> storage = new ConcurrentHashMap<>();
-```
+I dati stanno nella memoria del programma e spariscono quando il programma termina.
 
-Significa:
+## Perché esiste?
+
+Per provare gli use case senza database.
+
+## Struttura mentale
 
 ```text
-ho una mappa che collega un id stringa a un oggetto T.
+Map<String, T>
 ```
-
-## idExtractor
-
-```java
-private final Function<T, String> idExtractor;
-```
-
-Serve per sapere come estrarre l’id da un oggetto.
 
 Esempio:
 
-```java
-new InMemoryRepository<>(ParkingSpot::getFullCode)
+```text
+"SPOT-100" → ParkingSpot
+"SHP-001" → Shipment
+"DRV-001" → Driver
 ```
 
-## save
+## Metodi principali
 
-Salva l’oggetto dentro la mappa.
+```java
+findById(String id)
+```
 
-## findById
+cerca un oggetto.
 
-Cerca nella mappa usando l’id.
+```java
+save(T aggregate)
+```
 
-## findAll
+salva un oggetto.
 
-Restituisce tutti gli oggetti salvati.
+```java
+findAll()
+```
 
-## normalizeId
+ritorna tutti gli oggetti salvati.
 
-Converte gli id in maiuscolo e rimuove spazi. Così `spot-1` e `SPOT-1` vengono trattati in modo coerente.
+```java
+clear()
+```
+
+svuota il repository.
+
+## Perché normalizza gli ID?
+
+Per evitare differenze tra:
+
+```text
+spot-100
+SPOT-100
+ Spot-100 
+```
+
+Il repository li tratta in modo coerente.

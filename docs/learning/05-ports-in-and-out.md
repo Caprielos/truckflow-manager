@@ -1,44 +1,61 @@
-# 05 - Port in e port out
+# Port/in e port/out spiegati semplice
+
+## Idea generale
+
+L'application layer è come il centro operativo.
+
+Ha due tipi di porte:
+
+```text
+port/in  → richieste che entrano nel sistema
+port/out → richieste che l'application fa verso fuori
+```
 
 ## port/in
 
-Sono le porte di ingresso. Rappresentano cosa il sistema offre.
+Contiene gli use case.
 
-Esempio:
+Esempi:
 
 ```text
 AssignParkingSpotUseCase
 PlanTransportMissionUseCase
+CalculateMissionEconomicsUseCase
 ```
 
-Significa:
-
-```text
-qualcuno dall’esterno può chiedere queste azioni.
-```
+Sono azioni che qualcuno può chiedere al sistema.
 
 ## port/out
 
-Sono le porte di uscita. Rappresentano ciò che l’application chiede all’esterno.
+Contiene repository e servizi richiesti dall'application.
 
-Esempio:
+Esempi:
 
 ```text
 ParkingSpotRepository
 DriverRepository
-ShipmentRepository
+TransportMissionRepository
 ```
 
-Significa:
+Sono cose che l'application usa per salvare o caricare dati.
+
+## Esempio parcheggio
 
 ```text
-lo use case deve leggere o salvare dati.
+Utente futuro / test
+        ↓
+port/in: AssignParkingSpotUseCase
+        ↓
+DefaultAssignParkingSpotUseCase
+        ↓
+port/out: ParkingSpotRepository
+        ↓
+InMemoryParkingSpotRepository
 ```
 
-## Schema mentale
+## Frase da ricordare
 
 ```text
-controller futuro → port/in → usecase → port/out → repository reale
+port/in = cosa puoi chiedere all'app
+port/out = cosa l'app deve chiedere fuori per lavorare
 ```
-
-Oggi il repository reale è in memoria. Domani sarà database.

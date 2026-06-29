@@ -1,19 +1,159 @@
-# Package `domain.inventory`
+# Domain `inventory` spiegato
 
-Magazzino materiali: ricambi, gomme, DPI, AdBlue, olio, movimenti e riordino.
+Magazzino: ricambi, DPI, gomme, AdBlue, scorte, movimenti e riordino.
 
-## Classi
+## Classi principali
 
-| Classe | Tipo | Cosa rappresenta/fa | Metodi principali |
-| --- | --- | --- | --- |
-| InventoryBalance | class | Classe del package domain.inventory; rappresenta un concetto del modello TruckFlow. | of, fromMovements, getItem, getLocation, getAvailableQuantity, isBelowMinimumStock, calculateStockValue, canReserve |
-| InventoryItem | class | Classe del package domain.inventory; rappresenta un concetto del modello TruckFlow. | of, getItemCode, getType, getDescription, getUnitOfMeasure, getUnitCost, getMinimumStockQuantity, getNotes, calculateStockValue, isBelowMinimumStock |
-| InventoryItemType | enum | Enum/tipo di classificazione usato nelle regole di dominio. | isSafetyCritical |
-| InventoryRules | class | Classe di regole per validare e calcolare comportamenti nel package domain.inventory. | canReserve, shouldReorder, safetyCriticalItemShouldHaveStock |
-| InventoryStockMovement | class | Classe del package domain.inventory; rappresenta un concetto del modello TruckFlow. | of, getMovementCode, getItemCode, getLocation, getType, getQuantity, getUnitCost, getOccurredAt, getReferenceNumber, getNotes |
-| StockMovementType | enum | Enum/tipo di classificazione usato nelle regole di dominio. | getSign, increasesStock, decreasesStock |
-| WarehouseLocation | class | Classe del package domain.inventory; rappresenta un concetto del modello TruckFlow. | of, getFacilityCode, getZoneCode, getShelfCode, getBinCode, getFullCode, equals, hashCode |
+### `InventoryBalance`
 
-## Come ragionare su questo package
+Tipo: `class`.
 
-Questo package contiene concetti del dominio. Le classi non dovrebbero dipendere da database o controller web. Le regole dovrebbero rimanere testabili con JUnit.
+Classe di dominio/applicazione del package: rappresenta un concetto reale usato dal sistema.
+
+Campi principali:
+
+- `item`
+- `location`
+- `availableQuantity`
+
+Metodi pubblici principali:
+
+- `of()`
+- `fromMovements()`
+- `getItem()`
+- `getLocation()`
+- `getAvailableQuantity()`
+- `isBelowMinimumStock()`
+- `calculateStockValue()`
+- `canReserve()`
+
+### `InventoryItem`
+
+Tipo: `class`.
+
+Classe di dominio/applicazione del package: rappresenta un concetto reale usato dal sistema.
+
+Campi principali:
+
+- `MAX_CODE_LENGTH`
+- `MAX_DESCRIPTION_LENGTH`
+- `MAX_UNIT_LENGTH`
+- `itemCode`
+- `type`
+- `description`
+- `unitOfMeasure`
+- `unitCost`
+- `minimumStockQuantity`
+- `notes`
+
+Metodi pubblici principali:
+
+- `of()`
+- `getItemCode()`
+- `getType()`
+- `getDescription()`
+- `getUnitOfMeasure()`
+- `getUnitCost()`
+- `getMinimumStockQuantity()`
+- `getNotes()`
+- `calculateStockValue()`
+- `isBelowMinimumStock()`
+- `equals()`
+- `hashCode()`
+
+### `InventoryItemType`
+
+Tipo: `enum`.
+
+Enum: elenco chiuso di valori ammessi per evitare stringhe libere e errori di battitura.
+
+Metodi pubblici principali:
+
+- `isSafetyCritical()`
+
+### `InventoryRules`
+
+Tipo: `class`.
+
+Classe di regole: contiene controlli e decisioni di business, senza salvare dati.
+
+Metodi pubblici principali:
+
+- `canReserve()`
+- `shouldReorder()`
+- `safetyCriticalItemShouldHaveStock()`
+
+### `InventoryStockMovement`
+
+Tipo: `class`.
+
+Classe di dominio/applicazione del package: rappresenta un concetto reale usato dal sistema.
+
+Campi principali:
+
+- `MAX_CODE_LENGTH`
+- `movementCode`
+- `itemCode`
+- `location`
+- `type`
+- `quantity`
+- `unitCost`
+- `occurredAt`
+- `referenceNumber`
+- `notes`
+
+Metodi pubblici principali:
+
+- `of()`
+- `getMovementCode()`
+- `getItemCode()`
+- `getLocation()`
+- `getType()`
+- `getQuantity()`
+- `getUnitCost()`
+- `getOccurredAt()`
+- `getReferenceNumber()`
+- `getNotes()`
+- `signedQuantity()`
+- `isRelatedTo()`
+
+### `StockMovementType`
+
+Tipo: `enum`.
+
+Enum: elenco chiuso di valori ammessi per evitare stringhe libere e errori di battitura.
+
+Campi principali:
+
+- `sign`
+
+Metodi pubblici principali:
+
+- `getSign()`
+- `increasesStock()`
+- `decreasesStock()`
+
+### `WarehouseLocation`
+
+Tipo: `class`.
+
+Classe di dominio/applicazione del package: rappresenta un concetto reale usato dal sistema.
+
+Campi principali:
+
+- `MAX_CODE_LENGTH`
+- `facilityCode`
+- `zoneCode`
+- `shelfCode`
+- `binCode`
+
+Metodi pubblici principali:
+
+- `of()`
+- `getFacilityCode()`
+- `getZoneCode()`
+- `getShelfCode()`
+- `getBinCode()`
+- `getFullCode()`
+- `equals()`
+- `hashCode()`

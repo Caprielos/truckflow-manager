@@ -1,18 +1,131 @@
-# Package `domain.contract`
+# Domain `contract` spiegato
 
-Package domain del progetto TruckFlow.
+Contratti cliente, listini, tariffe e regole prezzo commerciali.
 
-## Classi
+## Classi principali
 
-| Classe | Tipo | Cosa rappresenta/fa | Metodi principali |
-| --- | --- | --- | --- |
-| ChargeUnit | enum | Enum: insieme chiuso di valori ammessi dal dominio. | isPercentageBased |
-| ContractRateCard | class | Classe del package domain.contract; rappresenta un concetto del modello TruckFlow. | of, getRateCardCode, getName, getRules, getNotes, findRule, containsRule |
-| CustomerContract | class | Classe del package domain.contract; rappresenta un concetto del modello TruckFlow. | active, inactive, getContractCode, getCustomerCode, getValidity, getRateCard, isActive, getNotes, isValidOn, hasTariff |
-| CustomerContractRules | class | Classe di regole per validare e calcolare comportamenti nel package domain.contract. | canPriceShipmentOn, requiresManualPricingForAdr, requiresManualPricingForTemperatureControlledTransport |
-| TariffRule | class | Classe del package domain.contract; rappresenta un concetto del modello TruckFlow. | amount, percentage, getRuleCode, getType, getDescription, getUnit, getAmount, getPercentage, isMandatory, getNotes |
-| TariffRuleType | enum | Enum/tipo di classificazione usato nelle regole di dominio. | isOperationalCircumstance |
+### `ChargeUnit`
 
-## Come ragionare su questo package
+Tipo: `enum`.
 
-Questo package contiene concetti del dominio. Le classi non dovrebbero dipendere da database o controller web. Le regole dovrebbero rimanere testabili con JUnit.
+Enum: elenco chiuso di valori ammessi per evitare stringhe libere e errori di battitura.
+
+Metodi pubblici principali:
+
+- `isPercentageBased()`
+
+### `ContractRateCard`
+
+Tipo: `class`.
+
+Classe di dominio/applicazione del package: rappresenta un concetto reale usato dal sistema.
+
+Campi principali:
+
+- `MAX_CODE_LENGTH`
+- `MAX_NAME_LENGTH`
+- `rateCardCode`
+- `name`
+- `rules`
+- `notes`
+
+Metodi pubblici principali:
+
+- `of()`
+- `getRateCardCode()`
+- `getName()`
+- `getRules()`
+- `getNotes()`
+- `findRule()`
+- `containsRule()`
+
+### `CustomerContract`
+
+Tipo: `class`.
+
+Classe di dominio/applicazione del package: rappresenta un concetto reale usato dal sistema.
+
+Campi principali:
+
+- `MAX_CODE_LENGTH`
+- `contractCode`
+- `customerCode`
+- `validity`
+- `rateCard`
+- `active`
+- `notes`
+
+Metodi pubblici principali:
+
+- `active()`
+- `inactive()`
+- `getContractCode()`
+- `getCustomerCode()`
+- `getValidity()`
+- `getRateCard()`
+- `isActive()`
+- `getNotes()`
+- `isValidOn()`
+- `hasTariff()`
+- `equals()`
+- `hashCode()`
+
+### `CustomerContractRules`
+
+Tipo: `class`.
+
+Classe di regole: contiene controlli e decisioni di business, senza salvare dati.
+
+Metodi pubblici principali:
+
+- `canPriceShipmentOn()`
+- `requiresManualPricingForAdr()`
+- `requiresManualPricingForTemperatureControlledTransport()`
+
+### `TariffRule`
+
+Tipo: `class`.
+
+Classe di dominio/applicazione del package: rappresenta un concetto reale usato dal sistema.
+
+Campi principali:
+
+- `MAX_CODE_LENGTH`
+- `MAX_DESCRIPTION_LENGTH`
+- `ruleCode`
+- `type`
+- `description`
+- `unit`
+- `amount`
+- `percentage`
+- `mandatory`
+- `notes`
+
+Metodi pubblici principali:
+
+- `amount()`
+- `percentage()`
+- `getRuleCode()`
+- `getType()`
+- `getDescription()`
+- `getUnit()`
+- `getAmount()`
+- `getPercentage()`
+- `isMandatory()`
+- `getNotes()`
+- `appliesTo()`
+- `equals()`
+
+### `TariffRuleType`
+
+Tipo: `enum`.
+
+Enum: elenco chiuso di valori ammessi per evitare stringhe libere e errori di battitura.
+
+Campi principali:
+
+- `operationalCircumstance`
+
+Metodi pubblici principali:
+
+- `isOperationalCircumstance()`

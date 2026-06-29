@@ -1,53 +1,63 @@
-# Walkthrough - ApplicationResult<T>
+# Walkthrough — ApplicationResult<T>
 
-`ApplicationResult<T>` è una classe generica.
+`ApplicationResult<T>` è una scatola generica per il risultato di uno use case.
 
-## Perché esiste
+## La riga
 
-Uno use case può:
+```java
+public final class ApplicationResult<T>
+```
 
-- riuscire e restituire un valore;
-- fallire e restituire errori.
+si legge:
 
-`T` indica il tipo del valore.
+```text
+classe pubblica, non estendibile, che lavora con un tipo generico T
+```
 
-Esempi:
+## Perché T?
+
+Perché un use case può restituire cose diverse:
 
 ```java
 ApplicationResult<Shipment>
 ApplicationResult<TransportMission>
 ApplicationResult<ParkingAssignment>
+ApplicationResult<MissionEconomics>
 ```
 
-## Metodi principali
+## Campi
 
 ```java
-success(T value)
+private final T value;
+private final List<ApplicationError> errors;
+```
+
+Può avere un valore oppure errori.
+
+## Successo
+
+```java
+ApplicationResult.success(value)
 ```
 
 Crea un risultato riuscito.
 
+## Fallimento
+
 ```java
-failure(ApplicationError error)
+ApplicationResult.failure(error)
 ```
 
 Crea un risultato fallito.
 
-```java
-isSuccess()
-isFailure()
-```
-
-Permettono di sapere se l’operazione è andata bene.
+## Lettura
 
 ```java
-getValue()
+if (result.isSuccess()) {
+    var value = result.getValueOrThrow();
+}
 ```
 
-Restituisce un `Optional<T>`.
+## Perché è utile
 
-```java
-getValueOrThrow()
-```
-
-Restituisce il valore oppure lancia errore se il risultato è fallito.
+Perché evita risposte confuse e aiuta il futuro web layer a restituire errori chiari.

@@ -1,60 +1,67 @@
-# Indice documentazione
+# Documentazione TruckFlow Manager
 
-Questa cartella è organizzata per scopo.
+## Sezioni
 
-## Per un cliente o un’azienda
+### Cliente / azienda
 
-- `client/solution-overview.md`
-- `client/target-customers.md`
-- `client/service-catalog.md`
-- `client/business-value.md`
+- `client/product-brief.md`
+- `client/services-offered.md`
 - `client/future-technologies.md`
 
-## Requisiti
+### Requisiti
 
 - `requirements/functional-requirements.md`
 - `requirements/non-functional-requirements.md`
-- `requirements/roles-and-permissions.md`
-- `requirements/data-and-integration-requirements.md`
-- `requirements/assumptions-and-boundaries.md`
+- `requirements/enterprise-scope.md`
 
-## Tecnica
+### Tecnica
 
-- `technical/architecture-overview.md`
-- `technical/package-structure.md`
-- `technical/application-layer.md`
-- `technical/domain-layer.md`
-- `technical/infrastructure-memory.md`
-- `technical/scenario-tests.md`
+- `technical/architecture-complete.md`
+- `technical/how-to-read-the-app.md`
 
-## Didattica
+### Didattica
 
-- `learning/01-project-structure-for-beginners.md`
-- `learning/02-java-terms-used-in-project.md`
-- `learning/03-domain-application-infrastructure.md`
-- `learning/04-use-cases-command-and-result.md`
+- `learning/00-learning-path.md`
+- `learning/01-java-words-explained.md`
+- `learning/02-how-to-read-a-class.md`
+- `learning/03-interface-record-final-generics.md`
+- `learning/04-use-case-command-result.md`
 - `learning/05-ports-in-and-out.md`
 - `learning/06-repositories-and-memory.md`
-- `learning/07-scenario-test-explained.md`
-- `learning/08-how-to-read-a-class.md`
+- `learning/07-tests-for-beginners.md`
+- `learning/08-junit-assertions.md`
+- `learning/09-scenario-tests-explained.md`
+- `learning/10-debugging-maven-errors.md`
 
-## Riferimento classi
+### Test
 
+- `tests/testing-strategy.md`
+- `tests/how-to-read-scenario-test.md`
+
+### Package e classi
+
+- `package-guide/package-map-explained.md`
+- `package-guide/domain-packages.md`
+- `package-guide/application-packages.md`
+- `package-guide/infrastructure-packages.md`
 - `class-reference/README.md`
-- `class-reference/application.md`
-- `class-reference/infrastructure-memory.md`
-- `class-reference/domain-*.md`
+- `class-reference/all-classes-by-package.md`
 
-## Diagrammi
+### Diagrammi
 
-- `diagrams/architecture-overview.mmd`
-- `diagrams/application-parking-sequence.mmd`
-- `diagrams/domain-main-class-diagram.mmd`
-- `diagrams/economics-payroll-parking-diagram.mmd`
-- `diagrams/order-shipment-mission-flow.mmd`
+- `diagrams/README.md`
+- `diagrams/architecture-overview.md`
+- `diagrams/class-diagram-core.md`
+- `diagrams/class-diagram-application.md`
+- `diagrams/class-diagram-economics.md`
+- `diagrams/class-diagram-parking-facility.md`
+- `diagrams/class-diagram-tests.md`
+- `diagrams/package-dependency-map.md`
 
-## Operazioni
+### Git
 
-- `operations/setup-and-test.md`
-- `operations/git-commands-used.md`
-- `operations/release-checklist.md`
+- `git/git-commands-used.md`
+
+### Roadmap
+
+- `roadmap/next-steps.md`

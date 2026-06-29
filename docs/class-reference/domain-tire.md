@@ -1,20 +1,143 @@
-# Package `domain.tire`
+# Domain `tire` spiegato
 
-Pneumatici come beni tracciabili: installazione, rotazione, stato e posizione ruota.
+Gomme fisiche tracciabili, posizioni ruota, installazioni e stato pneumatico.
 
-## Classi
+## Classi principali
 
-| Classe | Tipo | Cosa rappresenta/fa | Metodi principali |
-| --- | --- | --- | --- |
-| Tire | class | Classe del package domain.tire; rappresenta un concetto del modello TruckFlow. | of, getTireCode, getStatus, getTreadDepthMillimeters, getInstalledAtKilometers, getCurrentKilometers, calculateKilometersInUse, isBelowLegalMinimum, equals, hashCode |
-| TireInstallation | class | Classe del package domain.tire; rappresenta un concetto del modello TruckFlow. | active, remove, getTire, getVehicleFleetNumber, getWheelPosition, getInstalledAt, getInstalledAtKilometers, getRemovedAt, getRemovedAtKilometers, isActive |
-| TireRotationEvent | class | Evento puntuale nella timeline operativa o audit. | of, getTireCode, getVehicleFleetNumber, getFromPosition, getToPosition, getOccurredAt, getOdometerKilometers, getNotes, equals, hashCode |
-| TireRules | class | Classe di regole per validare e calcolare comportamenti nel package domain.tire. | isLegallyUsable, shouldScheduleReplacement |
-| TireStatus | enum | Enum di stato del ciclo di vita. | - |
-| WheelPosition | class | Classe del package domain.tire; rappresenta un concetto del modello TruckFlow. | of, getAxleNumber, getSide, getSlot, formatLabel, equals, hashCode |
-| WheelSide | enum | Enum: insieme chiuso di valori ammessi dal dominio. | - |
-| WheelSlot | enum | Enum: insieme chiuso di valori ammessi dal dominio. | - |
+### `Tire`
 
-## Come ragionare su questo package
+Tipo: `class`.
 
-Questo package contiene concetti del dominio. Le classi non dovrebbero dipendere da database o controller web. Le regole dovrebbero rimanere testabili con JUnit.
+Classe flotta: modella mezzi, rimorchi, gomme, tecnica o acquisto asset.
+
+Campi principali:
+
+- `tireCode`
+- `status`
+- `treadDepthMillimeters`
+- `installedAtKilometers`
+- `currentKilometers`
+
+Metodi pubblici principali:
+
+- `of()`
+- `getTireCode()`
+- `getStatus()`
+- `getTreadDepthMillimeters()`
+- `getInstalledAtKilometers()`
+- `getCurrentKilometers()`
+- `calculateKilometersInUse()`
+- `isBelowLegalMinimum()`
+- `equals()`
+- `hashCode()`
+
+### `TireInstallation`
+
+Tipo: `class`.
+
+Classe flotta: modella mezzi, rimorchi, gomme, tecnica o acquisto asset.
+
+Campi principali:
+
+- `tire`
+- `vehicleFleetNumber`
+- `wheelPosition`
+- `installedAt`
+- `installedAtKilometers`
+- `removedAt`
+- `removedAtKilometers`
+
+Metodi pubblici principali:
+
+- `active()`
+- `remove()`
+- `getTire()`
+- `getVehicleFleetNumber()`
+- `getWheelPosition()`
+- `getInstalledAt()`
+- `getInstalledAtKilometers()`
+- `getRemovedAt()`
+- `getRemovedAtKilometers()`
+- `isActive()`
+- `calculateKilometersMounted()`
+- `equals()`
+
+### `TireRotationEvent`
+
+Tipo: `class`.
+
+Classe flotta: modella mezzi, rimorchi, gomme, tecnica o acquisto asset.
+
+Campi principali:
+
+- `tireCode`
+- `vehicleFleetNumber`
+- `fromPosition`
+- `toPosition`
+- `occurredAt`
+- `odometerKilometers`
+- `notes`
+
+Metodi pubblici principali:
+
+- `of()`
+- `getTireCode()`
+- `getVehicleFleetNumber()`
+- `getFromPosition()`
+- `getToPosition()`
+- `getOccurredAt()`
+- `getOdometerKilometers()`
+- `getNotes()`
+- `equals()`
+- `hashCode()`
+
+### `TireRules`
+
+Tipo: `class`.
+
+Classe di regole: contiene controlli e decisioni di business, senza salvare dati.
+
+Metodi pubblici principali:
+
+- `isLegallyUsable()`
+- `shouldScheduleReplacement()`
+
+### `TireStatus`
+
+Tipo: `enum`.
+
+Enum: elenco chiuso di valori ammessi per evitare stringhe libere e errori di battitura.
+
+### `WheelPosition`
+
+Tipo: `class`.
+
+Classe di dominio/applicazione del package: rappresenta un concetto reale usato dal sistema.
+
+Campi principali:
+
+- `axleNumber`
+- `side`
+- `slot`
+
+Metodi pubblici principali:
+
+- `of()`
+- `getAxleNumber()`
+- `getSide()`
+- `getSlot()`
+- `formatLabel()`
+- `equals()`
+- `hashCode()`
+
+### `WheelSide`
+
+Tipo: `enum`.
+
+Enum: elenco chiuso di valori ammessi per evitare stringhe libere e errori di battitura.
+
+### `WheelSlot`
+
+Tipo: `enum`.
+
+Enum: elenco chiuso di valori ammessi per evitare stringhe libere e errori di battitura.

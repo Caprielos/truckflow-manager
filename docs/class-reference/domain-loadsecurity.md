@@ -1,16 +1,61 @@
-# Package `domain.loadsecurity`
+# Domain `loadsecurity` spiegato
 
-Fissaggio carico: attrezzature, checklist e regole.
+Fissaggio carico, attrezzature e checklist sicurezza carico.
 
-## Classi
+## Classi principali
 
-| Classe | Tipo | Cosa rappresenta/fa | Metodi principali |
-| --- | --- | --- | --- |
-| LoadSecuringChecklist | class | Classe del package domain.loadsecurity; rappresenta un concetto del modello TruckFlow. | of, getEquipment, countByType, hasAtLeast |
-| LoadSecuringEquipment | class | Classe del package domain.loadsecurity; rappresenta un concetto del modello TruckFlow. | of, getType, getQuantity, getCapacityDan, totalCapacityDan, equals, hashCode |
-| LoadSecuringEquipmentType | enum | Enum/tipo di classificazione usato nelle regole di dominio. | - |
-| LoadSecuringRules | class | Classe di regole per validare e calcolare comportamenti nel package domain.loadsecurity. | hasMinimumEquipmentForCargo, estimateMinimumStraps |
+### `LoadSecuringChecklist`
 
-## Come ragionare su questo package
+Tipo: `class`.
 
-Questo package contiene concetti del dominio. Le classi non dovrebbero dipendere da database o controller web. Le regole dovrebbero rimanere testabili con JUnit.
+Classe di dominio/applicazione del package: rappresenta un concetto reale usato dal sistema.
+
+Campi principali:
+
+- `equipment`
+
+Metodi pubblici principali:
+
+- `of()`
+- `getEquipment()`
+- `countByType()`
+- `hasAtLeast()`
+
+### `LoadSecuringEquipment`
+
+Tipo: `class`.
+
+Classe di dominio/applicazione del package: rappresenta un concetto reale usato dal sistema.
+
+Campi principali:
+
+- `type`
+- `quantity`
+- `capacityDan`
+
+Metodi pubblici principali:
+
+- `of()`
+- `getType()`
+- `getQuantity()`
+- `getCapacityDan()`
+- `totalCapacityDan()`
+- `equals()`
+- `hashCode()`
+
+### `LoadSecuringEquipmentType`
+
+Tipo: `enum`.
+
+Enum: elenco chiuso di valori ammessi per evitare stringhe libere e errori di battitura.
+
+### `LoadSecuringRules`
+
+Tipo: `class`.
+
+Classe di regole: contiene controlli e decisioni di business, senza salvare dati.
+
+Metodi pubblici principali:
+
+- `hasMinimumEquipmentForCargo()`
+- `estimateMinimumStraps()`

@@ -2,46 +2,47 @@
 
 ## Stato attuale
 
-Il progetto ora ha:
+Il progetto ha:
 
-- domain molto ricco;
+- domain ricco;
 - application layer;
 - repository port;
-- infrastructure memory;
-- test di scenario.
+- infrastructure/memory;
+- test unitari e scenario test;
+- documentazione tecnica/didattica/cliente.
 
 ## Prossimo step consigliato
 
 ### 1. Web REST API
 
-Aggiungere controller REST con Spring Boot.
+Aggiungere Spring Boot e controller REST.
 
-Esempi:
+Endpoint esempi:
 
 ```text
 POST /parking/assignments
-POST /shipments/from-order
 POST /missions/plan
-POST /missions/{id}/close
-GET /economics/missions/{id}
+POST /inventory/movements
+GET /missions/{id}/economics
+GET /drivers/{id}/payroll
 ```
 
-### 2. DTO e mapper
-
-Creare classi request/response separate dal domain.
-
-### 3. Database
+### 2. Infrastructure database
 
 Aggiungere PostgreSQL e repository persistenti.
 
-### 4. Sicurezza
+### 3. Security
 
-Aggiungere autenticazione, ruoli e permessi.
+Aggiungere login, ruoli e permessi.
 
-### 5. Generazione documenti
+### 4. PDF/documenti
 
-Generare PDF per DDT, CMR, POD e report missione.
+Generare DDT, CMR, POD, report missione e fatture.
 
-### 6. Frontend
+### 5. Import reali
 
-Creare dashboard web per dispatch, flotta, economics e magazzino.
+Integrare file CSV o API per carburante, pedaggi, banca, telematica.
+
+## Cosa non fare ora
+
+Non aggiungere infinite classi domain senza use case. Il domain è già ampio. Ora serve rendere l'app usabile tramite API e database.

@@ -1,13 +1,31 @@
-# Package `domain.drivetime`
+# Domain `drivetime` spiegato
 
-Regole su ore guida e riposo.
+Regole ore guida, riposo e limiti operativi.
 
-## Classi
+## Classi principali
 
-| Classe | Tipo | Cosa rappresenta/fa | Metodi principali |
-| --- | --- | --- | --- |
-| DriverTimeRules | class | Classe di regole per validare e calcolare comportamenti nel package domain.drivetime. | requiresBreakAfter, isWithinStandardDailyDriving, isWithinExtendedDailyDriving, requiredBreak, standardDailyRest, isWithinWeeklyDriving, isWithinTwoWeekDriving |
+### `DriverTimeRules`
 
-## Come ragionare su questo package
+Tipo: `class`.
 
-Questo package contiene concetti del dominio. Le classi non dovrebbero dipendere da database o controller web. Le regole dovrebbero rimanere testabili con JUnit.
+Classe di regole: contiene controlli e decisioni di business, senza salvare dati.
+
+Campi principali:
+
+- `MAX_CONTINUOUS_DRIVING`
+- `STANDARD_DAILY_DRIVING`
+- `EXTENDED_DAILY_DRIVING`
+- `REQUIRED_BREAK`
+- `STANDARD_DAILY_REST`
+- `MAX_WEEKLY_DRIVING`
+- `MAX_TWO_WEEK_DRIVING`
+
+Metodi pubblici principali:
+
+- `requiresBreakAfter()`
+- `isWithinStandardDailyDriving()`
+- `isWithinExtendedDailyDriving()`
+- `requiredBreak()`
+- `standardDailyRest()`
+- `isWithinWeeklyDriving()`
+- `isWithinTwoWeekDriving()`

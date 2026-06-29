@@ -1,13 +1,19 @@
-# Package `domain.compliance`
+# Domain `compliance` spiegato
 
-Regole trasversali di conformità.
+Regole generali di conformità tra cargo, driver, veicolo e documenti.
 
-## Classi
+## Classi principali
 
-| Classe | Tipo | Cosa rappresenta/fa | Metodi principali |
-| --- | --- | --- | --- |
-| ComplianceRules | class | Classe di regole per validare e calcolare comportamenti nel package domain.compliance. | isVehicleCompliantForShipment, isDriverCompliantForShipment, isRouteCompliantForShipment, isAssignmentCompliant, requiresSpecialComplianceChecks |
+### `ComplianceRules`
 
-## Come ragionare su questo package
+Tipo: `class`.
 
-Questo package contiene concetti del dominio. Le classi non dovrebbero dipendere da database o controller web. Le regole dovrebbero rimanere testabili con JUnit.
+Classe di regole: contiene controlli e decisioni di business, senza salvare dati.
+
+Metodi pubblici principali:
+
+- `isVehicleCompliantForShipment()`
+- `isDriverCompliantForShipment()`
+- `isRouteCompliantForShipment()`
+- `isAssignmentCompliant()`
+- `requiresSpecialComplianceChecks()`

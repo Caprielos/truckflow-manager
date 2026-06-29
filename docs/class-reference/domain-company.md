@@ -1,16 +1,73 @@
-# Package `domain.company`
+# Domain `company` spiegato
 
-Azienda di trasporto e licenze operative.
+Azienda di trasporto, licenze aziendali e autorizzazioni operative.
 
-## Classi
+## Classi principali
 
-| Classe | Tipo | Cosa rappresenta/fa | Metodi principali |
-| --- | --- | --- | --- |
-| CompanyComplianceRules | class | Classe di regole per validare e calcolare comportamenti nel package domain.company. | hasBaseRoadHaulageAuthorizations, canOperateInternationalTransport, canTransportCargo |
-| CompanyLicense | class | Classe del package domain.company; rappresenta un concetto del modello TruckFlow. | of, getType, getExpiresAt, getNotes, isValidOn, equals, hashCode |
-| CompanyLicenseType | enum | Enum/tipo di classificazione usato nelle regole di dominio. | - |
-| TransportCompany | class | Classe del package domain.company; rappresenta un concetto del modello TruckFlow. | of, getCompanyCode, getBusinessName, getVatNumber, getLicenses, getNotes, hasLicense, hasValidLicense, hasAnyValidEnvironmentalLicense |
+### `CompanyComplianceRules`
 
-## Come ragionare su questo package
+Tipo: `class`.
 
-Questo package contiene concetti del dominio. Le classi non dovrebbero dipendere da database o controller web. Le regole dovrebbero rimanere testabili con JUnit.
+Classe di regole: contiene controlli e decisioni di business, senza salvare dati.
+
+Metodi pubblici principali:
+
+- `hasBaseRoadHaulageAuthorizations()`
+- `canOperateInternationalTransport()`
+- `canTransportCargo()`
+
+### `CompanyLicense`
+
+Tipo: `class`.
+
+Classe di dominio/applicazione del package: rappresenta un concetto reale usato dal sistema.
+
+Campi principali:
+
+- `type`
+- `expiresAt`
+- `notes`
+
+Metodi pubblici principali:
+
+- `of()`
+- `getType()`
+- `getExpiresAt()`
+- `getNotes()`
+- `isValidOn()`
+- `equals()`
+- `hashCode()`
+
+### `CompanyLicenseType`
+
+Tipo: `enum`.
+
+Enum: elenco chiuso di valori ammessi per evitare stringhe libere e errori di battitura.
+
+### `TransportCompany`
+
+Tipo: `class`.
+
+Classe di dominio/applicazione del package: rappresenta un concetto reale usato dal sistema.
+
+Campi principali:
+
+- `MAX_CODE_LENGTH`
+- `MAX_NAME_LENGTH`
+- `companyCode`
+- `businessName`
+- `vatNumber`
+- `licenses`
+- `notes`
+
+Metodi pubblici principali:
+
+- `of()`
+- `getCompanyCode()`
+- `getBusinessName()`
+- `getVatNumber()`
+- `getLicenses()`
+- `getNotes()`
+- `hasLicense()`
+- `hasValidLicense()`
+- `hasAnyValidEnvironmentalLicense()`

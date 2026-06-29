@@ -1,37 +1,50 @@
-# TruckFlow Manager
+# TruckFlow Manager — Documentazione enterprise e didattica
 
-TruckFlow Manager è un progetto Java pensato come base di un gestionale reale per aziende di trasporto, logistica e gestione flotta.
+Questa documentazione è stata riscritta per avere tre letture diverse dello stesso progetto:
 
-Questa documentazione contiene tre livelli:
+1. **Lettura aziendale / cliente**: che problema risolve TruckFlow Manager, a chi serve, quali servizi offre.
+2. **Lettura tecnica**: architettura, package, classi, use case, repository e test.
+3. **Lettura didattica**: spiegazione molto semplice dei termini Java e del ragionamento tra le classi.
 
-1. **Documentazione cliente / business**: spiega a cosa serve l’applicazione, a chi è rivolta, quali servizi offre e quali requisiti copre.
-2. **Documentazione tecnica**: spiega architettura, package, classi, use case, repository e infrastruttura in memoria.
-3. **Documentazione didattica**: spiega il codice in modo semplice, anche per chi sta imparando Java e architettura software.
+Il progetto attuale contiene:
 
-## Stato attuale
+- **264 classi domain** circa, divise per area aziendale.
+- **73 classi application** tra use case, port e classi comuni.
+- **46 classi infrastructure/memory** per provare il sistema senza database.
+- **94 file di test**.
+- Report Maven nel progetto zippato: **823 test, 0 failure, 0 errori, 0 skipped**.
 
-- Linguaggio: Java 21
-- Build: Maven
-- Test: JUnit 5
-- Classi main rilevate: 384
-- Classi test rilevate: 94
-- Test Maven nel report incluso nello zip: 823 test, 0 failure, 0 errori, 0 skipped
+## Da dove iniziare
 
-## Cartelle principali
+Se vuoi capire il progetto come portfolio/backend:
 
-```text
-src/main/java/it/gabriele/truckflow/domain
-src/main/java/it/gabriele/truckflow/application
-src/main/java/it/gabriele/truckflow/infrastructure/memory
-src/test/java/it/gabriele/truckflow
+1. `docs/START-HERE.md`
+2. `docs/client/product-brief.md`
+3. `docs/technical/architecture-complete.md`
+4. `docs/package-guide/package-map-explained.md`
+5. `docs/learning/00-learning-path.md`
+
+Se vuoi imparare il codice:
+
+1. `docs/learning/01-java-words-explained.md`
+2. `docs/learning/02-how-to-read-a-class.md`
+3. `docs/learning/03-interface-record-final-generics.md`
+4. `docs/learning/04-use-case-command-result.md`
+5. `docs/learning/05-tests-for-beginners.md`
+
+Se vuoi vedere i diagrammi:
+
+- `docs/diagrams/README.md`
+- `docs/diagrams/class-diagram-core.md`
+- `docs/diagrams/class-diagram-application.md`
+- `docs/diagrams/class-diagram-economics.md`
+- `docs/diagrams/class-diagram-parking-facility.md`
+- `docs/diagrams/class-diagram-tests.md`
+
+## Comando principale di verifica
+
+```bash
+mvn clean test
 ```
 
-## Lettura consigliata
-
-1. `docs/client/solution-overview.md`
-2. `docs/requirements/functional-requirements.md`
-3. `docs/technical/architecture-overview.md`
-4. `docs/learning/01-project-structure-for-beginners.md`
-5. `docs/learning/04-use-cases-command-and-result.md`
-6. `docs/class-reference/README.md`
-7. `docs/operations/git-commands-used.md`
+Questo comando compila il progetto ed esegue tutti i test.

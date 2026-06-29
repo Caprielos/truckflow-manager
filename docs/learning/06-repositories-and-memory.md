@@ -1,8 +1,8 @@
-# 06 - Repository e memoria
+# Repository e memoria
 
 ## Repository
 
-Un repository è un oggetto che salva e carica altri oggetti.
+Un repository è una classe/interfaccia che rappresenta una raccolta di oggetti salvati.
 
 Esempio:
 
@@ -10,22 +10,47 @@ Esempio:
 ParkingSpotRepository
 ```
 
-può trovare un posto parcheggio.
+Significa: posso cercare e salvare posti parcheggio.
 
-## Repository in memoria
+## Repository port
 
-`InMemoryParkingSpotRepository` salva i dati in RAM.
+Nel package `application/port/out`, i repository sono solo interfacce.
 
-Internamente la classe base usa:
+Non dicono ancora dove stanno i dati.
+
+## InMemory repository
+
+Nel package `infrastructure/memory`, i repository salvano dati in RAM.
+
+Esempio:
 
 ```java
-ConcurrentHashMap<String, T>
+InMemoryParkingSpotRepository
 ```
 
-## Perché usarlo
+Serve per test e demo.
 
-Perché permette di provare gli use case senza database.
+## RAM non è database
 
-## Limite
+I dati in memoria spariscono quando il programma finisce.
 
-Se chiudi il programma, i dati spariscono.
+Però sono utilissimi perché permettono di testare gli use case senza PostgreSQL, file, server o Spring.
+
+## Map
+
+Alla base c'è una struttura tipo:
+
+```text
+id → oggetto
+```
+
+Esempio:
+
+```text
+"SPOT-100" → ParkingSpot
+"DRV-001" → Driver
+```
+
+## Perché usare memoria prima del database?
+
+Perché prima vogliamo capire se la logica funziona. Il database arriva dopo.

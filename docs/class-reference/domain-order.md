@@ -1,15 +1,71 @@
-# Package `domain.order`
+# Domain `order` spiegato
 
-Ordini di trasporto: richiesta commerciale prima della spedizione.
+Ordini di trasporto commerciali prima della spedizione.
 
-## Classi
+## Classi principali
 
-| Classe | Tipo | Cosa rappresenta/fa | Metodi principali |
-| --- | --- | --- | --- |
-| TransportOrder | class | Classe del package domain.order; rappresenta un concetto del modello TruckFlow. | draft, submitted, getOrderNumber, getCustomerAccount, getCargoLoad, getPickupFacility, getDeliveryFacility, getPickupWindow, getDeliveryWindow, getServiceType |
-| TransportOrderStatus | enum | Enum di stato del ciclo di vita. | isTerminal |
-| TransportServiceType | enum | Enum/tipo di classificazione usato nelle regole di dominio. | supportsTemperatureControl, supportsHazardousMaterial |
+### `TransportOrder`
 
-## Come ragionare su questo package
+Tipo: `class`.
 
-Questo package contiene concetti del dominio. Le classi non dovrebbero dipendere da database o controller web. Le regole dovrebbero rimanere testabili con JUnit.
+Classe di dominio/applicazione del package: rappresenta un concetto reale usato dal sistema.
+
+Campi principali:
+
+- `MAX_ORDER_NUMBER_LENGTH`
+- `orderNumber`
+- `customerAccount`
+- `cargoLoad`
+- `pickupFacility`
+- `deliveryFacility`
+- `pickupWindow`
+- `deliveryWindow`
+- `serviceType`
+- `quotedPrice`
+- `status`
+- `notes`
+
+Metodi pubblici principali:
+
+- `draft()`
+- `submitted()`
+- `getOrderNumber()`
+- `getCustomerAccount()`
+- `getCargoLoad()`
+- `getPickupFacility()`
+- `getDeliveryFacility()`
+- `getPickupWindow()`
+- `getDeliveryWindow()`
+- `getServiceType()`
+- `getQuotedPrice()`
+- `getStatus()`
+
+### `TransportOrderStatus`
+
+Tipo: `enum`.
+
+Enum: elenco chiuso di valori ammessi per evitare stringhe libere e errori di battitura.
+
+Campi principali:
+
+- `terminal`
+
+Metodi pubblici principali:
+
+- `isTerminal()`
+
+### `TransportServiceType`
+
+Tipo: `enum`.
+
+Enum: elenco chiuso di valori ammessi per evitare stringhe libere e errori di battitura.
+
+Campi principali:
+
+- `supportsTemperatureControl`
+- `supportsHazardousMaterial`
+
+Metodi pubblici principali:
+
+- `supportsTemperatureControl()`
+- `supportsHazardousMaterial()`

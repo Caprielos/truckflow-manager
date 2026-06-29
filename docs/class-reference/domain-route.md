@@ -1,16 +1,93 @@
-# Package `domain.route`
+# Domain `route` spiegato
 
-Piano di viaggio con fermate, distanze e finestre temporali.
+Tappe, pianificazione route e regole di percorso.
 
-## Classi
+## Classi principali
 
-| Classe | Tipo | Cosa rappresenta/fa | Metodi principali |
-| --- | --- | --- | --- |
-| RoutePlan | class | Piano composto da più elementi e usato per organizzare un processo operativo. | of, getRouteNumber, getStops, getEstimatedDistance, getNotes, getStopCount, getStartStop, getEndStop, getCargoOperationStops, hasPickupStop |
-| RoutePlanRules | class | Classe di regole per validare e calcolare comportamenti nel package domain.route. | hasCargoOperations, hasPickupAndDelivery, isWithinMaxDistance, startsAndEndsAtDifferentFacilities, usesOnlyActiveFacilities, isInternational, isOperationallyUsable |
-| RouteStop | class | Classe del package domain.route; rappresenta un concetto del modello TruckFlow. | of, getSequenceNumber, getType, getFacility, getPlannedTimeWindow, getNotes, isStart, isEnd, isPickup, isDelivery |
-| RouteStopType | enum | Enum/tipo di classificazione usato nelle regole di dominio. | isCargoOperation |
+### `RoutePlan`
 
-## Come ragionare su questo package
+Tipo: `class`.
 
-Questo package contiene concetti del dominio. Le classi non dovrebbero dipendere da database o controller web. Le regole dovrebbero rimanere testabili con JUnit.
+Classe di dominio/applicazione del package: rappresenta un concetto reale usato dal sistema.
+
+Campi principali:
+
+- `MAX_ROUTE_NUMBER_LENGTH`
+- `routeNumber`
+- `stops`
+- `estimatedDistance`
+- `notes`
+
+Metodi pubblici principali:
+
+- `of()`
+- `getRouteNumber()`
+- `getStops()`
+- `getEstimatedDistance()`
+- `getNotes()`
+- `getStopCount()`
+- `getStartStop()`
+- `getEndStop()`
+- `getCargoOperationStops()`
+- `hasPickupStop()`
+- `hasDeliveryStop()`
+- `isInternational()`
+
+### `RoutePlanRules`
+
+Tipo: `class`.
+
+Classe di regole: contiene controlli e decisioni di business, senza salvare dati.
+
+Metodi pubblici principali:
+
+- `hasCargoOperations()`
+- `hasPickupAndDelivery()`
+- `isWithinMaxDistance()`
+- `startsAndEndsAtDifferentFacilities()`
+- `usesOnlyActiveFacilities()`
+- `isInternational()`
+- `isOperationallyUsable()`
+
+### `RouteStop`
+
+Tipo: `class`.
+
+Classe di dominio/applicazione del package: rappresenta un concetto reale usato dal sistema.
+
+Campi principali:
+
+- `sequenceNumber`
+- `type`
+- `facility`
+- `plannedTimeWindow`
+- `notes`
+
+Metodi pubblici principali:
+
+- `of()`
+- `getSequenceNumber()`
+- `getType()`
+- `getFacility()`
+- `getPlannedTimeWindow()`
+- `getNotes()`
+- `isStart()`
+- `isEnd()`
+- `isPickup()`
+- `isDelivery()`
+- `isCargoOperation()`
+- `isAtSameFacility()`
+
+### `RouteStopType`
+
+Tipo: `enum`.
+
+Enum: elenco chiuso di valori ammessi per evitare stringhe libere e errori di battitura.
+
+Campi principali:
+
+- `cargoOperation`
+
+Metodi pubblici principali:
+
+- `isCargoOperation()`

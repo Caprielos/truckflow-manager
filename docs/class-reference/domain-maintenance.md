@@ -1,18 +1,148 @@
-# Package `domain.maintenance`
+# Domain `maintenance` spiegato
 
-Manutenzione, ticket difetti autista, fermi veicolo e ordini di lavoro.
+Manutenzione veicoli, ordini lavoro, scadenze e ticket difetti driver.
 
-## Classi
+## Classi principali
 
-| Classe | Tipo | Cosa rappresenta/fa | Metodi principali |
-| --- | --- | --- | --- |
-| DriverDefectTicket | class | Classe del package domain.maintenance; rappresenta un concetto del modello TruckFlow. | of, getTicketNumber, getVehicleFleetNumber, getDriverCode, getReportedAt, getDefectDescription, isVehicleBlocked, getNotes, equals, hashCode |
-| MaintenanceRules | class | Classe di regole per validare e calcolare comportamenti nel package domain.maintenance. | canBeScheduled, canBeStarted, canBeCompleted, canBeCancelled, blocksVehicleAvailability, shouldMakeVehicleUnavailable, requiresAdrSpecialist, requiresTireService, isTerminal |
-| MaintenanceStatus | enum | Enum di stato del ciclo di vita. | isTerminal, blocksVehicleAvailability |
-| MaintenanceType | enum | Enum/tipo di classificazione usato nelle regole di dominio. | isPlannedMaintenance, isSafetyCritical, isTireRelated, isAdrRelated |
-| MaintenanceWorkOrder | class | Classe del package domain.maintenance; rappresenta un concetto del modello TruckFlow. | open, scheduled, schedule, start, complete, cancel, getWorkOrderNumber, getVehicle, getType, getStatus |
-| VehicleDowntime | class | Classe del package domain.maintenance; rappresenta un concetto del modello TruckFlow. | of, getVehicleFleetNumber, getStartedAt, getEndedAt, getPartsCost, getLaborCost, getNotes, isOpen, calculateTotalCost, equals |
+### `DriverDefectTicket`
 
-## Come ragionare su questo package
+Tipo: `class`.
 
-Questo package contiene concetti del dominio. Le classi non dovrebbero dipendere da database o controller web. Le regole dovrebbero rimanere testabili con JUnit.
+Classe legata all’autista, alle sue abilitazioni o al suo costo operativo.
+
+Campi principali:
+
+- `ticketNumber`
+- `vehicleFleetNumber`
+- `driverCode`
+- `reportedAt`
+- `defectDescription`
+- `vehicleBlocked`
+- `notes`
+
+Metodi pubblici principali:
+
+- `of()`
+- `getTicketNumber()`
+- `getVehicleFleetNumber()`
+- `getDriverCode()`
+- `getReportedAt()`
+- `getDefectDescription()`
+- `isVehicleBlocked()`
+- `getNotes()`
+- `equals()`
+- `hashCode()`
+
+### `MaintenanceRules`
+
+Tipo: `class`.
+
+Classe di regole: contiene controlli e decisioni di business, senza salvare dati.
+
+Metodi pubblici principali:
+
+- `canBeScheduled()`
+- `canBeStarted()`
+- `canBeCompleted()`
+- `canBeCancelled()`
+- `blocksVehicleAvailability()`
+- `shouldMakeVehicleUnavailable()`
+- `requiresAdrSpecialist()`
+- `requiresTireService()`
+- `isTerminal()`
+
+### `MaintenanceStatus`
+
+Tipo: `enum`.
+
+Enum: elenco chiuso di valori ammessi per evitare stringhe libere e errori di battitura.
+
+Campi principali:
+
+- `terminal`
+- `blockingVehicleAvailability`
+
+Metodi pubblici principali:
+
+- `isTerminal()`
+- `blocksVehicleAvailability()`
+
+### `MaintenanceType`
+
+Tipo: `enum`.
+
+Enum: elenco chiuso di valori ammessi per evitare stringhe libere e errori di battitura.
+
+Campi principali:
+
+- `plannedMaintenance`
+- `safetyCritical`
+- `tireRelated`
+- `adrRelated`
+
+Metodi pubblici principali:
+
+- `isPlannedMaintenance()`
+- `isSafetyCritical()`
+- `isTireRelated()`
+- `isAdrRelated()`
+
+### `MaintenanceWorkOrder`
+
+Tipo: `class`.
+
+Classe di dominio/applicazione del package: rappresenta un concetto reale usato dal sistema.
+
+Campi principali:
+
+- `MAX_WORK_ORDER_NUMBER_LENGTH`
+- `workOrderNumber`
+- `vehicle`
+- `type`
+- `status`
+- `plannedDateRange`
+- `notes`
+
+Metodi pubblici principali:
+
+- `open()`
+- `scheduled()`
+- `schedule()`
+- `start()`
+- `complete()`
+- `cancel()`
+- `getWorkOrderNumber()`
+- `getVehicle()`
+- `getType()`
+- `getStatus()`
+- `getPlannedDateRange()`
+- `getNotes()`
+
+### `VehicleDowntime`
+
+Tipo: `class`.
+
+Classe flotta: modella mezzi, rimorchi, gomme, tecnica o acquisto asset.
+
+Campi principali:
+
+- `vehicleFleetNumber`
+- `startedAt`
+- `endedAt`
+- `partsCost`
+- `laborCost`
+- `notes`
+
+Metodi pubblici principali:
+
+- `of()`
+- `getVehicleFleetNumber()`
+- `getStartedAt()`
+- `getEndedAt()`
+- `getPartsCost()`
+- `getLaborCost()`
+- `getNotes()`
+- `isOpen()`
+- `calculateTotalCost()`
+- `equals()`
+- `hashCode()`

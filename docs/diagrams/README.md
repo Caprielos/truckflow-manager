@@ -1,11 +1,15 @@
 # Diagrammi
 
-I file `.mmd` sono diagrammi Mermaid. Puoi visualizzarli in GitHub, IntelliJ con plugin Mermaid, oppure in editor online Mermaid.
+I diagrammi sono scritti in Mermaid dentro file Markdown.
 
-## File disponibili
+GitHub spesso renderizza Mermaid automaticamente. In IntelliJ puoi usare un plugin Mermaid o copiare il blocco in un viewer online.
 
-- `architecture-overview.mmd`
-- `application-parking-sequence.mmd`
-- `domain-main-class-diagram.mmd`
-- `economics-payroll-parking-diagram.mmd`
-- `order-shipment-mission-flow.mmd`
+## Diagrammi disponibili
+
+- `architecture-overview.md`
+- `class-diagram-core.md`
+- `class-diagram-application.md`
+- `class-diagram-economics.md`
+- `class-diagram-parking-facility.md`
+- `class-diagram-tests.md`
+- `package-dependency-map.md`

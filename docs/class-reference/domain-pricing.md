@@ -1,18 +1,151 @@
-# Package `domain.pricing`
+# Domain `pricing` spiegato
 
-Prezzo/preventivo verso il cliente e breakdown commerciale.
+Preventivi e breakdown prezzo cliente.
 
-## Classi
+## Classi principali
 
-| Classe | Tipo | Cosa rappresenta/fa | Metodi principali |
-| --- | --- | --- | --- |
-| CostEstimationSource | enum | Enum: insieme chiuso di valori ammessi dal dominio. | isExternalProvider, isManual |
-| PriceBreakdown | class | Classe del package domain.pricing; rappresenta un concetto del modello TruckFlow. | of, getQuoteNumber, getLines, getNotes, getLineCount, hasNotes, hasDiscounts, hasSurcharges, hasLineType, getChargeLines |
-| PricingLine | class | Riga di dettaglio: rappresenta una voce numerabile/economica/documentale. | of, baseFreight, surcharge, discount, fuelFromEstimate, tollsFromEstimate, vehicleWearFromEstimate, getLineCode, getType, getDescription |
-| PricingLineType | enum | Enum/tipo di classificazione usato nelle regole di dominio. | isSurcharge, isDiscount, increasesTotal, decreasesTotal |
-| PricingRules | class | Classe di regole per validare e calcolare comportamenti nel package domain.pricing. | requiresAdrSurcharge, requiresTemperatureControlSurcharge, requiresInternationalSurcharge, hasDiscounts, hasSurcharges, hasBaseFreightLine, hasFuelSurchargeLine, hasTollChargeLine, hasVehicleWearChargeLine, hasAdrSurchargeLine |
-| RouteCostEstimate | class | Stima calcolata prima del dato finale effettivo. | of, getEstimateCode, getSource, getEstimatedDistance, getEstimatedFuelCost, getEstimatedTollCost, getEstimatedVehicleWearCost, getNotes, isFromExternalProvider, isManualEstimate |
+### `CostEstimationSource`
 
-## Come ragionare su questo package
+Tipo: `enum`.
 
-Questo package contiene concetti del dominio. Le classi non dovrebbero dipendere da database o controller web. Le regole dovrebbero rimanere testabili con JUnit.
+Enum: elenco chiuso di valori ammessi per evitare stringhe libere e errori di battitura.
+
+Campi principali:
+
+- `externalProvider`
+
+Metodi pubblici principali:
+
+- `isExternalProvider()`
+- `isManual()`
+
+### `PriceBreakdown`
+
+Tipo: `class`.
+
+Classe di dominio/applicazione del package: rappresenta un concetto reale usato dal sistema.
+
+Campi principali:
+
+- `MAX_QUOTE_NUMBER_LENGTH`
+- `quoteNumber`
+- `lines`
+- `notes`
+- `reference`
+- `total`
+
+Metodi pubblici principali:
+
+- `of()`
+- `getQuoteNumber()`
+- `getLines()`
+- `getNotes()`
+- `getLineCount()`
+- `hasNotes()`
+- `hasDiscounts()`
+- `hasSurcharges()`
+- `hasLineType()`
+- `getChargeLines()`
+- `getDiscountLines()`
+- `calculateTotal()`
+
+### `PricingLine`
+
+Tipo: `class`.
+
+Classe di dominio/applicazione del package: rappresenta un concetto reale usato dal sistema.
+
+Campi principali:
+
+- `MAX_LINE_CODE_LENGTH`
+- `MAX_DESCRIPTION_LENGTH`
+- `lineCode`
+- `type`
+- `description`
+- `amount`
+- `notes`
+
+Metodi pubblici principali:
+
+- `of()`
+- `baseFreight()`
+- `surcharge()`
+- `discount()`
+- `fuelFromEstimate()`
+- `tollsFromEstimate()`
+- `vehicleWearFromEstimate()`
+- `getLineCode()`
+- `getType()`
+- `getDescription()`
+- `getAmount()`
+- `getNotes()`
+
+### `PricingLineType`
+
+Tipo: `enum`.
+
+Enum: elenco chiuso di valori ammessi per evitare stringhe libere e errori di battitura.
+
+Campi principali:
+
+- `surcharge`
+- `discount`
+
+Metodi pubblici principali:
+
+- `isSurcharge()`
+- `isDiscount()`
+- `increasesTotal()`
+- `decreasesTotal()`
+
+### `PricingRules`
+
+Tipo: `class`.
+
+Classe di regole: contiene controlli e decisioni di business, senza salvare dati.
+
+Metodi pubblici principali:
+
+- `requiresAdrSurcharge()`
+- `requiresTemperatureControlSurcharge()`
+- `requiresInternationalSurcharge()`
+- `hasDiscounts()`
+- `hasSurcharges()`
+- `hasBaseFreightLine()`
+- `hasFuelSurchargeLine()`
+- `hasTollChargeLine()`
+- `hasVehicleWearChargeLine()`
+- `hasAdrSurchargeLine()`
+- `hasTemperatureControlSurchargeLine()`
+
+### `RouteCostEstimate`
+
+Tipo: `class`.
+
+Classe economica: modella prezzi, costi, IVA, fatture, ricavi o margini.
+
+Campi principali:
+
+- `MAX_ESTIMATE_CODE_LENGTH`
+- `estimateCode`
+- `source`
+- `estimatedDistance`
+- `estimatedFuelCost`
+- `estimatedTollCost`
+- `estimatedVehicleWearCost`
+- `notes`
+
+Metodi pubblici principali:
+
+- `of()`
+- `getEstimateCode()`
+- `getSource()`
+- `getEstimatedDistance()`
+- `getEstimatedFuelCost()`
+- `getEstimatedTollCost()`
+- `getEstimatedVehicleWearCost()`
+- `getNotes()`
+- `isFromExternalProvider()`
+- `isManualEstimate()`
+- `hasNotes()`
+- `calculateEstimatedRouteCost()`

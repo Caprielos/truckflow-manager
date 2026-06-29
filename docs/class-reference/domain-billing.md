@@ -1,17 +1,116 @@
-# Package `domain.billing`
+# Domain `billing` spiegato
 
-Fatturazione e pagamenti cliente.
+Fatture cliente, pagamenti e stato incassi.
 
-## Classi
+## Classi principali
 
-| Classe | Tipo | Cosa rappresenta/fa | Metodi principali |
-| --- | --- | --- | --- |
-| BillingRules | class | Classe di regole per validare e calcolare comportamenti nel package domain.billing. | canBeIssued, canBeMarkedPaid, canBeCancelled, hasReceivableAmount, isOverdue, isPaymentMatchingInvoice, canRegisterPayment, paymentsCoverInvoice |
-| Invoice | class | Classe del package domain.billing; rappresenta un concetto del modello TruckFlow. | draft, issued, issue, markPaid, cancel, getInvoiceNumber, getCustomerCode, getShipmentNumber, getPriceBreakdown, getIssueDate |
-| InvoiceStatus | enum | Enum di stato del ciclo di vita. | isTerminal, canReceivePayment |
-| PaymentMethod | enum | Enum: insieme chiuso di valori ammessi dal dominio. | isElectronic |
-| PaymentRecord | class | Classe del package domain.billing; rappresenta un concetto del modello TruckFlow. | of, bankTransfer, getPaymentNumber, getInvoiceNumber, getAmount, getMethod, getReceivedDate, getNotes, isElectronicPayment, hasNotes |
+### `BillingRules`
 
-## Come ragionare su questo package
+Tipo: `class`.
 
-Questo package contiene concetti del dominio. Le classi non dovrebbero dipendere da database o controller web. Le regole dovrebbero rimanere testabili con JUnit.
+Classe di regole: contiene controlli e decisioni di business, senza salvare dati.
+
+Metodi pubblici principali:
+
+- `canBeIssued()`
+- `canBeMarkedPaid()`
+- `canBeCancelled()`
+- `hasReceivableAmount()`
+- `isOverdue()`
+- `isPaymentMatchingInvoice()`
+- `canRegisterPayment()`
+- `paymentsCoverInvoice()`
+
+### `Invoice`
+
+Tipo: `class`.
+
+Classe economica: modella prezzi, costi, IVA, fatture, ricavi o margini.
+
+Campi principali:
+
+- `MAX_CODE_LENGTH`
+- `invoiceNumber`
+- `customerCode`
+- `shipmentNumber`
+- `priceBreakdown`
+- `issueDate`
+- `dueDate`
+- `status`
+- `notes`
+
+Metodi pubblici principali:
+
+- `draft()`
+- `issued()`
+- `issue()`
+- `markPaid()`
+- `cancel()`
+- `getInvoiceNumber()`
+- `getCustomerCode()`
+- `getShipmentNumber()`
+- `getPriceBreakdown()`
+- `getIssueDate()`
+- `getDueDate()`
+- `getStatus()`
+
+### `InvoiceStatus`
+
+Tipo: `enum`.
+
+Enum: elenco chiuso di valori ammessi per evitare stringhe libere e errori di battitura.
+
+Campi principali:
+
+- `terminal`
+- `canReceivePayment`
+
+Metodi pubblici principali:
+
+- `isTerminal()`
+- `canReceivePayment()`
+
+### `PaymentMethod`
+
+Tipo: `enum`.
+
+Enum: elenco chiuso di valori ammessi per evitare stringhe libere e errori di battitura.
+
+Campi principali:
+
+- `electronic`
+
+Metodi pubblici principali:
+
+- `isElectronic()`
+
+### `PaymentRecord`
+
+Tipo: `class`.
+
+Classe di dominio/applicazione del package: rappresenta un concetto reale usato dal sistema.
+
+Campi principali:
+
+- `MAX_CODE_LENGTH`
+- `paymentNumber`
+- `invoiceNumber`
+- `amount`
+- `method`
+- `receivedDate`
+- `notes`
+
+Metodi pubblici principali:
+
+- `of()`
+- `bankTransfer()`
+- `getPaymentNumber()`
+- `getInvoiceNumber()`
+- `getAmount()`
+- `getMethod()`
+- `getReceivedDate()`
+- `getNotes()`
+- `isElectronicPayment()`
+- `hasNotes()`
+- `isForInvoice()`
+- `isForInvoiceNumber()`

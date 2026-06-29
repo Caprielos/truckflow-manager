@@ -1,17 +1,106 @@
-# Package `domain.sustainability`
+# Domain `sustainability` spiegato
 
-Stime emissioni, standard ambientali e rating.
+Emissioni e sostenibilità del trasporto.
 
-## Classi
+## Classi principali
 
-| Classe | Tipo | Cosa rappresenta/fa | Metodi principali |
-| --- | --- | --- | --- |
-| EmissionEstimate | class | Stima calcolata prima del dato finale effettivo. | of, getEstimateNumber, getShipmentNumber, getRouteNumber, getDistance, getFuelType, getEmissionStandard, getEstimatedEnergyAmount, getEstimatedCo2Kg, getRating |
-| EmissionRating | enum | Enum: insieme chiuso di valori ammessi dal dominio. | getLevel, isWorseThan |
-| EmissionStandard | enum | Enum: insieme chiuso di valori ammessi dal dominio. | getLevel, isLowEmissionStandard, isAtLeast |
-| FuelType | enum | Enum/tipo di classificazione usato nelle regole di dominio. | isCombustionBased, isLowerEmissionAlternative, isZeroTailpipeEmission |
-| SustainabilityRules | class | Classe di regole per validare e calcolare comportamenti nel package domain.sustainability. | isLowEmissionTransport, isHighImpactTransport, requiresSustainabilityReview, isZeroTailpipeEmission, hasBetterEmissionStandard, calculateTotalCo2Kg, containsHighImpactEstimate, allEstimatesAreLowEmission |
+### `EmissionEstimate`
 
-## Come ragionare su questo package
+Tipo: `class`.
 
-Questo package contiene concetti del dominio. Le classi non dovrebbero dipendere da database o controller web. Le regole dovrebbero rimanere testabili con JUnit.
+Classe di dominio/applicazione del package: rappresenta un concetto reale usato dal sistema.
+
+Campi principali:
+
+- `MAX_CODE_LENGTH`
+- `estimateNumber`
+- `shipmentNumber`
+- `routeNumber`
+- `distance`
+- `fuelType`
+- `emissionStandard`
+- `estimatedEnergyAmount`
+- `estimatedCo2Kg`
+- `rating`
+- `notes`
+
+Metodi pubblici principali:
+
+- `of()`
+- `getEstimateNumber()`
+- `getShipmentNumber()`
+- `getRouteNumber()`
+- `getDistance()`
+- `getFuelType()`
+- `getEmissionStandard()`
+- `getEstimatedEnergyAmount()`
+- `getEstimatedCo2Kg()`
+- `getRating()`
+- `getNotes()`
+- `isZeroTailpipeEmission()`
+
+### `EmissionRating`
+
+Tipo: `enum`.
+
+Enum: elenco chiuso di valori ammessi per evitare stringhe libere e errori di battitura.
+
+Campi principali:
+
+- `level`
+
+Metodi pubblici principali:
+
+- `getLevel()`
+- `isWorseThan()`
+
+### `EmissionStandard`
+
+Tipo: `enum`.
+
+Enum: elenco chiuso di valori ammessi per evitare stringhe libere e errori di battitura.
+
+Campi principali:
+
+- `level`
+- `lowEmissionStandard`
+
+Metodi pubblici principali:
+
+- `getLevel()`
+- `isLowEmissionStandard()`
+- `isAtLeast()`
+
+### `FuelType`
+
+Tipo: `enum`.
+
+Enum: elenco chiuso di valori ammessi per evitare stringhe libere e errori di battitura.
+
+Campi principali:
+
+- `combustionBased`
+- `lowerEmissionAlternative`
+
+Metodi pubblici principali:
+
+- `isCombustionBased()`
+- `isLowerEmissionAlternative()`
+- `isZeroTailpipeEmission()`
+
+### `SustainabilityRules`
+
+Tipo: `class`.
+
+Classe di regole: contiene controlli e decisioni di business, senza salvare dati.
+
+Metodi pubblici principali:
+
+- `isLowEmissionTransport()`
+- `isHighImpactTransport()`
+- `requiresSustainabilityReview()`
+- `isZeroTailpipeEmission()`
+- `hasBetterEmissionStandard()`
+- `calculateTotalCo2Kg()`
+- `containsHighImpactEstimate()`
+- `allEstimatesAreLowEmission()`

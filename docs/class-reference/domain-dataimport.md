@@ -1,17 +1,103 @@
-# Package `domain.dataimport`
+# Domain `dataimport` spiegato
 
-Import da fonti esterne: carte carburante, pedaggi, telematica, banca, fatture, paghe.
+Import da fonti esterne: carte carburante, pedaggi, telematica, banca, paghe e fatture.
 
-## Classi
+## Classi principali
 
-| Classe | Tipo | Cosa rappresenta/fa | Metodi principali |
-| --- | --- | --- | --- |
-| ExternalDataSourceType | enum | Enum/tipo di classificazione usato nelle regole di dominio. | usuallyContainsEconomicData |
-| ImportBatch | class | Classe del package domain.dataimport; rappresenta un concetto del modello TruckFlow. | of, getBatchCode, getSourceType, getImportedAt, getRecords, getNotes, countValidatedRecords, countRejectedRecords, hasRejectedRecords, calculateAmountTotal |
-| ImportRecord | class | Classe del package domain.dataimport; rappresenta un concetto del modello TruckFlow. | of, getRecordCode, getSourceType, getExternalRowId, getStatus, getReferenceNumber, getAmount, getOccurredAt, getNotes, hasAmount |
-| ImportRecordStatus | enum | Enum di stato del ciclo di vita. | isTerminal, canBePosted |
-| ImportRules | class | Classe di regole per validare e calcolare comportamenti nel package domain.dataimport. | batchCanBePostedToDomain, batchRequiresManualReview, sourceUsuallyCreatesEconomicEntries |
+### `ExternalDataSourceType`
 
-## Come ragionare su questo package
+Tipo: `enum`.
 
-Questo package contiene concetti del dominio. Le classi non dovrebbero dipendere da database o controller web. Le regole dovrebbero rimanere testabili con JUnit.
+Enum: elenco chiuso di valori ammessi per evitare stringhe libere e errori di battitura.
+
+Metodi pubblici principali:
+
+- `usuallyContainsEconomicData()`
+
+### `ImportBatch`
+
+Tipo: `class`.
+
+Classe di dominio/applicazione del package: rappresenta un concetto reale usato dal sistema.
+
+Campi principali:
+
+- `MAX_CODE_LENGTH`
+- `batchCode`
+- `sourceType`
+- `importedAt`
+- `records`
+- `notes`
+
+Metodi pubblici principali:
+
+- `of()`
+- `getBatchCode()`
+- `getSourceType()`
+- `getImportedAt()`
+- `getRecords()`
+- `getNotes()`
+- `countValidatedRecords()`
+- `countRejectedRecords()`
+- `hasRejectedRecords()`
+- `calculateAmountTotal()`
+
+### `ImportRecord`
+
+Tipo: `class`.
+
+Classe di dominio/applicazione del package: rappresenta un concetto reale usato dal sistema.
+
+Campi principali:
+
+- `MAX_CODE_LENGTH`
+- `recordCode`
+- `sourceType`
+- `externalRowId`
+- `status`
+- `referenceNumber`
+- `amount`
+- `occurredAt`
+- `notes`
+
+Metodi pubblici principali:
+
+- `of()`
+- `getRecordCode()`
+- `getSourceType()`
+- `getExternalRowId()`
+- `getStatus()`
+- `getReferenceNumber()`
+- `getAmount()`
+- `getOccurredAt()`
+- `getNotes()`
+- `hasAmount()`
+- `canBePostedToDomain()`
+- `equals()`
+
+### `ImportRecordStatus`
+
+Tipo: `enum`.
+
+Enum: elenco chiuso di valori ammessi per evitare stringhe libere e errori di battitura.
+
+Campi principali:
+
+- `terminal`
+
+Metodi pubblici principali:
+
+- `isTerminal()`
+- `canBePosted()`
+
+### `ImportRules`
+
+Tipo: `class`.
+
+Classe di regole: contiene controlli e decisioni di business, senza salvare dati.
+
+Metodi pubblici principali:
+
+- `batchCanBePostedToDomain()`
+- `batchRequiresManualReview()`
+- `sourceUsuallyCreatesEconomicEntries()`

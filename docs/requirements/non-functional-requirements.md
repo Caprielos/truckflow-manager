@@ -1,25 +1,45 @@
 # Requisiti non funzionali
 
+I requisiti non funzionali descrivono come l'app deve comportarsi.
+
 ## Manutenibilità
 
-Il codice deve essere diviso in package chiari: domain, application, infrastructure e futuro web.
+Il codice deve essere diviso in livelli:
+
+```text
+domain → application → infrastructure → web
+```
+
+Così le regole non dipendono da database o API.
 
 ## Testabilità
 
-Le regole domain devono essere testabili senza database. Gli use case devono essere testabili con repository in memoria.
+Ogni regola importante deve essere testabile con JUnit. Gli use case devono essere provabili con repository in memoria.
 
 ## Estendibilità
 
-Il sistema deve poter sostituire `infrastructure.memory` con database reale senza riscrivere gli use case.
-
-## Sicurezza futura
-
-Il sistema dovrà gestire autenticazione, autorizzazioni e ruoli.
+Nuovi tipi di cargo, costi, documenti o import devono essere aggiungibili senza riscrivere tutto.
 
 ## Tracciabilità
 
-Le operazioni critiche devono essere tracciabili tramite audit trail.
+Azioni importanti devono poter essere auditabili.
 
-## Configurabilità
+## Sicurezza futura
 
-Aliquote IVA, policy paghe, tariffe, supplementi e regole aziendali non devono essere cablate in modo rigido: devono poter diventare configurazioni.
+La futura API dovrà avere ruoli e permessi, soprattutto per:
+
+- costi;
+- stipendi;
+- fatture;
+- cancellazione dati;
+- gestione utenti.
+
+## Affidabilità
+
+Il sistema deve evitare stati incoerenti, per esempio:
+
+- missione senza spedizione;
+- parcheggio occupato due volte;
+- merce ADR senza requisiti;
+- costo senza importo;
+- fattura senza righe.

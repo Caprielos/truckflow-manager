@@ -1,15 +1,89 @@
-# Package `domain.location`
+# Domain `location` spiegato
 
-Indirizzi, coordinate e location con timezone.
+Indirizzi, coordinate geografiche e luoghi fisici.
 
-## Classi
+## Classi principali
 
-| Classe | Tipo | Cosa rappresenta/fa | Metodi principali |
-| --- | --- | --- | --- |
-| Address | class | Classe del package domain.location; rappresenta un concetto del modello TruckFlow. | of, withCoordinates, getStreet, getCity, getPostalCode, getCountryCode, getCoordinates, hasCoordinates, isInCountry, formatSingleLine |
-| GeoCoordinates | class | Classe del package domain.location; rappresenta un concetto del modello TruckFlow. | of, getLatitude, getLongitude, isNorthernHemisphere, isSouthernHemisphere, isEasternHemisphere, isWesternHemisphere, equals, hashCode, toString |
-| Location | class | Classe del package domain.location; rappresenta un concetto del modello TruckFlow. | of, getName, getAddress, getZoneId, hasCoordinates, getCoordinates, isInCountry, isInSameTimeZone, formatSingleLine, equals |
+### `Address`
 
-## Come ragionare su questo package
+Tipo: `class`.
 
-Questo package contiene concetti del dominio. Le classi non dovrebbero dipendere da database o controller web. Le regole dovrebbero rimanere testabili con JUnit.
+Classe di dominio/applicazione del package: rappresenta un concetto reale usato dal sistema.
+
+Campi principali:
+
+- `MAX_FIELD_LENGTH`
+- `COUNTRY_CODE_LENGTH`
+- `street`
+- `city`
+- `postalCode`
+- `countryCode`
+- `coordinates`
+- `normalizedCountryCode`
+
+Metodi pubblici principali:
+
+- `of()`
+- `withCoordinates()`
+- `getStreet()`
+- `getCity()`
+- `getPostalCode()`
+- `getCountryCode()`
+- `getCoordinates()`
+- `hasCoordinates()`
+- `isInCountry()`
+- `formatSingleLine()`
+- `equals()`
+- `hashCode()`
+
+### `GeoCoordinates`
+
+Tipo: `class`.
+
+Classe di dominio/applicazione del package: rappresenta un concetto reale usato dal sistema.
+
+Campi principali:
+
+- `latitude`
+- `longitude`
+
+Metodi pubblici principali:
+
+- `of()`
+- `getLatitude()`
+- `getLongitude()`
+- `isNorthernHemisphere()`
+- `isSouthernHemisphere()`
+- `isEasternHemisphere()`
+- `isWesternHemisphere()`
+- `equals()`
+- `hashCode()`
+- `toString()`
+
+### `Location`
+
+Tipo: `class`.
+
+Classe di dominio/applicazione del package: rappresenta un concetto reale usato dal sistema.
+
+Campi principali:
+
+- `MAX_NAME_LENGTH`
+- `name`
+- `address`
+- `zoneId`
+
+Metodi pubblici principali:
+
+- `of()`
+- `getName()`
+- `getAddress()`
+- `getZoneId()`
+- `hasCoordinates()`
+- `getCoordinates()`
+- `isInCountry()`
+- `isInSameTimeZone()`
+- `formatSingleLine()`
+- `equals()`
+- `hashCode()`
+- `toString()`

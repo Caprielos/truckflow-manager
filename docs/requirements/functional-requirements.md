@@ -1,50 +1,66 @@
 # Requisiti funzionali
 
-## Cliente e ordini
+I requisiti funzionali descrivono cosa l'app deve fare.
 
-- Il sistema deve permettere di registrare clienti aziendali.
-- Il sistema deve gestire contatti logistici e amministrativi.
-- Il sistema deve permettere di creare ordini di trasporto.
-- Il sistema deve distinguere ordine, spedizione e missione.
+## Anagrafiche
 
-## Spedizioni
+- Gestire clienti.
+- Gestire autisti.
+- Gestire veicoli.
+- Gestire rimorchi e semirimorchi.
+- Gestire strutture aziendali.
+- Gestire magazzino.
 
-- Il sistema deve creare una spedizione da un ordine accettato.
-- Il sistema deve tracciare lo stato della spedizione.
-- Il sistema deve collegare carico, pickup, delivery e documenti.
+## Commerciale
 
-## Missioni
+- Registrare contratti cliente.
+- Registrare listini.
+- Calcolare tariffe con supplementi.
+- Creare ordini di trasporto.
 
-- Il sistema deve pianificare una missione usando spedizione, autista, convoglio e route plan.
-- Il sistema deve permettere avanzamento e chiusura missione.
-- Il sistema deve mantenere separato il concetto di spedizione commerciale dal viaggio operativo.
+## Spedizione e missione
 
-## Flotta
+- Creare spedizione da ordine accettato.
+- Pianificare missione operativa.
+- Associare driver, convoglio e rotta.
+- Chiudere missione.
+- Verificare readiness.
 
-- Il sistema deve gestire veicoli e rimorchi.
-- Il sistema deve gestire convogli.
-- Il sistema deve rappresentare caratteristiche tecniche, certificati e allestimenti.
+## Compliance
 
-## Costi e ricavi
+- Verificare patente, CQC, ADR e qualifiche driver.
+- Verificare compatibilità veicolo/cargo.
+- Verificare documenti richiesti.
+- Verificare checklist fissaggio carico.
 
-- Il sistema deve registrare ricavi cliente.
-- Il sistema deve registrare costi missione.
-- Il sistema deve distinguere IVA da guadagno.
-- Il sistema deve calcolare utile/perdita.
-- Il sistema deve rappresentare acquisti di mezzi, rimorchi, gomme, allestimenti e attrezzature.
+## Economia
+
+- Registrare ricavi.
+- Registrare costi.
+- Gestire IVA.
+- Registrare fatture fornitori.
+- Registrare acquisti asset.
+- Calcolare utile, perdita e debito/cassa negativa.
 
 ## Payroll
 
-- Il sistema deve calcolare il costo autista per missione.
-- Il calcolo deve considerare ore guida, attesa, carico/scarico, straordinario, notturno, trasferte e premi.
+- Calcolare costo autista per missione.
+- Considerare ore guida, lavoro, attesa, notte, festivo, trasferte e supplementi.
 
-## Strutture e parcheggio
+## Deposito/parcheggio
 
-- Il sistema deve gestire strutture di proprietà, affitto, leasing o piazzali terzi.
-- Il sistema deve gestire posti parcheggio numerati.
-- Il sistema deve permettere di parcheggiare risorse singole o convogli già agganciati.
+- Registrare posti parcheggio.
+- Assegnare mezzo/rimorchio/convoglio a un posto.
+- Sapere quali risorse sono parcheggiate e pronte.
 
 ## Magazzino
 
-- Il sistema deve registrare articoli, posizioni di magazzino e movimenti stock.
-- Il sistema deve segnalare quando un articolo è sotto scorta minima.
+- Registrare articoli.
+- Registrare movimenti stock.
+- Calcolare giacenze.
+- Segnalare riordino.
+
+## Import
+
+- Registrare batch di import.
+- Collegare dati importati a fuel, pedaggi, telematica, fatture o paghe.

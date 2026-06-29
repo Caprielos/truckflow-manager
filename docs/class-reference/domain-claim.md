@@ -1,19 +1,157 @@
-# Package `domain.claim`
+# Domain `claim` spiegato
 
-Danni, sinistri, reclami e ispezioni.
+Danni, reclami, incidenti e ispezioni danni.
 
-## Classi
+## Classi principali
 
-| Classe | Tipo | Cosa rappresenta/fa | Metodi principali |
-| --- | --- | --- | --- |
-| ClaimRules | class | Classe di regole per validare e calcolare comportamenti nel package domain.claim. | canBeReviewed, canBeAccepted, canBeRejected, canBeSettled, canBeCancelled, isOpenForAction, isResolved, requiresUrgentReview, isAcceptedCompensationWithinRequestedAmount |
-| ClaimSeverity | enum | Enum: insieme chiuso di valori ammessi dal dominio. | getLevel, isUrgent, isAtLeast |
-| ClaimStatus | enum | Enum di stato del ciclo di vita. | isTerminal |
-| ClaimType | enum | Enum/tipo di classificazione usato nelle regole di dominio. | isCargoRelated, isTimeRelated, isDocumentRelated, isFinancialDispute |
-| DamageInspection | class | Classe del package domain.claim; rappresenta un concetto del modello TruckFlow. | of, getInspectionNumber, getVehicleFleetNumber, getDriverCode, getPerformedAt, getItems, getNotes, hasNewDamage |
-| DamageInspectionItem | class | Classe del package domain.claim; rappresenta un concetto del modello TruckFlow. | of, getArea, isDamaged, getNotes, equals, hashCode |
-| TransportClaim | class | Classe del package domain.claim; rappresenta un concetto del modello TruckFlow. | open, startReview, accept, settle, reject, cancel, getClaimNumber, getShipmentNumber, getCustomerCode, getType |
+### `ClaimRules`
 
-## Come ragionare su questo package
+Tipo: `class`.
 
-Questo package contiene concetti del dominio. Le classi non dovrebbero dipendere da database o controller web. Le regole dovrebbero rimanere testabili con JUnit.
+Classe di regole: contiene controlli e decisioni di business, senza salvare dati.
+
+Metodi pubblici principali:
+
+- `canBeReviewed()`
+- `canBeAccepted()`
+- `canBeRejected()`
+- `canBeSettled()`
+- `canBeCancelled()`
+- `isOpenForAction()`
+- `isResolved()`
+- `requiresUrgentReview()`
+- `isAcceptedCompensationWithinRequestedAmount()`
+
+### `ClaimSeverity`
+
+Tipo: `enum`.
+
+Enum: elenco chiuso di valori ammessi per evitare stringhe libere e errori di battitura.
+
+Campi principali:
+
+- `level`
+- `urgent`
+
+Metodi pubblici principali:
+
+- `getLevel()`
+- `isUrgent()`
+- `isAtLeast()`
+
+### `ClaimStatus`
+
+Tipo: `enum`.
+
+Enum: elenco chiuso di valori ammessi per evitare stringhe libere e errori di battitura.
+
+Campi principali:
+
+- `terminal`
+
+Metodi pubblici principali:
+
+- `isTerminal()`
+
+### `ClaimType`
+
+Tipo: `enum`.
+
+Enum: elenco chiuso di valori ammessi per evitare stringhe libere e errori di battitura.
+
+Campi principali:
+
+- `cargoRelated`
+- `timeRelated`
+- `documentRelated`
+- `financialDispute`
+
+Metodi pubblici principali:
+
+- `isCargoRelated()`
+- `isTimeRelated()`
+- `isDocumentRelated()`
+- `isFinancialDispute()`
+
+### `DamageInspection`
+
+Tipo: `class`.
+
+Classe di dominio/applicazione del package: rappresenta un concetto reale usato dal sistema.
+
+Campi principali:
+
+- `inspectionNumber`
+- `vehicleFleetNumber`
+- `driverCode`
+- `performedAt`
+- `items`
+- `notes`
+
+Metodi pubblici principali:
+
+- `of()`
+- `getInspectionNumber()`
+- `getVehicleFleetNumber()`
+- `getDriverCode()`
+- `getPerformedAt()`
+- `getItems()`
+- `getNotes()`
+- `hasNewDamage()`
+
+### `DamageInspectionItem`
+
+Tipo: `class`.
+
+Classe di dominio/applicazione del package: rappresenta un concetto reale usato dal sistema.
+
+Campi principali:
+
+- `area`
+- `damaged`
+- `notes`
+
+Metodi pubblici principali:
+
+- `of()`
+- `getArea()`
+- `isDamaged()`
+- `getNotes()`
+- `equals()`
+- `hashCode()`
+
+### `TransportClaim`
+
+Tipo: `class`.
+
+Classe di dominio/applicazione del package: rappresenta un concetto reale usato dal sistema.
+
+Campi principali:
+
+- `MAX_CODE_LENGTH`
+- `claimNumber`
+- `shipmentNumber`
+- `customerCode`
+- `type`
+- `severity`
+- `status`
+- `requestedCompensation`
+- `acceptedCompensation`
+- `openedDate`
+- `closedDate`
+- `notes`
+
+Metodi pubblici principali:
+
+- `open()`
+- `startReview()`
+- `accept()`
+- `settle()`
+- `reject()`
+- `cancel()`
+- `getClaimNumber()`
+- `getShipmentNumber()`
+- `getCustomerCode()`
+- `getType()`
+- `getSeverity()`
+- `getStatus()`

@@ -1,19 +1,135 @@
-# Package `domain.facility`
+# Domain `facility` spiegato
 
-Strutture fisiche: sedi, depositi, magazzini, piazzali e relativi costi.
+Strutture aziendali: deposito, sede, magazzino, piazzale, proprietà/affitto e spese.
 
-## Classi
+## Classi principali
 
-| Classe | Tipo | Cosa rappresenta/fa | Metodi principali |
-| --- | --- | --- | --- |
-| Facility | class | Classe del package domain.facility; rappresenta un concetto del modello TruckFlow. | active, inactive, getCode, getType, getLocation, getOperatingHours, getNotes, isActive, isOpenAt, isInCountry |
-| FacilityCostFrequency | enum | Enum: insieme chiuso di valori ammessi dal dominio. | isRecurring |
-| FacilityCostLine | class | Riga di dettaglio: rappresenta una voce numerabile/economica/documentale. | of, monthly, yearly, oneTime, getCode, getType, getDescription, getAmount, getFrequency, getCoveragePeriod |
-| FacilityCostType | enum | Enum/tipo di classificazione usato nelle regole di dominio. | - |
-| FacilityFinancialProfile | class | Profilo che raggruppa informazioni tecniche, operative o economiche. | owned, rented, leased, thirdPartyYard, getFacilityCode, getOwnershipType, getPurchasePrice, getMonthlyRent, getDepositAmount, getCostLines |
-| FacilityOwnershipType | enum | Enum/tipo di classificazione usato nelle regole di dominio. | isOwnedAsset, requiresRecurringOccupancyPayment |
-| FacilityType | enum | Enum/tipo di classificazione usato nelle regole di dominio. | - |
+### `Facility`
 
-## Come ragionare su questo package
+Tipo: `class`.
 
-Questo package contiene concetti del dominio. Le classi non dovrebbero dipendere da database o controller web. Le regole dovrebbero rimanere testabili con JUnit.
+Classe di dominio/applicazione del package: rappresenta un concetto reale usato dal sistema.
+
+Campi principali:
+
+- `MAX_CODE_LENGTH`
+- `code`
+- `type`
+- `location`
+- `operatingHours`
+- `notes`
+- `active`
+
+Metodi pubblici principali:
+
+- `active()`
+- `inactive()`
+- `getCode()`
+- `getType()`
+- `getLocation()`
+- `getOperatingHours()`
+- `getNotes()`
+- `isActive()`
+- `isOpenAt()`
+- `isInCountry()`
+- `hasCoordinates()`
+- `hasNotes()`
+
+### `FacilityCostFrequency`
+
+Tipo: `enum`.
+
+Enum: elenco chiuso di valori ammessi per evitare stringhe libere e errori di battitura.
+
+Metodi pubblici principali:
+
+- `isRecurring()`
+
+### `FacilityCostLine`
+
+Tipo: `class`.
+
+Classe economica: modella prezzi, costi, IVA, fatture, ricavi o margini.
+
+Campi principali:
+
+- `MAX_CODE_LENGTH`
+- `MAX_DESCRIPTION_LENGTH`
+- `code`
+- `type`
+- `description`
+- `amount`
+- `frequency`
+- `coveragePeriod`
+- `notes`
+
+Metodi pubblici principali:
+
+- `of()`
+- `monthly()`
+- `yearly()`
+- `oneTime()`
+- `getCode()`
+- `getType()`
+- `getDescription()`
+- `getAmount()`
+- `getFrequency()`
+- `getCoveragePeriod()`
+- `getNotes()`
+- `isRecurring()`
+
+### `FacilityCostType`
+
+Tipo: `enum`.
+
+Enum: elenco chiuso di valori ammessi per evitare stringhe libere e errori di battitura.
+
+### `FacilityFinancialProfile`
+
+Tipo: `class`.
+
+Classe economica: modella prezzi, costi, IVA, fatture, ricavi o margini.
+
+Campi principali:
+
+- `MAX_FACILITY_CODE_LENGTH`
+- `facilityCode`
+- `ownershipType`
+- `purchasePrice`
+- `monthlyRent`
+- `depositAmount`
+- `costLines`
+- `notes`
+- `referenceCurrency`
+
+Metodi pubblici principali:
+
+- `owned()`
+- `rented()`
+- `leased()`
+- `thirdPartyYard()`
+- `getFacilityCode()`
+- `getOwnershipType()`
+- `getPurchasePrice()`
+- `getMonthlyRent()`
+- `getDepositAmount()`
+- `getCostLines()`
+- `getNotes()`
+- `isOwned()`
+
+### `FacilityOwnershipType`
+
+Tipo: `enum`.
+
+Enum: elenco chiuso di valori ammessi per evitare stringhe libere e errori di battitura.
+
+Metodi pubblici principali:
+
+- `isOwnedAsset()`
+- `requiresRecurringOccupancyPayment()`
+
+### `FacilityType`
+
+Tipo: `enum`.
+
+Enum: elenco chiuso di valori ammessi per evitare stringhe libere e errori di battitura.

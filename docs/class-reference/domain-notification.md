@@ -1,19 +1,144 @@
-# Package `domain.notification`
+# Domain `notification` spiegato
 
-Notifiche operative: canale, destinatario, priorità e stato.
+Messaggi, notifiche, canali e regole di invio.
 
-## Classi
+## Classi principali
 
-| Classe | Tipo | Cosa rappresenta/fa | Metodi principali |
-| --- | --- | --- | --- |
-| NotificationChannel | enum | Enum: insieme chiuso di valori ammessi dal dominio. | isExternalChannel, isRealTime |
-| NotificationMessage | class | Classe del package domain.notification; rappresenta un concetto del modello TruckFlow. | draft, scheduled, schedule, send, fail, cancel, getNotificationNumber, getType, getChannel, getRecipientType |
-| NotificationPriority | enum | Enum: insieme chiuso di valori ammessi dal dominio. | getLevel, requiresImmediateAttention, isAtLeast |
-| NotificationRecipientType | enum | Enum/tipo di classificazione usato nelle regole di dominio. | isHumanRecipient |
-| NotificationRules | class | Classe di regole per validare e calcolare comportamenti nel package domain.notification. | canBeScheduled, canBeSent, canBeFailed, canBeCancelled, isTerminal, requiresImmediateAttention, shouldNotifyCustomer, isOperationalNotification, isFinancialNotification, isSecurityNotification |
-| NotificationStatus | enum | Enum di stato del ciclo di vita. | isTerminal, isDelivered |
-| NotificationType | enum | Enum/tipo di classificazione usato nelle regole di dominio. | isCustomerVisible, isOperational, isFinancial, isSecurity |
+### `NotificationChannel`
 
-## Come ragionare su questo package
+Tipo: `enum`.
 
-Questo package contiene concetti del dominio. Le classi non dovrebbero dipendere da database o controller web. Le regole dovrebbero rimanere testabili con JUnit.
+Enum: elenco chiuso di valori ammessi per evitare stringhe libere e errori di battitura.
+
+Campi principali:
+
+- `externalChannel`
+- `realTime`
+
+Metodi pubblici principali:
+
+- `isExternalChannel()`
+- `isRealTime()`
+
+### `NotificationMessage`
+
+Tipo: `class`.
+
+Classe di dominio/applicazione del package: rappresenta un concetto reale usato dal sistema.
+
+Campi principali:
+
+- `MAX_NOTIFICATION_NUMBER_LENGTH`
+- `MAX_RECIPIENT_REFERENCE_LENGTH`
+- `MAX_SUBJECT_LENGTH`
+- `MAX_BODY_LENGTH`
+- `notificationNumber`
+- `type`
+- `channel`
+- `recipientType`
+- `recipientReference`
+- `priority`
+- `subject`
+- `body`
+
+Metodi pubblici principali:
+
+- `draft()`
+- `scheduled()`
+- `schedule()`
+- `send()`
+- `fail()`
+- `cancel()`
+- `getNotificationNumber()`
+- `getType()`
+- `getChannel()`
+- `getRecipientType()`
+- `getRecipientReference()`
+- `getPriority()`
+
+### `NotificationPriority`
+
+Tipo: `enum`.
+
+Enum: elenco chiuso di valori ammessi per evitare stringhe libere e errori di battitura.
+
+Campi principali:
+
+- `level`
+- `immediateAttention`
+
+Metodi pubblici principali:
+
+- `getLevel()`
+- `requiresImmediateAttention()`
+- `isAtLeast()`
+
+### `NotificationRecipientType`
+
+Tipo: `enum`.
+
+Enum: elenco chiuso di valori ammessi per evitare stringhe libere e errori di battitura.
+
+Campi principali:
+
+- `humanRecipient`
+
+Metodi pubblici principali:
+
+- `isHumanRecipient()`
+
+### `NotificationRules`
+
+Tipo: `class`.
+
+Classe di regole: contiene controlli e decisioni di business, senza salvare dati.
+
+Metodi pubblici principali:
+
+- `canBeScheduled()`
+- `canBeSent()`
+- `canBeFailed()`
+- `canBeCancelled()`
+- `isTerminal()`
+- `requiresImmediateAttention()`
+- `shouldNotifyCustomer()`
+- `isOperationalNotification()`
+- `isFinancialNotification()`
+- `isSecurityNotification()`
+- `usesExternalChannel()`
+
+### `NotificationStatus`
+
+Tipo: `enum`.
+
+Enum: elenco chiuso di valori ammessi per evitare stringhe libere e errori di battitura.
+
+Campi principali:
+
+- `terminal`
+- `delivered`
+
+Metodi pubblici principali:
+
+- `isTerminal()`
+- `isDelivered()`
+
+### `NotificationType`
+
+Tipo: `enum`.
+
+Enum: elenco chiuso di valori ammessi per evitare stringhe libere e errori di battitura.
+
+Campi principali:
+
+- `customerVisible`
+- `operational`
+- `financial`
+- `security`
+
+Metodi pubblici principali:
+
+- `isCustomerVisible()`
+- `isOperational()`
+- `isFinancial()`
+- `isSecurity()`

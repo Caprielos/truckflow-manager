@@ -1,18 +1,129 @@
-# Package `domain.audit`
+# Domain `audit` spiegato
 
-Audit trail: chi ha fatto cosa, quando e con quale severità.
+Traccia modifiche e azioni importanti: chi ha fatto cosa, quando e con che gravità.
 
-## Classi
+## Classi principali
 
-| Classe | Tipo | Cosa rappresenta/fa | Metodi principali |
-| --- | --- | --- | --- |
-| AuditActionType | enum | Enum/tipo di classificazione usato nelle regole di dominio. | isDataChange, isSecuritySensitive, hasFinancialImpact |
-| AuditActorType | enum | Enum/tipo di classificazione usato nelle regole di dominio. | isHumanActor |
-| AuditEvent | class | Evento puntuale nella timeline operativa o audit. | of, userAction, systemAction, integrationAction, getEventId, getAggregateType, getAggregateId, getActorType, getActorId, getActionType |
-| AuditRules | class | Classe di regole per validare e calcolare comportamenti nel package domain.audit. | canAppendEvent, requiresReview, containsSecuritySensitiveEvents, containsFinancialImpactEvents, isChronological |
-| AuditSeverity | enum | Enum: insieme chiuso di valori ammessi dal dominio. | getLevel, requiresReview, isAtLeast |
-| AuditTrail | class | Classe del package domain.audit; rappresenta un concetto del modello TruckFlow. | of, getEvents, getEventCount, getAggregateType, getAggregateId, getFirstEvent, getLatestEvent, containsEventId, hasActionType, hasSecuritySensitiveEvents |
+### `AuditActionType`
 
-## Come ragionare su questo package
+Tipo: `enum`.
 
-Questo package contiene concetti del dominio. Le classi non dovrebbero dipendere da database o controller web. Le regole dovrebbero rimanere testabili con JUnit.
+Enum: elenco chiuso di valori ammessi per evitare stringhe libere e errori di battitura.
+
+Campi principali:
+
+- `dataChange`
+- `securitySensitive`
+- `financialImpact`
+
+Metodi pubblici principali:
+
+- `isDataChange()`
+- `isSecuritySensitive()`
+- `hasFinancialImpact()`
+
+### `AuditActorType`
+
+Tipo: `enum`.
+
+Enum: elenco chiuso di valori ammessi per evitare stringhe libere e errori di battitura.
+
+Campi principali:
+
+- `humanActor`
+
+Metodi pubblici principali:
+
+- `isHumanActor()`
+
+### `AuditEvent`
+
+Tipo: `class`.
+
+Classe di dominio/applicazione del package: rappresenta un concetto reale usato dal sistema.
+
+Campi principali:
+
+- `MAX_CODE_LENGTH`
+- `eventId`
+- `aggregateType`
+- `aggregateId`
+- `actorType`
+- `actorId`
+- `actionType`
+- `severity`
+- `occurredAt`
+- `notes`
+
+Metodi pubblici principali:
+
+- `of()`
+- `userAction()`
+- `systemAction()`
+- `integrationAction()`
+- `getEventId()`
+- `getAggregateType()`
+- `getAggregateId()`
+- `getActorType()`
+- `getActorId()`
+- `getActionType()`
+- `getSeverity()`
+- `getOccurredAt()`
+
+### `AuditRules`
+
+Tipo: `class`.
+
+Classe di regole: contiene controlli e decisioni di business, senza salvare dati.
+
+Metodi pubblici principali:
+
+- `canAppendEvent()`
+- `requiresReview()`
+- `containsSecuritySensitiveEvents()`
+- `containsFinancialImpactEvents()`
+- `isChronological()`
+
+### `AuditSeverity`
+
+Tipo: `enum`.
+
+Enum: elenco chiuso di valori ammessi per evitare stringhe libere e errori di battitura.
+
+Campi principali:
+
+- `level`
+- `requiresReview`
+
+Metodi pubblici principali:
+
+- `getLevel()`
+- `requiresReview()`
+- `isAtLeast()`
+
+### `AuditTrail`
+
+Tipo: `class`.
+
+Classe di dominio/applicazione del package: rappresenta un concetto reale usato dal sistema.
+
+Campi principali:
+
+- `events`
+- `first`
+- `uniqueEventIds`
+
+Metodi pubblici principali:
+
+- `of()`
+- `getEvents()`
+- `getEventCount()`
+- `getAggregateType()`
+- `getAggregateId()`
+- `getFirstEvent()`
+- `getLatestEvent()`
+- `containsEventId()`
+- `hasActionType()`
+- `hasSecuritySensitiveEvents()`
+- `hasFinancialImpactEvents()`
+- `hasReviewRequiredEvents()`

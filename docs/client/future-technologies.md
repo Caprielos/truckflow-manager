@@ -1,44 +1,45 @@
 # Tecnologie future previste
 
+Il progetto oggi è Java puro con domain, application e infrastructure/memory. Le tecnologie future consigliate sono:
+
 ## Backend
 
-- Java 21
-- Spring Boot
-- Spring Web per API REST
-- Spring Validation
-- Spring Security per login, ruoli e permessi
+- Java 21 come target stabile.
+- Spring Boot per REST API, dependency injection e configurazione.
+- Spring Web per controller REST.
+- Spring Validation per validazione input.
+- Spring Security per login, ruoli e permessi.
 
 ## Database
 
-- PostgreSQL come database principale
-- Flyway o Liquibase per migrazioni schema
-- JPA/Hibernate per persistenza relazionale
+- PostgreSQL come database principale.
+- Flyway o Liquibase per migrazioni schema.
+- JPA/Hibernate solo nello strato infrastructure, non nel domain.
 
-## API e documentazione tecnica
+## Test
 
-- OpenAPI/Swagger
-- DTO request/response
-- mapping tra domain e API
+- JUnit 5 per unit test e scenario test.
+- Mockito per mock quando servirà.
+- Testcontainers per test con database reale PostgreSQL.
+
+## Documenti
+
+- Generazione PDF per DDT, CMR, POD, report missione e fatture.
+- Template HTML/PDF separati dalla logica domain.
+
+## API esterne future
+
+- Carte carburante.
+- Pedaggi/Telepass.
+- Telematica GPS.
+- Tachigrafo.
+- Sistemi contabili.
+- Banche.
 
 ## Frontend futuro
 
-- React o Angular
-- dashboard per ufficio traffico
-- schermate per fleet manager
-- pannello amministrativo per costi e fatture
-
-## Integrazioni future
-
-- fuel card: DKV, UTA, Eni, Q8 o file CSV
-- pedaggi e Telepass
-- telematica GPS/CAN-bus
-- tachigrafo e ore guida
-- fatture elettroniche/fornitori
-- banca e riconciliazione pagamenti
-
-## Reportistica
-
-- export PDF
-- export Excel/CSV
-- dashboard KPI
-- margine per missione, cliente, autista, mezzo e periodo
+- React o Angular per dashboard web.
+- Tabelle operative per ufficio traffico.
+- Dashboard economica.
+- Vista deposito/parcheggi.
+- Vista flotta.

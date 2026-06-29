@@ -1,15 +1,68 @@
-# Package `domain.operation`
+# Domain `operation` spiegato
 
-Missione operativa reale: viaggio pianificato/eseguito con autista, convoglio e rotta.
+Missione operativa reale: autista, convoglio, rotta e stati missione.
 
-## Classi
+## Classi principali
 
-| Classe | Tipo | Cosa rappresenta/fa | Metodi principali |
-| --- | --- | --- | --- |
-| TransportMission | class | Classe del package domain.operation; rappresenta un concetto del modello TruckFlow. | planned, dispatch, start, complete, cancel, getMissionNumber, getShipment, getDriver, getVehicleCombination, getRoutePlan |
-| TransportMissionRules | class | Classe di regole per validare e calcolare comportamenti nel package domain.operation. | isCompliant, canBeDispatched, canBeStarted, canBeCompleted, canBeCancelled, isCompleted, isTerminal, requiresSpecialHandling |
-| TransportMissionStatus | enum | Enum di stato del ciclo di vita. | isTerminal |
+### `TransportMission`
 
-## Come ragionare su questo package
+Tipo: `class`.
 
-Questo package contiene concetti del dominio. Le classi non dovrebbero dipendere da database o controller web. Le regole dovrebbero rimanere testabili con JUnit.
+Classe di dominio/applicazione del package: rappresenta un concetto reale usato dal sistema.
+
+Campi principali:
+
+- `MAX_MISSION_NUMBER_LENGTH`
+- `missionNumber`
+- `shipment`
+- `driver`
+- `vehicleCombination`
+- `routePlan`
+- `status`
+- `notes`
+
+Metodi pubblici principali:
+
+- `planned()`
+- `dispatch()`
+- `start()`
+- `complete()`
+- `cancel()`
+- `getMissionNumber()`
+- `getShipment()`
+- `getDriver()`
+- `getVehicleCombination()`
+- `getRoutePlan()`
+- `getStatus()`
+- `getNotes()`
+
+### `TransportMissionRules`
+
+Tipo: `class`.
+
+Classe di regole: contiene controlli e decisioni di business, senza salvare dati.
+
+Metodi pubblici principali:
+
+- `isCompliant()`
+- `canBeDispatched()`
+- `canBeStarted()`
+- `canBeCompleted()`
+- `canBeCancelled()`
+- `isCompleted()`
+- `isTerminal()`
+- `requiresSpecialHandling()`
+
+### `TransportMissionStatus`
+
+Tipo: `enum`.
+
+Enum: elenco chiuso di valori ammessi per evitare stringhe libere e errori di battitura.
+
+Campi principali:
+
+- `terminal`
+
+Metodi pubblici principali:
+
+- `isTerminal()`
