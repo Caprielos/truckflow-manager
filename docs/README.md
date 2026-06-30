@@ -8,6 +8,7 @@ Il progetto, allo stato attuale, è concentrato sul **domain layer** e contiene 
 - `domain.qualifications`
 - `domain.operational`
 - `domain.vehicles`
+- `domain.cargo`
 
 L’obiettivo di questa documentazione è spiegare in italiano, in modo chiaro e professionale, **perché il dominio è stato modellato così**, quali scelte sono state fatte e cosa ogni package rappresenta.
 
@@ -19,6 +20,7 @@ L’obiettivo di questa documentazione è spiegare in italiano, in modo chiaro e
 4. [`04-domain-operational.md`](04-domain-operational.md) — documentazione completa delle figure operative aziendali.
 5. [`05-domain-vehicles.md`](05-domain-vehicles.md) — documentazione completa del dominio veicoli e combinazioni.
 6. [`06-architecture-decisions.md`](06-architecture-decisions.md) — decisioni architetturali e regole generali del dominio puro.
+7. [`07-domain-cargo.md`](07-domain-cargo.md) — documentazione completa del dominio cargo e dei requisiti della merce.
 
 ## Stato del progetto documentato
 
@@ -27,7 +29,8 @@ Questa documentazione descrive la versione del progetto in cui il dominio contie
 - account applicativi e autorizzazioni di base;
 - catalogo statico delle qualificazioni e abilitazioni;
 - figure operative reali dell’azienda;
-- unità veicolo, allestimenti, combinazioni, schede tecniche, capacità, agganci e ruoli operativi dei mezzi, con `domain.vehicles` organizzato in sottopackage (`unit`, `combination`, `coupling`, `specification`, `body`, `operation`, `common`).
+- unità veicolo, allestimenti, combinazioni, schede tecniche, capacità, agganci e ruoli operativi dei mezzi, con `domain.vehicles` organizzato in sottopackage (`unit`, `combination`, `coupling`, `specification`, `body`, `operation`, `common`);
+- dominio cargo per descrivere la merce, le sue caratteristiche e i suoi requisiti di trasporto senza introdurre pianificazione o compatibilità implementata.
 
 
 ## Nota sul packaging di `domain.vehicles`

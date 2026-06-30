@@ -1,4 +1,5 @@
 it/gabriele/truckflow/domain/operational/OperationalDomainTest.class
+it/gabriele/truckflow/domain/cargo/CargoDomainTest.class
 it/gabriele/truckflow/domain/users/UserTest.class
 it/gabriele/truckflow/domain/qualifications/QualificationCatalogTest.class
 it/gabriele/truckflow/domain/vehicles/VehicleDomainTest.class

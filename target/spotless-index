@@ -1,4 +1,21 @@
 MAc4vFFOHoWZQuLjNeMMEnAuXKZyjUdGr+009b83T+Y=
+src/main/java/it/gabriele/truckflow/domain/cargo/CargoCategory.java 2026-06-30T15:25:32.781106247Z
+src/main/java/it/gabriele/truckflow/domain/cargo/CargoCode.java 2026-06-30T15:25:32.781178955Z
+src/main/java/it/gabriele/truckflow/domain/cargo/CargoCompatibilityRequirement.java 2026-06-30T15:25:32.781251330Z
+src/main/java/it/gabriele/truckflow/domain/cargo/CargoDimensions.java 2026-06-30T15:25:32.781329372Z
+src/main/java/it/gabriele/truckflow/domain/cargo/CargoHazard.java 2026-06-30T15:25:32.781406456Z
+src/main/java/it/gabriele/truckflow/domain/cargo/CargoId.java 2026-06-30T15:25:32.781499414Z
+src/main/java/it/gabriele/truckflow/domain/cargo/CargoPackaging.java 2026-06-30T15:25:32.781577664Z
+src/main/java/it/gabriele/truckflow/domain/cargo/CargoPackagingType.java 2026-06-30T15:25:32.781648456Z
+src/main/java/it/gabriele/truckflow/domain/cargo/CargoProperties.java 2026-06-30T15:25:32.781719998Z
+src/main/java/it/gabriele/truckflow/domain/cargo/CargoRegulatory.java 2026-06-30T15:25:32.781803540Z
+src/main/java/it/gabriele/truckflow/domain/cargo/CargoStatus.java 2026-06-30T15:25:32.781882540Z
+src/main/java/it/gabriele/truckflow/domain/cargo/CargoTemperature.java 2026-06-30T15:25:44.581279375Z
+src/main/java/it/gabriele/truckflow/domain/cargo/CargoTransportRequirement.java 2026-06-30T15:25:32.782037582Z
+src/main/java/it/gabriele/truckflow/domain/cargo/CargoType.java 2026-06-30T15:25:32.782116499Z
+src/main/java/it/gabriele/truckflow/domain/cargo/CargoUnit.java 2026-06-30T15:25:44.570544643Z
+src/main/java/it/gabriele/truckflow/domain/cargo/CargoValidation.java 2026-06-30T15:25:32.782419250Z
+src/main/java/it/gabriele/truckflow/domain/cargo/CargoWeights.java 2026-06-30T15:25:44.597277452Z
 src/main/java/it/gabriele/truckflow/domain/operational/common/OperationalCode.java 2026-06-30T13:22:36.993819691Z
 src/main/java/it/gabriele/truckflow/domain/operational/common/OperationalMetadata.java 2026-06-30T13:22:36.997080790Z
 src/main/java/it/gabriele/truckflow/domain/operational/common/OperationalProfile.java 2026-06-30T13:22:37.010019018Z
@@ -68,6 +85,7 @@ src/main/java/it/gabriele/truckflow/domain/vehicles/unit/VehicleStatus.java 2026
 src/main/java/it/gabriele/truckflow/domain/vehicles/unit/VehicleUnit.java 2026-06-30T14:57:39.106930505Z
 src/main/java/it/gabriele/truckflow/domain/vehicles/unit/VehicleUnitId.java 2026-06-30T14:57:39.052410653Z
 src/main/java/it/gabriele/truckflow/domain/vehicles/unit/VehicleUnitType.java 2026-06-30T14:57:28.552647379Z
+src/test/java/it/gabriele/truckflow/domain/cargo/CargoDomainTest.java 2026-06-30T15:25:32.782802042Z
 src/test/java/it/gabriele/truckflow/domain/operational/OperationalDomainTest.java 2026-06-30T13:22:37.043829222Z
 src/test/java/it/gabriele/truckflow/domain/qualifications/QualificationCatalogTest.java 2026-06-30T11:26:57.073563957Z
 src/test/java/it/gabriele/truckflow/domain/users/UserTest.java 2026-06-30T12:51:33.370124366Z

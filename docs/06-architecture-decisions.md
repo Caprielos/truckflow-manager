@@ -132,7 +132,54 @@ Non è stata scelta una divisione per tipo di mezzo, come `truck`, `trailer` o `
 
 Questa scelta rende il dominio più leggibile e più facile da estendere senza perdere coerenza.
 
-## 6.13 Cosa potrà essere aggiunto in futuro
+
+## 6.13 Decisione: separare cargo, veicoli e compatibilità
+
+Il dominio cargo descrive la merce e i requisiti che la merce impone al trasporto.
+
+Il dominio veicoli descrive i mezzi, le combinazioni, gli allestimenti e le capacità tecniche.
+
+La compatibilità tra cargo e veicolo non viene implementata dentro `domain.cargo` e non viene implementata dentro `domain.vehicles`.
+
+La regola architetturale è:
+
+```text
+Cargo dichiara requisiti.
+Vehicles dichiara capacità.
+Planning/Dispatching verifica la compatibilità.
+```
+
+Questa scelta evita dipendenze dirette tra bounded context e impedisce al dominio cargo di copiare concetti del dominio veicoli.
+
+## 6.14 Decisione: `CargoStatus` è anagrafico, non operativo
+
+`CargoStatus` non rappresenta stati di viaggio o consegna.
+
+Per questo sono stati usati stati come:
+
+- `ACTIVE`;
+- `SUSPENDED`;
+- `ARCHIVED`;
+- `DISCONTINUED`.
+
+Non sono stati del cargo puro:
+
+- `IN_TRANSIT`;
+- `DELIVERED`;
+- `DAMAGED`;
+- `CANCELLED`.
+
+Questi ultimi appartengono a spedizioni, consegne, tracking, incidenti o reclami.
+
+## 6.15 Decisione: requisiti cargo come set, non come tanti booleani
+
+I requisiti di trasporto della merce sono stati modellati tramite `Set<CargoTransportRequirement>` dentro `CargoCompatibilityRequirement`.
+
+Questa scelta è più scalabile di una lista di booleani come `requiresADR`, `requiresRefrigerated`, `requiresCarCarrier`, ecc.
+
+Se in futuro verrà aggiunto un nuovo requisito, sarà sufficiente aggiungere un nuovo valore al catalogo dei requisiti, senza gonfiare la struttura principale della merce.
+
+## 6.16 Cosa potrà essere aggiunto in futuro
 
 Il dominio attuale è una base.
 
@@ -156,7 +203,7 @@ In futuro si potranno aggiungere:
 
 Queste estensioni dovranno rispettare la separazione già definita.
 
-## 6.14 Conclusione
+## 6.17 Conclusione
 
 Le scelte fatte rendono TruckFlow Manager più ordinato e più vicino a un gestionale enterprise reale.
 
@@ -166,6 +213,7 @@ Il dominio attuale non prova a fare tutto subito. Descrive bene le fondamenta:
 - quali abilitazioni esistono;
 - quali persone operative lavorano in azienda;
 - quali mezzi compongono il parco veicoli;
-- come si collegano unità e combinazioni.
+- come si collegano unità e combinazioni;
+- quali merci esistono e quali requisiti di trasporto impongono.
 
 Questa base permette di crescere senza dover riscrivere i concetti fondamentali.

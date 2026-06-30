@@ -11,7 +11,8 @@ In questa fase il progetto si concentra sul **domain layer**, cioè sulla parte 
 - utenti applicativi;
 - abilitazioni e qualificazioni;
 - figure operative aziendali;
-- veicoli, rimorchi, semirimorchi e combinazioni.
+- veicoli, rimorchi, semirimorchi e combinazioni;
+- cargo, cioè merce e requisiti di trasporto.
 
 Il dominio non è ancora collegato a database, API REST, interfacce grafiche o servizi esterni. Questa è una scelta intenzionale: prima si costruisce il modello del business, poi si aggiungono infrastruttura e applicazione.
 
@@ -25,13 +26,14 @@ Per esempio:
 - un `Driver` non deve dipendere da una tabella SQL;
 - un `VehicleUnit` non deve dipendere da un controller REST;
 - una `Qualification` non deve contenere file PDF, scadenze o documenti caricati;
-- una `VehicleCombination` non deve ancora sapere se un rimorchio è disponibile oggi.
+- una `VehicleCombination` non deve ancora sapere se un rimorchio è disponibile oggi;
+- un `CargoUnit` non deve ancora decidere quale veicolo può caricarlo.
 
 Questa separazione rende il progetto più pulito e più facile da estendere.
 
 ## 1.3 I macro-domini attuali
 
-Il dominio è stato diviso in quattro macro-aree:
+Il dominio è stato diviso in cinque macro-aree:
 
 ### `domain.users`
 
@@ -49,6 +51,10 @@ Rappresenta le persone operative reali dell’azienda: autisti, meccanici, magaz
 
 Rappresenta il parco mezzi: unità veicolo singole, trailer, semirimorchi, trattori, combinazioni come bilico e autotreno, caratteristiche tecniche, allestimenti, capacità e agganci.
 
+### `domain.cargo`
+
+Rappresenta la merce: identificazione, tipologia, categorie logistiche, pesi, dimensioni, imballaggio, temperatura, pericolosità, requisiti normativi e requisiti di trasporto.
+
 ## 1.4 Perché separare i contesti
 
 La separazione dei contesti evita errori di modellazione.
@@ -62,6 +68,8 @@ Un `Driver` è una figura operativa reale. Serve per rappresentare un autista ne
 Quindi non vanno fusi nella stessa classe.
 
 Lo stesso ragionamento vale per le qualificazioni: una patente C è una `Qualification` del catalogo, mentre il fatto che Mario Rossi possieda quella patente appartiene al dominio operativo tramite una `OperationalQualification`.
+
+Lo stesso principio vale per cargo e veicoli: il cargo dichiara i propri requisiti, il veicolo dichiara le proprie capacità, mentre la verifica di compatibilità appartiene a un futuro modulo di pianificazione o assegnazione.
 
 ## 1.5 Principi architetturali seguiti
 
