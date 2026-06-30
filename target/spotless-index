@@ -7,11 +7,11 @@ src/main/java/it/gabriele/truckflow/domain/autisti/Patente.java 2026-06-30T10:02
 src/main/java/it/gabriele/truckflow/domain/documenti/Documento.java 2026-06-30T10:02:10.117467862Z
 src/main/java/it/gabriele/truckflow/domain/manutenzione/ManutenzioneItem.java 2026-06-30T10:02:10.119975880Z
 src/main/java/it/gabriele/truckflow/domain/mezzi/Mezzo.java 2026-06-30T10:02:10.115032344Z
-src/main/java/it/gabriele/truckflow/domain/qualifications/Qualification.java 2026-06-30T11:08:36.170894597Z
-src/main/java/it/gabriele/truckflow/domain/qualifications/QualificationCatalog.java 2026-06-30T11:08:33.659138466Z
-src/main/java/it/gabriele/truckflow/domain/qualifications/QualificationCategory.java 2026-06-30T11:08:33.653662797Z
+src/main/java/it/gabriele/truckflow/domain/qualifications/Qualification.java 2026-06-30T11:10:54.924134411Z
+src/main/java/it/gabriele/truckflow/domain/qualifications/QualificationCatalog.java 2026-06-30T11:10:54.923623207Z
+src/main/java/it/gabriele/truckflow/domain/qualifications/QualificationCategory.java 2026-06-30T11:10:54.923754372Z
 src/main/java/it/gabriele/truckflow/domain/scadenze/Scadenza.java 2026-06-30T10:02:10.122254983Z
 src/main/java/it/gabriele/truckflow/infrastructure/persistence/jpa/AutistaEntity.java 2026-06-30T10:02:10.126879396Z
 src/main/java/it/gabriele/truckflow/infrastructure/web/rest/AutistaController.java 2026-06-30T10:02:10.129086208Z
 src/test/java/it/gabriele/truckflow/application/autisti/AutistaServiceTest.java 2026-06-30T10:02:12.061278332Z
-src/test/java/it/gabriele/truckflow/domain/qualifications/QualificationCatalogTest.java 2026-06-30T11:08:36.093480647Z
+src/test/java/it/gabriele/truckflow/domain/qualifications/QualificationCatalogTest.java 2026-06-30T11:10:56.973630784Z

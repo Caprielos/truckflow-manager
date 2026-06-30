@@ -23,7 +23,7 @@ class QualificationCatalogTest {
 
   @Test
   void filtersDrivingLicensesByCategory() {
-    var qualifications = QualificationCatalog.byCategory(QualificationCategory.PATENTI_GUIDA);
+    var qualifications = QualificationCatalog.byCategory(QualificationCategory.DRIVING_LICENSES);
 
     assertEquals(9, qualifications.size());
     assertTrue(qualifications.contains(Qualification.DRIVING_LICENSE_C));
@@ -52,7 +52,8 @@ class QualificationCatalogTest {
 
   @Test
   void filtersFoodAndPharmaceuticalByCategory() {
-    var qualifications = QualificationCatalog.byCategory(QualificationCategory.ALIMENTI_FARMACI);
+    var qualifications =
+        QualificationCatalog.byCategory(QualificationCategory.FOOD_PHARMACEUTICALS);
 
     assertEquals(3, qualifications.size());
     assertTrue(qualifications.contains(Qualification.ATP));
@@ -62,7 +63,7 @@ class QualificationCatalogTest {
 
   @Test
   void filtersAnimalsByCategory() {
-    var qualifications = QualificationCatalog.byCategory(QualificationCategory.ANIMALI);
+    var qualifications = QualificationCatalog.byCategory(QualificationCategory.ANIMALS);
 
     assertEquals(4, qualifications.size());
     assertTrue(qualifications.contains(Qualification.LIVE_ANIMALS));
@@ -73,7 +74,7 @@ class QualificationCatalogTest {
 
   @Test
   void filtersWasteByCategory() {
-    var qualifications = QualificationCatalog.byCategory(QualificationCategory.RIFIUTI);
+    var qualifications = QualificationCatalog.byCategory(QualificationCategory.WASTE);
 
     assertEquals(9, qualifications.size());
     assertTrue(qualifications.contains(Qualification.WASTE_CATEGORY_1));
@@ -83,7 +84,7 @@ class QualificationCatalogTest {
 
   @Test
   void filtersMachineOperatorsByCategory() {
-    var qualifications = QualificationCatalog.byCategory(QualificationCategory.MACCHINE_OPERATRICI);
+    var qualifications = QualificationCatalog.byCategory(QualificationCategory.MACHINE_OPERATORS);
 
     assertEquals(8, qualifications.size());
     assertTrue(qualifications.contains(Qualification.FORKLIFT));
@@ -94,7 +95,7 @@ class QualificationCatalogTest {
 
   @Test
   void filtersSafetyByCategory() {
-    var qualifications = QualificationCatalog.byCategory(QualificationCategory.SICUREZZA);
+    var qualifications = QualificationCatalog.byCategory(QualificationCategory.SAFETY);
 
     assertEquals(6, qualifications.size());
     assertTrue(qualifications.contains(Qualification.CONSTRUCTION_SITE_SAFETY));
@@ -107,7 +108,7 @@ class QualificationCatalogTest {
 
   @Test
   void filtersPortAndAirportByCategory() {
-    var qualifications = QualificationCatalog.byCategory(QualificationCategory.PORTI_AEROPORTI);
+    var qualifications = QualificationCatalog.byCategory(QualificationCategory.PORTS_AND_AIRPORTS);
 
     assertEquals(6, qualifications.size());
     assertTrue(qualifications.contains(Qualification.CONTAINER_TRANSPORT));
@@ -120,7 +121,7 @@ class QualificationCatalogTest {
 
   @Test
   void filtersCompanyLogisticsByCategory() {
-    var qualifications = QualificationCatalog.byCategory(QualificationCategory.AZIENDALI_LOGISTICA);
+    var qualifications = QualificationCatalog.byCategory(QualificationCategory.COMPANY_LOGISTICS);
 
     assertEquals(6, qualifications.size());
     assertTrue(qualifications.contains(Qualification.LOGISTICS));
