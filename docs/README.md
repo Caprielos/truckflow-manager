@@ -32,6 +32,7 @@ L’obiettivo di questa documentazione è spiegare in italiano, in modo chiaro e
 11. [`11-domain-documents.md`](11-domain-documents.md) — documentazione completa del dominio documents e del concetto puro di documento aziendale.
 12. [`12-domain-compliance.md`](12-domain-compliance.md) — documentazione completa del dominio compliance e dei requisiti astratti di conformità.
 13. [`13-domain-rules.md`](13-domain-rules.md) — regole ufficiali della TruckFlow Domain Foundation v1.0 e roadmap della domain review.
+14. [`14-domain-review-patches.md`](14-domain-review-patches.md) — riepilogo degli interventi correttivi eseguiti durante la prima review concreta del dominio puro.
 
 ## Stato del progetto documentato
 
@@ -47,7 +48,8 @@ Questa documentazione descrive la versione del progetto in cui il dominio contie
 - dominio shipments per descrivere richieste di spedizione, item cargo, tratte logiche, priorità, livelli di servizio, requisiti e riferimenti senza introdurre pianificazione o tracking, con `domain.shipments` organizzato in sottopackage (`core`, `items`, `legs`, `requirements`, `metrics`, `properties`, `notes`, `references`);
 - dominio documents per descrivere il concetto puro di documento aziendale, con identità, codice, tipo, categoria, stato, metadati, contenuto logico e riferimenti astratti, senza introdurre file fisici, upload, storage, workflow, scadenze o compliance operativa;
 - dominio compliance per descrivere requisiti astratti di conformità, categorie, livelli di obbligatorietà, severità, target, regole, fonti e giurisdizioni senza introdurre controlli automatici, workflow, audit, scadenze o risultati di verifica.
-- regole ufficiali di dominio per guidare la TruckFlow Domain Foundation v1.0, la review finale del dominio puro e l'introduzione graduale delle eccezioni custom.
+- regole ufficiali di dominio per guidare la TruckFlow Domain Foundation v1.0, la review finale del dominio puro e l'introduzione graduale delle eccezioni custom;
+- prima review correttiva del dominio puro completata con sei interventi mirati: mutazioni atomiche, eccezioni custom, `OperationalCode` obbligatorio, test catalogo qualificazioni meno fragili e pulizia dei file locali/generati.
 
 
 ## Nota sul packaging di `domain.vehicles`
@@ -127,6 +129,22 @@ Il dominio non esegue controlli concreti e non contiene violazioni, audit, workf
 
 Questa scelta completa la prima grande fondazione del dominio puro enterprise di TruckFlow, mantenendo separati requisiti astratti e verifiche operative.
 
+
+
+## Nota su `docs/14-domain-review-patches.md`
+
+Il documento `14-domain-review-patches.md` riepiloga la prima review correttiva concreta del dominio puro.
+
+Non descrive procedure operative di applicazione tecnica, ma spiega perché sono stati eseguiti i sei interventi principali:
+
+- validare prima di mutare lo stato degli aggregate;
+- usare eccezioni custom nei domini semplici;
+- usare eccezioni custom nei domini complessi;
+- rendere `OperationalCode` obbligatorio;
+- rendere meno fragili i test del catalogo qualificazioni;
+- tenere fuori dal repository file locali, artefatti generati e file temporanei.
+
+Questo documento serve come storico architetturale della review e come riferimento per le prossime fasi.
 
 ## Nota su `docs/13-domain-rules.md`
 

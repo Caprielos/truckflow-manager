@@ -137,9 +137,9 @@ Queste parti verranno aggiunte in fasi successive, mantenendo il dominio attuale
 
 La versione attuale del dominio rappresenta la **TruckFlow Domain Foundation v1.0**.
 
-Questo significa che la fondazione del dominio puro è stata definita e che la roadmap della Domain Review Finale è approvata.
+Questo significa che la fondazione del dominio puro è stata definita e che la prima review correttiva del dominio è stata eseguita con interventi mirati su invarianti, eccezioni, codici aziendali, test e pulizia del repository.
 
-Non significa che il dominio sia già enterprise completo in senso assoluto. La review concreta dominio per dominio, l'introduzione graduale delle eccezioni custom e la preparazione del livello application rimangono attività successive.
+Non significa che tutta la piattaforma sia già enterprise completa in senso assoluto. API, database, workflow, audit, planning, dispatching e integrazioni esterne rimangono attività successive.
 
 Le regole fondamentali della fondazione sono:
 
@@ -147,7 +147,10 @@ Le regole fondamentali della fondazione sono:
 - gli aggregate root non devono essere importati direttamente da altri domini;
 - i riferimenti tra domini devono avvenire tramite ID, value object stabili o concetti astratti;
 - i value object simili non vanno unificati se hanno significato diverso;
-- le eccezioni custom devono essere introdotte gradualmente;
+- le eccezioni custom devono essere usate per rappresentare errori specifici di dominio;
+- le mutazioni degli aggregate devono avvenire solo dopo il completamento delle validazioni;
+- i codici aziendali devono essere obbligatori quando rappresentano identificativi interni leggibili;
+- i test dei cataloghi devono proteggere comportamento e coerenza, non conteggi fragili;
 - le violazioni concrete di compliance non fanno ancora parte del dominio puro.
 
-Il documento operativo di riferimento è [`13-domain-rules.md`](13-domain-rules.md).
+I documenti operativi di riferimento sono [`13-domain-rules.md`](13-domain-rules.md) e [`14-domain-review-patches.md`](14-domain-review-patches.md).

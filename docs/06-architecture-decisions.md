@@ -612,3 +612,61 @@ Il refactoring verso eccezioni custom deve avvenire gradualmente, dominio per do
 Il dominio compliance modella requisiti astratti tramite `ComplianceRequirement`. Una violazione di compliance, invece, rappresenta un risultato concreto di un controllo eseguito su una shipment, un veicolo, un documento, un cargo o un'altra istanza reale.
 
 Le violazioni, i check, gli audit, le approvazioni e i risultati di verifica saranno modellati in una fase successiva, dentro application layer o moduli dedicati di compliance check, planning, dispatching e audit.
+
+## 6.37 Decisione: validare prima di mutare gli aggregate
+
+Durante la prima review correttiva è stata formalizzata una regola importante: un aggregate deve validare il nuovo stato prima di modificare i propri campi interni.
+
+La sequenza corretta è:
+
+```text
+1. calcolare i nuovi valori
+2. validare i nuovi valori
+3. verificare la coerenza complessiva
+4. assegnare i campi interni
+```
+
+Questa scelta evita stati parzialmente modificati quando una validazione fallisce.
+
+## 6.38 Decisione: usare eccezioni custom nei domini
+
+Le eccezioni custom definite nella Domain Foundation vengono usate nei domini al posto delle eccezioni standard Java per rappresentare violazioni di validazione e invarianti.
+
+Questa scelta rende il modello più leggibile e prepara il livello application a gestire errori di dominio in modo chiaro.
+
+## 6.39 Decisione: rendere `OperationalCode` obbligatorio
+
+`OperationalCode` viene trattato come codice aziendale obbligatorio per le figure operative.
+
+Questa scelta lo allinea a `FleetCode`, `CargoCode`, `ShipmentCode`, `DocumentCode` e `ComplianceRequirementCode`.
+
+Un codice operativo leggibile è utile per ricerca, reportistica, audit, comunicazione interna e integrazioni future.
+
+## 6.40 Decisione: testare i cataloghi per coerenza, non per conteggi fragili
+
+I test dei cataloghi statici non devono bloccare l'evoluzione del dominio con conteggi rigidi non necessari.
+
+Devono invece verificare proprietà di qualità:
+
+- codici univoci;
+- ricerca per codice;
+- metadati completi;
+- categorie coerenti;
+- presenza degli elementi fondamentali.
+
+Questa scelta permette al catalogo qualificazioni di crescere senza rendere fragili i test.
+
+## 6.41 Decisione: escludere file locali e artefatti generati dal repository
+
+Il repository deve contenere codice sorgente, test, configurazioni condivise e documentazione ufficiale.
+
+File locali dell'IDE, artefatti Maven, file macOS, patch temporanee e script locali non rappresentano il dominio e non devono essere versionati.
+
+Questa scelta mantiene il repository pulito, riproducibile e più adatto al lavoro futuro su più ambienti.
+
+## 6.42 Decisione: documentare gli interventi correttivi della review
+
+Gli interventi della prima review concreta del dominio puro sono documentati in `docs/14-domain-review-patches.md`.
+
+Il documento non descrive procedure tecniche di applicazione, ma spiega cosa è stato cambiato e perché la modifica migliora la qualità del dominio.
+

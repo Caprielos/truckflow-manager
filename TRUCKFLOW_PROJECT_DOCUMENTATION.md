@@ -8,7 +8,7 @@ La documentazione ufficiale aggiornata si trova nella cartella [`docs`](docs/REA
 
 Il progetto è attualmente concentrato sul **domain layer puro**.
 
-La versione attuale rappresenta la **TruckFlow Domain Foundation v1.0**: la fondazione del dominio puro è definita, la roadmap della Domain Review Finale è approvata e il progetto è pronto per una review concreta dominio per dominio.
+La versione attuale rappresenta la **TruckFlow Domain Foundation v1.0** rafforzata dalla prima review correttiva del dominio puro. La fondazione è definita, le regole sono documentate e sono stati applicati interventi mirati su invarianti, eccezioni, codici aziendali, test e pulizia del repository.
 
 I package principali sono:
 
@@ -41,6 +41,7 @@ Il dominio è stato costruito seguendo una regola precisa: modellare prima i con
 - [`docs/11-domain-documents.md`](docs/11-domain-documents.md) — documento aziendale come concetto puro.
 - [`docs/12-domain-compliance.md`](docs/12-domain-compliance.md) — requisiti astratti di conformità.
 - [`docs/13-domain-rules.md`](docs/13-domain-rules.md) — regole ufficiali della TruckFlow Domain Foundation v1.0.
+- [`docs/14-domain-review-patches.md`](docs/14-domain-review-patches.md) — riepilogo degli interventi correttivi della prima review concreta del dominio puro.
 
 ## Regole fondamentali della Domain Foundation
 
@@ -67,13 +68,26 @@ Sono state inoltre definite eccezioni specifiche per i domini principali, come `
 
 Queste eccezioni non obbligano a modificare immediatamente tutte le classi esistenti. Il refactoring dalle eccezioni standard Java alle eccezioni custom deve avvenire gradualmente, dominio per dominio, aggiornando i test.
 
+## Review correttiva completata
+
+La prima review correttiva del dominio puro ha consolidato sei aspetti principali:
+
+1. validazione completa prima delle mutazioni di stato degli aggregate;
+2. uso delle eccezioni custom nei domini semplici;
+3. uso delle eccezioni custom nei domini complessi;
+4. obbligatorietà di `OperationalCode` per le figure operative;
+5. test del catalogo qualificazioni basati su comportamento e coerenza, non su conteggi fragili;
+6. pulizia della documentazione e delle regole sui file locali, IDE, build e artefatti temporanei.
+
+Questi interventi non aggiungono nuove funzionalità operative, ma rendono il dominio più sicuro, leggibile e pronto per essere consumato dal livello application.
+
 ## Prossimi step consigliati
 
 La roadmap consigliata è:
 
-1. review concreta dominio per dominio;
-2. controllo aggregate root, value object, invarianti, entità e nomenclatura;
-3. introduzione graduale delle eccezioni custom nei punti più importanti;
-4. aggiornamento costante di [`docs/13-domain-rules.md`](docs/13-domain-rules.md);
-5. pulizia finale del dominio puro;
-6. inizio del livello application.
+1. verificare sul Mac `mvn spotless:apply` e `mvn clean test` dopo ogni intervento importante;
+2. mantenere aggiornata la documentazione `docs/13-domain-rules.md` e `docs/14-domain-review-patches.md` quando cambiano le regole di dominio;
+3. iniziare il livello application con use case piccoli e chiari;
+4. introdurre porte in ingresso e porte repository in uscita;
+5. aggiungere repository in-memory per test e scenari;
+6. rimandare API REST, database e integrazioni esterne finché l'application layer non è stabile.

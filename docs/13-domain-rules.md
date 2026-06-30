@@ -6,13 +6,13 @@ Questo documento definisce le regole architetturali del dominio puro di TruckFlo
 
 Le regole qui descritte servono a mantenere il dominio coerente, pulito, disaccoppiato e pronto per essere utilizzato dal livello application.
 
-Questo documento rappresenta la base della **TruckFlow Domain Foundation v1.0**: la fondazione del dominio puro è stata definita, mentre la review concreta dominio per dominio e il refactoring graduale delle eccezioni custom rimangono attività successive.
+Questo documento rappresenta la base della **TruckFlow Domain Foundation v1.0**. Dopo la prima review correttiva, le regole qui descritte sono state applicate a interventi mirati su mutazioni di stato, eccezioni custom, codici aziendali, test di catalogo e pulizia del repository.
 
 ## 2. Stato della Domain Review Finale
 
-La **Domain Review Finale** è avviata e la roadmap è approvata.
+La **Domain Review Finale** è stata avviata e la prima review correttiva del dominio puro è stata completata con sei interventi mirati.
 
-Non va considerata ancora completata, perché la review dominio per dominio deve essere eseguita concretamente su classi, aggregate root, value object, invarianti, nomenclatura, dipendenze e test.
+Questa fase ha rafforzato il dominio, ma non sostituisce le future review che saranno necessarie quando verranno introdotti application layer, repository, API, workflow, audit, planning e dispatching.
 
 ## 3. Confini del dominio
 
@@ -116,7 +116,7 @@ Devono essere protetti nel costruttore o nei metodi di modifica dell'aggregate r
 
 A regime, gli invarianti devono lanciare eccezioni di dominio dedicate.
 
-Durante la fase MVP sono accettabili eccezioni standard Java, come `IllegalArgumentException` e `IllegalStateException`, purché siano usate in modo coerente e localizzato.
+Le eccezioni standard Java devono essere evitate nei punti di validazione del dominio quando esiste un'eccezione custom specifica. Durante evoluzioni future possono essere accettate solo temporaneamente, se localizzate e sostituite nella patch di refactoring del relativo dominio.
 
 ## 7. Entità
 
@@ -155,9 +155,9 @@ La regola architetturale è:
 
 ## 9. Eccezioni di dominio
 
-Le eccezioni custom sono un miglioramento enterprise, ma non sono un obbligo immediato.
+Le eccezioni custom sono ora parte della regola ordinaria del dominio.
 
-Devono essere introdotte gradualmente, dominio per dominio, senza modificare tutto insieme.
+Sono state introdotte gradualmente, dominio per dominio, e devono essere preferite alle eccezioni standard Java nei punti di validazione e invarianti.
 
 La struttura base prevista è:
 
@@ -307,24 +307,14 @@ Prima di chiudere la review del dominio puro verificare:
 
 ## 14. Roadmap successiva
 
-La roadmap consigliata è:
+La prima review correttiva del dominio puro è stata completata con sei interventi mirati, documentati in [`14-domain-review-patches.md`](14-domain-review-patches.md).
 
-1. approvazione roadmap Domain Review;
-2. review concreta dominio per dominio;
-3. introduzione graduale eccezioni custom;
-4. aggiornamento di `docs/13-domain-rules.md` quando cambiano le regole;
-5. pulizia finale del dominio puro;
-6. inizio del livello application.
+La roadmap successiva consigliata è:
 
-Ordine consigliato per la review:
-
-1. `domain.users`;
-2. `domain.qualifications`;
-3. `domain.operational`;
-4. `domain.vehicles`;
-5. `domain.cargo`;
-6. `domain.locations`;
-7. `domain.triptemplates`;
-8. `domain.shipments`;
-9. `domain.documents`;
-10. `domain.compliance`.
+1. mantenere verdi formattazione e test con `mvn spotless:apply` e `mvn clean test`;
+2. evitare nuove eccezioni standard Java nei punti di validazione del dominio;
+3. aggiornare `docs/13-domain-rules.md` quando cambiano regole architetturali;
+4. aggiornare `docs/14-domain-review-patches.md` quando vengono eseguiti nuovi interventi correttivi rilevanti;
+5. iniziare il livello `application` con use case piccoli, porte in ingresso e porte repository in uscita;
+6. introdurre `infrastructure.memory` solo come adattatore tecnico, senza riportare logica applicativa o infrastrutturale nel dominio;
+7. rimandare API REST, database e integrazioni esterne finché application layer e use case principali non sono stabili.
