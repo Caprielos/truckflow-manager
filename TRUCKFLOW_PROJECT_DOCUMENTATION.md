@@ -47,3 +47,12 @@ Questa versione mantiene `domain.shipments` organizzato in sottopackage tematici
 
 La divisione in sottopackage non crea nuovi aggregate. `Shipment` rimane l'unico aggregate root del dominio shipments.
 
+
+
+# Dominio `domain.compliance`
+
+Il dominio `domain.compliance` rappresenta i requisiti astratti di conformità di TruckFlow. Un `ComplianceRequirement` descrive identità, codice, stato, categoria, tipo, livello di obbligatorietà, severità, target astratto, regola descrittiva, fonte e giurisdizione.
+
+Il dominio non contiene controlli concreti, violazioni, audit, scadenze, approvazioni, notifiche o workflow. Questi concetti arriveranno più avanti in application layer o in moduli dedicati di compliance check, planning, dispatching e audit.
+
+La compliance completa la prima grande fondazione del dominio puro enterprise di TruckFlow, mantenendo separati requisiti astratti e verifiche operative.

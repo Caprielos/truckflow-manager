@@ -478,3 +478,107 @@ Non sono stati del dominio documents puro:
 - `PENDING_APPROVAL`.
 
 Questi stati appartengono a firma digitale, compliance, scadenze o workflow futuri, non al concetto base di documento.
+
+
+## 6.29 Decisione: introdurre `domain.compliance` come catalogo dei requisiti astratti
+
+Il dominio compliance è stato introdotto per rappresentare i requisiti astratti di conformità di TruckFlow.
+
+Un `ComplianceRequirement` descrive:
+
+- identità tecnica;
+- codice aziendale leggibile;
+- nome e descrizione;
+- stato anagrafico;
+- categoria;
+- tipo di requisito;
+- livello di obbligatorietà;
+- severità;
+- target astratto;
+- regola descrittiva;
+- fonte;
+- giurisdizione.
+
+Il dominio non esegue controlli concreti. Non dice se una shipment reale è conforme, se un documento è scaduto o se un veicolo può partire. Descrive solo che un requisito esiste.
+
+Le verifiche concrete arriveranno più avanti in application layer, planning, dispatching, audit o moduli di compliance check.
+
+## 6.30 Decisione: separare obbligatorietà e severità
+
+Nel dominio compliance, obbligatorietà e severità sono concetti diversi.
+
+`ComplianceObligationLevel` descrive se un requisito è:
+
+- `MANDATORY`;
+- `REQUIRED`;
+- `RECOMMENDED`;
+- `OPTIONAL`.
+
+`ComplianceSeverity` descrive la gravità del mancato rispetto:
+
+- `LOW`;
+- `MEDIUM`;
+- `HIGH`;
+- `CRITICAL`.
+
+Questa separazione permette di rappresentare correttamente casi come:
+
+```text
+obligationLevel = MANDATORY
+severity = CRITICAL
+```
+
+oppure:
+
+```text
+obligationLevel = REQUIRED
+severity = MEDIUM
+```
+
+`MANDATORY` indica un obbligo forte, legale, normativo o aziendale non derogabile. `REQUIRED` indica un requisito richiesto da processo, cliente o contratto.
+
+## 6.31 Decisione: usare `ComplianceTarget`, non `ComplianceReference`
+
+Il dominio compliance deve descrivere requisiti generali, non applicazioni concrete a singole entità.
+
+Per questo è stato introdotto `ComplianceTarget`, che indica a quale tipo di dominio si applica il requisito:
+
+```text
+VEHICLE
+OPERATIONAL
+CARGO
+SHIPMENT
+LOCATION
+TRIP_TEMPLATE
+DOCUMENT
+GENERIC
+OTHER
+```
+
+Non è stato introdotto `ComplianceReference` con `referencedId`, perché quello collegherebbe il requisito a un caso concreto come `VEH-001` o `SHP-001`.
+
+Il collegamento concreto tra requisito e istanza reale verrà modellato più avanti in moduli di compliance check, planning, dispatching o audit.
+
+## 6.32 Decisione: regole descrittive, non eseguibili
+
+`ComplianceRule` è una regola descrittiva.
+
+Non contiene:
+
+- funzioni eseguibili;
+- predicati;
+- metodi `check`;
+- validatori operativi;
+- logica di confronto con veicoli, cargo, shipment o documenti.
+
+Questa scelta mantiene il dominio puro. La regola spiega cosa deve essere rispettato, mentre la verifica concreta sarà responsabilità di servizi applicativi futuri.
+
+## 6.33 Decisione: fonte e giurisdizione del requisito
+
+Ogni requisito di compliance può avere una fonte e una giurisdizione.
+
+`ComplianceSource` indica da dove nasce il requisito: norma europea, regolamento nazionale, policy interna, richiesta cliente, requisito contrattuale, standard di sicurezza o altra fonte.
+
+`ComplianceJurisdiction` indica l'ambito concettuale in cui il requisito vale, per esempio Italia, Unione Europea, ambito internazionale, policy interna aziendale o requisito specifico cliente.
+
+Questi concetti non applicano automaticamente la legge e non gestiscono date di validità. Servono solo a descrivere il requisito in modo enterprise e scalabile.

@@ -13,6 +13,7 @@ Il progetto, allo stato attuale, è concentrato sul **domain layer** e contiene 
 - `domain.triptemplates`
 - `domain.shipments`
 - `domain.documents`
+- `domain.compliance`
 
 L’obiettivo di questa documentazione è spiegare in italiano, in modo chiaro e professionale, **perché il dominio è stato modellato così**, quali scelte sono state fatte e cosa ogni package rappresenta.
 
@@ -29,6 +30,7 @@ L’obiettivo di questa documentazione è spiegare in italiano, in modo chiaro e
 9. [`09-domain-triptemplates.md`](09-domain-triptemplates.md) — documentazione completa dei percorsi tipo e delle missioni tecniche astratte.
 10. [`10-domain-shipments.md`](10-domain-shipments.md) — documentazione completa delle spedizioni richieste e dei loro requisiti.
 11. [`11-domain-documents.md`](11-domain-documents.md) — documentazione completa del dominio documents e del concetto puro di documento aziendale.
+12. [`12-domain-compliance.md`](12-domain-compliance.md) — documentazione completa del dominio compliance e dei requisiti astratti di conformità.
 
 ## Stato del progetto documentato
 
@@ -42,7 +44,8 @@ Questa documentazione descrive la versione del progetto in cui il dominio contie
 - dominio locations per descrivere luoghi logistici riutilizzabili come depositi, hub, yard, porti, clienti e fornitori;
 - dominio triptemplates per descrivere percorsi tipo e missioni tecniche astratte senza assegnare mezzi, autisti, cargo o orari reali;
 - dominio shipments per descrivere richieste di spedizione, item cargo, tratte logiche, priorità, livelli di servizio, requisiti e riferimenti senza introdurre pianificazione o tracking, con `domain.shipments` organizzato in sottopackage (`core`, `items`, `legs`, `requirements`, `metrics`, `properties`, `notes`, `references`);
-- dominio documents per descrivere il concetto puro di documento aziendale, con identità, codice, tipo, categoria, stato, metadati, contenuto logico e riferimenti astratti, senza introdurre file fisici, upload, storage, workflow, scadenze o compliance operativa.
+- dominio documents per descrivere il concetto puro di documento aziendale, con identità, codice, tipo, categoria, stato, metadati, contenuto logico e riferimenti astratti, senza introdurre file fisici, upload, storage, workflow, scadenze o compliance operativa;
+- dominio compliance per descrivere requisiti astratti di conformità, categorie, livelli di obbligatorietà, severità, target, regole, fonti e giurisdizioni senza introdurre controlli automatici, workflow, audit, scadenze o risultati di verifica.
 
 
 ## Nota sul packaging di `domain.vehicles`
@@ -112,3 +115,12 @@ Il dominio documents rappresenta il documento aziendale come concetto astratto e
 Un documento contiene solo identità, codice aziendale, tipo, categoria, stato astratto, metadati, contenuto logico opzionale e riferimenti generici verso altri domini tramite `DocumentReference`.
 
 `DocumentReference` non importa gli ID concreti degli altri domini: usa `DocumentReferenceType` e un `referencedId` testuale. Questa scelta mantiene `domain.documents` disaccoppiato da vehicles, cargo, shipments, locations, triptemplates e operational.
+
+
+## Nota su `domain.compliance`
+
+Il dominio compliance rappresenta i requisiti astratti di conformità di TruckFlow. Un `ComplianceRequirement` descrive una regola, la sua categoria, il suo tipo, il livello di obbligatorietà, la severità, il target astratto, la fonte e la giurisdizione.
+
+Il dominio non esegue controlli concreti e non contiene violazioni, audit, workflow, scadenze, approvazioni o notifiche. Questi concetti saranno introdotti più avanti nei moduli applicativi di compliance check, planning, dispatching e audit.
+
+Questa scelta completa la prima grande fondazione del dominio puro enterprise di TruckFlow, mantenendo separati requisiti astratti e verifiche operative.

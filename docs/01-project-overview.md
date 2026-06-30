@@ -16,7 +16,8 @@ In questa fase il progetto si concentra sul **domain layer**, cioè sulla parte 
 - location, cioè luoghi logistici riutilizzabili;
 - trip template, cioè percorsi tipo e missioni tecniche astratte;
 - shipment, cioè richieste di spedizione composte da cargo, tratte logiche, requisiti, priorità e riferimenti;
-- documents, cioè documenti aziendali astratti, classificati e riusabili senza file fisici, upload, workflow o storage.
+- documents, cioè documenti aziendali astratti, classificati e riusabili senza file fisici, upload, workflow o storage;
+- compliance, cioè requisiti astratti di conformità con regole, categorie, livelli di obbligatorietà, severità, target, fonti e giurisdizioni.
 
 Il dominio non è ancora collegato a database, API REST, interfacce grafiche o servizi esterni. Questa è una scelta intenzionale: prima si costruisce il modello del business, poi si aggiungono infrastruttura e applicazione.
 
@@ -37,7 +38,7 @@ Questa separazione rende il progetto più pulito e più facile da estendere.
 
 ## 1.3 I macro-domini attuali
 
-Il dominio è stato diviso in nove macro-aree:
+Il dominio è stato diviso in dieci macro-aree:
 
 ### `domain.users`
 
@@ -75,6 +76,10 @@ Rappresenta le richieste di spedizione. Una `Shipment` descrive cosa deve essere
 
 Rappresenta il documento aziendale come concetto astratto e riusabile. Un `Document` contiene identità, codice, tipo, categoria, stato, metadati, contenuto logico e riferimenti generici verso altri domini. Non contiene file fisici, PDF, upload, storage, firma digitale, scadenze o workflow.
 
+### `domain.compliance`
+
+Rappresenta i requisiti astratti di conformità. Un `ComplianceRequirement` descrive quale regola esiste, a quale target astratto si applica, quale categoria riguarda, quanto è obbligatoria, quanto è severa, da quale fonte deriva e in quale giurisdizione vale. Non esegue controlli concreti, non registra violazioni, non gestisce scadenze, audit, workflow o approvazioni.
+
 ## 1.4 Perché separare i contesti
 
 La separazione dei contesti evita errori di modellazione.
@@ -91,7 +96,7 @@ Lo stesso ragionamento vale per le qualificazioni: una patente C è una `Qualifi
 
 Lo stesso principio vale per cargo e veicoli: il cargo dichiara i propri requisiti, il veicolo dichiara le proprie capacità, mentre la verifica di compatibilità appartiene a un futuro modulo di pianificazione o assegnazione.
 
-Lo stesso principio vale anche per location, trip template, shipment e documents: una location è un luogo riutilizzabile, un `TripTemplate` usa solo `LocationId` per indicare origine e destinazione dei segmenti, una `Shipment` usa `CargoId` e `LocationId` per riferirsi alla merce e ai luoghi senza inglobare gli aggregati completi, e un `Document` usa `DocumentReference` generico per riferirsi ad altri contesti senza importarne le classi. In questo modo i contesti rimangono separati e più semplici da evolvere.
+Lo stesso principio vale anche per location, trip template, shipment e documents: una location è un luogo riutilizzabile, un `TripTemplate` usa solo `LocationId` per indicare origine e destinazione dei segmenti, una `Shipment` usa `CargoId` e `LocationId` per riferirsi alla merce e ai luoghi senza inglobare gli aggregati completi, un `Document` usa `DocumentReference` generico per riferirsi ad altri contesti senza importarne le classi, e un `ComplianceRequirement` usa `ComplianceTarget` per indicare il tipo di dominio a cui si applica senza collegarsi a istanze concrete. In questo modo i contesti rimangono separati e più semplici da evolvere.
 
 ## 1.5 Principi architetturali seguiti
 
@@ -118,6 +123,8 @@ Il dominio attuale non gestisce ancora:
 - esecuzione reale dei trip;
 - manutenzione dettagliata;
 - scadenze legali;
+- verifiche concrete di compliance;
+- violazioni, audit e workflow approvativi;
 - gestione file fisici e workflow documentali;
 - audit trail completo;
 - telematica;
