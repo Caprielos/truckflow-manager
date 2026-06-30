@@ -1,0 +1,14 @@
+/Users/gabriele/Documents/Corso Chat/truckflow-manager/src/main/java/it/gabriele/truckflow/TruckflowManagerApplication.java
+/Users/gabriele/Documents/Corso Chat/truckflow-manager/src/main/java/it/gabriele/truckflow/application/autisti/AutistaService.java
+/Users/gabriele/Documents/Corso Chat/truckflow-manager/src/main/java/it/gabriele/truckflow/config/WebConfig.java
+/Users/gabriele/Documents/Corso Chat/truckflow-manager/src/main/java/it/gabriele/truckflow/domain/abilitazioni/AbilitazioneCatalogo.java
+/Users/gabriele/Documents/Corso Chat/truckflow-manager/src/main/java/it/gabriele/truckflow/domain/abilitazioni/CatalogoAbilitazioni.java
+/Users/gabriele/Documents/Corso Chat/truckflow-manager/src/main/java/it/gabriele/truckflow/domain/abilitazioni/CategoriaAbilitazione.java
+/Users/gabriele/Documents/Corso Chat/truckflow-manager/src/main/java/it/gabriele/truckflow/domain/autisti/Autista.java
+/Users/gabriele/Documents/Corso Chat/truckflow-manager/src/main/java/it/gabriele/truckflow/domain/autisti/Patente.java
+/Users/gabriele/Documents/Corso Chat/truckflow-manager/src/main/java/it/gabriele/truckflow/domain/documenti/Documento.java
+/Users/gabriele/Documents/Corso Chat/truckflow-manager/src/main/java/it/gabriele/truckflow/domain/manutenzione/ManutenzioneItem.java
+/Users/gabriele/Documents/Corso Chat/truckflow-manager/src/main/java/it/gabriele/truckflow/domain/mezzi/Mezzo.java
+/Users/gabriele/Documents/Corso Chat/truckflow-manager/src/main/java/it/gabriele/truckflow/domain/scadenze/Scadenza.java
+/Users/gabriele/Documents/Corso Chat/truckflow-manager/src/main/java/it/gabriele/truckflow/infrastructure/persistence/jpa/AutistaEntity.java
+/Users/gabriele/Documents/Corso Chat/truckflow-manager/src/main/java/it/gabriele/truckflow/infrastructure/web/rest/AutistaController.java

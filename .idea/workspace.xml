@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="f285ebd6-ca31-4d09-87c6-2a0cecd930e7" name="Changes" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="NextEditCompletionFeaturesState">
+    <decayedCancelled>
+      <entry key="MS100" value="1.5516145784383186" />
+      <entry key="MS500" value="3.8508096194518253" />
+      <entry key="S2" value="6.8595980425142535" />
+      <entry key="S5" value="8.031438432538424" />
+      <entry key="S10" value="8.494480348916703" />
+      <entry key="S30" value="8.826559928065603" />
+      <entry key="S60" value="8.933193805279931" />
+      <entry key="M2" value="9.419489739535846" />
+      <entry key="M5" value="13.892812098296586" />
+      <entry key="M10" value="25.35458776467578" />
+      <entry key="M15" value="37.33389840497056" />
+      <entry key="M30" value="69.49499000400186" />
+      <entry key="H1" value="122.3771342029253" />
+      <entry key="H2" value="206.40497855862614" />
+      <entry key="H4" value="326.6441729360173" />
+      <entry key="D1" value="744.6047136969148" />
+      <entry key="W1" value="1013.9160928755861" />
+    </decayedCancelled>
+    <decayedSelected>
+      <entry key="MS100" value="0.0" />
+      <entry key="MS500" value="0.0" />
+      <entry key="S2" value="1.7958070153917556E-172" />
+      <entry key="S5" value="2.003121194703524E-69" />
+      <entry key="S10" value="4.4881157609763887E-35" />
+      <entry key="S30" value="4.133627673997679E-12" />
+      <entry key="S60" value="2.8804526256152028E-6" />
+      <entry key="M2" value="0.0027514024028195932" />
+      <entry key="M5" value="0.17972471812183186" />
+      <entry key="M10" value="0.7322913838603278" />
+      <entry key="M15" value="1.1737767487450494" />
+      <entry key="M30" value="1.9467473724266768" />
+      <entry key="H1" value="2.8921939832787356" />
+      <entry key="H2" value="4.629150009439197" />
+      <entry key="H4" value="7.660075917578675" />
+      <entry key="D1" value="23.295241521409785" />
+      <entry key="W1" value="35.89680469045158" />
+    </decayedSelected>
+    <decayedShown>
+      <entry key="MS100" value="1.4971247826862149" />
+      <entry key="MS500" value="3.8168531740043794" />
+      <entry key="S2" value="6.841273066491786" />
+      <entry key="S5" value="8.022575953831641" />
+      <entry key="S10" value="8.489747982663447" />
+      <entry key="S30" value="8.824910692194228" />
+      <entry key="S60" value="8.93236070668381" />
+      <entry key="M2" value="9.421778896944325" />
+      <entry key="M5" value="14.071750327347424" />
+      <entry key="M10" value="26.08557608019574" />
+      <entry key="M15" value="38.50630648814746" />
+      <entry key="M30" value="71.44058004334508" />
+      <entry key="H1" value="125.26842961508882" />
+      <entry key="H2" value="211.03336362366434" />
+      <entry key="H4" value="334.30356708491786" />
+      <entry key="D1" value="767.8995900266344" />
+      <entry key="W1" value="1049.8128190059751" />
+    </decayedShown>
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="Security Analysis" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8,
+  &quot;fromUser&quot;: false
+}</component>
+  <component name="ProjectId" id="3FlBq8gPBTcvkYsPqwpGZ4LQ6ks" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ShipmentStatusRulesTest.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;new-app-enterprise&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_directory_selection&quot;: &quot;/Users/gabriele/Documents/Corso Chat/truckflow-manager/docs&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/gabriele/Documents/Corso Chat/truckflow-manager&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/docs" />
+      <recent name="$PROJECT_DIR$/docs/architecture-decisions" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="TruckFlowApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="truckflow-manager" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="it.gabriele.truckflow.TruckFlowApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-30f59d01ecdd-37e91769500f-intellij.indexing.shared.core-IU-261.25134.95" />
+        <option value="bundled-js-predefined-d6986cc7102b-31caf2ab9e3c-JavaScript-IU-261.25134.95" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="f285ebd6-ca31-4d09-87c6-2a0cecd930e7" name="Changes" comment="" />
+      <created>1782639963283</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1782639963283</updated>
+      <workItem from="1782639964295" duration="3208000" />
+      <workItem from="1782649190071" duration="63705000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
