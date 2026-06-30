@@ -582,3 +582,33 @@ Ogni requisito di compliance può avere una fonte e una giurisdizione.
 `ComplianceJurisdiction` indica l'ambito concettuale in cui il requisito vale, per esempio Italia, Unione Europea, ambito internazionale, policy interna aziendale o requisito specifico cliente.
 
 Questi concetti non applicano automaticamente la legge e non gestiscono date di validità. Servono solo a descrivere il requisito in modo enterprise e scalabile.
+
+## 6.34 Decisione: formalizzare TruckFlow Domain Foundation v1.0
+
+La fondazione del dominio puro viene formalizzata come **TruckFlow Domain Foundation v1.0**.
+
+Questa decisione non indica che tutta la piattaforma sia enterprise ready. Indica che il domain layer puro ha una base stabile, documentata e pronta per una review concreta dominio per dominio.
+
+La Domain Review Finale è quindi considerata avviata e la roadmap è approvata, ma non ancora completata.
+
+## 6.35 Decisione: introdurre eccezioni custom gradualmente
+
+Sono state definite eccezioni base condivise in `it.gabriele.truckflow.domain.shared.exceptions`:
+
+- `DomainException`;
+- `DomainValidationException`;
+- `InvariantViolationException`.
+
+Sono state inoltre definite eccezioni specifiche nei package `exceptions` dei singoli domini.
+
+Questa introduzione non obbliga a sostituire immediatamente tutte le eccezioni standard Java già presenti. Durante la fase MVP sono ancora accettabili `IllegalArgumentException` e `IllegalStateException`, purché siano localizzate e coerenti.
+
+Il refactoring verso eccezioni custom deve avvenire gradualmente, dominio per dominio, aggiornando i test a ogni passaggio.
+
+## 6.36 Decisione: non introdurre `ComplianceViolationException` in questa fase
+
+`ComplianceViolationException` non viene introdotta nel dominio puro attuale.
+
+Il dominio compliance modella requisiti astratti tramite `ComplianceRequirement`. Una violazione di compliance, invece, rappresenta un risultato concreto di un controllo eseguito su una shipment, un veicolo, un documento, un cargo o un'altra istanza reale.
+
+Le violazioni, i check, gli audit, le approvazioni e i risultati di verifica saranno modellati in una fase successiva, dentro application layer o moduli dedicati di compliance check, planning, dispatching e audit.

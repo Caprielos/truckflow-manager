@@ -132,3 +132,22 @@ Il dominio attuale non gestisce ancora:
 - integrazioni esterne.
 
 Queste parti verranno aggiunte in fasi successive, mantenendo il dominio attuale come base pulita e stabile.
+
+## 1.7 TruckFlow Domain Foundation v1.0
+
+La versione attuale del dominio rappresenta la **TruckFlow Domain Foundation v1.0**.
+
+Questo significa che la fondazione del dominio puro è stata definita e che la roadmap della Domain Review Finale è approvata.
+
+Non significa che il dominio sia già enterprise completo in senso assoluto. La review concreta dominio per dominio, l'introduzione graduale delle eccezioni custom e la preparazione del livello application rimangono attività successive.
+
+Le regole fondamentali della fondazione sono:
+
+- ogni dominio deve mantenere confini chiari;
+- gli aggregate root non devono essere importati direttamente da altri domini;
+- i riferimenti tra domini devono avvenire tramite ID, value object stabili o concetti astratti;
+- i value object simili non vanno unificati se hanno significato diverso;
+- le eccezioni custom devono essere introdotte gradualmente;
+- le violazioni concrete di compliance non fanno ancora parte del dominio puro.
+
+Il documento operativo di riferimento è [`13-domain-rules.md`](13-domain-rules.md).

@@ -31,6 +31,7 @@ L’obiettivo di questa documentazione è spiegare in italiano, in modo chiaro e
 10. [`10-domain-shipments.md`](10-domain-shipments.md) — documentazione completa delle spedizioni richieste e dei loro requisiti.
 11. [`11-domain-documents.md`](11-domain-documents.md) — documentazione completa del dominio documents e del concetto puro di documento aziendale.
 12. [`12-domain-compliance.md`](12-domain-compliance.md) — documentazione completa del dominio compliance e dei requisiti astratti di conformità.
+13. [`13-domain-rules.md`](13-domain-rules.md) — regole ufficiali della TruckFlow Domain Foundation v1.0 e roadmap della domain review.
 
 ## Stato del progetto documentato
 
@@ -46,6 +47,7 @@ Questa documentazione descrive la versione del progetto in cui il dominio contie
 - dominio shipments per descrivere richieste di spedizione, item cargo, tratte logiche, priorità, livelli di servizio, requisiti e riferimenti senza introdurre pianificazione o tracking, con `domain.shipments` organizzato in sottopackage (`core`, `items`, `legs`, `requirements`, `metrics`, `properties`, `notes`, `references`);
 - dominio documents per descrivere il concetto puro di documento aziendale, con identità, codice, tipo, categoria, stato, metadati, contenuto logico e riferimenti astratti, senza introdurre file fisici, upload, storage, workflow, scadenze o compliance operativa;
 - dominio compliance per descrivere requisiti astratti di conformità, categorie, livelli di obbligatorietà, severità, target, regole, fonti e giurisdizioni senza introdurre controlli automatici, workflow, audit, scadenze o risultati di verifica.
+- regole ufficiali di dominio per guidare la TruckFlow Domain Foundation v1.0, la review finale del dominio puro e l'introduzione graduale delle eccezioni custom.
 
 
 ## Nota sul packaging di `domain.vehicles`
@@ -124,3 +126,18 @@ Il dominio compliance rappresenta i requisiti astratti di conformità di TruckFl
 Il dominio non esegue controlli concreti e non contiene violazioni, audit, workflow, scadenze, approvazioni o notifiche. Questi concetti saranno introdotti più avanti nei moduli applicativi di compliance check, planning, dispatching e audit.
 
 Questa scelta completa la prima grande fondazione del dominio puro enterprise di TruckFlow, mantenendo separati requisiti astratti e verifiche operative.
+
+
+## Nota su `docs/13-domain-rules.md`
+
+Il documento `13-domain-rules.md` definisce la roadmap ufficiale della TruckFlow Domain Foundation v1.0.
+
+La Domain Review Finale è considerata avviata e la roadmap è approvata, ma non ancora completata dominio per dominio.
+
+Le regole principali sono:
+
+- non unificare value object simili se hanno significato diverso;
+- non importare aggregate root completi da altri domini;
+- usare riferimenti tramite ID, value object stabili o concetti astratti;
+- introdurre eccezioni custom di dominio in modo graduale;
+- non aggiungere ancora concetti come `ComplianceViolationException`, perché le violazioni concrete appartengono a moduli futuri di compliance check, audit o planning.

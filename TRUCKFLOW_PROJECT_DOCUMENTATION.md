@@ -6,21 +6,28 @@ La documentazione ufficiale aggiornata si trova nella cartella [`docs`](docs/REA
 
 ## Stato attuale del dominio
 
-Il progetto è attualmente concentrato sul **domain layer puro**. I package principali sono:
+Il progetto è attualmente concentrato sul **domain layer puro**.
 
-- `domain.users`
-- `domain.qualifications`
-- `domain.operational`
-- `domain.vehicles`
-- `domain.cargo`
-- `domain.locations`
-- `domain.triptemplates`
-- `domain.shipments`
+La versione attuale rappresenta la **TruckFlow Domain Foundation v1.0**: la fondazione del dominio puro è definita, la roadmap della Domain Review Finale è approvata e il progetto è pronto per una review concreta dominio per dominio.
 
-Il dominio è stato costruito seguendo una regola precisa: modellare prima i concetti reali dell'azienda, senza introdurre database, controller, JPA, REST API, JWT, microservizi, tracking, disponibilità o pianificazione operativa.
+I package principali sono:
+
+- `domain.users`;
+- `domain.qualifications`;
+- `domain.operational`;
+- `domain.vehicles`;
+- `domain.cargo`;
+- `domain.locations`;
+- `domain.triptemplates`;
+- `domain.shipments`;
+- `domain.documents`;
+- `domain.compliance`.
+
+Il dominio è stato costruito seguendo una regola precisa: modellare prima i concetti reali dell'azienda, senza introdurre database, controller, JPA, REST API, JWT, microservizi, tracking, disponibilità, pianificazione operativa, audit, workflow o controlli concreti di compliance.
 
 ## Documenti principali
 
+- [`docs/README.md`](docs/README.md) — indice della documentazione del dominio.
 - [`docs/01-project-overview.md`](docs/01-project-overview.md) — visione generale del progetto.
 - [`docs/02-domain-users.md`](docs/02-domain-users.md) — account applicativi e autorizzazioni.
 - [`docs/03-domain-qualifications.md`](docs/03-domain-qualifications.md) — catalogo qualificazioni.
@@ -31,28 +38,41 @@ Il dominio è stato costruito seguendo una regola precisa: modellare prima i con
 - [`docs/08-domain-locations.md`](docs/08-domain-locations.md) — luoghi logistici.
 - [`docs/09-domain-triptemplates.md`](docs/09-domain-triptemplates.md) — percorsi tipo e missioni tecniche astratte.
 - [`docs/10-domain-shipments.md`](docs/10-domain-shipments.md) — richieste di spedizione.
+- [`docs/11-domain-documents.md`](docs/11-domain-documents.md) — documento aziendale come concetto puro.
+- [`docs/12-domain-compliance.md`](docs/12-domain-compliance.md) — requisiti astratti di conformità.
+- [`docs/13-domain-rules.md`](docs/13-domain-rules.md) — regole ufficiali della TruckFlow Domain Foundation v1.0.
 
-## Nota sul checkup
+## Regole fondamentali della Domain Foundation
 
-Questa versione mantiene `domain.shipments` organizzato in sottopackage tematici:
+Le regole principali sono:
 
-- `core`
-- `items`
-- `legs`
-- `requirements`
-- `metrics`
-- `properties`
-- `notes`
-- `references`
+- ogni dominio mantiene confini chiari;
+- un dominio non importa aggregate root completi di altri domini;
+- i riferimenti tra domini avvengono tramite ID, value object stabili o concetti astratti;
+- value object simili non vengono unificati se hanno significato diverso;
+- le eccezioni custom sono introdotte gradualmente;
+- `ComplianceViolationException` non viene introdotta ora perché le violazioni concrete non appartengono ancora al dominio puro;
+- application layer e infrastructure rimangono separati dal dominio.
 
-La divisione in sottopackage non crea nuovi aggregate. `Shipment` rimane l'unico aggregate root del dominio shipments.
+## Eccezioni di dominio
 
+Sono state introdotte le eccezioni base condivise:
 
+- `DomainException`;
+- `DomainValidationException`;
+- `InvariantViolationException`.
 
-# Dominio `domain.compliance`
+Sono state inoltre definite eccezioni specifiche per i domini principali, come `InvalidUserException`, `InvalidShipmentException`, `InvalidDocumentException` e `InvalidComplianceRequirementException`.
 
-Il dominio `domain.compliance` rappresenta i requisiti astratti di conformità di TruckFlow. Un `ComplianceRequirement` descrive identità, codice, stato, categoria, tipo, livello di obbligatorietà, severità, target astratto, regola descrittiva, fonte e giurisdizione.
+Queste eccezioni non obbligano a modificare immediatamente tutte le classi esistenti. Il refactoring dalle eccezioni standard Java alle eccezioni custom deve avvenire gradualmente, dominio per dominio, aggiornando i test.
 
-Il dominio non contiene controlli concreti, violazioni, audit, scadenze, approvazioni, notifiche o workflow. Questi concetti arriveranno più avanti in application layer o in moduli dedicati di compliance check, planning, dispatching e audit.
+## Prossimi step consigliati
 
-La compliance completa la prima grande fondazione del dominio puro enterprise di TruckFlow, mantenendo separati requisiti astratti e verifiche operative.
+La roadmap consigliata è:
+
+1. review concreta dominio per dominio;
+2. controllo aggregate root, value object, invarianti, entità e nomenclatura;
+3. introduzione graduale delle eccezioni custom nei punti più importanti;
+4. aggiornamento costante di [`docs/13-domain-rules.md`](docs/13-domain-rules.md);
+5. pulizia finale del dominio puro;
+6. inizio del livello application.
