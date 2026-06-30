@@ -1,5 +1,6 @@
 package it.gabriele.truckflow.domain.cargo;
 
+import it.gabriele.truckflow.domain.cargo.exceptions.InvalidCargoException;
 import java.math.BigDecimal;
 import java.util.Collection;
 
@@ -9,7 +10,7 @@ final class CargoValidation {
 
   static <T> T requireNonNull(T value, String fieldName) {
     if (value == null) {
-      throw new IllegalArgumentException(fieldName + " is required.");
+      throw new InvalidCargoException(fieldName + " is required.");
     }
 
     return value;
@@ -19,7 +20,7 @@ final class CargoValidation {
     String normalized = normalize(value);
 
     if (normalized.isBlank()) {
-      throw new IllegalArgumentException(fieldName + " is required.");
+      throw new InvalidCargoException(fieldName + " is required.");
     }
 
     return normalized;
@@ -31,7 +32,7 @@ final class CargoValidation {
 
   static BigDecimal nonNegativeOrNull(BigDecimal value, String fieldName) {
     if (value != null && value.signum() < 0) {
-      throw new IllegalArgumentException(fieldName + " cannot be negative.");
+      throw new InvalidCargoException(fieldName + " cannot be negative.");
     }
 
     return value;
@@ -39,7 +40,7 @@ final class CargoValidation {
 
   static Integer nonNegativeOrNull(Integer value, String fieldName) {
     if (value != null && value < 0) {
-      throw new IllegalArgumentException(fieldName + " cannot be negative.");
+      throw new InvalidCargoException(fieldName + " cannot be negative.");
     }
 
     return value;
@@ -47,7 +48,7 @@ final class CargoValidation {
 
   static <T> void requireNoNullElements(Collection<T> values, String fieldName) {
     if (values.stream().anyMatch(value -> value == null)) {
-      throw new IllegalArgumentException(fieldName + " cannot contain null values.");
+      throw new InvalidCargoException(fieldName + " cannot contain null values.");
     }
   }
 }

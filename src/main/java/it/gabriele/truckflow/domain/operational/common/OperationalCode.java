@@ -1,12 +1,14 @@
 package it.gabriele.truckflow.domain.operational.common;
 
+import it.gabriele.truckflow.domain.shared.exceptions.DomainValidationException;
+
 public record OperationalCode(String value) {
 
   public OperationalCode {
     value = normalize(value).toUpperCase();
 
     if (!value.isBlank() && !value.matches("[A-Z0-9][A-Z0-9_-]*")) {
-      throw new IllegalArgumentException(
+      throw new DomainValidationException(
           "Operational code can contain only uppercase letters, numbers, dashes and underscores.");
     }
   }

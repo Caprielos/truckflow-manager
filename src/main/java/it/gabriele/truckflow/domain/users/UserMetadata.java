@@ -1,5 +1,6 @@
 package it.gabriele.truckflow.domain.users;
 
+import it.gabriele.truckflow.domain.users.exceptions.InvalidUserException;
 import java.time.Instant;
 
 public record UserMetadata(
@@ -12,7 +13,7 @@ public record UserMetadata(
     updatedBy = normalize(updatedBy).isBlank() ? createdBy : normalize(updatedBy);
 
     if (updatedAt.isBefore(createdAt)) {
-      throw new IllegalArgumentException("updatedAt cannot be before createdAt.");
+      throw new InvalidUserException("updatedAt cannot be before createdAt.");
     }
   }
 
@@ -27,7 +28,7 @@ public record UserMetadata(
 
   private static <T> T requireNonNull(T value, String fieldName) {
     if (value == null) {
-      throw new IllegalArgumentException(fieldName + " is required.");
+      throw new InvalidUserException(fieldName + " is required.");
     }
 
     return value;
@@ -37,7 +38,7 @@ public record UserMetadata(
     String normalized = normalize(value);
 
     if (normalized.isBlank()) {
-      throw new IllegalArgumentException(fieldName + " is required.");
+      throw new InvalidUserException(fieldName + " is required.");
     }
 
     return normalized;

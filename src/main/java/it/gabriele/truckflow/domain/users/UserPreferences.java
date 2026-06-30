@@ -1,5 +1,6 @@
 package it.gabriele.truckflow.domain.users;
 
+import it.gabriele.truckflow.domain.users.exceptions.InvalidUserException;
 import java.util.Locale;
 import java.util.Set;
 
@@ -17,7 +18,7 @@ public record UserPreferences(String language, String theme, boolean notificatio
     theme = normalize(theme).isBlank() ? DEFAULT_THEME : normalize(theme).toLowerCase(Locale.ROOT);
 
     if (!SUPPORTED_THEMES.contains(theme)) {
-      throw new IllegalArgumentException("Theme must be either 'light' or 'dark'.");
+      throw new InvalidUserException("Theme must be either 'light' or 'dark'.");
     }
   }
 

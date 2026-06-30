@@ -2,6 +2,7 @@ package it.gabriele.truckflow.domain.shipments.legs;
 
 import it.gabriele.truckflow.domain.locations.LocationId;
 import it.gabriele.truckflow.domain.shipments.core.ShipmentValidation;
+import it.gabriele.truckflow.domain.shipments.exceptions.InvalidShipmentLegException;
 import java.math.BigDecimal;
 
 public record ShipmentLeg(
@@ -43,7 +44,7 @@ public record ShipmentLeg(
     }
 
     if (type != ShipmentLegType.TRANSFER && type != ShipmentLegType.SPECIAL) {
-      throw new IllegalArgumentException(
+      throw new InvalidShipmentLegException(
           "Origin and destination can be the same only for transfer or special shipment legs.");
     }
   }

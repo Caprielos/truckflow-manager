@@ -12,6 +12,8 @@ import it.gabriele.truckflow.domain.operational.common.OperationalScope;
 import it.gabriele.truckflow.domain.operational.common.OperationalStatus;
 import it.gabriele.truckflow.domain.operational.dispatcher.Dispatcher;
 import it.gabriele.truckflow.domain.operational.driver.Driver;
+import it.gabriele.truckflow.domain.operational.exceptions.InvalidDispatcherException;
+import it.gabriele.truckflow.domain.operational.exceptions.InvalidDriverException;
 import it.gabriele.truckflow.domain.operational.manager.Manager;
 import it.gabriele.truckflow.domain.operational.mechanic.Mechanic;
 import it.gabriele.truckflow.domain.operational.warehouse.WarehouseOperator;
@@ -43,7 +45,7 @@ class OperationalDomainTest {
   @Test
   void activeDriverRequiresAtLeastOneQualification() {
     assertThrows(
-        IllegalStateException.class,
+        InvalidDriverException.class,
         () ->
             new Driver(
                 null,
@@ -117,7 +119,7 @@ class OperationalDomainTest {
   @Test
   void activeDispatcherRequiresAtLeastOneScope() {
     assertThrows(
-        IllegalStateException.class,
+        InvalidDispatcherException.class,
         () ->
             new Dispatcher(
                 null,
@@ -143,7 +145,7 @@ class OperationalDomainTest {
             OperationalMetadata.createdNow("system"),
             "");
 
-    assertThrows(IllegalStateException.class, () -> driver.activate("admin"));
+    assertThrows(InvalidDriverException.class, () -> driver.activate("admin"));
 
     assertEquals(OperationalStatus.SUSPENDED, driver.status());
   }

@@ -4,6 +4,7 @@ import it.gabriele.truckflow.domain.vehicles.body.VehicleBodyProfile;
 import it.gabriele.truckflow.domain.vehicles.body.VehicleBodyType;
 import it.gabriele.truckflow.domain.vehicles.common.VehicleValidation;
 import it.gabriele.truckflow.domain.vehicles.coupling.CouplingProfile;
+import it.gabriele.truckflow.domain.vehicles.exceptions.InvalidVehicleException;
 import it.gabriele.truckflow.domain.vehicles.operation.VehicleCapability;
 import it.gabriele.truckflow.domain.vehicles.operation.VehicleOperationalRole;
 import it.gabriele.truckflow.domain.vehicles.specification.VehicleTechnicalSpecification;
@@ -208,27 +209,27 @@ public final class VehicleUnit {
   private void validateConsistency(
       VehicleBodyProfile candidateBodyProfile, CouplingProfile candidateCouplingProfile) {
     if (isTrailerUnitType(unitType) && powerSource != PowerSource.NONE) {
-      throw new IllegalArgumentException("Trailers must have power source NONE.");
+      throw new InvalidVehicleException("Trailers must have power source NONE.");
     }
 
     if (unitType == VehicleUnitType.TRACTOR_UNIT && bodyType != VehicleBodyType.NONE) {
-      throw new IllegalArgumentException("Tractor units must have body type NONE.");
+      throw new InvalidVehicleException("Tractor units must have body type NONE.");
     }
 
     if (unitType == VehicleUnitType.TRACTOR_UNIT && !candidateCouplingProfile.canTow()) {
-      throw new IllegalArgumentException("Tractor units must be able to tow.");
+      throw new InvalidVehicleException("Tractor units must be able to tow.");
     }
 
     if (unitType == VehicleUnitType.SEMI_TRAILER && !candidateCouplingProfile.canBeTowed()) {
-      throw new IllegalArgumentException("Semi-trailers must be able to be towed.");
+      throw new InvalidVehicleException("Semi-trailers must be able to be towed.");
     }
 
     if (isDrawbarTrailer(unitType) && !candidateCouplingProfile.canBeTowed()) {
-      throw new IllegalArgumentException("Drawbar trailers must be able to be towed.");
+      throw new InvalidVehicleException("Drawbar trailers must be able to be towed.");
     }
 
     if (candidateBodyProfile != null && candidateBodyProfile.bodyType() != bodyType) {
-      throw new IllegalArgumentException("Body profile must match vehicle body type.");
+      throw new InvalidVehicleException("Body profile must match vehicle body type.");
     }
   }
 

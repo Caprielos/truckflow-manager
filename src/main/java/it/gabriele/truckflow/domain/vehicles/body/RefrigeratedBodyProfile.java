@@ -1,6 +1,7 @@
 package it.gabriele.truckflow.domain.vehicles.body;
 
 import it.gabriele.truckflow.domain.vehicles.common.VehicleValidation;
+import it.gabriele.truckflow.domain.vehicles.exceptions.InvalidVehicleException;
 import java.math.BigDecimal;
 
 public record RefrigeratedBodyProfile(
@@ -22,7 +23,7 @@ public record RefrigeratedBodyProfile(
     if (minTemperatureCelsius != null
         && maxTemperatureCelsius != null
         && minTemperatureCelsius.compareTo(maxTemperatureCelsius) > 0) {
-      throw new IllegalArgumentException(
+      throw new InvalidVehicleException(
           "minTemperatureCelsius cannot be greater than maxTemperatureCelsius.");
     }
   }

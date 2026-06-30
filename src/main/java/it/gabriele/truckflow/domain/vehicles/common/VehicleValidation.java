@@ -1,5 +1,6 @@
 package it.gabriele.truckflow.domain.vehicles.common;
 
+import it.gabriele.truckflow.domain.vehicles.exceptions.InvalidVehicleException;
 import java.math.BigDecimal;
 import java.util.Collection;
 
@@ -9,7 +10,7 @@ public final class VehicleValidation {
 
   public static <T> T requireNonNull(T value, String fieldName) {
     if (value == null) {
-      throw new IllegalArgumentException(fieldName + " is required.");
+      throw new InvalidVehicleException(fieldName + " is required.");
     }
 
     return value;
@@ -19,7 +20,7 @@ public final class VehicleValidation {
     String normalized = normalize(value);
 
     if (normalized.isBlank()) {
-      throw new IllegalArgumentException(fieldName + " is required.");
+      throw new InvalidVehicleException(fieldName + " is required.");
     }
 
     return normalized;
@@ -32,7 +33,7 @@ public final class VehicleValidation {
   public static BigDecimal requireNonNegative(BigDecimal value, String fieldName) {
     requireNonNull(value, fieldName);
     if (value.signum() < 0) {
-      throw new IllegalArgumentException(fieldName + " cannot be negative.");
+      throw new InvalidVehicleException(fieldName + " cannot be negative.");
     }
 
     return value;
@@ -40,7 +41,7 @@ public final class VehicleValidation {
 
   public static BigDecimal nonNegativeOrNull(BigDecimal value, String fieldName) {
     if (value != null && value.signum() < 0) {
-      throw new IllegalArgumentException(fieldName + " cannot be negative.");
+      throw new InvalidVehicleException(fieldName + " cannot be negative.");
     }
 
     return value;
@@ -48,7 +49,7 @@ public final class VehicleValidation {
 
   public static Integer nonNegativeOrNull(Integer value, String fieldName) {
     if (value != null && value < 0) {
-      throw new IllegalArgumentException(fieldName + " cannot be negative.");
+      throw new InvalidVehicleException(fieldName + " cannot be negative.");
     }
 
     return value;
@@ -56,7 +57,7 @@ public final class VehicleValidation {
 
   public static int requirePositive(int value, String fieldName) {
     if (value <= 0) {
-      throw new IllegalArgumentException(fieldName + " must be positive.");
+      throw new InvalidVehicleException(fieldName + " must be positive.");
     }
 
     return value;
@@ -64,7 +65,7 @@ public final class VehicleValidation {
 
   public static Integer positiveOrNull(Integer value, String fieldName) {
     if (value != null && value <= 0) {
-      throw new IllegalArgumentException(fieldName + " must be positive.");
+      throw new InvalidVehicleException(fieldName + " must be positive.");
     }
 
     return value;
@@ -72,7 +73,7 @@ public final class VehicleValidation {
 
   public static <T> void requireNoNullElements(Collection<T> values, String fieldName) {
     if (values.stream().anyMatch(value -> value == null)) {
-      throw new IllegalArgumentException(fieldName + " cannot contain null values.");
+      throw new InvalidVehicleException(fieldName + " cannot contain null values.");
     }
   }
 }

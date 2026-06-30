@@ -12,6 +12,7 @@ import it.gabriele.truckflow.domain.shipments.core.ShipmentCode;
 import it.gabriele.truckflow.domain.shipments.core.ShipmentPriority;
 import it.gabriele.truckflow.domain.shipments.core.ShipmentServiceLevel;
 import it.gabriele.truckflow.domain.shipments.core.ShipmentStatus;
+import it.gabriele.truckflow.domain.shipments.exceptions.InvalidShipmentException;
 import it.gabriele.truckflow.domain.shipments.items.ShipmentItem;
 import it.gabriele.truckflow.domain.shipments.items.ShipmentUnitOfMeasure;
 import it.gabriele.truckflow.domain.shipments.legs.ShipmentLeg;
@@ -93,7 +94,7 @@ class ShipmentDomainTest {
   @Test
   void confirmedShipmentMustHaveAtLeastOneItem() {
     assertThrows(
-        IllegalArgumentException.class,
+        InvalidShipmentException.class,
         () ->
             new Shipment(
                 null,
@@ -117,7 +118,7 @@ class ShipmentDomainTest {
   @Test
   void confirmedShipmentMustHaveAtLeastOneLeg() {
     assertThrows(
-        IllegalArgumentException.class,
+        InvalidShipmentException.class,
         () ->
             new Shipment(
                 null,
@@ -141,7 +142,7 @@ class ShipmentDomainTest {
   @Test
   void controlledTemperatureRequiresTransportRequirement() {
     assertThrows(
-        IllegalArgumentException.class,
+        InvalidShipmentException.class,
         () ->
             new Shipment(
                 null,
@@ -173,7 +174,7 @@ class ShipmentDomainTest {
         new ShipmentLeg(null, 1, ShipmentLegType.DELIVERY, hub, destination, BigDecimal.TEN, "");
 
     assertThrows(
-        IllegalArgumentException.class,
+        InvalidShipmentException.class,
         () ->
             new Shipment(
                 null,
@@ -197,7 +198,7 @@ class ShipmentDomainTest {
   @Test
   void itemQuantityMustBePositive() {
     assertThrows(
-        IllegalArgumentException.class,
+        InvalidShipmentException.class,
         () ->
             new ShipmentItem(
                 null, CargoId.random(), BigDecimal.ZERO, ShipmentUnitOfMeasure.PALLET, ""));
@@ -206,7 +207,7 @@ class ShipmentDomainTest {
   @Test
   void shipmentWeightRejectsNetGreaterThanGross() {
     assertThrows(
-        IllegalArgumentException.class,
+        InvalidShipmentException.class,
         () -> ShipmentWeight.kg(new BigDecimal("100"), new BigDecimal("120")));
   }
 
@@ -257,7 +258,7 @@ class ShipmentDomainTest {
             ShipmentNotes.empty(),
             "");
 
-    assertThrows(IllegalArgumentException.class, shipment::confirm);
+    assertThrows(InvalidShipmentException.class, shipment::confirm);
 
     assertEquals(ShipmentStatus.DRAFT, shipment.status());
     assertEquals(0, shipment.itemCount());

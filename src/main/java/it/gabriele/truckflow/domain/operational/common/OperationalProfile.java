@@ -1,5 +1,7 @@
 package it.gabriele.truckflow.domain.operational.common;
 
+import it.gabriele.truckflow.domain.shared.exceptions.DomainValidationException;
+
 public record OperationalProfile(
     String firstName,
     String lastName,
@@ -21,7 +23,7 @@ public record OperationalProfile(
     notes = normalize(notes);
 
     if (!email.isBlank() && !email.matches("^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$")) {
-      throw new IllegalArgumentException("Email is not valid.");
+      throw new DomainValidationException("Email is not valid.");
     }
   }
 
@@ -33,7 +35,7 @@ public record OperationalProfile(
     String normalized = normalize(value);
 
     if (normalized.isBlank()) {
-      throw new IllegalArgumentException(fieldName + " is required.");
+      throw new DomainValidationException(fieldName + " is required.");
     }
 
     return normalized;

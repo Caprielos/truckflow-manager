@@ -1,5 +1,6 @@
 package it.gabriele.truckflow.domain.cargo;
 
+import it.gabriele.truckflow.domain.cargo.exceptions.InvalidCargoException;
 import java.math.BigDecimal;
 
 public record CargoTemperature(
@@ -14,12 +15,12 @@ public record CargoTemperature(
     if (requiredMinCelsius != null
         && requiredMaxCelsius != null
         && requiredMinCelsius.compareTo(requiredMaxCelsius) > 0) {
-      throw new IllegalArgumentException(
+      throw new InvalidCargoException(
           "requiredMinCelsius cannot be greater than requiredMaxCelsius.");
     }
 
     if (controlled && requiredMinCelsius == null && requiredMaxCelsius == null) {
-      throw new IllegalArgumentException(
+      throw new InvalidCargoException(
           "At least one temperature limit is required when temperature is controlled.");
     }
   }

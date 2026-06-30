@@ -1,6 +1,7 @@
 package it.gabriele.truckflow.domain.vehicles.combination;
 
 import it.gabriele.truckflow.domain.vehicles.common.VehicleValidation;
+import it.gabriele.truckflow.domain.vehicles.exceptions.InvalidVehicleCombinationException;
 import it.gabriele.truckflow.domain.vehicles.operation.VehicleCapability;
 import it.gabriele.truckflow.domain.vehicles.operation.VehicleOperationalRole;
 import it.gabriele.truckflow.domain.vehicles.unit.VehicleStatus;
@@ -138,11 +139,12 @@ public final class VehicleCombination {
 
   private void validateShape() {
     if (requiresSingleUnit(combinationType) && secondaryUnitId != null) {
-      throw new IllegalArgumentException(combinationType + " must not have a secondary unit.");
+      throw new InvalidVehicleCombinationException(
+          combinationType + " must not have a secondary unit.");
     }
 
     if (!requiresSingleUnit(combinationType) && secondaryUnitId == null) {
-      throw new IllegalArgumentException(combinationType + " requires a secondary unit.");
+      throw new InvalidVehicleCombinationException(combinationType + " requires a secondary unit.");
     }
   }
 
@@ -162,14 +164,14 @@ public final class VehicleCombination {
 
   private static void validateSingleVehicle(VehicleUnit primaryUnit, VehicleUnit secondaryUnit) {
     if (secondaryUnit != null) {
-      throw new IllegalArgumentException(
+      throw new InvalidVehicleCombinationException(
           "Single vehicle combinations cannot have a secondary unit.");
     }
 
     if (primaryUnit.unitType() == VehicleUnitType.SEMI_TRAILER
         || primaryUnit.unitType() == VehicleUnitType.DRAWBAR_TRAILER
         || primaryUnit.unitType() == VehicleUnitType.CENTER_AXLE_TRAILER) {
-      throw new IllegalArgumentException("Trailers cannot be used as single vehicles.");
+      throw new InvalidVehicleCombinationException("Trailers cannot be used as single vehicles.");
     }
   }
 
@@ -178,17 +180,18 @@ public final class VehicleCombination {
     requireSecondaryUnit(secondaryUnit, "Articulated vehicles require a semi-trailer.");
 
     if (primaryUnit.unitType() != VehicleUnitType.TRACTOR_UNIT) {
-      throw new IllegalArgumentException(
+      throw new InvalidVehicleCombinationException(
           "Articulated vehicles require a tractor unit as primary unit.");
     }
 
     if (secondaryUnit.unitType() != VehicleUnitType.SEMI_TRAILER) {
-      throw new IllegalArgumentException(
+      throw new InvalidVehicleCombinationException(
           "Articulated vehicles require a semi-trailer as secondary unit.");
     }
 
     if (!primaryUnit.canTow() || !secondaryUnit.canBeTowed()) {
-      throw new IllegalArgumentException("Articulated vehicle units are not coupling-compatible.");
+      throw new InvalidVehicleCombinationException(
+          "Articulated vehicle units are not coupling-compatible.");
     }
   }
 
@@ -196,17 +199,18 @@ public final class VehicleCombination {
     requireSecondaryUnit(secondaryUnit, "Road trains require a trailer.");
 
     if (primaryUnit.unitType() != VehicleUnitType.RIGID_TRUCK) {
-      throw new IllegalArgumentException("Road trains require a rigid truck as primary unit.");
+      throw new InvalidVehicleCombinationException(
+          "Road trains require a rigid truck as primary unit.");
     }
 
     if (secondaryUnit.unitType() != VehicleUnitType.DRAWBAR_TRAILER
         && secondaryUnit.unitType() != VehicleUnitType.CENTER_AXLE_TRAILER) {
-      throw new IllegalArgumentException(
+      throw new InvalidVehicleCombinationException(
           "Road trains require a drawbar or center-axle trailer as secondary unit.");
     }
 
     if (!primaryUnit.canTow() || !secondaryUnit.canBeTowed()) {
-      throw new IllegalArgumentException("Road train units are not coupling-compatible.");
+      throw new InvalidVehicleCombinationException("Road train units are not coupling-compatible.");
     }
   }
 
@@ -214,28 +218,29 @@ public final class VehicleCombination {
     requireSecondaryUnit(secondaryUnit, "Van with trailer combinations require a trailer.");
 
     if (primaryUnit.unitType() != VehicleUnitType.VAN) {
-      throw new IllegalArgumentException(
+      throw new InvalidVehicleCombinationException(
           "Van with trailer combinations require a van as primary unit.");
     }
 
     if (secondaryUnit.unitType() != VehicleUnitType.DRAWBAR_TRAILER
         && secondaryUnit.unitType() != VehicleUnitType.CENTER_AXLE_TRAILER) {
-      throw new IllegalArgumentException(
+      throw new InvalidVehicleCombinationException(
           "Van with trailer combinations require a drawbar or center-axle trailer.");
     }
 
     if (!primaryUnit.canTow() || !secondaryUnit.canBeTowed()) {
-      throw new IllegalArgumentException("Van and trailer units are not coupling-compatible.");
+      throw new InvalidVehicleCombinationException(
+          "Van and trailer units are not coupling-compatible.");
     }
   }
 
   private static void validateWarehouseUnit(VehicleUnit primaryUnit, VehicleUnit secondaryUnit) {
     if (secondaryUnit != null) {
-      throw new IllegalArgumentException("Warehouse units cannot have a secondary unit.");
+      throw new InvalidVehicleCombinationException("Warehouse units cannot have a secondary unit.");
     }
 
     if (primaryUnit.unitType() != VehicleUnitType.WAREHOUSE_EQUIPMENT) {
-      throw new IllegalArgumentException(
+      throw new InvalidVehicleCombinationException(
           "Warehouse unit combinations require warehouse equipment.");
     }
   }
@@ -245,13 +250,14 @@ public final class VehicleCombination {
     requireSecondaryUnit(secondaryUnit, "Special combinations require a secondary unit.");
 
     if (!primaryUnit.canTow() || !secondaryUnit.canBeTowed()) {
-      throw new IllegalArgumentException("Special combination units are not coupling-compatible.");
+      throw new InvalidVehicleCombinationException(
+          "Special combination units are not coupling-compatible.");
     }
   }
 
   private static void requireSecondaryUnit(VehicleUnit secondaryUnit, String message) {
     if (secondaryUnit == null) {
-      throw new IllegalArgumentException(message);
+      throw new InvalidVehicleCombinationException(message);
     }
   }
 

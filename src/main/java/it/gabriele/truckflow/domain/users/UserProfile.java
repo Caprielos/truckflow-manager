@@ -1,5 +1,7 @@
 package it.gabriele.truckflow.domain.users;
 
+import it.gabriele.truckflow.domain.users.exceptions.InvalidUserException;
+
 public record UserProfile(
     String firstName, String lastName, UserContact contact, UserAddress address) {
 
@@ -26,7 +28,7 @@ public record UserProfile(
     String normalized = value == null ? "" : value.trim();
 
     if (normalized.isBlank()) {
-      throw new IllegalArgumentException(fieldName + " is required.");
+      throw new InvalidUserException(fieldName + " is required.");
     }
 
     return normalized;
@@ -34,7 +36,7 @@ public record UserProfile(
 
   private static <T> T requireNonNull(T value, String fieldName) {
     if (value == null) {
-      throw new IllegalArgumentException(fieldName + " is required.");
+      throw new InvalidUserException(fieldName + " is required.");
     }
 
     return value;

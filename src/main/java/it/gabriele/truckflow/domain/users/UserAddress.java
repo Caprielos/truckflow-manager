@@ -1,5 +1,7 @@
 package it.gabriele.truckflow.domain.users;
 
+import it.gabriele.truckflow.domain.users.exceptions.InvalidUserException;
+
 public record UserAddress(
     String street,
     String streetNumber,
@@ -21,7 +23,7 @@ public record UserAddress(
     String normalized = normalize(value);
 
     if (normalized.isBlank()) {
-      throw new IllegalArgumentException(fieldName + " is required.");
+      throw new InvalidUserException(fieldName + " is required.");
     }
 
     return normalized;

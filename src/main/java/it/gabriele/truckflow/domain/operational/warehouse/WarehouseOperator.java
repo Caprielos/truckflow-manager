@@ -5,6 +5,7 @@ import it.gabriele.truckflow.domain.operational.common.OperationalMetadata;
 import it.gabriele.truckflow.domain.operational.common.OperationalProfile;
 import it.gabriele.truckflow.domain.operational.common.OperationalQualification;
 import it.gabriele.truckflow.domain.operational.common.OperationalStatus;
+import it.gabriele.truckflow.domain.operational.exceptions.InvalidWarehouseOperatorException;
 import it.gabriele.truckflow.domain.qualifications.Qualification;
 import it.gabriele.truckflow.domain.users.UserId;
 import java.util.HashSet;
@@ -157,7 +158,7 @@ public final class WarehouseOperator {
   private static void ensureActiveHasQualifications(
       OperationalStatus status, Set<OperationalQualification> qualifications) {
     if (status == OperationalStatus.ACTIVE && qualifications.isEmpty()) {
-      throw new IllegalStateException(
+      throw new InvalidWarehouseOperatorException(
           "An active warehouse operator must have at least one qualification.");
     }
   }
@@ -173,7 +174,7 @@ public final class WarehouseOperator {
     }
 
     if (qualifications.stream().anyMatch(qualification -> qualification == null)) {
-      throw new IllegalArgumentException("Qualifications cannot contain null values.");
+      throw new InvalidWarehouseOperatorException("Qualifications cannot contain null values.");
     }
 
     return Set.copyOf(qualifications);
@@ -181,7 +182,7 @@ public final class WarehouseOperator {
 
   private static <T> T requireNonNull(T value, String fieldName) {
     if (value == null) {
-      throw new IllegalArgumentException(fieldName + " is required.");
+      throw new InvalidWarehouseOperatorException(fieldName + " is required.");
     }
 
     return value;
@@ -191,7 +192,7 @@ public final class WarehouseOperator {
     String normalized = normalize(value);
 
     if (normalized.isBlank()) {
-      throw new IllegalArgumentException(fieldName + " is required.");
+      throw new InvalidWarehouseOperatorException(fieldName + " is required.");
     }
 
     return normalized;

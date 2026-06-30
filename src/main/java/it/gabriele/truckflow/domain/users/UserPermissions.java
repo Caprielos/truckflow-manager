@@ -1,5 +1,6 @@
 package it.gabriele.truckflow.domain.users;
 
+import it.gabriele.truckflow.domain.users.exceptions.InvalidUserException;
 import java.util.Arrays;
 import java.util.Set;
 
@@ -59,7 +60,7 @@ public record UserPermissions(Set<UserPermission> permissions) {
 
   private static Set<UserPermission> validatePermissions(Set<UserPermission> permissions) {
     if (permissions.stream().anyMatch(permission -> permission == null)) {
-      throw new IllegalArgumentException("Permissions cannot contain null values.");
+      throw new InvalidUserException("Permissions cannot contain null values.");
     }
 
     return Set.copyOf(permissions);
@@ -73,7 +74,7 @@ public record UserPermissions(Set<UserPermission> permissions) {
 
   private static <T> T requireNonNull(T value, String fieldName) {
     if (value == null) {
-      throw new IllegalArgumentException(fieldName + " is required.");
+      throw new InvalidUserException(fieldName + " is required.");
     }
 
     return value;

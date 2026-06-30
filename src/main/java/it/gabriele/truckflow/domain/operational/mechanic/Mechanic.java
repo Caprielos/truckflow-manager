@@ -5,6 +5,7 @@ import it.gabriele.truckflow.domain.operational.common.OperationalMetadata;
 import it.gabriele.truckflow.domain.operational.common.OperationalProfile;
 import it.gabriele.truckflow.domain.operational.common.OperationalQualification;
 import it.gabriele.truckflow.domain.operational.common.OperationalStatus;
+import it.gabriele.truckflow.domain.operational.exceptions.InvalidMechanicException;
 import it.gabriele.truckflow.domain.qualifications.Qualification;
 import it.gabriele.truckflow.domain.users.UserId;
 import java.util.HashSet;
@@ -157,7 +158,8 @@ public final class Mechanic {
   private static void ensureActiveHasQualifications(
       OperationalStatus status, Set<OperationalQualification> qualifications) {
     if (status == OperationalStatus.ACTIVE && qualifications.isEmpty()) {
-      throw new IllegalStateException("An active mechanic must have at least one qualification.");
+      throw new InvalidMechanicException(
+          "An active mechanic must have at least one qualification.");
     }
   }
 
@@ -172,7 +174,7 @@ public final class Mechanic {
     }
 
     if (qualifications.stream().anyMatch(qualification -> qualification == null)) {
-      throw new IllegalArgumentException("Qualifications cannot contain null values.");
+      throw new InvalidMechanicException("Qualifications cannot contain null values.");
     }
 
     return Set.copyOf(qualifications);
@@ -180,7 +182,7 @@ public final class Mechanic {
 
   private static <T> T requireNonNull(T value, String fieldName) {
     if (value == null) {
-      throw new IllegalArgumentException(fieldName + " is required.");
+      throw new InvalidMechanicException(fieldName + " is required.");
     }
 
     return value;
@@ -190,7 +192,7 @@ public final class Mechanic {
     String normalized = normalize(value);
 
     if (normalized.isBlank()) {
-      throw new IllegalArgumentException(fieldName + " is required.");
+      throw new InvalidMechanicException(fieldName + " is required.");
     }
 
     return normalized;

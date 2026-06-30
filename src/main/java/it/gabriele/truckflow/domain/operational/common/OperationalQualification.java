@@ -1,6 +1,7 @@
 package it.gabriele.truckflow.domain.operational.common;
 
 import it.gabriele.truckflow.domain.qualifications.Qualification;
+import it.gabriele.truckflow.domain.shared.exceptions.DomainValidationException;
 
 public record OperationalQualification(
     Qualification qualification,
@@ -23,7 +24,7 @@ public record OperationalQualification(
 
   private static <T> T requireNonNull(T value, String fieldName) {
     if (value == null) {
-      throw new IllegalArgumentException(fieldName + " is required.");
+      throw new DomainValidationException(fieldName + " is required.");
     }
 
     return value;

@@ -1,5 +1,6 @@
 package it.gabriele.truckflow.domain.cargo;
 
+import it.gabriele.truckflow.domain.cargo.exceptions.InvalidCargoException;
 import java.math.BigDecimal;
 
 public record CargoWeights(
@@ -11,13 +12,13 @@ public record CargoWeights(
     tareWeightKg = CargoValidation.nonNegativeOrNull(tareWeightKg, "tareWeightKg");
 
     if (grossWeightKg != null && netWeightKg != null && netWeightKg.compareTo(grossWeightKg) > 0) {
-      throw new IllegalArgumentException("netWeightKg cannot be greater than grossWeightKg.");
+      throw new InvalidCargoException("netWeightKg cannot be greater than grossWeightKg.");
     }
 
     if (grossWeightKg != null
         && tareWeightKg != null
         && tareWeightKg.compareTo(grossWeightKg) > 0) {
-      throw new IllegalArgumentException("tareWeightKg cannot be greater than grossWeightKg.");
+      throw new InvalidCargoException("tareWeightKg cannot be greater than grossWeightKg.");
     }
   }
 

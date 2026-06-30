@@ -5,6 +5,7 @@ import it.gabriele.truckflow.domain.operational.common.OperationalMetadata;
 import it.gabriele.truckflow.domain.operational.common.OperationalProfile;
 import it.gabriele.truckflow.domain.operational.common.OperationalScope;
 import it.gabriele.truckflow.domain.operational.common.OperationalStatus;
+import it.gabriele.truckflow.domain.operational.exceptions.InvalidDispatcherException;
 import it.gabriele.truckflow.domain.users.UserId;
 import java.util.HashSet;
 import java.util.Set;
@@ -152,7 +153,7 @@ public final class Dispatcher {
   private static void ensureActiveHasScopes(
       OperationalStatus status, Set<OperationalScope> scopes) {
     if (status == OperationalStatus.ACTIVE && scopes.isEmpty()) {
-      throw new IllegalStateException("An active dispatcher must have at least one scope.");
+      throw new InvalidDispatcherException("An active dispatcher must have at least one scope.");
     }
   }
 
@@ -166,7 +167,7 @@ public final class Dispatcher {
     }
 
     if (scopes.stream().anyMatch(scope -> scope == null)) {
-      throw new IllegalArgumentException("Scopes cannot contain null values.");
+      throw new InvalidDispatcherException("Scopes cannot contain null values.");
     }
 
     return Set.copyOf(scopes);
@@ -174,7 +175,7 @@ public final class Dispatcher {
 
   private static <T> T requireNonNull(T value, String fieldName) {
     if (value == null) {
-      throw new IllegalArgumentException(fieldName + " is required.");
+      throw new InvalidDispatcherException(fieldName + " is required.");
     }
 
     return value;
@@ -184,7 +185,7 @@ public final class Dispatcher {
     String normalized = normalize(value);
 
     if (normalized.isBlank()) {
-      throw new IllegalArgumentException(fieldName + " is required.");
+      throw new InvalidDispatcherException(fieldName + " is required.");
     }
 
     return normalized;

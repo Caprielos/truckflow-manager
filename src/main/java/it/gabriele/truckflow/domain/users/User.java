@@ -1,5 +1,6 @@
 package it.gabriele.truckflow.domain.users;
 
+import it.gabriele.truckflow.domain.users.exceptions.InvalidUserException;
 import java.util.Set;
 
 public final class User {
@@ -149,7 +150,7 @@ public final class User {
     String validatedUpdatedBy = requireText(updatedBy, "updatedBy");
 
     if (roles.size() == 1 && roles.contains(role)) {
-      throw new IllegalStateException("The last user role cannot be removed.");
+      throw new InvalidUserException("The last user role cannot be removed.");
     }
 
     var updatedRoles = new java.util.HashSet<>(roles);
@@ -181,7 +182,7 @@ public final class User {
 
   public void activate(String updatedBy) {
     if (isDisabled()) {
-      throw new IllegalStateException(
+      throw new InvalidUserException(
           "A disabled user cannot be activated. Use reactivateDisabled instead.");
     }
 
@@ -266,7 +267,7 @@ public final class User {
 
   private void ensureNotDisabled(String message) {
     if (isDisabled()) {
-      throw new IllegalStateException(message);
+      throw new InvalidUserException(message);
     }
   }
 
@@ -276,17 +277,17 @@ public final class User {
 
   private static void ensureActiveUserHasRoles(UserStatus status, Set<UserRole> roles) {
     if (status == UserStatus.ACTIVE && roles.isEmpty()) {
-      throw new IllegalStateException("An active user must have at least one role.");
+      throw new InvalidUserException("An active user must have at least one role.");
     }
   }
 
   private static Set<UserRole> validateRoles(Set<UserRole> roles) {
     if (roles == null || roles.isEmpty()) {
-      throw new IllegalArgumentException("At least one role is required.");
+      throw new InvalidUserException("At least one role is required.");
     }
 
     if (roles.stream().anyMatch(role -> role == null)) {
-      throw new IllegalArgumentException("Roles cannot contain null values.");
+      throw new InvalidUserException("Roles cannot contain null values.");
     }
 
     return Set.copyOf(roles);
@@ -299,7 +300,7 @@ public final class User {
 
   private static <T> T requireNonNull(T value, String fieldName) {
     if (value == null) {
-      throw new IllegalArgumentException(fieldName + " is required.");
+      throw new InvalidUserException(fieldName + " is required.");
     }
 
     return value;
@@ -309,7 +310,7 @@ public final class User {
     String normalized = normalize(value);
 
     if (normalized.isBlank()) {
-      throw new IllegalArgumentException(fieldName + " is required.");
+      throw new InvalidUserException(fieldName + " is required.");
     }
 
     return normalized;

@@ -1,6 +1,7 @@
 package it.gabriele.truckflow.domain.vehicles.coupling;
 
 import it.gabriele.truckflow.domain.vehicles.common.VehicleValidation;
+import it.gabriele.truckflow.domain.vehicles.exceptions.InvalidVehicleException;
 import java.math.BigDecimal;
 
 public record CouplingProfile(
@@ -19,7 +20,7 @@ public record CouplingProfile(
     notes = VehicleValidation.normalize(notes);
 
     if (couplingType == CouplingType.NONE && (canTow || canBeTowed)) {
-      throw new IllegalArgumentException("Coupling type NONE cannot tow or be towed.");
+      throw new InvalidVehicleException("Coupling type NONE cannot tow or be towed.");
     }
   }
 

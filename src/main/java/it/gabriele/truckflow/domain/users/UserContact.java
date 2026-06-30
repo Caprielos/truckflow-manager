@@ -1,5 +1,6 @@
 package it.gabriele.truckflow.domain.users;
 
+import it.gabriele.truckflow.domain.users.exceptions.InvalidUserException;
 import java.util.regex.Pattern;
 
 public record UserContact(String email, String phoneNumber, String mobileNumber) {
@@ -13,11 +14,11 @@ public record UserContact(String email, String phoneNumber, String mobileNumber)
     mobileNumber = normalize(mobileNumber);
 
     if (email.isBlank() && phoneNumber.isBlank() && mobileNumber.isBlank()) {
-      throw new IllegalArgumentException("At least one contact value is required.");
+      throw new InvalidUserException("At least one contact value is required.");
     }
 
     if (!email.isBlank() && !EMAIL_PATTERN.matcher(email).matches()) {
-      throw new IllegalArgumentException("Email is not valid.");
+      throw new InvalidUserException("Email is not valid.");
     }
   }
 

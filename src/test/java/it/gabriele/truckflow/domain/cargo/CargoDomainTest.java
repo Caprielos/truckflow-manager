@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import it.gabriele.truckflow.domain.cargo.exceptions.InvalidCargoException;
 import java.math.BigDecimal;
 import java.util.Set;
 import org.junit.jupiter.api.Test;
@@ -69,7 +70,7 @@ class CargoDomainTest {
   @Test
   void adrRegulatoryRequirementMustDeclareTransportRequirement() {
     assertThrows(
-        IllegalArgumentException.class,
+        InvalidCargoException.class,
         () ->
             new CargoUnit(
                 null,
@@ -93,7 +94,7 @@ class CargoDomainTest {
   @Test
   void controlledTemperatureRequiresTemperatureTransportRequirement() {
     assertThrows(
-        IllegalArgumentException.class,
+        InvalidCargoException.class,
         () ->
             new CargoUnit(
                 null,
@@ -117,7 +118,7 @@ class CargoDomainTest {
   @Test
   void weightsCannotHaveNetGreaterThanGross() {
     assertThrows(
-        IllegalArgumentException.class,
+        InvalidCargoException.class,
         () -> new CargoWeights(new BigDecimal("100"), new BigDecimal("120"), BigDecimal.TEN));
   }
 
@@ -128,7 +129,7 @@ class CargoDomainTest {
         new CargoTemperature(new BigDecimal("2"), new BigDecimal("4"), true, "Fresh");
 
     assertThrows(
-        IllegalArgumentException.class, () -> cargo.replaceTemperature(controlledTemperature));
+        InvalidCargoException.class, () -> cargo.replaceTemperature(controlledTemperature));
 
     assertFalse(cargo.isTemperatureControlled());
     assertEquals(CargoTemperature.uncontrolled(), cargo.temperature());

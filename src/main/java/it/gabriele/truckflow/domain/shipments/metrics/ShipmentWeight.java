@@ -1,6 +1,7 @@
 package it.gabriele.truckflow.domain.shipments.metrics;
 
 import it.gabriele.truckflow.domain.shipments.core.ShipmentValidation;
+import it.gabriele.truckflow.domain.shipments.exceptions.InvalidShipmentException;
 import java.math.BigDecimal;
 
 public record ShipmentWeight(
@@ -12,7 +13,7 @@ public record ShipmentWeight(
     unit = ShipmentValidation.requireNonNull(unit, "unit");
 
     if (grossWeight != null && netWeight != null && netWeight.compareTo(grossWeight) > 0) {
-      throw new IllegalArgumentException("netWeight cannot be greater than grossWeight.");
+      throw new InvalidShipmentException("netWeight cannot be greater than grossWeight.");
     }
   }
 

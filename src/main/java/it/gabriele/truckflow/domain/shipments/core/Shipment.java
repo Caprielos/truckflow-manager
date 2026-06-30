@@ -1,5 +1,6 @@
 package it.gabriele.truckflow.domain.shipments.core;
 
+import it.gabriele.truckflow.domain.shipments.exceptions.InvalidShipmentException;
 import it.gabriele.truckflow.domain.shipments.items.ShipmentItem;
 import it.gabriele.truckflow.domain.shipments.legs.ShipmentLeg;
 import it.gabriele.truckflow.domain.shipments.metrics.ShipmentMetrics;
@@ -263,7 +264,7 @@ public final class Shipment {
     ShipmentValidation.requireNoNullElements(items, "items");
 
     if (status == ShipmentStatus.CONFIRMED && items.isEmpty()) {
-      throw new IllegalArgumentException("Confirmed shipments must have at least one item.");
+      throw new InvalidShipmentException("Confirmed shipments must have at least one item.");
     }
 
     return List.copyOf(items);
@@ -277,13 +278,13 @@ public final class Shipment {
     ShipmentValidation.requireNoNullElements(legs, "legs");
 
     if (status == ShipmentStatus.CONFIRMED && legs.isEmpty()) {
-      throw new IllegalArgumentException("Confirmed shipments must have at least one leg.");
+      throw new InvalidShipmentException("Confirmed shipments must have at least one leg.");
     }
 
     var sequenceNumbers = new HashSet<Integer>();
     for (ShipmentLeg leg : legs) {
       if (!sequenceNumbers.add(leg.sequenceNumber())) {
-        throw new IllegalArgumentException("Shipment leg sequence numbers must be unique.");
+        throw new InvalidShipmentException("Shipment leg sequence numbers must be unique.");
       }
     }
 
@@ -300,13 +301,13 @@ public final class Shipment {
       ShipmentRequirementSet requirementSet) {
     if (temperature.controlled()
         && !requirementSet.requires(ShipmentTransportRequirement.TEMPERATURE_CONTROL_REQUIRED)) {
-      throw new IllegalArgumentException(
+      throw new InvalidShipmentException(
           "Temperature controlled shipments must declare TEMPERATURE_CONTROL_REQUIRED.");
     }
 
     if (properties.requiresSeparation()
         && !requirementSet.requires(ShipmentTransportRequirement.SEPARATION_REQUIRED)) {
-      throw new IllegalArgumentException(
+      throw new InvalidShipmentException(
           "Shipments requiring separation must declare SEPARATION_REQUIRED.");
     }
   }

@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import it.gabriele.truckflow.domain.users.exceptions.InvalidUserException;
 import java.util.Set;
 import org.junit.jupiter.api.Test;
 
@@ -70,7 +71,7 @@ class UserTest {
   void doesNotRemoveLastRole() {
     User user = createUser(UserRole.DISPATCHER);
 
-    assertThrows(IllegalStateException.class, () -> user.removeRole(UserRole.DISPATCHER, "admin"));
+    assertThrows(InvalidUserException.class, () -> user.removeRole(UserRole.DISPATCHER, "admin"));
   }
 
   @Test
@@ -79,8 +80,8 @@ class UserTest {
 
     user.disable("admin");
 
-    assertThrows(IllegalStateException.class, () -> user.suspend("admin"));
-    assertThrows(IllegalStateException.class, () -> user.activate("admin"));
+    assertThrows(InvalidUserException.class, () -> user.suspend("admin"));
+    assertThrows(InvalidUserException.class, () -> user.activate("admin"));
 
     user.reactivateDisabled("admin");
     assertTrue(user.isActive());
@@ -100,8 +101,7 @@ class UserTest {
   @Test
   void validatesEmailWhenPresent() {
     assertThrows(
-        IllegalArgumentException.class,
-        () -> new UserContact("invalid-email", "", "+393331112233"));
+        InvalidUserException.class, () -> new UserContact("invalid-email", "", "+393331112233"));
   }
 
   @Test
@@ -109,7 +109,7 @@ class UserTest {
     User user = createUser(UserRole.DISPATCHER);
 
     assertThrows(
-        IllegalArgumentException.class, () -> user.changeUsername(new Username("new.user"), " "));
+        InvalidUserException.class, () -> user.changeUsername(new Username("new.user"), " "));
 
     assertEquals(new Username("mario.rossi"), user.username());
   }

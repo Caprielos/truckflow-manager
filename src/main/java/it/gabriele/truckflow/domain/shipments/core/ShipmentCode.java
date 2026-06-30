@@ -1,12 +1,14 @@
 package it.gabriele.truckflow.domain.shipments.core;
 
+import it.gabriele.truckflow.domain.shipments.exceptions.InvalidShipmentException;
+
 public record ShipmentCode(String value) {
 
   public ShipmentCode {
     value = ShipmentValidation.requireText(value, "value").toUpperCase();
 
     if (!value.matches("[A-Z0-9][A-Z0-9_-]*")) {
-      throw new IllegalArgumentException(
+      throw new InvalidShipmentException(
           "Shipment code can contain only uppercase letters, numbers, dashes and underscores.");
     }
   }

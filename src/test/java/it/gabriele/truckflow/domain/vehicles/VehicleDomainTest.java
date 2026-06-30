@@ -12,6 +12,8 @@ import it.gabriele.truckflow.domain.vehicles.combination.VehicleCombination;
 import it.gabriele.truckflow.domain.vehicles.combination.VehicleCombinationType;
 import it.gabriele.truckflow.domain.vehicles.coupling.CouplingProfile;
 import it.gabriele.truckflow.domain.vehicles.coupling.CouplingType;
+import it.gabriele.truckflow.domain.vehicles.exceptions.InvalidVehicleCombinationException;
+import it.gabriele.truckflow.domain.vehicles.exceptions.InvalidVehicleException;
 import it.gabriele.truckflow.domain.vehicles.operation.VehicleCapability;
 import it.gabriele.truckflow.domain.vehicles.operation.VehicleOperationalRole;
 import it.gabriele.truckflow.domain.vehicles.specification.VehicleAxle;
@@ -84,7 +86,7 @@ class VehicleDomainTest {
     var trailer = drawbarTrailer();
 
     assertThrows(
-        IllegalArgumentException.class,
+        InvalidVehicleCombinationException.class,
         () ->
             VehicleCombination.fromUnits(
                 null,
@@ -98,7 +100,7 @@ class VehicleDomainTest {
   @Test
   void trailerMustHaveNoPowerSource() {
     assertThrows(
-        IllegalArgumentException.class,
+        InvalidVehicleException.class,
         () ->
             new VehicleUnit(
                 null,
@@ -120,7 +122,7 @@ class VehicleDomainTest {
   @Test
   void bodyProfileMustMatchBodyType() {
     assertThrows(
-        IllegalArgumentException.class,
+        InvalidVehicleException.class,
         () ->
             new VehicleUnit(
                 null,
@@ -160,7 +162,7 @@ class VehicleDomainTest {
     var trailer = drawbarTrailer();
 
     assertThrows(
-        IllegalArgumentException.class,
+        InvalidVehicleCombinationException.class,
         () ->
             VehicleCombination.fromUnits(
                 null,

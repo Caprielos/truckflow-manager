@@ -1,12 +1,13 @@
 package it.gabriele.truckflow.domain.users;
 
+import it.gabriele.truckflow.domain.users.exceptions.InvalidUserException;
 import java.util.UUID;
 
 public record UserId(UUID value) {
 
   public UserId {
     if (value == null) {
-      throw new IllegalArgumentException("User id is required.");
+      throw new InvalidUserException("User id is required.");
     }
   }
 

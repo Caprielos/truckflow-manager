@@ -1,5 +1,7 @@
 package it.gabriele.truckflow.domain.users;
 
+import it.gabriele.truckflow.domain.users.exceptions.InvalidUserException;
+
 public record UserPasswordHash(String value) {
 
   public UserPasswordHash {
@@ -10,7 +12,7 @@ public record UserPasswordHash(String value) {
     String normalized = value == null ? "" : value.trim();
 
     if (normalized.isBlank()) {
-      throw new IllegalArgumentException(fieldName + " is required.");
+      throw new InvalidUserException(fieldName + " is required.");
     }
 
     return normalized;

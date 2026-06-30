@@ -1,6 +1,7 @@
 package it.gabriele.truckflow.domain.vehicles.specification;
 
 import it.gabriele.truckflow.domain.vehicles.common.VehicleValidation;
+import it.gabriele.truckflow.domain.vehicles.exceptions.InvalidVehicleException;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
@@ -15,7 +16,7 @@ public record VehicleAxleSpecification(List<VehicleAxle> axles) {
     Set<Integer> uniqueAxleNumbers =
         axles.stream().map(VehicleAxle::axleNumber).collect(Collectors.toSet());
     if (uniqueAxleNumbers.size() != axles.size()) {
-      throw new IllegalArgumentException("Axle numbers must be unique.");
+      throw new InvalidVehicleException("Axle numbers must be unique.");
     }
 
     axles = axles.stream().sorted(Comparator.comparingInt(VehicleAxle::axleNumber)).toList();

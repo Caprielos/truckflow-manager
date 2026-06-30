@@ -1,12 +1,13 @@
 package it.gabriele.truckflow.domain.operational.dispatcher;
 
+import it.gabriele.truckflow.domain.operational.exceptions.InvalidDispatcherException;
 import java.util.UUID;
 
 public record DispatcherId(UUID value) {
 
   public DispatcherId {
     if (value == null) {
-      throw new IllegalArgumentException("Dispatcher id is required.");
+      throw new InvalidDispatcherException("Dispatcher id is required.");
     }
   }
 

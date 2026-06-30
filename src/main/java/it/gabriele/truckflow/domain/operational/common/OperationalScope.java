@@ -1,5 +1,7 @@
 package it.gabriele.truckflow.domain.operational.common;
 
+import it.gabriele.truckflow.domain.shared.exceptions.DomainValidationException;
+
 public record OperationalScope(String code, String name, String description, String area) {
 
   public OperationalScope {
@@ -17,7 +19,7 @@ public record OperationalScope(String code, String name, String description, Str
     String normalized = normalize(value);
 
     if (normalized.isBlank()) {
-      throw new IllegalArgumentException(fieldName + " is required.");
+      throw new DomainValidationException(fieldName + " is required.");
     }
 
     return normalized;

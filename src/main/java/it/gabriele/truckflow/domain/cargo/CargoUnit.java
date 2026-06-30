@@ -1,5 +1,6 @@
 package it.gabriele.truckflow.domain.cargo;
 
+import it.gabriele.truckflow.domain.cargo.exceptions.InvalidCargoException;
 import java.util.Set;
 
 public final class CargoUnit {
@@ -234,7 +235,7 @@ public final class CargoUnit {
 
   private static Set<CargoCategory> validateCategories(Set<CargoCategory> categories) {
     if (categories == null || categories.isEmpty()) {
-      throw new IllegalArgumentException("categories are required.");
+      throw new InvalidCargoException("categories are required.");
     }
 
     CargoValidation.requireNoNullElements(categories, "categories");
@@ -253,27 +254,27 @@ public final class CargoUnit {
       CargoCompatibilityRequirement compatibilityRequirement) {
     if (regulatory.adrRequired()
         && !compatibilityRequirement.requires(CargoTransportRequirement.ADR_VEHICLE_REQUIRED)) {
-      throw new IllegalArgumentException(
+      throw new InvalidCargoException(
           "ADR cargo must require ADR vehicle compatibility requirement.");
     }
 
     if (regulatory.atpRequired()
         && !compatibilityRequirement.requires(
             CargoTransportRequirement.ATP_CERTIFICATION_REQUIRED)) {
-      throw new IllegalArgumentException(
+      throw new InvalidCargoException(
           "ATP cargo must require ATP certification compatibility requirement.");
     }
 
     if (temperature.controlled()
         && !compatibilityRequirement.requires(
             CargoTransportRequirement.TEMPERATURE_CONTROL_REQUIRED)) {
-      throw new IllegalArgumentException(
+      throw new InvalidCargoException(
           "Temperature controlled cargo must require temperature control requirement.");
     }
 
     if (properties.requiresSeparation()
         && !compatibilityRequirement.requires(CargoTransportRequirement.SEPARATION_REQUIRED)) {
-      throw new IllegalArgumentException(
+      throw new InvalidCargoException(
           "Cargo requiring separation must declare separation transport requirement.");
     }
   }
