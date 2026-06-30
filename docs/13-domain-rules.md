@@ -90,6 +90,24 @@ Questi concetti possono restare separati perché rappresentano peso o distanza i
 
 La regola corretta è: un value object va condiviso solo se rappresenta davvero lo stesso concetto aziendale in più domini.
 
+## 5.1 Test di catalogo e dati statici
+
+I test sui cataloghi statici del dominio non devono essere fragili.
+
+Devono preferire controlli di comportamento e coerenza rispetto a conteggi rigidi.
+
+Esempi corretti:
+
+- verificare che i codici siano univoci;
+- verificare che la ricerca per codice funzioni;
+- verificare che ogni categoria restituisca solo elementi della propria categoria;
+- verificare la presenza delle qualificazioni fondamentali;
+- verificare che ogni elemento abbia metadati completi.
+
+Esempio da evitare:
+
+- bloccare il test su un numero totale fisso quando il catalogo è destinato a crescere.
+
 ## 6. Invarianti
 
 Gli invarianti devono essere chiari, espliciti e localizzati nel dominio.

@@ -104,6 +104,20 @@ Serve a:
 
 È una classe di supporto del dominio, non un repository di database.
 
+I test del catalogo devono verificare il comportamento e la coerenza dei dati, non bloccare numeri totali rigidi.
+
+Esempi di controlli corretti:
+
+- tutti i codici sono univoci;
+- tutte le categorie hanno almeno una qualificazione;
+- le qualificazioni fondamentali sono presenti;
+- la ricerca per codice funziona;
+- ogni qualificazione filtrata appartiene davvero alla categoria richiesta.
+
+Esempio da evitare:
+
+- fallire il test solo perché il catalogo passa da 64 a 65 qualificazioni.
+
 ## 3.4 Perché le patenti sono qualificazioni
 
 Nel progetto TruckFlow, le patenti sono modellate come `Qualification`.

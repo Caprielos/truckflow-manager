@@ -1,16 +1,19 @@
 package it.gabriele.truckflow.domain.qualifications;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.EnumSet;
 import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 class QualificationCatalogTest {
 
   @Test
-  void containsAllQualifications() {
-    assertEquals(64, QualificationCatalog.all().size());
+  void exposesAllDeclaredQualificationsWithoutDependingOnFixedCatalogSize() {
+    assertEquals(EnumSet.allOf(Qualification.class), EnumSet.copyOf(QualificationCatalog.all()));
   }
 
   @Test
@@ -22,114 +25,121 @@ class QualificationCatalogTest {
   }
 
   @Test
-  void filtersDrivingLicensesByCategory() {
-    var qualifications = QualificationCatalog.byCategory(QualificationCategory.DRIVING_LICENSES);
+  void everyQualificationHasCompleteMetadata() {
+    for (var qualification : QualificationCatalog.all()) {
+      assertFalse(qualification.code().isBlank());
+      assertFalse(qualification.displayName().isBlank());
+      assertNotNull(qualification.category());
+      assertFalse(qualification.shortDescription().isBlank());
+      assertFalse(qualification.longDescription().isBlank());
+    }
+  }
 
-    assertEquals(9, qualifications.size());
-    assertTrue(qualifications.contains(Qualification.DRIVING_LICENSE_C));
-    assertTrue(qualifications.contains(Qualification.DRIVING_LICENSE_CE));
-    assertTrue(qualifications.contains(Qualification.DRIVING_LICENSE_D1E));
+  @Test
+  void everyCategoryContainsAtLeastOneQualification() {
+    for (var category : QualificationCategory.values()) {
+      assertFalse(
+          QualificationCatalog.byCategory(category).isEmpty(),
+          () -> "Expected at least one qualification in category " + category);
+    }
+  }
+
+  @Test
+  void filtersDrivingLicensesByCategory() {
+    assertCategoryContains(
+        QualificationCategory.DRIVING_LICENSES,
+        Qualification.DRIVING_LICENSE_C,
+        Qualification.DRIVING_LICENSE_CE,
+        Qualification.DRIVING_LICENSE_D1E);
   }
 
   @Test
   void filtersCqcByCategory() {
-    var qualifications = QualificationCatalog.byCategory(QualificationCategory.CQC);
-
-    assertEquals(2, qualifications.size());
-    assertTrue(qualifications.contains(Qualification.CQC_GOODS));
-    assertTrue(qualifications.contains(Qualification.CQC_PASSENGERS));
+    assertCategoryContains(
+        QualificationCategory.CQC, Qualification.CQC_GOODS, Qualification.CQC_PASSENGERS);
   }
 
   @Test
   void filtersAdrByCategory() {
-    var qualifications = QualificationCatalog.byCategory(QualificationCategory.ADR);
-
-    assertEquals(11, qualifications.size());
-    assertTrue(qualifications.contains(Qualification.ADR_BASIC));
-    assertTrue(qualifications.contains(Qualification.ADR_TANK));
-    assertTrue(qualifications.contains(Qualification.ADR_CLASS_9));
+    assertCategoryContains(
+        QualificationCategory.ADR,
+        Qualification.ADR_BASIC,
+        Qualification.ADR_TANK,
+        Qualification.ADR_CLASS_9);
   }
 
   @Test
   void filtersFoodAndPharmaceuticalsByCategory() {
-    var qualifications =
-        QualificationCatalog.byCategory(QualificationCategory.FOOD_PHARMACEUTICALS);
-
-    assertEquals(3, qualifications.size());
-    assertTrue(qualifications.contains(Qualification.ATP));
-    assertTrue(qualifications.contains(Qualification.HACCP));
-    assertTrue(qualifications.contains(Qualification.PHARMACEUTICAL_TRANSPORT));
+    assertCategoryContains(
+        QualificationCategory.FOOD_PHARMACEUTICALS,
+        Qualification.ATP,
+        Qualification.HACCP,
+        Qualification.PHARMACEUTICAL_TRANSPORT);
   }
 
   @Test
   void filtersAnimalsByCategory() {
-    var qualifications = QualificationCatalog.byCategory(QualificationCategory.ANIMALS);
-
-    assertEquals(4, qualifications.size());
-    assertTrue(qualifications.contains(Qualification.LIVE_ANIMALS));
-    assertTrue(qualifications.contains(Qualification.ANIMAL_WELFARE));
-    assertTrue(qualifications.contains(Qualification.SLAUGHTER_ANIMALS));
-    assertTrue(qualifications.contains(Qualification.PET_ANIMALS));
+    assertCategoryContains(
+        QualificationCategory.ANIMALS,
+        Qualification.LIVE_ANIMALS,
+        Qualification.ANIMAL_WELFARE,
+        Qualification.SLAUGHTER_ANIMALS,
+        Qualification.PET_ANIMALS);
   }
 
   @Test
   void filtersWasteByCategory() {
-    var qualifications = QualificationCatalog.byCategory(QualificationCategory.WASTE);
-
-    assertEquals(9, qualifications.size());
-    assertTrue(qualifications.contains(Qualification.WASTE_CATEGORY_1));
-    assertTrue(qualifications.contains(Qualification.WASTE_CATEGORY_5));
-    assertTrue(qualifications.contains(Qualification.WASTE_CATEGORY_10));
+    assertCategoryContains(
+        QualificationCategory.WASTE,
+        Qualification.WASTE_CATEGORY_1,
+        Qualification.WASTE_CATEGORY_5,
+        Qualification.WASTE_CATEGORY_10);
   }
 
   @Test
   void filtersMachineOperatorsByCategory() {
-    var qualifications = QualificationCatalog.byCategory(QualificationCategory.MACHINE_OPERATORS);
-
-    assertEquals(8, qualifications.size());
-    assertTrue(qualifications.contains(Qualification.FORKLIFT));
-    assertTrue(qualifications.contains(Qualification.MEWP));
-    assertTrue(qualifications.contains(Qualification.TRUCK_MOUNTED_CRANE));
-    assertTrue(qualifications.contains(Qualification.TELEHANDLER));
+    assertCategoryContains(
+        QualificationCategory.MACHINE_OPERATORS,
+        Qualification.FORKLIFT,
+        Qualification.MEWP,
+        Qualification.TRUCK_MOUNTED_CRANE,
+        Qualification.TELEHANDLER);
   }
 
   @Test
   void filtersSafetyByCategory() {
-    var qualifications = QualificationCatalog.byCategory(QualificationCategory.SAFETY);
-
-    assertEquals(6, qualifications.size());
-    assertTrue(qualifications.contains(Qualification.CONSTRUCTION_SITE_SAFETY));
-    assertTrue(qualifications.contains(Qualification.PPE_CATEGORY_III));
-    assertTrue(qualifications.contains(Qualification.ROAD_SIGNAGE));
-    assertTrue(qualifications.contains(Qualification.LOAD_HANDLING));
-    assertTrue(qualifications.contains(Qualification.FIRE_SAFETY));
-    assertTrue(qualifications.contains(Qualification.FIRST_AID));
+    assertCategoryContains(
+        QualificationCategory.SAFETY,
+        Qualification.CONSTRUCTION_SITE_SAFETY,
+        Qualification.PPE_CATEGORY_III,
+        Qualification.ROAD_SIGNAGE,
+        Qualification.LOAD_HANDLING,
+        Qualification.FIRE_SAFETY,
+        Qualification.FIRST_AID);
   }
 
   @Test
   void filtersPortsAndAirportsByCategory() {
-    var qualifications = QualificationCatalog.byCategory(QualificationCategory.PORTS_AND_AIRPORTS);
-
-    assertEquals(6, qualifications.size());
-    assertTrue(qualifications.contains(Qualification.CONTAINER_TRANSPORT));
-    assertTrue(qualifications.contains(Qualification.IMO));
-    assertTrue(qualifications.contains(Qualification.PORT_AREA_ACCESS));
-    assertTrue(qualifications.contains(Qualification.PORT_ADR));
-    assertTrue(qualifications.contains(Qualification.AIRPORT_CARGO));
-    assertTrue(qualifications.contains(Qualification.AIRPORT_SECURITY));
+    assertCategoryContains(
+        QualificationCategory.PORTS_AND_AIRPORTS,
+        Qualification.CONTAINER_TRANSPORT,
+        Qualification.IMO,
+        Qualification.PORT_AREA_ACCESS,
+        Qualification.PORT_ADR,
+        Qualification.AIRPORT_CARGO,
+        Qualification.AIRPORT_SECURITY);
   }
 
   @Test
   void filtersCompanyLogisticsByCategory() {
-    var qualifications = QualificationCatalog.byCategory(QualificationCategory.COMPANY_LOGISTICS);
-
-    assertEquals(6, qualifications.size());
-    assertTrue(qualifications.contains(Qualification.LOGISTICS));
-    assertTrue(qualifications.contains(Qualification.WAREHOUSE_MANAGEMENT));
-    assertTrue(qualifications.contains(Qualification.LOAD_SLINGING));
-    assertTrue(qualifications.contains(Qualification.RAMPS_AND_DOCKS));
-    assertTrue(qualifications.contains(Qualification.SENSITIVE_GOODS_TRANSPORT));
-    assertTrue(qualifications.contains(Qualification.MEDICAL_EQUIPMENT_TRANSPORT));
+    assertCategoryContains(
+        QualificationCategory.COMPANY_LOGISTICS,
+        Qualification.LOGISTICS,
+        Qualification.WAREHOUSE_MANAGEMENT,
+        Qualification.LOAD_SLINGING,
+        Qualification.RAMPS_AND_DOCKS,
+        Qualification.SENSITIVE_GOODS_TRANSPORT,
+        Qualification.MEDICAL_EQUIPMENT_TRANSPORT);
   }
 
   @Test
@@ -138,6 +148,11 @@ class QualificationCatalogTest {
 
     assertTrue(qualification.isPresent());
     assertEquals("Driving License C", qualification.orElseThrow().displayName());
+  }
+
+  @Test
+  void returnsEmptyWhenCodeDoesNotExist() {
+    assertTrue(QualificationCatalog.findByCode("UNKNOWN_QUALIFICATION").isEmpty());
   }
 
   @Test
@@ -155,5 +170,21 @@ class QualificationCatalogTest {
     assertEquals(QualificationCategory.DRIVING_LICENSES, qualification.category());
     assertTrue(qualification.shortDescription().startsWith("License for"));
     assertTrue(qualification.longDescription().contains("heavy goods vehicles"));
+  }
+
+  private static void assertCategoryContains(
+      QualificationCategory category, Qualification... expectedQualifications) {
+    var qualifications = QualificationCatalog.byCategory(category);
+
+    assertFalse(qualifications.isEmpty(), () -> "Expected category to contain values: " + category);
+    assertTrue(
+        qualifications.stream().allMatch(qualification -> qualification.category() == category),
+        () -> "Expected all qualifications to belong to category " + category);
+
+    for (var expectedQualification : expectedQualifications) {
+      assertTrue(
+          qualifications.contains(expectedQualification),
+          () -> "Expected " + expectedQualification + " in category " + category);
+    }
   }
 }
