@@ -1,9 +1,0 @@
-flowchart TD
-    WEB[Web REST API futura] --> IN[application/port/in]
-    TEST[Test di scenario] --> IN
-    IN --> UC[application/usecase]
-    UC --> DOMAIN[domain]
-    UC --> OUT[application/port/out]
-    MEMORY[infrastructure/memory] --> OUT
-    DB[Database futuro] -. implementerà .-> OUT
-    EXT[API esterne future] -. implementeranno .-> OUT

@@ -1,9 +1,0 @@
-/**
- * Repository in memoria inventory.
- *
- * <p>Contiene adapter in memoria temporanei per gli articoli, le giacenze, i movimenti, le scorte e
- * le regole di magazzino.
- *
- * <p>Questo file documenta il contenuto del package e non contiene logica applicativa.
- */
-package it.gabriele.truckflow.infrastructure.memory.inventory;
