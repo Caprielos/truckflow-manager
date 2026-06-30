@@ -31,7 +31,7 @@ public final class Dispatcher {
       OperationalMetadata metadata,
       String notes) {
     this.id = id == null ? DispatcherId.random() : id;
-    this.code = code == null ? OperationalCode.empty() : code;
+    this.code = requireNonNull(code, "code");
     this.userId = requireNonNull(userId, "userId");
     this.profile = requireNonNull(profile, "profile");
     this.scopes = validateScopes(scopes);

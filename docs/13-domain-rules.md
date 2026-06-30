@@ -77,6 +77,8 @@ I value object rappresentano concetti immutabili del dominio.
 
 Non bisogna unificare value object simili se hanno significato diverso nei rispettivi domini.
 
+I codici aziendali interni devono essere obbligatori quando rappresentano l'identificativo leggibile usato dall'azienda, come `OperationalCode`, `FleetCode`, `CargoCode`, `ShipmentCode`, `DocumentCode` e `ComplianceRequirementCode`.
+
 Esempi:
 
 - `CargoWeights`;

@@ -32,7 +32,7 @@ public final class WarehouseOperator {
       OperationalMetadata metadata,
       String notes) {
     this.id = id == null ? WarehouseOperatorId.random() : id;
-    this.code = code == null ? OperationalCode.empty() : code;
+    this.code = requireNonNull(code, "code");
     this.userId = requireNonNull(userId, "userId");
     this.profile = requireNonNull(profile, "profile");
     this.qualifications = validateQualifications(qualifications);

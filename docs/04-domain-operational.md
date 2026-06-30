@@ -63,7 +63,7 @@ Esempi:
 
 L’ID serve al dominio e al sistema. Il codice operativo serve all’azienda e agli utenti.
 
-Nel progetto è opzionale: può essere vuoto, ma quando presente viene normalizzato e validato.
+Nel progetto è obbligatorio: ogni figura operativa deve avere un codice interno aziendale valido. Il codice viene normalizzato in maiuscolo e validato.
 
 ### `OperationalMetadata`
 

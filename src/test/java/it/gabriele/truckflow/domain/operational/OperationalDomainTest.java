@@ -18,6 +18,7 @@ import it.gabriele.truckflow.domain.operational.manager.Manager;
 import it.gabriele.truckflow.domain.operational.mechanic.Mechanic;
 import it.gabriele.truckflow.domain.operational.warehouse.WarehouseOperator;
 import it.gabriele.truckflow.domain.qualifications.Qualification;
+import it.gabriele.truckflow.domain.shared.exceptions.DomainValidationException;
 import it.gabriele.truckflow.domain.users.UserId;
 import java.util.Set;
 import org.junit.jupiter.api.Test;
@@ -127,6 +128,29 @@ class OperationalDomainTest {
                 UserId.random(),
                 profile("Marco", "Viola", "Operations", "Dispatcher"),
                 Set.of(),
+                OperationalStatus.ACTIVE,
+                OperationalMetadata.createdNow("system"),
+                ""));
+  }
+
+  @Test
+  void operationalCodeIsMandatory() {
+    assertThrows(DomainValidationException.class, () -> OperationalCode.of(""));
+    assertThrows(DomainValidationException.class, () -> OperationalCode.of("   "));
+    assertThrows(DomainValidationException.class, () -> OperationalCode.of(null));
+  }
+
+  @Test
+  void driverRequiresOperationalCode() {
+    assertThrows(
+        InvalidDriverException.class,
+        () ->
+            new Driver(
+                null,
+                null,
+                UserId.random(),
+                profile("Code", "Missing", "Transport", "Driver"),
+                Set.of(qualification(Qualification.DRIVING_LICENSE_C)),
                 OperationalStatus.ACTIVE,
                 OperationalMetadata.createdNow("system"),
                 ""));

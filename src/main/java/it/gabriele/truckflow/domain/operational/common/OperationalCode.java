@@ -7,14 +7,14 @@ public record OperationalCode(String value) {
   public OperationalCode {
     value = normalize(value).toUpperCase();
 
-    if (!value.isBlank() && !value.matches("[A-Z0-9][A-Z0-9_-]*")) {
+    if (value.isBlank()) {
+      throw new DomainValidationException("Operational code is required.");
+    }
+
+    if (!value.matches("[A-Z0-9][A-Z0-9_-]*")) {
       throw new DomainValidationException(
           "Operational code can contain only uppercase letters, numbers, dashes and underscores.");
     }
-  }
-
-  public static OperationalCode empty() {
-    return new OperationalCode("");
   }
 
   public static OperationalCode of(String value) {
@@ -22,7 +22,7 @@ public record OperationalCode(String value) {
   }
 
   public boolean isAssigned() {
-    return !value.isBlank();
+    return true;
   }
 
   private static String normalize(String value) {
