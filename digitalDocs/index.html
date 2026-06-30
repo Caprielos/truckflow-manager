@@ -1,0 +1,406 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>TruckFlow Domain Documentation</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="tooltip-enabled">
+    <div class="page-shell">
+      <aside class="sidebar" aria-label="Documentation navigation">
+        <h1>TruckFlow Domain</h1>
+        <p class="subtitle">Full English documentation with optional Italian explanations.</p>
+        <nav>
+          <a href="#overview">Overview</a>
+          <a href="#tooltip-system">Tooltip System</a>
+          <a href="#architecture">Architecture Rules</a>
+          <a href="#domains">Domain Packages</a>
+          <a href="#review">Domain Review</a>
+          <a href="#exceptions">Domain Exceptions</a>
+          <a href="#glossary">Glossary</a>
+        </nav>
+      </aside>
+
+      <main class="content">
+        <header class="hero" id="overview">
+          <p class="eyebrow">TruckFlow Domain Foundation v1.0</p>
+          <h2>Domain Documentation</h2>
+          <p>
+            This digital documentation describes the pure
+            <span class="term" data-it="livello di dominio">domain layer</span>
+            of TruckFlow Manager using the same English names used in the Java code. Italian
+            explanations are available through optional CSS-based tooltips, without changing the
+            HTML markup.
+          </p>
+          <div class="badge-row" aria-label="Documentation tags">
+            <span class="badge">HTML + CSS</span>
+            <span class="badge">English first</span>
+            <span class="badge">Italian tooltip</span>
+            <span class="badge">No JavaScript required</span>
+          </div>
+        </header>
+
+        <section class="section" id="tooltip-system">
+          <h2>1. Bilingual Tooltip System</h2>
+          <p>
+            The main text is written in English. Important class names, entities, value objects,
+            variables and architectural concepts remain in English exactly as they appear in the
+            source code. The Italian explanation is stored in the <code>data-it</code> attribute of
+            each documented term.
+          </p>
+
+          <div class="grid">
+            <article class="card">
+              <h3>Tooltip mode</h3>
+              <p class="mode-enabled-note">
+                The current page uses <code>tooltip-enabled</code>. Italian explanations appear when
+                the user hovers over highlighted English terms such as
+                <span class="term" data-it="radice dell'aggregato">Aggregate Root</span>.
+              </p>
+              <p class="mode-disabled-note">
+                The current page uses <code>tooltip-disabled</code>. Italian explanations are shown
+                directly after highlighted English terms such as
+                <span class="term" data-it="radice dell'aggregato">Aggregate Root</span>.
+              </p>
+            </article>
+
+            <article class="card">
+              <h3>Direct mode</h3>
+              <p>
+                To show Italian explanations directly in the page, change only the global body flag:
+              </p>
+              <pre class="code-block">&lt;body class="tooltip-disabled"&gt;</pre>
+            </article>
+          </div>
+
+          <h3>Markup rule</h3>
+          <p>
+            The HTML remains identical in both modes. The visual behavior is controlled only by CSS.
+          </p>
+          <pre class="code-block">&lt;span class="term" data-it="entità del dominio"&gt;Entity&lt;/span&gt;</pre>
+        </section>
+
+        <section class="section" id="architecture">
+          <h2>2. Architecture Rules</h2>
+          <p>
+            TruckFlow follows a simplified but rigorous
+            <span class="term" data-it="progettazione guidata dal dominio">Domain-Driven Design</span>
+            approach. The current focus is the pure domain model, without application workflows,
+            persistence, REST APIs or external integrations.
+          </p>
+
+          <div class="callout">
+            <p>
+              The domain must model business concepts first. Technical mechanisms such as database
+              access, HTTP controllers, file storage and external services belong to later layers.
+            </p>
+          </div>
+
+          <h3>Layer separation</h3>
+          <ul class="check-list">
+            <li>
+              <span class="term" data-it="dominio puro">domain</span> contains business concepts,
+              invariants, value objects, entities and aggregate roots.
+            </li>
+            <li>
+              <span class="term" data-it="livello applicativo">application</span> will orchestrate
+              use cases and ports.
+            </li>
+            <li>
+              <span class="term" data-it="infrastruttura">infrastructure</span> will connect the
+              system to memory repositories, databases, files and external systems.
+            </li>
+            <li>
+              <span class="term" data-it="API REST o boundary esterno">api</span> will expose the
+              application behavior to clients.
+            </li>
+          </ul>
+
+          <h3>Allowed cross-domain references</h3>
+          <p>
+            A domain must not import full aggregate roots from another domain. References across
+            contexts are allowed only through stable identifiers, stable value objects or abstract
+            references.
+          </p>
+          <pre class="code-block">Allowed:   ShipmentItem -&gt; CargoId
+Allowed:   ShipmentLeg  -&gt; LocationId
+Avoid:     ShipmentItem -&gt; CargoUnit
+Avoid:     ShipmentLeg  -&gt; Location</pre>
+        </section>
+
+        <section class="section" id="domains">
+          <h2>3. Domain Packages</h2>
+          <p>
+            The current domain foundation is composed of ten main packages. Each package owns a clear
+            part of the business vocabulary and must keep its boundaries explicit.
+          </p>
+
+          <div class="domain-grid">
+            <article class="card">
+              <h3><span class="term" data-it="account applicativi">domain.users</span></h3>
+              <p>
+                Models application accounts, profile data, roles, permissions, user status and user
+                preferences. A <span class="term" data-it="utente applicativo">User</span> is not the
+                same concept as an operational worker such as a driver.
+              </p>
+            </article>
+
+            <article class="card">
+              <h3><span class="term" data-it="abilitazioni e certificazioni">domain.qualifications</span></h3>
+              <p>
+                Provides the static catalog of qualifications, driving licenses, CQC, ADR and other
+                operational certifications. A
+                <span class="term" data-it="qualificazione">Qualification</span> is a catalog entry,
+                not a personal document or expiration record.
+              </p>
+            </article>
+
+            <article class="card">
+              <h3><span class="term" data-it="figure operative aziendali">domain.operational</span></h3>
+              <p>
+                Models real operational company figures such as
+                <span class="term" data-it="autista">Driver</span>,
+                <span class="term" data-it="meccanico">Mechanic</span>,
+                <span class="term" data-it="magazziniere">WarehouseOperator</span>,
+                <span class="term" data-it="pianificatore operativo">Dispatcher</span> and
+                <span class="term" data-it="responsabile">Manager</span>.
+              </p>
+            </article>
+
+            <article class="card">
+              <h3><span class="term" data-it="mezzi e combinazioni">domain.vehicles</span></h3>
+              <p>
+                Models fleet units, body profiles, technical specifications, coupling profiles,
+                operational capabilities and vehicle combinations. The core distinction is between
+                <span class="term" data-it="unità fisica del parco mezzi">VehicleUnit</span> and
+                <span class="term" data-it="combinazione veicolare">VehicleCombination</span>.
+              </p>
+            </article>
+
+            <article class="card">
+              <h3><span class="term" data-it="merce e requisiti di trasporto">domain.cargo</span></h3>
+              <p>
+                Models merchandise as a reusable domain concept. A
+                <span class="term" data-it="scheda della merce">CargoUnit</span> declares cargo
+                properties, packaging, temperature, hazard and transport requirements, but does not
+                assign vehicles.
+              </p>
+            </article>
+
+            <article class="card">
+              <h3><span class="term" data-it="luoghi logistici">domain.locations</span></h3>
+              <p>
+                Models reusable logistics places such as depots, warehouses, customers, suppliers,
+                yards, hubs, ports, airports and terminals. A
+                <span class="term" data-it="luogo logistico">Location</span> is shared by shipments,
+                trip templates and future operational modules.
+              </p>
+            </article>
+
+            <article class="card">
+              <h3><span class="term" data-it="percorsi tipo">domain.triptemplates</span></h3>
+              <p>
+                Models abstract route patterns and technical mission templates. A
+                <span class="term" data-it="modello astratto di percorso">TripTemplate</span> is not
+                a real executed trip and does not contain drivers, vehicles, cargo, real times or GPS
+                tracking.
+              </p>
+            </article>
+
+            <article class="card">
+              <h3><span class="term" data-it="richieste di spedizione">domain.shipments</span></h3>
+              <p>
+                Models shipment requests: what must be shipped, which cargo items are included, which
+                logical legs are needed, which service level applies and which transport requirements
+                are declared. A <span class="term" data-it="richiesta di spedizione">Shipment</span>
+                is not transport execution.
+              </p>
+            </article>
+
+            <article class="card">
+              <h3><span class="term" data-it="documenti aziendali astratti">domain.documents</span></h3>
+              <p>
+                Models a <span class="term" data-it="documento aziendale astratto">Document</span>
+                as a pure business concept with identity, code, type, category, status, metadata,
+                logical content and abstract references. It does not manage physical files, upload,
+                storage or signatures.
+              </p>
+            </article>
+
+            <article class="card">
+              <h3><span class="term" data-it="requisiti astratti di conformità">domain.compliance</span></h3>
+              <p>
+                Models abstract compliance requirements. A
+                <span class="term" data-it="requisito astratto di conformità">ComplianceRequirement</span>
+                describes rules, categories, obligation levels, severity, targets, sources and
+                jurisdictions, but does not execute compliance checks or create violations.
+              </p>
+            </article>
+          </div>
+        </section>
+
+        <section class="section" id="review">
+          <h2>4. Domain Review Corrections</h2>
+          <p>
+            The first concrete domain review strengthened the foundation without introducing new
+            operational features. The goal was to make the pure model safer, clearer and easier to
+            consume from the future application layer.
+          </p>
+
+          <div class="timeline">
+            <article class="timeline-item">
+              <div class="timeline-number">1</div>
+              <div>
+                <h3>Validate before mutating aggregates</h3>
+                <p>
+                  Aggregate methods now validate all new values before assigning internal state. This
+                  prevents partially modified objects when an invariant fails.
+                </p>
+              </div>
+            </article>
+
+            <article class="timeline-item">
+              <div class="timeline-number">2</div>
+              <div>
+                <h3>Use custom exceptions in simple domains</h3>
+                <p>
+                  Smaller domains such as documents, compliance, locations and trip templates now use
+                  explicit domain exceptions instead of generic Java exceptions.
+                </p>
+              </div>
+            </article>
+
+            <article class="timeline-item">
+              <div class="timeline-number">3</div>
+              <div>
+                <h3>Use custom exceptions in complex domains</h3>
+                <p>
+                  Cargo, shipments, vehicles, operational and users now expose clearer error types,
+                  improving testability and future application error handling.
+                </p>
+              </div>
+            </article>
+
+            <article class="timeline-item">
+              <div class="timeline-number">4</div>
+              <div>
+                <h3>Make OperationalCode mandatory</h3>
+                <p>
+                  <span class="term" data-it="codice operativo aziendale">OperationalCode</span>
+                  is now consistent with other business codes such as
+                  <span class="term" data-it="codice flotta">FleetCode</span>,
+                  <span class="term" data-it="codice spedizione">ShipmentCode</span> and
+                  <span class="term" data-it="codice documento">DocumentCode</span>.
+                </p>
+              </div>
+            </article>
+
+            <article class="timeline-item">
+              <div class="timeline-number">5</div>
+              <div>
+                <h3>Make qualification catalog tests less fragile</h3>
+                <p>
+                  Qualification catalog tests focus on behavior, metadata completeness and code
+                  uniqueness instead of rigid item counts.
+                </p>
+              </div>
+            </article>
+
+            <article class="timeline-item">
+              <div class="timeline-number">6</div>
+              <div>
+                <h3>Clean local IDE and generated files</h3>
+                <p>
+                  Local IDE files, Maven build output, macOS generated files and temporary script or
+                  patch files are documented as non-source artifacts and excluded from versioning.
+                </p>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="section" id="exceptions">
+          <h2>5. Domain Exceptions</h2>
+          <p>
+            Domain-specific exceptions make validation failures explicit and easier to handle later in
+            the application layer. They are part of the domain language and should represent real
+            violations of the pure model.
+          </p>
+
+          <div class="grid">
+            <article class="card">
+              <h3>Shared base exceptions</h3>
+              <pre class="code-block">it.gabriele.truckflow.domain.shared.exceptions
+├── DomainException
+├── DomainValidationException
+└── InvariantViolationException</pre>
+            </article>
+
+            <article class="card">
+              <h3>Domain-specific examples</h3>
+              <pre class="code-block">InvalidUserException
+InvalidCargoException
+InvalidShipmentException
+InvalidDocumentException
+InvalidComplianceRequirementException</pre>
+            </article>
+          </div>
+
+          <p>
+            <span class="term" data-it="violazione concreta di conformità">ComplianceViolationException</span>
+            is intentionally not part of the current pure domain because concrete compliance checks,
+            results, violations and audit records have not been modeled yet.
+          </p>
+        </section>
+
+        <section class="section" id="glossary">
+          <h2>6. Glossary</h2>
+          <p>
+            This glossary keeps the English technical vocabulary aligned with the code while exposing
+            Italian explanations through the same tooltip system.
+          </p>
+
+          <div class="grid">
+            <article class="card">
+              <h3><span class="term" data-it="radice dell'aggregato">Aggregate Root</span></h3>
+              <p>The main consistency boundary of a domain aggregate.</p>
+            </article>
+
+            <article class="card">
+              <h3><span class="term" data-it="oggetto valore">Value Object</span></h3>
+              <p>An immutable domain concept defined by its value rather than identity.</p>
+            </article>
+
+            <article class="card">
+              <h3><span class="term" data-it="invariante di dominio">Invariant</span></h3>
+              <p>A rule that must always remain true for the domain object to be valid.</p>
+            </article>
+
+            <article class="card">
+              <h3><span class="term" data-it="confine del contesto">Bounded Context</span></h3>
+              <p>A clear business boundary with its own language, rules and model.</p>
+            </article>
+
+            <article class="card">
+              <h3><span class="term" data-it="riferimento astratto">Abstract Reference</span></h3>
+              <p>A lightweight reference to another context without importing its aggregate root.</p>
+            </article>
+
+            <article class="card">
+              <h3><span class="term" data-it="livello applicativo">Application Layer</span></h3>
+              <p>The layer that will orchestrate use cases without owning pure domain rules.</p>
+            </article>
+          </div>
+        </section>
+
+        <footer class="footer">
+          <p>
+            TruckFlow Manager — digital domain documentation. Existing Markdown documentation remains
+            available in the <code>docs</code> directory.
+          </p>
+        </footer>
+      </main>
+    </div>
+  </body>
+</html>

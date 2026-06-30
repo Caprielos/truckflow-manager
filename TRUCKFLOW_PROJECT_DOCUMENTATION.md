@@ -4,6 +4,20 @@ Questa è la pagina di ingresso della documentazione del dominio di TruckFlow Ma
 
 La documentazione ufficiale aggiornata si trova nella cartella [`docs`](docs/README.md).
 
+
+## Documentazione digitale HTML + CSS
+
+Oltre alla documentazione Markdown nella cartella [`docs`](docs/README.md), il progetto ora include una prima documentazione digitale nella cartella [`digitalDocs`](digitalDocs/index.html).
+
+Questa documentazione è pensata per essere full English e coerente con il codice: i nomi di classi, entità, value object, variabili e concetti architetturali rimangono in inglese. La spiegazione italiana è disponibile tramite tooltip CSS oppure può essere mostrata direttamente modificando solo la classe globale del tag `<body>`.
+
+Il comportamento è controllato da due flag CSS globali:
+
+- `tooltip-enabled` — mostra la traduzione italiana al passaggio del mouse;
+- `tooltip-disabled` — mostra la traduzione italiana direttamente nella pagina.
+
+Il markup HTML resta identico in entrambi i casi. Cambia solo il CSS applicato dal flag globale.
+
 ## Stato attuale del dominio
 
 Il progetto è attualmente concentrato sul **domain layer puro**.

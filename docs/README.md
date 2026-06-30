@@ -17,6 +17,20 @@ Il progetto, allo stato attuale, è concentrato sul **domain layer** e contiene 
 
 L’obiettivo di questa documentazione è spiegare in italiano, in modo chiaro e professionale, **perché il dominio è stato modellato così**, quali scelte sono state fatte e cosa ogni package rappresenta.
 
+
+## Documentazione digitale HTML + CSS
+
+È stata aggiunta una prima documentazione digitale separata nella cartella [`../digitalDocs`](../digitalDocs/index.html).
+
+Questa nuova documentazione non sostituisce i file Markdown esistenti. Serve come primo prototipo di documentazione navigabile in HTML + CSS, con contenuto principale in inglese e traduzioni italiane disponibili tramite tooltip o visualizzazione diretta.
+
+Il sistema usa un flag globale sul tag `<body>`:
+
+- `tooltip-enabled` per mostrare le traduzioni italiane tramite hover;
+- `tooltip-disabled` per mostrare le traduzioni italiane direttamente nella pagina.
+
+I nomi tecnici rimangono in inglese e allineati al codice Java.
+
 ## Indice consigliato
 
 1. [`01-project-overview.md`](01-project-overview.md) — visione generale del progetto e principi architetturali.
