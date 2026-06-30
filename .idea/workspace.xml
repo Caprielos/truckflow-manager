@@ -6,21 +6,198 @@
   <component name="ChangeListManager">
     <list default="true" id="f285ebd6-ca31-4d09-87c6-2a0cecd930e7" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/01-project-overview.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/01-project-overview.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/06-architecture-decisions.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/06-architecture-decisions.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/10-domain-shipments.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/10-domain-shipments.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/gabriele/truckflow/domain/shipments/Shipment.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/gabriele/truckflow/domain/shipments/ShipmentCode.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/gabriele/truckflow/domain/shipments/ShipmentId.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/gabriele/truckflow/domain/shipments/ShipmentItem.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/gabriele/truckflow/domain/shipments/ShipmentItemId.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/gabriele/truckflow/domain/shipments/ShipmentLeg.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/gabriele/truckflow/domain/shipments/ShipmentLegId.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/gabriele/truckflow/domain/shipments/ShipmentLegType.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/gabriele/truckflow/domain/shipments/ShipmentMetrics.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/gabriele/truckflow/domain/shipments/ShipmentNotes.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/gabriele/truckflow/domain/shipments/ShipmentPriority.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/gabriele/truckflow/domain/shipments/ShipmentProperties.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/gabriele/truckflow/domain/shipments/ShipmentReferences.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/gabriele/truckflow/domain/shipments/ShipmentRequirementSet.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/gabriele/truckflow/domain/shipments/ShipmentServiceLevel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/gabriele/truckflow/domain/shipments/ShipmentStatus.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/gabriele/truckflow/domain/shipments/ShipmentTemperature.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/gabriele/truckflow/domain/shipments/ShipmentTransportRequirement.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/gabriele/truckflow/domain/shipments/ShipmentUnitOfMeasure.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/gabriele/truckflow/domain/shipments/ShipmentValidation.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/gabriele/truckflow/domain/shipments/ShipmentVolume.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/gabriele/truckflow/domain/shipments/ShipmentVolumeUnit.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/gabriele/truckflow/domain/shipments/ShipmentWeight.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/gabriele/truckflow/domain/shipments/ShipmentWeightUnit.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/it/gabriele/truckflow/domain/shipments/ShipmentDomainTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/gabriele/truckflow/domain/shipments/ShipmentDomainTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/cargo/CargoCategory.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/cargo/CargoCode.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/cargo/CargoCompatibilityRequirement.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/cargo/CargoDimensions.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/cargo/CargoHazard.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/cargo/CargoId.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/cargo/CargoPackaging.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/cargo/CargoPackagingType.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/cargo/CargoProperties.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/cargo/CargoRegulatory.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/cargo/CargoStatus.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/cargo/CargoTemperature.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/cargo/CargoTransportRequirement.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/cargo/CargoType.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/cargo/CargoUnit.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/cargo/CargoValidation.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/cargo/CargoWeights.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/locations/GeoCoordinates.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/locations/Location.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/locations/LocationAddress.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/locations/LocationCode.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/locations/LocationId.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/locations/LocationStatus.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/locations/LocationType.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/locations/LocationValidation.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/operational/common/OperationalCode.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/operational/common/OperationalMetadata.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/operational/common/OperationalProfile.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/operational/common/OperationalQualification.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/operational/common/OperationalScope.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/operational/common/OperationalStatus.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/operational/dispatcher/Dispatcher.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/operational/dispatcher/DispatcherId.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/operational/driver/Driver.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/operational/driver/DriverId.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/operational/manager/Manager.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/operational/manager/ManagerId.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/operational/mechanic/Mechanic.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/operational/mechanic/MechanicId.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/operational/warehouse/WarehouseOperator.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/operational/warehouse/WarehouseOperatorId.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/qualifications/Qualification.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/qualifications/QualificationCatalog.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/qualifications/QualificationCategory.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/shipments/Shipment.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/shipments/ShipmentCode.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/shipments/ShipmentId.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/shipments/ShipmentItem.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/shipments/ShipmentItemId.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/shipments/ShipmentLeg.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/shipments/ShipmentLegId.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/shipments/ShipmentLegType.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/shipments/ShipmentMetrics.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/shipments/ShipmentNotes.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/shipments/ShipmentPriority.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/shipments/ShipmentProperties.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/shipments/ShipmentReferences.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/shipments/ShipmentRequirementSet.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/shipments/ShipmentServiceLevel.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/shipments/ShipmentStatus.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/shipments/ShipmentTemperature.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/shipments/ShipmentTransportRequirement.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/shipments/ShipmentUnitOfMeasure.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/shipments/ShipmentValidation.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/shipments/ShipmentVolume.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/shipments/ShipmentVolumeUnit.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/shipments/ShipmentWeight.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/shipments/ShipmentWeightUnit.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/triptemplates/Distance.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/triptemplates/DistanceUnit.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/triptemplates/RouteRoadType.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/triptemplates/RouteSpecification.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/triptemplates/TripTemplate.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/triptemplates/TripTemplateCode.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/triptemplates/TripTemplateId.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/triptemplates/TripTemplateSegment.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/triptemplates/TripTemplateSegmentId.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/triptemplates/TripTemplateSegmentType.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/triptemplates/TripTemplateStatus.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/triptemplates/TripTemplateType.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/triptemplates/TripTemplateValidation.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/users/User.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/users/UserAddress.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/users/UserContact.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/users/UserId.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/users/UserMetadata.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/users/UserPasswordHash.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/users/UserPermission.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/users/UserPermissions.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/users/UserPreferences.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/users/UserProfile.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/users/UserRole.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/users/UserStatus.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/users/Username.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/vehicles/body/CarCarrierBodyProfile.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/vehicles/body/ContainerChassisBodyProfile.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/vehicles/body/CurtainsiderBodyProfile.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/vehicles/body/LivestockBodyProfile.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/vehicles/body/LowLoaderBodyProfile.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/vehicles/body/RefrigeratedBodyProfile.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/vehicles/body/SiloBodyProfile.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/vehicles/body/TankBodyProfile.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/vehicles/body/TipperBodyProfile.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/vehicles/body/VehicleBodyProfile.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/vehicles/body/VehicleBodyType.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/vehicles/combination/VehicleCombination$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/vehicles/combination/VehicleCombination.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/vehicles/combination/VehicleCombinationId.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/vehicles/combination/VehicleCombinationType.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/vehicles/common/VehicleValidation.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/vehicles/coupling/CouplingProfile.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/vehicles/coupling/CouplingType.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/vehicles/operation/VehicleCapability.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/vehicles/operation/VehicleOperationalRole.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/vehicles/specification/VehicleAxle.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/vehicles/specification/VehicleAxleSpecification.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/vehicles/specification/VehicleCabSpecification.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/vehicles/specification/VehicleChassisSpecification.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/vehicles/specification/VehicleDimensions.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/vehicles/specification/VehicleElectricSpecification.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/vehicles/specification/VehicleEngineSpecification.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/vehicles/specification/VehicleLoadSpace.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/vehicles/specification/VehicleTechnicalSpecification.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/vehicles/specification/VehicleTireSpecification.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/vehicles/specification/VehicleTransmissionSpecification.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/vehicles/specification/VehicleWeights.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/vehicles/unit/FleetCode.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/vehicles/unit/PowerSource.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/vehicles/unit/VehicleStatus.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/vehicles/unit/VehicleUnit.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/vehicles/unit/VehicleUnitId.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/it/gabriele/truckflow/domain/vehicles/unit/VehicleUnitType.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/spotless-index" beforeDir="false" afterPath="$PROJECT_DIR$/target/spotless-index" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-it.gabriele.truckflow.domain.cargo.CargoDomainTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-it.gabriele.truckflow.domain.cargo.CargoDomainTest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-it.gabriele.truckflow.domain.locations.LocationDomainTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-it.gabriele.truckflow.domain.locations.LocationDomainTest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-it.gabriele.truckflow.domain.operational.OperationalDomainTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-it.gabriele.truckflow.domain.operational.OperationalDomainTest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-it.gabriele.truckflow.domain.qualifications.QualificationCatalogTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-it.gabriele.truckflow.domain.qualifications.QualificationCatalogTest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-it.gabriele.truckflow.domain.triptemplates.TripTemplateDomainTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-it.gabriele.truckflow.domain.triptemplates.TripTemplateDomainTest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-it.gabriele.truckflow.domain.users.UserTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-it.gabriele.truckflow.domain.users.UserTest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-it.gabriele.truckflow.domain.vehicles.VehicleDomainTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-it.gabriele.truckflow.domain.vehicles.VehicleDomainTest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/it.gabriele.truckflow.domain.cargo.CargoDomainTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/it.gabriele.truckflow.domain.cargo.CargoDomainTest.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/it.gabriele.truckflow.domain.operational.OperationalDomainTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/it.gabriele.truckflow.domain.operational.OperationalDomainTest.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/it.gabriele.truckflow.domain.qualifications.QualificationCatalogTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/it.gabriele.truckflow.domain.qualifications.QualificationCatalogTest.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/it.gabriele.truckflow.domain.triptemplates.TripTemplateDomainTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/it.gabriele.truckflow.domain.triptemplates.TripTemplateDomainTest.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/it.gabriele.truckflow.domain.users.UserTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/it.gabriele.truckflow.domain.users.UserTest.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-it.gabriele.truckflow.domain.cargo.CargoDomainTest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-it.gabriele.truckflow.domain.locations.LocationDomainTest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-it.gabriele.truckflow.domain.operational.OperationalDomainTest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-it.gabriele.truckflow.domain.qualifications.QualificationCatalogTest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-it.gabriele.truckflow.domain.shipments.ShipmentDomainTest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-it.gabriele.truckflow.domain.triptemplates.TripTemplateDomainTest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-it.gabriele.truckflow.domain.users.UserTest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-it.gabriele.truckflow.domain.vehicles.VehicleDomainTest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/it.gabriele.truckflow.domain.cargo.CargoDomainTest.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/it.gabriele.truckflow.domain.locations.LocationDomainTest.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/it.gabriele.truckflow.domain.operational.OperationalDomainTest.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/it.gabriele.truckflow.domain.qualifications.QualificationCatalogTest.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/it.gabriele.truckflow.domain.shipments.ShipmentDomainTest.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/it.gabriele.truckflow.domain.triptemplates.TripTemplateDomainTest.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/it.gabriele.truckflow.domain.users.UserTest.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/it.gabriele.truckflow.domain.vehicles.VehicleDomainTest.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/it/gabriele/truckflow/domain/cargo/CargoDomainTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/it/gabriele/truckflow/domain/locations/LocationDomainTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/it/gabriele/truckflow/domain/operational/OperationalDomainTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/it/gabriele/truckflow/domain/qualifications/QualificationCatalogTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/it/gabriele/truckflow/domain/shipments/ShipmentDomainTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/it/gabriele/truckflow/domain/triptemplates/TripTemplateDomainTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/it/gabriele/truckflow/domain/users/UserTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/it/gabriele/truckflow/domain/vehicles/VehicleDomainTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/truckflow-domain-shipments.patch" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,61 +216,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="5.426904999052019E-5" />
-      <entry key="MS500" value="0.20338382631037427" />
-      <entry key="S2" value="1.7496325951907514" />
-      <entry key="S5" value="2.857568847783426" />
-      <entry key="S10" value="3.474764894877182" />
-      <entry key="S30" value="5.7656018353523555" />
-      <entry key="S60" value="8.11395936521297" />
-      <entry key="M2" value="10.207213204592696" />
-      <entry key="M5" value="17.512286023835976" />
-      <entry key="M10" value="36.44380717950205" />
-      <entry key="M15" value="54.852330273811745" />
-      <entry key="M30" value="103.08873442179765" />
-      <entry key="H1" value="167.32596269976932" />
-      <entry key="H2" value="228.17198184532955" />
-      <entry key="H4" value="289.3509205709214" />
-      <entry key="D1" value="778.7725787782258" />
-      <entry key="W1" value="1272.6386980075579" />
+      <entry key="MS100" value="0.0013254387620843446" />
+      <entry key="MS500" value="0.48772253998676973" />
+      <entry key="S2" value="2.2758130463891426" />
+      <entry key="S5" value="3.183261992566534" />
+      <entry key="S10" value="3.5667167646251405" />
+      <entry key="S30" value="3.8496345285008573" />
+      <entry key="S60" value="3.924051729100422" />
+      <entry key="M2" value="3.9770869620694027" />
+      <entry key="M5" value="6.55097985200989" />
+      <entry key="M10" value="20.549757650394007" />
+      <entry key="M15" value="38.464198677690234" />
+      <entry key="M30" value="91.58679899044378" />
+      <entry key="H1" value="170.66465342029696" />
+      <entry key="H2" value="253.0101741719905" />
+      <entry key="H4" value="332.02954948205615" />
+      <entry key="D1" value="839.5561240686615" />
+      <entry key="W1" value="1343.606660597256" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="1.0" />
       <entry key="MS500" value="1.0" />
-      <entry key="S2" value="1.0000000006854133" />
-      <entry key="S5" value="1.0003867500202184" />
-      <entry key="S10" value="1.037278275845189" />
-      <entry key="S30" value="1.8314952873125505" />
-      <entry key="S60" value="2.8209478856422496" />
-      <entry key="M2" value="3.6984929343421635" />
-      <entry key="M5" value="4.470349778607563" />
-      <entry key="M10" value="4.933412144879311" />
-      <entry key="M15" value="5.201525664474416" />
-      <entry key="M30" value="5.681101289106174" />
-      <entry key="H1" value="6.144648888034028" />
-      <entry key="H2" value="6.51701619578393" />
-      <entry key="H4" value="7.168178545164124" />
-      <entry key="D1" value="21.414400299306614" />
-      <entry key="W1" value="40.52676732017419" />
+      <entry key="S2" value="1.0" />
+      <entry key="S5" value="1.0" />
+      <entry key="S10" value="1.0" />
+      <entry key="S30" value="1.0" />
+      <entry key="S60" value="1.0000000002582337" />
+      <entry key="M2" value="1.0000353861873263" />
+      <entry key="M5" value="1.0439202796809932" />
+      <entry key="M10" value="1.4890003774937977" />
+      <entry key="M15" value="2.1140515216652638" />
+      <entry key="M30" value="3.629176838210488" />
+      <entry key="H1" value="5.18013881821601" />
+      <entry key="H2" value="6.375212234761478" />
+      <entry key="H4" value="7.510018494407681" />
+      <entry key="D1" value="22.07341006098447" />
+      <entry key="W1" value="41.43394273882368" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.0028795198693503327" />
-      <entry key="MS500" value="0.41002612772653735" />
-      <entry key="S2" value="2.3204477568512085" />
-      <entry key="S5" value="3.6433672554344727" />
-      <entry key="S10" value="4.391152420114438" />
-      <entry key="S30" value="7.519971714363041" />
-      <entry key="S60" value="10.874223427864377" />
-      <entry key="M2" value="13.865564412204627" />
-      <entry key="M5" value="21.96303828331928" />
-      <entry key="M10" value="41.36623470186826" />
-      <entry key="M15" value="60.04604194700499" />
-      <entry key="M30" value="108.76546973429461" />
-      <entry key="H1" value="173.46819526298606" />
-      <entry key="H2" value="234.6876928101531" />
-      <entry key="H4" value="296.51837730341475" />
-      <entry key="D1" value="800.1866332632557" />
-      <entry key="W1" value="1313.165374782809" />
+      <entry key="MS100" value="0.010127975466546256" />
+      <entry key="MS500" value="0.7365254858582962" />
+      <entry key="S2" value="2.934433590851105" />
+      <entry key="S5" value="4.024657723304364" />
+      <entry key="S10" value="4.483151160357535" />
+      <entry key="S30" value="4.8207696868460355" />
+      <entry key="S60" value="4.909489002854054" />
+      <entry key="M2" value="4.969806928322716" />
+      <entry key="M5" value="7.591724499327322" />
+      <entry key="M10" value="22.036067265014488" />
+      <entry key="M15" value="40.575440918778455" />
+      <entry key="M30" value="95.21332809414956" />
+      <entry key="H1" value="175.8428124568041" />
+      <entry key="H2" value="259.38413497273996" />
+      <entry key="H4" value="339.538823082674" />
+      <entry key="D1" value="861.6291786458264" />
+      <entry key="W1" value="1385.0405108233508" />
     </decayedShown>
   </component>
   <component name="ProblemsViewState">
@@ -108,37 +285,38 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.ShipmentStatusRulesTest.executor&quot;: &quot;Run&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
-    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
-    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;new-app-enterprise&quot;,
-    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_directory_selection&quot;: &quot;/Users/gabriele/Documents/Corso Chat/truckflow-manager/docs&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/gabriele/Documents/Corso Chat/truckflow-manager&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Main.executor": "Run",
+    "JUnit.ShipmentStatusRulesTest.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
+    "git-widget-placeholder": "new-app-enterprise",
+    "junie.onboarding.icon.badge.shown": "true",
+    "kotlin-language-version-configured": "true",
+    "last_directory_selection": "/Users/gabriele/Documents/Corso Chat/truckflow-manager/docs",
+    "last_opened_file_path": "/Users/gabriele/Documents/Corso Chat/truckflow-manager/src/main/java/it/gabriele/truckflow/domain",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "to.speed.mode.migration.done": "true",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/java/it/gabriele/truckflow/domain" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/docs" />
       <recent name="$PROJECT_DIR$/docs/architecture-decisions" />
@@ -233,7 +411,7 @@
       <updated>1782639963283</updated>
       <workItem from="1782639964295" duration="3208000" />
       <workItem from="1782649190071" duration="75198000" />
-      <workItem from="1782836999575" duration="573000" />
+      <workItem from="1782836999575" duration="1728000" />
     </task>
     <servers />
   </component>

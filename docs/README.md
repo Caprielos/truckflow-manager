@@ -39,7 +39,7 @@ Questa documentazione descrive la versione del progetto in cui il dominio contie
 - dominio cargo per descrivere la merce, le sue caratteristiche e i suoi requisiti di trasporto senza introdurre pianificazione o compatibilità implementata;
 - dominio locations per descrivere luoghi logistici riutilizzabili come depositi, hub, yard, porti, clienti e fornitori;
 - dominio triptemplates per descrivere percorsi tipo e missioni tecniche astratte senza assegnare mezzi, autisti, cargo o orari reali;
-- dominio shipments per descrivere richieste di spedizione, item cargo, tratte logiche, priorità, livelli di servizio, requisiti e riferimenti senza introdurre pianificazione o tracking.
+- dominio shipments per descrivere richieste di spedizione, item cargo, tratte logiche, priorità, livelli di servizio, requisiti e riferimenti senza introdurre pianificazione o tracking, con `domain.shipments` organizzato in sottopackage (`core`, `items`, `legs`, `requirements`, `metrics`, `properties`, `notes`, `references`).
 
 
 ## Nota sul packaging di `domain.vehicles`
@@ -88,3 +88,16 @@ I percorsi astratti sono stati modellati come `TripTemplate`, non come `Trip`, p
 Il dominio shipments rappresenta la richiesta di spedizione: cosa deve essere spedito, quali cargo compongono la spedizione, da quali location parte, verso quali location arriva e quali requisiti devono essere rispettati.
 
 Una shipment non è ancora un viaggio operativo reale. Per questo non contiene veicoli, autisti, orari reali, tracking, documenti operativi o costi. Questi concetti verranno introdotti più avanti nei moduli di planning, dispatching, transport execution, tracking e documents.
+
+Il package `domain.shipments` è stato riorganizzato in sottopackage tematici per migliorare la leggibilità:
+
+- `domain.shipments.core` per l'aggregate root `Shipment`, ID, codice, stato, priorità, livello di servizio e validazioni condivise;
+- `domain.shipments.items` per gli item cargo della spedizione;
+- `domain.shipments.legs` per le tratte logiche della spedizione;
+- `domain.shipments.requirements` per i requisiti di trasporto dichiarati;
+- `domain.shipments.metrics` per peso e volume dichiarati;
+- `domain.shipments.properties` per proprietà generali e temperatura;
+- `domain.shipments.notes` per note interne ed esterne;
+- `domain.shipments.references` per riferimenti cliente, fornitore e interni.
+
+Questa divisione non crea micro-aggregate. `Shipment` rimane l'unico aggregate root; tutti gli altri elementi rimangono entity interne o value object appartenenti alla shipment.

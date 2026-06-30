@@ -68,7 +68,7 @@ Rappresenta percorsi tipo e missioni tecniche astratte. Un `TripTemplate` non è
 
 ### `domain.shipments`
 
-Rappresenta le richieste di spedizione. Una `Shipment` descrive cosa deve essere spedito, quali cargo compongono la spedizione, quali tratte logiche sono richieste, quali requisiti di trasporto devono essere rispettati, quale priorità ha e quale livello di servizio è richiesto. Non assegna ancora veicoli, autisti, orari o tracking.
+Rappresenta le richieste di spedizione. Una `Shipment` descrive cosa deve essere spedito, quali cargo compongono la spedizione, quali tratte logiche sono richieste, quali requisiti di trasporto devono essere rispettati, quale priorità ha e quale livello di servizio è richiesto. Non assegna ancora veicoli, autisti, orari o tracking. Il package è organizzato in sottopackage tematici, ma `Shipment` rimane l'unico aggregate root.
 
 ## 1.4 Perché separare i contesti
 

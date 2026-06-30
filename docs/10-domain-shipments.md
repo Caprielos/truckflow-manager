@@ -2,9 +2,9 @@
 
 ## 10.1 Obiettivo del dominio shipments
 
-Il package `domain.shipments` rappresenta la **spedizione richiesta**, cioè ciò che l'azienda deve trasportare da uno o più luoghi verso uno o più luoghi.
+Il dominio `domain.shipments` rappresenta la **richiesta di spedizione**: cosa deve essere spedito, quali merci compongono la spedizione, da quali luoghi parte, verso quali luoghi arriva e quali requisiti devono essere rispettati.
 
-Una shipment non è una semplice anagrafica come `CargoUnit`, ma non è nemmeno un viaggio operativo reale. È il concetto intermedio che descrive **cosa deve essere spedito**, **quali merci compongono la spedizione**, **quali tratte logiche sono richieste** e **quali requisiti devono essere rispettati**.
+Una `Shipment` non è una semplice anagrafica statica come `CargoUnit`, ma non è nemmeno l'esecuzione reale di un viaggio. È il concetto intermedio che descrive una spedizione da registrare, confermare e poi passare in futuro ai moduli di planning e dispatching.
 
 La distinzione fondamentale è:
 
@@ -71,48 +71,96 @@ claims
 incidents
 ```
 
-## 10.4 Struttura del package
+## 10.4 Struttura del package dopo la riorganizzazione
 
-Il package è stato modellato così:
+Il dominio shipments è stato diviso in sottopackage tematici per rendere il codice più leggibile.
+
+La regola fondamentale è questa:
+
+```text
+Shipment rimane l'unico aggregate root.
+Tutti gli altri componenti sono entity interne o value object appartenenti all'aggregate Shipment.
+La divisione in sottopackage serve solo a organizzare il codice.
+```
+
+La struttura attuale è:
 
 ```text
 domain.shipments
+├─ core
+│  ├─ Shipment
+│  ├─ ShipmentId
+│  ├─ ShipmentCode
+│  ├─ ShipmentStatus
+│  ├─ ShipmentPriority
+│  ├─ ShipmentServiceLevel
+│  └─ ShipmentValidation
+│
+├─ items
+│  ├─ ShipmentItem
+│  ├─ ShipmentItemId
+│  └─ ShipmentUnitOfMeasure
+│
+├─ legs
+│  ├─ ShipmentLeg
+│  ├─ ShipmentLegId
+│  └─ ShipmentLegType
+│
+├─ requirements
+│  ├─ ShipmentRequirementSet
+│  └─ ShipmentTransportRequirement
+│
+├─ metrics
+│  ├─ ShipmentMetrics
+│  ├─ ShipmentVolume
+│  ├─ ShipmentVolumeUnit
+│  ├─ ShipmentWeight
+│  └─ ShipmentWeightUnit
+│
+├─ properties
+│  ├─ ShipmentProperties
+│  └─ ShipmentTemperature
+│
+├─ notes
+│  └─ ShipmentNotes
+│
+└─ references
+   └─ ShipmentReferences
+```
+
+Questa divisione non crea nuovi aggregate, nuovi repository o nuovi bounded context. Serve solo a evitare un package piatto con molte classi tutte insieme.
+
+## 10.5 Perché questa divisione è corretta
+
+La riorganizzazione è corretta perché:
+
+- `Shipment` rimane l'aggregate root;
+- `ShipmentItem` e `ShipmentLeg` rimangono elementi interni della shipment;
+- `ShipmentRequirementSet`, `ShipmentMetrics`, `ShipmentProperties`, `ShipmentTemperature`, `ShipmentReferences` e `ShipmentNotes` rimangono value object dell'aggregate;
+- non vengono creati repository separati come `ShipmentItemRepository` o `ShipmentLegRepository`;
+- non vengono introdotti servizi di sottopackage;
+- la struttura è più navigabile e più adatta a un dominio enterprise.
+
+In DDD, la struttura dei package può aiutare la leggibilità, ma non deve cambiare il confine dell'aggregate.
+
+## 10.6 Package `core`
+
+Il package `domain.shipments.core` contiene il cuore dell'aggregate.
+
+```text
+domain.shipments.core
 ├─ Shipment
 ├─ ShipmentId
 ├─ ShipmentCode
 ├─ ShipmentStatus
 ├─ ShipmentPriority
 ├─ ShipmentServiceLevel
-│
-├─ ShipmentItem
-├─ ShipmentItemId
-├─ ShipmentUnitOfMeasure
-│
-├─ ShipmentLeg
-├─ ShipmentLegId
-├─ ShipmentLegType
-│
-├─ ShipmentProperties
-├─ ShipmentTemperature
-├─ ShipmentMetrics
-├─ ShipmentVolume
-├─ ShipmentVolumeUnit
-├─ ShipmentWeight
-├─ ShipmentWeightUnit
-│
-├─ ShipmentReferences
-├─ ShipmentNotes
-│
-├─ ShipmentRequirementSet
-├─ ShipmentTransportRequirement
 └─ ShipmentValidation
 ```
 
-La struttura è volutamente piatta, come `domain.cargo`, perché il dominio shipment è ricco ma ancora leggibile. Se in futuro dovesse crescere molto, potrà essere diviso in sottopackage come è stato fatto per `domain.vehicles`.
+### `Shipment`
 
-## 10.5 `Shipment`
-
-`Shipment` è l'entità principale.
+`Shipment` è l'aggregate root.
 
 Rappresenta una **richiesta di spedizione** o una **spedizione da organizzare**.
 
@@ -137,7 +185,7 @@ Contiene:
 
 La shipment non contiene oggetti completi di altri domini. Quando deve riferirsi a cargo o location usa solo i rispettivi ID.
 
-## 10.6 `ShipmentId`
+### `ShipmentId`
 
 `ShipmentId` è l'identificatore tecnico della spedizione.
 
@@ -158,7 +206,7 @@ ShipmentId = identificatore tecnico interno
 ShipmentCode = codice aziendale leggibile
 ```
 
-## 10.7 `ShipmentCode`
+### `ShipmentCode`
 
 `ShipmentCode` è il codice leggibile della spedizione.
 
@@ -182,7 +230,7 @@ Questa scelta è coerente con altri codici aziendali già presenti nel progetto:
 
 L'ID tecnico serve al sistema, mentre il codice aziendale serve agli utenti.
 
-## 10.8 `ShipmentStatus`
+### `ShipmentStatus`
 
 `ShipmentStatus` rappresenta lo stato della **richiesta di spedizione**, non lo stato operativo del viaggio.
 
@@ -217,7 +265,7 @@ Non sono stati di `domain.shipments`:
 
 Questi ultimi appartengono all'esecuzione reale del trasporto, al tracking, alla consegna, ai reclami o agli incidenti.
 
-## 10.9 `ShipmentPriority`
+### `ShipmentPriority`
 
 `ShipmentPriority` descrive quanto è importante o urgente una spedizione.
 
@@ -232,7 +280,7 @@ URGENT
 
 La priorità non pianifica il viaggio e non assegna un mezzo. È solo una caratteristica dichiarata della richiesta, utile per il futuro planning.
 
-## 10.10 `ShipmentServiceLevel`
+### `ShipmentServiceLevel`
 
 `ShipmentServiceLevel` descrive il livello di servizio richiesto.
 
@@ -246,17 +294,33 @@ DEDICATED
 TIME_CRITICAL
 ```
 
-Significato:
-
-- `ECONOMY`: servizio economico;
-- `STANDARD`: servizio normale;
-- `EXPRESS`: servizio rapido;
-- `DEDICATED`: servizio dedicato;
-- `TIME_CRITICAL`: spedizione critica rispetto al tempo.
-
 Non è ancora SLA operativo, non calcola penali e non decide il mezzo.
 
-## 10.11 `ShipmentItem`
+### `ShipmentValidation`
+
+`ShipmentValidation` contiene funzioni di validazione condivise usate dai sottopackage del dominio shipments.
+
+È stato spostato in `core` perché gli altri sottopackage devono poter riutilizzare le stesse regole base, come:
+
+- testo obbligatorio;
+- valori non nulli;
+- quantità positive;
+- valori non negativi;
+- normalizzazione delle note;
+- controllo di collezioni senza elementi nulli.
+
+## 10.7 Package `items`
+
+Il package `domain.shipments.items` contiene le righe merce della spedizione.
+
+```text
+domain.shipments.items
+├─ ShipmentItem
+├─ ShipmentItemId
+└─ ShipmentUnitOfMeasure
+```
+
+### `ShipmentItem`
 
 `ShipmentItem` rappresenta una riga merce inclusa nella spedizione.
 
@@ -282,7 +346,20 @@ ShipmentItem -> CargoUnit completo
 
 Questa scelta mantiene separati `domain.cargo` e `domain.shipments`.
 
-## 10.12 `ShipmentUnitOfMeasure`
+### `ShipmentItemId`
+
+`ShipmentItemId` identifica tecnicamente una riga merce dentro la shipment.
+
+Una shipment può avere più item, per esempio:
+
+```text
+Shipment SHP-001
+├─ Item 1: 33 pallet alimentari
+├─ Item 2: 4 pallet farmaceutici
+└─ Item 3: 2 colli fragili
+```
+
+### `ShipmentUnitOfMeasure`
 
 `ShipmentUnitOfMeasure` evita stringhe libere per le unità di misura.
 
@@ -312,7 +389,18 @@ Esempi:
 1 CONTAINER
 ```
 
-## 10.13 `ShipmentLeg`
+## 10.8 Package `legs`
+
+Il package `domain.shipments.legs` contiene le tratte logiche richieste dalla spedizione.
+
+```text
+domain.shipments.legs
+├─ ShipmentLeg
+├─ ShipmentLegId
+└─ ShipmentLegType
+```
+
+### `ShipmentLeg`
 
 `ShipmentLeg` rappresenta una tratta logica richiesta dalla spedizione.
 
@@ -342,7 +430,20 @@ domain.locations
 domain.shipments
 ```
 
-## 10.14 `ShipmentLegType`
+### `ShipmentLegId`
+
+`ShipmentLegId` identifica tecnicamente una tratta della shipment.
+
+Ogni shipment può avere più leg, per esempio:
+
+```text
+Shipment SHP-001
+├─ Leg 1: Pickup da cliente
+├─ Leg 2: Transit verso hub
+└─ Leg 3: Delivery al destinatario
+```
+
+### `ShipmentLegType`
 
 Valori:
 
@@ -359,47 +460,17 @@ Nel dominio `triptemplates` avevamo evitato `PICKUP` e `DELIVERY`, perché il te
 
 In `shipments`, invece, `PICKUP` e `DELIVERY` sono coerenti perché una spedizione può avere punti logici di ritiro e consegna.
 
-## 10.15 `ShipmentProperties`
+## 10.9 Package `requirements`
 
-`ShipmentProperties` contiene proprietà generali della spedizione.
-
-Campi:
-
-- `fragile`;
-- `highValue`;
-- `perishable`;
-- `requiresSeparation`;
-- `stackable`;
-- `notes`.
-
-Queste informazioni possono derivare dai cargo inclusi nella spedizione, ma possono anche essere dichiarate a livello shipment.
-
-Esempio:
+Il package `domain.shipments.requirements` contiene i requisiti dichiarati dalla spedizione.
 
 ```text
-Cargo 1 fragile = true
-Cargo 2 highValue = true
-ShipmentProperties fragile = true, highValue = true
+domain.shipments.requirements
+├─ ShipmentRequirementSet
+└─ ShipmentTransportRequirement
 ```
 
-## 10.16 `ShipmentTemperature`
-
-`ShipmentTemperature` descrive i requisiti termici della spedizione.
-
-Campi:
-
-- `requiredMinCelsius`;
-- `requiredMaxCelsius`;
-- `controlled`;
-- `notes`.
-
-Se `controlled` è `true`, devono essere presenti temperatura minima e massima.
-
-La classe non decide quale veicolo usare. Dice solo che la spedizione richiede determinate condizioni termiche.
-
-La verifica con i veicoli verrà più avanti.
-
-## 10.17 `ShipmentRequirementSet`
+### `ShipmentRequirementSet`
 
 `ShipmentRequirementSet` contiene un set di requisiti di trasporto dichiarati dalla spedizione.
 
@@ -409,7 +480,7 @@ Con i booleani, ogni nuovo requisito richiederebbe un nuovo campo.
 
 Con il set, è sufficiente aggiungere un nuovo valore all'enum `ShipmentTransportRequirement`.
 
-## 10.18 `ShipmentTransportRequirement`
+### `ShipmentTransportRequirement`
 
 Valori principali:
 
@@ -455,7 +526,20 @@ DEDICATED_VEHICLE_REQUIRED
 
 Questa scelta è coerente con il modello del cargo, dove i requisiti sono espressi come set e non come lista di booleani.
 
-## 10.19 `ShipmentMetrics`
+## 10.10 Package `metrics`
+
+Il package `domain.shipments.metrics` contiene le metriche dichiarate o riepilogative della shipment.
+
+```text
+domain.shipments.metrics
+├─ ShipmentMetrics
+├─ ShipmentVolume
+├─ ShipmentVolumeUnit
+├─ ShipmentWeight
+└─ ShipmentWeightUnit
+```
+
+### `ShipmentMetrics`
 
 `ShipmentMetrics` rappresenta metriche dichiarate, riepilogative o stimate della spedizione.
 
@@ -469,7 +553,7 @@ Contiene:
 
 Per ora il dominio le registra come informazioni della shipment.
 
-## 10.20 `ShipmentVolume` e `ShipmentWeight`
+### `ShipmentVolume`
 
 `ShipmentVolume` contiene:
 
@@ -481,6 +565,8 @@ L'unità attuale è:
 ```text
 CUBIC_METER
 ```
+
+### `ShipmentWeight`
 
 `ShipmentWeight` contiene:
 
@@ -497,11 +583,66 @@ TON
 
 Il peso netto non può essere maggiore del peso lordo.
 
-## 10.21 `ShipmentReferences`
+## 10.11 Package `properties`
 
-`ShipmentReferences` contiene riferimenti interni o esterni collegati alla spedizione.
+Il package `domain.shipments.properties` contiene le proprietà generali e i requisiti termici della shipment.
+
+```text
+domain.shipments.properties
+├─ ShipmentProperties
+└─ ShipmentTemperature
+```
+
+### `ShipmentProperties`
+
+`ShipmentProperties` contiene proprietà generali della spedizione.
 
 Campi:
+
+- `fragile`;
+- `highValue`;
+- `perishable`;
+- `requiresSeparation`;
+- `stackable`;
+- `notes`.
+
+Queste informazioni possono derivare dai cargo inclusi nella spedizione, ma possono anche essere dichiarate a livello shipment.
+
+Esempio:
+
+```text
+Cargo 1 fragile = true
+Cargo 2 highValue = true
+ShipmentProperties fragile = true, highValue = true
+```
+
+### `ShipmentTemperature`
+
+`ShipmentTemperature` descrive i requisiti termici della spedizione.
+
+Campi:
+
+- `requiredMinCelsius`;
+- `requiredMaxCelsius`;
+- `controlled`;
+- `notes`.
+
+Se `controlled` è `true`, devono essere presenti temperatura minima e massima.
+
+La classe non decide quale veicolo usare. Dice solo che la spedizione richiede determinate condizioni termiche.
+
+La verifica con i veicoli verrà più avanti.
+
+## 10.12 Package `references`
+
+Il package `domain.shipments.references` contiene i riferimenti interni o esterni collegati alla spedizione.
+
+```text
+domain.shipments.references
+└─ ShipmentReferences
+```
+
+`ShipmentReferences` contiene:
 
 - `customerReference`;
 - `supplierReference`;
@@ -520,7 +661,14 @@ Esempi:
 - numero ordine di acquisto;
 - numero ordine di vendita.
 
-## 10.22 `ShipmentNotes`
+## 10.13 Package `notes`
+
+Il package `domain.shipments.notes` contiene le note interne ed esterne della spedizione.
+
+```text
+domain.shipments.notes
+└─ ShipmentNotes
+```
 
 `ShipmentNotes` separa:
 
@@ -533,7 +681,7 @@ Le note esterne possono essere comunicate a cliente, destinatario o partner.
 
 Questa separazione è utile perché non tutte le note devono uscire dall'azienda.
 
-## 10.23 Relazioni con gli altri domini
+## 10.14 Relazioni con gli altri domini
 
 ### Shipment e Cargo
 
@@ -581,7 +729,34 @@ Il template di percorso potrà essere usato più avanti dal planning per suggeri
 
 Per ora la shipment ha le sue `ShipmentLeg`.
 
-## 10.24 Invarianti principali
+## 10.15 Linee guida DDD sui sottopackage
+
+La divisione in sottopackage non deve essere interpretata come divisione in micro-domini.
+
+Regole:
+
+- non creare `ShipmentItemRepository`;
+- non creare `ShipmentLegRepository`;
+- non creare servizi separati solo perché esiste un sottopackage;
+- non trattare `items`, `legs`, `metrics`, `requirements`, `properties`, `notes` o `references` come aggregate indipendenti;
+- usare `Shipment` come unico aggregate root;
+- salvare, caricare e modificare la shipment come aggregate unitario.
+
+Il repository futuro sarà concettualmente:
+
+```text
+ShipmentRepository
+```
+
+non:
+
+```text
+ShipmentItemRepository
+ShipmentLegRepository
+ShipmentMetricsRepository
+```
+
+## 10.16 Invarianti principali
 
 ### Shipment
 
@@ -627,7 +802,7 @@ Per ora la shipment ha le sue `ShipmentLeg`.
 
 - se `requiresSeparation = true`, la shipment deve dichiarare `SEPARATION_REQUIRED`.
 
-## 10.25 Esempio completo
+## 10.17 Esempio completo
 
 ```text
 Shipment
@@ -693,7 +868,7 @@ Shipment
    └─ externalNotes: Consegnare in area refrigerata
 ```
 
-## 10.26 Perché questa scelta è coerente con DDD
+## 10.18 Perché questa scelta è coerente con DDD
 
 `domain.shipments` è coerente con il resto del progetto perché:
 
@@ -706,7 +881,8 @@ Shipment
 - non gestisce documenti operativi;
 - non implementa compatibilità veicolo-cargo;
 - usa value object espliciti;
-- protegge invarianti semplici ma importanti.
+- protegge invarianti semplici ma importanti;
+- organizza il package in sottopackage senza spezzare l'aggregate root.
 
 La separazione finale è:
 

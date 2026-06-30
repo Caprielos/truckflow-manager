@@ -362,3 +362,46 @@ Tuttavia non pianificano nulla.
 Una shipment urgente o time-critical non assegna automaticamente un mezzo, un autista o una finestra temporale.
 
 Queste informazioni saranno usate più avanti dai moduli di planning e dispatching, ma nel dominio puro restano solo caratteristiche dichiarate della richiesta.
+
+## 6.25 Decisione: organizzare `domain.shipments` in sottopackage senza spezzare l'aggregate
+
+Il dominio `domain.shipments` è stato riorganizzato in sottopackage tematici:
+
+```text
+domain.shipments.core
+domain.shipments.items
+domain.shipments.legs
+domain.shipments.requirements
+domain.shipments.metrics
+domain.shipments.properties
+domain.shipments.notes
+domain.shipments.references
+```
+
+Questa scelta è stata fatta per migliorare la leggibilità del codice, perché il dominio shipment contiene molte classi tra aggregate root, entity interne e value object.
+
+La decisione architetturale importante è che questa divisione **non crea nuovi aggregate**.
+
+`Shipment` rimane l'unico aggregate root.
+
+Gli altri elementi rimangono interni all'aggregate:
+
+- `ShipmentItem` e `ShipmentLeg` sono entity interne della shipment;
+- `ShipmentRequirementSet`, `ShipmentMetrics`, `ShipmentProperties`, `ShipmentTemperature`, `ShipmentReferences` e `ShipmentNotes` sono value object della shipment;
+- i sottopackage servono solo per organizzare il codice.
+
+Di conseguenza, in futuro non dovranno nascere repository separati come:
+
+```text
+ShipmentItemRepository
+ShipmentLegRepository
+ShipmentMetricsRepository
+```
+
+Il repository corretto sarà concettualmente uno solo:
+
+```text
+ShipmentRepository
+```
+
+Questa scelta mantiene il modello DDD pulito: organizzazione interna più leggibile, ma confine dell'aggregate invariato.
