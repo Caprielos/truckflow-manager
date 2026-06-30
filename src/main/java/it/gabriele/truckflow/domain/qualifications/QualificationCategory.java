@@ -1,6 +1,6 @@
-package it.gabriele.truckflow.domain.abilitazioni;
+package it.gabriele.truckflow.domain.qualifications;
 
-public enum CategoriaAbilitazione {
+public enum QualificationCategory {
   PATENTI_GUIDA,
   CQC,
   ADR,
