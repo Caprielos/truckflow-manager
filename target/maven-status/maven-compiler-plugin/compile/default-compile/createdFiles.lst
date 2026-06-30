@@ -1,3 +1,12 @@
+it/gabriele/truckflow/domain/users/UserMetadata.class
 it/gabriele/truckflow/domain/qualifications/QualificationCatalog.class
-it/gabriele/truckflow/domain/qualifications/QualificationCategory.class
+it/gabriele/truckflow/domain/users/UserPermissions.class
+it/gabriele/truckflow/domain/users/UserRole.class
+it/gabriele/truckflow/domain/users/User.class
+it/gabriele/truckflow/domain/users/UserContact.class
 it/gabriele/truckflow/domain/qualifications/Qualification.class
+it/gabriele/truckflow/domain/users/UserStatus.class
+it/gabriele/truckflow/domain/qualifications/QualificationCategory.class
+it/gabriele/truckflow/domain/users/UserPreferences.class
+it/gabriele/truckflow/domain/users/UserPermission.class
+it/gabriele/truckflow/domain/users/UserAddress.class

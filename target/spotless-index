@@ -1,5 +1,15 @@
 MAc4vFFOHoWZQuLjNeMMEnAuXKZyjUdGr+009b83T+Y=
-src/main/java/it/gabriele/truckflow/domain/qualifications/Qualification.java 2026-06-30T11:16:08.215476191Z
-src/main/java/it/gabriele/truckflow/domain/qualifications/QualificationCatalog.java 2026-06-30T11:16:08.214868778Z
-src/main/java/it/gabriele/truckflow/domain/qualifications/QualificationCategory.java 2026-06-30T11:16:08.215103693Z
-src/test/java/it/gabriele/truckflow/domain/qualifications/QualificationCatalogTest.java 2026-06-30T11:16:08.220308365Z
+src/main/java/it/gabriele/truckflow/domain/qualifications/Qualification.java 2026-06-30T11:26:59.630994099Z
+src/main/java/it/gabriele/truckflow/domain/qualifications/QualificationCatalog.java 2026-06-30T11:23:48.323231049Z
+src/main/java/it/gabriele/truckflow/domain/qualifications/QualificationCategory.java 2026-06-30T11:23:50.842759425Z
+src/main/java/it/gabriele/truckflow/domain/users/User.java 2026-06-30T12:35:55.503586309Z
+src/main/java/it/gabriele/truckflow/domain/users/UserAddress.java 2026-06-30T12:34:37.891812941Z
+src/main/java/it/gabriele/truckflow/domain/users/UserContact.java 2026-06-30T12:34:37.889530624Z
+src/main/java/it/gabriele/truckflow/domain/users/UserMetadata.java 2026-06-30T12:34:40.015364094Z
+src/main/java/it/gabriele/truckflow/domain/users/UserPermission.java 2026-06-30T12:34:37.882167514Z
+src/main/java/it/gabriele/truckflow/domain/users/UserPermissions.java 2026-06-30T12:34:37.887164518Z
+src/main/java/it/gabriele/truckflow/domain/users/UserPreferences.java 2026-06-30T12:34:37.896214449Z
+src/main/java/it/gabriele/truckflow/domain/users/UserRole.java 2026-06-30T12:34:37.879555284Z
+src/main/java/it/gabriele/truckflow/domain/users/UserStatus.java 2026-06-30T12:34:37.884422288Z
+src/test/java/it/gabriele/truckflow/domain/qualifications/QualificationCatalogTest.java 2026-06-30T11:26:57.073563957Z
+src/test/java/it/gabriele/truckflow/domain/users/UserTest.java 2026-06-30T12:34:37.901342076Z

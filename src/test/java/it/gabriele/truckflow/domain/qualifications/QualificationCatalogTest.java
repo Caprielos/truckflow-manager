@@ -51,7 +51,7 @@ class QualificationCatalogTest {
   }
 
   @Test
-  void filtersFoodAndPharmaceuticalByCategory() {
+  void filtersFoodAndPharmaceuticalsByCategory() {
     var qualifications =
         QualificationCatalog.byCategory(QualificationCategory.FOOD_PHARMACEUTICALS);
 
@@ -107,7 +107,7 @@ class QualificationCatalogTest {
   }
 
   @Test
-  void filtersPortAndAirportByCategory() {
+  void filtersPortsAndAirportsByCategory() {
     var qualifications = QualificationCatalog.byCategory(QualificationCategory.PORTS_AND_AIRPORTS);
 
     assertEquals(6, qualifications.size());
@@ -137,6 +137,23 @@ class QualificationCatalogTest {
     var qualification = QualificationCatalog.findByCode("DRIVING_LICENSE_C");
 
     assertTrue(qualification.isPresent());
-    assertEquals("Driving License C", qualification.orElseThrow().nameValue());
+    assertEquals("Driving License C", qualification.orElseThrow().displayName());
+  }
+
+  @Test
+  void exposesCategoryMetadata() {
+    assertEquals("Driving Licenses", QualificationCategory.DRIVING_LICENSES.displayName());
+    assertEquals("DRIVING_LICENSES", QualificationCategory.DRIVING_LICENSES.code());
+  }
+
+  @Test
+  void exposesQualificationMetadata() {
+    var qualification = Qualification.DRIVING_LICENSE_C;
+
+    assertEquals("DRIVING_LICENSE_C", qualification.code());
+    assertEquals("Driving License C", qualification.displayName());
+    assertEquals(QualificationCategory.DRIVING_LICENSES, qualification.category());
+    assertTrue(qualification.shortDescription().startsWith("License for"));
+    assertTrue(qualification.longDescription().contains("heavy goods vehicles"));
   }
 }

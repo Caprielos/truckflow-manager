@@ -1,3 +1,12 @@
 /Users/gabriele/Documents/Corso Chat/truckflow-manager/src/main/java/it/gabriele/truckflow/domain/qualifications/Qualification.java
 /Users/gabriele/Documents/Corso Chat/truckflow-manager/src/main/java/it/gabriele/truckflow/domain/qualifications/QualificationCatalog.java
 /Users/gabriele/Documents/Corso Chat/truckflow-manager/src/main/java/it/gabriele/truckflow/domain/qualifications/QualificationCategory.java
+/Users/gabriele/Documents/Corso Chat/truckflow-manager/src/main/java/it/gabriele/truckflow/domain/users/User.java
+/Users/gabriele/Documents/Corso Chat/truckflow-manager/src/main/java/it/gabriele/truckflow/domain/users/UserAddress.java
+/Users/gabriele/Documents/Corso Chat/truckflow-manager/src/main/java/it/gabriele/truckflow/domain/users/UserContact.java
+/Users/gabriele/Documents/Corso Chat/truckflow-manager/src/main/java/it/gabriele/truckflow/domain/users/UserMetadata.java
+/Users/gabriele/Documents/Corso Chat/truckflow-manager/src/main/java/it/gabriele/truckflow/domain/users/UserPermission.java
+/Users/gabriele/Documents/Corso Chat/truckflow-manager/src/main/java/it/gabriele/truckflow/domain/users/UserPermissions.java
+/Users/gabriele/Documents/Corso Chat/truckflow-manager/src/main/java/it/gabriele/truckflow/domain/users/UserPreferences.java
+/Users/gabriele/Documents/Corso Chat/truckflow-manager/src/main/java/it/gabriele/truckflow/domain/users/UserRole.java
+/Users/gabriele/Documents/Corso Chat/truckflow-manager/src/main/java/it/gabriele/truckflow/domain/users/UserStatus.java
