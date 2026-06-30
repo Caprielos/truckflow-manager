@@ -10,7 +10,10 @@ public record UserPreferences(String language, String theme, boolean notificatio
   private static final Set<String> SUPPORTED_THEMES = Set.of("light", "dark");
 
   public UserPreferences {
-    language = normalize(language).isBlank() ? DEFAULT_LANGUAGE : normalize(language).toLowerCase();
+    language =
+        normalize(language).isBlank()
+            ? DEFAULT_LANGUAGE
+            : normalize(language).toLowerCase(Locale.ROOT);
     theme = normalize(theme).isBlank() ? DEFAULT_THEME : normalize(theme).toLowerCase(Locale.ROOT);
 
     if (!SUPPORTED_THEMES.contains(theme)) {

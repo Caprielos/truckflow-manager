@@ -1,6 +1,8 @@
 package it.gabriele.truckflow.domain.users;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Set;
@@ -9,42 +11,28 @@ import org.junit.jupiter.api.Test;
 class UserTest {
 
   @Test
-  void createsDomainUserWithRolesAndPermissions() {
-    User user =
-        new User(
-            null,
-            "dispatcher.one",
-            "hashed-password",
-            Set.of(UserRole.DISPATCHER),
-            UserPermissions.of(UserPermission.VIEW_TRIPS),
-            UserStatus.ACTIVE,
-            new UserContact("dispatcher@example.com", "", "+393331112233"),
-            new UserAddress("Main Street", "10", "00100", "Rome", "RM", "Italy"),
-            UserMetadata.createdNow("system"),
-            UserPreferences.defaults(),
-            "Main dispatcher user");
+  void createsDomainUserWithRolesPermissionsProfileAndPreferences() {
+    User user = createUser(UserRole.DISPATCHER, UserPermission.VIEW_TRIPS);
 
     assertTrue(user.isActive());
+    assertTrue(user.canLogin());
     assertTrue(user.hasRole(UserRole.DISPATCHER));
     assertTrue(user.hasPermission(UserPermission.VIEW_TRIPS));
     assertFalse(user.hasPermission(UserPermission.MANAGE_TRIPS));
+    assertEquals("Mario Rossi", user.profile().fullName());
+    assertEquals("en", user.preferences().language());
+  }
+
+  @Test
+  void normalizesUsername() {
+    Username username = new Username("  Dispatcher.One  ");
+
+    assertEquals("dispatcher.one", username.value());
   }
 
   @Test
   void grantsAndRevokesPermissionsSafely() {
-    User user =
-        new User(
-            null,
-            "manager.one",
-            "hashed-password",
-            Set.of(UserRole.MANAGER),
-            UserPermissions.empty(),
-            UserStatus.ACTIVE,
-            new UserContact("manager@example.com", "", ""),
-            new UserAddress("Main Street", "20", "00100", "Rome", "RM", "Italy"),
-            UserMetadata.createdNow("system"),
-            UserPreferences.defaults(),
-            "");
+    User user = createUser(UserRole.MANAGER);
 
     user.grantPermission(UserPermission.VIEW_REPORTS, "admin");
     assertTrue(user.hasPermission(UserPermission.VIEW_REPORTS));
@@ -54,28 +42,87 @@ class UserTest {
   }
 
   @Test
+  void checksMultipleRoles() {
+    User user = createUser(Set.of(UserRole.ADMIN, UserRole.MANAGER), UserPermissions.empty());
+
+    assertTrue(user.hasAnyRole(Set.of(UserRole.MANAGER, UserRole.DISPATCHER)));
+    assertTrue(user.hasAllRoles(Set.of(UserRole.ADMIN, UserRole.MANAGER)));
+    assertFalse(user.hasAllRoles(Set.of(UserRole.ADMIN, UserRole.DISPATCHER)));
+  }
+
+  @Test
   void changesAccountStatus() {
-    User user =
-        new User(
-            null,
-            "mechanic.one",
-            "hashed-password",
-            Set.of(UserRole.MECHANIC),
-            UserPermissions.empty(),
-            UserStatus.ACTIVE,
-            new UserContact("mechanic@example.com", "", ""),
-            new UserAddress("Main Street", "30", "00100", "Rome", "RM", "Italy"),
-            UserMetadata.createdNow("system"),
-            UserPreferences.defaults(),
-            "");
+    User user = createUser(UserRole.MECHANIC);
 
     user.suspend("admin");
-    assertFalse(user.isActive());
+    assertTrue(user.isSuspended());
+    assertFalse(user.canLogin());
 
     user.activate("admin");
     assertTrue(user.isActive());
 
     user.disable("admin");
-    assertFalse(user.isActive());
+    assertTrue(user.isDisabled());
+    assertFalse(user.canLogin());
+  }
+
+  @Test
+  void doesNotRemoveLastRole() {
+    User user = createUser(UserRole.DISPATCHER);
+
+    assertThrows(IllegalStateException.class, () -> user.removeRole(UserRole.DISPATCHER, "admin"));
+  }
+
+  @Test
+  void disabledUserCannotBeSuspendedOrActivatedWithStandardMethod() {
+    User user = createUser(UserRole.DISPATCHER);
+
+    user.disable("admin");
+
+    assertThrows(IllegalStateException.class, () -> user.suspend("admin"));
+    assertThrows(IllegalStateException.class, () -> user.activate("admin"));
+
+    user.reactivateDisabled("admin");
+    assertTrue(user.isActive());
+  }
+
+  @Test
+  void updatesMetadataWhenUserChanges() {
+    User user = createUser(UserRole.DISPATCHER);
+    var previousUpdatedAt = user.metadata().updatedAt();
+
+    user.updateNotes("Updated note", "admin");
+
+    assertTrue(user.metadata().updatedAt().isAfter(previousUpdatedAt));
+    assertEquals("admin", user.metadata().updatedBy());
+  }
+
+  @Test
+  void validatesEmailWhenPresent() {
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> new UserContact("invalid-email", "", "+393331112233"));
+  }
+
+  private static User createUser(UserRole role, UserPermission... permissions) {
+    return createUser(Set.of(role), UserPermissions.of(permissions));
+  }
+
+  private static User createUser(Set<UserRole> roles, UserPermissions permissions) {
+    return new User(
+        UserId.random(),
+        new Username("mario.rossi"),
+        new UserPasswordHash("hashed-password"),
+        roles,
+        permissions,
+        UserStatus.ACTIVE,
+        new UserProfile(
+            "Mario",
+            "Rossi",
+            new UserContact("mario.rossi@example.com", "", "+393331112233"),
+            new UserAddress("Main Street", "10", "00100", "Rome", "RM", "Italy")),
+        UserMetadata.createdNow("system"),
+        UserPreferences.defaults(),
+        "Test user");
   }
 }
