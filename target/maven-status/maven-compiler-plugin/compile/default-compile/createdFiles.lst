@@ -1,15 +1,3 @@
 it/gabriele/truckflow/domain/qualifications/QualificationCatalog.class
-it/gabriele/truckflow/infrastructure/web/rest/AutistaController.class
-it/gabriele/truckflow/infrastructure/web/rest/AutistaController$CreaAutistaRequest.class
-it/gabriele/truckflow/domain/qualifications/Qualification.class
-it/gabriele/truckflow/domain/documenti/Documento.class
-it/gabriele/truckflow/infrastructure/persistence/jpa/AutistaEntity.class
-it/gabriele/truckflow/application/autisti/AutistaService.class
-it/gabriele/truckflow/domain/mezzi/Mezzo.class
-it/gabriele/truckflow/domain/autisti/Autista.class
-it/gabriele/truckflow/domain/manutenzione/ManutenzioneItem.class
-it/gabriele/truckflow/TruckflowManagerApplication.class
-it/gabriele/truckflow/domain/autisti/Patente.class
-it/gabriele/truckflow/domain/scadenze/Scadenza.class
-it/gabriele/truckflow/config/WebConfig.class
 it/gabriele/truckflow/domain/qualifications/QualificationCategory.class
+it/gabriele/truckflow/domain/qualifications/Qualification.class
