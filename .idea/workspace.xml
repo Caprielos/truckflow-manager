@@ -6,18 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="f285ebd6-ca31-4d09-87c6-2a0cecd930e7" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/gabriele/truckflow/domain/users/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/gabriele/truckflow/domain/users/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/gabriele/truckflow/domain/users/UserContact.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/gabriele/truckflow/domain/users/UserContact.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/gabriele/truckflow/domain/users/UserPermissions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/gabriele/truckflow/domain/users/UserPermissions.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/gabriele/truckflow/domain/users/UserPreferences.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/gabriele/truckflow/domain/users/UserPreferences.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/it/gabriele/truckflow/domain/users/UserTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/gabriele/truckflow/domain/users/UserTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/spotless-index" beforeDir="false" afterPath="$PROJECT_DIR$/target/spotless-index" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-it.gabriele.truckflow.domain.qualifications.QualificationCatalogTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-it.gabriele.truckflow.domain.qualifications.QualificationCatalogTest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-it.gabriele.truckflow.domain.users.UserTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-it.gabriele.truckflow.domain.users.UserTest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/it.gabriele.truckflow.domain.qualifications.QualificationCatalogTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/it.gabriele.truckflow.domain.qualifications.QualificationCatalogTest.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/it.gabriele.truckflow.domain.users.UserTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/it.gabriele.truckflow.domain.users.UserTest.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -169,7 +157,7 @@
       <option name="presentableId" value="Default" />
       <updated>1782639963283</updated>
       <workItem from="1782639964295" duration="3208000" />
-      <workItem from="1782649190071" duration="67808000" />
+      <workItem from="1782649190071" duration="69574000" />
     </task>
     <servers />
   </component>
