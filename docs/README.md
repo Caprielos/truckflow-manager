@@ -27,7 +27,22 @@ Questa documentazione descrive la versione del progetto in cui il dominio contie
 - account applicativi e autorizzazioni di base;
 - catalogo statico delle qualificazioni e abilitazioni;
 - figure operative reali dell’azienda;
-- unità veicolo, allestimenti, combinazioni, schede tecniche, capacità, agganci e ruoli operativi dei mezzi.
+- unità veicolo, allestimenti, combinazioni, schede tecniche, capacità, agganci e ruoli operativi dei mezzi, con `domain.vehicles` organizzato in sottopackage (`unit`, `combination`, `coupling`, `specification`, `body`, `operation`, `common`).
+
+
+## Nota sul packaging di `domain.vehicles`
+
+Il dominio veicoli è stato riorganizzato in sottopackage per renderlo più leggibile:
+
+- `domain.vehicles.unit` per le unità fisiche;
+- `domain.vehicles.combination` per bilici, autotreni e mezzi singoli operativi;
+- `domain.vehicles.coupling` per agganci e traino;
+- `domain.vehicles.specification` per le schede tecniche;
+- `domain.vehicles.body` per allestimenti e profili di allestimento;
+- `domain.vehicles.operation` per capacità e ruoli operativi;
+- `domain.vehicles.common` per validazioni condivise.
+
+Questa divisione non è per tipo di mezzo, ma per concetto di dominio. È stata scelta perché molte classi sono condivise tra camion, trattori, rimorchi, semirimorchi e mezzi di magazzino.
 
 ## Cosa significa “domain puro”
 

@@ -113,7 +113,26 @@ Esempi:
 
 Questa scelta riduce l’accoppiamento e rende il dominio più modulare.
 
-## 6.12 Cosa potrà essere aggiunto in futuro
+
+## 6.12 Decisione: dividere `domain.vehicles` in sottopackage per concetto
+
+Il dominio veicoli è stato riorganizzato in sottopackage perché era diventato il package più ricco del progetto.
+
+La divisione scelta è per concetto di dominio:
+
+- `unit` per le unità fisiche;
+- `combination` per i complessi veicolari;
+- `coupling` per agganci e traino;
+- `specification` per la scheda tecnica;
+- `body` per allestimenti e profili;
+- `operation` per capacità e ruoli operativi;
+- `common` per validazioni comuni.
+
+Non è stata scelta una divisione per tipo di mezzo, come `truck`, `trailer` o `van`, perché avrebbe duplicato concetti condivisi. Per esempio, assi, pesi, pneumatici, capacità, allestimenti e agganci sono concetti trasversali.
+
+Questa scelta rende il dominio più leggibile e più facile da estendere senza perdere coerenza.
+
+## 6.13 Cosa potrà essere aggiunto in futuro
 
 Il dominio attuale è una base.
 
@@ -137,7 +156,7 @@ In futuro si potranno aggiungere:
 
 Queste estensioni dovranno rispettare la separazione già definita.
 
-## 6.13 Conclusione
+## 6.14 Conclusione
 
 Le scelte fatte rendono TruckFlow Manager più ordinato e più vicino a un gestionale enterprise reale.
 
