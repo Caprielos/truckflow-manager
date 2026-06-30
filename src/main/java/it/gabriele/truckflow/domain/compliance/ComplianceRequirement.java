@@ -126,14 +126,21 @@ public final class ComplianceRequirement {
   }
 
   public void reclassify(ComplianceCategory category, ComplianceRequirementType type) {
-    this.category = ComplianceValidation.requireNonNull(category, "category");
-    this.type = ComplianceValidation.requireNonNull(type, "type");
+    ComplianceCategory updatedCategory = ComplianceValidation.requireNonNull(category, "category");
+    ComplianceRequirementType updatedType = ComplianceValidation.requireNonNull(type, "type");
+
+    this.category = updatedCategory;
+    this.type = updatedType;
   }
 
   public void changeImportance(
       ComplianceObligationLevel obligationLevel, ComplianceSeverity severity) {
-    this.obligationLevel = ComplianceValidation.requireNonNull(obligationLevel, "obligationLevel");
-    this.severity = ComplianceValidation.requireNonNull(severity, "severity");
+    ComplianceObligationLevel updatedObligationLevel =
+        ComplianceValidation.requireNonNull(obligationLevel, "obligationLevel");
+    ComplianceSeverity updatedSeverity = ComplianceValidation.requireNonNull(severity, "severity");
+
+    this.obligationLevel = updatedObligationLevel;
+    this.severity = updatedSeverity;
   }
 
   public void replaceTarget(ComplianceTarget target) {

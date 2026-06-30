@@ -84,50 +84,73 @@ public final class Dispatcher {
 
   public void addScope(OperationalScope scope, String updatedBy) {
     requireNonNull(scope, "scope");
+    String validatedUpdatedBy = requireText(updatedBy, "updatedBy");
 
     var updatedScopes = new HashSet<>(scopes);
     updatedScopes.add(scope);
-    scopes = validateScopes(updatedScopes);
-    touch(updatedBy);
+    Set<OperationalScope> validatedScopes = validateScopes(updatedScopes);
+
+    this.scopes = validatedScopes;
+    touch(validatedUpdatedBy);
   }
 
   public void removeScope(OperationalScope scope, String updatedBy) {
     requireNonNull(scope, "scope");
+    String validatedUpdatedBy = requireText(updatedBy, "updatedBy");
 
     var updatedScopes = new HashSet<>(scopes);
     updatedScopes.remove(scope);
-    scopes = validateScopes(updatedScopes);
-    ensureActiveHasScopes();
-    touch(updatedBy);
+    Set<OperationalScope> validatedScopes = validateScopes(updatedScopes);
+    ensureActiveHasScopes(status, validatedScopes);
+
+    this.scopes = validatedScopes;
+    touch(validatedUpdatedBy);
   }
 
   public void activate(String updatedBy) {
-    status = OperationalStatus.ACTIVE;
-    ensureActiveHasScopes();
-    touch(updatedBy);
+    String validatedUpdatedBy = requireText(updatedBy, "updatedBy");
+    ensureActiveHasScopes(OperationalStatus.ACTIVE, scopes);
+
+    this.status = OperationalStatus.ACTIVE;
+    touch(validatedUpdatedBy);
   }
 
   public void suspend(String updatedBy) {
-    status = OperationalStatus.SUSPENDED;
-    touch(updatedBy);
+    String validatedUpdatedBy = requireText(updatedBy, "updatedBy");
+
+    this.status = OperationalStatus.SUSPENDED;
+    touch(validatedUpdatedBy);
   }
 
   public void markNotEligible(String updatedBy) {
-    status = OperationalStatus.NOT_ELIGIBLE;
-    touch(updatedBy);
+    String validatedUpdatedBy = requireText(updatedBy, "updatedBy");
+
+    this.status = OperationalStatus.NOT_ELIGIBLE;
+    touch(validatedUpdatedBy);
   }
 
   public void updateProfile(OperationalProfile profile, String updatedBy) {
-    this.profile = requireNonNull(profile, "profile");
-    touch(updatedBy);
+    OperationalProfile updatedProfile = requireNonNull(profile, "profile");
+    String validatedUpdatedBy = requireText(updatedBy, "updatedBy");
+
+    this.profile = updatedProfile;
+    touch(validatedUpdatedBy);
   }
 
   public void updateNotes(String notes, String updatedBy) {
-    this.notes = normalize(notes);
-    touch(updatedBy);
+    String updatedNotes = normalize(notes);
+    String validatedUpdatedBy = requireText(updatedBy, "updatedBy");
+
+    this.notes = updatedNotes;
+    touch(validatedUpdatedBy);
   }
 
   private void ensureActiveHasScopes() {
+    ensureActiveHasScopes(status, scopes);
+  }
+
+  private static void ensureActiveHasScopes(
+      OperationalStatus status, Set<OperationalScope> scopes) {
     if (status == OperationalStatus.ACTIVE && scopes.isEmpty()) {
       throw new IllegalStateException("An active dispatcher must have at least one scope.");
     }

@@ -196,6 +196,26 @@ class TripTemplateDomainTest {
     assertFalse(template.isContinuous());
   }
 
+  @Test
+  void failedActivateDoesNotMutateSuspendedTemplate() {
+    var template =
+        new TripTemplate(
+            null,
+            TripTemplateCode.of("EMPTY-SUSPENDED"),
+            "Empty suspended template",
+            "Template without segments",
+            TripTemplateType.LINE_HAUL,
+            TripTemplateStatus.SUSPENDED,
+            List.of(),
+            RouteSpecification.empty(),
+            "");
+
+    assertThrows(IllegalArgumentException.class, template::activate);
+
+    assertEquals(TripTemplateStatus.SUSPENDED, template.status());
+    assertEquals(0, template.segmentCount());
+  }
+
   private static TripTemplate milanRomeTemplate() {
     var milan = LocationDomainTest.milanDepot();
     var bologna = LocationDomainTest.bolognaHub();

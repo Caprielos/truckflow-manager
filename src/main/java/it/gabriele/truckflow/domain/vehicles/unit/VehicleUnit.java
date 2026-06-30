@@ -149,20 +149,26 @@ public final class VehicleUnit {
 
   public void replaceTechnicalSpecification(
       VehicleTechnicalSpecification technicalSpecification, String notes) {
-    this.technicalSpecification =
+    VehicleTechnicalSpecification updatedTechnicalSpecification =
         VehicleValidation.requireNonNull(technicalSpecification, "technicalSpecification");
-    this.notes = VehicleValidation.normalize(notes);
-    validateConsistency();
+    String updatedNotes = VehicleValidation.normalize(notes);
+
+    validateConsistency(bodyProfile, couplingProfile);
+    this.technicalSpecification = updatedTechnicalSpecification;
+    this.notes = updatedNotes;
   }
 
   public void replaceBodyProfile(VehicleBodyProfile bodyProfile) {
+    validateConsistency(bodyProfile, couplingProfile);
     this.bodyProfile = bodyProfile;
-    validateConsistency();
   }
 
   public void replaceCouplingProfile(CouplingProfile couplingProfile) {
-    this.couplingProfile = couplingProfile == null ? CouplingProfile.none() : couplingProfile;
-    validateConsistency();
+    CouplingProfile updatedCouplingProfile =
+        couplingProfile == null ? CouplingProfile.none() : couplingProfile;
+
+    validateConsistency(bodyProfile, updatedCouplingProfile);
+    this.couplingProfile = updatedCouplingProfile;
   }
 
   public void addCapability(VehicleCapability capability) {
@@ -196,6 +202,11 @@ public final class VehicleUnit {
   }
 
   private void validateConsistency() {
+    validateConsistency(bodyProfile, couplingProfile);
+  }
+
+  private void validateConsistency(
+      VehicleBodyProfile candidateBodyProfile, CouplingProfile candidateCouplingProfile) {
     if (isTrailerUnitType(unitType) && powerSource != PowerSource.NONE) {
       throw new IllegalArgumentException("Trailers must have power source NONE.");
     }
@@ -204,19 +215,19 @@ public final class VehicleUnit {
       throw new IllegalArgumentException("Tractor units must have body type NONE.");
     }
 
-    if (unitType == VehicleUnitType.TRACTOR_UNIT && !couplingProfile.canTow()) {
+    if (unitType == VehicleUnitType.TRACTOR_UNIT && !candidateCouplingProfile.canTow()) {
       throw new IllegalArgumentException("Tractor units must be able to tow.");
     }
 
-    if (unitType == VehicleUnitType.SEMI_TRAILER && !couplingProfile.canBeTowed()) {
+    if (unitType == VehicleUnitType.SEMI_TRAILER && !candidateCouplingProfile.canBeTowed()) {
       throw new IllegalArgumentException("Semi-trailers must be able to be towed.");
     }
 
-    if (isDrawbarTrailer(unitType) && !couplingProfile.canBeTowed()) {
+    if (isDrawbarTrailer(unitType) && !candidateCouplingProfile.canBeTowed()) {
       throw new IllegalArgumentException("Drawbar trailers must be able to be towed.");
     }
 
-    if (bodyProfile != null && bodyProfile.bodyType() != bodyType) {
+    if (candidateBodyProfile != null && candidateBodyProfile.bodyType() != bodyType) {
       throw new IllegalArgumentException("Body profile must match vehicle body type.");
     }
   }

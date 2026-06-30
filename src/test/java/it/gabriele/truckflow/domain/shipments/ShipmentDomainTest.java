@@ -236,6 +236,34 @@ class ShipmentDomainTest {
     assertEquals(0, shipment.legCount());
   }
 
+  @Test
+  void failedConfirmDoesNotMutateDraftShipment() {
+    var shipment =
+        new Shipment(
+            null,
+            ShipmentCode.of("SHP-ATOMIC"),
+            "Atomic shipment",
+            "Draft without items and legs",
+            ShipmentStatus.DRAFT,
+            ShipmentPriority.NORMAL,
+            ShipmentServiceLevel.STANDARD,
+            List.of(),
+            List.of(),
+            ShipmentProperties.standard(),
+            ShipmentTemperature.uncontrolled(),
+            ShipmentRequirementSet.none(),
+            ShipmentMetrics.empty(),
+            ShipmentReferences.empty(),
+            ShipmentNotes.empty(),
+            "");
+
+    assertThrows(IllegalArgumentException.class, shipment::confirm);
+
+    assertEquals(ShipmentStatus.DRAFT, shipment.status());
+    assertEquals(0, shipment.itemCount());
+    assertEquals(0, shipment.legCount());
+  }
+
   private static Shipment confirmedFoodShipment() {
     var origin = LocationId.random();
     var hub = LocationId.random();

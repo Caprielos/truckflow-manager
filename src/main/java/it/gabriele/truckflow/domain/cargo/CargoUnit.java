@@ -152,8 +152,10 @@ public final class CargoUnit {
   }
 
   public void replaceCategories(Set<CargoCategory> categories) {
-    this.categories = validateCategories(categories);
-    validateConsistency();
+    Set<CargoCategory> updatedCategories = validateCategories(categories);
+
+    validateConsistency(temperature, hazard, regulatory, properties, compatibilityRequirement);
+    this.categories = updatedCategories;
   }
 
   public void replaceDimensions(CargoDimensions dimensions) {
@@ -169,32 +171,49 @@ public final class CargoUnit {
   }
 
   public void replaceTemperature(CargoTemperature temperature) {
-    this.temperature = temperature == null ? CargoTemperature.uncontrolled() : temperature;
-    validateConsistency();
+    CargoTemperature updatedTemperature =
+        temperature == null ? CargoTemperature.uncontrolled() : temperature;
+
+    validateConsistency(
+        updatedTemperature, hazard, regulatory, properties, compatibilityRequirement);
+    this.temperature = updatedTemperature;
   }
 
   public void replaceHazard(CargoHazard hazard) {
-    this.hazard = hazard == null ? CargoHazard.none() : hazard;
-    validateConsistency();
+    CargoHazard updatedHazard = hazard == null ? CargoHazard.none() : hazard;
+
+    validateConsistency(
+        temperature, updatedHazard, regulatory, properties, compatibilityRequirement);
+    this.hazard = updatedHazard;
   }
 
   public void replaceRegulatory(CargoRegulatory regulatory) {
-    this.regulatory = regulatory == null ? CargoRegulatory.none() : regulatory;
-    validateConsistency();
+    CargoRegulatory updatedRegulatory = regulatory == null ? CargoRegulatory.none() : regulatory;
+
+    validateConsistency(
+        temperature, hazard, updatedRegulatory, properties, compatibilityRequirement);
+    this.regulatory = updatedRegulatory;
   }
 
   public void replaceProperties(CargoProperties properties) {
-    this.properties = properties == null ? CargoProperties.standard() : properties;
-    validateConsistency();
+    CargoProperties updatedProperties =
+        properties == null ? CargoProperties.standard() : properties;
+
+    validateConsistency(
+        temperature, hazard, regulatory, updatedProperties, compatibilityRequirement);
+    this.properties = updatedProperties;
   }
 
   public void replaceCompatibilityRequirement(
       CargoCompatibilityRequirement compatibilityRequirement) {
-    this.compatibilityRequirement =
+    CargoCompatibilityRequirement updatedCompatibilityRequirement =
         compatibilityRequirement == null
             ? CargoCompatibilityRequirement.none()
             : compatibilityRequirement;
-    validateConsistency();
+
+    validateConsistency(
+        temperature, hazard, regulatory, properties, updatedCompatibilityRequirement);
+    this.compatibilityRequirement = updatedCompatibilityRequirement;
   }
 
   public void activate() {
@@ -223,6 +242,15 @@ public final class CargoUnit {
   }
 
   private void validateConsistency() {
+    validateConsistency(temperature, hazard, regulatory, properties, compatibilityRequirement);
+  }
+
+  private static void validateConsistency(
+      CargoTemperature temperature,
+      CargoHazard hazard,
+      CargoRegulatory regulatory,
+      CargoProperties properties,
+      CargoCompatibilityRequirement compatibilityRequirement) {
     if (regulatory.adrRequired()
         && !compatibilityRequirement.requires(CargoTransportRequirement.ADR_VEHICLE_REQUIRED)) {
       throw new IllegalArgumentException(

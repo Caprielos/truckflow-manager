@@ -130,6 +130,24 @@ class OperationalDomainTest {
                 ""));
   }
 
+  @Test
+  void failedDriverActivationDoesNotMutateStatus() {
+    var driver =
+        new Driver(
+            null,
+            OperationalCode.of("DRV-ATOMIC"),
+            UserId.random(),
+            profile("Luca", "Bianchi", "Transport", "Driver"),
+            Set.of(),
+            OperationalStatus.SUSPENDED,
+            OperationalMetadata.createdNow("system"),
+            "");
+
+    assertThrows(IllegalStateException.class, () -> driver.activate("admin"));
+
+    assertEquals(OperationalStatus.SUSPENDED, driver.status());
+  }
+
   private static OperationalProfile profile(
       String firstName, String lastName, String department, String position) {
     return new OperationalProfile(

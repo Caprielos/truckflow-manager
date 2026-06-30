@@ -189,18 +189,27 @@ public final class Shipment {
   }
 
   public void replaceProperties(ShipmentProperties properties) {
-    this.properties = properties == null ? ShipmentProperties.standard() : properties;
-    validateConsistency();
+    ShipmentProperties updatedProperties =
+        properties == null ? ShipmentProperties.standard() : properties;
+
+    validateConsistency(updatedProperties, temperature, requirementSet);
+    this.properties = updatedProperties;
   }
 
   public void replaceTemperature(ShipmentTemperature temperature) {
-    this.temperature = temperature == null ? ShipmentTemperature.uncontrolled() : temperature;
-    validateConsistency();
+    ShipmentTemperature updatedTemperature =
+        temperature == null ? ShipmentTemperature.uncontrolled() : temperature;
+
+    validateConsistency(properties, updatedTemperature, requirementSet);
+    this.temperature = updatedTemperature;
   }
 
   public void replaceRequirementSet(ShipmentRequirementSet requirementSet) {
-    this.requirementSet = requirementSet == null ? ShipmentRequirementSet.none() : requirementSet;
-    validateConsistency();
+    ShipmentRequirementSet updatedRequirementSet =
+        requirementSet == null ? ShipmentRequirementSet.none() : requirementSet;
+
+    validateConsistency(properties, temperature, updatedRequirementSet);
+    this.requirementSet = updatedRequirementSet;
   }
 
   public void replaceMetrics(ShipmentMetrics metrics) {
@@ -224,10 +233,14 @@ public final class Shipment {
   }
 
   public void confirm() {
-    status = ShipmentStatus.CONFIRMED;
-    items = validateItems(items, status);
-    legs = validateLegs(legs, status);
-    validateConsistency();
+    List<ShipmentItem> validatedItems = validateItems(items, ShipmentStatus.CONFIRMED);
+    List<ShipmentLeg> validatedLegs = validateLegs(legs, ShipmentStatus.CONFIRMED);
+
+    validateConsistency(properties, temperature, requirementSet);
+
+    this.items = validatedItems;
+    this.legs = validatedLegs;
+    this.status = ShipmentStatus.CONFIRMED;
   }
 
   public void suspend() {
@@ -278,6 +291,13 @@ public final class Shipment {
   }
 
   private void validateConsistency() {
+    validateConsistency(properties, temperature, requirementSet);
+  }
+
+  private static void validateConsistency(
+      ShipmentProperties properties,
+      ShipmentTemperature temperature,
+      ShipmentRequirementSet requirementSet) {
     if (temperature.controlled()
         && !requirementSet.requires(ShipmentTransportRequirement.TEMPERATURE_CONTROL_REQUIRED)) {
       throw new IllegalArgumentException(

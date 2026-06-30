@@ -121,6 +121,19 @@ class CargoDomainTest {
         () -> new CargoWeights(new BigDecimal("100"), new BigDecimal("120"), BigDecimal.TEN));
   }
 
+  @Test
+  void failedTemperatureReplacementDoesNotMutateCargo() {
+    var cargo = generalPalletizedCargo();
+    var controlledTemperature =
+        new CargoTemperature(new BigDecimal("2"), new BigDecimal("4"), true, "Fresh");
+
+    assertThrows(
+        IllegalArgumentException.class, () -> cargo.replaceTemperature(controlledTemperature));
+
+    assertFalse(cargo.isTemperatureControlled());
+    assertEquals(CargoTemperature.uncontrolled(), cargo.temperature());
+  }
+
   private static CargoUnit generalPalletizedCargo() {
     return new CargoUnit(
         null,

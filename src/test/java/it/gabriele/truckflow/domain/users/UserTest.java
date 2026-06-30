@@ -104,6 +104,16 @@ class UserTest {
         () -> new UserContact("invalid-email", "", "+393331112233"));
   }
 
+  @Test
+  void failedUsernameChangeDoesNotMutateUser() {
+    User user = createUser(UserRole.DISPATCHER);
+
+    assertThrows(
+        IllegalArgumentException.class, () -> user.changeUsername(new Username("new.user"), " "));
+
+    assertEquals(new Username("mario.rossi"), user.username());
+  }
+
   private static User createUser(UserRole role, UserPermission... permissions) {
     return createUser(Set.of(role), UserPermissions.of(permissions));
   }

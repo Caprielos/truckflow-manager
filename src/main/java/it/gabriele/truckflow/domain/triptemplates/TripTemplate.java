@@ -119,8 +119,11 @@ public final class TripTemplate {
   }
 
   public void activate() {
-    status = TripTemplateStatus.ACTIVE;
-    segments = validateSegments(segments, status);
+    List<TripTemplateSegment> validatedSegments =
+        validateSegments(segments, TripTemplateStatus.ACTIVE);
+
+    this.segments = validatedSegments;
+    this.status = TripTemplateStatus.ACTIVE;
   }
 
   public void suspend() {

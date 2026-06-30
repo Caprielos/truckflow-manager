@@ -114,30 +114,39 @@ public final class User {
 
   public void changeUsername(Username username, String updatedBy) {
     ensureNotDisabled("A disabled user username cannot be changed.");
-    this.username = requireNonNull(username, "username");
-    touch(updatedBy);
+    Username updatedUsername = requireNonNull(username, "username");
+    String validatedUpdatedBy = requireText(updatedBy, "updatedBy");
+
+    this.username = updatedUsername;
+    touch(validatedUpdatedBy);
   }
 
   public void changePasswordHash(UserPasswordHash passwordHash, String updatedBy) {
     ensureNotDisabled("A disabled user password hash cannot be changed.");
-    this.passwordHash = requireNonNull(passwordHash, "passwordHash");
-    touch(updatedBy);
+    UserPasswordHash updatedPasswordHash = requireNonNull(passwordHash, "passwordHash");
+    String validatedUpdatedBy = requireText(updatedBy, "updatedBy");
+
+    this.passwordHash = updatedPasswordHash;
+    touch(validatedUpdatedBy);
   }
 
   public void addRole(UserRole role, String updatedBy) {
     ensureNotDisabled("A disabled user roles cannot be changed.");
     requireNonNull(role, "role");
+    String validatedUpdatedBy = requireText(updatedBy, "updatedBy");
 
     var updatedRoles = new java.util.HashSet<>(roles);
     updatedRoles.add(role);
+    Set<UserRole> validatedRoles = validateRoles(updatedRoles);
 
-    roles = validateRoles(updatedRoles);
-    touch(updatedBy);
+    this.roles = validatedRoles;
+    touch(validatedUpdatedBy);
   }
 
   public void removeRole(UserRole role, String updatedBy) {
     ensureNotDisabled("A disabled user roles cannot be changed.");
     requireNonNull(role, "role");
+    String validatedUpdatedBy = requireText(updatedBy, "updatedBy");
 
     if (roles.size() == 1 && roles.contains(role)) {
       throw new IllegalStateException("The last user role cannot be removed.");
@@ -145,22 +154,29 @@ public final class User {
 
     var updatedRoles = new java.util.HashSet<>(roles);
     updatedRoles.remove(role);
+    Set<UserRole> validatedRoles = validateRoles(updatedRoles);
+    ensureActiveUserHasRoles(status, validatedRoles);
 
-    roles = validateRoles(updatedRoles);
-    ensureActiveUserHasRoles();
-    touch(updatedBy);
+    this.roles = validatedRoles;
+    touch(validatedUpdatedBy);
   }
 
   public void grantPermission(UserPermission permission, String updatedBy) {
     ensureNotDisabled("A disabled user permissions cannot be changed.");
-    permissions = permissions.add(permission);
-    touch(updatedBy);
+    String validatedUpdatedBy = requireText(updatedBy, "updatedBy");
+    UserPermissions updatedPermissions = permissions.add(permission);
+
+    this.permissions = updatedPermissions;
+    touch(validatedUpdatedBy);
   }
 
   public void revokePermission(UserPermission permission, String updatedBy) {
     ensureNotDisabled("A disabled user permissions cannot be changed.");
-    permissions = permissions.remove(permission);
-    touch(updatedBy);
+    String validatedUpdatedBy = requireText(updatedBy, "updatedBy");
+    UserPermissions updatedPermissions = permissions.remove(permission);
+
+    this.permissions = updatedPermissions;
+    touch(validatedUpdatedBy);
   }
 
   public void activate(String updatedBy) {
@@ -169,56 +185,79 @@ public final class User {
           "A disabled user cannot be activated. Use reactivateDisabled instead.");
     }
 
-    status = UserStatus.ACTIVE;
-    ensureActiveUserHasRoles();
-    touch(updatedBy);
+    String validatedUpdatedBy = requireText(updatedBy, "updatedBy");
+    ensureActiveUserHasRoles(UserStatus.ACTIVE, roles);
+
+    this.status = UserStatus.ACTIVE;
+    touch(validatedUpdatedBy);
   }
 
   public void reactivateDisabled(String updatedBy) {
-    status = UserStatus.ACTIVE;
-    ensureActiveUserHasRoles();
-    touch(updatedBy);
+    String validatedUpdatedBy = requireText(updatedBy, "updatedBy");
+    ensureActiveUserHasRoles(UserStatus.ACTIVE, roles);
+
+    this.status = UserStatus.ACTIVE;
+    touch(validatedUpdatedBy);
   }
 
   public void suspend(String updatedBy) {
     ensureNotDisabled("A disabled user cannot be suspended.");
-    status = UserStatus.SUSPENDED;
-    touch(updatedBy);
+    String validatedUpdatedBy = requireText(updatedBy, "updatedBy");
+
+    this.status = UserStatus.SUSPENDED;
+    touch(validatedUpdatedBy);
   }
 
   public void disable(String updatedBy) {
-    status = UserStatus.DISABLED;
-    touch(updatedBy);
+    String validatedUpdatedBy = requireText(updatedBy, "updatedBy");
+
+    this.status = UserStatus.DISABLED;
+    touch(validatedUpdatedBy);
   }
 
   public void updateProfile(UserProfile profile, String updatedBy) {
     ensureNotDisabled("A disabled user profile cannot be changed.");
-    this.profile = requireNonNull(profile, "profile");
-    touch(updatedBy);
+    UserProfile updatedProfile = requireNonNull(profile, "profile");
+    String validatedUpdatedBy = requireText(updatedBy, "updatedBy");
+
+    this.profile = updatedProfile;
+    touch(validatedUpdatedBy);
   }
 
   public void updateContact(UserContact contact, String updatedBy) {
     ensureNotDisabled("A disabled user contact cannot be changed.");
-    profile = profile.withContact(contact);
-    touch(updatedBy);
+    String validatedUpdatedBy = requireText(updatedBy, "updatedBy");
+    UserProfile updatedProfile = profile.withContact(contact);
+
+    this.profile = updatedProfile;
+    touch(validatedUpdatedBy);
   }
 
   public void updateAddress(UserAddress address, String updatedBy) {
     ensureNotDisabled("A disabled user address cannot be changed.");
-    profile = profile.withAddress(address);
-    touch(updatedBy);
+    String validatedUpdatedBy = requireText(updatedBy, "updatedBy");
+    UserProfile updatedProfile = profile.withAddress(address);
+
+    this.profile = updatedProfile;
+    touch(validatedUpdatedBy);
   }
 
   public void updatePreferences(UserPreferences preferences, String updatedBy) {
     ensureNotDisabled("A disabled user preferences cannot be changed.");
-    this.preferences = requireNonNull(preferences, "preferences");
-    touch(updatedBy);
+    UserPreferences updatedPreferences = requireNonNull(preferences, "preferences");
+    String validatedUpdatedBy = requireText(updatedBy, "updatedBy");
+
+    this.preferences = updatedPreferences;
+    touch(validatedUpdatedBy);
   }
 
   public void updateNotes(String notes, String updatedBy) {
     ensureNotDisabled("A disabled user notes cannot be changed.");
-    this.notes = normalize(notes);
-    touch(updatedBy);
+    String updatedNotes = normalize(notes);
+    String validatedUpdatedBy = requireText(updatedBy, "updatedBy");
+
+    this.notes = updatedNotes;
+    touch(validatedUpdatedBy);
   }
 
   private void touch(String updatedBy) {
@@ -232,6 +271,10 @@ public final class User {
   }
 
   private void ensureActiveUserHasRoles() {
+    ensureActiveUserHasRoles(status, roles);
+  }
+
+  private static void ensureActiveUserHasRoles(UserStatus status, Set<UserRole> roles) {
     if (status == UserStatus.ACTIVE && roles.isEmpty()) {
       throw new IllegalStateException("An active user must have at least one role.");
     }

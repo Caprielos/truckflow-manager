@@ -95,8 +95,11 @@ public final class Document {
   }
 
   public void changeClassification(DocumentType type, DocumentCategory category) {
-    this.type = DocumentValidation.requireNonNull(type, "type");
-    this.category = DocumentValidation.requireNonNull(category, "category");
+    DocumentType updatedType = DocumentValidation.requireNonNull(type, "type");
+    DocumentCategory updatedCategory = DocumentValidation.requireNonNull(category, "category");
+
+    this.type = updatedType;
+    this.category = updatedCategory;
   }
 
   public void replaceMetadata(DocumentMetadata metadata) {

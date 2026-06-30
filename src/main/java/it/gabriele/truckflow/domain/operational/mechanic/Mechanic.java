@@ -87,50 +87,75 @@ public final class Mechanic {
 
   public void addQualification(OperationalQualification qualification, String updatedBy) {
     requireNonNull(qualification, "qualification");
+    String validatedUpdatedBy = requireText(updatedBy, "updatedBy");
 
     var updatedQualifications = new HashSet<>(qualifications);
     updatedQualifications.add(qualification);
-    qualifications = validateQualifications(updatedQualifications);
-    touch(updatedBy);
+    Set<OperationalQualification> validatedQualifications =
+        validateQualifications(updatedQualifications);
+
+    this.qualifications = validatedQualifications;
+    touch(validatedUpdatedBy);
   }
 
   public void removeQualification(OperationalQualification qualification, String updatedBy) {
     requireNonNull(qualification, "qualification");
+    String validatedUpdatedBy = requireText(updatedBy, "updatedBy");
 
     var updatedQualifications = new HashSet<>(qualifications);
     updatedQualifications.remove(qualification);
-    qualifications = validateQualifications(updatedQualifications);
-    ensureActiveHasQualifications();
-    touch(updatedBy);
+    Set<OperationalQualification> validatedQualifications =
+        validateQualifications(updatedQualifications);
+    ensureActiveHasQualifications(status, validatedQualifications);
+
+    this.qualifications = validatedQualifications;
+    touch(validatedUpdatedBy);
   }
 
   public void activate(String updatedBy) {
-    status = OperationalStatus.ACTIVE;
-    ensureActiveHasQualifications();
-    touch(updatedBy);
+    String validatedUpdatedBy = requireText(updatedBy, "updatedBy");
+    ensureActiveHasQualifications(OperationalStatus.ACTIVE, qualifications);
+
+    this.status = OperationalStatus.ACTIVE;
+    touch(validatedUpdatedBy);
   }
 
   public void suspend(String updatedBy) {
-    status = OperationalStatus.SUSPENDED;
-    touch(updatedBy);
+    String validatedUpdatedBy = requireText(updatedBy, "updatedBy");
+
+    this.status = OperationalStatus.SUSPENDED;
+    touch(validatedUpdatedBy);
   }
 
   public void markNotEligible(String updatedBy) {
-    status = OperationalStatus.NOT_ELIGIBLE;
-    touch(updatedBy);
+    String validatedUpdatedBy = requireText(updatedBy, "updatedBy");
+
+    this.status = OperationalStatus.NOT_ELIGIBLE;
+    touch(validatedUpdatedBy);
   }
 
   public void updateProfile(OperationalProfile profile, String updatedBy) {
-    this.profile = requireNonNull(profile, "profile");
-    touch(updatedBy);
+    OperationalProfile updatedProfile = requireNonNull(profile, "profile");
+    String validatedUpdatedBy = requireText(updatedBy, "updatedBy");
+
+    this.profile = updatedProfile;
+    touch(validatedUpdatedBy);
   }
 
   public void updateNotes(String notes, String updatedBy) {
-    this.notes = normalize(notes);
-    touch(updatedBy);
+    String updatedNotes = normalize(notes);
+    String validatedUpdatedBy = requireText(updatedBy, "updatedBy");
+
+    this.notes = updatedNotes;
+    touch(validatedUpdatedBy);
   }
 
   private void ensureActiveHasQualifications() {
+    ensureActiveHasQualifications(status, qualifications);
+  }
+
+  private static void ensureActiveHasQualifications(
+      OperationalStatus status, Set<OperationalQualification> qualifications) {
     if (status == OperationalStatus.ACTIVE && qualifications.isEmpty()) {
       throw new IllegalStateException("An active mechanic must have at least one qualification.");
     }
