@@ -1,0 +1,228 @@
+# Command Basic - TruckFlow Manager
+
+Documento con i comandi base più usati per lavorare sul progetto TruckFlow Manager.
+
+---
+
+## Comandi Maven principali
+
+### Test completo del progetto
+
+```bash
+mvn clean test
+```
+
+Questo comando:
+
+- pulisce il progetto
+- compila il codice
+- controlla il formato Java con Spotless
+- esegue i test
+
+Nel progetto TruckFlow Manager, Spotless è collegato alla fase `validate`, quindi `mvn clean test` controlla anche il Google Java Format.
+
+---
+
+### Controllare solo il formato Google Java
+
+```bash
+mvn spotless:check
+```
+
+Serve per verificare se il codice Java rispetta Google Java Format.
+
+---
+
+### Formattare automaticamente il codice Java
+
+```bash
+mvn spotless:apply
+```
+
+Serve per formattare automaticamente il codice Java secondo Google Java Format.
+
+Flusso consigliato:
+
+```bash
+mvn spotless:apply
+mvn clean test
+```
+
+---
+
+### Avviare Spring Boot
+
+```bash
+mvn spring-boot:run
+```
+
+Serve per avviare l'applicazione Spring Boot.
+
+---
+
+### Creare il pacchetto JAR
+
+```bash
+mvn clean package
+```
+
+Serve per compilare, testare e creare il file `.jar`.
+
+---
+
+### Installare il progetto nel repository Maven locale
+
+```bash
+mvn clean install
+```
+
+Serve per compilare, testare, creare il pacchetto e installarlo nel repository Maven locale.
+
+---
+
+## Comandi Git principali
+
+### Controllare lo stato del progetto
+
+```bash
+git status
+```
+
+Mostra i file modificati, aggiunti o eliminati.
+
+---
+
+### Vedere i branch disponibili
+
+```bash
+git branch
+```
+
+Mostra i branch locali.
+
+---
+
+### Creare un nuovo branch
+
+```bash
+git checkout -b nome-branch
+```
+
+Esempio:
+
+```bash
+git checkout -b new-app-enterprise
+```
+
+---
+
+### Spostarsi su un branch esistente
+
+```bash
+git checkout nome-branch
+```
+
+Esempio:
+
+```bash
+git checkout main
+```
+
+---
+
+### Aggiungere tutte le modifiche
+
+```bash
+git add -A
+```
+
+Aggiunge tutti i file modificati, nuovi o eliminati.
+
+---
+
+### Creare un commit
+
+```bash
+git commit -m "Descrizione modifica"
+```
+
+Esempio:
+
+```bash
+git commit -m "Add basic commands document"
+```
+
+---
+
+### Mandare il branch su GitHub
+
+```bash
+git push
+```
+
+Se il branch è nuovo:
+
+```bash
+git push -u origin nome-branch
+```
+
+Esempio:
+
+```bash
+git push -u origin new-app-enterprise
+```
+
+---
+
+## Flusso consigliato prima di fare commit
+
+Prima di salvare una modifica su Git, usare sempre:
+
+```bash
+mvn spotless:apply
+mvn clean test
+git status
+```
+
+Poi:
+
+```bash
+git add -A
+git commit -m "Descrizione modifica"
+git push
+```
+
+---
+
+## Errori comuni
+
+### Comando sbagliato
+
+```bash
+mvn cleant est
+```
+
+Questo comando è sbagliato.
+
+### Comando corretto
+
+```bash
+mvn clean test
+```
+
+---
+
+## Riassunto veloce
+
+| Azione | Comando |
+|---|---|
+| Test completo | `mvn clean test` |
+| Controllo formato | `mvn spotless:check` |
+| Formattazione automatica | `mvn spotless:apply` |
+| Avvio Spring Boot | `mvn spring-boot:run` |
+| Creazione JAR | `mvn clean package` |
+| Installazione locale | `mvn clean install` |
+| Stato Git | `git status` |
+| Commit | `git add -A && git commit -m "messaggio"` |
+| Push | `git push` |
+
