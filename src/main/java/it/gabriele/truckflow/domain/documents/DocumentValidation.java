@@ -1,5 +1,6 @@
 package it.gabriele.truckflow.domain.documents;
 
+import it.gabriele.truckflow.domain.documents.exceptions.InvalidDocumentException;
 import java.util.Collection;
 
 final class DocumentValidation {
@@ -8,7 +9,7 @@ final class DocumentValidation {
 
   static <T> T requireNonNull(T value, String fieldName) {
     if (value == null) {
-      throw new IllegalArgumentException(fieldName + " is required.");
+      throw new InvalidDocumentException(fieldName + " is required.");
     }
 
     return value;
@@ -18,7 +19,7 @@ final class DocumentValidation {
     String normalized = normalize(value);
 
     if (normalized.isBlank()) {
-      throw new IllegalArgumentException(fieldName + " is required.");
+      throw new InvalidDocumentException(fieldName + " is required.");
     }
 
     return normalized;
@@ -30,7 +31,7 @@ final class DocumentValidation {
 
   static <T> void requireNoNullElements(Collection<T> values, String fieldName) {
     if (values.stream().anyMatch(value -> value == null)) {
-      throw new IllegalArgumentException(fieldName + " cannot contain null values.");
+      throw new InvalidDocumentException(fieldName + " cannot contain null values.");
     }
   }
 }

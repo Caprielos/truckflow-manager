@@ -1,12 +1,14 @@
 package it.gabriele.truckflow.domain.locations;
 
+import it.gabriele.truckflow.domain.locations.exceptions.InvalidLocationException;
+
 public record LocationCode(String value) {
 
   public LocationCode {
     value = LocationValidation.requireText(value, "value").toUpperCase();
 
     if (!value.matches("[A-Z0-9][A-Z0-9_-]*")) {
-      throw new IllegalArgumentException(
+      throw new InvalidLocationException(
           "Location code can contain only uppercase letters, numbers, dashes and underscores.");
     }
   }

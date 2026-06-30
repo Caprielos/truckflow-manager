@@ -1,5 +1,6 @@
 package it.gabriele.truckflow.domain.triptemplates;
 
+import it.gabriele.truckflow.domain.triptemplates.exceptions.InvalidTripTemplateException;
 import java.math.BigDecimal;
 import java.time.Duration;
 import java.util.Collection;
@@ -10,7 +11,7 @@ final class TripTemplateValidation {
 
   static <T> T requireNonNull(T value, String fieldName) {
     if (value == null) {
-      throw new IllegalArgumentException(fieldName + " is required.");
+      throw new InvalidTripTemplateException(fieldName + " is required.");
     }
 
     return value;
@@ -20,7 +21,7 @@ final class TripTemplateValidation {
     String normalized = normalize(value);
 
     if (normalized.isBlank()) {
-      throw new IllegalArgumentException(fieldName + " is required.");
+      throw new InvalidTripTemplateException(fieldName + " is required.");
     }
 
     return normalized;
@@ -32,7 +33,7 @@ final class TripTemplateValidation {
 
   static int requirePositive(int value, String fieldName) {
     if (value <= 0) {
-      throw new IllegalArgumentException(fieldName + " must be positive.");
+      throw new InvalidTripTemplateException(fieldName + " must be positive.");
     }
 
     return value;
@@ -42,7 +43,7 @@ final class TripTemplateValidation {
     requireNonNull(value, fieldName);
 
     if (value.signum() < 0) {
-      throw new IllegalArgumentException(fieldName + " cannot be negative.");
+      throw new InvalidTripTemplateException(fieldName + " cannot be negative.");
     }
 
     return value;
@@ -50,7 +51,7 @@ final class TripTemplateValidation {
 
   static Duration nonNegativeOrNull(Duration value, String fieldName) {
     if (value != null && value.isNegative()) {
-      throw new IllegalArgumentException(fieldName + " cannot be negative.");
+      throw new InvalidTripTemplateException(fieldName + " cannot be negative.");
     }
 
     return value;
@@ -58,7 +59,7 @@ final class TripTemplateValidation {
 
   static <T> void requireNoNullElements(Collection<T> values, String fieldName) {
     if (values.stream().anyMatch(value -> value == null)) {
-      throw new IllegalArgumentException(fieldName + " cannot contain null values.");
+      throw new InvalidTripTemplateException(fieldName + " cannot contain null values.");
     }
   }
 }

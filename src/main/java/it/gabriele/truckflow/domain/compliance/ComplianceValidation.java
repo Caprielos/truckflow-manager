@@ -1,12 +1,14 @@
 package it.gabriele.truckflow.domain.compliance;
 
+import it.gabriele.truckflow.domain.compliance.exceptions.InvalidComplianceRequirementException;
+
 final class ComplianceValidation {
 
   private ComplianceValidation() {}
 
   static <T> T requireNonNull(T value, String fieldName) {
     if (value == null) {
-      throw new IllegalArgumentException(fieldName + " is required.");
+      throw new InvalidComplianceRequirementException(fieldName + " is required.");
     }
 
     return value;
@@ -16,7 +18,7 @@ final class ComplianceValidation {
     String normalized = normalize(value);
 
     if (normalized.isBlank()) {
-      throw new IllegalArgumentException(fieldName + " is required.");
+      throw new InvalidComplianceRequirementException(fieldName + " is required.");
     }
 
     return normalized;

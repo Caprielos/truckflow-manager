@@ -6,6 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import it.gabriele.truckflow.domain.locations.LocationDomainTest;
+import it.gabriele.truckflow.domain.triptemplates.exceptions.InvalidTripTemplateException;
+import it.gabriele.truckflow.domain.triptemplates.exceptions.InvalidTripTemplateSegmentException;
 import java.math.BigDecimal;
 import java.time.Duration;
 import java.util.List;
@@ -50,7 +52,7 @@ class TripTemplateDomainTest {
   @Test
   void activeTemplateRequiresAtLeastOneSegment() {
     assertThrows(
-        IllegalArgumentException.class,
+        InvalidTripTemplateException.class,
         () ->
             new TripTemplate(
                 null,
@@ -90,7 +92,7 @@ class TripTemplateDomainTest {
             "duplicate");
 
     assertThrows(
-        IllegalArgumentException.class,
+        InvalidTripTemplateException.class,
         () ->
             new TripTemplate(
                 null,
@@ -109,7 +111,7 @@ class TripTemplateDomainTest {
     var depot = LocationDomainTest.milanDepot();
 
     assertThrows(
-        IllegalArgumentException.class,
+        InvalidTripTemplateSegmentException.class,
         () ->
             new TripTemplateSegment(
                 null,
@@ -141,7 +143,7 @@ class TripTemplateDomainTest {
 
   @Test
   void distanceCannotBeNegative() {
-    assertThrows(IllegalArgumentException.class, () -> Distance.km(new BigDecimal("-1.00")));
+    assertThrows(InvalidTripTemplateException.class, () -> Distance.km(new BigDecimal("-1.00")));
   }
 
   @Test
@@ -210,7 +212,7 @@ class TripTemplateDomainTest {
             RouteSpecification.empty(),
             "");
 
-    assertThrows(IllegalArgumentException.class, template::activate);
+    assertThrows(InvalidTripTemplateException.class, template::activate);
 
     assertEquals(TripTemplateStatus.SUSPENDED, template.status());
     assertEquals(0, template.segmentCount());

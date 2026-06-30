@@ -1,5 +1,6 @@
 package it.gabriele.truckflow.domain.triptemplates;
 
+import it.gabriele.truckflow.domain.triptemplates.exceptions.InvalidTripTemplateException;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
@@ -147,13 +148,14 @@ public final class TripTemplate {
     TripTemplateValidation.requireNoNullElements(segments, "segments");
 
     if (status == TripTemplateStatus.ACTIVE && segments.isEmpty()) {
-      throw new IllegalArgumentException("Active trip templates must have at least one segment.");
+      throw new InvalidTripTemplateException(
+          "Active trip templates must have at least one segment.");
     }
 
     var sequenceNumbers = new HashSet<Integer>();
     for (TripTemplateSegment segment : segments) {
       if (!sequenceNumbers.add(segment.sequenceNumber())) {
-        throw new IllegalArgumentException(
+        throw new InvalidTripTemplateException(
             "Trip template segment sequence numbers must be unique.");
       }
     }

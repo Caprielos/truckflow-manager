@@ -1,5 +1,6 @@
 package it.gabriele.truckflow.domain.locations;
 
+import it.gabriele.truckflow.domain.locations.exceptions.InvalidLocationException;
 import java.math.BigDecimal;
 
 final class LocationValidation {
@@ -8,7 +9,7 @@ final class LocationValidation {
 
   static <T> T requireNonNull(T value, String fieldName) {
     if (value == null) {
-      throw new IllegalArgumentException(fieldName + " is required.");
+      throw new InvalidLocationException(fieldName + " is required.");
     }
 
     return value;
@@ -18,7 +19,7 @@ final class LocationValidation {
     String normalized = normalize(value);
 
     if (normalized.isBlank()) {
-      throw new IllegalArgumentException(fieldName + " is required.");
+      throw new InvalidLocationException(fieldName + " is required.");
     }
 
     return normalized;
@@ -33,7 +34,7 @@ final class LocationValidation {
     requireNonNull(value, fieldName);
 
     if (value.compareTo(min) < 0 || value.compareTo(max) > 0) {
-      throw new IllegalArgumentException(fieldName + " is outside the allowed range.");
+      throw new InvalidLocationException(fieldName + " is outside the allowed range.");
     }
 
     return value;

@@ -1,6 +1,7 @@
 package it.gabriele.truckflow.domain.triptemplates;
 
 import it.gabriele.truckflow.domain.locations.LocationId;
+import it.gabriele.truckflow.domain.triptemplates.exceptions.InvalidTripTemplateSegmentException;
 
 public record TripTemplateSegment(
     TripTemplateSegmentId id,
@@ -41,7 +42,7 @@ public record TripTemplateSegment(
     if (type != TripTemplateSegmentType.INTERNAL_TRANSFER
         && type != TripTemplateSegmentType.YARD_MOVEMENT
         && type != TripTemplateSegmentType.SPECIAL) {
-      throw new IllegalArgumentException(
+      throw new InvalidTripTemplateSegmentException(
           "Origin and destination can be the same only for internal, yard or special segments.");
     }
   }

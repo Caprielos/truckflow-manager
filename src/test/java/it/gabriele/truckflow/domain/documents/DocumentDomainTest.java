@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import it.gabriele.truckflow.domain.documents.exceptions.InvalidDocumentException;
 import java.util.Set;
 import org.junit.jupiter.api.Test;
 
@@ -75,20 +76,20 @@ class DocumentDomainTest {
 
   @Test
   void blankDocumentCodeIsRejected() {
-    assertThrows(IllegalArgumentException.class, () -> DocumentCode.of("   "));
+    assertThrows(InvalidDocumentException.class, () -> DocumentCode.of("   "));
   }
 
   @Test
   void blankDocumentReferenceIdIsRejected() {
     assertThrows(
-        IllegalArgumentException.class,
+        InvalidDocumentException.class,
         () -> new DocumentReference(DocumentReferenceType.CARGO, " ", "Invalid reference"));
   }
 
   @Test
   void blankMetadataTitleIsRejected() {
     assertThrows(
-        IllegalArgumentException.class,
+        InvalidDocumentException.class,
         () -> new DocumentMetadata(" ", "author", "description", "v1", Set.of()));
   }
 

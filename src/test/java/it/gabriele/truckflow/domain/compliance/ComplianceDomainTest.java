@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import it.gabriele.truckflow.domain.compliance.exceptions.InvalidComplianceRequirementException;
 import org.junit.jupiter.api.Test;
 
 class ComplianceDomainTest {
@@ -79,13 +80,14 @@ class ComplianceDomainTest {
 
   @Test
   void blankRequirementCodeIsRejected() {
-    assertThrows(IllegalArgumentException.class, () -> ComplianceRequirementCode.of(" "));
+    assertThrows(
+        InvalidComplianceRequirementException.class, () -> ComplianceRequirementCode.of(" "));
   }
 
   @Test
   void blankRequirementNameIsRejected() {
     assertThrows(
-        IllegalArgumentException.class,
+        InvalidComplianceRequirementException.class,
         () ->
             new ComplianceRequirement(
                 null,
@@ -107,7 +109,8 @@ class ComplianceDomainTest {
   @Test
   void blankJurisdictionScopeIsRejected() {
     assertThrows(
-        IllegalArgumentException.class, () -> new ComplianceJurisdiction("IT", "", " ", ""));
+        InvalidComplianceRequirementException.class,
+        () -> new ComplianceJurisdiction("IT", "", " ", ""));
   }
 
   private static ComplianceRequirement adrCargoRequirement() {
