@@ -52,7 +52,8 @@ Le regole principali sono:
 - value object simili non vengono unificati se hanno significato diverso;
 - le eccezioni custom sono introdotte gradualmente;
 - `ComplianceViolationException` non viene introdotta ora perché le violazioni concrete non appartengono ancora al dominio puro;
-- application layer e infrastructure rimangono separati dal dominio.
+- application layer e infrastructure rimangono separati dal dominio;
+- file locali dell'IDE, artefatti Maven, file macOS generati e file temporanei come `.patch` e `.sh` restano fuori dal versionamento.
 
 ## Eccezioni di dominio
 

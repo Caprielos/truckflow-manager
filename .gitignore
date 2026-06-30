@@ -1,6 +1,12 @@
+# Build output
 target/
 
-.idea/workspace.xml
+# Local IDE project files
+.idea/
+
+# macOS generated files
+.DS_Store
+__MACOSX/
 
 # Local generated patch/script files
 *.patch

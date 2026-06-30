@@ -269,6 +269,24 @@ Sono ammessi:
 - value object stabili;
 - concetti astratti.
 
+
+## 12.1 File locali, IDE e artefatti generati
+
+Il repository non deve contenere file locali dell'IDE o artefatti generati dalla build.
+
+Devono rimanere fuori dal versionamento:
+
+- `.idea/`;
+- `target/`;
+- `.DS_Store`;
+- `__MACOSX/`;
+- file `.patch`;
+- script locali `.sh` generati per attività temporanee.
+
+Questi file dipendono dall'ambiente locale dello sviluppatore o da operazioni temporanee e non rappresentano codice sorgente, documentazione ufficiale o regole di dominio.
+
+La regola operativa è: il repository deve contenere solo codice sorgente, test, configurazioni condivise realmente necessarie e documentazione ufficiale.
+
 ## 13. Checklist finale
 
 Prima di chiudere la review del dominio puro verificare:
