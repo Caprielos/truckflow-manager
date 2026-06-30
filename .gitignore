@@ -1,3 +1,7 @@
 target/
 
 .idea/workspace.xml
+
+# Local generated patch/script files
+*.patch
+*.sh
