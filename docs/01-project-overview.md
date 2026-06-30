@@ -15,7 +15,8 @@ In questa fase il progetto si concentra sul **domain layer**, cioè sulla parte 
 - cargo, cioè merce e requisiti di trasporto;
 - location, cioè luoghi logistici riutilizzabili;
 - trip template, cioè percorsi tipo e missioni tecniche astratte;
-- shipment, cioè richieste di spedizione composte da cargo, tratte logiche, requisiti, priorità e riferimenti.
+- shipment, cioè richieste di spedizione composte da cargo, tratte logiche, requisiti, priorità e riferimenti;
+- documents, cioè documenti aziendali astratti, classificati e riusabili senza file fisici, upload, workflow o storage.
 
 Il dominio non è ancora collegato a database, API REST, interfacce grafiche o servizi esterni. Questa è una scelta intenzionale: prima si costruisce il modello del business, poi si aggiungono infrastruttura e applicazione.
 
@@ -36,7 +37,7 @@ Questa separazione rende il progetto più pulito e più facile da estendere.
 
 ## 1.3 I macro-domini attuali
 
-Il dominio è stato diviso in otto macro-aree:
+Il dominio è stato diviso in nove macro-aree:
 
 ### `domain.users`
 
@@ -70,6 +71,10 @@ Rappresenta percorsi tipo e missioni tecniche astratte. Un `TripTemplate` non è
 
 Rappresenta le richieste di spedizione. Una `Shipment` descrive cosa deve essere spedito, quali cargo compongono la spedizione, quali tratte logiche sono richieste, quali requisiti di trasporto devono essere rispettati, quale priorità ha e quale livello di servizio è richiesto. Non assegna ancora veicoli, autisti, orari o tracking. Il package è organizzato in sottopackage tematici, ma `Shipment` rimane l'unico aggregate root.
 
+### `domain.documents`
+
+Rappresenta il documento aziendale come concetto astratto e riusabile. Un `Document` contiene identità, codice, tipo, categoria, stato, metadati, contenuto logico e riferimenti generici verso altri domini. Non contiene file fisici, PDF, upload, storage, firma digitale, scadenze o workflow.
+
 ## 1.4 Perché separare i contesti
 
 La separazione dei contesti evita errori di modellazione.
@@ -86,7 +91,7 @@ Lo stesso ragionamento vale per le qualificazioni: una patente C è una `Qualifi
 
 Lo stesso principio vale per cargo e veicoli: il cargo dichiara i propri requisiti, il veicolo dichiara le proprie capacità, mentre la verifica di compatibilità appartiene a un futuro modulo di pianificazione o assegnazione.
 
-Lo stesso principio vale anche per location, trip template e shipment: una location è un luogo riutilizzabile, un `TripTemplate` usa solo `LocationId` per indicare origine e destinazione dei segmenti, e una `Shipment` usa `CargoId` e `LocationId` per riferirsi alla merce e ai luoghi senza inglobare gli aggregati completi. In questo modo i contesti rimangono separati e più semplici da evolvere.
+Lo stesso principio vale anche per location, trip template, shipment e documents: una location è un luogo riutilizzabile, un `TripTemplate` usa solo `LocationId` per indicare origine e destinazione dei segmenti, una `Shipment` usa `CargoId` e `LocationId` per riferirsi alla merce e ai luoghi senza inglobare gli aggregati completi, e un `Document` usa `DocumentReference` generico per riferirsi ad altri contesti senza importarne le classi. In questo modo i contesti rimangono separati e più semplici da evolvere.
 
 ## 1.5 Principi architetturali seguiti
 
@@ -113,7 +118,7 @@ Il dominio attuale non gestisce ancora:
 - esecuzione reale dei trip;
 - manutenzione dettagliata;
 - scadenze legali;
-- documenti;
+- gestione file fisici e workflow documentali;
 - audit trail completo;
 - telematica;
 - GPS;

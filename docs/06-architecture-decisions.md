@@ -252,7 +252,7 @@ In futuro si potranno aggiungere:
 - disponibilità risorse;
 - manutenzione;
 - scadenze;
-- documenti;
+- file storage e workflow documentale;
 - audit trail;
 - dashboard KPI;
 - gestione costi;
@@ -405,3 +405,76 @@ ShipmentRepository
 ```
 
 Questa scelta mantiene il modello DDD pulito: organizzazione interna più leggibile, ma confine dell'aggregate invariato.
+
+## 6.26 Decisione: introdurre `domain.documents` come concetto puro di documento aziendale
+
+Il dominio documents è stato introdotto per rappresentare il documento aziendale come concetto astratto e riusabile.
+
+Un `Document` descrive:
+
+- identità tecnica;
+- codice aziendale leggibile;
+- tipo documento;
+- categoria;
+- stato astratto;
+- metadati;
+- contenuto logico opzionale;
+- riferimenti astratti verso altri domini.
+
+Non rappresenta un file fisico.
+
+Per questo `domain.documents` non contiene:
+
+- PDF;
+- upload;
+- download;
+- path filesystem;
+- URL;
+- chiavi di storage;
+- firma digitale;
+- scadenze;
+- workflow approvativi;
+- compliance operativa.
+
+Questa scelta mantiene il dominio puro e lascia file storage, versioning, firme, scadenze e workflow a moduli futuri.
+
+## 6.27 Decisione: `DocumentReference` generico e non accoppiato agli altri domini
+
+`domain.documents` deve poter riferirsi a veicoli, persone operative, cargo, shipment, location e trip template senza dipendere dalle loro classi Java.
+
+Per questo `DocumentReference` usa:
+
+```text
+DocumentReferenceType referenceType
+String referencedId
+```
+
+Il dominio documents non importa direttamente:
+
+- `VehicleUnitId`;
+- `CargoId`;
+- `ShipmentId`;
+- `LocationId`;
+- `TripTemplateId`;
+- `DriverId`.
+
+Questa scelta è più disaccoppiata rispetto ai riferimenti tipizzati e mantiene il bounded context documents riusabile da tutto TruckFlow.
+
+## 6.28 Decisione: stato documento astratto, non workflow
+
+`DocumentStatus` rappresenta solo lo stato astratto del documento nel dominio puro:
+
+- `DRAFT`;
+- `ACTIVE`;
+- `SUSPENDED`;
+- `ARCHIVED`.
+
+Non sono stati del dominio documents puro:
+
+- `SIGNED`;
+- `EXPIRED`;
+- `VALIDATED`;
+- `REJECTED`;
+- `PENDING_APPROVAL`.
+
+Questi stati appartengono a firma digitale, compliance, scadenze o workflow futuri, non al concetto base di documento.
