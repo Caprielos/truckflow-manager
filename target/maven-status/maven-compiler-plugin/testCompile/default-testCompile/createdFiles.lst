@@ -1,6 +1,7 @@
 it/gabriele/truckflow/domain/locations/LocationDomainTest.class
 it/gabriele/truckflow/domain/cargo/CargoDomainTest.class
 it/gabriele/truckflow/domain/qualifications/QualificationCatalogTest.class
+it/gabriele/truckflow/domain/shipments/ShipmentDomainTest.class
 it/gabriele/truckflow/domain/vehicles/VehicleDomainTest.class
 it/gabriele/truckflow/domain/operational/OperationalDomainTest.class
 it/gabriele/truckflow/domain/triptemplates/TripTemplateDomainTest.class

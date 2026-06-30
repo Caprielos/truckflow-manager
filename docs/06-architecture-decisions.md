@@ -278,3 +278,87 @@ Il dominio attuale non prova a fare tutto subito. Descrive bene le fondamenta:
 - quali percorsi tipo esistono e quali tratte li compongono.
 
 Questa base permette di crescere senza dover riscrivere i concetti fondamentali.
+
+## 6.20 Decisione: introdurre `domain.shipments` come richiesta di spedizione, non come esecuzione
+
+Il dominio shipments è stato introdotto per rappresentare la richiesta di spedizione.
+
+Una shipment descrive:
+
+- cosa deve essere spedito;
+- quali cargo compongono la spedizione;
+- da quali location parte e verso quali location arriva;
+- quali tratte logiche sono richieste;
+- quali requisiti di trasporto devono essere rispettati;
+- quale priorità e quale livello di servizio sono richiesti.
+
+Non rappresenta però il viaggio reale operativo.
+
+Per questo `domain.shipments` non contiene:
+
+- veicoli assegnati;
+- autisti assegnati;
+- orari reali;
+- tracking;
+- prove di consegna;
+- costi reali;
+- documenti operativi;
+- stato in viaggio.
+
+Questa scelta mantiene separati il concetto di richiesta di spedizione e quello di esecuzione reale del trasporto.
+
+## 6.21 Decisione: usare `CargoId` e `LocationId` dentro Shipment
+
+`ShipmentItem` non contiene un oggetto `CargoUnit` completo, ma solo `CargoId`.
+
+`ShipmentLeg` non contiene oggetti `Location` completi, ma solo:
+
+```text
+originLocationId
+destinationLocationId
+```
+
+Questa scelta segue la regola già applicata nel resto del dominio: quando un aggregato deve riferirsi a un altro aggregato, usa il suo ID e non l'oggetto completo.
+
+Il risultato è un dominio meno accoppiato e più facile da evolvere.
+
+## 6.22 Decisione: `ShipmentStatus` non è stato operativo di tracking
+
+Gli stati di `ShipmentStatus` rappresentano la vita della richiesta di spedizione:
+
+- `DRAFT`;
+- `REGISTERED`;
+- `CONFIRMED`;
+- `SUSPENDED`;
+- `CANCELLED`;
+- `ARCHIVED`.
+
+Non sono stati della shipment pura:
+
+- `IN_TRANSIT`;
+- `DELIVERED`;
+- `FAILED`;
+- `DAMAGED`;
+- `DELAYED`.
+
+Questi stati appartengono alla futura esecuzione del trasporto, al tracking, ai reclami o agli incidenti.
+
+## 6.23 Decisione: requisiti shipment come set, non come booleani
+
+Come già fatto per `domain.cargo`, anche per `domain.shipments` i requisiti di trasporto sono stati modellati come set.
+
+`ShipmentRequirementSet` contiene un `Set<ShipmentTransportRequirement>`.
+
+Questa scelta è più scalabile rispetto a una classe con molti booleani come `adrRequired`, `atpRequired`, `foodGradeRequired`, ecc.
+
+Se in futuro nasceranno nuovi requisiti, sarà sufficiente aggiungere un valore a `ShipmentTransportRequirement`, senza rendere la struttura principale sempre più grande.
+
+## 6.24 Decisione: priorità e livello di servizio non sono pianificazione
+
+`ShipmentPriority` e `ShipmentServiceLevel` sono stati aggiunti perché sono informazioni realistiche in una piattaforma enterprise.
+
+Tuttavia non pianificano nulla.
+
+Una shipment urgente o time-critical non assegna automaticamente un mezzo, un autista o una finestra temporale.
+
+Queste informazioni saranno usate più avanti dai moduli di planning e dispatching, ma nel dominio puro restano solo caratteristiche dichiarate della richiesta.

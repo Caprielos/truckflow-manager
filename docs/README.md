@@ -11,6 +11,7 @@ Il progetto, allo stato attuale, è concentrato sul **domain layer** e contiene 
 - `domain.cargo`
 - `domain.locations`
 - `domain.triptemplates`
+- `domain.shipments`
 
 L’obiettivo di questa documentazione è spiegare in italiano, in modo chiaro e professionale, **perché il dominio è stato modellato così**, quali scelte sono state fatte e cosa ogni package rappresenta.
 
@@ -25,6 +26,7 @@ L’obiettivo di questa documentazione è spiegare in italiano, in modo chiaro e
 7. [`07-domain-cargo.md`](07-domain-cargo.md) — documentazione completa del dominio cargo e dei requisiti della merce.
 8. [`08-domain-locations.md`](08-domain-locations.md) — documentazione completa del dominio locations e dei luoghi logistici.
 9. [`09-domain-triptemplates.md`](09-domain-triptemplates.md) — documentazione completa dei percorsi tipo e delle missioni tecniche astratte.
+10. [`10-domain-shipments.md`](10-domain-shipments.md) — documentazione completa delle spedizioni richieste e dei loro requisiti.
 
 ## Stato del progetto documentato
 
@@ -36,7 +38,8 @@ Questa documentazione descrive la versione del progetto in cui il dominio contie
 - unità veicolo, allestimenti, combinazioni, schede tecniche, capacità, agganci e ruoli operativi dei mezzi, con `domain.vehicles` organizzato in sottopackage (`unit`, `combination`, `coupling`, `specification`, `body`, `operation`, `common`);
 - dominio cargo per descrivere la merce, le sue caratteristiche e i suoi requisiti di trasporto senza introdurre pianificazione o compatibilità implementata;
 - dominio locations per descrivere luoghi logistici riutilizzabili come depositi, hub, yard, porti, clienti e fornitori;
-- dominio triptemplates per descrivere percorsi tipo e missioni tecniche astratte senza assegnare mezzi, autisti, cargo o orari reali.
+- dominio triptemplates per descrivere percorsi tipo e missioni tecniche astratte senza assegnare mezzi, autisti, cargo o orari reali;
+- dominio shipments per descrivere richieste di spedizione, item cargo, tratte logiche, priorità, livelli di servizio, requisiti e riferimenti senza introdurre pianificazione o tracking.
 
 
 ## Nota sul packaging di `domain.vehicles`
@@ -79,3 +82,9 @@ Tutte queste parti potranno essere aggiunte in futuro in layer o moduli separati
 Le location sono state modellate come dominio separato perché i luoghi non appartengono solo ai percorsi: in futuro saranno utili anche per clienti, fornitori, magazzini, spedizioni, tracking, documenti e pianificazione.
 
 I percorsi astratti sono stati modellati come `TripTemplate`, non come `Trip`, per evitare confusione con il viaggio reale operativo. Un `TripTemplate` descrive la struttura del percorso; il viaggio eseguito con veicolo, autista, cargo e orari reali verrà modellato più avanti in planning/dispatching.
+
+## Nota su `domain.shipments`
+
+Il dominio shipments rappresenta la richiesta di spedizione: cosa deve essere spedito, quali cargo compongono la spedizione, da quali location parte, verso quali location arriva e quali requisiti devono essere rispettati.
+
+Una shipment non è ancora un viaggio operativo reale. Per questo non contiene veicoli, autisti, orari reali, tracking, documenti operativi o costi. Questi concetti verranno introdotti più avanti nei moduli di planning, dispatching, transport execution, tracking e documents.
