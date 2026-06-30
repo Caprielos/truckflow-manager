@@ -12,7 +12,9 @@ In questa fase il progetto si concentra sul **domain layer**, cioè sulla parte 
 - abilitazioni e qualificazioni;
 - figure operative aziendali;
 - veicoli, rimorchi, semirimorchi e combinazioni;
-- cargo, cioè merce e requisiti di trasporto.
+- cargo, cioè merce e requisiti di trasporto;
+- location, cioè luoghi logistici riutilizzabili;
+- trip template, cioè percorsi tipo e missioni tecniche astratte.
 
 Il dominio non è ancora collegato a database, API REST, interfacce grafiche o servizi esterni. Questa è una scelta intenzionale: prima si costruisce il modello del business, poi si aggiungono infrastruttura e applicazione.
 
@@ -33,7 +35,7 @@ Questa separazione rende il progetto più pulito e più facile da estendere.
 
 ## 1.3 I macro-domini attuali
 
-Il dominio è stato diviso in cinque macro-aree:
+Il dominio è stato diviso in sette macro-aree:
 
 ### `domain.users`
 
@@ -55,6 +57,14 @@ Rappresenta il parco mezzi: unità veicolo singole, trailer, semirimorchi, tratt
 
 Rappresenta la merce: identificazione, tipologia, categorie logistiche, pesi, dimensioni, imballaggio, temperatura, pericolosità, requisiti normativi e requisiti di trasporto.
 
+### `domain.locations`
+
+Rappresenta i luoghi logistici e geografici usati dal sistema: depositi, magazzini, clienti, fornitori, yard, hub, porti, aeroporti, terminal ferroviari, terminal intermodali, aree di servizio e altri punti logistici.
+
+### `domain.triptemplates`
+
+Rappresenta percorsi tipo e missioni tecniche astratte. Un `TripTemplate` non è un viaggio reale: non contiene autisti, veicoli, cargo, orari o tracking. Descrive solo la struttura del percorso tramite segmenti ordinati e riferimenti a `LocationId`.
+
 ## 1.4 Perché separare i contesti
 
 La separazione dei contesti evita errori di modellazione.
@@ -70,6 +80,8 @@ Quindi non vanno fusi nella stessa classe.
 Lo stesso ragionamento vale per le qualificazioni: una patente C è una `Qualification` del catalogo, mentre il fatto che Mario Rossi possieda quella patente appartiene al dominio operativo tramite una `OperationalQualification`.
 
 Lo stesso principio vale per cargo e veicoli: il cargo dichiara i propri requisiti, il veicolo dichiara le proprie capacità, mentre la verifica di compatibilità appartiene a un futuro modulo di pianificazione o assegnazione.
+
+Lo stesso principio vale anche per location e trip template: una location è un luogo riutilizzabile, mentre un `TripTemplate` usa solo `LocationId` per indicare origine e destinazione dei segmenti. In questo modo il percorso tipo non ingloba l'intero aggregato Location.
 
 ## 1.5 Principi architetturali seguiti
 
@@ -88,11 +100,12 @@ Il progetto segue alcuni principi ispirati a Domain-Driven Design e Clean Archit
 
 Il dominio attuale non gestisce ancora:
 
-- viaggi;
+- viaggi operativi reali;
 - spedizioni;
 - assegnazione autista-mezzo;
 - disponibilità giornaliera;
 - pianificazione;
+- esecuzione reale dei trip;
 - manutenzione dettagliata;
 - scadenze legali;
 - documenti;

@@ -179,7 +179,66 @@ Questa scelta è più scalabile di una lista di booleani come `requiresADR`, `re
 
 Se in futuro verrà aggiunto un nuovo requisito, sarà sufficiente aggiungere un nuovo valore al catalogo dei requisiti, senza gonfiare la struttura principale della merce.
 
-## 6.16 Cosa potrà essere aggiunto in futuro
+
+## 6.16 Decisione: separare Location da TripTemplate
+
+Le location sono state modellate in `domain.locations` e non dentro `domain.triptemplates`.
+
+Questa scelta evita di trattare i luoghi come semplici dettagli di un percorso. Un deposito, un hub, un cliente, un porto o uno yard sono concetti riutilizzabili da molti domini futuri: spedizioni, magazzino, clienti, fornitori, tracking, documenti e pianificazione.
+
+Per questo `TripTemplateSegment` non contiene oggetti `Location` completi, ma solo:
+
+```text
+originLocationId
+destinationLocationId
+```
+
+La relazione tramite ID riduce l'accoppiamento tra aggregati e segue la stessa regola già usata per `UserId` nelle figure operative e `VehicleUnitId` nelle combinazioni veicolari.
+
+## 6.17 Decisione: usare TripTemplate invece di Trip
+
+Il nome `TripTemplate` è stato scelto per evitare confusione con il viaggio reale operativo.
+
+Un trip reale futuro potrà avere autista, veicolo, cargo, orari, tracking, stato di esecuzione, documenti e costi.
+
+Il `TripTemplate`, invece, descrive solo la struttura astratta del percorso:
+
+- codice;
+- nome;
+- tipo;
+- stato anagrafico;
+- segmenti ordinati;
+- specifica descrittiva della rotta.
+
+Questa distinzione mantiene il dominio puro e impedisce di introdurre pianificazione troppo presto.
+
+## 6.18 Decisione: segmenti come tratte, non come soste
+
+Un `TripTemplateSegment` rappresenta una tratta tra due location.
+
+La sosta non è il segmento: la sosta è una `Location`.
+
+Esempio:
+
+```text
+Segment 1: Milano Depot → Bologna Hub
+Segment 2: Bologna Hub → Firenze Yard
+Segment 3: Firenze Yard → Roma Depot
+```
+
+Questa scelta permette di modellare soste multiple in modo semplice, ordinato e coerente.
+
+## 6.19 Decisione: Yard come LocationType
+
+Il concetto di yard è stato modellato come `LocationType.YARD`.
+
+Uno yard rappresenta piazzali, aree di scambio rimorchi, parcheggi mezzi, zone di staging, aree di pre-carico e pre-scarico.
+
+È importante per TruckFlow perché molte operazioni logistiche non sono viaggi stradali completi, ma movimenti interni o tecnici.
+
+Per questo `domain.triptemplates` supporta anche `TripTemplateType.YARD_MOVEMENT` e `TripTemplateSegmentType.YARD_MOVEMENT`, restando però nel dominio puro: nessuna assegnazione, nessun tracking, nessuna esecuzione reale.
+
+## 6.20 Cosa potrà essere aggiunto in futuro
 
 Il dominio attuale è una base.
 
@@ -203,7 +262,7 @@ In futuro si potranno aggiungere:
 
 Queste estensioni dovranno rispettare la separazione già definita.
 
-## 6.17 Conclusione
+## 6.21 Conclusione
 
 Le scelte fatte rendono TruckFlow Manager più ordinato e più vicino a un gestionale enterprise reale.
 
@@ -214,6 +273,8 @@ Il dominio attuale non prova a fare tutto subito. Descrive bene le fondamenta:
 - quali persone operative lavorano in azienda;
 - quali mezzi compongono il parco veicoli;
 - come si collegano unità e combinazioni;
-- quali merci esistono e quali requisiti di trasporto impongono.
+- quali merci esistono e quali requisiti di trasporto impongono;
+- quali luoghi logistici esistono e come sono classificati;
+- quali percorsi tipo esistono e quali tratte li compongono.
 
 Questa base permette di crescere senza dover riscrivere i concetti fondamentali.

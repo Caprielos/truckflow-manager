@@ -5,14 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f285ebd6-ca31-4d09-87c6-2a0cecd930e7" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-it.gabriele.truckflow.domain.operational.OperationalDomainTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-it.gabriele.truckflow.domain.operational.OperationalDomainTest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-it.gabriele.truckflow.domain.qualifications.QualificationCatalogTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-it.gabriele.truckflow.domain.qualifications.QualificationCatalogTest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-it.gabriele.truckflow.domain.users.UserTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-it.gabriele.truckflow.domain.users.UserTest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-it.gabriele.truckflow.domain.vehicles.VehicleDomainTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-it.gabriele.truckflow.domain.vehicles.VehicleDomainTest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/it.gabriele.truckflow.domain.operational.OperationalDomainTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/it.gabriele.truckflow.domain.operational.OperationalDomainTest.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/it.gabriele.truckflow.domain.qualifications.QualificationCatalogTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/it.gabriele.truckflow.domain.qualifications.QualificationCatalogTest.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/it.gabriele.truckflow.domain.users.UserTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/it.gabriele.truckflow.domain.users.UserTest.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/it.gabriele.truckflow.domain.vehicles.VehicleDomainTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/it.gabriele.truckflow.domain.vehicles.VehicleDomainTest.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,61 +24,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="2.763503391517288E-5" />
-      <entry key="MS500" value="0.23141665857361665" />
-      <entry key="S2" value="4.022438732079289" />
-      <entry key="S5" value="12.726846859035799" />
-      <entry key="S10" value="23.471969339367156" />
-      <entry key="S30" value="41.71069282689528" />
-      <entry key="S60" value="49.93908549454131" />
-      <entry key="M2" value="55.07193084887632" />
-      <entry key="M5" value="61.30597039415416" />
-      <entry key="M10" value="75.87248480680556" />
-      <entry key="M15" value="89.79671021211975" />
-      <entry key="M30" value="115.90568247536801" />
-      <entry key="H1" value="137.90610428550252" />
-      <entry key="H2" value="154.53781421336024" />
-      <entry key="H4" value="186.591515353191" />
-      <entry key="D1" value="652.5087207530173" />
-      <entry key="W1" value="1126.8605394412104" />
+      <entry key="MS100" value="1.4612568793411316" />
+      <entry key="MS500" value="4.03794466366122" />
+      <entry key="S2" value="8.95089567930787" />
+      <entry key="S5" value="16.823707956876788" />
+      <entry key="S10" value="26.058273377100264" />
+      <entry key="S30" value="39.536254633494195" />
+      <entry key="S60" value="44.72236351091436" />
+      <entry key="M2" value="47.72997690942598" />
+      <entry key="M5" value="52.25409515792328" />
+      <entry key="M10" value="65.96777051257476" />
+      <entry key="M15" value="81.89319311867774" />
+      <entry key="M30" value="119.25592788817815" />
+      <entry key="H1" value="156.89100689597254" />
+      <entry key="H2" value="186.4327614603216" />
+      <entry key="H4" value="225.68557974256535" />
+      <entry key="D1" value="696.3904580290899" />
+      <entry key="W1" value="1176.0966395337873" />
     </decayedCancelled>
     <decayedSelected>
-      <entry key="MS100" value="1.0" />
-      <entry key="MS500" value="1.0" />
-      <entry key="S2" value="1.0" />
-      <entry key="S5" value="1.0" />
-      <entry key="S10" value="1.0" />
-      <entry key="S30" value="1.0" />
-      <entry key="S60" value="1.0" />
-      <entry key="M2" value="1.0" />
-      <entry key="M5" value="1.0" />
-      <entry key="M10" value="1.0" />
-      <entry key="M15" value="1.0" />
-      <entry key="M30" value="1.0000000013196244" />
-      <entry key="H1" value="1.000075300489215" />
-      <entry key="H2" value="1.0236203562890804" />
-      <entry key="H4" value="1.5471742719424753" />
-      <entry key="D1" value="16.005460109363597" />
-      <entry key="W1" value="34.710680583564276" />
+      <entry key="MS100" value="0.0" />
+      <entry key="MS500" value="0.0" />
+      <entry key="S2" value="2.2086847992400216E-206" />
+      <entry key="S5" value="5.465796986996877E-83" />
+      <entry key="S10" value="7.393102858067692E-42" />
+      <entry key="S30" value="1.9480895475383023E-14" />
+      <entry key="S60" value="1.395739785038133E-7" />
+      <entry key="M2" value="3.735960097536019E-4" />
+      <entry key="M5" value="0.042556008955866476" />
+      <entry key="M10" value="0.20629107822653509" />
+      <entry key="M15" value="0.349129835562688" />
+      <entry key="M30" value="0.5908720982447283" />
+      <entry key="H1" value="0.7687399343935147" />
+      <entry key="H2" value="0.8974541794379792" />
+      <entry key="H4" value="1.4486915272433762" />
+      <entry key="D1" value="15.83097309746172" />
+      <entry key="W1" value="34.65636829063575" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="4.8260763027761327E-4" />
-      <entry key="MS500" value="0.3850791457921525" />
-      <entry key="S2" value="4.602408456902107" />
-      <entry key="S5" value="13.521512015615814" />
-      <entry key="S10" value="24.359456355743053" />
-      <entry key="S30" value="42.669493106902806" />
-      <entry key="S60" value="50.91776421422967" />
-      <entry key="M2" value="56.06105272062851" />
-      <entry key="M5" value="62.30152187190578" />
-      <entry key="M10" value="76.87015674049094" />
-      <entry key="M15" value="90.79509293962867" />
-      <entry key="M30" value="116.90481267684063" />
-      <entry key="H1" value="138.90571832260963" />
-      <entry key="H2" value="155.56119035128853" />
-      <entry key="H4" value="188.13851762732173" />
-      <entry key="D1" value="668.5139245494146" />
-      <entry key="W1" value="1161.5711432235569" />
+      <entry key="MS100" value="1.430235246463412" />
+      <entry key="MS500" value="4.009464940933783" />
+      <entry key="S2" value="8.934002495587725" />
+      <entry key="S5" value="16.811541335635518" />
+      <entry key="S10" value="26.04882579968827" />
+      <entry key="S30" value="39.5313324020337" />
+      <entry key="S60" value="44.71954603408858" />
+      <entry key="M2" value="47.72883345508196" />
+      <entry key="M5" value="52.29582944200246" />
+      <entry key="M10" value="66.17326039006105" />
+      <entry key="M15" value="82.24154328787017" />
+      <entry key="M30" value="119.8461779943002" />
+      <entry key="H1" value="157.65933810454607" />
+      <entry key="H2" value="187.329974408161" />
+      <entry key="H4" value="227.13409665457868" />
+      <entry key="D1" value="712.2211753457177" />
+      <entry key="W1" value="1210.7529308201883" />
     </decayedShown>
   </component>
   <component name="ProblemsViewState">
@@ -164,7 +157,7 @@
       <option name="presentableId" value="Default" />
       <updated>1782639963283</updated>
       <workItem from="1782639964295" duration="3208000" />
-      <workItem from="1782649190071" duration="72137000" />
+      <workItem from="1782649190071" duration="73647000" />
     </task>
     <servers />
   </component>

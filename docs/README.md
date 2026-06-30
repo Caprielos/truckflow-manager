@@ -9,6 +9,8 @@ Il progetto, allo stato attuale, è concentrato sul **domain layer** e contiene 
 - `domain.operational`
 - `domain.vehicles`
 - `domain.cargo`
+- `domain.locations`
+- `domain.triptemplates`
 
 L’obiettivo di questa documentazione è spiegare in italiano, in modo chiaro e professionale, **perché il dominio è stato modellato così**, quali scelte sono state fatte e cosa ogni package rappresenta.
 
@@ -21,6 +23,8 @@ L’obiettivo di questa documentazione è spiegare in italiano, in modo chiaro e
 5. [`05-domain-vehicles.md`](05-domain-vehicles.md) — documentazione completa del dominio veicoli e combinazioni.
 6. [`06-architecture-decisions.md`](06-architecture-decisions.md) — decisioni architetturali e regole generali del dominio puro.
 7. [`07-domain-cargo.md`](07-domain-cargo.md) — documentazione completa del dominio cargo e dei requisiti della merce.
+8. [`08-domain-locations.md`](08-domain-locations.md) — documentazione completa del dominio locations e dei luoghi logistici.
+9. [`09-domain-triptemplates.md`](09-domain-triptemplates.md) — documentazione completa dei percorsi tipo e delle missioni tecniche astratte.
 
 ## Stato del progetto documentato
 
@@ -30,7 +34,9 @@ Questa documentazione descrive la versione del progetto in cui il dominio contie
 - catalogo statico delle qualificazioni e abilitazioni;
 - figure operative reali dell’azienda;
 - unità veicolo, allestimenti, combinazioni, schede tecniche, capacità, agganci e ruoli operativi dei mezzi, con `domain.vehicles` organizzato in sottopackage (`unit`, `combination`, `coupling`, `specification`, `body`, `operation`, `common`);
-- dominio cargo per descrivere la merce, le sue caratteristiche e i suoi requisiti di trasporto senza introdurre pianificazione o compatibilità implementata.
+- dominio cargo per descrivere la merce, le sue caratteristiche e i suoi requisiti di trasporto senza introdurre pianificazione o compatibilità implementata;
+- dominio locations per descrivere luoghi logistici riutilizzabili come depositi, hub, yard, porti, clienti e fornitori;
+- dominio triptemplates per descrivere percorsi tipo e missioni tecniche astratte senza assegnare mezzi, autisti, cargo o orari reali.
 
 
 ## Nota sul packaging di `domain.vehicles`
@@ -67,3 +73,9 @@ Quindi il dominio non contiene:
 - GPS o telematica.
 
 Tutte queste parti potranno essere aggiunte in futuro in layer o moduli separati, senza sporcare il dominio.
+
+## Nota su `domain.locations` e `domain.triptemplates`
+
+Le location sono state modellate come dominio separato perché i luoghi non appartengono solo ai percorsi: in futuro saranno utili anche per clienti, fornitori, magazzini, spedizioni, tracking, documenti e pianificazione.
+
+I percorsi astratti sono stati modellati come `TripTemplate`, non come `Trip`, per evitare confusione con il viaggio reale operativo. Un `TripTemplate` descrive la struttura del percorso; il viaggio eseguito con veicolo, autista, cargo e orari reali verrà modellato più avanti in planning/dispatching.
