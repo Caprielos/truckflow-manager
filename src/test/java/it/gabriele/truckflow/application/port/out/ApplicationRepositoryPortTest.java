@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import it.gabriele.truckflow.application.port.out.cargo.CargoUnitRepository;
+import it.gabriele.truckflow.application.port.out.documents.DocumentRepository;
 import it.gabriele.truckflow.application.port.out.locations.LocationRepository;
 import it.gabriele.truckflow.application.port.out.shipments.ShipmentRepository;
 import it.gabriele.truckflow.domain.cargo.CargoCategory;
@@ -21,6 +22,15 @@ import it.gabriele.truckflow.domain.cargo.CargoTemperature;
 import it.gabriele.truckflow.domain.cargo.CargoType;
 import it.gabriele.truckflow.domain.cargo.CargoUnit;
 import it.gabriele.truckflow.domain.cargo.CargoWeights;
+import it.gabriele.truckflow.domain.documents.Document;
+import it.gabriele.truckflow.domain.documents.DocumentCategory;
+import it.gabriele.truckflow.domain.documents.DocumentCode;
+import it.gabriele.truckflow.domain.documents.DocumentContent;
+import it.gabriele.truckflow.domain.documents.DocumentId;
+import it.gabriele.truckflow.domain.documents.DocumentMetadata;
+import it.gabriele.truckflow.domain.documents.DocumentReference;
+import it.gabriele.truckflow.domain.documents.DocumentStatus;
+import it.gabriele.truckflow.domain.documents.DocumentType;
 import it.gabriele.truckflow.domain.locations.Location;
 import it.gabriele.truckflow.domain.locations.LocationAddress;
 import it.gabriele.truckflow.domain.locations.LocationCode;
@@ -94,13 +104,30 @@ class ApplicationRepositoryPortTest {
   }
 
   @Test
+  void documentRepositoryPortStoresAndFindsDocumentsByIdAndCode() {
+    var repository = new InMemoryTestDocumentRepository();
+    var document = document("DOC-001");
+
+    Document saved = repository.save(document);
+
+    assertEquals(document, saved);
+    assertTrue(repository.existsById(document.id()));
+    assertTrue(repository.existsByCode(DocumentCode.of("doc-001")));
+    assertEquals(document, repository.findById(document.id()).orElseThrow());
+    assertEquals(document, repository.findByCode(document.code()).orElseThrow());
+    assertFalse(repository.existsByCode(DocumentCode.of("DOC-404")));
+  }
+
+  @Test
   void repositoryPortsAreApplicationContractsAndNotConcreteInfrastructure() {
     assertTrue(RepositoryPort.class.isAssignableFrom(LocationRepository.class));
     assertTrue(RepositoryPort.class.isAssignableFrom(CargoUnitRepository.class));
     assertTrue(RepositoryPort.class.isAssignableFrom(ShipmentRepository.class));
+    assertTrue(RepositoryPort.class.isAssignableFrom(DocumentRepository.class));
     assertTrue(LocationRepository.class.isInterface());
     assertTrue(CargoUnitRepository.class.isInterface());
     assertTrue(ShipmentRepository.class.isInterface());
+    assertTrue(DocumentRepository.class.isInterface());
   }
 
   private static Location location(String code) {
@@ -153,6 +180,19 @@ class ApplicationRepositoryPortTest {
         ShipmentReferences.empty(),
         ShipmentNotes.empty(),
         "");
+  }
+
+  private static Document document(String code) {
+    return new Document(
+        null,
+        DocumentCode.of(code),
+        DocumentType.GENERIC,
+        DocumentCategory.GENERIC,
+        DocumentStatus.DRAFT,
+        DocumentMetadata.minimal("Document " + code),
+        DocumentContent.empty(),
+        Set.<DocumentReference>of(),
+        "Application repository port test document");
   }
 
   private static final class InMemoryTestLocationRepository implements LocationRepository {
@@ -250,6 +290,39 @@ class ApplicationRepositoryPortTest {
 
     @Override
     public boolean existsByCode(ShipmentCode code) {
+      return byCode.containsKey(code);
+    }
+  }
+
+  private static final class InMemoryTestDocumentRepository implements DocumentRepository {
+
+    private final Map<DocumentId, Document> byId = new HashMap<>();
+    private final Map<DocumentCode, Document> byCode = new HashMap<>();
+
+    @Override
+    public Document save(Document document) {
+      byId.put(document.id(), document);
+      byCode.put(document.code(), document);
+      return document;
+    }
+
+    @Override
+    public Optional<Document> findById(DocumentId id) {
+      return Optional.ofNullable(byId.get(id));
+    }
+
+    @Override
+    public Optional<Document> findByCode(DocumentCode code) {
+      return Optional.ofNullable(byCode.get(code));
+    }
+
+    @Override
+    public boolean existsById(DocumentId id) {
+      return byId.containsKey(id);
+    }
+
+    @Override
+    public boolean existsByCode(DocumentCode code) {
       return byCode.containsKey(code);
     }
   }

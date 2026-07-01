@@ -20,9 +20,9 @@ Il markup HTML resta identico in entrambi i casi. Cambia solo il CSS applicato d
 
 ## Stato attuale del dominio
 
-Il progetto ha consolidato il **domain layer puro** e ha completato i primi step dell’application layer fino al **Punto 6F — Application Use Case Review & Hardening**.
+Il progetto ha consolidato il **domain layer puro** e ha completato i primi step dell’application layer fino al **Punto 6G — Application Use Cases Expansion**.
 
-La versione attuale rappresenta la **TruckFlow Domain Foundation v1.0** rafforzata dalla prima review correttiva del dominio puro. La fondazione è definita, le regole sono documentate e sono stati applicati interventi mirati su invarianti, eccezioni, codici aziendali, test e pulizia del repository. Il passo attuale completato è il rafforzamento dei primi use case applicativi per Locations, Cargo e Shipments, con cancellazione shipment, copy-on-write delle mutazioni shipment, test negativi e protezione da mutazioni parziali, senza introdurre ancora REST API, database, JPA, Spring Data o persistenza definitiva.
+La versione attuale rappresenta la **TruckFlow Domain Foundation v1.0** rafforzata dalla prima review correttiva del dominio puro. La fondazione è definita, le regole sono documentate e sono stati applicati interventi mirati su invarianti, eccezioni, codici aziendali, test e pulizia del repository. Il passo attuale completato è l'espansione controllata dei use case applicativi verso Documents, dopo il rafforzamento dei primi use case per Locations, Cargo e Shipments. Ora l'application layer copre anche registrazione, ricerca, attivazione e archiviazione di documenti logici, senza introdurre ancora REST API, database, JPA, Spring Data, file storage o persistenza definitiva.
 
 I package principali sono:
 
@@ -63,6 +63,7 @@ Il dominio è stato costruito seguendo una regola precisa: modellare prima i con
 - [`docs/19-application-in-memory-repositories.md`](docs/19-application-in-memory-repositories.md) — repository in memory del Punto 6D: implementazioni leggere per Locations, Cargo e Shipments.
 - [`docs/20-application-first-use-cases.md`](docs/20-application-first-use-cases.md) — primi use case del Punto 6E: command, result, port in, application service e primo flusso applicativo Locations + Cargo + Shipments.
 - [`docs/21-application-use-case-hardening.md`](docs/21-application-use-case-hardening.md) — hardening del Punto 6F: `CancelShipmentUseCase`, copy-on-write delle mutazioni shipment, test negativi, errori applicativi e protezione dalle mutazioni fallite.
+- [`docs/22-application-use-case-expansion.md`](docs/22-application-use-case-expansion.md) — espansione del Punto 6G: primi use case applicativi Documents, `DocumentRepository`, `InMemoryDocumentRepository` e flusso register/find/activate/archive.
 
 ## Regole fondamentali della Domain Foundation
 
@@ -118,6 +119,8 @@ Con il Punto 6E sono stati introdotti i primi use case applicativi reali: regist
 
 Con il Punto 6F è stato eseguito l'hardening dei primi use case: è stato aggiunto `CancelShipmentUseCase`, sono stati rafforzati i service di mutazione shipment con approccio copy-on-write, sono stati ampliati i test negativi su command, dependency nulle, risorse mancanti e duplicati, ed è stata verificata la protezione da mutazioni parziali in caso di errore di dominio.
 
+Con il Punto 6G è stata eseguita la prima espansione controllata dell'application layer verso `documents`: sono stati aggiunti command, result, port in, port out, service applicativi, repository in memory e test per registrare, trovare, attivare e archiviare documenti logici aziendali.
+
 
 
 ## Punto 6A — Application Layer Blueprint
@@ -142,7 +145,8 @@ Le prime porte sono dedicate a:
 
 - Locations, tramite `LocationRepository`;
 - Cargo, tramite `CargoUnitRepository`;
-- Shipments, tramite `ShipmentRepository`.
+- Shipments, tramite `ShipmentRepository`;
+- Documents, tramite `DocumentRepository` dopo il Punto 6G.
 
 Ogni porta permette salvataggio, ricerca per ID, ricerca per codice e verifica di esistenza per ID o codice. Questa scelta prepara i futuri use case senza introdurre database, JPA, Spring, file system o infrastructure concreta.
 
@@ -157,7 +161,8 @@ Le implementazioni introdotte sono:
 
 - `InMemoryLocationRepository`;
 - `InMemoryCargoUnitRepository`;
-- `InMemoryShipmentRepository`.
+- `InMemoryShipmentRepository`;
+- `InMemoryDocumentRepository` dopo il Punto 6G.
 
 Queste repository permettono salvataggio, ricerca per ID, ricerca per codice e verifica di esistenza. Inoltre rifiutano input nulli con `UseCaseValidationException` e codici duplicati con `DuplicateResourceException`.
 
@@ -188,6 +193,18 @@ Questa fase non introduce ancora REST API, database, Spring, JPA, security o mod
 
 Il Punto 6F è documentato in [`docs/21-application-use-case-hardening.md`](docs/21-application-use-case-hardening.md).
 
+## Punto 6G — Application Use Cases Expansion
+
+Il Punto 6G espande l'application layer verso il dominio Documents.
+
+Sono stati aggiunti `RegisterDocumentCommand`, `FindDocumentCommand`, `ActivateDocumentCommand` e `ArchiveDocumentCommand`, insieme a `DocumentResult`, `DocumentRepository`, le port in documentali e i service `RegisterDocumentService`, `FindDocumentService`, `ActivateDocumentService` e `ArchiveDocumentService`.
+
+È stata aggiunta anche `InMemoryDocumentRepository`, coerente con gli adapter in memory già presenti per Locations, Cargo e Shipments. I test applicativi verificano registrazione, ricerca, attivazione, archiviazione, duplicati, risorse mancanti, command nulli e dependency nulle.
+
+Questa fase non introduce REST API, database, JPA, Spring controller, file upload, file storage, workflow documentali, audit trail o compliance check concreti.
+
+Il Punto 6G è documentato in [`docs/22-application-use-case-expansion.md`](docs/22-application-use-case-expansion.md).
+
 ## Prossimi step consigliati
 
 La roadmap consigliata è:
@@ -200,5 +217,6 @@ La roadmap consigliata è:
 6. mantenere stabile il Punto 6D con le prime repository in memory per test e scenari locali;
 7. mantenere stabile il Punto 6E con i primi use case Locations + Cargo + Shipments;
 8. mantenere stabile il Punto 6F con hardening dei primi use case, `CancelShipmentUseCase` e protezione copy-on-write delle mutazioni shipment;
-9. estendere i casi d'uso applicativi ad altri domini nel Punto 6G;
-10. rimandare API REST, database e integrazioni esterne finché l'application layer non è stabile.
+9. mantenere stabile il Punto 6G con i primi use case applicativi Documents, `DocumentRepository` e `InMemoryDocumentRepository`;
+10. rivedere nel Punto 6H la coerenza dell'application layer dopo l'espansione Documents;
+11. rimandare API REST, database e integrazioni esterne finché l'application layer non è stabile.

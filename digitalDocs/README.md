@@ -52,6 +52,8 @@ This digital documentation mirrors:
 - `docs/18-application-repository-ports.md`
 - `docs/19-application-in-memory-repositories.md`
 - `docs/20-application-first-use-cases.md`
+- `docs/21-application-use-case-hardening.md`
+- `docs/22-application-use-case-expansion.md`
 - `command_basic.md`
 
 
@@ -91,3 +93,15 @@ Documento di riferimento: `docs/20-application-first-use-cases.md`.
 La documentazione digitale include ora anche il Punto 6F — Application Use Case Review & Hardening.
 
 Questo aggiornamento documenta `CancelShipmentUseCase`, la protezione copy-on-write dei service di mutazione shipment, i test di hardening dei primi use case e la distinzione tra errori applicativi ed errori di dominio. La documentazione HTML resta un mirror navigabile della documentazione Markdown e non sostituisce i file ufficiali nella cartella `docs`.
+
+Documento di riferimento: `docs/21-application-use-case-hardening.md`.
+
+## Aggiornamento Punto 6G
+
+La documentazione digitale include ora anche il Punto 6G — Application Use Cases Expansion.
+
+Questo aggiornamento documenta la prima espansione controllata dell'application layer verso `documents`: command, result, port in, port out, service applicativi, `DocumentRepository`, `InMemoryDocumentRepository` e test per registrare, trovare, attivare e archiviare documenti logici aziendali.
+
+La fase resta coerente con i vincoli architetturali già decisi: niente REST API, controller Spring, database, JPA, file upload, file storage, workflow documentale, audit trail o compliance check concreti.
+
+Documento di riferimento: `docs/22-application-use-case-expansion.md`.

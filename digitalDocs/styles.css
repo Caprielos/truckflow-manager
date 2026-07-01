@@ -438,3 +438,9 @@ body.tooltip-disabled .term[data-it]::after {
 #doc-22:checked ~ .app-shell label[for="doc-22"] { background: var(--nav-active-bg); border-color: var(--accent); color: var(--text-strong); }
 #doc-23:checked ~ .app-shell .panel-23 { display: block; }
 #doc-23:checked ~ .app-shell label[for="doc-23"] { background: var(--nav-active-bg); border-color: var(--accent); color: var(--text-strong); }
+#doc-24:checked ~ .app-shell .panel-24 { display: block; }
+#doc-24:checked ~ .app-shell label[for="doc-24"] { background: var(--nav-active-bg); border-color: var(--accent); color: var(--text-strong); }
+#doc-24:checked ~ .app-shell label[for="doc-24"] .nav-number { background: var(--accent); color: white; }
+#doc-21:checked ~ .app-shell label[for="doc-21"] .nav-number { background: var(--accent); color: white; }
+#doc-22:checked ~ .app-shell label[for="doc-22"] .nav-number { background: var(--accent); color: white; }
+#doc-23:checked ~ .app-shell label[for="doc-23"] .nav-number { background: var(--accent); color: white; }

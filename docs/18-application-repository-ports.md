@@ -328,3 +328,30 @@ Le porte hanno quindi iniziato a svolgere il loro ruolo reale: permettere agli u
 Il Punto 6F usa le repository port definite in questo step per verificare scenari applicativi più robusti.
 
 `ShipmentRepository` viene usata anche dal nuovo `CancelShipmentUseCase`, mentre `LocationRepository` e `CargoUnitRepository` continuano a proteggere i lookup necessari ai primi flussi. La logica rimane astratta: nessun service applicativo conosce database, JPA, file system o implementazioni concrete.
+
+## Aggiornamento dopo il Punto 6G — DocumentRepository
+
+Il Punto 6G estende il set di repository port aggiungendo:
+
+```text
+application.port.out.documents.DocumentRepository
+```
+
+Questa porta permette ai use case documentali di:
+
+- salvare un `Document`;
+- cercare un `Document` tramite `DocumentId`;
+- cercare un `Document` tramite `DocumentCode`;
+- verificare l'esistenza per ID;
+- verificare l'esistenza per codice.
+
+`DocumentRepository` resta una porta outbound dell'application layer. Non è una repository JPA, non usa Spring Data, non conosce database e non gestisce file fisici.
+
+La porta viene usata dai primi use case documentali del Punto 6G:
+
+- `RegisterDocumentUseCase`;
+- `FindDocumentUseCase`;
+- `ActivateDocumentUseCase`;
+- `ArchiveDocumentUseCase`.
+
+I test contrattuali delle repository port sono stati aggiornati per includere anche `DocumentRepository`.

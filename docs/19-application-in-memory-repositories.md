@@ -227,3 +227,27 @@ Questo conferma che gli adapter in memory sono sufficienti per testare l'orchest
 Le repository in memory introdotte nel Punto 6D vengono usate nel Punto 6F per testare scenari applicativi più severi.
 
 I test verificano che una shipment cancellata venga salvata correttamente, che un cargo duplicato venga rifiutato, che le risorse mancanti producano errori applicativi e che una mutazione fallita non lasci stato parziale nell'aggregate salvato.
+
+## Aggiornamento dopo il Punto 6G — InMemoryDocumentRepository
+
+Il Punto 6G estende l'infrastructure memory aggiungendo:
+
+```text
+infrastructure.memory.documents.InMemoryDocumentRepository
+```
+
+Questa classe implementa `DocumentRepository` e gestisce aggregate `Document` in memoria.
+
+Responsabilità principali:
+
+- salvare un documento;
+- cercare un documento tramite `DocumentId`;
+- cercare un documento tramite `DocumentCode`;
+- verificare esistenza per ID;
+- verificare esistenza per codice;
+- impedire codici duplicati su documenti diversi;
+- rifiutare input nulli con `UseCaseValidationException`.
+
+La repository resta un adapter temporaneo e leggero. Non introduce database, JPA, Spring Data, storage fisico, upload, download, versioning documentale reale o workflow approvativi.
+
+`InMemoryRepositoryTest` è stato aggiornato per verificare anche il comportamento di `InMemoryDocumentRepository`.

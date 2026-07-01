@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import it.gabriele.truckflow.application.exception.DuplicateResourceException;
 import it.gabriele.truckflow.application.exception.UseCaseValidationException;
 import it.gabriele.truckflow.application.port.out.cargo.CargoUnitRepository;
+import it.gabriele.truckflow.application.port.out.documents.DocumentRepository;
 import it.gabriele.truckflow.application.port.out.locations.LocationRepository;
 import it.gabriele.truckflow.application.port.out.shipments.ShipmentRepository;
 import it.gabriele.truckflow.domain.cargo.CargoCategory;
@@ -24,6 +25,15 @@ import it.gabriele.truckflow.domain.cargo.CargoTemperature;
 import it.gabriele.truckflow.domain.cargo.CargoType;
 import it.gabriele.truckflow.domain.cargo.CargoUnit;
 import it.gabriele.truckflow.domain.cargo.CargoWeights;
+import it.gabriele.truckflow.domain.documents.Document;
+import it.gabriele.truckflow.domain.documents.DocumentCategory;
+import it.gabriele.truckflow.domain.documents.DocumentCode;
+import it.gabriele.truckflow.domain.documents.DocumentContent;
+import it.gabriele.truckflow.domain.documents.DocumentId;
+import it.gabriele.truckflow.domain.documents.DocumentMetadata;
+import it.gabriele.truckflow.domain.documents.DocumentReference;
+import it.gabriele.truckflow.domain.documents.DocumentStatus;
+import it.gabriele.truckflow.domain.documents.DocumentType;
 import it.gabriele.truckflow.domain.locations.Location;
 import it.gabriele.truckflow.domain.locations.LocationAddress;
 import it.gabriele.truckflow.domain.locations.LocationCode;
@@ -43,6 +53,7 @@ import it.gabriele.truckflow.domain.shipments.properties.ShipmentTemperature;
 import it.gabriele.truckflow.domain.shipments.references.ShipmentReferences;
 import it.gabriele.truckflow.domain.shipments.requirements.ShipmentRequirementSet;
 import it.gabriele.truckflow.infrastructure.memory.cargo.InMemoryCargoUnitRepository;
+import it.gabriele.truckflow.infrastructure.memory.documents.InMemoryDocumentRepository;
 import it.gabriele.truckflow.infrastructure.memory.locations.InMemoryLocationRepository;
 import it.gabriele.truckflow.infrastructure.memory.shipments.InMemoryShipmentRepository;
 import java.util.List;
@@ -127,10 +138,36 @@ class InMemoryRepositoryTest {
   }
 
   @Test
+  void inMemoryDocumentRepositoryImplementsApplicationPortAndFindsByIdAndCode() {
+    DocumentRepository repository = new InMemoryDocumentRepository();
+    var document = document("DOC-001");
+
+    Document saved = repository.save(document);
+
+    assertEquals(document, saved);
+    assertTrue(repository.existsById(document.id()));
+    assertTrue(repository.existsByCode(DocumentCode.of("doc-001")));
+    assertEquals(document, repository.findById(document.id()).orElseThrow());
+    assertEquals(document, repository.findByCode(document.code()).orElseThrow());
+    assertFalse(repository.findById(DocumentId.random()).isPresent());
+  }
+
+  @Test
+  void inMemoryDocumentRepositoryRejectsDuplicateCodesForDifferentDocuments() {
+    DocumentRepository repository = new InMemoryDocumentRepository();
+    repository.save(document("DOC-DUP-001"));
+
+    var duplicate = document("doc-dup-001");
+
+    assertThrows(DuplicateResourceException.class, () -> repository.save(duplicate));
+  }
+
+  @Test
   void inMemoryRepositoriesRejectNullInputsAsApplicationValidationErrors() {
     LocationRepository locationRepository = new InMemoryLocationRepository();
     CargoUnitRepository cargoUnitRepository = new InMemoryCargoUnitRepository();
     ShipmentRepository shipmentRepository = new InMemoryShipmentRepository();
+    DocumentRepository documentRepository = new InMemoryDocumentRepository();
 
     assertThrows(UseCaseValidationException.class, () -> locationRepository.save(null));
     assertThrows(UseCaseValidationException.class, () -> locationRepository.findById(null));
@@ -143,6 +180,10 @@ class InMemoryRepositoryTest {
     assertThrows(UseCaseValidationException.class, () -> shipmentRepository.save(null));
     assertThrows(UseCaseValidationException.class, () -> shipmentRepository.findById(null));
     assertThrows(UseCaseValidationException.class, () -> shipmentRepository.findByCode(null));
+
+    assertThrows(UseCaseValidationException.class, () -> documentRepository.save(null));
+    assertThrows(UseCaseValidationException.class, () -> documentRepository.findById(null));
+    assertThrows(UseCaseValidationException.class, () -> documentRepository.findByCode(null));
   }
 
   private static Location location(String code) {
@@ -195,5 +236,18 @@ class InMemoryRepositoryTest {
         ShipmentReferences.empty(),
         ShipmentNotes.empty(),
         "");
+  }
+
+  private static Document document(String code) {
+    return new Document(
+        null,
+        DocumentCode.of(code),
+        DocumentType.GENERIC,
+        DocumentCategory.GENERIC,
+        DocumentStatus.DRAFT,
+        DocumentMetadata.minimal("Document " + code),
+        DocumentContent.empty(),
+        Set.<DocumentReference>of(),
+        "In-memory repository test document");
   }
 }

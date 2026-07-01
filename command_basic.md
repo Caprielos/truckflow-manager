@@ -240,3 +240,30 @@ git status
 ```
 
 Questo step aggiunge `CancelShipmentUseCase`, protegge le mutazioni shipment con approccio copy-on-write e amplia i test applicativi negativi. Quindi `mvn spotless:apply` e `mvn clean test` restano i controlli più importanti da eseguire prima del commit.
+
+---
+
+## Nota progetto — Punto 6G
+
+Dopo l'aggiunta del Punto 6G — Application Use Cases Expansion, il controllo consigliato resta sempre:
+
+```bash
+mvn spotless:apply
+mvn spotless:check
+mvn clean test
+git status
+```
+
+Il Punto 6G aggiunge i primi use case applicativi Documents, quindi prima del commit conviene controllare anche che siano presenti i nuovi package:
+
+```bash
+find src/main/java/it/gabriele/truckflow/application -type d | grep documents
+find src/main/java/it/gabriele/truckflow/infrastructure/memory -type d | grep documents
+```
+
+Commit consigliato:
+
+```bash
+git add -A
+git commit -m "Expand application use cases with documents"
+```

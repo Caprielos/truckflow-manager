@@ -310,3 +310,16 @@ Dopo il Punto 6E è stato aggiunto il Punto 6F — Application Use Case Review &
 Questa fase completa e rafforza il primo gruppo di use case aggiungendo `CancelShipmentUseCase` e testando casi negativi più espliciti: command nulli, input obbligatori mancanti, risorse inesistenti, duplicati cargo, cancellazione shipment e mutazioni fallite senza stato parziale.
 
 Il Punto 6F non cambia la natura del Punto 6E: l'application layer continua a orchestrare il dominio senza duplicare le regole business.
+
+## Aggiornamento successivo — Punto 6G
+
+Dopo l'hardening del Punto 6F, il Punto 6G ha aggiunto il primo blocco applicativo fuori dal flusso Locations + Cargo + Shipments: i use case Documents.
+
+Il nuovo blocco non modifica il significato del Punto 6E, ma estende l'application layer con una seconda area applicativa coerente:
+
+- registrare un documento logico;
+- trovare un documento;
+- attivare un documento;
+- archiviare un documento.
+
+La documentazione specifica è disponibile in `docs/22-application-use-case-expansion.md`.

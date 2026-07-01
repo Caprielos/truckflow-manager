@@ -1,8 +1,8 @@
 # TruckFlow Manager — Documentazione del dominio
 
-Questa cartella contiene la documentazione ufficiale di TruckFlow Manager, con la fondazione del dominio puro e i primi step dell’application layer: blueprint, foundation, repository port, repository in memory, primi use case applicativi e hardening dei use case.
+Questa cartella contiene la documentazione ufficiale di TruckFlow Manager, con la fondazione del dominio puro e i primi step dell’application layer: blueprint, foundation, repository port, repository in memory, primi use case applicativi, hardening dei use case ed espansione controllata verso Documents.
 
-Il progetto ha completato la fondazione del **domain layer** e sta consolidando e rafforzando i primi casi d'uso dell'**application layer**. La fondazione di dominio contiene i seguenti package principali:
+Il progetto ha completato la fondazione del **domain layer** e ha consolidato e rafforzato i primi casi d'uso dell'**application layer** e ora li sta espandendo in modo controllato verso altri domini. La fondazione di dominio contiene i seguenti package principali:
 
 - `domain.users`
 - `domain.qualifications`
@@ -54,6 +54,7 @@ I nomi tecnici rimangono in inglese e allineati al codice Java.
 19. [`19-application-in-memory-repositories.md`](19-application-in-memory-repositories.md) — repository in memory del Punto 6D: `InMemoryLocationRepository`, `InMemoryCargoUnitRepository`, `InMemoryShipmentRepository`, regole sui duplicati, test e limiti dello step.
 20. [`20-application-first-use-cases.md`](20-application-first-use-cases.md) — primi use case del Punto 6E: command, result, port in, application service e flusso Locations + Cargo + Shipments.
 21. [`21-application-use-case-hardening.md`](21-application-use-case-hardening.md) — hardening del Punto 6F: review dei primi use case, `CancelShipmentUseCase`, copy-on-write delle mutazioni shipment, test negativi e protezione dalle mutazioni parziali.
+22. [`22-application-use-case-expansion.md`](22-application-use-case-expansion.md) — espansione del Punto 6G: primi use case applicativi Documents, `DocumentRepository`, `InMemoryDocumentRepository`, command/result/port/service e test applicativi.
 
 ## Stato del progetto documentato
 
@@ -77,7 +78,8 @@ Questa documentazione descrive la versione del progetto in cui il dominio contie
 - repository port del primo application layer documentate in `18-application-repository-ports.md`, con `RepositoryPort`, `LocationRepository`, `CargoUnitRepository` e `ShipmentRepository` come primi contratti outbound per Locations, Cargo e Shipments;
 - repository in memory del primo infrastructure adapter documentate in `19-application-in-memory-repositories.md`, con `InMemoryLocationRepository`, `InMemoryCargoUnitRepository` e `InMemoryShipmentRepository` per test e sviluppo locale senza database;
 - primi use case applicativi documentati in `20-application-first-use-cases.md`, con command, result, port in e service per Locations, Cargo e Shipments;
-- hardening dei primi use case documentato in `21-application-use-case-hardening.md`, con `CancelShipmentUseCase`, copy-on-write dei service di mutazione shipment, test negativi, controllo degli errori applicativi e verifica delle mutazioni fallite.
+- hardening dei primi use case documentato in `21-application-use-case-hardening.md`, con `CancelShipmentUseCase`, copy-on-write dei service di mutazione shipment, test negativi, controllo degli errori applicativi e verifica delle mutazioni fallite;
+- espansione controllata dei use case applicativi documentata in `22-application-use-case-expansion.md`, con `RegisterDocumentUseCase`, `FindDocumentUseCase`, `ActivateDocumentUseCase`, `ArchiveDocumentUseCase`, `DocumentRepository`, `InMemoryDocumentRepository` e test del flusso documentale logico.
 
 
 ## Nota sul packaging di `domain.vehicles`

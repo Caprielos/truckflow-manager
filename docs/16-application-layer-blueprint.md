@@ -601,3 +601,21 @@ Dopo il Punto 6E, la roadmap applicativa prevede una fase di hardening.
 Il Punto 6F consolida i primi use case prima di estenderli ad altri domini. Aggiunge `CancelShipmentUseCase`, rafforza i test applicativi e verifica che errori applicativi, errori di dominio e mutazioni fallite siano gestiti correttamente.
 
 Il passo successivo consigliato diventa quindi il Punto 6G, dedicato all'espansione dei use case verso altri domini, non ancora a REST API o database.
+
+## Aggiornamento dopo il Punto 6G
+
+Il Punto 6G ha realizzato la prima espansione controllata prevista dalla roadmap del blueprint.
+
+La scelta concreta è stata partire da `documents`, perché il dominio Documents era già puro, indipendente e utilizzabile senza introdurre ancora workflow documentali, file fisici, upload, database, REST API o compliance check concreti.
+
+Con il Punto 6G sono stati aggiunti:
+
+- command documentali;
+- result documentale;
+- port in documentali;
+- `DocumentRepository` come nuova repository port;
+- application service documentali;
+- `InMemoryDocumentRepository`;
+- test applicativi e test repository aggiornati.
+
+La roadmap successiva diventa quindi il Punto 6H, dedicato alla review dell'espansione Documents e all'allineamento della documentazione prima di procedere con altri domini applicativi.

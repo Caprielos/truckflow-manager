@@ -228,3 +228,17 @@ In quella fase si potrà decidere se estendere i casi d'uso a:
 - altre azioni su Shipments.
 
 Prima di passare a REST API, database o Spring, conviene completare un set minimo ma coerente di use case applicativi.
+
+## Aggiornamento successivo — Punto 6G completato
+
+Dopo il Punto 6F è stato applicato il Punto 6G — Application Use Cases Expansion.
+
+L'espansione non ha modificato il significato del 6F: il nucleo Locations + Cargo + Shipments resta stabile e hardenizzato. Il Punto 6G aggiunge invece un nuovo blocco applicativo separato per `documents`, mantenendo gli stessi principi di validazione, error handling, repository usage, test e documentazione.
+
+La nuova documentazione di riferimento è:
+
+```text
+docs/22-application-use-case-expansion.md
+```
+
+Il prossimo step consigliato non è ancora REST API o database, ma una review del nuovo blocco applicativo Documents nel Punto 6H.
