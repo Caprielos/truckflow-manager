@@ -26,7 +26,8 @@ public final class CancelShipmentService implements CancelShipmentUseCase {
             .findById(command.shipmentId())
             .orElseThrow(() -> new ResourceNotFoundException("Shipment", command.shipmentId()));
 
-    shipment.cancel();
-    return ShipmentResult.from(shipmentRepository.save(shipment));
+    var updatedShipment = ShipmentMutationSupport.copyOf(shipment);
+    updatedShipment.cancel();
+    return ShipmentResult.from(shipmentRepository.save(updatedShipment));
   }
 }

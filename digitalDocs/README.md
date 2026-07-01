@@ -90,4 +90,4 @@ Documento di riferimento: `docs/20-application-first-use-cases.md`.
 
 La documentazione digitale include ora anche il Punto 6F — Application Use Case Review & Hardening.
 
-Questo aggiornamento documenta `CancelShipmentUseCase`, i test di hardening dei primi use case e la distinzione tra errori applicativi ed errori di dominio. La documentazione HTML resta un mirror navigabile della documentazione Markdown e non sostituisce i file ufficiali nella cartella `docs`.
+Questo aggiornamento documenta `CancelShipmentUseCase`, la protezione copy-on-write dei service di mutazione shipment, i test di hardening dei primi use case e la distinzione tra errori applicativi ed errori di dominio. La documentazione HTML resta un mirror navigabile della documentazione Markdown e non sostituisce i file ufficiali nella cartella `docs`.

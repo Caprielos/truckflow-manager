@@ -37,12 +37,13 @@ public final class AddShipmentItemService implements AddShipmentItemUseCase {
       throw new ResourceNotFoundException("CargoUnit", command.cargoId());
     }
 
-    var updatedItems = new ArrayList<>(shipment.items());
+    var updatedShipment = ShipmentMutationSupport.copyOf(shipment);
+    var updatedItems = new ArrayList<>(updatedShipment.items());
     updatedItems.add(
         new ShipmentItem(
             null, command.cargoId(), command.quantity(), command.unitOfMeasure(), command.notes()));
 
-    shipment.replaceItems(updatedItems);
-    return ShipmentResult.from(shipmentRepository.save(shipment));
+    updatedShipment.replaceItems(updatedItems);
+    return ShipmentResult.from(shipmentRepository.save(updatedShipment));
   }
 }

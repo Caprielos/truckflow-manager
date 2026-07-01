@@ -239,4 +239,4 @@ mvn clean test
 git status
 ```
 
-Questo step aggiunge `CancelShipmentUseCase` e nuovi test applicativi, quindi `mvn clean test` è il controllo più importante da eseguire prima del commit.
+Questo step aggiunge `CancelShipmentUseCase`, protegge le mutazioni shipment con approccio copy-on-write e amplia i test applicativi negativi. Quindi `mvn spotless:apply` e `mvn clean test` restano i controlli più importanti da eseguire prima del commit.

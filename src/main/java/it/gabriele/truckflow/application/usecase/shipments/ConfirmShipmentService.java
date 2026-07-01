@@ -26,7 +26,8 @@ public final class ConfirmShipmentService implements ConfirmShipmentUseCase {
             .findById(command.shipmentId())
             .orElseThrow(() -> new ResourceNotFoundException("Shipment", command.shipmentId()));
 
-    shipment.confirm();
-    return ShipmentResult.from(shipmentRepository.save(shipment));
+    var updatedShipment = ShipmentMutationSupport.copyOf(shipment);
+    updatedShipment.confirm();
+    return ShipmentResult.from(shipmentRepository.save(updatedShipment));
   }
 }

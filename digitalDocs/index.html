@@ -108,8 +108,8 @@
 </ul>
 <p>Il markup HTML resta identico in entrambi i casi. Cambia solo il CSS applicato dal flag globale.</p>
 <h2>Stato attuale del dominio</h2>
-<p>Il progetto ha consolidato il <strong>domain layer puro</strong>, ha completato i primi step dell’application layer fino al <strong>Punto 6E — First Use Cases</strong> e sta introducendo il <strong>Punto 6F — Application Use Case Review &amp; Hardening</strong>.</p>
-<p>La versione attuale rappresenta la <strong>TruckFlow Domain Foundation v1.0</strong> rafforzata dalla prima review correttiva del dominio puro. La fondazione è definita, le regole sono documentate e sono stati applicati interventi mirati su invarianti, eccezioni, codici aziendali, test e pulizia del repository. Il passo attuale è rafforzare i primi use case applicativi per Locations, Cargo e Shipments, aggiungendo cancellazione shipment, test negativi e protezione da mutazioni parziali, senza introdurre ancora REST API, database, JPA, Spring Data o persistenza definitiva.</p>
+<p>Il progetto ha consolidato il <strong>domain layer puro</strong> e ha completato i primi step dell’application layer fino al <strong>Punto 6F — Application Use Case Review &amp; Hardening</strong>.</p>
+<p>La versione attuale rappresenta la <strong>TruckFlow Domain Foundation v1.0</strong> rafforzata dalla prima review correttiva del dominio puro. La fondazione è definita, le regole sono documentate e sono stati applicati interventi mirati su invarianti, eccezioni, codici aziendali, test e pulizia del repository. Il passo attuale completato è il rafforzamento dei primi use case applicativi per Locations, Cargo e Shipments, con cancellazione shipment, copy-on-write delle mutazioni shipment, test negativi e protezione da mutazioni parziali, senza introdurre ancora REST API, database, JPA, Spring Data o persistenza definitiva.</p>
 <p>I package principali sono:</p>
 <ul>
 <li><code>domain.users</code>;</li>
@@ -147,7 +147,7 @@
 <li><a href="docs/18-application-repository-ports.md"><code>docs/18-application-repository-ports.md</code></a> — repository port del Punto 6C: <code>RepositoryPort</code>, <code>LocationRepository</code>, <code>CargoUnitRepository</code> e <code>ShipmentRepository</code>.</li>
 <li><a href="docs/19-application-in-memory-repositories.md"><code>docs/19-application-in-memory-repositories.md</code></a> — repository in memory del Punto 6D: implementazioni leggere per Locations, Cargo e Shipments.</li>
 <li><a href="docs/20-application-first-use-cases.md"><code>docs/20-application-first-use-cases.md</code></a> — primi use case del Punto 6E: command, result, port in, application service e primo flusso applicativo Locations + Cargo + Shipments.</li>
-<li><a href="docs/21-application-use-case-hardening.md"><code>docs/21-application-use-case-hardening.md</code></a> — hardening del Punto 6F: <code>CancelShipmentUseCase</code>, test negativi, errori applicativi e protezione dalle mutazioni fallite.</li>
+<li><a href="docs/21-application-use-case-hardening.md"><code>docs/21-application-use-case-hardening.md</code></a> — hardening del Punto 6F: <code>CancelShipmentUseCase</code>, copy-on-write delle mutazioni shipment, test negativi, errori applicativi e protezione dalle mutazioni fallite.</li>
 </ul>
 <h2>Regole fondamentali della Domain Foundation</h2>
 <p>Le regole principali sono:</p>
@@ -189,7 +189,7 @@
 <p>Con il Punto 6C sono state introdotte le prime repository port specifiche: <code>RepositoryPort</code>, <code>LocationRepository</code>, <code>CargoUnitRepository</code> e <code>ShipmentRepository</code>. Questi contratti permettono ai futuri use case di salvare e recuperare aggregate tramite ID e codice senza conoscere implementazioni concrete.</p>
 <p>Con il Punto 6D sono state introdotte le prime implementazioni in memory: <code>InMemoryLocationRepository</code>, <code>InMemoryCargoUnitRepository</code> e <code>InMemoryShipmentRepository</code>. Questi adapter sono utili per test e sviluppo locale, proteggono duplicati di codice e input nulli, ma non sostituiscono un database enterprise definitivo.</p>
 <p>Con il Punto 6E sono stati introdotti i primi use case applicativi reali: registrazione e recupero di Locations e Cargo, creazione di una Shipment draft, aggiunta di item e leg, conferma e recupero della Shipment. Questo step dimostra il primo flusso applicativo completo senza introdurre ancora REST API, database o framework.</p>
-<p>Con il Punto 6F è stato eseguito l&#x27;hardening dei primi use case: è stato aggiunto <code>CancelShipmentUseCase</code>, sono stati rafforzati i test negativi su command, risorse mancanti e duplicati, ed è stata verificata la protezione da mutazioni parziali in caso di errore di dominio.</p>
+<p>Con il Punto 6F è stato eseguito l&#x27;hardening dei primi use case: è stato aggiunto <code>CancelShipmentUseCase</code>, sono stati rafforzati i service di mutazione shipment con approccio copy-on-write, sono stati ampliati i test negativi su command, dependency nulle, risorse mancanti e duplicati, ed è stata verificata la protezione da mutazioni parziali in caso di errore di dominio.</p>
 <h2>Punto 6A — Application Layer Blueprint</h2>
 <p>Il Punto 6A ha progettato il livello applicativo prima di scrivere codice operativo. L&#x27;application layer dovrà orchestrare il dominio tramite casi d&#x27;uso, senza duplicare le regole di business e senza introdurre subito controller, database, JPA, Spring o API REST.</p>
 <p>La struttura prevista include command, result, port in, port out, application service, eccezioni applicative e repository astratti. Il primo flusso consigliato parte da Locations + Cargo + Shipments, perché permette di creare un caso d&#x27;uso reale mantenendo separati dominio, applicazione e infrastruttura.</p>
@@ -225,8 +225,8 @@
 <p>Il Punto 6E è documentato in <a href="docs/20-application-first-use-cases.md"><code>docs/20-application-first-use-cases.md</code></a>.</p>
 <h2>Punto 6F — Application Use Case Review &amp; Hardening</h2>
 <p>Il Punto 6F rafforza i primi use case del blocco Locations + Cargo + Shipments.</p>
-<p>Sono stati aggiunti <code>CancelShipmentCommand</code>, <code>CancelShipmentUseCase</code> e <code>CancelShipmentService</code>, completando il primo set di azioni applicative sulle shipment con la cancellazione.</p>
-<p>La fase aggiunge test di hardening che verificano command nulli, input obbligatori mancanti, find use case su risorse inesistenti, duplicati cargo, cancellazione persistita della shipment e assenza di stato parziale dopo una mutazione fallita.</p>
+<p>Sono stati aggiunti <code>CancelShipmentCommand</code>, <code>CancelShipmentUseCase</code> e <code>CancelShipmentService</code>, completando il primo set di azioni applicative sulle shipment con la cancellazione. Inoltre i service di mutazione shipment usano una copia dell'aggregate prima di salvare, così una validazione di dominio fallita non modifica lo stato persistito in memory.</p>
+<p>La fase aggiunge test di hardening che verificano command nulli, dependency repository nulle, input obbligatori mancanti, find use case su risorse inesistenti, duplicati di location/cargo/shipment, risorse mancanti nei use case di mutazione, cancellazione persistita della shipment e assenza di stato parziale dopo mutazioni fallite su item, leg e conferma shipment.</p>
 <p>Questa fase non introduce ancora REST API, database, Spring, JPA, security o moduli enterprise avanzati. Serve a rendere stabile il primo nucleo applicativo prima dell&#x27;espansione verso altri domini.</p>
 <p>Il Punto 6F è documentato in <a href="docs/21-application-use-case-hardening.md"><code>docs/21-application-use-case-hardening.md</code></a>.</p>
 <h2>Prossimi step consigliati</h2>
@@ -239,7 +239,7 @@
 <li>mantenere stabile il Punto 6C con le prime repository port specifiche;</li>
 <li>mantenere stabile il Punto 6D con le prime repository in memory per test e scenari locali;</li>
 <li>mantenere stabile il Punto 6E con i primi use case Locations + Cargo + Shipments;</li>
-<li>mantenere stabile il Punto 6F con hardening dei primi use case e <code>CancelShipmentUseCase</code>;</li>
+<li>mantenere stabile il Punto 6F con hardening dei primi use case, <code>CancelShipmentUseCase</code> e protezione copy-on-write delle mutazioni shipment;</li>
 <li>estendere i casi d&#x27;uso applicativi ad altri domini nel Punto 6G;</li>
 <li>rimandare API REST, database e integrazioni esterne finché l&#x27;application layer non è stabile.</li>
 </ol>
@@ -298,7 +298,7 @@
 <li><a href="18-application-repository-ports.md"><code>18-application-repository-ports.md</code></a> — repository port del Punto 6C: <code>RepositoryPort</code>, <code>LocationRepository</code>, <code>CargoUnitRepository</code>, <code>ShipmentRepository</code>, contratti per ID/codice e prossimo passaggio verso repository in memory.</li>
 <li><a href="19-application-in-memory-repositories.md"><code>19-application-in-memory-repositories.md</code></a> — repository in memory del Punto 6D: <code>InMemoryLocationRepository</code>, <code>InMemoryCargoUnitRepository</code>, <code>InMemoryShipmentRepository</code>, regole sui duplicati, test e limiti dello step.</li>
 <li><a href="20-application-first-use-cases.md"><code>20-application-first-use-cases.md</code></a> — primi use case del Punto 6E: command, result, port in, application service e flusso Locations + Cargo + Shipments.</li>
-<li><a href="21-application-use-case-hardening.md"><code>21-application-use-case-hardening.md</code></a> — hardening del Punto 6F: review dei primi use case, <code>CancelShipmentUseCase</code>, test negativi e protezione dalle mutazioni parziali.</li>
+<li><a href="21-application-use-case-hardening.md"><code>21-application-use-case-hardening.md</code></a> — hardening del Punto 6F: review dei primi use case, <code>CancelShipmentUseCase</code>, copy-on-write delle mutazioni shipment, test negativi e protezione dalle mutazioni parziali.</li>
 </ol>
 <h2>Stato del progetto documentato</h2>
 <p>Questa documentazione descrive la versione del progetto in cui il dominio contiene:</p>
@@ -321,7 +321,7 @@
 <li>repository port del primo application layer documentate in <code>18-application-repository-ports.md</code>, con <code>RepositoryPort</code>, <code>LocationRepository</code>, <code>CargoUnitRepository</code> e <code>ShipmentRepository</code> come primi contratti outbound per Locations, Cargo e Shipments;</li>
 <li>repository in memory del primo infrastructure adapter documentate in <code>19-application-in-memory-repositories.md</code>, con <code>InMemoryLocationRepository</code>, <code>InMemoryCargoUnitRepository</code> e <code>InMemoryShipmentRepository</code> per test e sviluppo locale senza database;</li>
 <li>primi use case applicativi documentati in <code>20-application-first-use-cases.md</code>, con command, result, port in e service per Locations, Cargo e Shipments;</li>
-<li>hardening dei primi use case documentato in <code>21-application-use-case-hardening.md</code>, con <code>CancelShipmentUseCase</code>, test negativi, controllo degli errori applicativi e verifica delle mutazioni fallite.</li>
+<li>hardening dei primi use case documentato in <code>21-application-use-case-hardening.md</code>, con <code>CancelShipmentUseCase</code>, copy-on-write dei service di mutazione shipment, test negativi, controllo degli errori applicativi e verifica delle mutazioni fallite.</li>
 </ul>
 <h2>Nota sul packaging di <code>domain.vehicles</code></h2>
 <p>Il dominio veicoli è stato riorganizzato in sottopackage per renderlo più leggibile:</p>
@@ -430,7 +430,7 @@
 <p>Il Punto 6E dimostra che TruckFlow Manager sta iniziando a funzionare come applicazione a casi d&#x27;uso, ma senza introdurre ancora REST API, database, JPA, Spring, security o frontend.</p>
 <h2>Nota su <code>docs/21-application-use-case-hardening.md</code></h2>
 <p>Il documento <code>21-application-use-case-hardening.md</code> descrive il Punto 6F.</p>
-<p>Questo step rafforza i primi use case applicativi introdotti nel Punto 6E. Aggiunge <code>CancelShipmentUseCase</code>, <code>CancelShipmentCommand</code> e <code>CancelShipmentService</code>, estende la copertura dei test applicativi e verifica che command nulli, risorse mancanti, duplicati e mutazioni fallite siano gestiti correttamente.</p>
+<p>Questo step rafforza i primi use case applicativi introdotti nel Punto 6E. Aggiunge <code>CancelShipmentUseCase</code>, <code>CancelShipmentCommand</code> e <code>CancelShipmentService</code>, introduce una protezione copy-on-write per i service che mutano shipment, estende la copertura dei test applicativi e verifica che command nulli, dependency nulle, risorse mancanti, duplicati e mutazioni fallite siano gestiti correttamente.</p>
 <p>Il Punto 6F non introduce ancora REST API, database, Spring, JPA, security, planning o tracking. Serve a rendere stabile il primo nucleo applicativo prima di estendere i casi d&#x27;uso ad altri domini.</p>
   </div>
 </article>
@@ -570,7 +570,7 @@
 <p>Il progetto ora include il primo blocco di use case applicativi reali per Locations, Cargo e Shipments. Questo passaggio segna l&#x27;inizio del comportamento applicativo concreto sopra il dominio puro.</p>
 <p>I nuovi use case permettono di registrare location, registrare cargo, creare una shipment draft, aggiungere item e leg, confermare e recuperare una shipment. Il progetto rimane però indipendente da REST API, database, JPA e Spring: il comportamento è testato tramite repository in memory e contratti applicativi.</p>
 <h2>Aggiornamento Punto 6F — Use Case Hardening</h2>
-<p>Dopo l&#x27;introduzione dei primi use case applicativi, il progetto ha aggiunto una fase di hardening dedicata. Il Punto 6F rafforza il blocco Locations + Cargo + Shipments aggiungendo <code>CancelShipmentUseCase</code> e testando casi negativi, risorse mancanti, duplicati, command nulli e mutazioni fallite.</p>
+<p>Dopo l&#x27;introduzione dei primi use case applicativi, il progetto ha aggiunto una fase di hardening dedicata. Il Punto 6F rafforza il blocco Locations + Cargo + Shipments aggiungendo <code>CancelShipmentUseCase</code>, protezione copy-on-write delle mutazioni shipment e testando casi negativi, dependency nulle, risorse mancanti, duplicati, command nulli e mutazioni fallite.</p>
 <p>Questo conferma la direzione architetturale del progetto: prima si stabilizza il comportamento applicativo puro, poi si passa a REST API, database, security e moduli enterprise avanzati.</p>
   </div>
 </article>
@@ -2606,7 +2606,7 @@ web -&gt; application
 <h2>Decisione architetturale — Hardening prima dell&#x27;espansione dei use case</h2>
 <p>Prima di estendere l&#x27;application layer ad altri domini, TruckFlow Manager introduce il Punto 6F — Application Use Case Review &amp; Hardening.</p>
 <p>La decisione è consolidare i primi use case esistenti invece di aggiungere subito molti casi d&#x27;uso nuovi. Questa scelta riduce il rischio di propagare errori strutturali, rende più chiara la separazione tra errori applicativi ed errori di dominio e prepara un modello replicabile per i prossimi domini.</p>
-<p>Il Punto 6F aggiunge <code>CancelShipmentUseCase</code> e test di robustezza sui command, sulle risorse mancanti, sui duplicati e sulle mutazioni fallite. Non introduce framework, database, controller o transazioni.</p>
+<p>Il Punto 6F aggiunge <code>CancelShipmentUseCase</code>, protezione copy-on-write delle mutazioni shipment e test di robustezza sui command, sulle dependency nulle, sulle risorse mancanti, sui duplicati e sulle mutazioni fallite. Non introduce framework, database, controller o transazioni.</p>
   </div>
 </article>
 <article class="doc-panel panel-8" id="07-domain-cargo-md">
@@ -5723,7 +5723,7 @@ domain -&gt; application -&gt; infrastructure -&gt; api
 <p>Questa fase non modifica il domain layer: dimostra che il dominio è consumabile dall&#x27;application layer senza introdurre framework, web adapter o database.</p>
 <h2>Aggiornamento applicativo — Punto 6F</h2>
 <p>Dopo la review del dominio e i primi step applicativi, il Punto 6F ha rafforzato i primi use case del blocco Locations + Cargo + Shipments.</p>
-<p>L&#x27;intervento aggiunge <code>CancelShipmentUseCase</code> e test di hardening sui command, sulle risorse mancanti, sui duplicati e sulle mutazioni fallite. Questo aggiornamento non modifica le regole del dominio: conferma che il dominio continua a essere il proprietario delle invarianti e che l&#x27;application layer orchestra il flusso applicativo.</p>
+<p>L&#x27;intervento aggiunge <code>CancelShipmentUseCase</code>, protezione copy-on-write delle mutazioni shipment e test di hardening sui command, sulle dependency nulle, sulle risorse mancanti, sui duplicati e sulle mutazioni fallite. Questo aggiornamento non modifica le regole del dominio: conferma che il dominio continua a essere il proprietario delle invarianti e che l&#x27;application layer orchestra il flusso applicativo.</p>
   </div>
 </article>
 <article class="doc-panel panel-16" id="15-domain-test-suite-review-md">
@@ -5990,7 +5990,7 @@ Punto 6 — Application Layer
 <p>Questa distinzione è importante: i test di dominio proteggono le regole business interne, mentre i test applicativi proteggono il coordinamento tra domini e repository.</p>
 <h2>Collegamento con il Punto 6F</h2>
 <p>La revisione della test suite del dominio è stata completata prima dell&#x27;application layer. Il Punto 6F riprende la stessa filosofia anche sui primi use case applicativi: test significativi, nomi espressivi, casi negativi e verifica che gli errori non lascino stati parziali.</p>
-<p>La differenza è che i test del Punto 6F non testano direttamente le invarianti del dominio, già coperte dalla suite domain. Testano invece l&#x27;orchestrazione applicativa: command, service, repository port, repository in memory, risorse mancanti, duplicati e propagazione degli errori di dominio.</p>
+<p>La differenza è che i test del Punto 6F non testano direttamente le invarianti del dominio, già coperte dalla suite domain. Testano invece l&#x27;orchestrazione applicativa: command, service, repository port, repository in memory, dependency nulle, risorse mancanti, duplicati, copy-on-write delle mutazioni shipment e propagazione degli errori di dominio.</p>
   </div>
 </article>
 <article class="doc-panel panel-17" id="16-application-layer-blueprint-md">
@@ -6469,7 +6469,7 @@ infrastructure implementa le port out definite dall&#x27;application layer
 <p>Il Punto 6E conferma una scelta architetturale importante: l&#x27;application layer orchestra il dominio ma non duplica le regole di dominio. Per esempio, la conferma della shipment viene eseguita chiamando <code>shipment.confirm()</code>, mentre le regole di conferma restano dentro l&#x27;aggregate <code>Shipment</code>.</p>
 <h2>Aggiornamento roadmap — Punto 6F</h2>
 <p>Dopo il Punto 6E, la roadmap applicativa prevede una fase di hardening.</p>
-<p>Il Punto 6F consolida i primi use case prima di estenderli ad altri domini. Aggiunge <code>CancelShipmentUseCase</code>, rafforza i test applicativi e verifica che errori applicativi, errori di dominio e mutazioni fallite siano gestiti correttamente.</p>
+<p>Il Punto 6F consolida i primi use case prima di estenderli ad altri domini. Aggiunge <code>CancelShipmentUseCase</code>, rafforza i service di mutazione shipment con approccio copy-on-write, amplia i test applicativi e verifica che errori applicativi, errori di dominio e mutazioni fallite siano gestiti correttamente.</p>
 <p>Il passo successivo consigliato diventa quindi il Punto 6G, dedicato all&#x27;espansione dei use case verso altri domini, non ancora a REST API o database.</p>
   </div>
 </article>
@@ -6646,7 +6646,7 @@ git push
 mvn clean test
 git status
 </code></pre>
-<p>Questo step aggiunge <code>CancelShipmentUseCase</code> e nuovi test applicativi, quindi <code>mvn clean test</code> è il controllo più importante da eseguire prima del commit.</p>
+<p>Questo step aggiunge <code>CancelShipmentUseCase</code>, protegge le mutazioni shipment con approccio copy-on-write e amplia i test applicativi negativi. Quindi <code>mvn spotless:apply</code> e <code>mvn clean test</code> restano i controlli più importanti da eseguire prima del commit.</p>
 
   </div>
 </article>
@@ -7632,7 +7632,7 @@ Punto 6D — In-Memory Repositories
 <p>Il progetto non è ancora una REST API e non usa ancora database, ma ha iniziato a comportarsi come una vera applicazione organizzata per casi d&#x27;uso.</p>
 <h2>Aggiornamento successivo — Punto 6F</h2>
 <p>Dopo il Punto 6E è stato aggiunto il Punto 6F — Application Use Case Review &amp; Hardening.</p>
-<p>Questa fase completa e rafforza il primo gruppo di use case aggiungendo <code>CancelShipmentUseCase</code> e testando casi negativi più espliciti: command nulli, input obbligatori mancanti, risorse inesistenti, duplicati cargo, cancellazione shipment e mutazioni fallite senza stato parziale.</p>
+<p>Questa fase completa e rafforza il primo gruppo di use case aggiungendo <code>CancelShipmentUseCase</code>, protezione copy-on-write delle mutazioni shipment e testando casi negativi più espliciti: command nulli, dependency nulle, input obbligatori mancanti, risorse inesistenti, duplicati, cancellazione shipment e mutazioni fallite senza stato parziale.</p>
 <p>Il Punto 6F non cambia la natura del Punto 6E: l&#x27;application layer continua a orchestrare il dominio senza duplicare le regole business.</p>
   </div>
 </article>
@@ -7644,22 +7644,38 @@ Punto 6D — In-Memory Repositories
     <h1>Application Use Case Review &amp; Hardening</h1>
   </header>
   <div class="markdown-body">
-<h1>Punto 6F — Application Use Case Review &amp; Hardening</h1>
-<p>Il <strong>Punto 6F</strong> consolida i primi use case applicativi introdotti nel Punto 6E.</p>
-<p>Questa fase non introduce ancora REST API, controller, database, JPA, Spring, security, frontend o integrazioni esterne. L&#x27;obiettivo è rendere più robusto il primo blocco applicativo già esistente, verificando che command, service, repository port, repository in memory e risultati applicativi lavorino insieme in modo coerente.</p>
-<p>Il Punto 6F è quindi una fase di <strong>review e hardening</strong>, non una fase di espansione enterprise generale.</p>
-<h2>Obiettivo dello step</h2>
-<p>Il Punto 6F serve a verificare che i primi use case applicativi siano abbastanza solidi prima di estendere il modello ad altri domini.</p>
+<h1 id="punto-6f-application-use-case-review-hardening">Punto 6F —
+Application Use Case Review &amp; Hardening</h1>
+<p>Il <strong>Punto 6F</strong> consolida i primi use case applicativi
+introdotti nel Punto 6E.</p>
+<p>Questa fase non introduce ancora REST API, controller, database, JPA,
+Spring, security, frontend o integrazioni esterne. L’obiettivo è rendere
+più robusto il primo blocco applicativo già esistente, verificando che
+command, service, repository port, repository in memory e result
+applicativi lavorino insieme in modo coerente.</p>
+<p>Il Punto 6F è quindi una fase di <strong>review e hardening</strong>,
+non una fase di espansione enterprise generale.</p>
+<h2 id="obiettivo-dello-step">Obiettivo dello step</h2>
+<p>Il Punto 6F serve a verificare che i primi use case applicativi siano
+abbastanza solidi prima di estendere il modello ad altri domini.</p>
 <p>Gli obiettivi sono:</p>
 <ul>
-<li>completare il primo gruppo di azioni applicative sulle shipment;</li>
+<li>completare il primo gruppo di azioni applicative sulle
+shipment;</li>
 <li>rafforzare i test negativi dei service applicativi;</li>
-<li>verificare la distinzione tra errori applicativi ed errori di dominio;</li>
-<li>controllare che le mutazioni fallite non lascino stati parziali;</li>
-<li>documentare cosa è stato coperto e cosa rimane fuori dalle fasi future;</li>
+<li>verificare la distinzione tra errori applicativi ed errori di
+dominio;</li>
+<li>controllare che le mutazioni fallite non lascino stati
+parziali;</li>
+<li>rafforzare il comportamento dei service che modificano una
+shipment;</li>
+<li>verificare la consistenza dei <code>result</code> rispetto allo
+stato persistito;</li>
+<li>documentare cosa è stato coperto e cosa rimane fuori dalle fasi
+future;</li>
 <li>mantenere separati domain, application e infrastructure memory.</li>
 </ul>
-<h2>Use case aggiunto</h2>
+<h2 id="use-case-aggiunto">Use case aggiunto</h2>
 <p>Il Punto 6F aggiunge un nuovo use case applicativo:</p>
 <ul>
 <li><code>CancelShipmentUseCase</code>.</li>
@@ -7672,42 +7688,102 @@ Punto 6D — In-Memory Repositories
 <ul>
 <li><code>CancelShipmentService</code>.</li>
 </ul>
-<p>Questo use case permette di cancellare una shipment esistente usando il metodo di dominio <code>shipment.cancel()</code> e salvando poi l&#x27;aggregate aggiornato tramite <code>ShipmentRepository</code>.</p>
-<p>La logica applicativa è semplice:</p>
-<ol>
+<p>Questo use case permette di cancellare una shipment esistente usando
+il metodo di dominio <code>shipment.cancel()</code> e salvando poi
+l’aggregate aggiornato tramite <code>ShipmentRepository</code>.</p>
+<p>La logica applicativa è:</p>
+<ol type="1">
 <li>ricevere il command;</li>
 <li>verificare che il command non sia nullo;</li>
 <li>caricare la shipment tramite repository port;</li>
-<li>se la shipment non esiste, sollevare <code>ResourceNotFoundException</code>;</li>
-<li>chiamare <code>shipment.cancel()</code>;</li>
-<li>salvare la shipment aggiornata;</li>
+<li>se la shipment non esiste, sollevare
+<code>ResourceNotFoundException</code>;</li>
+<li>creare una copia applicativa della shipment caricata;</li>
+<li>chiamare <code>cancel()</code> sulla copia;</li>
+<li>salvare la shipment aggiornata solo dopo il completamento della
+mutazione;</li>
 <li>restituire <code>ShipmentResult</code>.</li>
 </ol>
-<h2>Perché è stato aggiunto CancelShipment</h2>
-<p>Nei documenti precedenti la cancellazione della shipment era già indicata tra le azioni applicative naturali del primo blocco Shipments.</p>
-<p>Il Punto 6E aveva introdotto creazione, aggiunta item, aggiunta leg, conferma e ricerca. Il Punto 6F completa questo primo gruppo aggiungendo la cancellazione applicativa.</p>
-<p>La cancellazione non introduce workflow avanzato, planning, dispatching o audit. È solo una prima azione applicativa coerente con lo stato <code>CANCELLED</code> già presente nel dominio shipment.</p>
-<h2>Test aggiunti</h2>
-<p>È stato aggiunto il test:</p>
+<h2 id="perché-è-stato-aggiunto-cancelshipment">Perché è stato aggiunto
+CancelShipment</h2>
+<p>Nei documenti precedenti la cancellazione della shipment era già
+indicata tra le azioni applicative naturali del primo blocco
+Shipments.</p>
+<p>Il Punto 6E aveva introdotto creazione, aggiunta item, aggiunta leg,
+conferma e ricerca. Il Punto 6F completa questo primo gruppo aggiungendo
+la cancellazione applicativa.</p>
+<p>La cancellazione non introduce workflow avanzato, planning,
+dispatching o audit. È solo una prima azione applicativa coerente con lo
+stato <code>CANCELLED</code> già presente nel dominio shipment.</p>
+<h2 id="hardening-delle-mutazioni-shipment">Hardening delle mutazioni
+shipment</h2>
+<p>Il Punto 6F rafforza anche i service che modificano una shipment già
+esistente:</p>
+<ul>
+<li><code>AddShipmentItemService</code>;</li>
+<li><code>AddShipmentLegService</code>;</li>
+<li><code>ConfirmShipmentService</code>;</li>
+<li><code>CancelShipmentService</code>.</li>
+</ul>
+<p>Questi service ora usano un helper interno al package shipment
+application:</p>
+<ul>
+<li><code>ShipmentMutationSupport</code>.</li>
+</ul>
+<p><code>ShipmentMutationSupport.copyOf(...)</code> crea una copia
+dell’aggregate caricato dal repository. La mutazione viene applicata
+alla copia e la copia viene salvata solo se tutte le validazioni di
+dominio sono passate.</p>
+<p>Questa scelta è importante perché le repository in memory conservano
+aggregate mutabili. Senza questa protezione, un service potrebbe
+modificare l’oggetto caricato e lasciare uno stato parziale nel
+repository anche quando una validazione successiva fallisce.</p>
+<p>La regola applicativa diventa:</p>
+<blockquote>
+<p>caricare l’aggregate, copiare l’aggregate, mutare la copia, salvare
+solo la copia valida.</p>
+</blockquote>
+<p>Questo non sostituisce transazioni, unit of work o persistenza
+enterprise. È un hardening locale coerente con lo stato attuale del
+progetto.</p>
+<h2 id="test-aggiunti-e-rafforzati">Test aggiunti e rafforzati</h2>
+<p>È stato rafforzato il test:</p>
 <ul>
 <li><code>ApplicationUseCaseHardeningTest</code>.</li>
 </ul>
-<p>Questo test verifica il comportamento dei primi use case in situazioni positive, negative e di protezione dello stato.</p>
+<p>Questo test verifica il comportamento dei primi use case in
+situazioni positive, negative e di protezione dello stato.</p>
 <p>I casi coperti sono:</p>
 <ul>
-<li>i service rifiutano command nulli con <code>UseCaseValidationException</code>;</li>
+<li>tutti i service rifiutano command nulli con
+<code>UseCaseValidationException</code>;</li>
+<li>i service rifiutano repository dependency nulle in fase di
+costruzione;</li>
 <li>i command rifiutano input applicativi obbligatori mancanti;</li>
-<li>i find use case restituiscono <code>ResourceNotFoundException</code> quando la risorsa non esiste;</li>
-<li>la registrazione cargo rifiuta codici duplicati con <code>DuplicateResourceException</code>;</li>
-<li><code>CancelShipmentUseCase</code> cancella e persiste una shipment esistente;</li>
-<li><code>CancelShipmentUseCase</code> fallisce se la shipment non esiste;</li>
-<li>una mutazione fallita su shipment item non lascia stato parziale nella shipment salvata.</li>
+<li>i find use case restituiscono <code>ResourceNotFoundException</code>
+quando la risorsa non esiste;</li>
+<li>le registrazioni di location, cargo e shipment rifiutano codici
+business duplicati con <code>DuplicateResourceException</code>;</li>
+<li>i use case di mutazione shipment falliscono con
+<code>ResourceNotFoundException</code> quando mancano shipment, cargo o
+location necessarie;</li>
+<li><code>CancelShipmentUseCase</code> cancella e persiste una shipment
+esistente;</li>
+<li>una mutazione fallita su shipment item non lascia stato
+parziale;</li>
+<li>una mutazione fallita su shipment leg non lascia stato
+parziale;</li>
+<li>una conferma fallita non modifica lo stato della shipment
+persistita.</li>
 </ul>
-<h2>Errori applicativi verificati</h2>
-<p>Il Punto 6F rafforza la distinzione tra errori applicativi e errori di dominio.</p>
+<h2 id="errori-applicativi-verificati">Errori applicativi
+verificati</h2>
+<p>Il Punto 6F rafforza la distinzione tra errori applicativi e errori
+di dominio.</p>
 <p>Sono errori applicativi:</p>
 <ul>
 <li>command nullo;</li>
+<li>dipendenza repository nulla nella costruzione del service;</li>
 <li>input applicativo obbligatorio mancante;</li>
 <li>location non trovata;</li>
 <li>cargo non trovato;</li>
@@ -7723,32 +7799,68 @@ Punto 6D — In-Memory Repositories
 <p>Sono invece errori di dominio:</p>
 <ul>
 <li>shipment item con quantità non positiva;</li>
+<li>shipment leg con sequenza non valida;</li>
+<li>shipment leg con sequenza duplicata;</li>
 <li>shipment confermata senza item;</li>
 <li>shipment confermata senza leg;</li>
-<li>shipment incoerente rispetto a temperatura, separazione o requisiti.</li>
+<li>shipment incoerente rispetto a temperatura, separazione o
+requisiti.</li>
 </ul>
-<p>Questi errori restano nel domain layer e vengono propagati dall&#x27;application layer senza essere mascherati.</p>
-<h2>Regola confermata</h2>
-<p>Il Punto 6F conferma una regola centrale dell&#x27;architettura:</p>
-<blockquote>Il dominio decide se una regola di business è valida. L&#x27;application layer orchestra il caso d&#x27;uso, gestisce risorse mancanti o duplicate e salva il risultato.</blockquote>
-<p>Quindi un service applicativo non deve replicare le regole profonde del dominio.</p>
+<p>Questi errori restano nel domain layer e vengono propagati
+dall’application layer senza essere mascherati.</p>
+<h2 id="regola-confermata">Regola confermata</h2>
+<p>Il Punto 6F conferma una regola centrale dell’architettura:</p>
+<blockquote>
+<p>Il dominio decide se una regola di business è valida. L’application
+layer orchestra il caso d’uso, gestisce risorse mancanti o duplicate e
+salva il risultato.</p>
+</blockquote>
+<p>Quindi un service applicativo non deve replicare le regole profonde
+del dominio.</p>
 <p>Esempio:</p>
 <ul>
-<li><code>AddShipmentItemService</code> verifica che shipment e cargo esistano;</li>
+<li><code>AddShipmentItemService</code> verifica che shipment e cargo
+esistano;</li>
+<li>crea una copia della shipment caricata;</li>
 <li>crea lo shipment item usando il dominio;</li>
-<li>se la quantità è invalida, il dominio solleva <code>InvalidShipmentException</code>;</li>
-<li>il service non converte quell&#x27;errore in un errore tecnico o infrastrutturale.</li>
+<li>se la quantità è invalida, il dominio solleva
+<code>InvalidShipmentException</code>;</li>
+<li>il service non converte quell’errore in un errore tecnico o
+infrastrutturale;</li>
+<li>la repository non viene aggiornata con uno stato parziale.</li>
 </ul>
-<h2>Mutazioni fallite e stato parziale</h2>
-<p>Un punto importante del Punto 6F è la verifica delle mutazioni fallite.</p>
-<p>Quando un use case prova ad aggiungere uno shipment item non valido, il dominio deve impedire la creazione dell&#x27;item e la shipment salvata non deve risultare parzialmente modificata.</p>
-<p>Questo protegge il futuro application layer da errori difficili da individuare, come:</p>
+<h2 id="mutazioni-fallite-e-stato-parziale">Mutazioni fallite e stato
+parziale</h2>
+<p>Un punto importante del Punto 6F è la verifica delle mutazioni
+fallite.</p>
+<p>Quando un use case prova ad aggiungere uno shipment item non valido,
+aggiungere una shipment leg con sequenza duplicata o confermare una
+shipment incompleta, il dominio deve impedire l’operazione e la shipment
+salvata deve restare nello stato precedente.</p>
+<p>Questo protegge il futuro application layer da errori difficili da
+individuare, come:</p>
 <ul>
 <li>shipment con item parzialmente aggiunti;</li>
+<li>shipment con leg parzialmente aggiunte;</li>
+<li>shipment marcate come confermate dopo una conferma fallita;</li>
 <li>repository aggiornati dopo una validazione fallita;</li>
-<li>result applicativi incoerenti rispetto allo stato reale dell&#x27;aggregate.</li>
+<li>result applicativi incoerenti rispetto allo stato reale
+dell’aggregate.</li>
 </ul>
-<h2>Cosa è stato fatto</h2>
+<h2 id="confini-architetturali-confermati">Confini architetturali
+confermati</h2>
+<p>Il Punto 6F mantiene invariati i confini già stabiliti:</p>
+<ul>
+<li>il domain layer non importa application o infrastructure;</li>
+<li>l’application layer non importa framework, web adapter o repository
+concrete;</li>
+<li>l’application layer dipende solo da port e dominio;</li>
+<li><code>infrastructure.memory</code> implementa le repository
+port;</li>
+<li>non vengono introdotti controller, DTO web, database o annotazioni
+di persistenza.</li>
+</ul>
+<h2 id="cosa-è-stato-fatto">Cosa è stato fatto</h2>
 <p>Con il Punto 6F il progetto ora contiene:</p>
 <ul>
 <li>domain layer puro;</li>
@@ -7757,10 +7869,12 @@ Punto 6D — In-Memory Repositories
 <li>repository in memory;</li>
 <li>primi use case per Locations, Cargo e Shipments;</li>
 <li>use case di cancellazione shipment;</li>
+<li>hardening copy-on-write dei service di mutazione shipment;</li>
 <li>test del primo flusso applicativo completo;</li>
-<li>test di hardening su command, service, errori e mutazioni fallite.</li>
+<li>test di hardening su command, service, errori, repository mancanti,
+risorse mancanti, duplicati e mutazioni fallite.</li>
 </ul>
-<h2>Cosa manca ancora</h2>
+<h2 id="cosa-manca-ancora">Cosa manca ancora</h2>
 <p>Il Punto 6F non introduce ancora:</p>
 <ul>
 <li>use case per Vehicles;</li>
@@ -7775,17 +7889,21 @@ Punto 6D — In-Memory Repositories
 <li>tracking e monitoraggio;</li>
 <li>REST API;</li>
 <li>database;</li>
-<li>transazioni;</li>
+<li>transazioni enterprise;</li>
 <li>security e permissions.</li>
 </ul>
-<p>Queste parti non vengono aggiunte ora perché il primo obiettivo è stabilizzare il nucleo applicativo già introdotto.</p>
-<h2>Stato dopo il Punto 6F</h2>
-<p>Dopo questo step, TruckFlow Manager ha un primo application layer più robusto.</p>
-<p>Il progetto non è ancora una piattaforma enterprise completa e non espone ancora API esterne, ma ora possiede una base applicativa più affidabile per continuare verso i prossimi use case.</p>
-<h2>Prossimo step consigliato</h2>
+<p>Queste parti non vengono aggiunte ora perché il primo obiettivo è
+stabilizzare il nucleo applicativo già introdotto.</p>
+<h2 id="stato-dopo-il-punto-6f">Stato dopo il Punto 6F</h2>
+<p>Dopo questo step, TruckFlow Manager ha un primo application layer più
+robusto.</p>
+<p>Il progetto non è ancora una piattaforma enterprise completa e non
+espone ancora API esterne, ma ora possiede una base applicativa più
+affidabile per continuare verso i prossimi use case.</p>
+<h2 id="prossimo-step-consigliato">Prossimo step consigliato</h2>
 <p>Il prossimo step consigliato è:</p>
 <p><strong>Punto 6G — Application Use Cases Expansion</strong>.</p>
-<p>In quella fase si potrà decidere se estendere i casi d&#x27;uso a:</p>
+<p>In quella fase si potrà decidere se estendere i casi d’uso a:</p>
 <ul>
 <li>Documents;</li>
 <li>Compliance;</li>
@@ -7793,7 +7911,8 @@ Punto 6D — In-Memory Repositories
 <li>Operational Roles;</li>
 <li>altre azioni su Shipments.</li>
 </ul>
-<p>Prima di passare a REST API, database o Spring, conviene completare un set minimo ma coerente di use case applicativi.</p>
+<p>Prima di passare a REST API, database o Spring, conviene completare
+un set minimo ma coerente di use case applicativi.</p>
   </div>
 </article>
 

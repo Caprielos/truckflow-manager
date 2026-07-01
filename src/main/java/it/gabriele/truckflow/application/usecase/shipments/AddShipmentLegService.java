@@ -41,7 +41,8 @@ public final class AddShipmentLegService implements AddShipmentLegUseCase {
       throw new ResourceNotFoundException("Location", command.destinationLocationId());
     }
 
-    var updatedLegs = new ArrayList<>(shipment.legs());
+    var updatedShipment = ShipmentMutationSupport.copyOf(shipment);
+    var updatedLegs = new ArrayList<>(updatedShipment.legs());
     updatedLegs.add(
         new ShipmentLeg(
             null,
@@ -52,7 +53,7 @@ public final class AddShipmentLegService implements AddShipmentLegUseCase {
             command.estimatedDistanceKm(),
             command.notes()));
 
-    shipment.replaceLegs(updatedLegs);
-    return ShipmentResult.from(shipmentRepository.save(shipment));
+    updatedShipment.replaceLegs(updatedLegs);
+    return ShipmentResult.from(shipmentRepository.save(updatedShipment));
   }
 }

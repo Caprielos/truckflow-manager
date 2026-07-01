@@ -782,8 +782,8 @@
             <div><h3>First Use Cases</h3><p>Introduzione dei primi command, result, port in e application service per il flusso Locations + Cargo + Shipments.</p></div>
           </div>
           <div class="timeline-item">
-            <div><span class="badge now">In corso</span><div class="milestone">Punto 6F</div></div>
-            <div><h3>Application Use Case Review &amp; Hardening</h3><p>Rafforzamento dei primi use case, aggiunta di CancelShipmentUseCase, test negativi e verifica delle mutazioni fallite.</p></div>
+            <div><span class="badge done">Completato</span><div class="milestone">Punto 6F</div></div>
+            <div><h3>Application Use Case Review &amp; Hardening</h3><p>Rafforzamento dei primi use case, aggiunta di CancelShipmentUseCase, copy-on-write delle mutazioni shipment, test negativi e verifica delle mutazioni fallite.</p></div>
           </div>
         </div>
         <h3>Obiettivi a breve termine</h3>
@@ -794,7 +794,7 @@
           <li>mantenere stabile il Punto 6C con le prime repository port;</li>
           <li>mantenere stabile il Punto 6D con repository in memory senza introdurre ancora web o database;</li>
           <li>mantenere stabile il Punto 6E con i primi use case applicativi per Locations + Cargo + Shipments;</li>
-          <li>consolidare il Punto 6F con hardening dei use case, CancelShipmentUseCase e test negativi.</li>
+          <li>mantenere stabile il Punto 6F con hardening dei use case, CancelShipmentUseCase, copy-on-write delle mutazioni shipment e test negativi.</li>
         </ul>
         <h3>Obiettivi a medio termine</h3>
         <ul>
@@ -809,7 +809,7 @@
 
       <section id="application-layer">
         <h2>8. Application Layer, In-Memory Repositories e Use Case Hardening</h2>
-        <p class="lead">Il Punto 6A ha definito il blueprint del livello applicativo. Il Punto 6B ha introdotto la foundation concreta. Il Punto 6C ha aggiunto le prime repository port. Il Punto 6D ha aggiunto le repository in memory. Il Punto 6E ha introdotto i primi use case applicativi per Locations, Cargo e Shipments. Il Punto 6F ora li rafforza con CancelShipmentUseCase e test negativi, senza introdurre ancora REST API, database o framework.</p>
+        <p class="lead">Il Punto 6A ha definito il blueprint del livello applicativo. Il Punto 6B ha introdotto la foundation concreta. Il Punto 6C ha aggiunto le prime repository port. Il Punto 6D ha aggiunto le repository in memory. Il Punto 6E ha introdotto i primi use case applicativi per Locations, Cargo e Shipments. Il Punto 6F ora li rafforza con CancelShipmentUseCase, copy-on-write delle mutazioni shipment e test negativi, senza introdurre ancora REST API, database o framework.</p>
         <div class="grid two">
           <div class="card">
             <h3>Responsabilità</h3>
@@ -817,7 +817,7 @@
           </div>
           <div class="card">
             <h3>Componenti previsti</h3>
-            <p>La struttura comprende command, result, port in, port out, use case, application service, eccezioni applicative, repository port e repository in memory per sviluppo e test. Il Punto 6E aggiunge i primi command e service concreti: registrazione e ricerca di Locations e Cargo, creazione di Shipment, aggiunta di item, aggiunta di leg, conferma e ricerca della Shipment. Il Punto 6F aggiunge cancellazione shipment e hardening dei comportamenti negativi.</p>
+            <p>La struttura comprende command, result, port in, port out, use case, application service, eccezioni applicative, repository port e repository in memory per sviluppo e test. Il Punto 6E aggiunge i primi command e service concreti: registrazione e ricerca di Locations e Cargo, creazione di Shipment, aggiunta di item, aggiunta di leg, conferma e ricerca della Shipment. Il Punto 6F aggiunge cancellazione shipment, copy-on-write delle mutazioni shipment e hardening dei comportamenti negativi.</p>
           </div>
           <div class="card">
             <h3>Primo flusso</h3>
@@ -835,7 +835,7 @@
         <div class="grid two">
           <div class="card">
             <h3>Repository in memory usate dai use case</h3>
-            <p>Il Punto 6D aggiunge InMemoryLocationRepository, InMemoryCargoUnitRepository e InMemoryShipmentRepository. Il Punto 6E le usa nei test applicativi per dimostrare il primo flusso reale senza database. Il Punto 6F le usa per verificare cancellazione, duplicati, risorse mancanti e mutazioni fallite.</p>
+            <p>Il Punto 6D aggiunge InMemoryLocationRepository, InMemoryCargoUnitRepository e InMemoryShipmentRepository. Il Punto 6E le usa nei test applicativi per dimostrare il primo flusso reale senza database. Il Punto 6F le usa per verificare cancellazione, duplicati, dependency nulle, risorse mancanti e mutazioni fallite senza stati parziali.</p>
           </div>
           <div class="card">
             <h3>Limiti intenzionali</h3>
@@ -912,7 +912,7 @@
               <tr><td>Application Repository Ports</td><td><span class="badge done">Completate</span></td><td>Introduce RepositoryPort, LocationRepository, CargoUnitRepository e ShipmentRepository come contratti outbound senza database o infrastructure concreta.</td></tr>
               <tr><td>In-Memory Repositories</td><td><span class="badge done">Completate</span></td><td>Introduce implementazioni leggere per Location, Cargo e Shipment utili per test, sviluppo locale e primi use case senza database.</td></tr>
               <tr><td>First Use Cases</td><td><span class="badge done">Completati</span></td><td>Introduce command, result, port in e application service per il primo flusso Locations + Cargo + Shipments.</td></tr>
-              <tr><td>Use Case Hardening</td><td><span class="badge now">In corso</span></td><td>Aggiunge CancelShipmentUseCase, test negativi e verifica che le mutazioni fallite non lascino stato parziale.</td></tr>
+              <tr><td>Use Case Hardening</td><td><span class="badge done">Completato</span></td><td>Aggiunge CancelShipmentUseCase, copy-on-write delle mutazioni shipment, test negativi e verifica che le mutazioni fallite non lascino stato parziale.</td></tr>
               <tr><td>Database e repository reali</td><td><span class="badge planned">Futuro</span></td><td>Non vanno introdotti prima dei repository in memory e dei use case applicativi.</td></tr>
               <tr><td>API REST</td><td><span class="badge planned">Futuro</span></td><td>Le API devono esporre casi d’uso stabili, non accedere direttamente al dominio in modo improvvisato.</td></tr>
               <tr><td>Planning & Dispatching</td><td><span class="badge planned">Futuro</span></td><td>È il modulo che assegnerà risorse reali e verificherà compatibilità operative.</td></tr>
