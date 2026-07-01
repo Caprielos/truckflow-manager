@@ -20,9 +20,9 @@ Il markup HTML resta identico in entrambi i casi. Cambia solo il CSS applicato d
 
 ## Stato attuale del dominio
 
-Il progetto ha consolidato il **domain layer puro** e ha completato i primi step dell’application layer fino al **Punto 6L — Application Compliance Base Use Cases**.
+Il progetto ha consolidato il **domain layer puro** e ha completato i primi step dell’application layer fino al **Punto 6M — Application Layer Final Review & Freeze**.
 
-La versione attuale rappresenta la **TruckFlow Domain Foundation v1.0** rafforzata dalla prima review correttiva del dominio puro. La fondazione è definita, le regole sono documentate e sono stati applicati interventi mirati su invarianti, eccezioni, codici aziendali, test e pulizia del repository. Il passo attuale completato è il Punto 6L, cioè la prima espansione controllata verso i use case Compliance base. Ora l'application layer copre anche registrazione, ricerca e mutazioni di stato per `ComplianceRequirement`, con repository port Compliance, repository in memory Compliance e test applicativi dedicati, senza introdurre ancora REST API, database, JPA, Spring Data, planning, tracking, audit trail, workflow, country engine operativo o controlli concreti di violazione.
+La versione attuale rappresenta la **TruckFlow Domain Foundation v1.0** rafforzata dalla prima review correttiva del dominio puro. La fondazione è definita, le regole sono documentate e sono stati applicati interventi mirati su invarianti, eccezioni, codici aziendali, test e pulizia del repository. Il passo attuale completato è il Punto 6M, cioè la review/freeze finale del primo ciclo dell'application layer. Ora l'application layer copre Locations, Cargo, Shipments, Documents, Vehicles, Operational Roles e Compliance base con command, result, port in, port out, service, repository in memory, test e documentazione allineati, senza introdurre ancora REST API, database, JPA, Spring Data, planning, tracking, audit trail, workflow, country engine operativo o controlli concreti di violazione.
 
 I package principali sono:
 
@@ -69,6 +69,7 @@ Il dominio è stato costruito seguendo una regola precisa: modellare prima i con
 - [`docs/25-application-use-cases-expansion-operational-roles.md`](docs/25-application-use-cases-expansion-operational-roles.md) — espansione del Punto 6J: primi use case applicativi Operational Roles, repository port Operational, repository in memory Operational e test applicativi.
 - [`docs/26-application-operational-use-case-hardening.md`](docs/26-application-operational-use-case-hardening.md) — hardening del Punto 6K: review Operational Roles, copertura completa dei service di stato, copy-on-write sulle attivazioni fallite e documentazione allineata.
 - [`docs/27-application-compliance-base-use-cases.md`](docs/27-application-compliance-base-use-cases.md) — espansione del Punto 6L: primi use case Compliance base, `ComplianceRequirementRepository`, `InMemoryComplianceRequirementRepository` e flusso register/find/status.
+- [`docs/28-application-layer-final-review-freeze.md`](docs/28-application-layer-final-review-freeze.md) — chiusura del Punto 6M: review finale, freeze dell’application layer, controlli architetturali e documentazione di cosa resta fuori.
 
 ## Regole fondamentali della Domain Foundation
 
@@ -158,7 +159,7 @@ Le prime porte sono dedicate a:
 - Documents, tramite `DocumentRepository` dopo il Punto 6G;
 - Vehicles, tramite `VehicleUnitRepository` e `VehicleCombinationRepository` dopo il Punto 6I;
 - Operational Roles, tramite `DriverRepository`, `MechanicRepository`, `WarehouseOperatorRepository`, `DispatcherRepository` e `ManagerRepository` dopo il Punto 6J, rafforzate dal Punto 6K;
-- Compliance base, tramite `ComplianceRequirementRepository` dopo il Punto 6L.
+- Compliance base, tramite `ComplianceRequirementRepository` dopo il Punto 6L, consolidata dal freeze del Punto 6M.
 
 Ogni porta permette salvataggio, ricerca per ID, ricerca per codice e verifica di esistenza per ID o codice. Questa scelta prepara i futuri use case senza introdurre database, JPA, Spring, file system o infrastructure concreta.
 
@@ -177,7 +178,7 @@ Le implementazioni introdotte sono:
 - `InMemoryDocumentRepository` dopo il Punto 6G;
 - `InMemoryVehicleUnitRepository` e `InMemoryVehicleCombinationRepository` dopo il Punto 6I;
 - `InMemoryDriverRepository`, `InMemoryMechanicRepository`, `InMemoryWarehouseOperatorRepository`, `InMemoryDispatcherRepository` e `InMemoryManagerRepository` dopo il Punto 6J, rafforzate dai test del Punto 6K;
-- `InMemoryComplianceRequirementRepository` dopo il Punto 6L.
+- `InMemoryComplianceRequirementRepository` dopo il Punto 6L, consolidata dal freeze del Punto 6M.
 
 Queste repository permettono salvataggio, ricerca per ID, ricerca per codice e verifica di esistenza. Inoltre rifiutano input nulli con `UseCaseValidationException` e codici duplicati con `DuplicateResourceException`.
 
@@ -280,6 +281,17 @@ Questa fase mantiene Compliance come catalogo astratto. Non introduce controlli 
 
 Il Punto 6L è documentato in [`docs/27-application-compliance-base-use-cases.md`](docs/27-application-compliance-base-use-cases.md).
 
+## Punto 6M — Application Layer Final Review & Freeze
+
+Il Punto 6M chiude il primo ciclo dell'application layer.
+
+Questa fase non aggiunge nuovi use case business. Introduce invece `ApplicationLayerFinalFreezeTest`, che verifica la completezza dei package applicativi attivi, l'allineamento tra port in concrete e service applicativi, la presenza della documentazione applicativa dal Punto 6A al Punto 6M e l'assenza di layer prematuri come web, security, JPA, persistence o database.
+
+Il Punto 6M conferma che l'application layer base è ora stabile per Locations, Cargo, Shipments, Documents, Vehicles, Operational Roles e Compliance base, mantenendo ancora fuori REST API, controller, database, JPA, Spring Data, security, planning, tracking, workflow, audit trail e dashboard.
+
+Il Punto 6M è documentato in [`docs/28-application-layer-final-review-freeze.md`](docs/28-application-layer-final-review-freeze.md).
+
+
 ## Prossimi step consigliati
 
 La roadmap consigliata è:
@@ -298,5 +310,6 @@ La roadmap consigliata è:
 12. mantenere stabile il Punto 6J con i primi use case applicativi Operational Roles, repository port Operational, repository in memory Operational e test dedicati;
 13. mantenere stabile il Punto 6K con hardening dei use case Operational Roles, copertura completa dei service di stato e test copy-on-write sulle attivazioni fallite;
 14. mantenere stabile il Punto 6L con i primi use case Compliance base, repository port Compliance, repository in memory Compliance e test dedicati;
-15. procedere con il Punto 6M come review/freeze finale dell'application layer;
-16. rimandare API REST, database e integrazioni esterne finché l'application layer non è stabile.
+15. mantenere stabile il Punto 6M come freeze finale del primo ciclo application layer;
+16. aprire un nuovo punto roadmap solo dopo verifica locale completa con `mvn spotless:check` e `mvn clean test`;
+17. rimandare API REST, database e integrazioni esterne finché non viene definito il prossimo punto ufficiale.

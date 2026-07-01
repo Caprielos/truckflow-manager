@@ -59,6 +59,7 @@ This digital documentation mirrors:
 - `docs/25-application-use-cases-expansion-operational-roles.md`
 - `docs/26-application-operational-use-case-hardening.md`
 - `docs/27-application-compliance-base-use-cases.md`
+- `docs/28-application-layer-final-review-freeze.md`
 - `command_basic.md`
 
 
@@ -162,3 +163,14 @@ Questo aggiornamento documenta la prima espansione controllata dell'application 
 La fase resta coerente con i vincoli architetturali già decisi: niente REST API, controller Spring, database, JPA, security, audit trail, workflow, country engine operativo, scadenze reali o controlli concreti di violazione.
 
 Documento di riferimento: `docs/27-application-compliance-base-use-cases.md`.
+
+
+## Aggiornamento Punto 6M
+
+La documentazione digitale include ora anche il Punto 6M — Application Layer Final Review & Freeze.
+
+Questo aggiornamento documenta la chiusura del primo ciclo dell'application layer: package completi per i contesti applicativi attivi, allineamento tra port in e service, documentazione applicativa dal Punto 6A al Punto 6M e controlli contro l'introduzione prematura di web, security, JPA, persistence o database.
+
+La fase resta una review/freeze: non introduce nuovi use case business, REST API, controller Spring, database, JPA, Spring Data, security, planning, tracking, audit trail, workflow o dashboard.
+
+Documento di riferimento: `docs/28-application-layer-final-review-freeze.md`.

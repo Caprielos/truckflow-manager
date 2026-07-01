@@ -331,3 +331,7 @@ Il Punto 6K non modifica i use case Documents introdotti nel Punto 6G. Conferma 
 Dopo Documents, Vehicles e Operational Roles, il Punto 6L aggiunge una nuova espansione controllata verso Compliance base.
 
 Il principio rimane lo stesso: vengono aggiunti use case applicativi per un aggregate già puro (`ComplianceRequirement`) senza introdurre controlli reali di violazione, motori regole, audit trail, workflow, REST API o database.
+
+## Allineamento Punto 6M
+
+Il Punto 6M chiude il primo ciclo dell'application layer con una review/freeze finale. Da questo momento i contenuti documentati nei punti 6A-6L sono considerati fondazione applicativa stabile: eventuali evoluzioni future dovranno essere introdotte in nuovi punti roadmap, mantenendo ancora fuori REST API, controller, database, JPA, Spring Data, security, tracking, planning, dashboard, workflow e integrazioni esterne.

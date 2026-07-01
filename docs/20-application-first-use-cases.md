@@ -345,3 +345,7 @@ Il nucleo iniziale Locations + Cargo + Shipments rimane invariato.
 Il Punto 6L estende lo stesso modello applicativo al catalogo base di Compliance: command espliciti, service piccoli, repository port astratte, result applicativi e test con adapter in memory.
 
 Anche in questo step non vengono introdotti REST API, database o framework.
+
+## Allineamento Punto 6M
+
+Il Punto 6M chiude il primo ciclo dell'application layer con una review/freeze finale. Da questo momento i contenuti documentati nei punti 6A-6L sono considerati fondazione applicativa stabile: eventuali evoluzioni future dovranno essere introdotte in nuovi punti roadmap, mantenendo ancora fuori REST API, controller, database, JPA, Spring Data, security, tracking, planning, dashboard, workflow e integrazioni esterne.

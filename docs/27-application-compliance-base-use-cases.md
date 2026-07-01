@@ -257,3 +257,7 @@ Dopo il Punto 6L, l'application layer copre i primi blocchi fondamentali:
 - Compliance base requirements.
 
 Il prossimo step consigliato è il **Punto 6M — Application Layer Final Review & Freeze**, cioè la chiusura finale del Punto 6 con revisione complessiva, documentazione finale e verifica dei confini architetturali.
+
+## Allineamento Punto 6M
+
+Il Punto 6M chiude il primo ciclo dell'application layer con una review/freeze finale. Da questo momento i contenuti documentati nei punti 6A-6L sono considerati fondazione applicativa stabile: eventuali evoluzioni future dovranno essere introdotte in nuovi punti roadmap, mantenendo ancora fuori REST API, controller, database, JPA, Spring Data, security, tracking, planning, dashboard, workflow e integrazioni esterne.

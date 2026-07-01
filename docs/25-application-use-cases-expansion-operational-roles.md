@@ -305,3 +305,7 @@ Il Punto 6K non introduce nuovi use case business né cambia i contratti pubblic
 Il Punto 6L non modifica i use case Operational Roles. Aggiunge invece i primi use case applicativi per il catalogo base di Compliance.
 
 Le verifiche concrete su patente, CQC, ADR, visite mediche, ruoli e abilitazioni restano fuori dal Punto 6L e appartengono a futuri moduli di compliance check.
+
+## Allineamento Punto 6M
+
+Il Punto 6M chiude il primo ciclo dell'application layer con una review/freeze finale. Da questo momento i contenuti documentati nei punti 6A-6L sono considerati fondazione applicativa stabile: eventuali evoluzioni future dovranno essere introdotte in nuovi punti roadmap, mantenendo ancora fuori REST API, controller, database, JPA, Spring Data, security, tracking, planning, dashboard, workflow e integrazioni esterne.

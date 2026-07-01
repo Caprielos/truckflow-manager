@@ -342,3 +342,7 @@ Il Punto 6K non modifica i use case Vehicles. Rafforza invece il blocco Operatio
 Il Punto 6L non modifica i use case Vehicles. Aggiunge invece un blocco applicativo separato per Compliance base.
 
 Le compatibilità concrete tra veicoli, cargo, documenti e requisiti compliance restano fuori: verranno trattate solo in moduli futuri di planning, dispatching o compliance check.
+
+## Allineamento Punto 6M
+
+Il Punto 6M chiude il primo ciclo dell'application layer con una review/freeze finale. Da questo momento i contenuti documentati nei punti 6A-6L sono considerati fondazione applicativa stabile: eventuali evoluzioni future dovranno essere introdotte in nuovi punti roadmap, mantenendo ancora fuori REST API, controller, database, JPA, Spring Data, security, tracking, planning, dashboard, workflow e integrazioni esterne.

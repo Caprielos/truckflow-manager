@@ -326,3 +326,7 @@ Questo conferma che la foundation è sufficiente per avviare casi d'uso concreti
 La foundation applicativa introdotta nel Punto 6B viene utilizzata pienamente nel Punto 6F.
 
 `ApplicationCommand`, `ApplicationResult`, `UseCase`, `UseCaseValidationException`, `ResourceNotFoundException` e `DuplicateResourceException` vengono esercitati nei test di hardening dei primi use case. Questo conferma che la foundation è abbastanza stabile per supportare casi d'uso reali senza dipendere da framework o infrastruttura concreta.
+
+## Allineamento Punto 6M
+
+Il Punto 6M chiude il primo ciclo dell'application layer con una review/freeze finale. Da questo momento i contenuti documentati nei punti 6A-6L sono considerati fondazione applicativa stabile: eventuali evoluzioni future dovranno essere introdotte in nuovi punti roadmap, mantenendo ancora fuori REST API, controller, database, JPA, Spring Data, security, tracking, planning, dashboard, workflow e integrazioni esterne.

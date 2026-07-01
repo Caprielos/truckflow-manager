@@ -304,3 +304,7 @@ InMemoryComplianceRequirementRepository
 Questo adapter implementa `ComplianceRequirementRepository`, indicizza i requisiti per ID e codice, rifiuta input nulli e impedisce codici duplicati.
 
 Rimane un adapter temporaneo per test e sviluppo locale. Non introduce database, JPA, Spring Data, transazioni, persistenza definitiva o controlli compliance concreti.
+
+## Allineamento Punto 6M
+
+Il Punto 6M chiude il primo ciclo dell'application layer con una review/freeze finale. Da questo momento i contenuti documentati nei punti 6A-6L sono considerati fondazione applicativa stabile: eventuali evoluzioni future dovranno essere introdotte in nuovi punti roadmap, mantenendo ancora fuori REST API, controller, database, JPA, Spring Data, security, tracking, planning, dashboard, workflow e integrazioni esterne.

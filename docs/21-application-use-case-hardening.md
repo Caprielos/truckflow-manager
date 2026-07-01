@@ -264,3 +264,7 @@ Per questo i service Operational Roles continuano a usare mutation support copy-
 Il principio di hardening del Punto 6F rimane valido anche per Compliance base.
 
 I nuovi service compliance rifiutano command nulli, dependency repository nulle e risorse mancanti. Le mutazioni di stato usano una copia dell'aggregate prima del salvataggio, mantenendo coerente l'approccio copy-on-write già adottato negli step precedenti.
+
+## Allineamento Punto 6M
+
+Il Punto 6M chiude il primo ciclo dell'application layer con una review/freeze finale. Da questo momento i contenuti documentati nei punti 6A-6L sono considerati fondazione applicativa stabile: eventuali evoluzioni future dovranno essere introdotte in nuovi punti roadmap, mantenendo ancora fuori REST API, controller, database, JPA, Spring Data, security, tracking, planning, dashboard, workflow e integrazioni esterne.

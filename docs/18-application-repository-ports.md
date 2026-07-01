@@ -408,3 +408,7 @@ ComplianceRequirementRepository
 La porta espone salvataggio, ricerca per `ComplianceRequirementId`, ricerca per `ComplianceRequirementCode` e controlli di esistenza per ID e codice.
 
 Come tutte le altre repository port, resta un contratto dell'application layer. Non è una repository JPA, non conosce database, Spring Data, query SQL, transazioni o persistenza definitiva.
+
+## Allineamento Punto 6M
+
+Il Punto 6M chiude il primo ciclo dell'application layer con una review/freeze finale. Da questo momento i contenuti documentati nei punti 6A-6L sono considerati fondazione applicativa stabile: eventuali evoluzioni future dovranno essere introdotte in nuovi punti roadmap, mantenendo ancora fuori REST API, controller, database, JPA, Spring Data, security, tracking, planning, dashboard, workflow e integrazioni esterne.

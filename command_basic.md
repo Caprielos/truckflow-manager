@@ -417,3 +417,37 @@ Commit consigliato:
 git add -A
 git commit -m "Expand application use cases with compliance base"
 ```
+
+---
+
+## Nota progetto — Punto 6M
+
+Dopo l'aggiunta del Punto 6M — Application Layer Final Review & Freeze, il controllo consigliato resta:
+
+```bash
+mvn spotless:apply
+mvn spotless:check
+mvn clean test
+git status
+```
+
+Il Punto 6M chiude il primo ciclo dell'application layer. Non aggiunge nuovi use case business, ma introduce il test finale di freeze:
+
+- `ApplicationLayerFinalFreezeTest`;
+- controllo dei package applicativi attivi;
+- controllo del rapporto tra port in concrete e service applicativi;
+- controllo della documentazione applicativa dal Punto 6A al Punto 6M;
+- controllo contro layer prematuri come web, security, JPA, persistence o database.
+
+Prima del commit conviene controllare anche che il documento finale sia presente:
+
+```bash
+ls docs/28-application-layer-final-review-freeze.md
+```
+
+Commit consigliato:
+
+```bash
+git add -A
+git commit -m "Finalize application layer review and freeze"
+```

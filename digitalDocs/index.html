@@ -37,6 +37,7 @@
 <input class="doc-toggle" type="radio" name="active-doc" id="doc-27">
 <input class="doc-toggle" type="radio" name="active-doc" id="doc-28">
 <input class="doc-toggle" type="radio" name="active-doc" id="doc-29">
+<input class="doc-toggle" type="radio" name="active-doc" id="doc-30">
 <div class="app-shell">
   <aside class="sidebar">
     <div class="brand"><div class="brand-mark">TF</div><div><h1>TruckFlow Docs</h1><p>Digital mirror of the official Markdown documentation.</p></div></div>
@@ -69,13 +70,14 @@
 <label class="nav-item" for="doc-24"><span class="nav-number">25</span><span class="nav-label">Use Case Expansion Review</span><span class="nav-file">23-application-use-case-expansion-review.md</span></label>
 <label class="nav-item" for="doc-25"><span class="nav-number">26</span><span class="nav-label">Use Cases Vehicles</span><span class="nav-file">24-application-use-cases-expansion-vehicles.md</span></label>
 <label class="nav-item" for="doc-26"><span class="nav-number">27</span><span class="nav-label">Use Cases Operational Roles</span><span class="nav-file">25-application-use-cases-expansion-operational-roles.md</span></label>
-<label class="nav-item" for="doc-27"><span class="nav-number">28</span><span class="nav-label">Command Basic</span><span class="nav-file">command_basic.md</span></label>
-<label class="nav-item" for="doc-28"><span class="nav-number">29</span><span class="nav-label">Operational Hardening</span><span class="nav-file">26-application-operational-use-case-hardening.md</span></label>
-<label class="nav-item" for="doc-29"><span class="nav-number">30</span><span class="nav-label">Compliance Base</span><span class="nav-file">27-application-compliance-base-use-cases.md</span></label>
+<label class="nav-item" for="doc-27"><span class="nav-number">28</span><span class="nav-label">Operational Hardening</span><span class="nav-file">26-application-operational-use-case-hardening.md</span></label>
+<label class="nav-item" for="doc-28"><span class="nav-number">29</span><span class="nav-label">Compliance Base</span><span class="nav-file">27-application-compliance-base-use-cases.md</span></label>
+<label class="nav-item" for="doc-29"><span class="nav-number">30</span><span class="nav-label">Application Freeze</span><span class="nav-file">28-application-layer-final-review-freeze.md</span></label>
+<label class="nav-item" for="doc-30"><span class="nav-number">31</span><span class="nav-label">Command Basic</span><span class="nav-file">command_basic.md</span></label>
     </nav>
   </aside>
   <main class="content">
-    <div class="content-toolbar"><div><p class="eyebrow">TruckFlow Manager</p><h2>Official Project Documentation</h2></div><div class="toolbar-badges"><span>HTML + CSS</span><span>Markdown mirror</span><span>Domain + Application Use Cases</span><span>Punto 6L</span></div></div>
+    <div class="content-toolbar"><div><p class="eyebrow">TruckFlow Manager</p><h2>Official Project Documentation</h2></div><div class="toolbar-badges"><span>HTML + CSS</span><span>Markdown mirror</span><span>Application Layer Freeze</span><span>Punto 6M</span></div></div>
 <article class="doc-panel panel-0" id="TRUCKFLOW_PROJECT_DOCUMENTATION-md">
   <header class="doc-panel-header">
     <p class="eyebrow">TRUCKFLOW_PROJECT_DOCUMENTATION.md</p>
@@ -112,20 +114,20 @@ direttamente nella pagina.</li>
 applicato dal flag globale.</p>
 <h2 id="stato-attuale-del-dominio">Stato attuale del dominio</h2>
 <p>Il progetto ha consolidato il <strong>domain layer puro</strong> e ha
-completato i primi step dell’application layer fino al <strong>Punto 6L
-— Application Compliance Base Use Cases</strong>.</p>
+completato i primi step dell’application layer fino al <strong>Punto 6M
+— Application Layer Final Review &amp; Freeze</strong>.</p>
 <p>La versione attuale rappresenta la <strong>TruckFlow Domain
 Foundation v1.0</strong> rafforzata dalla prima review correttiva del
 dominio puro. La fondazione è definita, le regole sono documentate e
 sono stati applicati interventi mirati su invarianti, eccezioni, codici
 aziendali, test e pulizia del repository. Il passo attuale completato è
-il Punto 6L, cioè la prima espansione controllata verso i use case
-Compliance base. Ora l’application layer copre anche registrazione,
-ricerca e mutazioni di stato per <code>ComplianceRequirement</code>, con
-repository port Compliance, repository in memory Compliance e test
-applicativi dedicati, senza introdurre ancora REST API, database, JPA,
-Spring Data, planning, tracking, audit trail, workflow, country engine
-operativo o controlli concreti di violazione.</p>
+il Punto 6M, cioè la review/freeze finale del primo ciclo
+dell’application layer. Ora l’application layer copre Locations, Cargo,
+Shipments, Documents, Vehicles, Operational Roles e Compliance base con
+command, result, port in, port out, service, repository in memory, test
+e documentazione allineati, senza introdurre ancora REST API, database,
+JPA, Spring Data, planning, tracking, audit trail, workflow, country
+engine operativo o controlli concreti di violazione.</p>
 <p>I package principali sono:</p>
 <ul>
 <li><code>domain.users</code>;</li>
@@ -252,6 +254,10 @@ href="docs/27-application-compliance-base-use-cases.md"><code>docs/27-applicatio
 <code>ComplianceRequirementRepository</code>,
 <code>InMemoryComplianceRequirementRepository</code> e flusso
 register/find/status.</li>
+<li><a
+href="docs/28-application-layer-final-review-freeze.md"><code>docs/28-application-layer-final-review-freeze.md</code></a>
+— chiusura del Punto 6M: review finale, freeze dell’application layer,
+controlli architetturali e documentazione di cosa resta fuori.</li>
 </ul>
 <h2 id="regole-fondamentali-della-domain-foundation">Regole fondamentali
 della Domain Foundation</h2>
@@ -416,7 +422,8 @@ concreti.</p>
 <code>DispatcherRepository</code> e <code>ManagerRepository</code> dopo
 il Punto 6J, rafforzate dal Punto 6K;</li>
 <li>Compliance base, tramite
-<code>ComplianceRequirementRepository</code> dopo il Punto 6L.</li>
+<code>ComplianceRequirementRepository</code> dopo il Punto 6L,
+consolidata dal freeze del Punto 6M.</li>
 </ul>
 <p>Ogni porta permette salvataggio, ricerca per ID, ricerca per codice e
 verifica di esistenza per ID o codice. Questa scelta prepara i futuri
@@ -445,7 +452,7 @@ dall’application layer.</p>
 <code>InMemoryManagerRepository</code> dopo il Punto 6J, rafforzate dai
 test del Punto 6K;</li>
 <li><code>InMemoryComplianceRequirementRepository</code> dopo il Punto
-6L.</li>
+6L, consolidata dal freeze del Punto 6M.</li>
 </ul>
 <p>Queste repository permettono salvataggio, ricerca per ID, ricerca per
 codice e verifica di esistenza. Inoltre rifiutano input nulli con
@@ -615,6 +622,22 @@ calcola violazioni, non gestisce scadenze reali, audit trail, workflow,
 notifiche, REST API, controller, database, JPA o security.</p>
 <p>Il Punto 6L è documentato in <a
 href="docs/27-application-compliance-base-use-cases.md"><code>docs/27-application-compliance-base-use-cases.md</code></a>.</p>
+<h2 id="punto-6m-application-layer-final-review-freeze">Punto 6M —
+Application Layer Final Review &amp; Freeze</h2>
+<p>Il Punto 6M chiude il primo ciclo dell’application layer.</p>
+<p>Questa fase non aggiunge nuovi use case business. Introduce invece
+<code>ApplicationLayerFinalFreezeTest</code>, che verifica la
+completezza dei package applicativi attivi, l’allineamento tra port in
+concrete e service applicativi, la presenza della documentazione
+applicativa dal Punto 6A al Punto 6M e l’assenza di layer prematuri come
+web, security, JPA, persistence o database.</p>
+<p>Il Punto 6M conferma che l’application layer base è ora stabile per
+Locations, Cargo, Shipments, Documents, Vehicles, Operational Roles e
+Compliance base, mantenendo ancora fuori REST API, controller, database,
+JPA, Spring Data, security, planning, tracking, workflow, audit trail e
+dashboard.</p>
+<p>Il Punto 6M è documentato in <a
+href="docs/28-application-layer-final-review-freeze.md"><code>docs/28-application-layer-final-review-freeze.md</code></a>.</p>
 <h2 id="prossimi-step-consigliati">Prossimi step consigliati</h2>
 <p>La roadmap consigliata è:</p>
 <ol type="1">
@@ -657,16 +680,19 @@ sulle attivazioni fallite;</li>
 <li>mantenere stabile il Punto 6L con i primi use case Compliance base,
 repository port Compliance, repository in memory Compliance e test
 dedicati;</li>
-<li>procedere con il Punto 6M come review/freeze finale dell’application
-layer;</li>
-<li>rimandare API REST, database e integrazioni esterne finché
-l’application layer non è stabile.</li>
+<li>mantenere stabile il Punto 6M come freeze finale del primo ciclo
+application layer;</li>
+<li>aprire un nuovo punto roadmap solo dopo verifica locale completa con
+<code>mvn spotless:check</code> e <code>mvn clean test</code>;</li>
+<li>rimandare API REST, database e integrazioni esterne finché non viene
+definito il prossimo punto ufficiale.</li>
 </ol>
+
   </div>
 </article>
 <article class="doc-panel panel-1" id="README-md">
   <header class="doc-panel-header">
-    <p class="eyebrow">README.md</p>
+    <p class="eyebrow">docs/README.md</p>
     <h1>TruckFlow Manager — Documentazione del dominio</h1>
   </header>
   <div class="markdown-body">
@@ -679,15 +705,17 @@ repository in memory, primi use case applicativi, hardening dei use
 case, espansione controllata verso Documents, review/allineamento del
 Punto 6H, espansione controllata verso Vehicles nel Punto 6I, espansione
 controllata verso Operational Roles nel Punto 6J, hardening Operational
-Roles nel Punto 6K e primi use case Compliance base nel Punto 6L.</p>
+Roles nel Punto 6K, primi use case Compliance base nel Punto 6L e
+review/freeze finale dell’application layer nel Punto 6M.</p>
 <p>Il progetto ha completato la fondazione del <strong>domain
 layer</strong>. L’<strong>application layer</strong> ha consolidato i
 primi casi d’uso, ha completato la prima espansione controllata verso
 Documents, l’ha rafforzata con una review tecnica e documentale, ha
 aggiunto i primi use case applicativi Vehicles e Operational Roles, ha
-rafforzato Operational Roles con il Punto 6K e ha introdotto i primi use
-case Compliance base nel Punto 6L. La fondazione di dominio contiene i
-seguenti package principali:</p>
+rafforzato Operational Roles con il Punto 6K, ha introdotto i primi use
+case Compliance base nel Punto 6L e ha chiuso il primo ciclo
+dell’application layer con il Punto 6M. La fondazione di dominio
+contiene i seguenti package principali:</p>
 <ul>
 <li><code>domain.users</code></li>
 <li><code>domain.qualifications</code></li>
@@ -840,6 +868,10 @@ href="27-application-compliance-base-use-cases.md"><code>27-application-complian
 <code>ComplianceRequirementRepository</code>,
 <code>InMemoryComplianceRequirementRepository</code> e flusso
 register/find/status.</li>
+<li><a
+href="28-application-layer-final-review-freeze.md"><code>28-application-layer-final-review-freeze.md</code></a>
+— chiusura del Punto 6M: review finale, freeze dell’application layer,
+controlli architetturali e documentazione di cosa resta fuori.</li>
 </ol>
 <h2 id="stato-del-progetto-documentato">Stato del progetto
 documentato</h2>
@@ -878,7 +910,11 @@ upload, storage, workflow, scadenze o compliance operativa;</li>
 <li>dominio compliance per descrivere requisiti astratti di conformità,
 categorie, livelli di obbligatorietà, severità, target, regole, fonti e
 giurisdizioni senza introdurre controlli automatici, workflow, audit,
-scadenze o risultati di verifica.</li>
+scadenze o risultati di verifica;</li>
+<li>application layer base chiuso al Punto 6M con use case, repository
+port, repository in memory, test e documentazione allineati per
+Locations, Cargo, Shipments, Documents, Vehicles, Operational Roles e
+Compliance base;</li>
 <li>regole ufficiali di dominio per guidare la TruckFlow Domain
 Foundation v1.0, la review finale del dominio puro e l’introduzione
 graduale delle eccezioni custom;</li>
@@ -1208,11 +1244,12 @@ descrive il Punto 6L.</p>
 sospensione, archiviazione e dismissione.</p>
 <p>La fase non introduce controlli legali reali, violazioni concrete,
 audit trail, workflow, REST API, database, JPA o Spring Data.</p>
+
   </div>
 </article>
 <article class="doc-panel panel-2" id="01-project-overview-md">
   <header class="doc-panel-header">
-    <p class="eyebrow">01-project-overview.md</p>
+    <p class="eyebrow">docs/01-project-overview.md</p>
     <h1>1. Visione generale del progetto TruckFlow Manager</h1>
   </header>
   <div class="markdown-body">
@@ -1471,11 +1508,12 @@ mancanti, duplicati, command nulli e mutazioni fallite.</p>
 <p>Questo conferma la direzione architetturale del progetto: prima si
 stabilizza il comportamento applicativo puro, poi si passa a REST API,
 database, security e moduli enterprise avanzati.</p>
+
   </div>
 </article>
 <article class="doc-panel panel-3" id="02-domain-users-md">
   <header class="doc-panel-header">
-    <p class="eyebrow">02-domain-users.md</p>
+    <p class="eyebrow">docs/02-domain-users.md</p>
     <h1>2. Package `domain.users`</h1>
   </header>
   <div class="markdown-body">
@@ -1735,11 +1773,12 @@ a sua volta referenzia il catalogo <code>Qualification</code>.</p>
 applicativo. Deve solo sapere a quale account è collegata una figura
 operativa.</p>
 <p>Questo approccio è più scalabile e coerente con DDD.</p>
+
   </div>
 </article>
 <article class="doc-panel panel-4" id="03-domain-qualifications-md">
   <header class="doc-panel-header">
-    <p class="eyebrow">03-domain-qualifications.md</p>
+    <p class="eyebrow">docs/03-domain-qualifications.md</p>
     <h1>3. Package `domain.qualifications`</h1>
   </header>
   <div class="markdown-body">
@@ -1924,11 +1963,12 @@ qualificazioni possedute.</li>
 </ul>
 <p>Questa scelta mantiene il catalogo semplice, stabile e
 riutilizzabile.</p>
+
   </div>
 </article>
 <article class="doc-panel panel-5" id="04-domain-operational-md">
   <header class="doc-panel-header">
-    <p class="eyebrow">04-domain-operational.md</p>
+    <p class="eyebrow">docs/04-domain-operational.md</p>
     <h1>4. Package `domain.operational`</h1>
   </header>
   <div class="markdown-body">
@@ -2262,11 +2302,12 @@ tracking.</p>
 <p>Il Punto 6K aggiunge test applicativi di hardening e conferma che le
 invarianti rimangono nel dominio mentre l’application layer orchestra
 command, repository port, service e result.</p>
+
   </div>
 </article>
 <article class="doc-panel panel-6" id="05-domain-vehicles-md">
   <header class="doc-panel-header">
-    <p class="eyebrow">05-domain-vehicles.md</p>
+    <p class="eyebrow">docs/05-domain-vehicles.md</p>
     <h1>5. Package `domain.vehicles`</h1>
   </header>
   <div class="markdown-body">
@@ -3283,11 +3324,12 @@ dominio, ma lo rende molto più leggibile.</p>
 <p>Questa è la struttura corretta per continuare a far crescere
 TruckFlow senza trasformare <code>domain.vehicles</code> in un package
 troppo grande e difficile da mantenere.</p>
+
   </div>
 </article>
 <article class="doc-panel panel-7" id="06-architecture-decisions-md">
   <header class="doc-panel-header">
-    <p class="eyebrow">06-architecture-decisions.md</p>
+    <p class="eyebrow">docs/06-architecture-decisions.md</p>
     <h1>6. Decisioni architetturali del dominio</h1>
   </header>
   <div class="markdown-body">
@@ -4163,11 +4205,12 @@ replicabile per i prossimi domini.</p>
 robustezza sui command, sulle risorse mancanti, sui duplicati e sulle
 mutazioni fallite. Non introduce framework, database, controller o
 transazioni.</p>
+
   </div>
 </article>
 <article class="doc-panel panel-8" id="07-domain-cargo-md">
   <header class="doc-panel-header">
-    <p class="eyebrow">07-domain-cargo.md</p>
+    <p class="eyebrow">docs/07-domain-cargo.md</p>
     <h1>7. Package `domain.cargo`</h1>
   </header>
   <div class="markdown-body">
@@ -4505,11 +4548,12 @@ spedizioni.</p>
 <p>Descrive invece la merce e i suoi requisiti.</p>
 <p>Questa scelta rende TruckFlow più pulito, più scalabile e coerente
 con il dominio veicoli già introdotto.</p>
+
   </div>
 </article>
 <article class="doc-panel panel-9" id="08-domain-locations-md">
   <header class="doc-panel-header">
-    <p class="eyebrow">08-domain-locations.md</p>
+    <p class="eyebrow">docs/08-domain-locations.md</p>
     <h1>8. Dominio `domain.locations`</h1>
   </header>
   <div class="markdown-body">
@@ -4811,11 +4855,12 @@ percorsi, ma è un concetto autonomo.</p>
 <p>Questo rende TruckFlow più scalabile perché lo stesso luogo potrà
 essere usato da percorsi tipo, spedizioni, magazzini, clienti,
 fornitori, documenti, pianificazione e tracking senza duplicazioni.</p>
+
   </div>
 </article>
 <article class="doc-panel panel-10" id="09-domain-triptemplates-md">
   <header class="doc-panel-header">
-    <p class="eyebrow">09-domain-triptemplates.md</p>
+    <p class="eyebrow">docs/09-domain-triptemplates.md</p>
     <h1>9. Dominio `domain.triptemplates`</h1>
   </header>
   <div class="markdown-body">
@@ -5251,11 +5296,12 @@ Vehicles = mezzi
 Cargo = merce
 Operational = persone operative
 Planning/Dispatching = assegnazione reale futura</code></pre>
+
   </div>
 </article>
 <article class="doc-panel panel-11" id="10-domain-shipments-md">
   <header class="doc-panel-header">
-    <p class="eyebrow">10-domain-shipments.md</p>
+    <p class="eyebrow">docs/10-domain-shipments.md</p>
     <h1>10. Dominio `domain.shipments`</h1>
   </header>
   <div class="markdown-body">
@@ -5999,11 +6045,12 @@ Operational = persone operative
 Planning/Dispatching = esecuzione reale futura</code></pre>
 <p>Questa struttura mantiene TruckFlow pulito, scalabile e pronto per i
 moduli operativi futuri.</p>
+
   </div>
 </article>
 <article class="doc-panel panel-12" id="11-domain-documents-md">
   <header class="doc-panel-header">
-    <p class="eyebrow">11-domain-documents.md</p>
+    <p class="eyebrow">docs/11-domain-documents.md</p>
     <h1>11. Dominio `domain.documents`</h1>
   </header>
   <div class="markdown-body">
@@ -6387,11 +6434,12 @@ o compliance operativa.</p>
 <p>Questa scelta rende il dominio documents coerente con il resto di
 TruckFlow e pronto a diventare una base stabile per i futuri moduli
 documentali enterprise.</p>
+
   </div>
 </article>
 <article class="doc-panel panel-13" id="12-domain-compliance-md">
   <header class="doc-panel-header">
-    <p class="eyebrow">12-domain-compliance.md</p>
+    <p class="eyebrow">docs/12-domain-compliance.md</p>
     <h1>12. Dominio `domain.compliance`</h1>
   </header>
   <div class="markdown-body">
@@ -6843,11 +6891,12 @@ bounded context.</p>
 <p>Questa scelta completa la prima grande fondazione del dominio puro
 enterprise di TruckFlow e prepara il progetto ai futuri moduli
 applicativi di planning, dispatching e compliance check.</p>
+
   </div>
 </article>
 <article class="doc-panel panel-14" id="13-domain-rules-md">
   <header class="doc-panel-header">
-    <p class="eyebrow">13-domain-rules.md</p>
+    <p class="eyebrow">docs/13-domain-rules.md</p>
     <h1>13 – Domain Rules</h1>
   </header>
   <div class="markdown-body">
@@ -7329,11 +7378,12 @@ invarianti profonde.</p>
 errore del dominio shipment. L’application layer può orchestrare
 <code>AddShipmentItemService</code>, ma non deve duplicare la regola
 business che rende valida o invalida la quantità.</p>
+
   </div>
 </article>
 <article class="doc-panel panel-15" id="14-domain-review-patches-md">
   <header class="doc-panel-header">
-    <p class="eyebrow">14-domain-review-patches.md</p>
+    <p class="eyebrow">docs/14-domain-review-patches.md</p>
     <h1>14 – Domain Review: interventi correttivi</h1>
   </header>
   <div class="markdown-body">
@@ -7822,11 +7872,12 @@ mutazioni fallite. Questo aggiornamento non modifica le regole del
 dominio: conferma che il dominio continua a essere il proprietario delle
 invarianti e che l’application layer orchestra il flusso
 applicativo.</p>
+
   </div>
 </article>
 <article class="doc-panel panel-16" id="15-domain-test-suite-review-md">
   <header class="doc-panel-header">
-    <p class="eyebrow">15-domain-test-suite-review.md</p>
+    <p class="eyebrow">docs/15-domain-test-suite-review.md</p>
     <h1>15 – Domain Test Suite Review</h1>
   </header>
   <div class="markdown-body">
@@ -8171,11 +8222,12 @@ invarianti del dominio, già coperte dalla suite domain. Testano invece
 l’orchestrazione applicativa: command, service, repository port,
 repository in memory, risorse mancanti, duplicati e propagazione degli
 errori di dominio.</p>
+
   </div>
 </article>
 <article class="doc-panel panel-17" id="16-application-layer-blueprint-md">
   <header class="doc-panel-header">
-    <p class="eyebrow">16-application-layer-blueprint.md</p>
+    <p class="eyebrow">docs/16-application-layer-blueprint.md</p>
     <h1>16 — Application Layer Blueprint</h1>
   </header>
   <div class="markdown-body">
@@ -8849,11 +8901,20 @@ catalogo astratto e non come motore di controllo operativo.</p>
 <p>Non vengono introdotti REST API, controller, database, JPA, Spring
 Data, security, audit trail, workflow o controlli concreti di
 violazione.</p>
+<h2 id="allineamento-punto-6m">Allineamento Punto 6M</h2>
+<p>Il Punto 6M chiude il primo ciclo dell’application layer con una
+review/freeze finale. Da questo momento i contenuti documentati nei
+punti 6A-6L sono considerati fondazione applicativa stabile: eventuali
+evoluzioni future dovranno essere introdotte in nuovi punti roadmap,
+mantenendo ancora fuori REST API, controller, database, JPA, Spring
+Data, security, tracking, planning, dashboard, workflow e integrazioni
+esterne.</p>
+
   </div>
 </article>
 <article class="doc-panel panel-18" id="17-application-foundation-md">
   <header class="doc-panel-header">
-    <p class="eyebrow">17-application-foundation.md</p>
+    <p class="eyebrow">docs/17-application-foundation.md</p>
     <h1>17 — Application Foundation</h1>
   </header>
   <div class="markdown-body">
@@ -9125,11 +9186,20 @@ pienamente nel Punto 6F.</p>
 hardening dei primi use case. Questo conferma che la foundation è
 abbastanza stabile per supportare casi d’uso reali senza dipendere da
 framework o infrastruttura concreta.</p>
+<h2 id="allineamento-punto-6m">Allineamento Punto 6M</h2>
+<p>Il Punto 6M chiude il primo ciclo dell’application layer con una
+review/freeze finale. Da questo momento i contenuti documentati nei
+punti 6A-6L sono considerati fondazione applicativa stabile: eventuali
+evoluzioni future dovranno essere introdotte in nuovi punti roadmap,
+mantenendo ancora fuori REST API, controller, database, JPA, Spring
+Data, security, tracking, planning, dashboard, workflow e integrazioni
+esterne.</p>
+
   </div>
 </article>
 <article class="doc-panel panel-19" id="18-application-repository-ports-md">
   <header class="doc-panel-header">
-    <p class="eyebrow">18-application-repository-ports.md</p>
+    <p class="eyebrow">docs/18-application-repository-ports.md</p>
     <h1>18 — Application Repository Ports</h1>
   </header>
   <div class="markdown-body">
@@ -9531,11 +9601,20 @@ codice.</p>
 <p>Come tutte le altre repository port, resta un contratto
 dell’application layer. Non è una repository JPA, non conosce database,
 Spring Data, query SQL, transazioni o persistenza definitiva.</p>
+<h2 id="allineamento-punto-6m">Allineamento Punto 6M</h2>
+<p>Il Punto 6M chiude il primo ciclo dell’application layer con una
+review/freeze finale. Da questo momento i contenuti documentati nei
+punti 6A-6L sono considerati fondazione applicativa stabile: eventuali
+evoluzioni future dovranno essere introdotte in nuovi punti roadmap,
+mantenendo ancora fuori REST API, controller, database, JPA, Spring
+Data, security, tracking, planning, dashboard, workflow e integrazioni
+esterne.</p>
+
   </div>
 </article>
 <article class="doc-panel panel-20" id="19-application-in-memory-repositories-md">
   <header class="doc-panel-header">
-    <p class="eyebrow">19-application-in-memory-repositories.md</p>
+    <p class="eyebrow">docs/19-application-in-memory-repositories.md</p>
     <h1>Punto 6D — In-Memory Repositories</h1>
   </header>
   <div class="markdown-body">
@@ -9867,11 +9946,20 @@ ID e codice, rifiuta input nulli e impedisce codici duplicati.</p>
 <p>Rimane un adapter temporaneo per test e sviluppo locale. Non
 introduce database, JPA, Spring Data, transazioni, persistenza
 definitiva o controlli compliance concreti.</p>
+<h2 id="allineamento-punto-6m">Allineamento Punto 6M</h2>
+<p>Il Punto 6M chiude il primo ciclo dell’application layer con una
+review/freeze finale. Da questo momento i contenuti documentati nei
+punti 6A-6L sono considerati fondazione applicativa stabile: eventuali
+evoluzioni future dovranno essere introdotte in nuovi punti roadmap,
+mantenendo ancora fuori REST API, controller, database, JPA, Spring
+Data, security, tracking, planning, dashboard, workflow e integrazioni
+esterne.</p>
+
   </div>
 </article>
 <article class="doc-panel panel-21" id="20-application-first-use-cases-md">
   <header class="doc-panel-header">
-    <p class="eyebrow">20-application-first-use-cases.md</p>
+    <p class="eyebrow">docs/20-application-first-use-cases.md</p>
     <h1>Punto 6E — First Use Cases</h1>
   </header>
   <div class="markdown-body">
@@ -10235,11 +10323,20 @@ Compliance: command espliciti, service piccoli, repository port
 astratte, result applicativi e test con adapter in memory.</p>
 <p>Anche in questo step non vengono introdotti REST API, database o
 framework.</p>
+<h2 id="allineamento-punto-6m">Allineamento Punto 6M</h2>
+<p>Il Punto 6M chiude il primo ciclo dell’application layer con una
+review/freeze finale. Da questo momento i contenuti documentati nei
+punti 6A-6L sono considerati fondazione applicativa stabile: eventuali
+evoluzioni future dovranno essere introdotte in nuovi punti roadmap,
+mantenendo ancora fuori REST API, controller, database, JPA, Spring
+Data, security, tracking, planning, dashboard, workflow e integrazioni
+esterne.</p>
+
   </div>
 </article>
 <article class="doc-panel panel-22" id="21-application-use-case-hardening-md">
   <header class="doc-panel-header">
-    <p class="eyebrow">21-application-use-case-hardening.md</p>
+    <p class="eyebrow">docs/21-application-use-case-hardening.md</p>
     <h1>Punto 6F — Application Use Case Review &amp; Hardening</h1>
   </header>
   <div class="markdown-body">
@@ -10556,11 +10653,20 @@ Compliance base.</p>
 repository nulle e risorse mancanti. Le mutazioni di stato usano una
 copia dell’aggregate prima del salvataggio, mantenendo coerente
 l’approccio copy-on-write già adottato negli step precedenti.</p>
+<h2 id="allineamento-punto-6m">Allineamento Punto 6M</h2>
+<p>Il Punto 6M chiude il primo ciclo dell’application layer con una
+review/freeze finale. Da questo momento i contenuti documentati nei
+punti 6A-6L sono considerati fondazione applicativa stabile: eventuali
+evoluzioni future dovranno essere introdotte in nuovi punti roadmap,
+mantenendo ancora fuori REST API, controller, database, JPA, Spring
+Data, security, tracking, planning, dashboard, workflow e integrazioni
+esterne.</p>
+
   </div>
 </article>
 <article class="doc-panel panel-23" id="22-application-use-case-expansion-md">
   <header class="doc-panel-header">
-    <p class="eyebrow">22-application-use-case-expansion.md</p>
+    <p class="eyebrow">docs/22-application-use-case-expansion.md</p>
     <h1>Punto 6G — Application Use Cases Expansion</h1>
   </header>
   <div class="markdown-body">
@@ -10895,11 +11001,20 @@ una nuova espansione controllata verso Compliance base.</p>
 per un aggregate già puro (<code>ComplianceRequirement</code>) senza
 introdurre controlli reali di violazione, motori regole, audit trail,
 workflow, REST API o database.</p>
+<h2 id="allineamento-punto-6m">Allineamento Punto 6M</h2>
+<p>Il Punto 6M chiude il primo ciclo dell’application layer con una
+review/freeze finale. Da questo momento i contenuti documentati nei
+punti 6A-6L sono considerati fondazione applicativa stabile: eventuali
+evoluzioni future dovranno essere introdotte in nuovi punti roadmap,
+mantenendo ancora fuori REST API, controller, database, JPA, Spring
+Data, security, tracking, planning, dashboard, workflow e integrazioni
+esterne.</p>
+
   </div>
 </article>
 <article class="doc-panel panel-24" id="23-application-use-case-expansion-review-md">
   <header class="doc-panel-header">
-    <p class="eyebrow">23-application-use-case-expansion-review.md</p>
+    <p class="eyebrow">docs/23-application-use-case-expansion-review.md</p>
     <h1>Punto 6H — Application Use Case Expansion Review &amp; Documentation Alignment</h1>
   </header>
   <div class="markdown-body">
@@ -11191,11 +11306,20 @@ nel Punto 6H.</p>
 <code>UseCase</code>, service allineati alle port, result null-safe,
 repository port astratte e adapter in memory con input nulli
 controllati.</p>
+<h2 id="allineamento-punto-6m">Allineamento Punto 6M</h2>
+<p>Il Punto 6M chiude il primo ciclo dell’application layer con una
+review/freeze finale. Da questo momento i contenuti documentati nei
+punti 6A-6L sono considerati fondazione applicativa stabile: eventuali
+evoluzioni future dovranno essere introdotte in nuovi punti roadmap,
+mantenendo ancora fuori REST API, controller, database, JPA, Spring
+Data, security, tracking, planning, dashboard, workflow e integrazioni
+esterne.</p>
+
   </div>
 </article>
 <article class="doc-panel panel-25" id="24-application-use-cases-expansion-vehicles-md">
   <header class="doc-panel-header">
-    <p class="eyebrow">24-application-use-cases-expansion-vehicles.md</p>
+    <p class="eyebrow">docs/24-application-use-cases-expansion-vehicles.md</p>
     <h1>Punto 6I — Application Use Cases Expansion II: Vehicles</h1>
   </header>
   <div class="markdown-body">
@@ -11540,11 +11664,20 @@ blocco applicativo separato per Compliance base.</p>
 <p>Le compatibilità concrete tra veicoli, cargo, documenti e requisiti
 compliance restano fuori: verranno trattate solo in moduli futuri di
 planning, dispatching o compliance check.</p>
+<h2 id="allineamento-punto-6m">Allineamento Punto 6M</h2>
+<p>Il Punto 6M chiude il primo ciclo dell’application layer con una
+review/freeze finale. Da questo momento i contenuti documentati nei
+punti 6A-6L sono considerati fondazione applicativa stabile: eventuali
+evoluzioni future dovranno essere introdotte in nuovi punti roadmap,
+mantenendo ancora fuori REST API, controller, database, JPA, Spring
+Data, security, tracking, planning, dashboard, workflow e integrazioni
+esterne.</p>
+
   </div>
 </article>
 <article class="doc-panel panel-26" id="25-application-use-cases-expansion-operational-roles-md">
   <header class="doc-panel-header">
-    <p class="eyebrow">25-application-use-cases-expansion-operational-roles.md</p>
+    <p class="eyebrow">docs/25-application-use-cases-expansion-operational-roles.md</p>
     <h1>Punto 6J — Application Use Cases Expansion III: Operational Roles</h1>
   </header>
   <div class="markdown-body">
@@ -11846,9 +11979,648 @@ Compliance.</p>
 <p>Le verifiche concrete su patente, CQC, ADR, visite mediche, ruoli e
 abilitazioni restano fuori dal Punto 6L e appartengono a futuri moduli
 di compliance check.</p>
+<h2 id="allineamento-punto-6m">Allineamento Punto 6M</h2>
+<p>Il Punto 6M chiude il primo ciclo dell’application layer con una
+review/freeze finale. Da questo momento i contenuti documentati nei
+punti 6A-6L sono considerati fondazione applicativa stabile: eventuali
+evoluzioni future dovranno essere introdotte in nuovi punti roadmap,
+mantenendo ancora fuori REST API, controller, database, JPA, Spring
+Data, security, tracking, planning, dashboard, workflow e integrazioni
+esterne.</p>
+
   </div>
 </article>
-<article class="doc-panel panel-27" id="command_basic-md">
+<article class="doc-panel panel-27" id="26-application-operational-use-case-hardening-md">
+  <header class="doc-panel-header">
+    <p class="eyebrow">docs/26-application-operational-use-case-hardening.md</p>
+    <h1>Punto 6K — Application Operational Use Case Review &amp; Hardening</h1>
+  </header>
+  <div class="markdown-body">
+<h1
+id="punto-6k-application-operational-use-case-review-hardening">Punto 6K
+— Application Operational Use Case Review &amp; Hardening</h1>
+<p>Il Punto 6K rivede e rafforza l’espansione applicativa verso gli
+<strong>Operational Roles</strong> introdotta nel Punto 6J.</p>
+<p>Questa fase non aggiunge nuovi domini business. Serve a controllare
+che i use case applicativi per <code>Driver</code>,
+<code>Mechanic</code>, <code>WarehouseOperator</code>,
+<code>Dispatcher</code> e <code>Manager</code> siano coerenti,
+simmetrici, testati e documentati prima di procedere verso altri domini
+applicativi.</p>
+<p>Il Punto 6K rimane dentro i confini dell’application layer. Non
+introduce REST API, controller Spring, database, JPA, Spring Data,
+security, tracking, planning, dispatching reale, turni, availability,
+payroll, dashboard, audit trail enterprise o workflow operativi.</p>
+<h2 id="obiettivo-dello-step">Obiettivo dello step</h2>
+<p>L’obiettivo del Punto 6K è consolidare il blocco Operational Roles
+dopo la sua introduzione.</p>
+<p>La review verifica in particolare:</p>
+<ul>
+<li>copertura uniforme dei service di stato per tutti i ruoli
+operativi;</li>
+<li>assenza di mutazioni parziali quando una validazione di dominio
+fallisce;</li>
+<li>protezione copy-on-write su attivazione, sospensione e marcatura
+come non idoneo;</li>
+<li>gestione coerente di command nulli;</li>
+<li>gestione coerente di dependency repository nulle;</li>
+<li>documentazione allineata tra Markdown, documentazione digitale HTML
++ CSS e file di comandi;</li>
+<li>pulizia di piccoli commenti tecnici generati nel Punto 6J.</li>
+</ul>
+<h2 id="nessuna-nuova-funzionalità-business">Nessuna nuova funzionalità
+business</h2>
+<p>Il Punto 6K non introduce nuovi casi d’uso funzionali.</p>
+<p>Non vengono aggiunti:</p>
+<ul>
+<li>assegnazioni driver-veicolo;</li>
+<li>assegnazioni driver-shipment;</li>
+<li>disponibilità giornaliera;</li>
+<li>turni;</li>
+<li>calendario operativo;</li>
+<li>payroll;</li>
+<li>HR avanzato;</li>
+<li>controlli reali su patente, CQC, ADR o visite mediche;</li>
+<li>dispatching reale;</li>
+<li>planning;</li>
+<li>tracking;</li>
+<li>dashboard;</li>
+<li>REST API;</li>
+<li>persistenza definitiva.</li>
+</ul>
+<p>Queste parti appartengono a moduli futuri e non devono entrare ora
+nel livello application di base.</p>
+<h2 id="test-aggiunto">Test aggiunto</h2>
+<p>È stato aggiunto il test:</p>
+<pre class="text"><code>ApplicationOperationalUseCaseHardeningTest</code></pre>
+<p>Questo test affianca i test introdotti nel Punto 6J e rafforza il
+contratto operativo applicativo.</p>
+<h2 id="copertura-dei-service-di-stato-per-tutti-i-ruoli">Copertura dei
+service di stato per tutti i ruoli</h2>
+<p>Il test verifica che i use case di stato siano coperti per tutti i
+ruoli operativi correnti:</p>
+<ul>
+<li><code>Driver</code>;</li>
+<li><code>Mechanic</code>;</li>
+<li><code>WarehouseOperator</code>;</li>
+<li><code>Dispatcher</code>;</li>
+<li><code>Manager</code>.</li>
+</ul>
+<p>Per ogni ruolo vengono testati i passaggi principali:</p>
+<ul>
+<li>registrazione valida;</li>
+<li>sospensione;</li>
+<li>marcatura come non idoneo;</li>
+<li>riattivazione.</li>
+</ul>
+<p>In questo modo il progetto non dipende solo dai casi
+driver/dispatcher, ma protegge esplicitamente anche mechanic, warehouse
+operator e manager.</p>
+<h2 id="hardening-copy-on-write-sulle-attivazioni-fallite">Hardening
+copy-on-write sulle attivazioni fallite</h2>
+<p>Il Punto 6J aveva già introdotto i mutation support
+copy-on-write:</p>
+<pre class="text"><code>DriverMutationSupport
+MechanicMutationSupport
+WarehouseOperatorMutationSupport
+DispatcherMutationSupport
+ManagerMutationSupport</code></pre>
+<p>Il Punto 6K verifica anche il caso negativo più importante: una
+figura operativa registrata come <code>SUSPENDED</code> senza
+qualificazioni o scope non può essere attivata.</p>
+<p>Il comportamento atteso è:</p>
+<ol type="1">
+<li>il service carica l’aggregate dalla repository;</li>
+<li>crea una copia;</li>
+<li>prova ad attivare la copia;</li>
+<li>il dominio rifiuta l’attivazione perché mancano qualificazioni o
+scope;</li>
+<li>la repository mantiene l’aggregate originale in stato
+<code>SUSPENDED</code>;</li>
+<li>nessuna modifica parziale viene salvata.</li>
+</ol>
+<p>Questo protegge gli adapter in memory dal problema dei riferimenti
+mutabili.</p>
+<h2 id="error-handling-applicativo-verificato">Error handling
+applicativo verificato</h2>
+<p>Il Punto 6K rafforza il controllo degli errori applicativi.</p>
+<p>I test verificano che tutti i service Operational Roles rifiutino
+command nulli con:</p>
+<pre class="text"><code>UseCaseValidationException</code></pre>
+<p>Viene verificato lo stesso contratto anche per le dependency
+repository nulle nei costruttori dei service.</p>
+<p>Questa scelta mantiene coerente il comportamento già stabilito negli
+step precedenti dell’application layer.</p>
+<h2 id="pulizia-documentale-nel-codice">Pulizia documentale nel
+codice</h2>
+<p>Sono stati corretti piccoli commenti tecnici nei package applicativi
+Operational Roles.</p>
+<p>In particolare:</p>
+<ul>
+<li><code>warehouseoperator</code> è stato uniformato in
+<code>warehouse operator</code> nei commenti JavaDoc;</li>
+<li>i commenti dei command e delle port <code>MarkNotEligible...</code>
+sono stati resi più leggibili, usando “mark as not eligible” invece di
+esporre il nome tecnico del metodo.</li>
+</ul>
+<p>Non sono stati cambiati nomi di classi, metodi, package o contratti
+pubblici.</p>
+<h2 id="documentazione-aggiornata">Documentazione aggiornata</h2>
+<p>Il Punto 6K aggiorna la documentazione collegata:</p>
+<ul>
+<li>questo documento
+<code>docs/26-application-operational-use-case-hardening.md</code>;</li>
+<li><code>docs/README.md</code>;</li>
+<li><code>TRUCKFLOW_PROJECT_DOCUMENTATION.md</code>;</li>
+<li>i documenti applicativi precedenti dove è utile chiarire lo stato
+attuale;</li>
+<li><code>digitalDocs/index.html</code>;</li>
+<li><code>digitalDocs/styles.css</code>;</li>
+<li><code>digitalDocs/README.md</code>;</li>
+<li><code>digitalDocs/truckflow-manager-enterprise-documentation.html</code>;</li>
+<li><code>command_basic.md</code>.</li>
+</ul>
+<p>La documentazione digitale rimane un mirror navigabile della
+documentazione Markdown ufficiale.</p>
+<h2 id="confini-architetturali-rispettati">Confini architetturali
+rispettati</h2>
+<p>Il Punto 6K non introduce:</p>
+<ul>
+<li>dipendenze dal dominio verso application o infrastructure;</li>
+<li>dipendenze dall’application layer verso infrastructure
+concreta;</li>
+<li>dipendenze dall’application layer verso controller, web, JPA o
+Spring Data;</li>
+<li>persistenza definitiva;</li>
+<li>API REST;</li>
+<li>motori di workflow;</li>
+<li>regole enterprise avanzate.</li>
+</ul>
+<p>Il dominio Operational continua a contenere le invarianti business.
+L’application layer orchestra i casi d’uso e gestisce errori
+applicativi, repository port e result.</p>
+<h2 id="stato-finale-dopo-il-punto-6k">Stato finale dopo il Punto
+6K</h2>
+<p>Dopo il Punto 6K, il blocco Operational Roles risulta più solido:</p>
+<ul>
+<li>use case applicativi presenti per tutti i ruoli principali;</li>
+<li>repository port e repository in memory presenti;</li>
+<li>mutazioni di stato protette con copy-on-write;</li>
+<li>test positivi e negativi più completi;</li>
+<li>command nulli e dependency nulle controllati;</li>
+<li>documentazione aggiornata.</li>
+</ul>
+<p>Il Punto 6L è stato poi applicato come espansione controllata verso i
+use case base di Compliance. Il prossimo step consigliato diventa il
+<strong>Punto 6M — Application Layer Final Review &amp;
+Freeze</strong>.</p>
+<h2 id="aggiornamento-successivo-punto-6l-compliance-base">Aggiornamento
+successivo — Punto 6L Compliance base</h2>
+<p>Dopo l’hardening Operational Roles, il Punto 6L applica una nuova
+espansione controllata verso Compliance base.</p>
+<p>Il blocco Operational Roles rimane invariato. Compliance base
+aggiunge invece register/find/status use cases per
+<code>ComplianceRequirement</code>, mantenendo fuori controlli reali su
+persone, documenti, veicoli, cargo o shipment.</p>
+<h2 id="allineamento-punto-6m">Allineamento Punto 6M</h2>
+<p>Il Punto 6M chiude il primo ciclo dell’application layer con una
+review/freeze finale. Da questo momento i contenuti documentati nei
+punti 6A-6L sono considerati fondazione applicativa stabile: eventuali
+evoluzioni future dovranno essere introdotte in nuovi punti roadmap,
+mantenendo ancora fuori REST API, controller, database, JPA, Spring
+Data, security, tracking, planning, dashboard, workflow e integrazioni
+esterne.</p>
+
+  </div>
+</article>
+<article class="doc-panel panel-28" id="27-application-compliance-base-use-cases-md">
+  <header class="doc-panel-header">
+    <p class="eyebrow">docs/27-application-compliance-base-use-cases.md</p>
+    <h1>Punto 6L — Application Compliance Base Use Cases</h1>
+  </header>
+  <div class="markdown-body">
+<h1 id="punto-6l-application-compliance-base-use-cases">Punto 6L —
+Application Compliance Base Use Cases</h1>
+<p>Il Punto 6L introduce una piccola espansione controllata
+dell’application layer verso il dominio <strong>Compliance</strong>.</p>
+<p>Questa fase aggiunge i primi use case applicativi per gestire un
+catalogo base di <code>ComplianceRequirement</code>, cioè requisiti
+astratti di conformità già modellati nel dominio puro.</p>
+<p>Il Punto 6L rimane rigorosamente dentro i confini dell’application
+layer e degli adapter in memory. Non introduce controlli legali reali,
+motori di validazione, workflow, audit trail, dashboard, REST API,
+controller Spring, database, JPA, Spring Data, security, tracking o
+planning.</p>
+<h2 id="obiettivo-dello-step">Obiettivo dello step</h2>
+<p>L’obiettivo è rendere il dominio <code>compliance</code> consumabile
+dai futuri casi d’uso applicativi senza trasformarlo ancora in un motore
+di compliance operativo.</p>
+<p>Il sistema ora può:</p>
+<ul>
+<li>registrare un requisito astratto di compliance;</li>
+<li>trovare un requisito tramite ID;</li>
+<li>attivare un requisito;</li>
+<li>sospendere un requisito;</li>
+<li>archiviare un requisito;</li>
+<li>dismettere un requisito tramite stato
+<code>DISCONTINUED</code>;</li>
+<li>proteggere i codici duplicati;</li>
+<li>usare una repository port astratta;</li>
+<li>usare un adapter in memory per test e sviluppo locale.</li>
+</ul>
+<h2 id="cosa-è-stato-aggiunto">Cosa è stato aggiunto</h2>
+<p>Sono stati aggiunti i package applicativi dedicati a compliance:</p>
+<pre class="text"><code>application.command.compliance
+application.result.compliance
+application.port.in.compliance
+application.port.out.compliance
+application.usecase.compliance
+infrastructure.memory.compliance</code></pre>
+<p>Questa struttura segue la stessa organizzazione già usata per
+Locations, Cargo, Shipments, Documents, Vehicles e Operational
+Roles.</p>
+<h2 id="command-applicativi">Command applicativi</h2>
+<p>Sono stati aggiunti i command:</p>
+<pre class="text"><code>RegisterComplianceRequirementCommand
+FindComplianceRequirementCommand
+ActivateComplianceRequirementCommand
+SuspendComplianceRequirementCommand
+ArchiveComplianceRequirementCommand
+DiscontinueComplianceRequirementCommand</code></pre>
+<p>I command controllano input obbligatori e normalizzano i testi
+applicativi semplici dove necessario.</p>
+<p><code>RegisterComplianceRequirementCommand</code> richiede:</p>
+<ul>
+<li><code>ComplianceRequirementCode</code>;</li>
+<li>nome;</li>
+<li>stato;</li>
+<li>categoria;</li>
+<li>tipo;</li>
+<li>obligation level;</li>
+<li>severity;</li>
+<li>target;</li>
+<li>rule;</li>
+<li>source;</li>
+<li>jurisdiction.</li>
+</ul>
+<p>Il command non esegue controlli legali reali. Prepara soltanto
+l’input per creare un aggregate di dominio valido.</p>
+<h2 id="result-applicativo">Result applicativo</h2>
+<p>È stato aggiunto:</p>
+<pre class="text"><code>ComplianceRequirementResult</code></pre>
+<p>Il result espone solo informazioni utili al livello applicativo:</p>
+<ul>
+<li>ID;</li>
+<li>code;</li>
+<li>name;</li>
+<li>status;</li>
+<li>category;</li>
+<li>type;</li>
+<li>obligation level;</li>
+<li>severity;</li>
+<li>target type;</li>
+<li>jurisdiction scope;</li>
+<li>country;</li>
+<li>region;</li>
+<li>flag <code>active</code>;</li>
+<li>flag <code>mandatory</code>;</li>
+<li>flag <code>critical</code>.</li>
+</ul>
+<p>Il result non espone l’intero aggregate e rifiuta domain object nulli
+con <code>UseCaseValidationException</code>.</p>
+<h2 id="repository-port">Repository port</h2>
+<p>È stata aggiunta la port:</p>
+<pre class="text"><code>ComplianceRequirementRepository</code></pre>
+<p>La port consente:</p>
+<ul>
+<li><code>save</code>;</li>
+<li><code>findById</code>;</li>
+<li><code>findByCode</code>;</li>
+<li><code>existsById</code>;</li>
+<li><code>existsByCode</code>.</li>
+</ul>
+<p>È una porta astratta dell’application layer. Non conosce database,
+JPA, query SQL, Spring Data o repository concrete.</p>
+<h2 id="repository-in-memory">Repository in memory</h2>
+<p>È stato aggiunto l’adapter:</p>
+<pre class="text"><code>InMemoryComplianceRequirementRepository</code></pre>
+<p>L’adapter gestisce due indici:</p>
+<ul>
+<li>requisiti per ID;</li>
+<li>ID per code.</li>
+</ul>
+<p>Rifiuta input nulli con <code>UseCaseValidationException</code> e
+codici duplicati con <code>DuplicateResourceException</code>.</p>
+<p>Questo adapter è utile per test e sviluppo locale, ma non rappresenta
+una persistenza enterprise definitiva.</p>
+<h2 id="service-applicativi">Service applicativi</h2>
+<p>Sono stati aggiunti i service:</p>
+<pre class="text"><code>RegisterComplianceRequirementService
+FindComplianceRequirementService
+ActivateComplianceRequirementService
+SuspendComplianceRequirementService
+ArchiveComplianceRequirementService
+DiscontinueComplianceRequirementService</code></pre>
+<p>I service orchestrano il dominio:</p>
+<ol type="1">
+<li>validano il command;</li>
+<li>usano la repository port;</li>
+<li>recuperano o creano l’aggregate;</li>
+<li>invocano il metodo di dominio corretto;</li>
+<li>salvano tramite repository port;</li>
+<li>restituiscono un result applicativo.</li>
+</ol>
+<p>Le regole business rimangono nel dominio <code>compliance</code>.</p>
+<h2 id="copy-on-write-sulle-mutazioni">Copy-on-write sulle
+mutazioni</h2>
+<p>Per i cambi di stato è stato aggiunto:</p>
+<pre class="text"><code>ComplianceRequirementMutationSupport</code></pre>
+<p>Le mutazioni lavorano su una copia dell’aggregate prima del
+salvataggio.</p>
+<p>Questo mantiene coerente la scelta già adottata per Shipments,
+Documents, Vehicles e Operational Roles: evitare che un adapter in
+memory conservi mutazioni parziali in caso di errore futuro.</p>
+<h2 id="test-aggiunti">Test aggiunti</h2>
+<p>Sono stati aggiunti:</p>
+<pre class="text"><code>ApplicationComplianceUseCaseExpansionTest
+ApplicationComplianceRepositoryPortTest
+InMemoryComplianceRepositoryTest</code></pre>
+<p>I test verificano:</p>
+<ul>
+<li>registrazione di un requisito compliance;</li>
+<li>ricerca tramite ID;</li>
+<li>passaggi di stato <code>ACTIVE</code>, <code>SUSPENDED</code>,
+<code>ARCHIVED</code> e <code>DISCONTINUED</code>;</li>
+<li>comportamento copy-on-write sui cambi di stato;</li>
+<li>rifiuto di codici duplicati;</li>
+<li>rifiuto di risorse mancanti;</li>
+<li>rifiuto di command nulli;</li>
+<li>rifiuto di dependency repository nulle;</li>
+<li>normalizzazione di nome, descrizione e note nel command;</li>
+<li>contratto della repository port;</li>
+<li>comportamento dell’adapter in memory.</li>
+</ul>
+<p>È stato inoltre aggiornato <code>ApplicationUseCaseReviewTest</code>
+per includere i nuovi inbound port, service e result compliance.</p>
+<h2 id="cosa-non-viene-ancora-introdotto">Cosa non viene ancora
+introdotto</h2>
+<p>Il Punto 6L non introduce:</p>
+<ul>
+<li>controlli automatici su ADR, ATP, tachigrafo, CQC, visite mediche o
+revisioni;</li>
+<li>calcolo violazioni;</li>
+<li>scadenze obbligatorie concrete;</li>
+<li>motore regole;</li>
+<li>audit trail;</li>
+<li>workflow approvativi;</li>
+<li>notifiche;</li>
+<li>dashboard compliance;</li>
+<li>document requirement enforcement;</li>
+<li>country engine concreto;</li>
+<li>REST API;</li>
+<li>controller Spring;</li>
+<li>database;</li>
+<li>JPA;</li>
+<li>Spring Data;</li>
+<li>security.</li>
+</ul>
+<p>Queste funzionalità appartengono a moduli futuri.</p>
+<h2 id="confini-architetturali-rispettati">Confini architetturali
+rispettati</h2>
+<p>Il Punto 6L mantiene i confini già stabiliti:</p>
+<ul>
+<li>il dominio <code>compliance</code> contiene le invarianti;</li>
+<li>l’application layer orchestra i casi d’uso;</li>
+<li>l’infrastructure memory implementa solo adapter tecnici;</li>
+<li>l’application layer dipende da port astratte, non da implementazioni
+concrete;</li>
+<li>il dominio non importa application o infrastructure;</li>
+<li>non vengono introdotti framework.</li>
+</ul>
+<h2 id="documentazione-aggiornata">Documentazione aggiornata</h2>
+<p>Il Punto 6L aggiorna:</p>
+<ul>
+<li>questo documento
+<code>docs/27-application-compliance-base-use-cases.md</code>;</li>
+<li><code>docs/README.md</code>;</li>
+<li><code>TRUCKFLOW_PROJECT_DOCUMENTATION.md</code>;</li>
+<li>i documenti applicativi collegati;</li>
+<li><code>docs/12-domain-compliance.md</code>;</li>
+<li><code>digitalDocs/index.html</code>;</li>
+<li><code>digitalDocs/styles.css</code>;</li>
+<li><code>digitalDocs/README.md</code>;</li>
+<li><code>digitalDocs/truckflow-manager-enterprise-documentation.html</code>;</li>
+<li><code>command_basic.md</code>.</li>
+</ul>
+<p>La documentazione Markdown rimane la fonte principale. La
+documentazione digitale HTML + CSS rimane il mirror navigabile.</p>
+<h2 id="stato-finale-dopo-il-punto-6l">Stato finale dopo il Punto
+6L</h2>
+<p>Dopo il Punto 6L, l’application layer copre i primi blocchi
+fondamentali:</p>
+<ul>
+<li>Locations;</li>
+<li>Cargo;</li>
+<li>Shipments;</li>
+<li>Documents;</li>
+<li>Vehicles;</li>
+<li>Operational Roles;</li>
+<li>Compliance base requirements.</li>
+</ul>
+<p>Il prossimo step consigliato è il <strong>Punto 6M — Application
+Layer Final Review &amp; Freeze</strong>, cioè la chiusura finale del
+Punto 6 con revisione complessiva, documentazione finale e verifica dei
+confini architetturali.</p>
+<h2 id="allineamento-punto-6m">Allineamento Punto 6M</h2>
+<p>Il Punto 6M chiude il primo ciclo dell’application layer con una
+review/freeze finale. Da questo momento i contenuti documentati nei
+punti 6A-6L sono considerati fondazione applicativa stabile: eventuali
+evoluzioni future dovranno essere introdotte in nuovi punti roadmap,
+mantenendo ancora fuori REST API, controller, database, JPA, Spring
+Data, security, tracking, planning, dashboard, workflow e integrazioni
+esterne.</p>
+
+  </div>
+</article>
+<article class="doc-panel panel-29" id="28-application-layer-final-review-freeze-md">
+  <header class="doc-panel-header">
+    <p class="eyebrow">docs/28-application-layer-final-review-freeze.md</p>
+    <h1>Punto 6M — Application Layer Final Review &amp; Freeze</h1>
+  </header>
+  <div class="markdown-body">
+<h1 id="punto-6m-application-layer-final-review-freeze">Punto 6M —
+Application Layer Final Review &amp; Freeze</h1>
+<p>Il Punto 6M chiude il primo ciclo dell’<strong>Application
+Layer</strong> di TruckFlow Manager.</p>
+<p>Questa fase non introduce un nuovo dominio applicativo. Serve invece
+a fare una revisione finale, congelare lo stato raggiunto dal Punto 6 e
+documentare chiaramente cosa è completo, cosa resta volutamente fuori e
+quali confini architetturali devono rimanere stabili prima dei prossimi
+livelli del progetto.</p>
+<h2 id="obiettivo-dello-step">Obiettivo dello step</h2>
+<p>L’obiettivo del Punto 6M è consolidare tutto il lavoro fatto da 6A a
+6L:</p>
+<ul>
+<li>blueprint dell’application layer;</li>
+<li>contratti base applicativi;</li>
+<li>repository port;</li>
+<li>repository in memory;</li>
+<li>primi use case Locations, Cargo e Shipments;</li>
+<li>hardening dei use case iniziali;</li>
+<li>espansione verso Documents;</li>
+<li>review e allineamento dopo Documents;</li>
+<li>espansione verso Vehicles;</li>
+<li>espansione verso Operational Roles;</li>
+<li>hardening dei use case Operational Roles;</li>
+<li>primi use case Compliance base.</li>
+</ul>
+<p>Il risultato atteso è un application layer stabile, leggibile,
+testato e documentato, pronto per essere usato come fondazione dei
+prossimi step infrastrutturali e web, ma senza anticiparli.</p>
+<h2 id="stato-finale-del-punto-6">Stato finale del Punto 6</h2>
+<p>Alla fine del Punto 6M, l’application layer contiene i seguenti
+bounded context applicativi:</p>
+<ul>
+<li><code>locations</code>;</li>
+<li><code>cargo</code>;</li>
+<li><code>shipments</code>;</li>
+<li><code>documents</code>;</li>
+<li><code>vehicles</code>;</li>
+<li><code>operational</code>;</li>
+<li><code>compliance</code>.</li>
+</ul>
+<p>Per ognuno di questi contesti esiste una struttura coerente:</p>
+<ul>
+<li>command applicativi in <code>application.command</code>;</li>
+<li>result applicativi in <code>application.result</code>;</li>
+<li>port in in <code>application.port.in</code>;</li>
+<li>repository port in <code>application.port.out</code>;</li>
+<li>service applicativi in <code>application.usecase</code>;</li>
+<li>adapter in memory in <code>infrastructure.memory</code>.</li>
+</ul>
+<p>Questa struttura conferma la separazione tra:</p>
+<ul>
+<li>dominio puro;</li>
+<li>application layer;</li>
+<li>adapter tecnici temporanei in memory.</li>
+</ul>
+<h2 id="test-aggiunti-nel-punto-6m">Test aggiunti nel Punto 6M</h2>
+<p>Il Punto 6M aggiunge
+<code>ApplicationLayerFinalFreezeTest</code>.</p>
+<p>Questo test non verifica un singolo use case business. Verifica
+invece la coerenza complessiva dell’application layer alla fine del
+Punto 6.</p>
+<p>Il test controlla che:</p>
+<ul>
+<li>tutti i contesti applicativi attivi abbiano package completi;</li>
+<li>ogni port in concreta abbia un application service
+corrispondente;</li>
+<li>la documentazione applicativa dal Punto 6A al Punto 6M sia
+presente;</li>
+<li>non siano stati introdotti layer prematuri come web, security, JPA,
+persistence o database;</li>
+<li>non siano presenti annotazioni o contratti tipici di REST
+controller, entity JPA, repository Spring Data o configurazioni
+security;</li>
+<li>la test suite applicativa di review, hardening ed espansione sia
+ancora presente.</li>
+</ul>
+<p>Questo test è una protezione architetturale finale: se in futuro
+verrà introdotto per errore qualcosa fuori sequenza, il test aiuterà a
+intercettarlo.</p>
+<h2 id="cosa-è-considerato-completato">Cosa è considerato
+completato</h2>
+<p>Il Punto 6 considera completato il primo application layer di
+base.</p>
+<p>Sono completati:</p>
+<ul>
+<li>contratti comuni <code>UseCase</code>, <code>Command</code>,
+<code>ApplicationResult</code>, <code>RepositoryPort</code>;</li>
+<li>eccezioni applicative comuni;</li>
+<li>repository port dei contesti applicativi attivi;</li>
+<li>repository in memory per test e sviluppo iniziale;</li>
+<li>use case applicativi di registrazione, ricerca e cambio stato dove
+previsti;</li>
+<li>copy-on-write per mutazioni delicate;</li>
+<li>test architetturali;</li>
+<li>test applicativi positivi e negativi;</li>
+<li>test repository port;</li>
+<li>test repository in memory;</li>
+<li>documentazione Markdown;</li>
+<li>documentazione digitale HTML + CSS;</li>
+<li>documentazione enterprise unica.</li>
+</ul>
+<h2 id="cosa-resta-volutamente-fuori">Cosa resta volutamente fuori</h2>
+<p>Il Punto 6M conferma che non sono stati ancora introdotti:</p>
+<ul>
+<li>REST API;</li>
+<li>Spring controller;</li>
+<li>DTO web;</li>
+<li>database reale;</li>
+<li>JPA;</li>
+<li>Hibernate;</li>
+<li>Spring Data;</li>
+<li>security;</li>
+<li>JWT;</li>
+<li>ruoli e permessi applicativi reali;</li>
+<li>tracking;</li>
+<li>planning;</li>
+<li>dispatching operativo;</li>
+<li>assegnazione concreta di veicoli, autisti o spedizioni;</li>
+<li>dashboard;</li>
+<li>workflow enterprise;</li>
+<li>audit trail;</li>
+<li>notifiche;</li>
+<li>file upload;</li>
+<li>file storage;</li>
+<li>motore country compliance;</li>
+<li>scadenze operative;</li>
+<li>controlli automatici di violazione compliance.</li>
+</ul>
+<p>Queste parti appartengono a step successivi e non devono essere
+mischiate alla chiusura del Punto 6.</p>
+<h2 id="regola-di-freeze">Regola di freeze</h2>
+<p>Dopo il Punto 6M, il Punto 6 è considerato chiuso.</p>
+<p>Questo significa che eventuali nuove funzionalità dovranno
+appartenere a un nuovo punto della roadmap, per esempio:</p>
+<ul>
+<li>preparazione controllata del livello web;</li>
+<li>blueprint REST API;</li>
+<li>infrastruttura persistente;</li>
+<li>security blueprint;</li>
+<li>test di scenario enterprise;</li>
+<li>evoluzione controllata dei use case applicativi.</li>
+</ul>
+<p>Non significa che il codice non potrà più essere migliorato.
+Significa che il primo ciclo dell’application layer ha ora una base
+stabile, documentata e verificabile.</p>
+<h2 id="verifica-locale-consigliata">Verifica locale consigliata</h2>
+<p>Dopo aver applicato la patch del Punto 6M, eseguire:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">mvn</span> spotless:apply</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">mvn</span> spotless:check</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">mvn</span> clean test</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> status</span></code></pre></div>
+<p>Se tutti i test passano, il commit consigliato è:</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add <span class="at">-A</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">&quot;Finalize application layer review and freeze&quot;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push</span></code></pre></div>
+<h2 id="stato-dopo-questo-step">Stato dopo questo step</h2>
+<p>Dopo il Punto 6M, TruckFlow Manager si trova in questo stato:</p>
+<ul>
+<li>dominio puro completato, pulito, testato e documentato;</li>
+<li>application layer base completato, revisionato e documentato;</li>
+<li>adapter in memory disponibili per test e sviluppo iniziale;</li>
+<li>nessun layer web o database ancora introdotto;</li>
+<li>documentazione Markdown e HTML allineata;</li>
+<li>progetto pronto per aprire il prossimo grande punto della
+roadmap.</li>
+</ul>
+
+  </div>
+</article>
+<article class="doc-panel panel-30" id="command_basic-md">
   <header class="doc-panel-header">
     <p class="eyebrow">command_basic.md</p>
     <h1>Command Basic - TruckFlow Manager</h1>
@@ -12175,440 +12947,37 @@ memory.</li>
 <div class="sourceCode" id="cb40"><pre
 class="sourceCode bash"><code class="sourceCode bash"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add <span class="at">-A</span></span>
 <span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">&quot;Expand application use cases with compliance base&quot;</span></span></code></pre></div>
-  </div>
-</article>
-<article class="doc-panel panel-28" id="26-application-operational-use-case-hardening-md">
-  <header class="doc-panel-header">
-    <p class="eyebrow">26-application-operational-use-case-hardening.md</p>
-    <h1>Punto 6K — Application Operational Use Case Review &amp; Hardening</h1>
-  </header>
-  <div class="markdown-body">
-<h1
-id="punto-6k-application-operational-use-case-review-hardening">Punto 6K
-— Application Operational Use Case Review &amp; Hardening</h1>
-<p>Il Punto 6K rivede e rafforza l’espansione applicativa verso gli
-<strong>Operational Roles</strong> introdotta nel Punto 6J.</p>
-<p>Questa fase non aggiunge nuovi domini business. Serve a controllare
-che i use case applicativi per <code>Driver</code>,
-<code>Mechanic</code>, <code>WarehouseOperator</code>,
-<code>Dispatcher</code> e <code>Manager</code> siano coerenti,
-simmetrici, testati e documentati prima di procedere verso altri domini
-applicativi.</p>
-<p>Il Punto 6K rimane dentro i confini dell’application layer. Non
-introduce REST API, controller Spring, database, JPA, Spring Data,
-security, tracking, planning, dispatching reale, turni, availability,
-payroll, dashboard, audit trail enterprise o workflow operativi.</p>
-<h2 id="obiettivo-dello-step">Obiettivo dello step</h2>
-<p>L’obiettivo del Punto 6K è consolidare il blocco Operational Roles
-dopo la sua introduzione.</p>
-<p>La review verifica in particolare:</p>
+<hr />
+<h2 id="nota-progetto-punto-6m">Nota progetto — Punto 6M</h2>
+<p>Dopo l’aggiunta del Punto 6M — Application Layer Final Review &amp;
+Freeze, il controllo consigliato resta:</p>
+<div class="sourceCode" id="cb41"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="ex">mvn</span> spotless:apply</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="ex">mvn</span> spotless:check</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="ex">mvn</span> clean test</span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> status</span></code></pre></div>
+<p>Il Punto 6M chiude il primo ciclo dell’application layer. Non
+aggiunge nuovi use case business, ma introduce il test finale di
+freeze:</p>
 <ul>
-<li>copertura uniforme dei service di stato per tutti i ruoli
-operativi;</li>
-<li>assenza di mutazioni parziali quando una validazione di dominio
-fallisce;</li>
-<li>protezione copy-on-write su attivazione, sospensione e marcatura
-come non idoneo;</li>
-<li>gestione coerente di command nulli;</li>
-<li>gestione coerente di dependency repository nulle;</li>
-<li>documentazione allineata tra Markdown, documentazione digitale HTML
-+ CSS e file di comandi;</li>
-<li>pulizia di piccoli commenti tecnici generati nel Punto 6J.</li>
+<li><code>ApplicationLayerFinalFreezeTest</code>;</li>
+<li>controllo dei package applicativi attivi;</li>
+<li>controllo del rapporto tra port in concrete e service
+applicativi;</li>
+<li>controllo della documentazione applicativa dal Punto 6A al Punto
+6M;</li>
+<li>controllo contro layer prematuri come web, security, JPA,
+persistence o database.</li>
 </ul>
-<h2 id="nessuna-nuova-funzionalità-business">Nessuna nuova funzionalità
-business</h2>
-<p>Il Punto 6K non introduce nuovi casi d’uso funzionali.</p>
-<p>Non vengono aggiunti:</p>
-<ul>
-<li>assegnazioni driver-veicolo;</li>
-<li>assegnazioni driver-shipment;</li>
-<li>disponibilità giornaliera;</li>
-<li>turni;</li>
-<li>calendario operativo;</li>
-<li>payroll;</li>
-<li>HR avanzato;</li>
-<li>controlli reali su patente, CQC, ADR o visite mediche;</li>
-<li>dispatching reale;</li>
-<li>planning;</li>
-<li>tracking;</li>
-<li>dashboard;</li>
-<li>REST API;</li>
-<li>persistenza definitiva.</li>
-</ul>
-<p>Queste parti appartengono a moduli futuri e non devono entrare ora
-nel livello application di base.</p>
-<h2 id="test-aggiunto">Test aggiunto</h2>
-<p>È stato aggiunto il test:</p>
-<pre class="text"><code>ApplicationOperationalUseCaseHardeningTest</code></pre>
-<p>Questo test affianca i test introdotti nel Punto 6J e rafforza il
-contratto operativo applicativo.</p>
-<h2 id="copertura-dei-service-di-stato-per-tutti-i-ruoli">Copertura dei
-service di stato per tutti i ruoli</h2>
-<p>Il test verifica che i use case di stato siano coperti per tutti i
-ruoli operativi correnti:</p>
-<ul>
-<li><code>Driver</code>;</li>
-<li><code>Mechanic</code>;</li>
-<li><code>WarehouseOperator</code>;</li>
-<li><code>Dispatcher</code>;</li>
-<li><code>Manager</code>.</li>
-</ul>
-<p>Per ogni ruolo vengono testati i passaggi principali:</p>
-<ul>
-<li>registrazione valida;</li>
-<li>sospensione;</li>
-<li>marcatura come non idoneo;</li>
-<li>riattivazione.</li>
-</ul>
-<p>In questo modo il progetto non dipende solo dai casi
-driver/dispatcher, ma protegge esplicitamente anche mechanic, warehouse
-operator e manager.</p>
-<h2 id="hardening-copy-on-write-sulle-attivazioni-fallite">Hardening
-copy-on-write sulle attivazioni fallite</h2>
-<p>Il Punto 6J aveva già introdotto i mutation support
-copy-on-write:</p>
-<pre class="text"><code>DriverMutationSupport
-MechanicMutationSupport
-WarehouseOperatorMutationSupport
-DispatcherMutationSupport
-ManagerMutationSupport</code></pre>
-<p>Il Punto 6K verifica anche il caso negativo più importante: una
-figura operativa registrata come <code>SUSPENDED</code> senza
-qualificazioni o scope non può essere attivata.</p>
-<p>Il comportamento atteso è:</p>
-<ol type="1">
-<li>il service carica l’aggregate dalla repository;</li>
-<li>crea una copia;</li>
-<li>prova ad attivare la copia;</li>
-<li>il dominio rifiuta l’attivazione perché mancano qualificazioni o
-scope;</li>
-<li>la repository mantiene l’aggregate originale in stato
-<code>SUSPENDED</code>;</li>
-<li>nessuna modifica parziale viene salvata.</li>
-</ol>
-<p>Questo protegge gli adapter in memory dal problema dei riferimenti
-mutabili.</p>
-<h2 id="error-handling-applicativo-verificato">Error handling
-applicativo verificato</h2>
-<p>Il Punto 6K rafforza il controllo degli errori applicativi.</p>
-<p>I test verificano che tutti i service Operational Roles rifiutino
-command nulli con:</p>
-<pre class="text"><code>UseCaseValidationException</code></pre>
-<p>Viene verificato lo stesso contratto anche per le dependency
-repository nulle nei costruttori dei service.</p>
-<p>Questa scelta mantiene coerente il comportamento già stabilito negli
-step precedenti dell’application layer.</p>
-<h2 id="pulizia-documentale-nel-codice">Pulizia documentale nel
-codice</h2>
-<p>Sono stati corretti piccoli commenti tecnici nei package applicativi
-Operational Roles.</p>
-<p>In particolare:</p>
-<ul>
-<li><code>warehouseoperator</code> è stato uniformato in
-<code>warehouse operator</code> nei commenti JavaDoc;</li>
-<li>i commenti dei command e delle port <code>MarkNotEligible...</code>
-sono stati resi più leggibili, usando “mark as not eligible” invece di
-esporre il nome tecnico del metodo.</li>
-</ul>
-<p>Non sono stati cambiati nomi di classi, metodi, package o contratti
-pubblici.</p>
-<h2 id="documentazione-aggiornata">Documentazione aggiornata</h2>
-<p>Il Punto 6K aggiorna la documentazione collegata:</p>
-<ul>
-<li>questo documento
-<code>docs/26-application-operational-use-case-hardening.md</code>;</li>
-<li><code>docs/README.md</code>;</li>
-<li><code>TRUCKFLOW_PROJECT_DOCUMENTATION.md</code>;</li>
-<li>i documenti applicativi precedenti dove è utile chiarire lo stato
-attuale;</li>
-<li><code>digitalDocs/index.html</code>;</li>
-<li><code>digitalDocs/styles.css</code>;</li>
-<li><code>digitalDocs/README.md</code>;</li>
-<li><code>digitalDocs/truckflow-manager-enterprise-documentation.html</code>;</li>
-<li><code>command_basic.md</code>.</li>
-</ul>
-<p>La documentazione digitale rimane un mirror navigabile della
-documentazione Markdown ufficiale.</p>
-<h2 id="confini-architetturali-rispettati">Confini architetturali
-rispettati</h2>
-<p>Il Punto 6K non introduce:</p>
-<ul>
-<li>dipendenze dal dominio verso application o infrastructure;</li>
-<li>dipendenze dall’application layer verso infrastructure
-concreta;</li>
-<li>dipendenze dall’application layer verso controller, web, JPA o
-Spring Data;</li>
-<li>persistenza definitiva;</li>
-<li>API REST;</li>
-<li>motori di workflow;</li>
-<li>regole enterprise avanzate.</li>
-</ul>
-<p>Il dominio Operational continua a contenere le invarianti business.
-L’application layer orchestra i casi d’uso e gestisce errori
-applicativi, repository port e result.</p>
-<h2 id="stato-finale-dopo-il-punto-6k">Stato finale dopo il Punto
-6K</h2>
-<p>Dopo il Punto 6K, il blocco Operational Roles risulta più solido:</p>
-<ul>
-<li>use case applicativi presenti per tutti i ruoli principali;</li>
-<li>repository port e repository in memory presenti;</li>
-<li>mutazioni di stato protette con copy-on-write;</li>
-<li>test positivi e negativi più completi;</li>
-<li>command nulli e dependency nulle controllati;</li>
-<li>documentazione aggiornata.</li>
-</ul>
-<p>Il Punto 6L è stato poi applicato come espansione controllata verso i
-use case base di Compliance. Il prossimo step consigliato diventa il
-<strong>Punto 6M — Application Layer Final Review &amp;
-Freeze</strong>.</p>
-<h2 id="aggiornamento-successivo-punto-6l-compliance-base">Aggiornamento
-successivo — Punto 6L Compliance base</h2>
-<p>Dopo l’hardening Operational Roles, il Punto 6L applica una nuova
-espansione controllata verso Compliance base.</p>
-<p>Il blocco Operational Roles rimane invariato. Compliance base
-aggiunge invece register/find/status use cases per
-<code>ComplianceRequirement</code>, mantenendo fuori controlli reali su
-persone, documenti, veicoli, cargo o shipment.</p>
-  </div>
-</article>
-<article class="doc-panel panel-29" id="27-application-compliance-base-use-cases-md">
-  <header class="doc-panel-header">
-    <p class="eyebrow">27-application-compliance-base-use-cases.md</p>
-    <h1>Punto 6L — Application Compliance Base Use Cases</h1>
-  </header>
-  <div class="markdown-body">
-<h1 id="punto-6l-application-compliance-base-use-cases">Punto 6L —
-Application Compliance Base Use Cases</h1>
-<p>Il Punto 6L introduce una piccola espansione controllata
-dell’application layer verso il dominio <strong>Compliance</strong>.</p>
-<p>Questa fase aggiunge i primi use case applicativi per gestire un
-catalogo base di <code>ComplianceRequirement</code>, cioè requisiti
-astratti di conformità già modellati nel dominio puro.</p>
-<p>Il Punto 6L rimane rigorosamente dentro i confini dell’application
-layer e degli adapter in memory. Non introduce controlli legali reali,
-motori di validazione, workflow, audit trail, dashboard, REST API,
-controller Spring, database, JPA, Spring Data, security, tracking o
-planning.</p>
-<h2 id="obiettivo-dello-step">Obiettivo dello step</h2>
-<p>L’obiettivo è rendere il dominio <code>compliance</code> consumabile
-dai futuri casi d’uso applicativi senza trasformarlo ancora in un motore
-di compliance operativo.</p>
-<p>Il sistema ora può:</p>
-<ul>
-<li>registrare un requisito astratto di compliance;</li>
-<li>trovare un requisito tramite ID;</li>
-<li>attivare un requisito;</li>
-<li>sospendere un requisito;</li>
-<li>archiviare un requisito;</li>
-<li>dismettere un requisito tramite stato
-<code>DISCONTINUED</code>;</li>
-<li>proteggere i codici duplicati;</li>
-<li>usare una repository port astratta;</li>
-<li>usare un adapter in memory per test e sviluppo locale.</li>
-</ul>
-<h2 id="cosa-è-stato-aggiunto">Cosa è stato aggiunto</h2>
-<p>Sono stati aggiunti i package applicativi dedicati a compliance:</p>
-<pre class="text"><code>application.command.compliance
-application.result.compliance
-application.port.in.compliance
-application.port.out.compliance
-application.usecase.compliance
-infrastructure.memory.compliance</code></pre>
-<p>Questa struttura segue la stessa organizzazione già usata per
-Locations, Cargo, Shipments, Documents, Vehicles e Operational
-Roles.</p>
-<h2 id="command-applicativi">Command applicativi</h2>
-<p>Sono stati aggiunti i command:</p>
-<pre class="text"><code>RegisterComplianceRequirementCommand
-FindComplianceRequirementCommand
-ActivateComplianceRequirementCommand
-SuspendComplianceRequirementCommand
-ArchiveComplianceRequirementCommand
-DiscontinueComplianceRequirementCommand</code></pre>
-<p>I command controllano input obbligatori e normalizzano i testi
-applicativi semplici dove necessario.</p>
-<p><code>RegisterComplianceRequirementCommand</code> richiede:</p>
-<ul>
-<li><code>ComplianceRequirementCode</code>;</li>
-<li>nome;</li>
-<li>stato;</li>
-<li>categoria;</li>
-<li>tipo;</li>
-<li>obligation level;</li>
-<li>severity;</li>
-<li>target;</li>
-<li>rule;</li>
-<li>source;</li>
-<li>jurisdiction.</li>
-</ul>
-<p>Il command non esegue controlli legali reali. Prepara soltanto
-l’input per creare un aggregate di dominio valido.</p>
-<h2 id="result-applicativo">Result applicativo</h2>
-<p>È stato aggiunto:</p>
-<pre class="text"><code>ComplianceRequirementResult</code></pre>
-<p>Il result espone solo informazioni utili al livello applicativo:</p>
-<ul>
-<li>ID;</li>
-<li>code;</li>
-<li>name;</li>
-<li>status;</li>
-<li>category;</li>
-<li>type;</li>
-<li>obligation level;</li>
-<li>severity;</li>
-<li>target type;</li>
-<li>jurisdiction scope;</li>
-<li>country;</li>
-<li>region;</li>
-<li>flag <code>active</code>;</li>
-<li>flag <code>mandatory</code>;</li>
-<li>flag <code>critical</code>.</li>
-</ul>
-<p>Il result non espone l’intero aggregate e rifiuta domain object nulli
-con <code>UseCaseValidationException</code>.</p>
-<h2 id="repository-port">Repository port</h2>
-<p>È stata aggiunta la port:</p>
-<pre class="text"><code>ComplianceRequirementRepository</code></pre>
-<p>La port consente:</p>
-<ul>
-<li><code>save</code>;</li>
-<li><code>findById</code>;</li>
-<li><code>findByCode</code>;</li>
-<li><code>existsById</code>;</li>
-<li><code>existsByCode</code>.</li>
-</ul>
-<p>È una porta astratta dell’application layer. Non conosce database,
-JPA, query SQL, Spring Data o repository concrete.</p>
-<h2 id="repository-in-memory">Repository in memory</h2>
-<p>È stato aggiunto l’adapter:</p>
-<pre class="text"><code>InMemoryComplianceRequirementRepository</code></pre>
-<p>L’adapter gestisce due indici:</p>
-<ul>
-<li>requisiti per ID;</li>
-<li>ID per code.</li>
-</ul>
-<p>Rifiuta input nulli con <code>UseCaseValidationException</code> e
-codici duplicati con <code>DuplicateResourceException</code>.</p>
-<p>Questo adapter è utile per test e sviluppo locale, ma non rappresenta
-una persistenza enterprise definitiva.</p>
-<h2 id="service-applicativi">Service applicativi</h2>
-<p>Sono stati aggiunti i service:</p>
-<pre class="text"><code>RegisterComplianceRequirementService
-FindComplianceRequirementService
-ActivateComplianceRequirementService
-SuspendComplianceRequirementService
-ArchiveComplianceRequirementService
-DiscontinueComplianceRequirementService</code></pre>
-<p>I service orchestrano il dominio:</p>
-<ol type="1">
-<li>validano il command;</li>
-<li>usano la repository port;</li>
-<li>recuperano o creano l’aggregate;</li>
-<li>invocano il metodo di dominio corretto;</li>
-<li>salvano tramite repository port;</li>
-<li>restituiscono un result applicativo.</li>
-</ol>
-<p>Le regole business rimangono nel dominio <code>compliance</code>.</p>
-<h2 id="copy-on-write-sulle-mutazioni">Copy-on-write sulle
-mutazioni</h2>
-<p>Per i cambi di stato è stato aggiunto:</p>
-<pre class="text"><code>ComplianceRequirementMutationSupport</code></pre>
-<p>Le mutazioni lavorano su una copia dell’aggregate prima del
-salvataggio.</p>
-<p>Questo mantiene coerente la scelta già adottata per Shipments,
-Documents, Vehicles e Operational Roles: evitare che un adapter in
-memory conservi mutazioni parziali in caso di errore futuro.</p>
-<h2 id="test-aggiunti">Test aggiunti</h2>
-<p>Sono stati aggiunti:</p>
-<pre class="text"><code>ApplicationComplianceUseCaseExpansionTest
-ApplicationComplianceRepositoryPortTest
-InMemoryComplianceRepositoryTest</code></pre>
-<p>I test verificano:</p>
-<ul>
-<li>registrazione di un requisito compliance;</li>
-<li>ricerca tramite ID;</li>
-<li>passaggi di stato <code>ACTIVE</code>, <code>SUSPENDED</code>,
-<code>ARCHIVED</code> e <code>DISCONTINUED</code>;</li>
-<li>comportamento copy-on-write sui cambi di stato;</li>
-<li>rifiuto di codici duplicati;</li>
-<li>rifiuto di risorse mancanti;</li>
-<li>rifiuto di command nulli;</li>
-<li>rifiuto di dependency repository nulle;</li>
-<li>normalizzazione di nome, descrizione e note nel command;</li>
-<li>contratto della repository port;</li>
-<li>comportamento dell’adapter in memory.</li>
-</ul>
-<p>È stato inoltre aggiornato <code>ApplicationUseCaseReviewTest</code>
-per includere i nuovi inbound port, service e result compliance.</p>
-<h2 id="cosa-non-viene-ancora-introdotto">Cosa non viene ancora
-introdotto</h2>
-<p>Il Punto 6L non introduce:</p>
-<ul>
-<li>controlli automatici su ADR, ATP, tachigrafo, CQC, visite mediche o
-revisioni;</li>
-<li>calcolo violazioni;</li>
-<li>scadenze obbligatorie concrete;</li>
-<li>motore regole;</li>
-<li>audit trail;</li>
-<li>workflow approvativi;</li>
-<li>notifiche;</li>
-<li>dashboard compliance;</li>
-<li>document requirement enforcement;</li>
-<li>country engine concreto;</li>
-<li>REST API;</li>
-<li>controller Spring;</li>
-<li>database;</li>
-<li>JPA;</li>
-<li>Spring Data;</li>
-<li>security.</li>
-</ul>
-<p>Queste funzionalità appartengono a moduli futuri.</p>
-<h2 id="confini-architetturali-rispettati">Confini architetturali
-rispettati</h2>
-<p>Il Punto 6L mantiene i confini già stabiliti:</p>
-<ul>
-<li>il dominio <code>compliance</code> contiene le invarianti;</li>
-<li>l’application layer orchestra i casi d’uso;</li>
-<li>l’infrastructure memory implementa solo adapter tecnici;</li>
-<li>l’application layer dipende da port astratte, non da implementazioni
-concrete;</li>
-<li>il dominio non importa application o infrastructure;</li>
-<li>non vengono introdotti framework.</li>
-</ul>
-<h2 id="documentazione-aggiornata">Documentazione aggiornata</h2>
-<p>Il Punto 6L aggiorna:</p>
-<ul>
-<li>questo documento
-<code>docs/27-application-compliance-base-use-cases.md</code>;</li>
-<li><code>docs/README.md</code>;</li>
-<li><code>TRUCKFLOW_PROJECT_DOCUMENTATION.md</code>;</li>
-<li>i documenti applicativi collegati;</li>
-<li><code>docs/12-domain-compliance.md</code>;</li>
-<li><code>digitalDocs/index.html</code>;</li>
-<li><code>digitalDocs/styles.css</code>;</li>
-<li><code>digitalDocs/README.md</code>;</li>
-<li><code>digitalDocs/truckflow-manager-enterprise-documentation.html</code>;</li>
-<li><code>command_basic.md</code>.</li>
-</ul>
-<p>La documentazione Markdown rimane la fonte principale. La
-documentazione digitale HTML + CSS rimane il mirror navigabile.</p>
-<h2 id="stato-finale-dopo-il-punto-6l">Stato finale dopo il Punto
-6L</h2>
-<p>Dopo il Punto 6L, l’application layer copre i primi blocchi
-fondamentali:</p>
-<ul>
-<li>Locations;</li>
-<li>Cargo;</li>
-<li>Shipments;</li>
-<li>Documents;</li>
-<li>Vehicles;</li>
-<li>Operational Roles;</li>
-<li>Compliance base requirements.</li>
-</ul>
-<p>Il prossimo step consigliato è il <strong>Punto 6M — Application
-Layer Final Review &amp; Freeze</strong>, cioè la chiusura finale del
-Punto 6 con revisione complessiva, documentazione finale e verifica dei
-confini architetturali.</p>
+<p>Prima del commit conviene controllare anche che il documento finale
+sia presente:</p>
+<div class="sourceCode" id="cb42"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> docs/28-application-layer-final-review-freeze.md</span></code></pre></div>
+<p>Commit consigliato:</p>
+<div class="sourceCode" id="cb43"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add <span class="at">-A</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">&quot;Finalize application layer review and freeze&quot;</span></span></code></pre></div>
+
   </div>
 </article>
   </main>

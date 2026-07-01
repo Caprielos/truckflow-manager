@@ -653,3 +653,7 @@ Il blueprint applicativo rimane valido anche dopo l'espansione base verso Compli
 Il Punto 6L segue la struttura prevista: command, result, port in, repository port, application service, repository in memory e test. La differenza è che il nuovo blocco lavora su `ComplianceRequirement`, mantenendo la compliance come catalogo astratto e non come motore di controllo operativo.
 
 Non vengono introdotti REST API, controller, database, JPA, Spring Data, security, audit trail, workflow o controlli concreti di violazione.
+
+## Allineamento Punto 6M
+
+Il Punto 6M chiude il primo ciclo dell'application layer con una review/freeze finale. Da questo momento i contenuti documentati nei punti 6A-6L sono considerati fondazione applicativa stabile: eventuali evoluzioni future dovranno essere introdotte in nuovi punti roadmap, mantenendo ancora fuori REST API, controller, database, JPA, Spring Data, security, tracking, planning, dashboard, workflow e integrazioni esterne.

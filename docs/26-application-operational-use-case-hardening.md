@@ -170,3 +170,7 @@ Il Punto 6L è stato poi applicato come espansione controllata verso i use case 
 Dopo l'hardening Operational Roles, il Punto 6L applica una nuova espansione controllata verso Compliance base.
 
 Il blocco Operational Roles rimane invariato. Compliance base aggiunge invece register/find/status use cases per `ComplianceRequirement`, mantenendo fuori controlli reali su persone, documenti, veicoli, cargo o shipment.
+
+## Allineamento Punto 6M
+
+Il Punto 6M chiude il primo ciclo dell'application layer con una review/freeze finale. Da questo momento i contenuti documentati nei punti 6A-6L sono considerati fondazione applicativa stabile: eventuali evoluzioni future dovranno essere introdotte in nuovi punti roadmap, mantenendo ancora fuori REST API, controller, database, JPA, Spring Data, security, tracking, planning, dashboard, workflow e integrazioni esterne.
