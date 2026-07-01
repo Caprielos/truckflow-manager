@@ -477,3 +477,9 @@ Dopo la stabilizzazione del dominio e dei primi adapter applicativi, è stato in
 Lo step aggiunge command, result, port in e application service per Locations, Cargo e Shipments. Il primo scenario testato registra due location, registra un cargo, crea una shipment draft, aggiunge item e leg, conferma la shipment e la recupera.
 
 Questa fase non modifica il domain layer: dimostra che il dominio è consumabile dall'application layer senza introdurre framework, web adapter o database.
+
+## Aggiornamento applicativo — Punto 6F
+
+Dopo la review del dominio e i primi step applicativi, il Punto 6F ha rafforzato i primi use case del blocco Locations + Cargo + Shipments.
+
+L'intervento aggiunge `CancelShipmentUseCase` e test di hardening sui command, sulle risorse mancanti, sui duplicati e sulle mutazioni fallite. Questo aggiornamento non modifica le regole del dominio: conferma che il dominio continua a essere il proprietario delle invarianti e che l'application layer orchestra il flusso applicativo.

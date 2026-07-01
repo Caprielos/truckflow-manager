@@ -797,3 +797,11 @@ Con il Punto 6E sono stati introdotti i primi use case applicativi senza usare S
 La decisione confermata è che l'application layer deve orchestrare il dominio tramite command, result, port in, port out e application service. Le regole business restano nel dominio. Gli errori di lookup, duplicato e input applicativo restano nell'application layer.
 
 Questa scelta mantiene il progetto aderente a una architettura pulita: il dominio non conosce l'application layer, l'application layer non conosce infrastructure concreta, e gli adapter in memory vengono usati solo nei test e nello sviluppo locale.
+
+## Decisione architetturale — Hardening prima dell'espansione dei use case
+
+Prima di estendere l'application layer ad altri domini, TruckFlow Manager introduce il Punto 6F — Application Use Case Review & Hardening.
+
+La decisione è consolidare i primi use case esistenti invece di aggiungere subito molti casi d'uso nuovi. Questa scelta riduce il rischio di propagare errori strutturali, rende più chiara la separazione tra errori applicativi ed errori di dominio e prepara un modello replicabile per i prossimi domini.
+
+Il Punto 6F aggiunge `CancelShipmentUseCase` e test di robustezza sui command, sulle risorse mancanti, sui duplicati e sulle mutazioni fallite. Non introduce framework, database, controller o transazioni.

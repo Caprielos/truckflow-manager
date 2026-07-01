@@ -522,13 +522,23 @@ Obiettivo:
 - partire da locations, cargo e shipments;
 - mantenere servizi piccoli e leggibili.
 
-### Punto 6F — Application Tests
+### Punto 6F — Application Use Case Review & Hardening
 
 Obiettivo:
 
-- testare use case singoli;
-- testare errori applicativi;
-- testare il primo flusso completo senza database.
+- rafforzare i primi use case esistenti;
+- aggiungere `CancelShipmentUseCase`;
+- testare errori applicativi e risorse mancanti;
+- verificare duplicati e mutazioni fallite;
+- consolidare il primo flusso completo senza database.
+
+### Punto 6G — Application Use Cases Expansion
+
+Obiettivo:
+
+- estendere i casi d'uso ad altri domini solo dopo il consolidamento del blocco iniziale;
+- valutare Documents, Compliance, Vehicles e Operational Roles;
+- rimandare REST API, database e security finché l'application layer non è stabile.
 
 ---
 
@@ -583,3 +593,11 @@ Il blueprint è stato rispettato nel primo blocco applicativo reale.
 Con il Punto 6E sono stati creati command, result, port in e application service per Locations, Cargo e Shipments. Il primo flusso consigliato nel blueprint è ora implementato e testato: registrazione di due location, registrazione di un cargo, creazione di una shipment draft, aggiunta di item, aggiunta di leg, conferma e recupero della shipment.
 
 Il Punto 6E conferma una scelta architetturale importante: l'application layer orchestra il dominio ma non duplica le regole di dominio. Per esempio, la conferma della shipment viene eseguita chiamando `shipment.confirm()`, mentre le regole di conferma restano dentro l'aggregate `Shipment`.
+
+## Aggiornamento roadmap — Punto 6F
+
+Dopo il Punto 6E, la roadmap applicativa prevede una fase di hardening.
+
+Il Punto 6F consolida i primi use case prima di estenderli ad altri domini. Aggiunge `CancelShipmentUseCase`, rafforza i test applicativi e verifica che errori applicativi, errori di dominio e mutazioni fallite siano gestiti correttamente.
+
+Il passo successivo consigliato diventa quindi il Punto 6G, dedicato all'espansione dei use case verso altri domini, non ancora a REST API o database.

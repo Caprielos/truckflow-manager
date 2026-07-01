@@ -226,3 +226,17 @@ mvn clean test
 | Commit | `git add -A && git commit -m "messaggio"` |
 | Push | `git push` |
 
+
+---
+
+## Nota progetto — Punto 6F
+
+Dopo l'aggiunta del Punto 6F — Application Use Case Review & Hardening, il controllo consigliato resta:
+
+```bash
+mvn spotless:apply
+mvn clean test
+git status
+```
+
+Questo step aggiunge `CancelShipmentUseCase` e nuovi test applicativi, quindi `mvn clean test` è il controllo più importante da eseguire prima del commit.

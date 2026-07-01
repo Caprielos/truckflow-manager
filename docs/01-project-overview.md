@@ -184,3 +184,9 @@ Questa evoluzione permette di iniziare i primi use case applicativi senza introd
 Il progetto ora include il primo blocco di use case applicativi reali per Locations, Cargo e Shipments. Questo passaggio segna l'inizio del comportamento applicativo concreto sopra il dominio puro.
 
 I nuovi use case permettono di registrare location, registrare cargo, creare una shipment draft, aggiungere item e leg, confermare e recuperare una shipment. Il progetto rimane però indipendente da REST API, database, JPA e Spring: il comportamento è testato tramite repository in memory e contratti applicativi.
+
+## Aggiornamento Punto 6F — Use Case Hardening
+
+Dopo l'introduzione dei primi use case applicativi, il progetto ha aggiunto una fase di hardening dedicata. Il Punto 6F rafforza il blocco Locations + Cargo + Shipments aggiungendo `CancelShipmentUseCase` e testando casi negativi, risorse mancanti, duplicati, command nulli e mutazioni fallite.
+
+Questo conferma la direzione architetturale del progetto: prima si stabilizza il comportamento applicativo puro, poi si passa a REST API, database, security e moduli enterprise avanzati.

@@ -322,3 +322,9 @@ Le repository port introdotte nel Punto 6C sono ora usate dai primi application 
 - `ShipmentRepository` viene usata per creare, aggiornare, confermare e recuperare le shipment.
 
 Le porte hanno quindi iniziato a svolgere il loro ruolo reale: permettere agli use case di orchestrare il dominio senza conoscere implementazioni concrete.
+
+## Collegamento con il Punto 6F
+
+Il Punto 6F usa le repository port definite in questo step per verificare scenari applicativi più robusti.
+
+`ShipmentRepository` viene usata anche dal nuovo `CancelShipmentUseCase`, mentre `LocationRepository` e `CargoUnitRepository` continuano a proteggere i lookup necessari ai primi flussi. La logica rimane astratta: nessun service applicativo conosce database, JPA, file system o implementazioni concrete.

@@ -302,3 +302,11 @@ Dopo questo step, il progetto contiene:
 - primo flusso applicativo reale testato.
 
 Il progetto non è ancora una REST API e non usa ancora database, ma ha iniziato a comportarsi come una vera applicazione organizzata per casi d'uso.
+
+## Aggiornamento successivo — Punto 6F
+
+Dopo il Punto 6E è stato aggiunto il Punto 6F — Application Use Case Review & Hardening.
+
+Questa fase completa e rafforza il primo gruppo di use case aggiungendo `CancelShipmentUseCase` e testando casi negativi più espliciti: command nulli, input obbligatori mancanti, risorse inesistenti, duplicati cargo, cancellazione shipment e mutazioni fallite senza stato parziale.
+
+Il Punto 6F non cambia la natura del Punto 6E: l'application layer continua a orchestrare il dominio senza duplicare le regole business.

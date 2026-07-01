@@ -436,3 +436,5 @@ body.tooltip-disabled .term[data-it]::after {
 
 #doc-22:checked ~ .app-shell .panel-22 { display: block; }
 #doc-22:checked ~ .app-shell label[for="doc-22"] { background: var(--nav-active-bg); border-color: var(--accent); color: var(--text-strong); }
+#doc-23:checked ~ .app-shell .panel-23 { display: block; }
+#doc-23:checked ~ .app-shell label[for="doc-23"] { background: var(--nav-active-bg); border-color: var(--accent); color: var(--text-strong); }

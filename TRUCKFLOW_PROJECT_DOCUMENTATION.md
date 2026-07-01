@@ -20,9 +20,9 @@ Il markup HTML resta identico in entrambi i casi. Cambia solo il CSS applicato d
 
 ## Stato attuale del dominio
 
-Il progetto ha consolidato il **domain layer puro** e ha completato il **Punto 6D — In-Memory Repositories** e sta introducendo il **Punto 6E — First Use Cases**.
+Il progetto ha consolidato il **domain layer puro**, ha completato i primi step dell’application layer fino al **Punto 6E — First Use Cases** e sta introducendo il **Punto 6F — Application Use Case Review & Hardening**.
 
-La versione attuale rappresenta la **TruckFlow Domain Foundation v1.0** rafforzata dalla prima review correttiva del dominio puro. La fondazione è definita, le regole sono documentate e sono stati applicati interventi mirati su invarianti, eccezioni, codici aziendali, test e pulizia del repository. Il passo attuale è implementare i primi use case applicativi per Locations, Cargo e Shipments, senza introdurre ancora REST API, database, JPA, Spring Data o persistenza definitiva.
+La versione attuale rappresenta la **TruckFlow Domain Foundation v1.0** rafforzata dalla prima review correttiva del dominio puro. La fondazione è definita, le regole sono documentate e sono stati applicati interventi mirati su invarianti, eccezioni, codici aziendali, test e pulizia del repository. Il passo attuale è rafforzare i primi use case applicativi per Locations, Cargo e Shipments, aggiungendo cancellazione shipment, test negativi e protezione da mutazioni parziali, senza introdurre ancora REST API, database, JPA, Spring Data o persistenza definitiva.
 
 I package principali sono:
 
@@ -62,6 +62,7 @@ Il dominio è stato costruito seguendo una regola precisa: modellare prima i con
 - [`docs/18-application-repository-ports.md`](docs/18-application-repository-ports.md) — repository port del Punto 6C: `RepositoryPort`, `LocationRepository`, `CargoUnitRepository` e `ShipmentRepository`.
 - [`docs/19-application-in-memory-repositories.md`](docs/19-application-in-memory-repositories.md) — repository in memory del Punto 6D: implementazioni leggere per Locations, Cargo e Shipments.
 - [`docs/20-application-first-use-cases.md`](docs/20-application-first-use-cases.md) — primi use case del Punto 6E: command, result, port in, application service e primo flusso applicativo Locations + Cargo + Shipments.
+- [`docs/21-application-use-case-hardening.md`](docs/21-application-use-case-hardening.md) — hardening del Punto 6F: `CancelShipmentUseCase`, test negativi, errori applicativi e protezione dalle mutazioni fallite.
 
 ## Regole fondamentali della Domain Foundation
 
@@ -114,6 +115,8 @@ Con il Punto 6C sono state introdotte le prime repository port specifiche: `Repo
 Con il Punto 6D sono state introdotte le prime implementazioni in memory: `InMemoryLocationRepository`, `InMemoryCargoUnitRepository` e `InMemoryShipmentRepository`. Questi adapter sono utili per test e sviluppo locale, proteggono duplicati di codice e input nulli, ma non sostituiscono un database enterprise definitivo.
 
 Con il Punto 6E sono stati introdotti i primi use case applicativi reali: registrazione e recupero di Locations e Cargo, creazione di una Shipment draft, aggiunta di item e leg, conferma e recupero della Shipment. Questo step dimostra il primo flusso applicativo completo senza introdurre ancora REST API, database o framework.
+
+Con il Punto 6F è stato eseguito l'hardening dei primi use case: è stato aggiunto `CancelShipmentUseCase`, sono stati rafforzati i test negativi su command, risorse mancanti e duplicati, ed è stata verificata la protezione da mutazioni parziali in caso di errore di dominio.
 
 
 
@@ -172,6 +175,19 @@ Questa fase non introduce ancora web, database, JPA, Spring, transazioni o secur
 
 Il Punto 6E è documentato in [`docs/20-application-first-use-cases.md`](docs/20-application-first-use-cases.md).
 
+
+## Punto 6F — Application Use Case Review & Hardening
+
+Il Punto 6F rafforza i primi use case del blocco Locations + Cargo + Shipments.
+
+Sono stati aggiunti `CancelShipmentCommand`, `CancelShipmentUseCase` e `CancelShipmentService`, completando il primo set di azioni applicative sulle shipment con la cancellazione.
+
+La fase aggiunge test di hardening che verificano command nulli, input obbligatori mancanti, find use case su risorse inesistenti, duplicati cargo, cancellazione persistita della shipment e assenza di stato parziale dopo una mutazione fallita.
+
+Questa fase non introduce ancora REST API, database, Spring, JPA, security o moduli enterprise avanzati. Serve a rendere stabile il primo nucleo applicativo prima dell'espansione verso altri domini.
+
+Il Punto 6F è documentato in [`docs/21-application-use-case-hardening.md`](docs/21-application-use-case-hardening.md).
+
 ## Prossimi step consigliati
 
 La roadmap consigliata è:
@@ -183,5 +199,6 @@ La roadmap consigliata è:
 5. mantenere stabile il Punto 6C con le prime repository port specifiche;
 6. mantenere stabile il Punto 6D con le prime repository in memory per test e scenari locali;
 7. mantenere stabile il Punto 6E con i primi use case Locations + Cargo + Shipments;
-8. eseguire una review e un hardening dei primi use case nel Punto 6F;
-9. rimandare API REST, database e integrazioni esterne finché l'application layer non è stabile.
+8. mantenere stabile il Punto 6F con hardening dei primi use case e `CancelShipmentUseCase`;
+9. estendere i casi d'uso applicativi ad altri domini nel Punto 6G;
+10. rimandare API REST, database e integrazioni esterne finché l'application layer non è stabile.

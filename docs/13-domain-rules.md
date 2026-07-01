@@ -417,3 +417,9 @@ Con il Punto 6E i confini del dominio restano invariati. I nuovi use case applic
 Le regole di dominio continuano a vivere negli aggregate e nei value object. L'application layer si limita a caricare aggregate, verificare l'esistenza di risorse correlate, invocare il comportamento del dominio e salvare il risultato tramite repository port.
 
 La conferma di una shipment, per esempio, resta responsabilità dell'aggregate `Shipment`. Il service applicativo chiama `shipment.confirm()` e propaga eventuali eccezioni di dominio.
+
+## Regola aggiornata — Il dominio resta il proprietario delle invarianti
+
+Il Punto 6F conferma che l'application layer non deve trasformarsi in un secondo dominio. I service applicativi verificano command, risorse mancanti e duplicati, ma lasciano al dominio la validazione delle invarianti profonde.
+
+Per esempio, un item shipment con quantità non positiva resta un errore del dominio shipment. L'application layer può orchestrare `AddShipmentItemService`, ma non deve duplicare la regola business che rende valida o invalida la quantità.

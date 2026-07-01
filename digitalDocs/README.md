@@ -85,3 +85,9 @@ Documento di riferimento: `docs/19-application-in-memory-repositories.md`.
 La documentazione digitale include ora anche il Punto 6E — First Use Cases. Questo step aggiunge i primi command, result, port in e application service per Locations, Cargo e Shipments, più il primo flusso applicativo completo testato con repository in memory.
 
 Documento di riferimento: `docs/20-application-first-use-cases.md`.
+
+## Aggiornamento Punto 6F
+
+La documentazione digitale include ora anche il Punto 6F — Application Use Case Review & Hardening.
+
+Questo aggiornamento documenta `CancelShipmentUseCase`, i test di hardening dei primi use case e la distinzione tra errori applicativi ed errori di dominio. La documentazione HTML resta un mirror navigabile della documentazione Markdown e non sostituisce i file ufficiali nella cartella `docs`.

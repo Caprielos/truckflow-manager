@@ -221,3 +221,9 @@ Il test applicativo del Punto 6E usa `InMemoryLocationRepository`, `InMemoryCarg
 5. recupero della shipment finale.
 
 Questo conferma che gli adapter in memory sono sufficienti per testare l'orchestrazione applicativa prima di introdurre persistenza enterprise.
+
+## Collegamento con il Punto 6F
+
+Le repository in memory introdotte nel Punto 6D vengono usate nel Punto 6F per testare scenari applicativi più severi.
+
+I test verificano che una shipment cancellata venga salvata correttamente, che un cargo duplicato venga rifiutato, che le risorse mancanti producano errori applicativi e che una mutazione fallita non lasci stato parziale nell'aggregate salvato.

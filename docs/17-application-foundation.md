@@ -320,3 +320,9 @@ La foundation introdotta nel Punto 6B è ora usata dai primi use case reali.
 I marker `ApplicationCommand` e `ApplicationResult` sono implementati da command e result specifici per Locations, Cargo e Shipments. Il contratto generico `UseCase` è specializzato dalle nuove port in, mentre le eccezioni applicative sono usate per command nulli, risorse mancanti e duplicati.
 
 Questo conferma che la foundation è sufficiente per avviare casi d'uso concreti senza introdurre Spring, REST API, database o framework esterni.
+
+## Collegamento con il Punto 6F
+
+La foundation applicativa introdotta nel Punto 6B viene utilizzata pienamente nel Punto 6F.
+
+`ApplicationCommand`, `ApplicationResult`, `UseCase`, `UseCaseValidationException`, `ResourceNotFoundException` e `DuplicateResourceException` vengono esercitati nei test di hardening dei primi use case. Questo conferma che la foundation è abbastanza stabile per supportare casi d'uso reali senza dipendere da framework o infrastruttura concreta.

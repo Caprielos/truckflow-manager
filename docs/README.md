@@ -1,8 +1,8 @@
 # TruckFlow Manager — Documentazione del dominio
 
-Questa cartella contiene la documentazione ufficiale di TruckFlow Manager, con la fondazione del dominio puro e i primi step dell’application layer: blueprint, foundation, repository port, repository in memory e primi use case applicativi.
+Questa cartella contiene la documentazione ufficiale di TruckFlow Manager, con la fondazione del dominio puro e i primi step dell’application layer: blueprint, foundation, repository port, repository in memory, primi use case applicativi e hardening dei use case.
 
-Il progetto ha completato la fondazione del **domain layer** e sta consolidando i primi casi d'uso dell'**application layer**. La fondazione di dominio contiene i seguenti package principali:
+Il progetto ha completato la fondazione del **domain layer** e sta consolidando e rafforzando i primi casi d'uso dell'**application layer**. La fondazione di dominio contiene i seguenti package principali:
 
 - `domain.users`
 - `domain.qualifications`
@@ -53,6 +53,7 @@ I nomi tecnici rimangono in inglese e allineati al codice Java.
 18. [`18-application-repository-ports.md`](18-application-repository-ports.md) — repository port del Punto 6C: `RepositoryPort`, `LocationRepository`, `CargoUnitRepository`, `ShipmentRepository`, contratti per ID/codice e prossimo passaggio verso repository in memory.
 19. [`19-application-in-memory-repositories.md`](19-application-in-memory-repositories.md) — repository in memory del Punto 6D: `InMemoryLocationRepository`, `InMemoryCargoUnitRepository`, `InMemoryShipmentRepository`, regole sui duplicati, test e limiti dello step.
 20. [`20-application-first-use-cases.md`](20-application-first-use-cases.md) — primi use case del Punto 6E: command, result, port in, application service e flusso Locations + Cargo + Shipments.
+21. [`21-application-use-case-hardening.md`](21-application-use-case-hardening.md) — hardening del Punto 6F: review dei primi use case, `CancelShipmentUseCase`, test negativi e protezione dalle mutazioni parziali.
 
 ## Stato del progetto documentato
 
@@ -74,7 +75,9 @@ Questa documentazione descrive la versione del progetto in cui il dominio contie
 - blueprint del primo application layer documentato in `16-application-layer-blueprint.md`, che definisce struttura, responsabilità, package, command, result, port, use case, repository in memory e test strategy prima di introdurre codice applicativo;
 - foundation del primo application layer documentata in `17-application-foundation.md`, che introduce package application, contratti base, eccezioni applicative e test architetturali senza ancora aggiungere use case specifici o repository in memory;
 - repository port del primo application layer documentate in `18-application-repository-ports.md`, con `RepositoryPort`, `LocationRepository`, `CargoUnitRepository` e `ShipmentRepository` come primi contratti outbound per Locations, Cargo e Shipments;
-- repository in memory del primo infrastructure adapter documentate in `19-application-in-memory-repositories.md`, con `InMemoryLocationRepository`, `InMemoryCargoUnitRepository` e `InMemoryShipmentRepository` per test e sviluppo locale senza database.
+- repository in memory del primo infrastructure adapter documentate in `19-application-in-memory-repositories.md`, con `InMemoryLocationRepository`, `InMemoryCargoUnitRepository` e `InMemoryShipmentRepository` per test e sviluppo locale senza database;
+- primi use case applicativi documentati in `20-application-first-use-cases.md`, con command, result, port in e service per Locations, Cargo e Shipments;
+- hardening dei primi use case documentato in `21-application-use-case-hardening.md`, con `CancelShipmentUseCase`, test negativi, controllo degli errori applicativi e verifica delle mutazioni fallite.
 
 
 ## Nota sul packaging di `domain.vehicles`
@@ -235,3 +238,11 @@ Il documento `20-application-first-use-cases.md` descrive il Punto 6E.
 Questo step introduce i primi command, result, port in e application service per Locations, Cargo e Shipments. Il primo scenario applicativo completo registra due location, registra un cargo, crea una shipment draft, aggiunge item e leg, conferma la shipment e la recupera.
 
 Il Punto 6E dimostra che TruckFlow Manager sta iniziando a funzionare come applicazione a casi d'uso, ma senza introdurre ancora REST API, database, JPA, Spring, security o frontend.
+
+## Nota su `docs/21-application-use-case-hardening.md`
+
+Il documento `21-application-use-case-hardening.md` descrive il Punto 6F.
+
+Questo step rafforza i primi use case applicativi introdotti nel Punto 6E. Aggiunge `CancelShipmentUseCase`, `CancelShipmentCommand` e `CancelShipmentService`, estende la copertura dei test applicativi e verifica che command nulli, risorse mancanti, duplicati e mutazioni fallite siano gestiti correttamente.
+
+Il Punto 6F non introduce ancora REST API, database, Spring, JPA, security, planning o tracking. Serve a rendere stabile il primo nucleo applicativo prima di estendere i casi d'uso ad altri domini.

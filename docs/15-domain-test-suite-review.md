@@ -330,3 +330,9 @@ La revisione dei test si estende ora anche al primo scenario applicativo reale.
 Il dominio continua a essere protetto dai test domain-specific, mentre il nuovo test applicativo verifica l'orchestrazione: repository in memory, use case, command, result, lookup di risorse e propagazione delle eccezioni di dominio.
 
 Questa distinzione è importante: i test di dominio proteggono le regole business interne, mentre i test applicativi proteggono il coordinamento tra domini e repository.
+
+## Collegamento con il Punto 6F
+
+La revisione della test suite del dominio è stata completata prima dell'application layer. Il Punto 6F riprende la stessa filosofia anche sui primi use case applicativi: test significativi, nomi espressivi, casi negativi e verifica che gli errori non lascino stati parziali.
+
+La differenza è che i test del Punto 6F non testano direttamente le invarianti del dominio, già coperte dalla suite domain. Testano invece l'orchestrazione applicativa: command, service, repository port, repository in memory, risorse mancanti, duplicati e propagazione degli errori di dominio.
