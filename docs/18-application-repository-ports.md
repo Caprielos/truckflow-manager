@@ -312,3 +312,13 @@ La relazione è questa:
 Queste implementazioni dimostrano che i contratti definiti nel Punto 6C sono semplici, testabili e indipendenti da tecnologie esterne.
 
 Le repository in memory non sostituiscono il futuro database. Servono per test, prototipi locali e primi use case applicativi.
+
+## Aggiornamento dopo il Punto 6E
+
+Le repository port introdotte nel Punto 6C sono ora usate dai primi application service.
+
+- `LocationRepository` viene usata dai casi d'uso di registrazione, ricerca e validazione delle location nelle shipment leg.
+- `CargoUnitRepository` viene usata dai casi d'uso cargo e per verificare che un cargo esista prima di aggiungerlo a una shipment.
+- `ShipmentRepository` viene usata per creare, aggiornare, confermare e recuperare le shipment.
+
+Le porte hanno quindi iniziato a svolgere il loro ruolo reale: permettere agli use case di orchestrare il dominio senza conoscere implementazioni concrete.

@@ -1,8 +1,8 @@
 # TruckFlow Manager — Documentazione del dominio
 
-Questa cartella contiene la documentazione ufficiale di TruckFlow Manager, con la fondazione del dominio puro e i primi step dell’application layer: blueprint, foundation, repository port e repository in memory.
+Questa cartella contiene la documentazione ufficiale di TruckFlow Manager, con la fondazione del dominio puro e i primi step dell’application layer: blueprint, foundation, repository port, repository in memory e primi use case applicativi.
 
-Il progetto ha completato la fondazione del **domain layer** e sta consolidando i primi adapter dell'**application layer**. La fondazione di dominio contiene i seguenti package principali:
+Il progetto ha completato la fondazione del **domain layer** e sta consolidando i primi casi d'uso dell'**application layer**. La fondazione di dominio contiene i seguenti package principali:
 
 - `domain.users`
 - `domain.qualifications`
@@ -52,6 +52,7 @@ I nomi tecnici rimangono in inglese e allineati al codice Java.
 17. [`17-application-foundation.md`](17-application-foundation.md) — foundation del Punto 6B: package application, contratti base, eccezioni applicative, test architetturali e cosa manca prima dei primi use case.
 18. [`18-application-repository-ports.md`](18-application-repository-ports.md) — repository port del Punto 6C: `RepositoryPort`, `LocationRepository`, `CargoUnitRepository`, `ShipmentRepository`, contratti per ID/codice e prossimo passaggio verso repository in memory.
 19. [`19-application-in-memory-repositories.md`](19-application-in-memory-repositories.md) — repository in memory del Punto 6D: `InMemoryLocationRepository`, `InMemoryCargoUnitRepository`, `InMemoryShipmentRepository`, regole sui duplicati, test e limiti dello step.
+20. [`20-application-first-use-cases.md`](20-application-first-use-cases.md) — primi use case del Punto 6E: command, result, port in, application service e flusso Locations + Cargo + Shipments.
 
 ## Stato del progetto documentato
 
@@ -218,3 +219,19 @@ Questo step aggiunge i primi contratti outbound specifici dell’application lay
 Le porte permettono ai futuri use case di salvare e recuperare aggregate tramite ID e codice, senza conoscere database, JPA, Spring, file system o infrastructure concreta.
 
 Il prossimo step sarà creare repository in memory ufficiali per testare i primi flussi applicativi senza database.
+
+## Nota su `docs/19-application-in-memory-repositories.md`
+
+Il documento `19-application-in-memory-repositories.md` descrive il Punto 6D.
+
+Questo step aggiunge le prime implementazioni concrete e leggere delle repository port: `InMemoryLocationRepository`, `InMemoryCargoUnitRepository` e `InMemoryShipmentRepository`.
+
+Queste implementazioni permettono test e sviluppo locale senza database, proteggendo input nulli e codici duplicati.
+
+## Nota su `docs/20-application-first-use-cases.md`
+
+Il documento `20-application-first-use-cases.md` descrive il Punto 6E.
+
+Questo step introduce i primi command, result, port in e application service per Locations, Cargo e Shipments. Il primo scenario applicativo completo registra due location, registra un cargo, crea una shipment draft, aggiunge item e leg, conferma la shipment e la recupera.
+
+Il Punto 6E dimostra che TruckFlow Manager sta iniziando a funzionare come applicazione a casi d'uso, ma senza introdurre ancora REST API, database, JPA, Spring, security o frontend.

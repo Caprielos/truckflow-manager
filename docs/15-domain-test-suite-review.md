@@ -322,3 +322,11 @@ Con il Punto 6D sono stati aggiunti test specifici per `infrastructure.memory`. 
 - restino privi di dipendenze da framework.
 
 Questa separazione conferma la regola generale: test di dominio per regole business, test application/infrastructure per orchestrazione e adapter.
+
+## Aggiornamento dopo il Punto 6E
+
+La revisione dei test si estende ora anche al primo scenario applicativo reale.
+
+Il dominio continua a essere protetto dai test domain-specific, mentre il nuovo test applicativo verifica l'orchestrazione: repository in memory, use case, command, result, lookup di risorse e propagazione delle eccezioni di dominio.
+
+Questa distinzione è importante: i test di dominio proteggono le regole business interne, mentre i test applicativi proteggono il coordinamento tra domini e repository.

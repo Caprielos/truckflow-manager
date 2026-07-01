@@ -469,3 +469,11 @@ Questo step introduce repository in memory per i primi tre domini applicativi:
 Le repository in memory implementano le porte del Punto 6C e permettono ai futuri use case di essere testati senza database.
 
 La scelta è intenzionale: TruckFlow Manager non introduce subito JPA o Spring Data, perché l'obiettivo attuale è stabilizzare prima l'application layer e i suoi flussi.
+
+## Punto 6E — First Use Cases
+
+Dopo la stabilizzazione del dominio e dei primi adapter applicativi, è stato introdotto il primo blocco di use case reali.
+
+Lo step aggiunge command, result, port in e application service per Locations, Cargo e Shipments. Il primo scenario testato registra due location, registra un cargo, crea una shipment draft, aggiunge item e leg, conferma la shipment e la recupera.
+
+Questa fase non modifica il domain layer: dimostra che il dominio è consumabile dall'application layer senza introdurre framework, web adapter o database.

@@ -20,9 +20,9 @@ Il markup HTML resta identico in entrambi i casi. Cambia solo il CSS applicato d
 
 ## Stato attuale del dominio
 
-Il progetto ha consolidato il **domain layer puro** e ha completato il **Punto 6C — Repository Ports** e sta introducendo il **Punto 6D — In-Memory Repositories**.
+Il progetto ha consolidato il **domain layer puro** e ha completato il **Punto 6D — In-Memory Repositories** e sta introducendo il **Punto 6E — First Use Cases**.
 
-La versione attuale rappresenta la **TruckFlow Domain Foundation v1.0** rafforzata dalla prima review correttiva del dominio puro. La fondazione è definita, le regole sono documentate e sono stati applicati interventi mirati su invarianti, eccezioni, codici aziendali, test e pulizia del repository. Il passo attuale è implementare i primi repository in memory per Locations, Cargo e Shipments, senza introdurre ancora database, JPA, Spring Data o persistenza definitiva.
+La versione attuale rappresenta la **TruckFlow Domain Foundation v1.0** rafforzata dalla prima review correttiva del dominio puro. La fondazione è definita, le regole sono documentate e sono stati applicati interventi mirati su invarianti, eccezioni, codici aziendali, test e pulizia del repository. Il passo attuale è implementare i primi use case applicativi per Locations, Cargo e Shipments, senza introdurre ancora REST API, database, JPA, Spring Data o persistenza definitiva.
 
 I package principali sono:
 
@@ -61,6 +61,7 @@ Il dominio è stato costruito seguendo una regola precisa: modellare prima i con
 - [`docs/17-application-foundation.md`](docs/17-application-foundation.md) — foundation del Punto 6B: package application, contratti base, eccezioni applicative e test architetturali.
 - [`docs/18-application-repository-ports.md`](docs/18-application-repository-ports.md) — repository port del Punto 6C: `RepositoryPort`, `LocationRepository`, `CargoUnitRepository` e `ShipmentRepository`.
 - [`docs/19-application-in-memory-repositories.md`](docs/19-application-in-memory-repositories.md) — repository in memory del Punto 6D: implementazioni leggere per Locations, Cargo e Shipments.
+- [`docs/20-application-first-use-cases.md`](docs/20-application-first-use-cases.md) — primi use case del Punto 6E: command, result, port in, application service e primo flusso applicativo Locations + Cargo + Shipments.
 
 ## Regole fondamentali della Domain Foundation
 
@@ -112,6 +113,8 @@ Con il Punto 6C sono state introdotte le prime repository port specifiche: `Repo
 
 Con il Punto 6D sono state introdotte le prime implementazioni in memory: `InMemoryLocationRepository`, `InMemoryCargoUnitRepository` e `InMemoryShipmentRepository`. Questi adapter sono utili per test e sviluppo locale, proteggono duplicati di codice e input nulli, ma non sostituiscono un database enterprise definitivo.
 
+Con il Punto 6E sono stati introdotti i primi use case applicativi reali: registrazione e recupero di Locations e Cargo, creazione di una Shipment draft, aggiunta di item e leg, conferma e recupero della Shipment. Questo step dimostra il primo flusso applicativo completo senza introdurre ancora REST API, database o framework.
+
 
 
 ## Punto 6A — Application Layer Blueprint
@@ -159,6 +162,16 @@ Questa fase non introduce ancora database, JPA, Spring Data, transazioni o query
 
 Il Punto 6D è documentato in [`docs/19-application-in-memory-repositories.md`](docs/19-application-in-memory-repositories.md).
 
+## Punto 6E — First Use Cases
+
+Il Punto 6E aggiunge il primo comportamento applicativo reale. Sono stati introdotti command, result, port in e application service per Locations, Cargo e Shipments.
+
+I primi use case permettono di registrare location, registrare cargo, creare una shipment draft, aggiungere item, aggiungere leg, confermare la shipment e recuperarla. Il flusso viene testato usando le repository in memory introdotte nel Punto 6D.
+
+Questa fase non introduce ancora web, database, JPA, Spring, transazioni o security. Il suo scopo è dimostrare che l'application layer orchestra correttamente il dominio e distingue errori applicativi da errori di dominio.
+
+Il Punto 6E è documentato in [`docs/20-application-first-use-cases.md`](docs/20-application-first-use-cases.md).
+
 ## Prossimi step consigliati
 
 La roadmap consigliata è:
@@ -169,5 +182,6 @@ La roadmap consigliata è:
 4. mantenere stabile il Punto 6B con foundation applicativa, package, eccezioni applicative, command, result e test;
 5. mantenere stabile il Punto 6C con le prime repository port specifiche;
 6. mantenere stabile il Punto 6D con le prime repository in memory per test e scenari locali;
-7. implementare i primi use case piccoli e chiari nel Punto 6E, partendo da Locations + Cargo + Shipments;
-8. rimandare API REST, database e integrazioni esterne finché l'application layer non è stabile.
+7. mantenere stabile il Punto 6E con i primi use case Locations + Cargo + Shipments;
+8. eseguire una review e un hardening dei primi use case nel Punto 6F;
+9. rimandare API REST, database e integrazioni esterne finché l'application layer non è stabile.

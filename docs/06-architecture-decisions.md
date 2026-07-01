@@ -789,3 +789,11 @@ La decisione è intenzionale:
 - mantiene l'infrastructure layer sostituibile.
 
 Le repository in memory sono adapter temporanei e leggeri. In futuro potranno essere affiancate o sostituite da repository JPA, file-based o integrazioni esterne senza modificare il dominio.
+
+## Decisione architetturale — primi use case senza framework
+
+Con il Punto 6E sono stati introdotti i primi use case applicativi senza usare Spring, JPA, controller REST o database.
+
+La decisione confermata è che l'application layer deve orchestrare il dominio tramite command, result, port in, port out e application service. Le regole business restano nel dominio. Gli errori di lookup, duplicato e input applicativo restano nell'application layer.
+
+Questa scelta mantiene il progetto aderente a una architettura pulita: il dominio non conosce l'application layer, l'application layer non conosce infrastructure concreta, e gli adapter in memory vengono usati solo nei test e nello sviluppo locale.

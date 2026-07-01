@@ -312,3 +312,11 @@ Questo step usa le eccezioni applicative definite nella foundation:
 - `DuplicateResourceException` per codici duplicati.
 
 In questo modo la foundation non rimane teorica: viene utilizzata concretamente da adapter tecnici leggeri, senza introdurre framework o database.
+
+## Aggiornamento dopo il Punto 6E
+
+La foundation introdotta nel Punto 6B è ora usata dai primi use case reali.
+
+I marker `ApplicationCommand` e `ApplicationResult` sono implementati da command e result specifici per Locations, Cargo e Shipments. Il contratto generico `UseCase` è specializzato dalle nuove port in, mentre le eccezioni applicative sono usate per command nulli, risorse mancanti e duplicati.
+
+Questo conferma che la foundation è sufficiente per avviare casi d'uso concreti senza introdurre Spring, REST API, database o framework esterni.

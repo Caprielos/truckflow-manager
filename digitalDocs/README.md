@@ -51,6 +51,7 @@ This digital documentation mirrors:
 - `docs/17-application-foundation.md`
 - `docs/18-application-repository-ports.md`
 - `docs/19-application-in-memory-repositories.md`
+- `docs/20-application-first-use-cases.md`
 - `command_basic.md`
 
 
@@ -77,3 +78,10 @@ Documento di riferimento: `docs/18-application-repository-ports.md`.
 La documentazione digitale include ora anche il Punto 6D — In-Memory Repositories. Questo step aggiunge le prime implementazioni concrete e leggere delle repository port per Locations, Cargo e Shipments, senza introdurre database, JPA, Spring Data o persistenza definitiva.
 
 Documento di riferimento: `docs/19-application-in-memory-repositories.md`.
+
+
+## Aggiornamento Punto 6E
+
+La documentazione digitale include ora anche il Punto 6E — First Use Cases. Questo step aggiunge i primi command, result, port in e application service per Locations, Cargo e Shipments, più il primo flusso applicativo completo testato con repository in memory.
+
+Documento di riferimento: `docs/20-application-first-use-cases.md`.

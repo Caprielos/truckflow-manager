@@ -495,7 +495,7 @@
           <li><span>Value Object principali</span><span class="badge done">Rafforzati</span></li>
           <li><span>Eccezioni custom</span><span class="badge done">Applicate</span></li>
           <li><span>Revisione test dominio</span><span class="badge done">Completata</span></li>
-          <li><span>Application layer</span><span class="badge now">Repository in memory avviate</span></li>
+          <li><span>Application layer</span><span class="badge now">Primi use case avviati</span></li>
         </ul>
       </aside>
     </div>
@@ -739,7 +739,7 @@
 
       <section id="roadmap" class="soft">
         <h2>7. Roadmap ufficiale del progetto</h2>
-        <p class="lead">La roadmap reale riflette il lavoro svolto finora: prima il dominio, poi la sua stabilizzazione, poi i test, poi la foundation dell’application layer e ora le prime repository port.</p>
+        <p class="lead">La roadmap reale riflette il lavoro svolto finora: prima il dominio, poi la sua stabilizzazione, poi i test, poi la foundation dell’application layer, le repository e ora i primi use case applicativi.</p>
         <div class="timeline">
           <div class="timeline-item">
             <div><span class="badge done">Completato</span><div class="milestone">Punto 1</div></div>
@@ -770,16 +770,16 @@
             <div><h3>Application Foundation</h3><p>Creazione dei package application, dei contratti base ApplicationCommand, ApplicationResult e UseCase, delle prime eccezioni applicative e dei test architetturali.</p></div>
           </div>
           <div class="timeline-item">
-            <div><span class="badge now">In corso</span><div class="milestone">Punto 6C</div></div>
+            <div><span class="badge done">Completato</span><div class="milestone">Punto 6C</div></div>
             <div><h3>Application Repository Ports</h3><p>Introduzione di RepositoryPort, LocationRepository, CargoUnitRepository e ShipmentRepository come primi contratti outbound dell’application layer.</p></div>
           </div>
           <div class="timeline-item">
-            <div><span class="badge now">In corso</span><div class="milestone">Punto 6D</div></div>
+            <div><span class="badge done">Completato</span><div class="milestone">Punto 6D</div></div>
             <div><h3>In-Memory Repositories</h3><p>Implementazione di InMemoryLocationRepository, InMemoryCargoUnitRepository e InMemoryShipmentRepository per test, sviluppo locale e primi use case senza database.</p></div>
           </div>
           <div class="timeline-item">
-            <div><span class="badge planned">Pianificato</span><div class="milestone">Punto 6E–6F</div></div>
-            <div><h3>Primi use case e application tests</h3><p>Creazione progressiva dei primi use case e test applicativi sul flusso Locations + Cargo + Shipments.</p></div>
+            <div><span class="badge now">In corso</span><div class="milestone">Punto 6E</div></div>
+            <div><h3>First Use Cases</h3><p>Introduzione dei primi command, result, port in e application service per il flusso Locations + Cargo + Shipments.</p></div>
           </div>
         </div>
         <h3>Obiettivi a breve termine</h3>
@@ -788,22 +788,22 @@
           <li>usare il blueprint del Punto 6A come guida ufficiale;</li>
           <li>mantenere stabile il Punto 6B come foundation tecnica dell'application layer;</li>
           <li>mantenere stabile il Punto 6C con le prime repository port;</li>
-          <li>consolidare il Punto 6D con repository in memory senza introdurre ancora web o database;</li>
-          <li>preparare il Punto 6E con i primi use case applicativi.</li>
+          <li>mantenere stabile il Punto 6D con repository in memory senza introdurre ancora web o database;</li>
+          <li>consolidare il Punto 6E con i primi use case applicativi per Locations + Cargo + Shipments.</li>
         </ul>
         <h3>Obiettivi a medio termine</h3>
         <ul>
           <li>estendere progressivamente le repository port agli aggregate principali quando nasceranno nuovi use case;</li>
           <li>usare repository in memory per scenari e test applicativi;</li>
-          <li>modellare i primi flussi applicativi: creazione veicolo, registrazione cargo, creazione shipment, conferma shipment, gestione documento e requisito compliance;</li>
+          <li>rafforzare i primi flussi applicativi e poi estenderli gradualmente a veicoli, documenti, compliance e ruoli operativi;</li>
           <li>preparare l’infrastructure layer senza sporcare il dominio.</li>
         </ul>
       </section>
 
 
       <section id="application-layer">
-        <h2>8. Application Layer e In-Memory Repositories</h2>
-        <p class="lead">Il Punto 6A ha definito il blueprint del livello applicativo. Il Punto 6B ha introdotto la foundation concreta. Il Punto 6C ha aggiunto le prime repository port. Il Punto 6D introduce ora le repository in memory per Locations, Cargo e Shipments, senza introdurre ancora REST API, database o framework.</p>
+        <h2>8. Application Layer, In-Memory Repositories e First Use Cases</h2>
+        <p class="lead">Il Punto 6A ha definito il blueprint del livello applicativo. Il Punto 6B ha introdotto la foundation concreta. Il Punto 6C ha aggiunto le prime repository port. Il Punto 6D ha aggiunto le repository in memory. Il Punto 6E introduce ora i primi use case applicativi per Locations, Cargo e Shipments, senza introdurre ancora REST API, database o framework.</p>
         <div class="grid two">
           <div class="card">
             <h3>Responsabilità</h3>
@@ -811,11 +811,11 @@
           </div>
           <div class="card">
             <h3>Componenti previsti</h3>
-            <p>La struttura comprende command, result, port in, port out, use case, application service, eccezioni applicative, repository port e repository in memory per sviluppo e test. Il Punto 6C introduce i primi contratti repository: LocationRepository, CargoUnitRepository e ShipmentRepository. Il Punto 6D aggiunge le prime implementazioni in memory: InMemoryLocationRepository, InMemoryCargoUnitRepository e InMemoryShipmentRepository.</p>
+            <p>La struttura comprende command, result, port in, port out, use case, application service, eccezioni applicative, repository port e repository in memory per sviluppo e test. Il Punto 6E aggiunge i primi command e service concreti: registrazione e ricerca di Locations e Cargo, creazione di Shipment, aggiunta di item, aggiunta di leg, conferma e ricerca della Shipment.</p>
           </div>
           <div class="card">
             <h3>Primo flusso</h3>
-            <p>Il primo blocco consigliato è Locations + Cargo + Shipments: registrare location, registrare cargo, creare una shipment, aggiungere item e tratta, poi confermare la shipment.</p>
+            <p>Il primo blocco ora implementato è Locations + Cargo + Shipments: registrare location, registrare cargo, creare una shipment, aggiungere item e tratta, confermare la shipment e recuperarla come risultato applicativo.</p>
           </div>
           <div class="card">
             <h3>Cosa resta fuori</h3>
@@ -828,8 +828,8 @@
 
         <div class="grid two">
           <div class="card">
-            <h3>Repository in memory introdotte</h3>
-            <p>Il Punto 6D aggiunge InMemoryLocationRepository, InMemoryCargoUnitRepository e InMemoryShipmentRepository. Queste classi implementano le porte applicative e sono pensate per test e sviluppo locale.</p>
+            <h3>Repository in memory usate dai use case</h3>
+            <p>Il Punto 6D aggiunge InMemoryLocationRepository, InMemoryCargoUnitRepository e InMemoryShipmentRepository. Il Punto 6E le usa nei test applicativi per dimostrare il primo flusso reale senza database.</p>
           </div>
           <div class="card">
             <h3>Limiti intenzionali</h3>
@@ -904,7 +904,8 @@
               <tr><td>Application Layer Blueprint</td><td><span class="badge done">Completato</span></td><td>È stato documentato il Punto 6A per definire struttura, responsabilità, package, use case e strategia di test prima del codice applicativo.</td></tr>
               <tr><td>Application Foundation</td><td><span class="badge done">Completata</span></td><td>Introduce package application, contratti base, eccezioni applicative e test architetturali senza ancora creare use case specifici.</td></tr>
               <tr><td>Application Repository Ports</td><td><span class="badge done">Completate</span></td><td>Introduce RepositoryPort, LocationRepository, CargoUnitRepository e ShipmentRepository come contratti outbound senza database o infrastructure concreta.</td></tr>
-              <tr><td>In-Memory Repositories</td><td><span class="badge now">In corso</span></td><td>Introduce implementazioni leggere per Location, Cargo e Shipment utili per test, sviluppo locale e primi use case senza database.</td></tr>
+              <tr><td>In-Memory Repositories</td><td><span class="badge done">Completate</span></td><td>Introduce implementazioni leggere per Location, Cargo e Shipment utili per test, sviluppo locale e primi use case senza database.</td></tr>
+              <tr><td>First Use Cases</td><td><span class="badge now">In corso</span></td><td>Introduce command, result, port in e application service per il primo flusso Locations + Cargo + Shipments.</td></tr>
               <tr><td>Database e repository reali</td><td><span class="badge planned">Futuro</span></td><td>Non vanno introdotti prima dei repository in memory e dei use case applicativi.</td></tr>
               <tr><td>API REST</td><td><span class="badge planned">Futuro</span></td><td>Le API devono esporre casi d’uso stabili, non accedere direttamente al dominio in modo improvvisato.</td></tr>
               <tr><td>Planning & Dispatching</td><td><span class="badge planned">Futuro</span></td><td>È il modulo che assegnerà risorse reali e verificherà compatibilità operative.</td></tr>
@@ -922,7 +923,7 @@
         <h2>12. Conclusione</h2>
         <p class="lead">TruckFlow Manager è oggi una fondazione di dominio solida per una futura piattaforma enterprise di trasporto e logistica.</p>
         <p>Il progetto descrive i principali concetti aziendali con confini chiari, value object espressivi, invarianti protetti, eccezioni custom e documentazione strutturata. La fase attuale non mira ad aggiungere nuove funzionalità operative, ma a usare il dominio puro come base per costruire progressivamente l’application layer.</p>
-        <p>La direzione futura è costruire gradualmente una piattaforma completa: prima blueprint e foundation applicativa, poi repository port, repository in memory e use case applicativi, quindi infrastructure, API, workflow, planning, dispatching, document management avanzato, tracking, analytics e integrazioni enterprise.</p>
+        <p>La direzione futura è costruire gradualmente una piattaforma completa: prima blueprint e foundation applicativa, poi repository port, repository in memory e primi use case applicativi, quindi infrastructure, API, workflow, planning, dispatching, document management avanzato, tracking, analytics e integrazioni enterprise.</p>
         <div class="pill-list">
           <span class="pill">Domain-first</span>
           <span class="pill">Enterprise-ready foundation</span>

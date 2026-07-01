@@ -575,3 +575,11 @@ Le prime implementazioni sono:
 Queste classi confermano la direzione del blueprint: i futuri use case potranno dipendere dalle repository port, mentre i test potranno usare implementazioni in memory semplici e veloci.
 
 La regola rimane invariata: l'application layer orchestra, il domain layer protegge le regole business e l'infrastructure layer fornisce adapter tecnici sostituibili.
+
+## Aggiornamento dopo il Punto 6E
+
+Il blueprint è stato rispettato nel primo blocco applicativo reale.
+
+Con il Punto 6E sono stati creati command, result, port in e application service per Locations, Cargo e Shipments. Il primo flusso consigliato nel blueprint è ora implementato e testato: registrazione di due location, registrazione di un cargo, creazione di una shipment draft, aggiunta di item, aggiunta di leg, conferma e recupero della shipment.
+
+Il Punto 6E conferma una scelta architetturale importante: l'application layer orchestra il dominio ma non duplica le regole di dominio. Per esempio, la conferma della shipment viene eseguita chiamando `shipment.confirm()`, mentre le regole di conferma restano dentro l'aggregate `Shipment`.

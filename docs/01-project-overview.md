@@ -178,3 +178,9 @@ Lo stato attuale include:
 - repository in memory per Locations, Cargo e Shipments.
 
 Questa evoluzione permette di iniziare i primi use case applicativi senza introdurre ancora database, API REST o framework web.
+
+## Aggiornamento Punto 6E — primi use case applicativi
+
+Il progetto ora include il primo blocco di use case applicativi reali per Locations, Cargo e Shipments. Questo passaggio segna l'inizio del comportamento applicativo concreto sopra il dominio puro.
+
+I nuovi use case permettono di registrare location, registrare cargo, creare una shipment draft, aggiungere item e leg, confermare e recuperare una shipment. Il progetto rimane però indipendente da REST API, database, JPA e Spring: il comportamento è testato tramite repository in memory e contratti applicativi.

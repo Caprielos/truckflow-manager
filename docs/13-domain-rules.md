@@ -409,3 +409,11 @@ Questa scelta non modifica le regole del dominio puro:
 - le repository in memory non devono contenere regole di dominio.
 
 Le repository in memory possono proteggere aspetti applicativi minimi, come input nulli e duplicati di codice, ma non devono decidere se un aggregate è valido dal punto di vista business. Questa responsabilità resta nel dominio.
+
+## Aggiornamento — confini dopo i primi use case
+
+Con il Punto 6E i confini del dominio restano invariati. I nuovi use case applicativi usano il dominio senza modificarne le regole e senza introdurre dipendenze inverse.
+
+Le regole di dominio continuano a vivere negli aggregate e nei value object. L'application layer si limita a caricare aggregate, verificare l'esistenza di risorse correlate, invocare il comportamento del dominio e salvare il risultato tramite repository port.
+
+La conferma di una shipment, per esempio, resta responsabilità dell'aggregate `Shipment`. Il service applicativo chiama `shipment.confirm()` e propaga eventuali eccezioni di dominio.

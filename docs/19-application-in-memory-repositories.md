@@ -207,3 +207,17 @@ Dopo questo step, il progetto contiene:
 - documentazione aggiornata.
 
 Il progetto è quindi pronto per iniziare i primi use case applicativi senza introdurre ancora web, database o framework.
+
+## Aggiornamento dopo il Punto 6E
+
+Le repository in memory introdotte nel Punto 6D sono ora usate nel primo scenario applicativo completo.
+
+Il test applicativo del Punto 6E usa `InMemoryLocationRepository`, `InMemoryCargoUnitRepository` e `InMemoryShipmentRepository` per simulare un flusso reale senza database:
+
+1. registrazione delle location;
+2. registrazione del cargo;
+3. creazione della shipment;
+4. salvataggio delle mutazioni successive;
+5. recupero della shipment finale.
+
+Questo conferma che gli adapter in memory sono sufficienti per testare l'orchestrazione applicativa prima di introdurre persistenza enterprise.
