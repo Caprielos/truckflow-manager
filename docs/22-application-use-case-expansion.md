@@ -311,3 +311,9 @@ La review ha rafforzato:
 - documentazione Markdown e HTML.
 
 Il prossimo step consigliato non è più la review 6H, perché ora è completata. Il prossimo passo diventa il Punto 6I, cioè una nuova espansione applicativa controllata da scegliere tra Vehicles, Operational Roles, Compliance o ulteriori azioni logiche su Documents.
+
+## Aggiornamento successivo — Punto 6I Vehicles
+
+Dopo la prima espansione verso Documents del Punto 6G e la review del Punto 6H, il Punto 6I ha eseguito una seconda espansione controllata verso Vehicles.
+
+Questa nuova fase non modifica il significato del Punto 6G: Documents rimane il primo dominio applicativo espanso dopo Locations, Cargo e Shipments. Vehicles viene aggiunto come step successivo separato, con documentazione dedicata in `24-application-use-cases-expansion-vehicles.md`.

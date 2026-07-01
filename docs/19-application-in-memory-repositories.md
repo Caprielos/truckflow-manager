@@ -262,3 +262,23 @@ Ora `InMemoryRepositoryTest` verifica input nulli non solo per `save`, `findById
 - `existsByCode(null)`.
 
 Questo rende uniforme il comportamento pubblico di tutte le repository in memory attuali: Location, Cargo, Shipment e Document.
+
+## Aggiornamento dopo il Punto 6I — Vehicles In-Memory Repositories
+
+Dopo il Punto 6I, l'infrastructure memory include anche:
+
+- `InMemoryVehicleUnitRepository`;
+- `InMemoryVehicleCombinationRepository`.
+
+`InMemoryVehicleUnitRepository` implementa `VehicleUnitRepository` e indicizza le unità veicolo per:
+
+- `VehicleUnitId`;
+- `FleetCode`;
+- `VehicleIdentificationNumber`;
+- `LicensePlate`, quando presente.
+
+Rifiuta input nulli con `UseCaseValidationException` e duplicati di fleet code, VIN o targa con `DuplicateResourceException`.
+
+`InMemoryVehicleCombinationRepository` implementa `VehicleCombinationRepository` e indicizza le combinazioni per `VehicleCombinationId`.
+
+Questi adapter restano temporanei e servono solo per test e sviluppo locale. Non introducono database, JPA, Spring Data, transazioni o persistenza definitiva.

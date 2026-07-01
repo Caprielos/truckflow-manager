@@ -20,9 +20,9 @@ Il markup HTML resta identico in entrambi i casi. Cambia solo il CSS applicato d
 
 ## Stato attuale del dominio
 
-Il progetto ha consolidato il **domain layer puro** e ha completato i primi step dell’application layer fino al **Punto 6H — Application Use Case Expansion Review & Documentation Alignment**.
+Il progetto ha consolidato il **domain layer puro** e ha completato i primi step dell’application layer fino al **Punto 6I — Application Use Cases Expansion II: Vehicles**.
 
-La versione attuale rappresenta la **TruckFlow Domain Foundation v1.0** rafforzata dalla prima review correttiva del dominio puro. La fondazione è definita, le regole sono documentate e sono stati applicati interventi mirati su invarianti, eccezioni, codici aziendali, test e pulizia del repository. Il passo attuale completato è la review del Punto 6H dopo l'espansione controllata dei use case applicativi verso Documents. Ora l'application layer copre registrazione, ricerca, attivazione e archiviazione di documenti logici ed è stato rafforzato con controlli su contratti `UseCase`, service, result null-safe, repository in memory e copy-on-write documentale, senza introdurre ancora REST API, database, JPA, Spring Data, file storage o persistenza definitiva.
+La versione attuale rappresenta la **TruckFlow Domain Foundation v1.0** rafforzata dalla prima review correttiva del dominio puro. La fondazione è definita, le regole sono documentate e sono stati applicati interventi mirati su invarianti, eccezioni, codici aziendali, test e pulizia del repository. Il passo attuale completato è il Punto 6I, cioè la seconda espansione controllata dei use case applicativi verso Vehicles. Ora l'application layer copre anche registrazione e ricerca di unità veicolo, mutazioni di stato `VehicleUnit`, registrazione e ricerca di `VehicleCombination`, repository port Vehicles, repository in memory Vehicles e test applicativi dedicati, senza introdurre ancora REST API, database, JPA, Spring Data, planning, tracking, manutenzione, disponibilità o persistenza definitiva.
 
 I package principali sono:
 
@@ -65,6 +65,7 @@ Il dominio è stato costruito seguendo una regola precisa: modellare prima i con
 - [`docs/21-application-use-case-hardening.md`](docs/21-application-use-case-hardening.md) — hardening del Punto 6F: `CancelShipmentUseCase`, copy-on-write delle mutazioni shipment, test negativi, errori applicativi e protezione dalle mutazioni fallite.
 - [`docs/22-application-use-case-expansion.md`](docs/22-application-use-case-expansion.md) — espansione del Punto 6G: primi use case applicativi Documents, `DocumentRepository`, `InMemoryDocumentRepository` e flusso register/find/activate/archive.
 - [`docs/23-application-use-case-expansion-review.md`](docs/23-application-use-case-expansion-review.md) — review del Punto 6H: contratti `UseCase`, service allineati alle port in, result null-safe, repository in memory uniformi e documentazione aggiornata.
+- [`docs/24-application-use-cases-expansion-vehicles.md`](docs/24-application-use-cases-expansion-vehicles.md) — espansione del Punto 6I: primi use case applicativi Vehicles, repository port Vehicles, repository in memory Vehicles e test applicativi.
 
 ## Regole fondamentali della Domain Foundation
 
@@ -124,6 +125,8 @@ Con il Punto 6G è stata eseguita la prima espansione controllata dell'applicati
 
 Con il Punto 6H è stata eseguita una review tecnica e documentale dell'espansione: i result applicativi sono stati resi null-safe, è stato aggiunto `ApplicationUseCaseReviewTest`, sono stati rafforzati i controlli sulle repository in memory e il flusso Documents verifica esplicitamente il comportamento copy-on-write.
 
+Con il Punto 6I è stata eseguita la seconda espansione controllata dell'application layer verso `vehicles`: sono stati aggiunti command, result, port in, port out, service applicativi, repository in memory e test per registrare, trovare e cambiare stato alle unità veicolo, oltre a registrare e trovare combinazioni veicolo costruite da unità già esistenti.
+
 
 
 ## Punto 6A — Application Layer Blueprint
@@ -149,7 +152,8 @@ Le prime porte sono dedicate a:
 - Locations, tramite `LocationRepository`;
 - Cargo, tramite `CargoUnitRepository`;
 - Shipments, tramite `ShipmentRepository`;
-- Documents, tramite `DocumentRepository` dopo il Punto 6G.
+- Documents, tramite `DocumentRepository` dopo il Punto 6G;
+- Vehicles, tramite `VehicleUnitRepository` e `VehicleCombinationRepository` dopo il Punto 6I.
 
 Ogni porta permette salvataggio, ricerca per ID, ricerca per codice e verifica di esistenza per ID o codice. Questa scelta prepara i futuri use case senza introdurre database, JPA, Spring, file system o infrastructure concreta.
 
@@ -165,7 +169,8 @@ Le implementazioni introdotte sono:
 - `InMemoryLocationRepository`;
 - `InMemoryCargoUnitRepository`;
 - `InMemoryShipmentRepository`;
-- `InMemoryDocumentRepository` dopo il Punto 6G.
+- `InMemoryDocumentRepository` dopo il Punto 6G;
+- `InMemoryVehicleUnitRepository` e `InMemoryVehicleCombinationRepository` dopo il Punto 6I.
 
 Queste repository permettono salvataggio, ricerca per ID, ricerca per codice e verifica di esistenza. Inoltre rifiutano input nulli con `UseCaseValidationException` e codici duplicati con `DuplicateResourceException`.
 
@@ -220,6 +225,18 @@ Questa fase non introduce nuovi use case business, REST API, database, JPA, cont
 
 Il Punto 6H è documentato in [`docs/23-application-use-case-expansion-review.md`](docs/23-application-use-case-expansion-review.md).
 
+## Punto 6I — Application Use Cases Expansion II: Vehicles
+
+Il Punto 6I espande l'application layer verso il dominio Vehicles.
+
+Sono stati aggiunti i primi command, result, port in e service per `VehicleUnit`: registrazione, ricerca, attivazione, sospensione, messa fuori servizio e dismissione logica. Sono state aggiunte anche le prime port e i primi service per `VehicleCombination`: registrazione da unità veicolo esistenti e ricerca per ID.
+
+Le repository port aggiunte sono `VehicleUnitRepository` e `VehicleCombinationRepository`. Le relative implementazioni temporanee sono `InMemoryVehicleUnitRepository` e `InMemoryVehicleCombinationRepository`.
+
+La fase mantiene il dominio Vehicles puro e non introduce ancora pianificazione, dispatching, disponibilità, manutenzione, tracking, telematica, scadenze tecniche, database, JPA o REST API.
+
+Il Punto 6I è documentato in [`docs/24-application-use-cases-expansion-vehicles.md`](docs/24-application-use-cases-expansion-vehicles.md).
+
 ## Prossimi step consigliati
 
 La roadmap consigliata è:
@@ -234,5 +251,6 @@ La roadmap consigliata è:
 8. mantenere stabile il Punto 6F con hardening dei primi use case, `CancelShipmentUseCase` e protezione copy-on-write delle mutazioni shipment;
 9. mantenere stabile il Punto 6G con i primi use case applicativi Documents, `DocumentRepository` e `InMemoryDocumentRepository`;
 10. mantenere stabile il Punto 6H con review dei contratti `UseCase`, service, result null-safe, repository in memory e copy-on-write Documents;
-11. scegliere con calma il Punto 6I, cioè la prossima espansione applicativa controllata;
-12. rimandare API REST, database e integrazioni esterne finché l'application layer non è stabile.
+11. mantenere stabile il Punto 6I con i primi use case applicativi Vehicles, repository port Vehicles, repository in memory Vehicles e test dedicati;
+12. scegliere con calma il Punto 6J, cioè la prossima espansione applicativa controllata o una review dopo Vehicles;
+13. rimandare API REST, database e integrazioni esterne finché l'application layer non è stabile.

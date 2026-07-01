@@ -627,3 +627,11 @@ Il Punto 6H conferma che il blueprint del Punto 6A resta valido anche dopo l'esp
 La review ha verificato che le port in continuino a estendere il contratto base `UseCase`, che i service concreti implementino la propria port, che i result applicativi gestiscano input nulli con `UseCaseValidationException` e che le repository in memory rimangano adapter sostituibili.
 
 Il prossimo passo non deve ancora essere REST API o database. La roadmap corretta resta una nuova espansione applicativa controllata, mantenendo gli stessi confini definiti da questo blueprint.
+
+## Aggiornamento dopo il Punto 6I
+
+La roadmap applicativa ha ora raggiunto anche i primi use case Vehicles.
+
+Il blueprint rimane valido: ogni nuovo dominio applicativo deve continuare a introdurre command, result, port in, port out, application service, repository in memory e test senza saltare direttamente verso REST API, database o framework.
+
+Il Punto 6I conferma questa regola aggiungendo `VehicleUnit` e `VehicleCombination` all'application layer senza introdurre ancora planning, dispatching, tracking, manutenzione, disponibilità o assegnazioni operative.

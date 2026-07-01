@@ -239,3 +239,18 @@ Le opzioni più coerenti sono:
 - ulteriore Documents, ma solo su metadati logici e riferimenti, senza file upload o workflow.
 
 La scelta va fatta mantenendo gli stessi vincoli: niente REST API, niente database, niente JPA, niente security e niente moduli enterprise operativi finché l'application layer non è stabile.
+
+## Aggiornamento successivo — Punto 6I Vehicles
+
+Dopo questa review, il progetto ha applicato il Punto 6I — Application Use Cases Expansion II: Vehicles.
+
+Il Punto 6I aggiunge i primi use case applicativi Vehicles mantenendo validi i principi consolidati qui:
+
+- tutte le nuove port in estendono `UseCase`;
+- tutti i nuovi service implementano la propria port in;
+- i nuovi result rifiutano input dominio nulli con `UseCaseValidationException`;
+- le nuove repository in memory rifiutano input nulli;
+- le mutazioni di stato delle `VehicleUnit` usano approccio copy-on-write;
+- non vengono introdotti REST API, database, JPA, controller, security, tracking, planning o dashboard.
+
+La documentazione del nuovo step è in `24-application-use-cases-expansion-vehicles.md`.

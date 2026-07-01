@@ -739,7 +739,7 @@
 
       <section id="roadmap" class="soft">
         <h2>7. Roadmap ufficiale del progetto</h2>
-        <p class="lead">La roadmap reale riflette il lavoro svolto finora: prima il dominio, poi la sua stabilizzazione, poi i test, poi la foundation dell’application layer, le repository, i primi use case applicativi, il loro hardening e ora la prima espansione controllata verso Documents.</p>
+        <p class="lead">La roadmap reale riflette il lavoro svolto finora: prima il dominio, poi la sua stabilizzazione, poi i test, poi la foundation dell’application layer, le repository, i primi use case applicativi, il loro hardening, l'espansione verso Documents, la review e ora l'espansione controllata verso Vehicles.</p>
         <div class="timeline">
           <div class="timeline-item">
             <div><span class="badge done">Completato</span><div class="milestone">Punto 1</div></div>
@@ -793,6 +793,10 @@
             <div><span class="badge done">Completato</span><div class="milestone">Punto 6H</div></div>
             <div><h3>Application Use Case Expansion Review</h3><p>Review tecnica dopo Documents: contratti UseCase, service allineati alle port in, result null-safe, repository in memory uniformi, copy-on-write documentale e documentazione aggiornata.</p></div>
           </div>
+          <div class="timeline-item">
+            <div><span class="badge done">Completato</span><div class="milestone">Punto 6I</div></div>
+            <div><h3>Application Use Cases Expansion II: Vehicles</h3><p>Seconda espansione controllata verso Vehicles: command, result, port, service, VehicleUnitRepository, VehicleCombinationRepository, repository in memory e test per unità veicolo e combinazioni.</p></div>
+          </div>
         </div>
         <h3>Obiettivi a breve termine</h3>
         <ul>
@@ -804,13 +808,14 @@
           <li>mantenere stabile il Punto 6E con i primi use case applicativi per Locations + Cargo + Shipments;</li>
           <li>mantenere stabile il Punto 6F con hardening dei use case, CancelShipmentUseCase, copy-on-write delle mutazioni shipment e test negativi;</li>
           <li>mantenere stabile il Punto 6G con i primi use case Documents, DocumentRepository e InMemoryDocumentRepository;</li>
-          <li>mantenere stabile il Punto 6H con review dei contratti UseCase, service, result null-safe, repository in memory e copy-on-write Documents.</li>
+          <li>mantenere stabile il Punto 6H con review dei contratti UseCase, service, result null-safe, repository in memory e copy-on-write Documents;</li>
+          <li>mantenere stabile il Punto 6I con i primi use case Vehicles, repository Vehicles, repository in memory Vehicles e test dedicati.</li>
         </ul>
         <h3>Obiettivi a medio termine</h3>
         <ul>
           <li>estendere progressivamente le repository port agli aggregate principali quando nasceranno nuovi use case;</li>
           <li>usare repository in memory per scenari e test applicativi;</li>
-          <li>scegliere il Punto 6I solo dopo la review completata del Punto 6H;</li>
+          <li>scegliere il Punto 6J solo dopo aver verificato il Punto 6I sul Mac con Maven;</li>
           <li>procedere gradualmente verso veicoli, compliance, ruoli operativi e ulteriori azioni documentali;</li>
           <li>preparare l’infrastructure layer senza sporcare il dominio.</li>
         </ul>
@@ -819,7 +824,7 @@
 
       <section id="application-layer">
         <h2>8. Application Layer, In-Memory Repositories e Use Case Expansion</h2>
-        <p class="lead">Il Punto 6A ha definito il blueprint del livello applicativo. Il Punto 6B ha introdotto la foundation concreta. Il Punto 6C ha aggiunto le prime repository port. Il Punto 6D ha aggiunto le repository in memory. Il Punto 6E ha introdotto i primi use case applicativi per Locations, Cargo e Shipments. Il Punto 6F li ha rafforzati con CancelShipmentUseCase e copy-on-write. Il Punto 6G espande l'application layer verso Documents e il Punto 6H rivede e allinea questa espansione, senza introdurre ancora REST API, database o framework.</p>
+        <p class="lead">Il Punto 6A ha definito il blueprint del livello applicativo. Il Punto 6B ha introdotto la foundation concreta. Il Punto 6C ha aggiunto le prime repository port. Il Punto 6D ha aggiunto le repository in memory. Il Punto 6E ha introdotto i primi use case applicativi per Locations, Cargo e Shipments. Il Punto 6F li ha rafforzati con CancelShipmentUseCase e copy-on-write. Il Punto 6G espande l'application layer verso Documents, il Punto 6H rivede e allinea questa espansione e il Punto 6I aggiunge i primi use case Vehicles, senza introdurre ancora REST API, database o framework.</p>
         <div class="grid two">
           <div class="card">
             <h3>Responsabilità</h3>
@@ -827,11 +832,11 @@
           </div>
           <div class="card">
             <h3>Componenti previsti</h3>
-            <p>La struttura comprende command, result, port in, port out, use case, application service, eccezioni applicative, repository port e repository in memory per sviluppo e test. Il Punto 6E aggiunge i primi command e service concreti: registrazione e ricerca di Locations e Cargo, creazione di Shipment, aggiunta di item, aggiunta di leg, conferma e ricerca della Shipment. Il Punto 6F aggiunge cancellazione shipment, copy-on-write delle mutazioni shipment e hardening dei comportamenti negativi. Il Punto 6G aggiunge command, result, port e service per Documents: registrazione, ricerca, attivazione e archiviazione. Il Punto 6H rafforza result null-safe, contratti UseCase, service, repository in memory e copy-on-write.</p>
+            <p>La struttura comprende command, result, port in, port out, use case, application service, eccezioni applicative, repository port e repository in memory per sviluppo e test. Il Punto 6E aggiunge i primi command e service concreti: registrazione e ricerca di Locations e Cargo, creazione di Shipment, aggiunta di item, aggiunta di leg, conferma e ricerca della Shipment. Il Punto 6F aggiunge cancellazione shipment, copy-on-write delle mutazioni shipment e hardening dei comportamenti negativi. Il Punto 6G aggiunge command, result, port e service per Documents: registrazione, ricerca, attivazione e archiviazione. Il Punto 6H rafforza result null-safe, contratti UseCase, service, repository in memory e copy-on-write. Il Punto 6I aggiunge command, result, port e service per Vehicles: registrazione/ricerca di unità veicolo, mutazioni di stato e registrazione/ricerca di combinazioni.</p>
           </div>
           <div class="card">
             <h3>Primo flusso</h3>
-            <p>Il primo blocco implementato è Locations + Cargo + Shipments: registrare location, registrare cargo, creare una shipment, aggiungere item e tratta, confermare o cancellare la shipment e recuperarla come risultato applicativo. Il Punto 6G aggiunge il primo blocco Documents: registrare, trovare, attivare e archiviare un documento logico. Il Punto 6H verifica che il blocco sia coerente prima di espandere altri domini.</p>
+            <p>Il primo blocco implementato è Locations + Cargo + Shipments: registrare location, registrare cargo, creare una shipment, aggiungere item e tratta, confermare o cancellare la shipment e recuperarla come risultato applicativo. Il Punto 6G aggiunge il primo blocco Documents: registrare, trovare, attivare e archiviare un documento logico. Il Punto 6H verifica che il blocco sia coerente prima di espandere altri domini. Il Punto 6I aggiunge il primo blocco Vehicles senza entrare ancora in planning, dispatching, tracking o manutenzione.</p>
           </div>
           <div class="card">
             <h3>Cosa resta fuori</h3>
@@ -925,6 +930,7 @@
               <tr><td>Use Case Hardening</td><td><span class="badge done">Completato</span></td><td>Aggiunge CancelShipmentUseCase, copy-on-write delle mutazioni shipment, test negativi e verifica che le mutazioni fallite non lascino stato parziale.</td></tr>
               <tr><td>Application Use Cases Expansion</td><td><span class="badge done">Completata</span></td><td>Aggiunge i primi use case Documents: register, find, activate e archive, con DocumentRepository, InMemoryDocumentRepository e test dedicati.</td></tr>
               <tr><td>Application Use Case Expansion Review</td><td><span class="badge done">Completata</span></td><td>Rafforza il 6G con ApplicationUseCaseReviewTest, result null-safe, repository in memory uniformi, copy-on-write Documents e documentazione allineata.</td></tr>
+              <tr><td>Application Use Cases Expansion II: Vehicles</td><td><span class="badge done">Completata</span></td><td>Aggiunge i primi use case Vehicles: VehicleUnit register/find/status, VehicleCombination register/find, repository port, repository in memory e test dedicati.</td></tr>
               <tr><td>Database e repository reali</td><td><span class="badge planned">Futuro</span></td><td>Non vanno introdotti prima della stabilizzazione dei repository in memory e dei use case applicativi.</td></tr>
               <tr><td>API REST</td><td><span class="badge planned">Futuro</span></td><td>Le API devono esporre casi d’uso stabili, non accedere direttamente al dominio in modo improvvisato.</td></tr>
               <tr><td>Planning & Dispatching</td><td><span class="badge planned">Futuro</span></td><td>È il modulo che assegnerà risorse reali e verificherà compatibilità operative.</td></tr>
@@ -941,7 +947,7 @@
       <section id="conclusione" class="soft">
         <h2>12. Conclusione</h2>
         <p class="lead">TruckFlow Manager è oggi una fondazione di dominio solida per una futura piattaforma enterprise di trasporto e logistica.</p>
-        <p>Il progetto descrive i principali concetti aziendali con confini chiari, value object espressivi, invarianti protetti, eccezioni custom e documentazione strutturata. La fase attuale ha rafforzato i primi use case applicativi e li ha espansi verso Documents senza introdurre ancora API REST, database o framework. L’obiettivo è costruire progressivamente un application layer stabile sopra il dominio puro.</p>
+        <p>Il progetto descrive i principali concetti aziendali con confini chiari, value object espressivi, invarianti protetti, eccezioni custom e documentazione strutturata. La fase attuale ha rafforzato i primi use case applicativi, li ha espansi verso Documents e ha poi aggiunto i primi use case Vehicles senza introdurre ancora API REST, database o framework. L’obiettivo è costruire progressivamente un application layer stabile sopra il dominio puro.</p>
         <p>La direzione futura è costruire gradualmente una piattaforma completa: prima blueprint e foundation applicativa, poi repository port, repository in memory e primi use case applicativi, quindi infrastructure, API, workflow, planning, dispatching, document management avanzato, tracking, analytics e integrazioni enterprise.</p>
         <div class="pill-list">
           <span class="pill">Domain-first</span>

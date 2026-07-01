@@ -368,3 +368,21 @@ Le port attuali restano:
 - `DocumentRepository`.
 
 La review conferma che queste porte rimangono contratti dell'application layer e non implementazioni concrete. Le verifiche sulle repository in memory sono state ampliate per controllare anche la validazione di `existsById(null)` ed `existsByCode(null)`.
+
+## Aggiornamento dopo il Punto 6I — Vehicles Repository Ports
+
+Dopo il Punto 6I, l'application layer include anche le repository port del dominio Vehicles:
+
+- `VehicleUnitRepository`;
+- `VehicleCombinationRepository`.
+
+`VehicleUnitRepository` segue il principio delle repository applicative già introdotte per gli aggregate con codice business, ma aggiunge anche gli identificativi tecnici tipici dei mezzi:
+
+- ricerca e verifica per `VehicleUnitId`;
+- ricerca e verifica per `FleetCode`;
+- ricerca e verifica per `VehicleIdentificationNumber`;
+- ricerca e verifica per `LicensePlate`, quando presente.
+
+`VehicleCombinationRepository` espone invece salvataggio, ricerca e verifica per `VehicleCombinationId`, perché in questa fase le combinazioni veicolo non hanno ancora un codice business dedicato.
+
+Anche queste port restano contratti astratti dell'application layer. Non sono repository JPA, non conoscono database, query SQL, Spring Data o transazioni.

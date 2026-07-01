@@ -55,6 +55,7 @@ This digital documentation mirrors:
 - `docs/21-application-use-case-hardening.md`
 - `docs/22-application-use-case-expansion.md`
 - `docs/23-application-use-case-expansion-review.md`
+- `docs/24-application-use-cases-expansion-vehicles.md`
 - `command_basic.md`
 
 
@@ -116,3 +117,14 @@ Questo aggiornamento documenta la review tecnica successiva all'espansione Docum
 La fase resta una review: non introduce REST API, controller Spring, database, JPA, security, tracking, planning, dashboard, file upload, workflow documentali o compliance check concreti.
 
 Documento di riferimento: `docs/23-application-use-case-expansion-review.md`.
+
+
+## Aggiornamento Punto 6I
+
+La documentazione digitale include ora anche il Punto 6I — Application Use Cases Expansion II: Vehicles.
+
+Questo aggiornamento documenta la seconda espansione controllata dell'application layer verso `vehicles`: command, result, port in, port out, service applicativi, `VehicleUnitRepository`, `VehicleCombinationRepository`, repository in memory e test per registrare/trovare unità veicolo, cambiare stato alle `VehicleUnit`, registrare combinazioni veicolo e trovarle per ID.
+
+La fase resta coerente con i vincoli architetturali già decisi: niente REST API, controller Spring, database, JPA, security, tracking, planning, dispatching, manutenzione, disponibilità mezzi, dashboard o workflow enterprise.
+
+Documento di riferimento: `docs/24-application-use-cases-expansion-vehicles.md`.

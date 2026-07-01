@@ -33,6 +33,7 @@
 <input class="doc-toggle" type="radio" name="active-doc" id="doc-23">
 <input class="doc-toggle" type="radio" name="active-doc" id="doc-24">
 <input class="doc-toggle" type="radio" name="active-doc" id="doc-25">
+<input class="doc-toggle" type="radio" name="active-doc" id="doc-26">
 <div class="app-shell">
   <aside class="sidebar">
     <div class="brand"><div class="brand-mark">TF</div><div><h1>TruckFlow Docs</h1><p>Digital mirror of the official Markdown documentation.</p></div></div>
@@ -64,10 +65,11 @@
 <label class="nav-item" for="doc-23"><span class="nav-number">24</span><span class="nav-label">Use Case Expansion</span><span class="nav-file">22-application-use-case-expansion.md</span></label>
 <label class="nav-item" for="doc-24"><span class="nav-number">25</span><span class="nav-label">Use Case Expansion Review</span><span class="nav-file">23-application-use-case-expansion-review.md</span></label>
 <label class="nav-item" for="doc-25"><span class="nav-number">26</span><span class="nav-label">Command Basic</span><span class="nav-file">command_basic.md</span></label>
+<label class="nav-item" for="doc-26"><span class="nav-number">27</span><span class="nav-label">Use Cases Vehicles</span><span class="nav-file">24-application-use-cases-expansion-vehicles.md</span></label>
     </nav>
   </aside>
   <main class="content">
-    <div class="content-toolbar"><div><p class="eyebrow">TruckFlow Manager</p><h2>Official Project Documentation</h2></div><div class="toolbar-badges"><span>HTML + CSS</span><span>Markdown mirror</span><span>Domain + Application Use Cases</span><span>Punto 6H</span></div></div>
+    <div class="content-toolbar"><div><p class="eyebrow">TruckFlow Manager</p><h2>Official Project Documentation</h2></div><div class="toolbar-badges"><span>HTML + CSS</span><span>Markdown mirror</span><span>Domain + Application Use Cases</span><span>Punto 6I</span></div></div>
 <article class="doc-panel panel-0" id="TRUCKFLOW_PROJECT_DOCUMENTATION-md">
   <header class="doc-panel-header">
     <p class="eyebrow">TRUCKFLOW_PROJECT_DOCUMENTATION.md</p>
@@ -87,8 +89,8 @@
 </ul>
 <p>Il markup HTML resta identico in entrambi i casi. Cambia solo il CSS applicato dal flag globale.</p>
 <h2>Stato attuale del dominio</h2>
-<p>Il progetto ha consolidato il <strong>domain layer puro</strong> e ha completato i primi step dell’application layer fino al <strong>Punto 6H — Application Use Case Expansion Review &amp; Documentation Alignment</strong>.</p>
-<p>La versione attuale rappresenta la <strong>TruckFlow Domain Foundation v1.0</strong> rafforzata dalla prima review correttiva del dominio puro. La fondazione è definita, le regole sono documentate e sono stati applicati interventi mirati su invarianti, eccezioni, codici aziendali, test e pulizia del repository. Il passo attuale completato è la review del Punto 6H dopo l'espansione controllata dei use case applicativi verso Documents. Ora l'application layer copre registrazione, ricerca, attivazione e archiviazione di documenti logici ed è stato rafforzato con controlli su contratti <code>UseCase</code>, service, result null-safe, repository in memory e copy-on-write documentale, senza introdurre ancora REST API, database, JPA, Spring Data, file storage o persistenza definitiva.</p>
+<p>Il progetto ha consolidato il <strong>domain layer puro</strong> e ha completato i primi step dell’application layer fino al <strong>Punto 6I — Application Use Cases Expansion II: Vehicles</strong>.</p>
+<p>La versione attuale rappresenta la <strong>TruckFlow Domain Foundation v1.0</strong> rafforzata dalla prima review correttiva del dominio puro. La fondazione è definita, le regole sono documentate e sono stati applicati interventi mirati su invarianti, eccezioni, codici aziendali, test e pulizia del repository. Il passo attuale completato è la Punto 6I dopo l'espansione controllata dei use case applicativi verso Vehicles. Ora l'application layer copre registrazione, ricerca, attivazione e archiviazione di documenti logici ed è stato rafforzato con controlli su contratti <code>UseCase</code>, service, result null-safe, repository in memory e copy-on-write documentale, senza introdurre ancora REST API, database, JPA, Spring Data, file storage o persistenza definitiva.</p>
 <p>I package principali sono:</p>
 <ul>
 <li><code>domain.users</code>;</li>
@@ -129,6 +131,7 @@
 <li><a href="docs/21-application-use-case-hardening.md"><code>docs/21-application-use-case-hardening.md</code></a> — hardening del Punto 6F: <code>CancelShipmentUseCase</code>, copy-on-write delle mutazioni shipment, test negativi, errori applicativi e protezione dalle mutazioni fallite.</li>
 <li><a href="docs/22-application-use-case-expansion.md"><code>docs/22-application-use-case-expansion.md</code></a> — espansione del Punto 6G: primi use case applicativi Documents, <code>DocumentRepository</code>, <code>InMemoryDocumentRepository</code> e flusso register/find/activate/archive.</li>
 <li><a href="docs/23-application-use-case-expansion-review.md"><code>docs/23-application-use-case-expansion-review.md</code></a> — review del Punto 6H: contratti <code>UseCase</code>, service allineati alle port in, result null-safe, repository in memory uniformi e documentazione aggiornata.</li>
+<li><a href="docs/24-application-use-cases-expansion-vehicles.md"><code>docs/24-application-use-cases-expansion-vehicles.md</code></a> — espansione del Punto 6I: primi use case applicativi Vehicles, repository port Vehicles, repository in memory Vehicles e test applicativi.</li>
 </ul>
 <h2>Regole fondamentali della Domain Foundation</h2>
 <p>Le regole principali sono:</p>
@@ -301,6 +304,7 @@
 <li><a href="21-application-use-case-hardening.md"><code>21-application-use-case-hardening.md</code></a> — hardening del Punto 6F: review dei primi use case, <code>CancelShipmentUseCase</code>, copy-on-write delle mutazioni shipment, test negativi e protezione dalle mutazioni parziali.</li>
 <li><a href="22-application-use-case-expansion.md"><code>22-application-use-case-expansion.md</code></a> — espansione del Punto 6G: primi use case applicativi Documents, <code>DocumentRepository</code>, <code>InMemoryDocumentRepository</code>, command/result/port/service e test applicativi.</li>
 <li><a href="23-application-use-case-expansion-review.md"><code>23-application-use-case-expansion-review.md</code></a> — review del Punto 6H: contratti <code>UseCase</code>, service allineati alle port in, result null-safe, repository in memory uniformi, copy-on-write Documents e documentazione aggiornata.</li>
+<li><a href="24-application-use-cases-expansion-vehicles.md"><code>24-application-use-cases-expansion-vehicles.md</code></a> — espansione del Punto 6I: primi use case applicativi Vehicles, repository port Vehicles, repository in memory Vehicles e test applicativi.</li>
 </ol>
 <h2>Stato del progetto documentato</h2>
 <p>Questa documentazione descrive la versione del progetto in cui il dominio contiene:</p>
@@ -8155,6 +8159,7 @@ src/main/java/it/gabriele/truckflow/infrastructure/memory/documents
 <p>Sono stati allineati:</p>
 <ul>
 <li><code>docs/23-application-use-case-expansion-review.md</code>;</li>
+<li><code>docs/24-application-use-cases-expansion-vehicles.md</code>;</li>
 <li><code>docs/README.md</code>;</li>
 <li><code>TRUCKFLOW_PROJECT_DOCUMENTATION.md</code>;</li>
 <li><code>digitalDocs/index.html</code>;</li>
@@ -8411,7 +8416,324 @@ git status
 <pre><code class="language-bash">git add -A
 git commit -m &quot;Review application use case expansion&quot;
 </code></pre>
+<hr />
+<h2>Nota progetto — Punto 6I</h2>
+<p>Dopo l'aggiunta del Punto 6I — Application Use Cases Expansion II: Vehicles, il controllo consigliato resta:</p>
+<pre><code class="language-bash">mvn spotless:apply
+mvn spotless:check
+mvn clean test
+git status
+</code></pre>
+<p>Il Punto 6I aggiunge i primi use case applicativi Vehicles, quindi prima del commit conviene controllare anche che siano presenti i nuovi package:</p>
+<pre><code class="language-bash">find src/main/java/it/gabriele/truckflow/application -type d | grep vehicles
+find src/main/java/it/gabriele/truckflow/infrastructure/memory -type d | grep vehicles
+</code></pre>
+<p>Commit consigliato:</p>
+<pre><code class="language-bash">git add -A
+git commit -m &quot;Expand application use cases with vehicles&quot;
+</code></pre>
 
+  </div>
+</article>
+
+<article class="doc-panel panel-26" id="24-application-use-cases-expansion-vehicles-md">
+  <header class="doc-panel-header">
+    <p class="eyebrow">24-application-use-cases-expansion-vehicles.md</p>
+    <h1>Punto 6I — Application Use Cases Expansion II: Vehicles</h1>
+  </header>
+  <div class="markdown-body">
+<h1>Punto 6I — Application Use Cases Expansion II: Vehicles</h1>
+<p>Il Punto 6I espande l&#x27;application layer verso il dominio <code>vehicles</code>.</p>
+<p>La fase è volutamente controllata: rende disponibili i primi use case applicativi per registrare e consultare unità veicolo e combinazioni operative, senza introdurre ancora REST API, controller Spring, database, JPA, security, tracking, planning, dispatching, manutenzione, disponibilità mezzi, dashboard o assegnazioni operative alle shipment.</p>
+<p>Il dominio <code>vehicles</code> era già stato modellato come dominio puro. Il Punto 6I lo collega ora all&#x27;application layer tramite command, result, port in, port out, application service, repository in memory e test.</p>
+<h2>Obiettivo dello step</h2>
+<p>L&#x27;obiettivo non è creare un fleet management completo.</p>
+<p>L&#x27;obiettivo è introdurre il primo blocco applicativo per il registro logico della flotta:</p>
+<ul>
+<li>registrare una <code>VehicleUnit</code> fisica;</li>
+<li>trovare una <code>VehicleUnit</code> per ID;</li>
+<li>cambiare lo stato applicativo di una <code>VehicleUnit</code>;</li>
+<li>registrare una <code>VehicleCombination</code> da unità veicolo già esistenti;</li>
+<li>trovare una <code>VehicleCombination</code> per ID;</li>
+<li>mantenere il dominio <code>vehicles</code> indipendente da infrastructure, web e database;</li>
+<li>continuare a distinguere errori applicativi da errori di dominio.</li>
+</ul>
+<h2>Package aggiunti</h2>
+<p>Sono stati aggiunti nuovi package applicativi dedicati ai vehicles:</p>
+<pre><code>
+src/main/java/it/gabriele/truckflow/application/command/vehicles
+src/main/java/it/gabriele/truckflow/application/result/vehicles
+src/main/java/it/gabriele/truckflow/application/port/in/vehicles
+src/main/java/it/gabriele/truckflow/application/port/out/vehicles
+src/main/java/it/gabriele/truckflow/application/usecase/vehicles
+src/main/java/it/gabriele/truckflow/infrastructure/memory/vehicles
+</code></pre>
+<p>Questi package seguono la stessa architettura già usata per Locations, Cargo, Shipments e Documents.</p>
+<h2>Command aggiunti per VehicleUnit</h2>
+<p>Sono stati aggiunti sei command applicativi per le unità veicolo:</p>
+<ul>
+<li><code>RegisterVehicleUnitCommand</code>;</li>
+<li><code>FindVehicleUnitCommand</code>;</li>
+<li><code>ActivateVehicleUnitCommand</code>;</li>
+<li><code>SuspendVehicleUnitCommand</code>;</li>
+<li><code>MarkVehicleUnitOutOfServiceCommand</code>;</li>
+<li><code>DismissVehicleUnitCommand</code>.</li>
+</ul>
+<p><code>RegisterVehicleUnitCommand</code> rappresenta l&#x27;input applicativo necessario per registrare una nuova unità fisica di flotta.</p>
+<p>Richiede:</p>
+<ul>
+<li><code>FleetCode</code>;</li>
+<li><code>VehicleIdentificationNumber</code>;</li>
+<li><code>VehicleUnitType</code>;</li>
+<li><code>VehicleBodyType</code>;</li>
+<li><code>PowerSource</code>;</li>
+<li><code>VehicleTechnicalSpecification</code>;</li>
+<li><code>VehicleStatus</code>.</li>
+</ul>
+<p>Accetta inoltre:</p>
+<ul>
+<li><code>LicensePlate</code>, opzionale per mezzi non stradali;</li>
+<li><code>VehicleBodyProfile</code>;</li>
+<li><code>Set&lt;VehicleCapability&gt;</code>;</li>
+<li><code>Set&lt;VehicleOperationalRole&gt;</code>;</li>
+<li><code>CouplingProfile</code>;</li>
+<li><code>notes</code>.</li>
+</ul>
+<p>Gli insiemi nulli di capability e ruoli operativi vengono normalizzati a set vuoto. Se presenti, non possono contenere elementi nulli.</p>
+<h2>Command aggiunti per VehicleCombination</h2>
+<p>Sono stati aggiunti due command applicativi per le combinazioni veicolo:</p>
+<ul>
+<li><code>RegisterVehicleCombinationCommand</code>;</li>
+<li><code>FindVehicleCombinationCommand</code>.</li>
+</ul>
+<p><code>RegisterVehicleCombinationCommand</code> non crea unità veicolo nuove. Riceve invece gli ID di unità già registrate e delega al dominio <code>VehicleCombination.fromUnits(...)</code> la validazione della forma della combinazione.</p>
+<p>Questa scelta mantiene corretti i confini:</p>
+<ul>
+<li>l&#x27;application layer orchestra il caricamento delle unità;</li>
+<li>il dominio valida se la combinazione è sensata;</li>
+<li>l&#x27;infrastructure memory salva il risultato tramite repository port;</li>
+<li>non viene introdotta pianificazione operativa.</li>
+</ul>
+<h2>Result aggiunti</h2>
+<p>Sono stati aggiunti due result applicativi:</p>
+<pre><code>
+VehicleUnitResult
+VehicleCombinationResult
+</code></pre>
+<p><code>VehicleUnitResult</code> espone una vista applicativa essenziale della unità veicolo:</p>
+<ul>
+<li>id;</li>
+<li>fleet code;</li>
+<li>targa, quando presente;</li>
+<li>VIN;</li>
+<li>tipo unità;</li>
+<li>tipo allestimento;</li>
+<li>alimentazione;</li>
+<li>stato;</li>
+<li>presenza targa;</li>
+<li>capacità di trainare;</li>
+<li>capacità di essere trainato;</li>
+<li>indicatore trailer;</li>
+<li>numero di capability;</li>
+<li>numero di ruoli operativi.</li>
+</ul>
+<p><code>VehicleCombinationResult</code> espone:</p>
+<ul>
+<li>id;</li>
+<li>tipo combinazione;</li>
+<li>ID unità primaria;</li>
+<li>ID unità secondaria, quando presente;</li>
+<li>presenza unità secondaria;</li>
+<li>stato;</li>
+<li>numero di capability combinate;</li>
+<li>numero di ruoli operativi combinati.</li>
+</ul>
+<p>I result non espongono ancora disponibilità, costi, manutenzione, telematica, scadenze, pianificazione o assegnazioni a viaggi.</p>
+<h2>Repository port aggiunte</h2>
+<p>Sono state aggiunte due porte outbound:</p>
+<pre><code>
+VehicleUnitRepository
+VehicleCombinationRepository
+</code></pre>
+<p><code>VehicleUnitRepository</code> consente:</p>
+<ul>
+<li><code>save(VehicleUnit vehicleUnit)</code>;</li>
+<li><code>findById(VehicleUnitId id)</code>;</li>
+<li><code>findByFleetCode(FleetCode fleetCode)</code>;</li>
+<li><code>findByVin(VehicleIdentificationNumber vin)</code>;</li>
+<li><code>findByLicensePlate(LicensePlate licensePlate)</code>;</li>
+<li><code>existsById(VehicleUnitId id)</code>;</li>
+<li><code>existsByFleetCode(FleetCode fleetCode)</code>;</li>
+<li><code>existsByVin(VehicleIdentificationNumber vin)</code>;</li>
+<li><code>existsByLicensePlate(LicensePlate licensePlate)</code>.</li>
+</ul>
+<p>La repository controlla quindi gli identificativi principali della flotta: ID tecnico, codice flotta, VIN e targa.</p>
+<p><code>VehicleCombinationRepository</code> consente:</p>
+<ul>
+<li><code>save(VehicleCombination vehicleCombination)</code>;</li>
+<li><code>findById(VehicleCombinationId id)</code>;</li>
+<li><code>existsById(VehicleCombinationId id)</code>.</li>
+</ul>
+<p>Le combinazioni veicolo attuali non hanno ancora un codice business dedicato. Per questo la prima repository espone solo identità tecnica di dominio.</p>
+<h2>Use case port aggiunte</h2>
+<p>Sono state aggiunte le seguenti port in:</p>
+<ul>
+<li><code>RegisterVehicleUnitUseCase</code>;</li>
+<li><code>FindVehicleUnitUseCase</code>;</li>
+<li><code>ActivateVehicleUnitUseCase</code>;</li>
+<li><code>SuspendVehicleUnitUseCase</code>;</li>
+<li><code>MarkVehicleUnitOutOfServiceUseCase</code>;</li>
+<li><code>DismissVehicleUnitUseCase</code>;</li>
+<li><code>RegisterVehicleCombinationUseCase</code>;</li>
+<li><code>FindVehicleCombinationUseCase</code>.</li>
+</ul>
+<p>Ogni port in estende il contratto base <code>UseCase&lt;C, R&gt;</code>.</p>
+<h2>Application service aggiunti</h2>
+<p>Sono stati aggiunti i seguenti service applicativi:</p>
+<ul>
+<li><code>RegisterVehicleUnitService</code>;</li>
+<li><code>FindVehicleUnitService</code>;</li>
+<li><code>ActivateVehicleUnitService</code>;</li>
+<li><code>SuspendVehicleUnitService</code>;</li>
+<li><code>MarkVehicleUnitOutOfServiceService</code>;</li>
+<li><code>DismissVehicleUnitService</code>;</li>
+<li><code>RegisterVehicleCombinationService</code>;</li>
+<li><code>FindVehicleCombinationService</code>.</li>
+</ul>
+<p>I service:</p>
+<ul>
+<li>validano command nulli;</li>
+<li>validano dependency repository nulle;</li>
+<li>usano solo repository port;</li>
+<li>restituiscono result applicativi;</li>
+<li>lanciano <code>ResourceNotFoundException</code> quando una risorsa richiesta non esiste;</li>
+<li>lanciano <code>DuplicateResourceException</code> per codici flotta, VIN o targhe duplicati;</li>
+<li>delegano al dominio le regole di coerenza tecnica del veicolo;</li>
+<li>non importano Spring, REST, JPA, controller o database.</li>
+</ul>
+<h2>Mutazioni VehicleUnit copy-on-write</h2>
+<p>È stato aggiunto:</p>
+<pre><code>
+VehicleUnitMutationSupport
+</code></pre>
+<p>Le mutazioni di stato delle unità veicolo lavorano su una copia dell&#x27;aggregate prima del salvataggio.</p>
+<p>Questo riguarda:</p>
+<ul>
+<li>activate;</li>
+<li>suspend;</li>
+<li>mark out of service;</li>
+<li>dismiss.</li>
+</ul>
+<p>La scelta è coerente con quanto fatto per Shipments e Documents: una mutazione deve diventare persistente solo dopo aver completato correttamente il use case.</p>
+<h2>Mutazioni VehicleCombination copy-on-write</h2>
+<p>È stato aggiunto anche:</p>
+<pre><code>
+VehicleCombinationMutationSupport
+</code></pre>
+<p>In questa fase i use case pubblici sulle combinazioni sono solo register e find, ma il supporto alla copia viene preparato ora per mantenere coerenza architetturale e per futuri use case di stato sulle combinazioni.</p>
+<h2>Repository in memory aggiunte</h2>
+<p>Sono state aggiunte:</p>
+<pre><code>
+InMemoryVehicleUnitRepository
+InMemoryVehicleCombinationRepository
+</code></pre>
+<p><code>InMemoryVehicleUnitRepository</code>:</p>
+<ul>
+<li>implementa <code>VehicleUnitRepository</code>;</li>
+<li>indicizza per <code>VehicleUnitId</code>;</li>
+<li>indicizza per <code>FleetCode</code>;</li>
+<li>indicizza per <code>VehicleIdentificationNumber</code>;</li>
+<li>indicizza per <code>LicensePlate</code>, quando presente;</li>
+<li>rifiuta input nulli con <code>UseCaseValidationException</code>;</li>
+<li>rifiuta duplicati con <code>DuplicateResourceException</code>.</li>
+</ul>
+<p><code>InMemoryVehicleCombinationRepository</code>:</p>
+<ul>
+<li>implementa <code>VehicleCombinationRepository</code>;</li>
+<li>indicizza per <code>VehicleCombinationId</code>;</li>
+<li>rifiuta input nulli con <code>UseCaseValidationException</code>.</li>
+</ul>
+<p>Queste implementazioni restano adapter tecnici temporanei per sviluppo e test.</p>
+<h2>Test aggiunti e aggiornati</h2>
+<p>Sono stati aggiunti:</p>
+<pre><code>
+ApplicationVehicleUseCaseExpansionTest
+ApplicationVehicleRepositoryPortTest
+InMemoryVehicleRepositoryTest
+</code></pre>
+<p>Sono stati aggiornati anche i test di review applicativa esistenti per includere le nuove port, i nuovi service e i nuovi result Vehicles.</p>
+<p>I test verificano:</p>
+<ul>
+<li>registrazione unità veicolo;</li>
+<li>ricerca unità veicolo;</li>
+<li>activate/suspend/out of service/dismiss;</li>
+<li>copy-on-write delle mutazioni di stato VehicleUnit;</li>
+<li>duplicati per fleet code, VIN e targa;</li>
+<li>command nulli;</li>
+<li>dependency repository nulle;</li>
+<li>risorse mancanti;</li>
+<li>registrazione combinazione articolata da trattore e semirimorchio esistenti;</li>
+<li>ricerca combinazione;</li>
+<li>unità mancanti nella registrazione combinazione;</li>
+<li>forma combinazione non valida delegata al dominio;</li>
+<li>contratti repository port;</li>
+<li>repository in memory Vehicles con input nulli.</li>
+</ul>
+<h2>Confini mantenuti</h2>
+<p>Il Punto 6I non introduce:</p>
+<ul>
+<li>REST API;</li>
+<li>controller Spring;</li>
+<li>DTO web;</li>
+<li>database;</li>
+<li>JPA;</li>
+<li>Hibernate;</li>
+<li>Spring Data;</li>
+<li>security;</li>
+<li>JWT;</li>
+<li>tracking GPS;</li>
+<li>telematica;</li>
+<li>pianificazione viaggi;</li>
+<li>dispatching;</li>
+<li>assegnazione veicolo/autista a shipment;</li>
+<li>disponibilità giornaliera mezzi;</li>
+<li>manutenzione;</li>
+<li>pneumatici;</li>
+<li>scadenze tecniche;</li>
+<li>costi flotta;</li>
+<li>dashboard;</li>
+<li>audit trail;</li>
+<li>workflow enterprise.</li>
+</ul>
+<p>Il Punto 6I registra e consulta solo il registro applicativo della flotta logica.</p>
+<h2>Stato finale dopo il Punto 6I</h2>
+<p>Dopo questo step l&#x27;application layer copre:</p>
+<ul>
+<li>Locations;</li>
+<li>Cargo;</li>
+<li>Shipments;</li>
+<li>Documents;</li>
+<li>Vehicles.</li>
+</ul>
+<p>L&#x27;application layer ora possiede un primo nucleo coerente per:</p>
+<ul>
+<li>luoghi logistici;</li>
+<li>unità cargo;</li>
+<li>richieste di spedizione;</li>
+<li>documenti logici;</li>
+<li>unità veicolo;</li>
+<li>combinazioni veicolo.</li>
+</ul>
+<p>Il prossimo step consigliato è:</p>
+<pre><code>
+Punto 6J — Application Use Cases Expansion III
+</code></pre>
+<p>La direzione più coerente per il Punto 6J è una delle seguenti:</p>
+<ul>
+<li>Operational Roles use cases;</li>
+<li>Compliance base use cases;</li>
+<li>review/hardening specifica dopo Vehicles.</li>
+</ul>
   </div>
 </article>
   </main>

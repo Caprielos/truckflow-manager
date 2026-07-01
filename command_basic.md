@@ -295,3 +295,30 @@ Commit consigliato:
 git add -A
 git commit -m "Review application use case expansion"
 ```
+
+---
+
+## Nota progetto — Punto 6I
+
+Dopo l'aggiunta del Punto 6I — Application Use Cases Expansion II: Vehicles, il controllo consigliato resta:
+
+```bash
+mvn spotless:apply
+mvn spotless:check
+mvn clean test
+git status
+```
+
+Il Punto 6I aggiunge i primi use case applicativi Vehicles, quindi prima del commit conviene controllare anche che siano presenti i nuovi package:
+
+```bash
+find src/main/java/it/gabriele/truckflow/application -type d | grep vehicles
+find src/main/java/it/gabriele/truckflow/infrastructure/memory -type d | grep vehicles
+```
+
+Commit consigliato:
+
+```bash
+git add -A
+git commit -m "Expand application use cases with vehicles"
+```
