@@ -22,9 +22,9 @@ La documentazione digitale funziona anche come sistema di **Guided Links**: un i
 
 ## Stato attuale del dominio
 
-Il progetto ha consolidato il **domain layer puro** e ha completato i primi step dell’application layer fino al **Punto 6M — Application Layer Final Review & Freeze**.
+Il progetto ha consolidato il **domain layer puro**, ha completato il primo ciclo dell’application layer fino al **Punto 6M — Application Layer Final Review & Freeze** e ha aperto il **Punto 7A — Infrastructure Layer Blueprint** come fase documentale del nuovo ciclo infrastrutturale.
 
-La versione attuale rappresenta la **TruckFlow Domain Foundation v1.0** rafforzata dalla prima review correttiva del dominio puro. La fondazione è definita, le regole sono documentate e sono stati applicati interventi mirati su invarianti, eccezioni, codici aziendali, test e pulizia del repository. Il passo attuale completato è il Punto 6M, cioè la review/freeze finale del primo ciclo dell'application layer. Ora l'application layer copre Locations, Cargo, Shipments, Documents, Vehicles, Operational Roles e Compliance base con command, result, port in, port out, service, repository in memory, test e documentazione allineati, senza introdurre ancora REST API, database, JPA, Spring Data, planning, tracking, audit trail, workflow, country engine operativo o controlli concreti di violazione.
+La versione attuale rappresenta la **TruckFlow Domain Foundation v1.0** rafforzata dalla prima review correttiva del dominio puro. La fondazione è definita, le regole sono documentate e sono stati applicati interventi mirati su invarianti, eccezioni, codici aziendali, test e pulizia del repository. Il Punto 6M ha chiuso la review/freeze finale del primo ciclo dell'application layer; il passo attuale aperto e documentato è il Punto 7A, cioè il blueprint dell'Infrastructure Layer. Ora l'application layer copre Locations, Cargo, Shipments, Documents, Vehicles, Operational Roles e Compliance base con command, result, port in, port out, service, repository in memory, test e documentazione allineati, senza introdurre ancora REST API, database, JPA, Spring Data, planning, tracking, audit trail, workflow, country engine operativo o controlli concreti di violazione.
 
 Nota importante: eventuali dipendenze Spring Boot, Web, Validation o OpenAPI già presenti nel `pom.xml` sono da considerare preparatorie o storiche. Non rappresentano ancora l'introduzione architetturale di REST API, controller, database, JPA, Spring Data o security nel Punto 6.
 
@@ -75,6 +75,7 @@ Il dominio è stato costruito seguendo una regola precisa: modellare prima i con
 - [`docs/27-application-compliance-base-use-cases.md`](docs/27-application-compliance-base-use-cases.md) — espansione del Punto 6L: primi use case Compliance base, `ComplianceRequirementRepository`, `InMemoryComplianceRequirementRepository` e flusso register/find/status.
 - [`docs/28-application-layer-final-review-freeze.md`](docs/28-application-layer-final-review-freeze.md) — chiusura del Punto 6M: review finale, freeze dell’application layer, controlli architetturali e documentazione di cosa resta fuori.
 - [`docs/29-final-roadmap-documentation-alignment.md`](docs/29-final-roadmap-documentation-alignment.md) — pulizia documentale finale: roadmap reale 1 → 6M, correzione del 6G Documents, chiarimento sulle dipendenze Spring preparatorie e definizione del concetto di Guided Links.
+- [`docs/30-infrastructure-layer-blueprint.md`](docs/30-infrastructure-layer-blueprint.md) — apertura del Punto 7A: principi, confini, roadmap 7A → 7H, ruolo di Spring, repository reali, repository in memory, mapping, adapter e relazione con il futuro Punto 8 API Layer.
 
 ## Regole fondamentali della Domain Foundation
 
@@ -145,6 +146,8 @@ Con il Punto 6L è stata eseguita l'espansione controllata verso Compliance base
 Con il Punto 6M è stata eseguita la review/freeze finale del primo ciclo application layer: `ApplicationLayerFinalFreezeTest` verifica completezza dei package, allineamento tra port in e service, presenza della documentazione applicativa e assenza di layer prematuri come web, security, JPA, persistence o database.
 
 Con la pulizia documentale finale è stato aggiunto il documento [`docs/29-final-roadmap-documentation-alignment.md`](docs/29-final-roadmap-documentation-alignment.md), che rende esplicita la roadmap reale dal Punto 1 al Punto 6M, corregge la descrizione del Punto 6G Documents e chiarisce il ruolo preparatorio delle dipendenze Spring presenti nel `pom.xml`.
+
+Con il Punto 7A è stato aggiunto il documento [`docs/30-infrastructure-layer-blueprint.md`](docs/30-infrastructure-layer-blueprint.md), che apre ufficialmente il ciclo Infrastructure Layer senza introdurre ancora codice operativo. Il blueprint definisce cosa entra e cosa resta fuori dal Punto 7, mantiene i repository in memory come adapter validi e stabilisce una roadmap progressiva 7A → 7H prima del futuro Punto 8 API Layer.
 
 ## Punto 6A — Application Layer Blueprint
 
@@ -327,6 +330,26 @@ La descrizione corretta del Punto 6G Documents è: register, find, activate e ar
 
 La roadmap finale e le note di allineamento sono documentate in [`docs/29-final-roadmap-documentation-alignment.md`](docs/29-final-roadmap-documentation-alignment.md).
 
+## Punto 7A — Infrastructure Layer Blueprint
+
+Il Punto 7A apre il nuovo ciclo della roadmap: **Punto 7 — Infrastructure Layer**.
+
+Questa fase non modifica codice Java operativo. Serve a fissare i confini dell'infrastruttura prima di introdurre package, wiring, mapping, repository reali o configurazioni tecniche.
+
+Il blueprint stabilisce che:
+
+- domain e application layer restano indipendenti da infrastructure;
+- l'infrastructure layer implementerà i port.out dell'application layer;
+- Spring potrà essere usato solo come wiring tecnico;
+- i repository in memory restano validi per test e sviluppo;
+- REST API, controller, DTO web, JSON e security HTTP restano fuori dal Punto 7;
+- il Punto 8 sarà il momento corretto per l'API Layer.
+
+La roadmap ufficiale del Punto 7 è composta da 7A Infrastructure Blueprint, 7B Infrastructure Foundation, 7C Spring Wiring Foundation, 7D Persistence Mapping Blueprint, 7E Real Repository Prototype, 7F Repository Expansion, 7G Infrastructure Testing e 7H Infrastructure Review & Freeze.
+
+Il Punto 7A è documentato in [`docs/30-infrastructure-layer-blueprint.md`](docs/30-infrastructure-layer-blueprint.md).
+
+
 ## Prossimi step consigliati
 
 La roadmap consigliata è:
@@ -346,5 +369,6 @@ La roadmap consigliata è:
 13. mantenere stabile il Punto 6K con hardening dei use case Operational Roles, copertura completa dei service di stato e test copy-on-write sulle attivazioni fallite;
 14. mantenere stabile il Punto 6L con i primi use case Compliance base, repository port Compliance, repository in memory Compliance e test dedicati;
 15. mantenere stabile il Punto 6M come freeze finale del primo ciclo application layer;
-16. aprire un nuovo punto roadmap solo dopo verifica locale completa con `mvn spotless:check` e `mvn clean test`;
-17. rimandare API REST, database e integrazioni esterne finché non viene definito il prossimo punto ufficiale.
+16. usare il Punto 7A come riferimento ufficiale prima di introdurre qualunque infrastruttura reale;
+17. aprire un nuovo punto roadmap solo dopo verifica locale completa con `mvn spotless:check` e `mvn clean test`;
+18. rimandare API REST, database e integrazioni esterne finché non viene definito il prossimo punto ufficiale.

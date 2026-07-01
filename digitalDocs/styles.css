@@ -466,3 +466,18 @@ body.tooltip-disabled .term[data-it]::after {
 #doc-31:checked ~ .app-shell .panel-31 { display: block; }
 #doc-31:checked ~ .app-shell label[for="doc-31"] { background: var(--nav-active-bg); border-color: var(--accent); color: var(--text-strong); }
 #doc-31:checked ~ .app-shell label[for="doc-31"] .nav-number { background: var(--accent); color: white; }
+
+#doc-32:checked ~ .app-shell .panel-32 { display: block; }
+#doc-32:checked ~ .app-shell label[for="doc-32"] { background: var(--nav-active-bg); border-color: var(--accent); color: var(--text-strong); }
+#doc-32:checked ~ .app-shell label[for="doc-32"] .nav-number { background: var(--accent); color: white; }
+
+.roadmap-notice {
+  margin: 0 0 22px;
+  padding: 14px 16px;
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent);
+  border-radius: 12px;
+  background: var(--panel-soft);
+  color: var(--text);
+  font-size: 0.95rem;
+}

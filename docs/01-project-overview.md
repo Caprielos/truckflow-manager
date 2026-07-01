@@ -208,3 +208,12 @@ La sequenza reale completata è:
 Lo stato attuale del progetto non è più un application layer appena avviato: è una base applicativa stabile, documentata e testata per Locations, Cargo, Shipments, Documents, Vehicles, Operational Roles e Compliance base.
 
 Il progetto continua però a non introdurre ancora REST API, controller, database, JPA, Spring Data, security, tracking, planning, dashboard, workflow, audit trail o integrazioni esterne.
+
+
+## Aggiornamento roadmap — Punto 7A
+
+Dopo la chiusura del Punto 6M e la pulizia documentale finale, TruckFlow Manager apre il **Punto 7A — Infrastructure Layer Blueprint**.
+
+Questo aggiornamento non introduce codice operativo, database, REST API, JPA o security. Serve a definire la visione infrastrutturale del progetto: confini, dipendenze, ruolo degli adapter, ruolo di Spring come wiring tecnico, permanenza dei repository in memory e roadmap progressiva da 7A a 7H.
+
+Il documento ufficiale è [`30-infrastructure-layer-blueprint.md`](30-infrastructure-layer-blueprint.md).

@@ -657,3 +657,10 @@ Non vengono introdotti REST API, controller, database, JPA, Spring Data, securit
 ## Allineamento Punto 6M
 
 Il Punto 6M chiude il primo ciclo dell'application layer con una review/freeze finale. Da questo momento i contenuti documentati nei punti 6A-6L sono considerati fondazione applicativa stabile: eventuali evoluzioni future dovranno essere introdotte in nuovi punti roadmap, mantenendo ancora fuori REST API, controller, database, JPA, Spring Data, security, tracking, planning, dashboard, workflow e integrazioni esterne.
+
+
+## Collegamento con il Punto 7A
+
+Il primo ciclo dell'application layer è stato chiuso con il Punto 6M. Il Punto 7A apre il layer infrastrutturale senza modificare i principi definiti in questo blueprint: domain e application restano indipendenti da infrastructure, Spring, database, controller e security.
+
+Il documento di riferimento per il nuovo ciclo è [`30-infrastructure-layer-blueprint.md`](30-infrastructure-layer-blueprint.md).

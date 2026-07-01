@@ -8,7 +8,7 @@ The page is a faithful digital mirror of the Markdown documentation files.
 
 The left sidebar contains the documentation index. Selecting an item shows the corresponding document on the right.
 
-This guided navigation is the project documentation's **Guided Links** layer: it does not replace the Markdown files, but helps readers move through the official project history from the domain foundation to the final application-layer freeze.
+This guided navigation is the project documentation's **Guided Links** layer: it does not replace the Markdown files, but helps readers move through the official project history from the domain foundation to the final application-layer freeze and the opening Infrastructure Blueprint.
 
 ## Tooltip modes
 
@@ -63,6 +63,7 @@ This digital documentation mirrors:
 - `docs/27-application-compliance-base-use-cases.md`
 - `docs/28-application-layer-final-review-freeze.md`
 - `docs/29-final-roadmap-documentation-alignment.md`
+- `docs/30-infrastructure-layer-blueprint.md`
 - `command_basic.md`
 
 
@@ -190,3 +191,14 @@ This document clarifies the official final state after Punto 6M:
 - file attach, PDF generation, upload, storage, document versioning and workflows are still future work;
 - Spring dependencies already present in `pom.xml` are preparatory/historical and do not mean REST API, controllers, JPA or security have been introduced;
 - the next work should start a new roadmap point, most likely Punto 7.
+
+
+## Aggiornamento Punto 7A
+
+La documentazione digitale include ora anche il Punto 7A — Infrastructure Layer Blueprint.
+
+Questo aggiornamento apre il nuovo ciclo roadmap dedicato all'infrastruttura in modo prudente e documentale: definisce confini, dipendenze, ruolo dei port.out, ruolo degli adapter, ruolo di Spring come wiring tecnico, permanenza dei repository in memory e roadmap 7A → 7H.
+
+La fase non introduce codice operativo, repository reali, database, JPA, REST API, controller, DTO web, security o servizi esterni.
+
+Documento di riferimento: `docs/30-infrastructure-layer-blueprint.md`.

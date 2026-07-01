@@ -470,6 +470,7 @@
         <a href="#architettura">Architettura</a>
         <a href="#roadmap">Roadmap</a>
         <a href="#application-layer">Application Layer</a>
+        <a href="#infrastructure-layer">Infrastructure Layer</a>
         <a href="#enterprise">Enterprise</a>
         <a href="#business">Business</a>
       </nav>
@@ -479,9 +480,9 @@
   <div class="hero">
     <div class="hero-inner">
       <div>
-        <div class="eyebrow">Documentazione professionale • Domain Foundation • Application Freeze</div>
+        <div class="eyebrow">Documentazione professionale • Domain Foundation • Application Freeze • Infrastructure Blueprint</div>
         <h1>TruckFlow Manager — Documentazione Enterprise</h1>
-        <p>Una panoramica completa, tecnica e commerciale, del progetto TruckFlow Manager: cosa fa oggi, perché è progettato in questo modo, quali domini contiene, come è stato consolidato l’application layer e quali moduli dovranno essere aggiunti per evolvere in una piattaforma enterprise completa per trasporto, logistica e gestione flotta.</p>
+        <p>Una panoramica completa, tecnica e commerciale, del progetto TruckFlow Manager: cosa fa oggi, perché è progettato in questo modo, quali domini contiene, come è stato consolidato l’application layer, come viene aperto il nuovo Infrastructure Layer e quali moduli dovranno essere aggiunti per evolvere in una piattaforma enterprise completa per trasporto, logistica e gestione flotta.</p>
         <div class="hero-actions">
           <a class="button primary" href="#overview">Inizia dalla visione</a>
           <a class="button" href="#roadmap">Vai alla roadmap</a>
@@ -496,6 +497,7 @@
           <li><span>Eccezioni custom</span><span class="badge done">Applicate</span></li>
           <li><span>Revisione test dominio</span><span class="badge done">Completata</span></li>
           <li><span>Application layer</span><span class="badge done">Punto 6M completato</span></li>
+          <li><span>Infrastructure layer</span><span class="badge now">Punto 7A blueprint</span></li>
         </ul>
       </aside>
     </div>
@@ -513,10 +515,11 @@
         <li><a href="#requisiti-attuali">6. Requisiti attuali</a></li>
         <li><a href="#roadmap">7. Roadmap ufficiale</a></li>
         <li><a href="#application-layer">8. Application Layer & In-Memory Repositories</a></li>
-        <li><a href="#enterprise">9. Evoluzione enterprise</a></li>
-        <li><a href="#business">10. Presentazione commerciale</a></li>
-        <li><a href="#fatto-manca">11. Fatto, manca, perché</a></li>
-        <li><a href="#conclusione">12. Conclusione</a></li>
+        <li><a href="#infrastructure-layer">9. Infrastructure Layer Blueprint</a></li>
+        <li><a href="#enterprise">10. Evoluzione enterprise</a></li>
+        <li><a href="#business">11. Presentazione commerciale</a></li>
+        <li><a href="#fatto-manca">12. Fatto, manca, perché</a></li>
+        <li><a href="#conclusione">13. Conclusione</a></li>
       </ol>
     </aside>
 
@@ -742,9 +745,9 @@
 
       <section id="roadmap" class="soft">
         <h2>7. Roadmap ufficiale del progetto</h2>
-        <p class="lead">La roadmap reale riflette il lavoro svolto finora: prima il dominio, poi la sua stabilizzazione, poi i test, poi il primo ciclo completo dell’application layer da 6A a 6M. Il Punto 6 è ora chiuso: Documents, Vehicles, Operational Roles e Compliance base sono stati integrati nell’application layer senza introdurre REST API, database, JPA o security.</p>
+        <p class="lead">La roadmap reale riflette il lavoro svolto finora: prima il dominio, poi la sua stabilizzazione, poi i test, poi il primo ciclo completo dell’application layer da 6A a 6M. Il Punto 6 è ora chiuso: Documents, Vehicles, Operational Roles e Compliance base sono stati integrati nell’application layer senza introdurre REST API, database, JPA o security. Il Punto 7A apre ora l’Infrastructure Layer con un blueprint solo documentale, senza modificare codice operativo.</p>
         <div class="callout">
-          <p><strong>Allineamento finale:</strong> la descrizione corretta del Punto 6G Documents è register/find/activate/archive. Non sono stati introdotti update documentali completi, attach di file fisici, generazione PDF, upload, storage, firma digitale, versioning o workflow documentali. Le dipendenze Spring eventualmente presenti nel <code>pom.xml</code> sono preparatorie o storiche: il codice domain/application non usa ancora controller, JPA, Spring Data o security.</p>
+          <p><strong>Allineamento finale:</strong> la descrizione corretta del Punto 6G Documents è register/find/activate/archive. Non sono stati introdotti update documentali completi, attach di file fisici, generazione PDF, upload, storage, firma digitale, versioning o workflow documentali. Le dipendenze Spring eventualmente presenti nel <code>pom.xml</code> sono preparatorie o storiche: il codice domain/application non usa ancora controller, JPA, Spring Data o security. Il Punto 7A chiarisce come Spring potrà entrare più avanti solo come wiring tecnico, non come concetto di dominio o application.</p>
         </div>
         <div class="timeline">
           <div class="timeline-item">
@@ -823,6 +826,10 @@
             <div><span class="badge done">Documentazione</span><div class="milestone">Allineamento finale</div></div>
             <div><h3>Roadmap finale 1 → 6M</h3><p>Pulizia documentale: roadmap reale completata, correzione del Punto 6G Documents, nota sulle dipendenze Spring preparatorie e formalizzazione dei Guided Links nella documentazione digitale.</p></div>
           </div>
+          <div class="timeline-item">
+            <div><span class="badge now">Aperto</span><div class="milestone">Punto 7A</div></div>
+            <div><h3>Infrastructure Layer Blueprint</h3><p>Apertura documentale del Punto 7: confini infrastrutturali, roadmap 7A → 7H, ruolo di Spring come wiring, permanenza dei repository in memory, mapping, adapter e separazione dal futuro API Layer.</p></div>
+          </div>
         </div>
         <h3>Obiettivi a breve termine</h3>
         <ul>
@@ -889,8 +896,49 @@
         </div>
       </section>
 
+      <section id="infrastructure-layer" class="soft">
+        <h2>9. Infrastructure Layer Blueprint</h2>
+        <p class="lead">Il Punto 7A apre l'Infrastructure Layer in modo prudente e professionale. La fase è solo documentale: definisce cosa entrerà nel layer infrastrutturale, cosa deve restare fuori, come dovranno comportarsi gli adapter e perché REST API e controller appartengono al futuro Punto 8.</p>
+        <div class="grid two">
+          <div class="card">
+            <h3>Obiettivo</h3>
+            <p>Dare all'application layer implementazioni tecniche reali dei suoi port.out, mantenendo domain e application indipendenti da database, framework, file system, servizi esterni e configurazioni tecniche.</p>
+          </div>
+          <div class="card">
+            <h3>Regola delle dipendenze</h3>
+            <p>Le dipendenze devono puntare verso il centro: infrastructure → application → domain. Domain e application non devono importare infrastructure, JPA, controller, web o security.</p>
+          </div>
+          <div class="card">
+            <h3>Cosa può entrare nel Punto 7</h3>
+            <ul>
+              <li>package infrastrutturali ordinati;</li>
+              <li>eccezioni infrastrutturali;</li>
+              <li>wiring Spring controllato;</li>
+              <li>mapping domain ↔ persistence;</li>
+              <li>repository reali che implementano port.out;</li>
+              <li>test tecnici di adapter, mapper e configurazione.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Cosa resta fuori</h3>
+            <ul>
+              <li>REST API e controller;</li>
+              <li>DTO web e JSON API;</li>
+              <li>security HTTP e JWT;</li>
+              <li>frontend e dashboard;</li>
+              <li>planning, tracking e dispatching reale;</li>
+              <li>workflow enterprise completi.</li>
+            </ul>
+          </div>
+        </div>
+        <h3>Roadmap 7A → 7H</h3>
+        <p>Il Punto 7 è diviso in otto sotto-step progressivi: 7A Infrastructure Blueprint, 7B Infrastructure Foundation, 7C Spring Wiring Foundation, 7D Persistence Mapping Blueprint, 7E Real Repository Prototype, 7F Repository Expansion, 7G Infrastructure Testing e 7H Infrastructure Review &amp; Freeze.</p>
+        <p>Il primo repository reale consigliato sarà Locations, perché è un dominio semplice e permette di validare il pattern infrastrutturale con rischio ridotto. I repository in memory non vengono rimossi: restano adapter validi per test e sviluppo locale.</p>
+      </section>
+
+
       <section id="enterprise">
-        <h2>9. Requisiti futuri per una piattaforma enterprise completa</h2>
+        <h2>10. Requisiti futuri per una piattaforma enterprise completa</h2>
         <p class="lead">TruckFlow Manager ha una fondazione pronta per crescere. Per diventare una piattaforma enterprise completa dovrà introdurre moduli applicativi e infrastrutturali separati, ognuno con responsabilità chiare.</p>
         <div class="grid two">
           <div class="card"><h3>Planning & Dispatching</h3><p>Assegnazione reale di veicoli, combinazioni, autisti, cargo, orari e tratte. Gestirà compatibilità cargo‑vehicle, qualificazioni autista, vincoli di capacità e priorità delle shipment.</p></div>
@@ -907,7 +955,7 @@
       </section>
 
       <section id="business" class="soft">
-        <h2>10. Presentazione commerciale del progetto</h2>
+        <h2>11. Presentazione commerciale del progetto</h2>
         <p class="lead">TruckFlow Manager può essere presentato come una piattaforma gestionale moderna per aziende che vogliono governare trasporto, logistica e flotta con un modello strutturato e scalabile.</p>
         <div class="quote">TruckFlow Manager non nasce come semplice archivio mezzi. Nasce come fondazione enterprise per controllare mezzi, merci, spedizioni, documenti, compliance e persone operative con coerenza e visione di crescita.</div>
         <div class="grid two">
@@ -945,7 +993,7 @@
       </section>
 
       <section id="fatto-manca">
-        <h2>11. Cosa è fatto, cosa manca e perché</h2>
+        <h2>12. Cosa è fatto, cosa manca e perché</h2>
         <div class="table-wrap">
           <table>
             <thead><tr><th>Area</th><th>Stato</th><th>Motivo</th></tr></thead>
@@ -966,6 +1014,7 @@
               <tr><td>Application Compliance Base Use Cases</td><td><span class="badge done">Completata</span></td><td>Aggiunge i primi use case Compliance base per ComplianceRequirement: register, find, activate, suspend, archive e discontinue.</td></tr>
               <tr><td>Application Layer Final Review &amp; Freeze</td><td><span class="badge done">Completata</span></td><td>Chiude il Punto 6 con ApplicationLayerFinalFreezeTest, documentazione 6A-6M allineata e controllo contro layer prematuri.</td></tr>
               <tr><td>Roadmap finale e allineamento documentale</td><td><span class="badge done">Completata</span></td><td>Chiarisce che il Punto 6 è chiuso al 6M, corregge il 6G Documents, spiega le dipendenze Spring preparatorie e formalizza i Guided Links.</td></tr>
+              <tr><td>Infrastructure Layer Blueprint</td><td><span class="badge now">Aperto</span></td><td>Il Punto 7A definisce confini, roadmap 7A → 7H, ruolo di Spring, adapter, mapping e repository reali senza introdurre ancora codice operativo, database o REST API.</td></tr>
               <tr><td>Database e repository reali</td><td><span class="badge planned">Futuro</span></td><td>Non vanno introdotti prima della stabilizzazione dei repository in memory e dei use case applicativi.</td></tr>
               <tr><td>API REST</td><td><span class="badge planned">Futuro</span></td><td>Le API devono esporre casi d’uso stabili, non accedere direttamente al dominio in modo improvvisato.</td></tr>
               <tr><td>Planning & Dispatching</td><td><span class="badge planned">Futuro</span></td><td>È il modulo che assegnerà risorse reali e verificherà compatibilità operative.</td></tr>
@@ -980,10 +1029,10 @@
       </section>
 
       <section id="conclusione" class="soft">
-        <h2>12. Conclusione</h2>
+        <h2>13. Conclusione</h2>
         <p class="lead">TruckFlow Manager è oggi una fondazione di dominio solida per una futura piattaforma enterprise di trasporto e logistica.</p>
-        <p>Il progetto descrive i principali concetti aziendali con confini chiari, value object espressivi, invarianti protetti, eccezioni custom e documentazione strutturata. La fase attuale ha rafforzato i primi use case applicativi, li ha espansi verso Documents, Vehicles, Operational Roles e Compliance base, ha aggiunto hardening dedicato agli Operational Roles e ha chiuso il Punto 6 con un freeze finale senza introdurre ancora API REST, controller, database, JPA, security o uso architetturale di Spring nel codice applicativo. L’obiettivo è costruire progressivamente nuovi layer sopra una base application stabile.</p>
-        <p>La direzione futura è costruire gradualmente una piattaforma completa: prima blueprint e foundation applicativa, poi repository port, repository in memory e primi use case applicativi, quindi infrastructure, API, workflow, planning, dispatching, document management avanzato, tracking, analytics e integrazioni enterprise.</p>
+        <p>Il progetto descrive i principali concetti aziendali con confini chiari, value object espressivi, invarianti protetti, eccezioni custom e documentazione strutturata. La fase attuale ha rafforzato i primi use case applicativi, li ha espansi verso Documents, Vehicles, Operational Roles e Compliance base, ha aggiunto hardening dedicato agli Operational Roles e ha chiuso il Punto 6 con un freeze finale senza introdurre ancora API REST, controller, database, JPA, security o uso architetturale di Spring nel codice applicativo, e ha aperto il Punto 7A come blueprint documentale dell’Infrastructure Layer. L’obiettivo è costruire progressivamente nuovi layer sopra una base application stabile.</p>
+        <p>La direzione futura è costruire gradualmente una piattaforma completa: prima domain e application layer, poi infrastructure blueprint, foundation tecnica, wiring Spring controllato, mapping, repository reali, test infrastrutturali, quindi API, workflow, planning, dispatching, document management avanzato, tracking, analytics e integrazioni enterprise.</p>
         <div class="pill-list">
           <span class="pill">Domain-first</span>
           <span class="pill">Enterprise-ready foundation</span>

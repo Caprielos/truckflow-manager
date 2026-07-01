@@ -483,3 +483,35 @@ Commit consigliato:
 git add -A
 git commit -m "Align final roadmap documentation"
 ```
+
+
+---
+
+## Nota progetto — Punto 7A
+
+Il Punto 7A — Infrastructure Layer Blueprint è una patch solo documentale.
+
+Non modifica codice Java operativo, test, package applicativi, `pom.xml`, controller, database, JPA, Spring Data, security o repository reali. Serve a fissare ufficialmente la roadmap del Punto 7 prima di iniziare gli step implementativi successivi.
+
+Dopo l'applicazione della patch, il controllo consigliato resta:
+
+```bash
+mvn spotless:check
+mvn clean test
+git status
+```
+
+Documenti principali da controllare:
+
+```bash
+ls docs/30-infrastructure-layer-blueprint.md
+ls digitalDocs/index.html
+ls digitalDocs/truckflow-manager-enterprise-documentation.html
+```
+
+Commit consigliato:
+
+```bash
+git add -A
+git commit -m "Document infrastructure layer blueprint"
+```

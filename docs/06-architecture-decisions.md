@@ -805,3 +805,21 @@ Prima di estendere l'application layer ad altri domini, TruckFlow Manager introd
 La decisione è consolidare i primi use case esistenti invece di aggiungere subito molti casi d'uso nuovi. Questa scelta riduce il rischio di propagare errori strutturali, rende più chiara la separazione tra errori applicativi ed errori di dominio e prepara un modello replicabile per i prossimi domini.
 
 Il Punto 6F aggiunge `CancelShipmentUseCase` e test di robustezza sui command, sulle risorse mancanti, sui duplicati e sulle mutazioni fallite. Non introduce framework, database, controller o transazioni.
+
+
+## Decisione architetturale — Punto 7A Infrastructure Layer Blueprint
+
+Dopo la chiusura del primo ciclo dell'application layer, il progetto apre il Punto 7 con una fase documentale: **Infrastructure Layer Blueprint**.
+
+La decisione è procedere in modo progressivo:
+
+- prima documentazione e confini;
+- poi foundation infrastrutturale;
+- poi wiring Spring controllato;
+- poi blueprint di mapping;
+- poi un repository reale pilota;
+- poi espansione, test e freeze.
+
+Il Punto 7 non deve introdurre REST API, controller, DTO web, JSON, security HTTP o frontend. Questi elementi appartengono al futuro Punto 8.
+
+L'infrastructure layer potrà dipendere da application e domain per implementare i port.out, ma application e domain non dovranno dipendere da infrastructure. I repository in memory restano parte del progetto come adapter tecnici validi per test, sviluppo locale e scenari applicativi.

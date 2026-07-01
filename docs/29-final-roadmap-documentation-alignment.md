@@ -2,7 +2,7 @@
 
 Questo documento chiude la pulizia documentale successiva al **Punto 6M — Application Layer Final Review & Freeze**.
 
-Serve a rendere esplicita la roadmap reale del progetto, correggere alcune descrizioni storiche ormai superate e chiarire lo stato attuale prima dell'apertura del Punto 7.
+Serve a rendere esplicita la roadmap reale del progetto, correggere alcune descrizioni storiche ormai superate e chiarire lo stato attuale prima dell'apertura del Punto 7. Dopo questa pulizia, il Punto 7A apre ufficialmente il ciclo Infrastructure Layer con un blueprint solo documentale.
 
 Questo step è **solo documentale**: non modifica codice Java, test, package, use case o dipendenze Maven.
 
@@ -191,7 +191,7 @@ La direzione più naturale è:
 
 **Punto 7 — Infrastructure Layer**
 
-Il Punto 7 dovrà essere definito prima in modo teorico e documentale, senza introdurre subito controller REST o database se non sono ancora stati progettati i confini.
+Il Punto 7 viene aperto con il **Punto 7A — Infrastructure Layer Blueprint**, una fase solo documentale che definisce confini, roadmap, dipendenze consentite e dipendenze vietate senza introdurre subito controller REST, database, JPA, repository reali o security.
 
 Il Punto 7 potrà preparare:
 
@@ -200,9 +200,11 @@ Il Punto 7 potrà preparare:
 - mapping domain/application verso persistence;
 - strategia database;
 - strategia Spring controllata;
-- separazione tra repository port e implementazioni concrete.
+- separazione tra repository port e implementazioni concrete;
+- roadmap progressiva 7A → 7H;
+- criteri per non confondere Infrastructure Layer e futuro API Layer.
 
-Le REST API dovrebbero restare un punto successivo, perché devono esporre use case stabili e non accedere direttamente al dominio.
+Le REST API dovrebbero restare un punto successivo, perché devono esporre use case stabili e non accedere direttamente al dominio. Il documento ufficiale di apertura è [`docs/30-infrastructure-layer-blueprint.md`](30-infrastructure-layer-blueprint.md).
 
 ## Conclusione
 

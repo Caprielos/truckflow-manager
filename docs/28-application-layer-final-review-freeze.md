@@ -173,3 +173,12 @@ Questa pulizia non cambia il codice e non riapre il Punto 6. Serve solo a render
 - attach fisico, generazione PDF, upload, storage, versioning e workflow documentali sono ancora futuri;
 - le dipendenze Spring eventualmente già presenti nel `pom.xml` sono preparatorie o storiche;
 - il prossimo lavoro deve aprire un nuovo punto roadmap, non un ulteriore sotto-step del Punto 6.
+
+
+## Allineamento successivo — Punto 7A
+
+Dopo il freeze del Punto 6M, il progetto apre il **Punto 7A — Infrastructure Layer Blueprint**.
+
+Il 7A non modifica il codice applicativo congelato: definisce solo il blueprint del layer infrastrutturale, la roadmap 7A → 7H, il ruolo dei repository reali futuri, il ruolo dei repository in memory ancora presenti e il confine con il futuro Punto 8 API Layer.
+
+Documento di riferimento: [`30-infrastructure-layer-blueprint.md`](30-infrastructure-layer-blueprint.md).
