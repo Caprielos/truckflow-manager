@@ -217,3 +217,11 @@ Dopo la chiusura del Punto 6M e la pulizia documentale finale, TruckFlow Manager
 Questo aggiornamento non introduce codice operativo, database, REST API, JPA o security. Serve a definire la visione infrastrutturale del progetto: confini, dipendenze, ruolo degli adapter, ruolo di Spring come wiring tecnico, permanenza dei repository in memory e roadmap progressiva da 7A a 7H.
 
 Il documento ufficiale è [`30-infrastructure-layer-blueprint.md`](30-infrastructure-layer-blueprint.md).
+
+## Aggiornamento roadmap — Punto 7B
+
+Dopo il blueprint del Punto 7A, TruckFlow Manager applica il **Punto 7B — Infrastructure Foundation**.
+
+Questo aggiornamento introduce una base tecnica leggera del layer infrastrutturale: package dedicati, eccezioni infrastrutturali, marker di adapter, profili tecnici e un contratto generico di mapping. La fase non introduce ancora database, JPA, Spring Data, repository reali completi, controller REST, DTO web o security.
+
+Il valore del 7B è preparare una casa ordinata per gli step successivi del Punto 7, mantenendo intatti i confini: il dominio resta puro, l'application layer resta indipendente da infrastructure e i repository in memory restano disponibili per test e sviluppo locale.

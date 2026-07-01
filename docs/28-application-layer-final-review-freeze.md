@@ -182,3 +182,11 @@ Dopo il freeze del Punto 6M, il progetto apre il **Punto 7A — Infrastructure L
 Il 7A non modifica il codice applicativo congelato: definisce solo il blueprint del layer infrastrutturale, la roadmap 7A → 7H, il ruolo dei repository reali futuri, il ruolo dei repository in memory ancora presenti e il confine con il futuro Punto 8 API Layer.
 
 Documento di riferimento: [`30-infrastructure-layer-blueprint.md`](30-infrastructure-layer-blueprint.md).
+
+## Allineamento successivo — Punto 7B
+
+Dopo il 7A, il progetto introduce il **Punto 7B — Infrastructure Foundation**.
+
+Questa fase non riapre l'application layer e non modifica i use case congelati. Aggiunge solo la prima struttura tecnica del layer infrastrutturale: package base, eccezioni tecniche, marker di adapter/repository/service, profili infrastrutturali e un contratto generico di mapping.
+
+Il freeze del Punto 6M resta valido: domain e application non dipendono da infrastructure, e REST API, controller, database, JPA, Spring Data e security restano fuori dal ciclo applicativo.

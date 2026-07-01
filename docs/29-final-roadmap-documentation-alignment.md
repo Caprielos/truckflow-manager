@@ -218,3 +218,17 @@ La documentazione ufficiale deve ora dire chiaramente che:
 - il prossimo lavoro deve aprire un nuovo punto roadmap.
 
 Questa è la base documentale corretta prima di procedere con il Punto 7.
+
+## Allineamento successivo — Punto 7B
+
+Dopo l'apertura documentale del Punto 7A, il progetto procede con il **Punto 7B — Infrastructure Foundation**.
+
+Il 7B rende concreta la foundation infrastrutturale senza cambiare la roadmap finale del Punto 6. La sequenza corretta diventa:
+
+1. chiusura Punto 6M;
+2. pulizia roadmap finale;
+3. Punto 7A — Infrastructure Layer Blueprint;
+4. Punto 7B — Infrastructure Foundation;
+5. prossimo step: Punto 7C — Spring Wiring Foundation.
+
+Il Punto 7B non introduce API REST, controller, JSON, database, JPA, Spring Data o security. Introduce solo struttura tecnica e convenzioni per proseguire in modo ordinato.

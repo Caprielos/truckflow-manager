@@ -664,3 +664,11 @@ Il Punto 6M chiude il primo ciclo dell'application layer con una review/freeze f
 Il primo ciclo dell'application layer è stato chiuso con il Punto 6M. Il Punto 7A apre il layer infrastrutturale senza modificare i principi definiti in questo blueprint: domain e application restano indipendenti da infrastructure, Spring, database, controller e security.
 
 Il documento di riferimento per il nuovo ciclo è [`30-infrastructure-layer-blueprint.md`](30-infrastructure-layer-blueprint.md).
+
+## Collegamento con il Punto 7B
+
+Il Punto 7B — Infrastructure Foundation conferma i confini definiti da questo blueprint applicativo.
+
+L'application layer continua a non dipendere da infrastructure. I nuovi package infrastrutturali, le eccezioni tecniche, i marker di adapter e il contratto generico di mapping sono elementi esterni al core applicativo. Servono a preparare gli adapter futuri, non a modificare command, result, port in, port out o service applicativi già congelati.
+
+Questa separazione permette al Punto 7 di crescere senza trasformare l'application layer in codice tecnico o framework-specific.

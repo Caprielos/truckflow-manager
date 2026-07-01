@@ -515,3 +515,35 @@ Commit consigliato:
 git add -A
 git commit -m "Document infrastructure layer blueprint"
 ```
+
+---
+
+## Nota progetto — Punto 7B
+
+Il Punto 7B — Infrastructure Foundation introduce la prima struttura tecnica dell'infrastructure layer.
+
+La patch aggiunge package infrastrutturali base, eccezioni tecniche, marker/convenzioni e test architetturale, ma non introduce database, JPA, Spring Data, REST API, controller o security.
+
+Dopo l'applicazione della patch, il controllo consigliato è:
+
+```bash
+mvn spotless:apply
+mvn spotless:check
+mvn clean test
+git status
+```
+
+Documenti principali da controllare:
+
+```bash
+ls docs/31-infrastructure-foundation.md
+ls src/main/java/it/gabriele/truckflow/infrastructure/exception
+ls src/test/java/it/gabriele/truckflow/infrastructure/InfrastructureFoundationTest.java
+```
+
+Commit consigliato:
+
+```bash
+git add -A
+git commit -m "Add infrastructure foundation"
+```

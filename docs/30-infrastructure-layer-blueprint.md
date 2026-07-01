@@ -2,6 +2,8 @@
 
 Questo documento apre ufficialmente il **Punto 7 — Infrastructure Layer** di TruckFlow Manager.
 
+> Aggiornamento 7B: il blueprint è stato trasformato in foundation tecnica leggera con package, eccezioni e convenzioni infrastrutturali documentate in `31-infrastructure-foundation.md`.
+
 Il Punto 7A è una fase **solo documentale e architetturale**: non introduce codice Java operativo, non crea repository reali, non configura database, non attiva controller REST e non cambia il comportamento dell'application layer.
 
 Il suo scopo è fissare in modo chiaro, professionale e definitivo i confini del nuovo layer infrastrutturale prima di iniziare gli step implementativi successivi.
@@ -340,9 +342,9 @@ Non produce:
 
 ## 7B — Infrastructure Foundation
 
-Il Punto 7B creerà la base strutturale del layer infrastrutturale.
+Il Punto 7B crea la base strutturale del layer infrastrutturale.
 
-Possibili contenuti:
+Contenuti applicati:
 
 - package `infrastructure.config`;
 - package `infrastructure.repository`;
@@ -351,10 +353,14 @@ Possibili contenuti:
 - package `infrastructure.service`;
 - package `infrastructure.exception`;
 - eccezioni infrastrutturali base;
-- convenzioni di naming;
-- test architetturali minimi.
+- marker e convenzioni tecniche;
+- profili infrastrutturali;
+- contratto generico di mapping;
+- test architetturale minimo.
 
-Il 7B non deve ancora introdurre database reale completo.
+Il 7B non introduce database reale completo, JPA, Spring Data, REST API, controller o security.
+
+Il 7B è documentato in `31-infrastructure-foundation.md`.
 
 ## 7C — Spring Wiring Foundation
 
@@ -501,7 +507,7 @@ Il Punto 7 deve preparare una base infrastrutturale stabile affinché il Punto 8
 
 ## Sintesi finale
 
-Il Punto 7A apre l'Infrastructure Layer in modo prudente e professionale.
+Il Punto 7A apre l'Infrastructure Layer in modo prudente e professionale. Il successivo Punto 7B ha introdotto la prima foundation tecnica leggera mantenendo gli stessi confini architetturali.
 
 Non implementa subito database o Spring operativo. Prima definisce:
 

@@ -64,6 +64,7 @@ This digital documentation mirrors:
 - `docs/28-application-layer-final-review-freeze.md`
 - `docs/29-final-roadmap-documentation-alignment.md`
 - `docs/30-infrastructure-layer-blueprint.md`
+- `docs/31-infrastructure-foundation.md`
 - `command_basic.md`
 
 
@@ -202,3 +203,14 @@ Questo aggiornamento apre il nuovo ciclo roadmap dedicato all'infrastruttura in 
 La fase non introduce codice operativo, repository reali, database, JPA, REST API, controller, DTO web, security o servizi esterni.
 
 Documento di riferimento: `docs/30-infrastructure-layer-blueprint.md`.
+
+
+## Aggiornamento Punto 7B
+
+La documentazione digitale include ora anche il Punto 7B — Infrastructure Foundation.
+
+Questo aggiornamento documenta la prima foundation tecnica del layer infrastrutturale: package base, eccezioni infrastrutturali, marker di adapter/repository/service, profili tecnici e contratto generico di mapping.
+
+La fase resta prudente: non introduce database, JPA, Spring Data, repository reali completi, REST API, controller, DTO web, security o servizi esterni operativi.
+
+Documento di riferimento: `docs/31-infrastructure-foundation.md`.

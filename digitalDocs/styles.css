@@ -471,6 +471,10 @@ body.tooltip-disabled .term[data-it]::after {
 #doc-32:checked ~ .app-shell label[for="doc-32"] { background: var(--nav-active-bg); border-color: var(--accent); color: var(--text-strong); }
 #doc-32:checked ~ .app-shell label[for="doc-32"] .nav-number { background: var(--accent); color: white; }
 
+#doc-33:checked ~ .app-shell .panel-33 { display: block; }
+#doc-33:checked ~ .app-shell label[for="doc-33"] { background: var(--nav-active-bg); border-color: var(--accent); color: var(--text-strong); }
+#doc-33:checked ~ .app-shell label[for="doc-33"] .nav-number { background: var(--accent); color: white; }
+
 .roadmap-notice {
   margin: 0 0 22px;
   padding: 14px 16px;

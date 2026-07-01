@@ -22,9 +22,9 @@ La documentazione digitale funziona anche come sistema di **Guided Links**: un i
 
 ## Stato attuale del dominio
 
-Il progetto ha consolidato il **domain layer puro**, ha completato il primo ciclo dell’application layer fino al **Punto 6M — Application Layer Final Review & Freeze** e ha aperto il **Punto 7A — Infrastructure Layer Blueprint** come fase documentale del nuovo ciclo infrastrutturale.
+Il progetto ha consolidato il **domain layer puro**, ha completato il primo ciclo dell’application layer fino al **Punto 6M — Application Layer Final Review & Freeze**, ha aperto il **Punto 7A — Infrastructure Layer Blueprint** e ha applicato il **Punto 7B — Infrastructure Foundation** come prima foundation tecnica leggera del nuovo ciclo infrastrutturale.
 
-La versione attuale rappresenta la **TruckFlow Domain Foundation v1.0** rafforzata dalla prima review correttiva del dominio puro. La fondazione è definita, le regole sono documentate e sono stati applicati interventi mirati su invarianti, eccezioni, codici aziendali, test e pulizia del repository. Il Punto 6M ha chiuso la review/freeze finale del primo ciclo dell'application layer; il passo attuale aperto e documentato è il Punto 7A, cioè il blueprint dell'Infrastructure Layer. Ora l'application layer copre Locations, Cargo, Shipments, Documents, Vehicles, Operational Roles e Compliance base con command, result, port in, port out, service, repository in memory, test e documentazione allineati, senza introdurre ancora REST API, database, JPA, Spring Data, planning, tracking, audit trail, workflow, country engine operativo o controlli concreti di violazione.
+La versione attuale rappresenta la **TruckFlow Domain Foundation v1.0** rafforzata dalla prima review correttiva del dominio puro. La fondazione è definita, le regole sono documentate e sono stati applicati interventi mirati su invarianti, eccezioni, codici aziendali, test e pulizia del repository. Il Punto 6M ha chiuso la review/freeze finale del primo ciclo dell'application layer; il Punto 7A ha definito il blueprint dell'Infrastructure Layer; il Punto 7B ha introdotto la foundation tecnica con package, eccezioni e convenzioni infrastrutturali. Ora l'application layer copre Locations, Cargo, Shipments, Documents, Vehicles, Operational Roles e Compliance base con command, result, port in, port out, service, repository in memory, test e documentazione allineati, senza introdurre ancora REST API, database, JPA, Spring Data, planning, tracking, audit trail, workflow, country engine operativo o controlli concreti di violazione.
 
 Nota importante: eventuali dipendenze Spring Boot, Web, Validation o OpenAPI già presenti nel `pom.xml` sono da considerare preparatorie o storiche. Non rappresentano ancora l'introduzione architetturale di REST API, controller, database, JPA, Spring Data o security nel Punto 6.
 
@@ -76,6 +76,7 @@ Il dominio è stato costruito seguendo una regola precisa: modellare prima i con
 - [`docs/28-application-layer-final-review-freeze.md`](docs/28-application-layer-final-review-freeze.md) — chiusura del Punto 6M: review finale, freeze dell’application layer, controlli architetturali e documentazione di cosa resta fuori.
 - [`docs/29-final-roadmap-documentation-alignment.md`](docs/29-final-roadmap-documentation-alignment.md) — pulizia documentale finale: roadmap reale 1 → 6M, correzione del 6G Documents, chiarimento sulle dipendenze Spring preparatorie e definizione del concetto di Guided Links.
 - [`docs/30-infrastructure-layer-blueprint.md`](docs/30-infrastructure-layer-blueprint.md) — apertura del Punto 7A: principi, confini, roadmap 7A → 7H, ruolo di Spring, repository reali, repository in memory, mapping, adapter e relazione con il futuro Punto 8 API Layer.
+- [`docs/31-infrastructure-foundation.md`](docs/31-infrastructure-foundation.md) — Punto 7B: foundation tecnica leggera dell'Infrastructure Layer, package base, eccezioni infrastrutturali, convenzioni, marker tecnici e test architetturale.
 
 ## Regole fondamentali della Domain Foundation
 
@@ -148,6 +149,8 @@ Con il Punto 6M è stata eseguita la review/freeze finale del primo ciclo applic
 Con la pulizia documentale finale è stato aggiunto il documento [`docs/29-final-roadmap-documentation-alignment.md`](docs/29-final-roadmap-documentation-alignment.md), che rende esplicita la roadmap reale dal Punto 1 al Punto 6M, corregge la descrizione del Punto 6G Documents e chiarisce il ruolo preparatorio delle dipendenze Spring presenti nel `pom.xml`.
 
 Con il Punto 7A è stato aggiunto il documento [`docs/30-infrastructure-layer-blueprint.md`](docs/30-infrastructure-layer-blueprint.md), che apre ufficialmente il ciclo Infrastructure Layer senza introdurre ancora codice operativo. Il blueprint definisce cosa entra e cosa resta fuori dal Punto 7, mantiene i repository in memory come adapter validi e stabilisce una roadmap progressiva 7A → 7H prima del futuro Punto 8 API Layer.
+
+Con il Punto 7B è stato aggiunto il documento [`docs/31-infrastructure-foundation.md`](docs/31-infrastructure-foundation.md) e sono stati introdotti package infrastrutturali base, eccezioni tecniche, marker di adapter/repository/service, profili tecnici e un contratto generico di mapping. La fase resta prudente: niente database, JPA, Spring Data, REST API, controller, security o repository reali completi.
 
 ## Punto 6A — Application Layer Blueprint
 
@@ -349,6 +352,20 @@ La roadmap ufficiale del Punto 7 è composta da 7A Infrastructure Blueprint, 7B 
 
 Il Punto 7A è documentato in [`docs/30-infrastructure-layer-blueprint.md`](docs/30-infrastructure-layer-blueprint.md).
 
+## Punto 7B — Infrastructure Foundation
+
+Il Punto 7B è il primo step implementativo leggero del ciclo Infrastructure Layer.
+
+Questa fase crea una struttura tecnica ordinata sotto `infrastructure` senza introdurre ancora persistenza reale. I package introdotti sono `adapter`, `config`, `exception`, `mapping`, `repository` e `service`, che affiancano il package `memory` già esistente.
+
+Il 7B introduce anche una gerarchia di eccezioni infrastrutturali con `InfrastructureException` come radice, più `RepositoryException`, `ExternalServiceException`, `InfrastructureConfigurationException` e `MappingException`.
+
+La foundation aggiunge marker/convenzioni tecniche come `InfrastructureAdapter`, `InfrastructureRepositoryAdapter`, `InfrastructureService`, `InfrastructureProfile` e `PersistenceMapper`. Questi elementi preparano gli step successivi, ma non implementano ancora un database o repository reali completi.
+
+Il Punto 7B mantiene fuori REST API, controller, DTO web, security HTTP, JPA, Hibernate, Spring Data, database e servizi esterni operativi.
+
+Il Punto 7B è documentato in [`docs/31-infrastructure-foundation.md`](docs/31-infrastructure-foundation.md).
+
 
 ## Prossimi step consigliati
 
@@ -370,5 +387,6 @@ La roadmap consigliata è:
 14. mantenere stabile il Punto 6L con i primi use case Compliance base, repository port Compliance, repository in memory Compliance e test dedicati;
 15. mantenere stabile il Punto 6M come freeze finale del primo ciclo application layer;
 16. usare il Punto 7A come riferimento ufficiale prima di introdurre qualunque infrastruttura reale;
-17. aprire un nuovo punto roadmap solo dopo verifica locale completa con `mvn spotless:check` e `mvn clean test`;
-18. rimandare API REST, database e integrazioni esterne finché non viene definito il prossimo punto ufficiale.
+17. mantenere stabile il Punto 7B come foundation tecnica dell'Infrastructure Layer, senza trasformarlo prematuramente in database, JPA, REST API o security;
+18. procedere con il Punto 7C — Spring Wiring Foundation solo dopo verifica locale completa con `mvn spotless:check` e `mvn clean test`;
+19. rimandare API REST, database completi e integrazioni esterne finché non viene definito lo step specifico corretto.

@@ -823,3 +823,21 @@ La decisione è procedere in modo progressivo:
 Il Punto 7 non deve introdurre REST API, controller, DTO web, JSON, security HTTP o frontend. Questi elementi appartengono al futuro Punto 8.
 
 L'infrastructure layer potrà dipendere da application e domain per implementare i port.out, ma application e domain non dovranno dipendere da infrastructure. I repository in memory restano parte del progetto come adapter tecnici validi per test, sviluppo locale e scenari applicativi.
+
+## Decisione architetturale — Punto 7B Infrastructure Foundation
+
+Il Punto 7B introduce la foundation tecnica dell'Infrastructure Layer senza anticipare database, JPA, REST API o security.
+
+La decisione principale è separare fin da subito le responsabilità infrastrutturali in package espliciti:
+
+- `infrastructure.adapter` per gli adapter tecnici;
+- `infrastructure.config` per concetti di configurazione;
+- `infrastructure.exception` per errori tecnici;
+- `infrastructure.mapping` per la traduzione domain ↔ persistence;
+- `infrastructure.repository` per futuri repository reali;
+- `infrastructure.service` per futuri servizi tecnici;
+- `infrastructure.memory` per gli adapter in memory esistenti.
+
+Le eccezioni tecniche partono da `InfrastructureException` e non devono essere confuse con eccezioni di dominio o validazioni applicative. Errori di database, mapping, configurazione o servizi esterni sono problemi infrastrutturali.
+
+Il Punto 7B conferma che domain e application non devono dipendere da infrastructure. L'infrastructure layer può preparare marker, contratti e convenzioni, ma non deve ancora introdurre controller, JPA entity, Spring Data repository o security HTTP.
