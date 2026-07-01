@@ -172,18 +172,26 @@ class InMemoryRepositoryTest {
     assertThrows(UseCaseValidationException.class, () -> locationRepository.save(null));
     assertThrows(UseCaseValidationException.class, () -> locationRepository.findById(null));
     assertThrows(UseCaseValidationException.class, () -> locationRepository.findByCode(null));
+    assertThrows(UseCaseValidationException.class, () -> locationRepository.existsById(null));
+    assertThrows(UseCaseValidationException.class, () -> locationRepository.existsByCode(null));
 
     assertThrows(UseCaseValidationException.class, () -> cargoUnitRepository.save(null));
     assertThrows(UseCaseValidationException.class, () -> cargoUnitRepository.findById(null));
     assertThrows(UseCaseValidationException.class, () -> cargoUnitRepository.findByCode(null));
+    assertThrows(UseCaseValidationException.class, () -> cargoUnitRepository.existsById(null));
+    assertThrows(UseCaseValidationException.class, () -> cargoUnitRepository.existsByCode(null));
 
     assertThrows(UseCaseValidationException.class, () -> shipmentRepository.save(null));
     assertThrows(UseCaseValidationException.class, () -> shipmentRepository.findById(null));
     assertThrows(UseCaseValidationException.class, () -> shipmentRepository.findByCode(null));
+    assertThrows(UseCaseValidationException.class, () -> shipmentRepository.existsById(null));
+    assertThrows(UseCaseValidationException.class, () -> shipmentRepository.existsByCode(null));
 
     assertThrows(UseCaseValidationException.class, () -> documentRepository.save(null));
     assertThrows(UseCaseValidationException.class, () -> documentRepository.findById(null));
     assertThrows(UseCaseValidationException.class, () -> documentRepository.findByCode(null));
+    assertThrows(UseCaseValidationException.class, () -> documentRepository.existsById(null));
+    assertThrows(UseCaseValidationException.class, () -> documentRepository.existsByCode(null));
   }
 
   private static Location location(String code) {

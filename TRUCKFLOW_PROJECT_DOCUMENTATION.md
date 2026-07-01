@@ -20,9 +20,9 @@ Il markup HTML resta identico in entrambi i casi. Cambia solo il CSS applicato d
 
 ## Stato attuale del dominio
 
-Il progetto ha consolidato il **domain layer puro** e ha completato i primi step dell’application layer fino al **Punto 6G — Application Use Cases Expansion**.
+Il progetto ha consolidato il **domain layer puro** e ha completato i primi step dell’application layer fino al **Punto 6H — Application Use Case Expansion Review & Documentation Alignment**.
 
-La versione attuale rappresenta la **TruckFlow Domain Foundation v1.0** rafforzata dalla prima review correttiva del dominio puro. La fondazione è definita, le regole sono documentate e sono stati applicati interventi mirati su invarianti, eccezioni, codici aziendali, test e pulizia del repository. Il passo attuale completato è l'espansione controllata dei use case applicativi verso Documents, dopo il rafforzamento dei primi use case per Locations, Cargo e Shipments. Ora l'application layer copre anche registrazione, ricerca, attivazione e archiviazione di documenti logici, senza introdurre ancora REST API, database, JPA, Spring Data, file storage o persistenza definitiva.
+La versione attuale rappresenta la **TruckFlow Domain Foundation v1.0** rafforzata dalla prima review correttiva del dominio puro. La fondazione è definita, le regole sono documentate e sono stati applicati interventi mirati su invarianti, eccezioni, codici aziendali, test e pulizia del repository. Il passo attuale completato è la review del Punto 6H dopo l'espansione controllata dei use case applicativi verso Documents. Ora l'application layer copre registrazione, ricerca, attivazione e archiviazione di documenti logici ed è stato rafforzato con controlli su contratti `UseCase`, service, result null-safe, repository in memory e copy-on-write documentale, senza introdurre ancora REST API, database, JPA, Spring Data, file storage o persistenza definitiva.
 
 I package principali sono:
 
@@ -64,6 +64,7 @@ Il dominio è stato costruito seguendo una regola precisa: modellare prima i con
 - [`docs/20-application-first-use-cases.md`](docs/20-application-first-use-cases.md) — primi use case del Punto 6E: command, result, port in, application service e primo flusso applicativo Locations + Cargo + Shipments.
 - [`docs/21-application-use-case-hardening.md`](docs/21-application-use-case-hardening.md) — hardening del Punto 6F: `CancelShipmentUseCase`, copy-on-write delle mutazioni shipment, test negativi, errori applicativi e protezione dalle mutazioni fallite.
 - [`docs/22-application-use-case-expansion.md`](docs/22-application-use-case-expansion.md) — espansione del Punto 6G: primi use case applicativi Documents, `DocumentRepository`, `InMemoryDocumentRepository` e flusso register/find/activate/archive.
+- [`docs/23-application-use-case-expansion-review.md`](docs/23-application-use-case-expansion-review.md) — review del Punto 6H: contratti `UseCase`, service allineati alle port in, result null-safe, repository in memory uniformi e documentazione aggiornata.
 
 ## Regole fondamentali della Domain Foundation
 
@@ -120,6 +121,8 @@ Con il Punto 6E sono stati introdotti i primi use case applicativi reali: regist
 Con il Punto 6F è stato eseguito l'hardening dei primi use case: è stato aggiunto `CancelShipmentUseCase`, sono stati rafforzati i service di mutazione shipment con approccio copy-on-write, sono stati ampliati i test negativi su command, dependency nulle, risorse mancanti e duplicati, ed è stata verificata la protezione da mutazioni parziali in caso di errore di dominio.
 
 Con il Punto 6G è stata eseguita la prima espansione controllata dell'application layer verso `documents`: sono stati aggiunti command, result, port in, port out, service applicativi, repository in memory e test per registrare, trovare, attivare e archiviare documenti logici aziendali.
+
+Con il Punto 6H è stata eseguita una review tecnica e documentale dell'espansione: i result applicativi sono stati resi null-safe, è stato aggiunto `ApplicationUseCaseReviewTest`, sono stati rafforzati i controlli sulle repository in memory e il flusso Documents verifica esplicitamente il comportamento copy-on-write.
 
 
 
@@ -205,6 +208,18 @@ Questa fase non introduce REST API, database, JPA, Spring controller, file uploa
 
 Il Punto 6G è documentato in [`docs/22-application-use-case-expansion.md`](docs/22-application-use-case-expansion.md).
 
+## Punto 6H — Application Use Case Expansion Review & Documentation Alignment
+
+Il Punto 6H rivede e allinea l'application layer dopo l'espansione Documents.
+
+Sono stati rafforzati i factory method dei result applicativi (`LocationResult`, `CargoUnitResult`, `ShipmentResult`, `DocumentResult`) per rifiutare input nulli con `UseCaseValidationException`. È stato aggiunto `ApplicationUseCaseReviewTest`, che verifica che tutte le port in attuali estendano `UseCase` e che tutti i service concreti implementino la propria port.
+
+Sono stati inoltre ampliati i test delle repository in memory per coprire anche `existsById(null)` ed `existsByCode(null)`, e il test dei Documents verifica esplicitamente che activate/archive lavorino su copie prima del salvataggio.
+
+Questa fase non introduce nuovi use case business, REST API, database, JPA, controller, security, tracking, planning o dashboard.
+
+Il Punto 6H è documentato in [`docs/23-application-use-case-expansion-review.md`](docs/23-application-use-case-expansion-review.md).
+
 ## Prossimi step consigliati
 
 La roadmap consigliata è:
@@ -218,5 +233,6 @@ La roadmap consigliata è:
 7. mantenere stabile il Punto 6E con i primi use case Locations + Cargo + Shipments;
 8. mantenere stabile il Punto 6F con hardening dei primi use case, `CancelShipmentUseCase` e protezione copy-on-write delle mutazioni shipment;
 9. mantenere stabile il Punto 6G con i primi use case applicativi Documents, `DocumentRepository` e `InMemoryDocumentRepository`;
-10. rivedere nel Punto 6H la coerenza dell'application layer dopo l'espansione Documents;
-11. rimandare API REST, database e integrazioni esterne finché l'application layer non è stabile.
+10. mantenere stabile il Punto 6H con review dei contratti `UseCase`, service, result null-safe, repository in memory e copy-on-write Documents;
+11. scegliere con calma il Punto 6I, cioè la prossima espansione applicativa controllata;
+12. rimandare API REST, database e integrazioni esterne finché l'application layer non è stabile.

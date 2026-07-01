@@ -619,3 +619,11 @@ Con il Punto 6G sono stati aggiunti:
 - test applicativi e test repository aggiornati.
 
 La roadmap successiva diventa quindi il Punto 6H, dedicato alla review dell'espansione Documents e all'allineamento della documentazione prima di procedere con altri domini applicativi.
+
+## Aggiornamento dopo il Punto 6H
+
+Il Punto 6H conferma che il blueprint del Punto 6A resta valido anche dopo l'espansione Documents.
+
+La review ha verificato che le port in continuino a estendere il contratto base `UseCase`, che i service concreti implementino la propria port, che i result applicativi gestiscano input nulli con `UseCaseValidationException` e che le repository in memory rimangano adapter sostituibili.
+
+Il prossimo passo non deve ancora essere REST API o database. La roadmap corretta resta una nuova espansione applicativa controllata, mantenendo gli stessi confini definiti da questo blueprint.

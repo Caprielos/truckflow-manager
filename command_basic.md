@@ -267,3 +267,31 @@ Commit consigliato:
 git add -A
 git commit -m "Expand application use cases with documents"
 ```
+
+---
+
+## Nota progetto — Punto 6H
+
+Dopo l'aggiunta del Punto 6H — Application Use Case Expansion Review & Documentation Alignment, il controllo consigliato resta:
+
+```bash
+mvn spotless:apply
+mvn spotless:check
+mvn clean test
+git status
+```
+
+Il Punto 6H non aggiunge nuovi domini o REST API. Rafforza la coerenza dell'application layer dopo Documents con:
+
+- `ApplicationUseCaseReviewTest`;
+- result applicativi null-safe;
+- controlli più completi sulle repository in memory;
+- verifica copy-on-write dei document use case;
+- documentazione Markdown, HTML e CSS aggiornata.
+
+Commit consigliato:
+
+```bash
+git add -A
+git commit -m "Review application use case expansion"
+```

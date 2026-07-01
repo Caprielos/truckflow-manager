@@ -1,5 +1,6 @@
 package it.gabriele.truckflow.application.result.locations;
 
+import it.gabriele.truckflow.application.exception.UseCaseValidationException;
 import it.gabriele.truckflow.application.result.ApplicationResult;
 import it.gabriele.truckflow.domain.locations.Location;
 import it.gabriele.truckflow.domain.locations.LocationCode;
@@ -13,6 +14,8 @@ public record LocationResult(
     implements ApplicationResult {
 
   public static LocationResult from(Location location) {
+    UseCaseValidationException.requireNonNull(location, "location");
+
     return new LocationResult(
         location.id(), location.code(), location.name(), location.type(), location.status());
   }

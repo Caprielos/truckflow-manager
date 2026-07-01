@@ -54,6 +54,7 @@ This digital documentation mirrors:
 - `docs/20-application-first-use-cases.md`
 - `docs/21-application-use-case-hardening.md`
 - `docs/22-application-use-case-expansion.md`
+- `docs/23-application-use-case-expansion-review.md`
 - `command_basic.md`
 
 
@@ -105,3 +106,13 @@ Questo aggiornamento documenta la prima espansione controllata dell'application 
 La fase resta coerente con i vincoli architetturali già decisi: niente REST API, controller Spring, database, JPA, file upload, file storage, workflow documentale, audit trail o compliance check concreti.
 
 Documento di riferimento: `docs/22-application-use-case-expansion.md`.
+
+## Aggiornamento Punto 6H
+
+La documentazione digitale include ora anche il Punto 6H — Application Use Case Expansion Review & Documentation Alignment.
+
+Questo aggiornamento documenta la review tecnica successiva all'espansione Documents: contratti `UseCase`, service allineati alle port in, result applicativi null-safe, repository in memory con validazione uniforme, copy-on-write documentale e allineamento della documentazione Markdown + HTML + CSS.
+
+La fase resta una review: non introduce REST API, controller Spring, database, JPA, security, tracking, planning, dashboard, file upload, workflow documentali o compliance check concreti.
+
+Documento di riferimento: `docs/23-application-use-case-expansion-review.md`.

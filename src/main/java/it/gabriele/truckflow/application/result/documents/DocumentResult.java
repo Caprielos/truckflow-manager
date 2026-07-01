@@ -1,5 +1,6 @@
 package it.gabriele.truckflow.application.result.documents;
 
+import it.gabriele.truckflow.application.exception.UseCaseValidationException;
 import it.gabriele.truckflow.application.result.ApplicationResult;
 import it.gabriele.truckflow.domain.documents.Document;
 import it.gabriele.truckflow.domain.documents.DocumentCategory;
@@ -21,6 +22,8 @@ public record DocumentResult(
     implements ApplicationResult {
 
   public static DocumentResult from(Document document) {
+    UseCaseValidationException.requireNonNull(document, "document");
+
     return new DocumentResult(
         document.id(),
         document.code(),

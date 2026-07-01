@@ -46,14 +46,18 @@ class ApplicationUseCaseExpansionTest {
     var found = context.findDocument.execute(new FindDocumentCommand(registered.id()));
     assertEquals(registered, found);
 
+    var storedDraft = context.documentRepository.findById(registered.id()).orElseThrow();
     var active = context.activateDocument.execute(new ActivateDocumentCommand(registered.id()));
     assertEquals(DocumentStatus.ACTIVE, active.status());
+    assertEquals(DocumentStatus.DRAFT, storedDraft.status());
     assertEquals(
         DocumentStatus.ACTIVE,
         context.documentRepository.findById(registered.id()).orElseThrow().status());
 
+    var storedActive = context.documentRepository.findById(registered.id()).orElseThrow();
     var archived = context.archiveDocument.execute(new ArchiveDocumentCommand(registered.id()));
     assertEquals(DocumentStatus.ARCHIVED, archived.status());
+    assertEquals(DocumentStatus.ACTIVE, storedActive.status());
     assertEquals(
         DocumentStatus.ARCHIVED,
         context.documentRepository.findById(registered.id()).orElseThrow().status());

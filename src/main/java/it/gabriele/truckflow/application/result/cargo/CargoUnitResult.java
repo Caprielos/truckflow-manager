@@ -1,5 +1,6 @@
 package it.gabriele.truckflow.application.result.cargo;
 
+import it.gabriele.truckflow.application.exception.UseCaseValidationException;
 import it.gabriele.truckflow.application.result.ApplicationResult;
 import it.gabriele.truckflow.domain.cargo.CargoCode;
 import it.gabriele.truckflow.domain.cargo.CargoId;
@@ -13,6 +14,8 @@ public record CargoUnitResult(
     implements ApplicationResult {
 
   public static CargoUnitResult from(CargoUnit cargoUnit) {
+    UseCaseValidationException.requireNonNull(cargoUnit, "cargoUnit");
+
     return new CargoUnitResult(
         cargoUnit.id(), cargoUnit.code(), cargoUnit.name(), cargoUnit.type(), cargoUnit.status());
   }

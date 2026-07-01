@@ -355,3 +355,16 @@ La porta viene usata dai primi use case documentali del Punto 6G:
 - `ArchiveDocumentUseCase`.
 
 I test contrattuali delle repository port sono stati aggiornati per includere anche `DocumentRepository`.
+
+## Aggiornamento dopo il Punto 6H
+
+Il Punto 6H non aggiunge nuove repository port, ma rafforza la review del set esistente.
+
+Le port attuali restano:
+
+- `LocationRepository`;
+- `CargoUnitRepository`;
+- `ShipmentRepository`;
+- `DocumentRepository`.
+
+La review conferma che queste porte rimangono contratti dell'application layer e non implementazioni concrete. Le verifiche sulle repository in memory sono state ampliate per controllare anche la validazione di `existsById(null)` ed `existsByCode(null)`.

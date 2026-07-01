@@ -323,3 +323,9 @@ Il nuovo blocco non modifica il significato del Punto 6E, ma estende l'applicati
 - archiviare un documento.
 
 La documentazione specifica è disponibile in `docs/22-application-use-case-expansion.md`.
+
+## Aggiornamento dopo il Punto 6H
+
+Il Punto 6H non modifica il primo flusso Locations + Cargo + Shipments introdotto nel Punto 6E.
+
+La review aggiunge però una garanzia trasversale: i result applicativi collegati ai primi use case (`LocationResult`, `CargoUnitResult` e `ShipmentResult`) ora rifiutano input nulli con `UseCaseValidationException`, evitando errori Java impliciti e mantenendo coerente l'error handling applicativo.

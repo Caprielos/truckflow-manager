@@ -251,3 +251,14 @@ Responsabilità principali:
 La repository resta un adapter temporaneo e leggero. Non introduce database, JPA, Spring Data, storage fisico, upload, download, versioning documentale reale o workflow approvativi.
 
 `InMemoryRepositoryTest` è stato aggiornato per verificare anche il comportamento di `InMemoryDocumentRepository`.
+
+## Aggiornamento dopo il Punto 6H
+
+Il Punto 6H rafforza i test sulle repository in memory.
+
+Ora `InMemoryRepositoryTest` verifica input nulli non solo per `save`, `findById` e `findByCode`, ma anche per:
+
+- `existsById(null)`;
+- `existsByCode(null)`.
+
+Questo rende uniforme il comportamento pubblico di tutte le repository in memory attuali: Location, Cargo, Shipment e Document.

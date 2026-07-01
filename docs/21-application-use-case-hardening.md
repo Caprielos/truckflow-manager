@@ -242,3 +242,9 @@ docs/22-application-use-case-expansion.md
 ```
 
 Il prossimo step consigliato non è ancora REST API o database, ma una review del nuovo blocco applicativo Documents nel Punto 6H.
+
+## Aggiornamento dopo il Punto 6H
+
+Il Punto 6H estende l'idea di hardening applicativo anche dopo l'espansione Documents.
+
+Non cambia le mutazioni shipment già rafforzate nel Punto 6F, ma aggiunge una review trasversale su port, service, result e repository in memory. Inoltre conferma che anche le mutazioni documentali introdotte nel Punto 6G seguono l'approccio copy-on-write.

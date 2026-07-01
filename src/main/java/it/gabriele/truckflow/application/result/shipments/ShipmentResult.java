@@ -1,5 +1,6 @@
 package it.gabriele.truckflow.application.result.shipments;
 
+import it.gabriele.truckflow.application.exception.UseCaseValidationException;
 import it.gabriele.truckflow.application.result.ApplicationResult;
 import it.gabriele.truckflow.domain.shipments.core.Shipment;
 import it.gabriele.truckflow.domain.shipments.core.ShipmentCode;
@@ -22,6 +23,8 @@ public record ShipmentResult(
     implements ApplicationResult {
 
   public static ShipmentResult from(Shipment shipment) {
+    UseCaseValidationException.requireNonNull(shipment, "shipment");
+
     return new ShipmentResult(
         shipment.id(),
         shipment.code(),

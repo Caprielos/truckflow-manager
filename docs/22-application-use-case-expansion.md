@@ -296,3 +296,18 @@ Prima di introdurre nuovi domini applicativi, conviene rivedere la crescita del 
 - confini con dominio e infrastructure.
 
 Solo dopo questo review step sarà opportuno scegliere la prossima espansione tra Vehicles, Compliance, Operational Roles o ulteriori azioni su Shipments/Documents.
+
+## Aggiornamento dopo il Punto 6H
+
+Il Punto 6H ha completato la review del blocco Documents introdotto in questo step.
+
+La review ha rafforzato:
+
+- result applicativi null-safe;
+- contratti `UseCase` verificati da test;
+- service concreti verificati contro le proprie port in;
+- repository in memory con validazione uniforme;
+- test copy-on-write su activate/archive documentali;
+- documentazione Markdown e HTML.
+
+Il prossimo step consigliato non è più la review 6H, perché ora è completata. Il prossimo passo diventa il Punto 6I, cioè una nuova espansione applicativa controllata da scegliere tra Vehicles, Operational Roles, Compliance o ulteriori azioni logiche su Documents.
