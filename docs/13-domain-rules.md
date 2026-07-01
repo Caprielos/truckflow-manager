@@ -333,11 +333,13 @@ Prima di chiudere la review del dominio puro verificare:
 - eccezioni pulite;
 - nomenclatura coerente;
 - test verdi;
+- test architetturali sui confini tra domini verdi;
+- test contrattuali dei value object principali verdi;
 - documentazione aggiornata.
 
 ## 14. Roadmap successiva
 
-La prima review correttiva del dominio puro è stata completata con otto interventi mirati, documentati in [`14-domain-review-patches.md`](14-domain-review-patches.md).
+La prima review correttiva del dominio puro è stata completata con otto interventi mirati, documentati in [`14-domain-review-patches.md`](14-domain-review-patches.md). La revisione finale della test suite del dominio puro è documentata in [`15-domain-test-suite-review.md`](15-domain-test-suite-review.md).
 
 La roadmap successiva consigliata è:
 
@@ -345,6 +347,7 @@ La roadmap successiva consigliata è:
 2. evitare nuove eccezioni standard Java nei punti di validazione del dominio;
 3. aggiornare `docs/13-domain-rules.md` quando cambiano regole architetturali;
 4. aggiornare `docs/14-domain-review-patches.md` quando vengono eseguiti nuovi interventi correttivi rilevanti;
-5. iniziare il livello `application` con use case piccoli, porte in ingresso e porte repository in uscita;
-6. introdurre `infrastructure.memory` solo come adattatore tecnico, senza riportare logica applicativa o infrastrutturale nel dominio;
-7. rimandare API REST, database e integrazioni esterne finché application layer e use case principali non sono stabili.
+5. aggiornare `docs/15-domain-test-suite-review.md` quando cambiano copertura, confini o strategia dei test del dominio puro;
+6. iniziare il livello `application` con use case piccoli, porte in ingresso e porte repository in uscita;
+7. introdurre `infrastructure.memory` solo come adattatore tecnico, senza riportare logica applicativa o infrastrutturale nel dominio;
+8. rimandare API REST, database e integrazioni esterne finché application layer e use case principali non sono stabili.

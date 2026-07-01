@@ -267,6 +267,9 @@ body {
 #doc-16:checked ~ .app-shell .panel-16 { display: block; }
 #doc-16:checked ~ .app-shell label[for="doc-16"] { background: var(--nav-active-bg); border-color: var(--accent); color: var(--text-strong); }
 #doc-16:checked ~ .app-shell label[for="doc-16"] .nav-number { background: var(--accent); color: white; }
+#doc-17:checked ~ .app-shell .panel-17 { display: block; }
+#doc-17:checked ~ .app-shell label[for="doc-17"] { background: var(--nav-active-bg); border-color: var(--accent); color: var(--text-strong); }
+#doc-17:checked ~ .app-shell label[for="doc-17"] .nav-number { background: var(--accent); color: white; }
 
 .doc-panel-header {
   margin-bottom: 26px;

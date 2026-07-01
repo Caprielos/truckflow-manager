@@ -56,6 +56,7 @@ Il dominio è stato costruito seguendo una regola precisa: modellare prima i con
 - [`docs/12-domain-compliance.md`](docs/12-domain-compliance.md) — requisiti astratti di conformità.
 - [`docs/13-domain-rules.md`](docs/13-domain-rules.md) — regole ufficiali della TruckFlow Domain Foundation v1.0.
 - [`docs/14-domain-review-patches.md`](docs/14-domain-review-patches.md) — riepilogo degli interventi correttivi della prima review concreta del dominio puro.
+- [`docs/15-domain-test-suite-review.md`](docs/15-domain-test-suite-review.md) — revisione finale della test suite del dominio puro, con cosa è stato aggiunto, cosa manca e perché.
 
 ## Regole fondamentali della Domain Foundation
 
@@ -97,12 +98,14 @@ La prima review correttiva del dominio puro ha consolidato otto aspetti principa
 
 Questi interventi non aggiungono nuove funzionalità operative, ma rendono il dominio più sicuro, leggibile e pronto per essere consumato dal livello application.
 
+Dopo questi interventi è stata aggiunta anche una revisione finale della test suite del dominio puro. Questa revisione introduce test architetturali sui confini tra domini, test contrattuali sui value object principali, casi limite aggiuntivi su cargo e shipment e un documento dedicato che chiarisce cosa è coperto e cosa rimane fuori perché appartiene a moduli futuri.
+
 ## Prossimi step consigliati
 
 La roadmap consigliata è:
 
 1. verificare sul Mac `mvn spotless:apply` e `mvn clean test` dopo ogni intervento importante;
-2. mantenere aggiornata la documentazione `docs/13-domain-rules.md` e `docs/14-domain-review-patches.md` quando cambiano le regole di dominio;
+2. mantenere aggiornata la documentazione `docs/13-domain-rules.md`, `docs/14-domain-review-patches.md` e `docs/15-domain-test-suite-review.md` quando cambiano regole, test o confini del dominio;
 3. iniziare il livello application con use case piccoli e chiari;
 4. introdurre porte in ingresso e porte repository in uscita;
 5. aggiungere repository in-memory per test e scenari;

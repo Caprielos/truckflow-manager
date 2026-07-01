@@ -389,7 +389,22 @@ TruckFlow Domain Foundation v1.0 rafforzata dalla prima review correttiva del do
 
 ---
 
-## 12. Prossimo passo consigliato
+## 12. Revisione finale della test suite
+
+Dopo gli otto interventi correttivi è stata aggiunta una revisione specifica della test suite del dominio puro, documentata in [`15-domain-test-suite-review.md`](15-domain-test-suite-review.md).
+
+Questa revisione non introduce nuovi concetti operativi nel dominio. Rafforza invece i test esistenti con:
+
+- test architetturali sui confini tra bounded context;
+- controlli contro dipendenze vietate nel domain layer;
+- controlli contro eccezioni standard nei punti di validazione;
+- test contrattuali sui value object principali;
+- casi limite aggiuntivi per cargo e shipment;
+- spiegazione esplicita di ciò che non viene ancora testato perché appartiene a moduli futuri.
+
+---
+
+## 13. Prossimo passo consigliato
 
 Il prossimo passo naturale è preparare il livello `application`.
 

@@ -13,6 +13,7 @@ import it.gabriele.truckflow.domain.shipments.core.ShipmentPriority;
 import it.gabriele.truckflow.domain.shipments.core.ShipmentServiceLevel;
 import it.gabriele.truckflow.domain.shipments.core.ShipmentStatus;
 import it.gabriele.truckflow.domain.shipments.exceptions.InvalidShipmentException;
+import it.gabriele.truckflow.domain.shipments.exceptions.InvalidShipmentLegException;
 import it.gabriele.truckflow.domain.shipments.items.ShipmentItem;
 import it.gabriele.truckflow.domain.shipments.items.ShipmentUnitOfMeasure;
 import it.gabriele.truckflow.domain.shipments.legs.ShipmentLeg;
@@ -263,6 +264,59 @@ class ShipmentDomainTest {
     assertEquals(ShipmentStatus.DRAFT, shipment.status());
     assertEquals(0, shipment.itemCount());
     assertEquals(0, shipment.legCount());
+  }
+
+  @Test
+  void failedPropertiesReplacementDoesNotMutateShipment() {
+    var shipment =
+        new Shipment(
+            null,
+            ShipmentCode.of("SHP-NO-SEP"),
+            "Shipment without separation",
+            "Confirmed shipment without separation requirements",
+            ShipmentStatus.CONFIRMED,
+            ShipmentPriority.NORMAL,
+            ShipmentServiceLevel.STANDARD,
+            List.of(item()),
+            List.of(leg()),
+            ShipmentProperties.standard(),
+            ShipmentTemperature.uncontrolled(),
+            ShipmentRequirementSet.none(),
+            ShipmentMetrics.empty(),
+            ShipmentReferences.empty(),
+            ShipmentNotes.empty(),
+            "");
+    var invalidProperties =
+        new ShipmentProperties(false, false, false, true, true, "Requires separation");
+
+    assertThrows(
+        InvalidShipmentException.class, () -> shipment.replaceProperties(invalidProperties));
+
+    assertFalse(shipment.properties().requiresSeparation());
+    assertFalse(shipment.requires(ShipmentTransportRequirement.SEPARATION_REQUIRED));
+  }
+
+  @Test
+  void shipmentLegRejectsSameOriginAndDestinationForPickup() {
+    var location = LocationId.random();
+
+    assertThrows(
+        InvalidShipmentLegException.class,
+        () ->
+            new ShipmentLeg(
+                null, 1, ShipmentLegType.PICKUP, location, location, BigDecimal.ZERO, "Invalid"));
+  }
+
+  @Test
+  void shipmentLegAllowsSameOriginAndDestinationOnlyForTransferOrSpecial() {
+    var location = LocationId.random();
+
+    var transfer =
+        new ShipmentLeg(
+            null, 1, ShipmentLegType.TRANSFER, location, location, BigDecimal.ZERO, "Internal");
+
+    assertEquals(location, transfer.originLocationId());
+    assertEquals(location, transfer.destinationLocationId());
   }
 
   private static Shipment confirmedFoodShipment() {

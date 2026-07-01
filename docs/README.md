@@ -47,6 +47,7 @@ I nomi tecnici rimangono in inglese e allineati al codice Java.
 12. [`12-domain-compliance.md`](12-domain-compliance.md) — documentazione completa del dominio compliance e dei requisiti astratti di conformità.
 13. [`13-domain-rules.md`](13-domain-rules.md) — regole ufficiali della TruckFlow Domain Foundation v1.0 e roadmap della domain review.
 14. [`14-domain-review-patches.md`](14-domain-review-patches.md) — riepilogo degli interventi correttivi eseguiti durante la prima review concreta del dominio puro.
+15. [`15-domain-test-suite-review.md`](15-domain-test-suite-review.md) — revisione finale della test suite del dominio puro, con cosa è stato aggiunto, cosa manca e perché.
 
 ## Stato del progetto documentato
 
@@ -63,7 +64,8 @@ Questa documentazione descrive la versione del progetto in cui il dominio contie
 - dominio documents per descrivere il concetto puro di documento aziendale, con identità, codice, tipo, categoria, stato, metadati, contenuto logico e riferimenti astratti, senza introdurre file fisici, upload, storage, workflow, scadenze o compliance operativa;
 - dominio compliance per descrivere requisiti astratti di conformità, categorie, livelli di obbligatorietà, severità, target, regole, fonti e giurisdizioni senza introdurre controlli automatici, workflow, audit, scadenze o risultati di verifica.
 - regole ufficiali di dominio per guidare la TruckFlow Domain Foundation v1.0, la review finale del dominio puro e l'introduzione graduale delle eccezioni custom;
-- prima review correttiva del dominio puro completata con otto interventi mirati: mutazioni atomiche, eccezioni custom, `OperationalCode` obbligatorio, test catalogo qualificazioni meno fragili, pulizia dei file locali/generati e introduzione di `LicensePlate` e `VehicleIdentificationNumber` come value object del dominio veicoli, più `LanguageCode`, `UserTheme`, `CountryCode`, `JurisdictionRegion`, `ComplianceJurisdictionScope` e `OperationalScopeCode` per ridurre primitive obsession.
+- prima review correttiva del dominio puro completata con otto interventi mirati: mutazioni atomiche, eccezioni custom, `OperationalCode` obbligatorio, test catalogo qualificazioni meno fragili, pulizia dei file locali/generati e introduzione di `LicensePlate` e `VehicleIdentificationNumber` come value object del dominio veicoli, più `LanguageCode`, `UserTheme`, `CountryCode`, `JurisdictionRegion`, `ComplianceJurisdictionScope` e `OperationalScopeCode` per ridurre primitive obsession;
+- revisione finale della test suite del dominio puro documentata in `15-domain-test-suite-review.md`, con test architetturali, test contrattuali dei value object, casi limite cargo e shipment e spiegazione esplicita di cosa rimane fuori perché appartiene a moduli futuri.
 
 
 ## Nota sul packaging di `domain.vehicles`
@@ -175,3 +177,10 @@ Le regole principali sono:
 - usare riferimenti tramite ID, value object stabili o concetti astratti;
 - introdurre eccezioni custom di dominio in modo graduale;
 - non aggiungere ancora concetti come `ComplianceViolationException`, perché le violazioni concrete appartengono a moduli futuri di compliance check, audit o planning.
+
+
+## Nota su `docs/15-domain-test-suite-review.md`
+
+Il documento `15-domain-test-suite-review.md` descrive la revisione finale della test suite del dominio puro.
+
+Spiega cosa è stato aggiunto nei test, perché sono stati aggiunti test architetturali e test contrattuali dei value object, quali invarianti sono stati rafforzati e quali aree non vengono ancora testate perché appartengono a moduli futuri come availability, maintenance, planning, dispatching, workflow documentali e compliance check concreti.

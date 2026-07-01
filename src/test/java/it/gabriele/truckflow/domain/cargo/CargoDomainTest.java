@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import it.gabriele.truckflow.domain.cargo.exceptions.InvalidCargoException;
 import java.math.BigDecimal;
+import java.util.HashSet;
 import java.util.Set;
 import org.junit.jupiter.api.Test;
 
@@ -120,6 +121,45 @@ class CargoDomainTest {
     assertThrows(
         InvalidCargoException.class,
         () -> new CargoWeights(new BigDecimal("100"), new BigDecimal("120"), BigDecimal.TEN));
+  }
+
+  @Test
+  void dimensionsCannotContainNegativeMeasures() {
+    assertThrows(
+        InvalidCargoException.class,
+        () ->
+            new CargoDimensions(
+                new BigDecimal("1.20"),
+                new BigDecimal("0.80"),
+                new BigDecimal("-1.50"),
+                new BigDecimal("1.44")));
+  }
+
+  @Test
+  void controlledTemperatureRejectsInvertedMinAndMax() {
+    assertThrows(
+        InvalidCargoException.class,
+        () -> new CargoTemperature(new BigDecimal("8"), new BigDecimal("2"), true, "Invalid"));
+  }
+
+  @Test
+  void packagingRejectsNegativeUnitCounts() {
+    assertThrows(
+        InvalidCargoException.class,
+        () -> new CargoPackaging(CargoPackagingType.PALLET, -1, 1, "", true, "Invalid"));
+  }
+
+  @Test
+  void compatibilityRequirementRejectsNullTransportRequirementElements() {
+    var requirements = new HashSet<CargoTransportRequirement>();
+    requirements.add(CargoTransportRequirement.ADR_VEHICLE_REQUIRED);
+    requirements.add(null);
+
+    assertThrows(
+        InvalidCargoException.class,
+        () ->
+            new CargoCompatibilityRequirement(
+                requirements, null, null, null, null, null, "Invalid requirements"));
   }
 
   @Test

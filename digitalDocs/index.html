@@ -24,6 +24,7 @@
 <input class="doc-toggle" type="radio" name="active-doc" id="doc-14">
 <input class="doc-toggle" type="radio" name="active-doc" id="doc-15">
 <input class="doc-toggle" type="radio" name="active-doc" id="doc-16">
+<input class="doc-toggle" type="radio" name="active-doc" id="doc-17">
 <div class="app-shell">
   <aside class="sidebar">
     <div class="brand">
@@ -59,6 +60,7 @@
 <label class="nav-item" for="doc-14"><span class="nav-number">15</span><span class="nav-label">Domain Rules</span><span class="nav-file">13-domain-rules.md</span></label>
 <label class="nav-item" for="doc-15"><span class="nav-number">16</span><span class="nav-label">Domain Review Patches</span><span class="nav-file">14-domain-review-patches.md</span></label>
 <label class="nav-item" for="doc-16"><span class="nav-number">17</span><span class="nav-label">Command Basic</span><span class="nav-file">command_basic.md</span></label>
+<label class="nav-item" for="doc-17"><span class="nav-number">18</span><span class="nav-label">Domain Test Suite Review</span><span class="nav-file">15-domain-test-suite-review.md</span></label>
     </nav>
   </aside>
 
@@ -5290,6 +5292,221 @@ git push</code></pre>
 <tr><td>Commit</td><td><code>git add -A &amp;&amp; git commit -m &quot;messaggio&quot;</code></td></tr>
 <tr><td>Push</td><td><code>git push</code></td></tr>
 </tbody></table>
+  </div>
+</article>
+
+<article class="doc-panel panel-17" id="15-domain-test-suite-review-md">
+  <header class="doc-panel-header">
+    <p class="eyebrow">15-domain-test-suite-review.md</p>
+    <h1>15 – Domain Test Suite Review</h1>
+  </header>
+  <div class="markdown-body">
+<h1 id="15-domain-test-suite-review">15 – Domain Test Suite Review</h1>
+<h2 id="1-obiettivo">1. Obiettivo</h2>
+<p>Questo documento descrive la revisione finale della test suite del dominio puro di TruckFlow Manager prima dell&#x27;introduzione del livello <code>application</code>.</p>
+<p>L&#x27;obiettivo non è testare funzionalità future non ancora modellate, ma rendere i test più rappresentativi del dominio attuale:</p>
+<ul>
+<li>value object;</li>
+<li>aggregate root;</li>
+<li>invarianti;</li>
+<li>transizioni di stato;</li>
+<li>mutazioni lecite e vietate;</li>
+<li>eccezioni custom;</li>
+<li>confini tra bounded context;</li>
+<li>assenza di dipendenze vietate nel domain layer.</li>
+</ul>
+<p>Questa fase completa il Punto 5 della roadmap come **Punto 5E — Revisione finale della test suite del dominio puro**.</p>
+<h2 id="2-principio-seguito">2. Principio seguito</h2>
+<p>La regola principale è:</p>
+<pre><code>Testare bene il dominio puro attuale, senza inventare moduli futuri.</code></pre>
+<p>Quindi i test non devono introdurre indirettamente concetti che appartengono a fasi successive, come:</p>
+<ul>
+<li>availability operativa;</li>
+<li>maintenance completa;</li>
+<li>planning;</li>
+<li>dispatching;</li>
+<li>tracking;</li>
+<li>audit;</li>
+<li>repository database;</li>
+<li>controller REST;</li>
+<li>compatibilità cargo-veicolo eseguita realmente;</li>
+<li>assegnazione autista-mezzo;</li>
+<li>workflow documentali;</li>
+<li>compliance check concreti.</li>
+</ul>
+<p>Questi aspetti sono importanti, ma verranno testati quando esisteranno i relativi moduli.</p>
+<h2 id="3-cosa-stato-aggiunto">3. Cosa è stato aggiunto</h2>
+<h3 id="3-1-test-architetturali-del-dominio">3.1 Test architetturali del dominio</h3>
+<p>È stato aggiunto <code>DomainArchitectureTest</code>.</p>
+<p>Questo test controlla che il dominio puro rimanga indipendente da tecnologia e layer esterni.</p>
+<p>Verifica che sotto <code>src/main/java/it/gabriele/truckflow/domain</code> non vengano importati:</p>
+<ul>
+<li>Spring;</li>
+<li>JPA;</li>
+<li>Jakarta Persistence;</li>
+<li>Lombok;</li>
+<li>application layer;</li>
+<li>infrastructure layer.</li>
+</ul>
+<p>Verifica inoltre che nel dominio non siano presenti punti di validazione con:</p>
+<pre><code>throw new IllegalArgumentException(...)
+throw new IllegalStateException(...)</code></pre>
+<p>Il dominio deve usare eccezioni custom specifiche, non eccezioni standard generiche nei punti di validazione.</p>
+<h3 id="3-2-test-dei-confini-tra-domini">3.2 Test dei confini tra domini</h3>
+<p><code>DomainArchitectureTest</code> controlla anche che i bounded context non importino aggregate root completi di altri domini.</p>
+<p>Esempi di regole protette:</p>
+<ul>
+<li><code>domain.cargo</code> non deve importare <code>domain.vehicles</code> o <code>domain.shipments</code>;</li>
+<li><code>domain.vehicles</code> non deve importare <code>domain.cargo</code> o <code>domain.shipments</code>;</li>
+<li><code>domain.shipments</code> può usare <code>CargoId</code> e <code>LocationId</code>, ma non deve importare <code>CargoUnit</code> o <code>Location</code> completi;</li>
+<li><code>domain.triptemplates</code> può usare <code>LocationId</code>, ma non deve importare <code>Location</code> completo;</li>
+<li><code>domain.operational</code> può usare <code>UserId</code>, ma non deve importare <code>User</code> completo;</li>
+<li><code>domain.documents</code> deve usare riferimenti astratti, non aggregate root concreti;</li>
+<li><code>domain.compliance</code> deve usare target astratti, non istanze concrete di altri domini.</li>
+</ul>
+<p>Questi test proteggono una regola fondamentale della Domain Foundation:</p>
+<pre><code>I domini si collegano tramite ID, value object stabili o concetti astratti, non tramite aggregate root completi.</code></pre>
+<h3 id="3-3-test-contrattuali-dei-value-object">3.3 Test contrattuali dei value object</h3>
+<p>È stato aggiunto <code>DomainValueObjectContractTest</code>.</p>
+<p>Questo test verifica che i value object principali del dominio:</p>
+<ul>
+<li>normalizzino correttamente i valori;</li>
+<li>rifiutino valori non validi;</li>
+<li>lancino eccezioni custom coerenti;</li>
+<li>mantengano il significato specifico del bounded context.</li>
+</ul>
+<p>Sono coperti, tra gli altri:</p>
+<ul>
+<li><code>CargoCode</code>;</li>
+<li><code>ShipmentCode</code>;</li>
+<li><code>LocationCode</code>;</li>
+<li><code>TripTemplateCode</code>;</li>
+<li><code>DocumentCode</code>;</li>
+<li><code>ComplianceRequirementCode</code>;</li>
+<li><code>FleetCode</code>;</li>
+<li><code>OperationalScopeCode</code>;</li>
+<li><code>LicensePlate</code>;</li>
+<li><code>VehicleIdentificationNumber</code>;</li>
+<li><code>LanguageCode</code>;</li>
+<li><code>UserTheme</code>;</li>
+<li><code>CountryCode</code>;</li>
+<li><code>JurisdictionRegion</code>;</li>
+<li><code>ComplianceJurisdictionScope</code>.</li>
+</ul>
+<h3 id="3-4-test-su-compliancejurisdiction">3.4 Test su `ComplianceJurisdiction`</h3>
+<p>I test chiariscono una scelta importante:</p>
+<pre><code>Il dominio rappresenta la giurisdizione.
+L&#x27;application layer e la UI decideranno in futuro quali regioni, paesi e default mostrare.</code></pre>
+<p>Per questo vengono testati casi come:</p>
+<pre><code>scope = NATIONAL
+country = IT
+region = assente</code></pre>
+<pre><code>scope = EUROPEAN_UNION
+country = assente
+region = EU</code></pre>
+<pre><code>scope = REGIONAL
+country = IT
+region = LOMBARDY</code></pre>
+<p>Non viene inserita nel dominio la logica:</p>
+<pre><code>Europa -&gt; lista nazioni -&gt; default Italia</code></pre>
+<p>Quella sarà una futura logica di configurazione, application layer o interfaccia utente.</p>
+<h3 id="3-5-test-aggiuntivi-sul-dominio-cargo">3.5 Test aggiuntivi sul dominio cargo</h3>
+<p>Sono stati rafforzati i test di <code>domain.cargo</code> con casi limite e negativi su:</p>
+<ul>
+<li>dimensioni negative;</li>
+<li>temperatura controllata con minimo maggiore del massimo;</li>
+<li>packaging con quantità negativa;</li>
+<li>requisiti di compatibilità con elementi nulli;</li>
+<li>sostituzione fallita della temperatura senza mutazione parziale dell&#x27;aggregate.</li>
+</ul>
+<p>Questi test rendono più espliciti gli invarianti su dimensioni, temperature, packaging e requisiti di trasporto.</p>
+<h3 id="3-6-test-aggiuntivi-sul-dominio-shipments">3.6 Test aggiuntivi sul dominio shipments</h3>
+<p>Sono stati rafforzati i test di <code>domain.shipments</code> con casi su:</p>
+<ul>
+<li>sostituzione fallita delle proprietà senza mutazione parziale della shipment;</li>
+<li>rifiuto di una tratta <code>PICKUP</code> con stessa origine e destinazione;</li>
+<li>accettazione di stessa origine e destinazione solo per tratte <code>TRANSFER</code> o <code>SPECIAL</code>.</li>
+</ul>
+<p>Questi test proteggono meglio gli invarianti sulle mutazioni atomiche e sulle regole delle tratte logiche.</p>
+<h2 id="4-cosa-era-gi-coperto-prima">4. Cosa era già coperto prima</h2>
+<p>Prima di questa revisione erano già presenti test significativi su:</p>
+<ul>
+<li>creazione di utenti applicativi;</li>
+<li>ruoli e permessi;</li>
+<li>stato utente;</li>
+<li>figure operative;</li>
+<li>qualificazioni operative;</li>
+<li>catalogo qualificazioni;</li>
+<li>unità veicolo;</li>
+<li>combinazioni veicolari;</li>
+<li>targa e VIN come value object;</li>
+<li>cargo ADR e cargo a temperatura controllata;</li>
+<li>location e coordinate;</li>
+<li>trip template e segmenti;</li>
+<li>shipment confermate e draft;</li>
+<li>documenti astratti;</li>
+<li>requisiti di compliance astratti;</li>
+<li>eccezioni base condivise.</li>
+</ul>
+<p>Questa patch non sostituisce quei test: li completa con test trasversali e alcuni casi limite aggiuntivi.</p>
+<h2 id="5-cosa-manca-ancora-e-perch">5. Cosa manca ancora e perché</h2>
+<h3 id="5-1-availability">5.1 Availability</h3>
+<p>Non sono stati aggiunti test su availability operativa perché il dominio attuale non modella ancora disponibilità giornaliera, prenotazioni, assegnazioni o indisponibilità risorse.</p>
+<p>Questi test arriveranno quando esisterà un modulo dedicato a fleet availability, planning o dispatching.</p>
+<h3 id="5-2-maintenance">5.2 Maintenance</h3>
+<p>Non sono stati aggiunti test completi su manutenzione perché non esiste ancora un bounded context completo per:</p>
+<ul>
+<li>manutenzioni programmate;</li>
+<li>interventi;</li>
+<li>difetti segnalati;</li>
+<li>downtime;</li>
+<li>costi manutentivi;</li>
+<li>pneumatici;</li>
+<li>ricambi.</li>
+</ul>
+<p>Questi test arriveranno quando verrà modellato il dominio maintenance.</p>
+<h3 id="5-3-fleet-operations">5.3 Fleet operations</h3>
+<p>Non sono stati aggiunti test su fleet operations operative perché il dominio <code>vehicles</code> attuale descrive unità, combinazioni, capacità tecniche e stato anagrafico, ma non esecuzione operativa, disponibilità o assegnazione.</p>
+<h3 id="5-4-compatibilit-cargo-veicolo">5.4 Compatibilità cargo-veicolo</h3>
+<p>Non sono stati aggiunti test di compatibilità reale tra cargo e veicolo perché la regola architetturale attuale è:</p>
+<pre><code>Cargo dichiara requisiti.
+Vehicles dichiara capacità.
+Planning/Dispatching verifica la compatibilità.</code></pre>
+<p>Quindi oggi è corretto testare che il cargo dichiari requisiti e che il veicolo dichiari capacità, ma non è ancora corretto creare un test che assegna un cargo a un mezzo.</p>
+<h3 id="5-5-compliance-check-concreti">5.5 Compliance check concreti</h3>
+<p>Non sono stati aggiunti test su <code>ComplianceCheck</code>, <code>ComplianceResult</code> o <code>ComplianceViolation</code> perché questi concetti non appartengono ancora al dominio compliance puro.</p>
+<p>Il dominio attuale modella solo <code>ComplianceRequirement</code>, cioè il requisito astratto.</p>
+<h3 id="5-6-workflow-documentali">5.6 Workflow documentali</h3>
+<p>Non sono stati aggiunti test su firma, scadenza, validazione documento, approvazione o upload file perché <code>domain.documents</code> rappresenta il documento astratto, non il workflow documentale.</p>
+<p>Questi test arriveranno con moduli futuri di document management, file storage e workflow.</p>
+<h2 id="6-regola-per-i-prossimi-test">6. Regola per i prossimi test</h2>
+<p>Ogni nuovo test del domain layer deve rispettare queste regole:</p>
+<ul>
+<li>deve raccontare una regola di business o un invariante;</li>
+<li>deve avere un nome espressivo;</li>
+<li>deve usare eccezioni custom del dominio;</li>
+<li>deve evitare dipendenze da framework, database o API;</li>
+<li>deve evitare di testare funzionalità future non modellate;</li>
+<li>deve proteggere confini tra bounded context;</li>
+<li>deve preferire comportamento e coerenza rispetto a conteggi fragili.</li>
+</ul>
+<h2 id="7-stato-finale">7. Stato finale</h2>
+<p>Dopo questa revisione, la suite di test del dominio puro protegge meglio:</p>
+<ul>
+<li>value object principali;</li>
+<li>codici aziendali;</li>
+<li>identificatori veicolo;</li>
+<li>preferenze utente;</li>
+<li>giurisdizione compliance;</li>
+<li>operational scope;</li>
+<li>invarianti cargo;</li>
+<li>invarianti shipment;</li>
+<li>eccezioni custom;</li>
+<li>confini tra domini;</li>
+<li>indipendenza del domain layer da framework e infrastructure.</li>
+</ul>
+<p>Il dominio rimane pronto per il prossimo passo:</p>
+<pre><code>Punto 6 — Application Layer</code></pre>
   </div>
 </article>
   </main>
