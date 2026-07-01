@@ -54,3 +54,9 @@ This digital documentation mirrors:
 ## Application layer blueprint
 
 The digital documentation now also mirrors the Punto 6A application layer blueprint. This step explains the intended structure for command, result, port in, port out, use cases, repository ports, in-memory repositories and application tests before introducing REST APIs or databases.
+
+## Aggiornamento Punto 6B
+
+La documentazione digitale include ora anche il riferimento al Punto 6B — Application Foundation, che introduce i primi package e contratti dell'application layer senza modificare la documentazione Markdown esistente.
+
+Documento di riferimento: `docs/17-application-foundation.md`.

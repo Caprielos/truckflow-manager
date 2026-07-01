@@ -740,3 +740,19 @@ infrastructure implementa le port out definite dall'application layer
 ```
 
 L'application layer potrà dipendere dal dominio. Il dominio non potrà dipendere dall'application layer. L'infrastructure potrà implementare le porte definite dall'application layer.
+
+## Decisione architetturale — Application Foundation prima dei use case concreti
+
+Dopo il blueprint del Punto 6A, TruckFlow Manager introduce il Punto 6B: Application Foundation.
+
+La foundation applicativa crea package, contratti base ed eccezioni applicative prima di implementare use case specifici. Questa scelta evita di introdurre `RegisterLocationUseCase`, `CreateShipmentUseCase` o repository specifici senza una struttura comune.
+
+Le regole sono:
+
+- l'application layer può dipendere dal dominio;
+- il dominio non può dipendere dall'application layer;
+- l'application layer non deve dipendere da Spring, JPA, web, database o infrastructure concreta;
+- gli errori applicativi sono separati dagli errori di dominio;
+- i repository concreti arriveranno in infrastructure, non nel dominio e non nella foundation.
+
+Il Punto 6B non implementa ancora casi d'uso completi. Prepara la base tecnica per il Punto 6C, dedicato alle prime repository port specifiche.

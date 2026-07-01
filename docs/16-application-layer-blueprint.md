@@ -2,6 +2,9 @@
 
 Questo documento definisce il **Punto 6A — Application Layer Blueprint** di TruckFlow Manager.
 
+> Stato: il blueprint del Punto 6A è stato completato come guida architetturale. Il progetto ha avviato il Punto 6B con la creazione della foundation applicativa descritta in `docs/17-application-foundation.md`.
+
+
 Il dominio puro è stato modellato, rafforzato, testato e documentato. Il passo successivo non è introdurre subito REST API, database o Spring, ma progettare il livello applicativo che userà il dominio attraverso casi d'uso chiari.
 
 L'application layer è il ponte tra il modello di dominio e i futuri ingressi tecnici del sistema, come API REST, interfacce grafiche, job automatici, import/export, workflow e integrazioni esterne.

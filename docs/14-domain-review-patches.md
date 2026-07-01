@@ -431,3 +431,11 @@ Dopo la review correttiva del dominio puro e la revisione finale della test suit
 Questo non è un nuovo refactoring del dominio. È il documento di handoff verso il livello applicativo. Definisce come TruckFlow Manager dovrà organizzare use case, command, result, port in, port out, repository in memory, eccezioni applicative e test applicativi.
 
 La scelta protegge il lavoro fatto nel dominio: i futuri controller, database e moduli infrastrutturali dovranno passare dall'application layer e non manipolare direttamente gli aggregate in modo disordinato.
+
+## Step successivo — Punto 6B Application Foundation
+
+Dopo gli interventi correttivi sul dominio e il blueprint del Punto 6A, il progetto ha iniziato il Punto 6B.
+
+Questo step non è una correzione del dominio, ma il primo passo applicativo: crea la foundation dell'application layer con contratti base, package dedicati, eccezioni applicative e test architetturali.
+
+La review del dominio resta valida: il dominio rimane puro e non dipende dal nuovo layer applicativo.

@@ -20,9 +20,9 @@ Il markup HTML resta identico in entrambi i casi. Cambia solo il CSS applicato d
 
 ## Stato attuale del dominio
 
-Il progetto ha consolidato il **domain layer puro** e sta entrando nel **Punto 6A — Application Layer Blueprint**.
+Il progetto ha consolidato il **domain layer puro** e sta entrando nel **Punto 6B — Application Foundation**.
 
-La versione attuale rappresenta la **TruckFlow Domain Foundation v1.0** rafforzata dalla prima review correttiva del dominio puro. La fondazione è definita, le regole sono documentate e sono stati applicati interventi mirati su invarianti, eccezioni, codici aziendali, test e pulizia del repository. Il passo successivo è progettare il livello applicativo che userà il dominio tramite casi d'uso, porte e repository astratti.
+La versione attuale rappresenta la **TruckFlow Domain Foundation v1.0** rafforzata dalla prima review correttiva del dominio puro. La fondazione è definita, le regole sono documentate e sono stati applicati interventi mirati su invarianti, eccezioni, codici aziendali, test e pulizia del repository. Il passo successivo è trasformare il blueprint in una foundation applicativa concreta: package, contratti base, eccezioni applicative e test architetturali.
 
 I package principali sono:
 
@@ -58,6 +58,7 @@ Il dominio è stato costruito seguendo una regola precisa: modellare prima i con
 - [`docs/14-domain-review-patches.md`](docs/14-domain-review-patches.md) — riepilogo degli interventi correttivi della prima review concreta del dominio puro.
 - [`docs/15-domain-test-suite-review.md`](docs/15-domain-test-suite-review.md) — revisione finale della test suite del dominio puro, con cosa è stato aggiunto, cosa manca e perché.
 - [`docs/16-application-layer-blueprint.md`](docs/16-application-layer-blueprint.md) — blueprint del Punto 6A, dedicato a struttura application, command, result, port, repository, use case e test applicativi.
+- [`docs/17-application-foundation.md`](docs/17-application-foundation.md) — foundation del Punto 6B: package application, contratti base, eccezioni applicative e test architetturali.
 
 ## Regole fondamentali della Domain Foundation
 
@@ -101,17 +102,25 @@ Questi interventi non aggiungono nuove funzionalità operative, ma rendono il do
 
 Dopo questi interventi è stata aggiunta anche una revisione finale della test suite del dominio puro. Questa revisione introduce test architetturali sui confini tra domini, test contrattuali sui value object principali, casi limite aggiuntivi su cargo e shipment e un documento dedicato che chiarisce cosa è coperto e cosa rimane fuori perché appartiene a moduli futuri.
 
-È stato inoltre aggiunto il blueprint del Punto 6A. Questo nuovo step non implementa ancora il codice applicativo, ma definisce come dovranno essere organizzati use case, command, result, port in, port out, repository in memory, eccezioni applicative e test dell'application layer.
+È stato inoltre aggiunto il blueprint del Punto 6A. Questo step ha definito come organizzare use case, command, result, port in, port out, repository in memory, eccezioni applicative e test dell'application layer.
+
+Dopo il blueprint è stata avviata la foundation del Punto 6B: sono stati creati i package applicativi principali, i contratti base `ApplicationCommand`, `ApplicationResult` e `UseCase`, le prime eccezioni applicative e i test architetturali che proteggono il nuovo livello.
 
 
 
 ## Punto 6A — Application Layer Blueprint
 
-Il nuovo step documentato è il Punto 6A.
-
-Questo step serve a progettare il livello applicativo prima di scrivere codice operativo. L'application layer dovrà orchestrare il dominio tramite casi d'uso, senza duplicare le regole di business e senza introdurre subito controller, database, JPA, Spring o API REST.
+Il Punto 6A ha progettato il livello applicativo prima di scrivere codice operativo. L'application layer dovrà orchestrare il dominio tramite casi d'uso, senza duplicare le regole di business e senza introdurre subito controller, database, JPA, Spring o API REST.
 
 La struttura prevista include command, result, port in, port out, application service, eccezioni applicative e repository astratti. Il primo flusso consigliato parte da Locations + Cargo + Shipments, perché permette di creare un caso d'uso reale mantenendo separati dominio, applicazione e infrastruttura.
+
+## Punto 6B — Application Foundation
+
+Il Punto 6B introduce la prima base concreta dell'application layer. Sono stati aggiunti i package `application.command`, `application.result`, `application.port.in`, `application.port.out`, `application.usecase` e `application.exception`.
+
+La foundation include i contratti `ApplicationCommand`, `ApplicationResult` e `UseCase`, più le eccezioni applicative `ApplicationException`, `UseCaseValidationException`, `ResourceNotFoundException` e `DuplicateResourceException`.
+
+Questa fase non introduce ancora use case specifici, repository port specifici, repository in memory, API REST o database. Serve a rendere stabile la struttura prima di costruire Locations, Cargo e Shipments nel livello applicativo.
 
 ## Prossimi step consigliati
 
@@ -119,9 +128,9 @@ La roadmap consigliata è:
 
 1. verificare sul Mac `mvn spotless:apply` e `mvn clean test` dopo ogni intervento importante;
 2. mantenere aggiornata la documentazione `docs/13-domain-rules.md`, `docs/14-domain-review-patches.md`, `docs/15-domain-test-suite-review.md` e `docs/16-application-layer-blueprint.md` quando cambiano regole, test, confini o struttura applicativa;
-3. chiudere il Punto 6A con il blueprint dell'application layer;
-4. introdurre la foundation applicativa: package, eccezioni applicative, command e result;
-5. introdurre porte in ingresso e porte repository in uscita;
+3. mantenere il Punto 6A come blueprint ufficiale dell'application layer;
+4. completare il Punto 6B con foundation applicativa, package, eccezioni applicative, command, result e test;
+5. introdurre nel Punto 6C le prime porte repository specifiche;
 6. aggiungere repository in-memory per test e scenari;
 7. implementare i primi use case piccoli e chiari, partendo da Locations + Cargo + Shipments;
 8. rimandare API REST, database e integrazioni esterne finché l'application layer non è stabile.

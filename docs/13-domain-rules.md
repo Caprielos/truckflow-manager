@@ -363,3 +363,11 @@ Regola ufficiale:
 > Il dominio decide se un oggetto è valido. L'application layer decide quando caricarlo, come orchestrarlo e dove salvarlo tramite porte astratte.
 
 REST API, database, JPA, tracking, planning, dispatching, workflow documentali e compliance check concreti restano fuori dal Punto 6A.
+
+## Stato successivo alla Domain Foundation — Punto 6B
+
+Dopo la chiusura della fondazione del dominio puro e il blueprint del Punto 6A, il progetto ha avviato il Punto 6B — Application Foundation.
+
+Questa fase non modifica le regole del dominio. Introduce il livello applicativo come layer separato, con package, contratti base, eccezioni applicative e test architetturali.
+
+La regola rimane invariata: il dominio non importa l'application layer. L'application layer può usare il dominio per orchestrare futuri casi d'uso.

@@ -290,3 +290,9 @@ La revisione della test suite del dominio puro prepara il progetto all'applicati
 I test di dominio continuano a proteggere invarianti, value object, aggregate root, eccezioni custom e confini tra bounded context. I futuri test applicativi avranno invece un compito diverso: verificare che i casi d'uso orchestrino correttamente repository, command, result e aggregate già validati dal dominio.
 
 Per questo il nuovo documento `16-application-layer-blueprint.md` separa chiaramente test di dominio e test applicativi.
+
+## Estensione successiva — test della Application Foundation
+
+Con il Punto 6B sono stati aggiunti test dedicati all'application layer.
+
+Questi test non sostituiscono la test suite del dominio. Servono a verificare che la nuova foundation applicativa resti separata da framework, web, JPA e infrastructure concreta, e che il dominio non importi il livello application.

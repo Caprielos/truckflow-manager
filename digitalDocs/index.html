@@ -26,6 +26,7 @@
 <input class="doc-toggle" type="radio" name="active-doc" id="doc-16">
 <input class="doc-toggle" type="radio" name="active-doc" id="doc-17">
 <input class="doc-toggle" type="radio" name="active-doc" id="doc-18">
+<input class="doc-toggle" type="radio" name="active-doc" id="doc-19">
 <div class="app-shell">
   <aside class="sidebar">
     <div class="brand">
@@ -62,7 +63,8 @@
 <label class="nav-item" for="doc-15"><span class="nav-number">16</span><span class="nav-label">Domain Review Patches</span><span class="nav-file">14-domain-review-patches.md</span></label>
 <label class="nav-item" for="doc-16"><span class="nav-number">17</span><span class="nav-label">Domain Test Suite Review</span><span class="nav-file">15-domain-test-suite-review.md</span></label>
 <label class="nav-item" for="doc-17"><span class="nav-number">18</span><span class="nav-label">Application Layer Blueprint</span><span class="nav-file">16-application-layer-blueprint.md</span></label>
-<label class="nav-item" for="doc-18"><span class="nav-number">19</span><span class="nav-label">Command Basic</span><span class="nav-file">command_basic.md</span></label>
+<label class="nav-item" for="doc-19"><span class="nav-number">19</span><span class="nav-label">Application Foundation</span><span class="nav-file">17-application-foundation.md</span></label>
+<label class="nav-item" for="doc-18"><span class="nav-number">20</span><span class="nav-label">Command Basic</span><span class="nav-file">command_basic.md</span></label>
     </nav>
   </aside>
 
@@ -75,7 +77,7 @@
       <div class="toolbar-badges">
         <span>HTML + CSS</span>
         <span>Markdown mirror</span>
-        <span>Domain + Application Blueprint</span>
+        <span>Domain + Application Foundation</span>
       </div>
     </div>
 
@@ -98,8 +100,8 @@
 </ul>
 <p>Il markup HTML resta identico in entrambi i casi. Cambia solo il CSS applicato dal flag globale.</p>
 <h2>Stato attuale del dominio</h2>
-<p>Il progetto ha consolidato il <strong><span class="term" data-it="livello di dominio">domain layer</span> puro</strong> e sta entrando nel <strong>Punto 6A — <span class="term" data-it="livello applicativo">Application Layer</span> Blueprint</strong>.</p>
-<p>La versione attuale rappresenta la <strong><span class="term" data-it="fondazione del dominio puro TruckFlow versione 1.0">TruckFlow Domain Foundation v1.0</span></strong> rafforzata dalla prima review correttiva del dominio puro. La fondazione è definita, le regole sono documentate e sono stati applicati interventi mirati su invarianti, eccezioni, codici aziendali, test e pulizia del <span class="term" data-it="repository">repository</span>. Il passo successivo è progettare il livello applicativo che userà il dominio tramite casi d'uso, porte e <span class="term" data-it="repository">repository</span> astratti.</p>
+<p>Il progetto ha consolidato il <strong><span class="term" data-it="livello di dominio">domain layer</span> puro</strong> e ha completato il <strong>Punto 6A — <span class="term" data-it="livello applicativo">Application Layer</span> Blueprint</strong> e sta introducendo il <strong>Punto 6B — <span class="term" data-it="fondazione applicativa">Application Foundation</span></strong>.</p>
+<p>La versione attuale rappresenta la <strong><span class="term" data-it="fondazione del dominio puro TruckFlow versione 1.0">TruckFlow Domain Foundation v1.0</span></strong> rafforzata dalla prima review correttiva del dominio puro. La fondazione è definita, le regole sono documentate e sono stati applicati interventi mirati su invarianti, eccezioni, codici aziendali, test e pulizia del <span class="term" data-it="repository">repository</span>. Il passo successivo è trasformare il blueprint in una foundation applicativa concreta: package, contratti base, eccezioni applicative e test architetturali.</p>
 <p>I package principali sono:</p>
 <ul>
 <li><code>domain.users</code>;</li>
@@ -133,6 +135,7 @@
 <li><a href="docs/14-domain-review-patches.md"><code>docs/14-domain-review-patches.md</code></a> — riepilogo degli interventi correttivi della prima review concreta del dominio puro.</li>
 <li><a href="docs/15-domain-test-suite-review.md"><code>docs/15-domain-test-suite-review.md</code></a> — revisione finale della test suite del dominio puro, con cosa è stato aggiunto, cosa manca e perché.</li>
 <li><a href="docs/16-application-layer-blueprint.md"><code>docs/16-application-layer-blueprint.md</code></a> — blueprint del Punto 6A, dedicato a struttura application, <span class="term" data-it="comando applicativo">command</span>, <span class="term" data-it="risultato applicativo">result</span>, port, <span class="term" data-it="repository">repository</span>, <span class="term" data-it="caso d’uso">use case</span> e test applicativi.</li>
+<li><a href="docs/17-application-foundation.md"><code>docs/17-application-foundation.md</code></a> — foundation del Punto 6B: package application, contratti base, eccezioni applicative, test architetturali e cosa manca prima dei primi <span class="term" data-it="caso d’uso">use case</span>.</li>
 </ul>
 <h2>Regole fondamentali della Domain Foundation</h2>
 <p>Le regole principali sono:</p>
@@ -6350,6 +6353,53 @@ git push
 </tbody>
 </table>
 
+  </div>
+</article>
+
+<article class="doc-panel panel-19" id="17-application-foundation-md">
+  <header class="doc-panel-header">
+    <p class="eyebrow">17-application-foundation.md</p>
+    <h1>17 — Application Foundation</h1>
+  </header>
+  <div class="markdown-body">
+<h1>17 — <span class="term" data-it="fondazione applicativa">Application Foundation</span></h1>
+<p>Questo documento descrive il <strong>Punto 6B — <span class="term" data-it="fondazione applicativa">Application Foundation</span></strong> di TruckFlow Manager.</p>
+<p>Il Punto 6A ha definito il blueprint del livello applicativo. Il Punto 6B inizia a trasformare quel blueprint in codice, creando la fondazione tecnica dell'<span class="term" data-it="livello applicativo">application layer</span> senza introdurre ancora casi d'uso operativi completi, <span class="term" data-it="repository">repository</span> concreti, database, controller REST o framework applicativi.</p>
+<h2>1. Obiettivo del Punto 6B</h2>
+<p>L'obiettivo è creare la base minima, stabile e riusabile su cui costruire i futuri <span class="term" data-it="caso d’uso">use case</span>.</p>
+<ul>
+<li>package <code>application</code>;</li>
+<li>sottopackage <code>command</code>, <code>result</code>, <code>port.in</code>, <code>port.out</code>, <code>usecase</code> ed <code>exception</code>;</li>
+<li>contratti base <code>ApplicationCommand</code>, <code>ApplicationResult</code> e <code>UseCase</code>;</li>
+<li>eccezioni applicative fondamentali;</li>
+<li>test architetturali e contrattuali dedicati all'application layer;</li>
+<li>documentazione aggiornata sul nuovo step.</li>
+</ul>
+<h2>2. Cosa è stato aggiunto</h2>
+<p>È stato creato il package <code>it.gabriele.truckflow.application</code>, separato dal dominio e indipendente da framework, web, database e infrastructure concreta.</p>
+<p>Il package <code>application.command</code> contiene <code>ApplicationCommand</code>, cioè il contratto base per gli input dei futuri casi d'uso.</p>
+<p>Il package <code>application.result</code> contiene <code>ApplicationResult</code>, cioè il contratto base per gli output stabili dei futuri casi d'uso.</p>
+<p>Il package <code>application.port.in</code> contiene <code>UseCase</code>, il contratto generico che esprime la regola: un command entra, un result esce.</p>
+<p>Il package <code>application.port.out</code> prepara le future porte verso repository e servizi esterni astratti.</p>
+<p>Il package <code>application.usecase</code> prepara le future implementazioni dei casi d'uso, con convenzione <code>RegisterLocationUseCase</code> per il contratto e <code>RegisterLocationService</code> per l'application service.</p>
+<p>Il package <code>application.exception</code> introduce <code>ApplicationException</code>, <code>UseCaseValidationException</code>, <code>ResourceNotFoundException</code> e <code>DuplicateResourceException</code>.</p>
+<h2>3. Differenza tra errori di dominio ed errori applicativi</h2>
+<p>Le eccezioni di dominio rappresentano violazioni delle regole di business. Le eccezioni applicative rappresentano problemi di orchestrazione del caso d'uso, come risorse mancanti, duplicati o input applicativi incompleti.</p>
+<blockquote><p>Il dominio decide se il modello è valido. L'application layer decide come orchestrare il modello e come gestire risorse mancanti, duplicati e input applicativi.</p></blockquote>
+<h2>4. Cosa è stato testato</h2>
+<ul>
+<li>normalizzazione dei messaggi di <code>ApplicationException</code>;</li>
+<li>comportamento di <code>ResourceNotFoundException</code>;</li>
+<li>comportamento di <code>DuplicateResourceException</code>;</li>
+<li>validazione base di <code>UseCaseValidationException</code>;</li>
+<li>contratto generico <code>UseCase</code>;</li>
+<li>assenza di dipendenze da Spring, JPA, Lombok, web e infrastructure nell'application layer;</li>
+<li>assenza di dipendenze del domain layer verso l'application layer.</li>
+</ul>
+<h2>5. Cosa non è stato ancora fatto</h2>
+<p>Il Punto 6B non introduce ancora use case specifici, command specifici, result specifici, repository port specifici, repository in memory, controller REST, database, JPA, Spring annotations, sicurezza, API pubbliche o workflow operativi.</p>
+<h2>6. Prossimo step</h2>
+<p>Dopo il Punto 6B, il passo successivo consigliato è <strong>Punto 6C — Repository Ports</strong>, partendo da Locations, Cargo e Shipments.</p>
   </div>
 </article>
   </main>

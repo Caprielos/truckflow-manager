@@ -1,6 +1,6 @@
 # TruckFlow Manager — Documentazione del dominio
 
-Questa cartella contiene la documentazione ufficiale di TruckFlow Manager, con la fondazione del dominio puro e il blueprint del primo application layer.
+Questa cartella contiene la documentazione ufficiale di TruckFlow Manager, con la fondazione del dominio puro e il blueprint e la foundation del primo application layer.
 
 Il progetto ha completato la fondazione del **domain layer** e sta iniziando la progettazione dell'**application layer**. La fondazione di dominio contiene i seguenti package principali:
 
@@ -49,6 +49,7 @@ I nomi tecnici rimangono in inglese e allineati al codice Java.
 14. [`14-domain-review-patches.md`](14-domain-review-patches.md) — riepilogo degli interventi correttivi eseguiti durante la prima review concreta del dominio puro.
 15. [`15-domain-test-suite-review.md`](15-domain-test-suite-review.md) — revisione finale della test suite del dominio puro, con cosa è stato aggiunto, cosa manca e perché.
 16. [`16-application-layer-blueprint.md`](16-application-layer-blueprint.md) — blueprint del Punto 6A: obiettivi, struttura, package, use case, repository port, repository in memory, test strategy e roadmap dell'application layer.
+17. [`17-application-foundation.md`](17-application-foundation.md) — foundation del Punto 6B: package application, contratti base, eccezioni applicative, test architetturali e cosa manca prima dei primi use case.
 
 ## Stato del progetto documentato
 
@@ -67,7 +68,8 @@ Questa documentazione descrive la versione del progetto in cui il dominio contie
 - regole ufficiali di dominio per guidare la TruckFlow Domain Foundation v1.0, la review finale del dominio puro e l'introduzione graduale delle eccezioni custom;
 - prima review correttiva del dominio puro completata con otto interventi mirati: mutazioni atomiche, eccezioni custom, `OperationalCode` obbligatorio, test catalogo qualificazioni meno fragili, pulizia dei file locali/generati e introduzione di `LicensePlate` e `VehicleIdentificationNumber` come value object del dominio veicoli, più `LanguageCode`, `UserTheme`, `CountryCode`, `JurisdictionRegion`, `ComplianceJurisdictionScope` e `OperationalScopeCode` per ridurre primitive obsession;
 - revisione finale della test suite del dominio puro documentata in `15-domain-test-suite-review.md`, con test architetturali, test contrattuali dei value object, casi limite cargo e shipment e spiegazione esplicita di cosa rimane fuori perché appartiene a moduli futuri;
-- blueprint del primo application layer documentato in `16-application-layer-blueprint.md`, che definisce struttura, responsabilità, package, command, result, port, use case, repository in memory e test strategy prima di introdurre codice applicativo.
+- blueprint del primo application layer documentato in `16-application-layer-blueprint.md`, che definisce struttura, responsabilità, package, command, result, port, use case, repository in memory e test strategy prima di introdurre codice applicativo;
+- foundation del primo application layer documentata in `17-application-foundation.md`, che introduce package application, contratti base, eccezioni applicative e test architetturali senza ancora aggiungere use case specifici, repository port o repository in memory.
 
 
 ## Nota sul packaging di `domain.vehicles`
@@ -194,3 +196,11 @@ Il documento `16-application-layer-blueprint.md` apre ufficialmente il Punto 6A.
 Non introduce ancora controller REST, database, JPA, Spring, API o workflow operativi. Definisce invece come TruckFlow Manager dovrà costruire il livello che orchestra il dominio: command, result, port in, port out, application service, eccezioni applicative, repository astratti, repository in memory e test dei casi d'uso.
 
 Il primo blocco applicativo consigliato è `Locations + Cargo + Shipments`, perché permette di costruire un flusso reale senza anticipare planning, dispatching, tracking o compatibilità cargo-veicolo operative.
+
+## Nota su `docs/17-application-foundation.md`
+
+Il documento `17-application-foundation.md` descrive il Punto 6B.
+
+Questo step inizia il codice dell'application layer senza introdurre ancora funzionalità operative complete. Aggiunge package applicativi, contratti base, eccezioni applicative e test architetturali.
+
+La foundation serve a preparare i prossimi step: repository port specifici, repository in memory e primi use case del blocco Locations + Cargo + Shipments.
