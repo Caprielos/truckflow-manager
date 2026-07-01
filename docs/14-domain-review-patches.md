@@ -455,3 +455,17 @@ Sono stati aggiunti:
 - documentazione dedicata in `docs/18-application-repository-ports.md`.
 
 Questa fase non introduce database, repository in memory ufficiali, use case operativi o REST API. Serve a stabilire i contratti che i prossimi use case useranno per salvare e recuperare aggregate.
+
+## Punto 6D — In-Memory Repositories
+
+Dopo la chiusura della foundation del dominio e l'avvio dell'application layer, è stato aggiunto il Punto 6D.
+
+Questo step introduce repository in memory per i primi tre domini applicativi:
+
+- Locations;
+- Cargo;
+- Shipments.
+
+Le repository in memory implementano le porte del Punto 6C e permettono ai futuri use case di essere testati senza database.
+
+La scelta è intenzionale: TruckFlow Manager non introduce subito JPA o Spring Data, perché l'obiettivo attuale è stabilizzare prima l'application layer e i suoi flussi.

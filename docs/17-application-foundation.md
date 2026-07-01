@@ -301,3 +301,14 @@ Repository aggiunti:
 Questi repository sono interfacce applicative, non implementazioni tecniche.
 
 Le implementazioni in memory arriveranno nello step successivo, Punto 6D.
+
+## Collegamento con il Punto 6D
+
+Dopo la foundation applicativa e le repository port, il Punto 6D introduce il primo adapter infrastructure reale: le repository in memory.
+
+Questo step usa le eccezioni applicative definite nella foundation:
+
+- `UseCaseValidationException` per input nulli;
+- `DuplicateResourceException` per codici duplicati.
+
+In questo modo la foundation non rimane teorica: viene utilizzata concretamente da adapter tecnici leggeri, senza introdurre framework o database.

@@ -775,3 +775,17 @@ Le porte `LocationRepository`, `CargoUnitRepository` e `ShipmentRepository` appa
 Non possono invece dipendere da Spring, JPA, Hibernate, Lombok, web, infrastructure concreta o database.
 
 Il vantaggio è che i futuri use case potranno essere scritti e testati contro contratti stabili, mentre le implementazioni potranno cambiare: in memory, file, database, API o altro.
+
+## Decisione — Repository in memory prima del database
+
+TruckFlow Manager introduce repository in memory prima di un database reale.
+
+La decisione è intenzionale:
+
+- consente di testare i primi use case rapidamente;
+- mantiene il dominio libero da JPA e annotazioni tecniche;
+- permette di stabilizzare i contratti repository prima della persistenza definitiva;
+- riduce il rischio di progettare il database prima dei flussi applicativi;
+- mantiene l'infrastructure layer sostituibile.
+
+Le repository in memory sono adapter temporanei e leggeri. In futuro potranno essere affiancate o sostituite da repository JPA, file-based o integrazioni esterne senza modificare il dominio.

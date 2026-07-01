@@ -20,9 +20,9 @@ Il markup HTML resta identico in entrambi i casi. Cambia solo il CSS applicato d
 
 ## Stato attuale del dominio
 
-Il progetto ha consolidato il **domain layer puro** e ha completato il **Punto 6B — Application Foundation** e sta introducendo il **Punto 6C — Repository Ports**.
+Il progetto ha consolidato il **domain layer puro** e ha completato il **Punto 6C — Repository Ports** e sta introducendo il **Punto 6D — In-Memory Repositories**.
 
-La versione attuale rappresenta la **TruckFlow Domain Foundation v1.0** rafforzata dalla prima review correttiva del dominio puro. La fondazione è definita, le regole sono documentate e sono stati applicati interventi mirati su invarianti, eccezioni, codici aziendali, test e pulizia del repository. Il passo attuale è completare i primi contratti repository dell’application layer, partendo da Locations, Cargo e Shipments, senza introdurre ancora database o repository concreti.
+La versione attuale rappresenta la **TruckFlow Domain Foundation v1.0** rafforzata dalla prima review correttiva del dominio puro. La fondazione è definita, le regole sono documentate e sono stati applicati interventi mirati su invarianti, eccezioni, codici aziendali, test e pulizia del repository. Il passo attuale è implementare i primi repository in memory per Locations, Cargo e Shipments, senza introdurre ancora database, JPA, Spring Data o persistenza definitiva.
 
 I package principali sono:
 
@@ -60,6 +60,7 @@ Il dominio è stato costruito seguendo una regola precisa: modellare prima i con
 - [`docs/16-application-layer-blueprint.md`](docs/16-application-layer-blueprint.md) — blueprint del Punto 6A, dedicato a struttura application, command, result, port, repository, use case e test applicativi.
 - [`docs/17-application-foundation.md`](docs/17-application-foundation.md) — foundation del Punto 6B: package application, contratti base, eccezioni applicative e test architetturali.
 - [`docs/18-application-repository-ports.md`](docs/18-application-repository-ports.md) — repository port del Punto 6C: `RepositoryPort`, `LocationRepository`, `CargoUnitRepository` e `ShipmentRepository`.
+- [`docs/19-application-in-memory-repositories.md`](docs/19-application-in-memory-repositories.md) — repository in memory del Punto 6D: implementazioni leggere per Locations, Cargo e Shipments.
 
 ## Regole fondamentali della Domain Foundation
 
@@ -109,6 +110,8 @@ Dopo il blueprint è stata avviata la foundation del Punto 6B: sono stati creati
 
 Con il Punto 6C sono state introdotte le prime repository port specifiche: `RepositoryPort`, `LocationRepository`, `CargoUnitRepository` e `ShipmentRepository`. Questi contratti permettono ai futuri use case di salvare e recuperare aggregate tramite ID e codice senza conoscere implementazioni concrete.
 
+Con il Punto 6D sono state introdotte le prime implementazioni in memory: `InMemoryLocationRepository`, `InMemoryCargoUnitRepository` e `InMemoryShipmentRepository`. Questi adapter sono utili per test e sviluppo locale, proteggono duplicati di codice e input nulli, ma non sostituiscono un database enterprise definitivo.
+
 
 
 ## Punto 6A — Application Layer Blueprint
@@ -139,6 +142,23 @@ Ogni porta permette salvataggio, ricerca per ID, ricerca per codice e verifica d
 
 Il Punto 6C è documentato in [`docs/18-application-repository-ports.md`](docs/18-application-repository-ports.md).
 
+
+## Punto 6D — In-Memory Repositories
+
+Il Punto 6D aggiunge le prime implementazioni concrete delle repository port. Sono adapter tecnici leggeri, collocati in `infrastructure.memory`, e implementano i contratti definiti dall’application layer.
+
+Le implementazioni introdotte sono:
+
+- `InMemoryLocationRepository`;
+- `InMemoryCargoUnitRepository`;
+- `InMemoryShipmentRepository`.
+
+Queste repository permettono salvataggio, ricerca per ID, ricerca per codice e verifica di esistenza. Inoltre rifiutano input nulli con `UseCaseValidationException` e codici duplicati con `DuplicateResourceException`.
+
+Questa fase non introduce ancora database, JPA, Spring Data, transazioni o query avanzate. Serve a preparare test e primi use case applicativi mantenendo dominio, application e infrastruttura separati.
+
+Il Punto 6D è documentato in [`docs/19-application-in-memory-repositories.md`](docs/19-application-in-memory-repositories.md).
+
 ## Prossimi step consigliati
 
 La roadmap consigliata è:
@@ -148,6 +168,6 @@ La roadmap consigliata è:
 3. mantenere il Punto 6A come blueprint ufficiale dell'application layer;
 4. mantenere stabile il Punto 6B con foundation applicativa, package, eccezioni applicative, command, result e test;
 5. mantenere stabile il Punto 6C con le prime repository port specifiche;
-6. aggiungere repository in-memory per test e scenari nel Punto 6D;
-7. implementare i primi use case piccoli e chiari, partendo da Locations + Cargo + Shipments;
+6. mantenere stabile il Punto 6D con le prime repository in memory per test e scenari locali;
+7. implementare i primi use case piccoli e chiari nel Punto 6E, partendo da Locations + Cargo + Shipments;
 8. rimandare API REST, database e integrazioni esterne finché l'application layer non è stabile.

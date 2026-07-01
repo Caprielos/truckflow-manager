@@ -165,3 +165,16 @@ Il Punto 6A ha definito il blueprint dell'application layer. Il Punto 6B ha intr
 Questo passaggio non introduce ancora REST API, database o framework. Serve a definire come il sistema dovrà eseguire azioni applicative usando il dominio: registrare location, registrare cargo, creare shipment, aggiungere item e tratte, confermare shipment e recuperare informazioni tramite repository astratti.
 
 Il primo blocco consigliato rimane Locations + Cargo + Shipments, perché rappresenta un flusso logistico reale senza anticipare moduli futuri come planning, dispatching, tracking o availability.
+
+## Stato applicativo aggiornato
+
+Dopo la stabilizzazione del domain layer, TruckFlow Manager ha iniziato il Punto 6 dedicato all'application layer.
+
+Lo stato attuale include:
+
+- blueprint dell'application layer;
+- foundation con command, result, use case base ed eccezioni applicative;
+- repository port per Locations, Cargo e Shipments;
+- repository in memory per Locations, Cargo e Shipments.
+
+Questa evoluzione permette di iniziare i primi use case applicativi senza introdurre ancora database, API REST o framework web.

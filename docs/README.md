@@ -1,8 +1,8 @@
 # TruckFlow Manager — Documentazione del dominio
 
-Questa cartella contiene la documentazione ufficiale di TruckFlow Manager, con la fondazione del dominio puro e i primi step dell’application layer: blueprint, foundation e repository port.
+Questa cartella contiene la documentazione ufficiale di TruckFlow Manager, con la fondazione del dominio puro e i primi step dell’application layer: blueprint, foundation, repository port e repository in memory.
 
-Il progetto ha completato la fondazione del **domain layer** e sta iniziando la progettazione dell'**application layer**. La fondazione di dominio contiene i seguenti package principali:
+Il progetto ha completato la fondazione del **domain layer** e sta consolidando i primi adapter dell'**application layer**. La fondazione di dominio contiene i seguenti package principali:
 
 - `domain.users`
 - `domain.qualifications`
@@ -51,6 +51,7 @@ I nomi tecnici rimangono in inglese e allineati al codice Java.
 16. [`16-application-layer-blueprint.md`](16-application-layer-blueprint.md) — blueprint del Punto 6A: obiettivi, struttura, package, use case, repository port, repository in memory, test strategy e roadmap dell'application layer.
 17. [`17-application-foundation.md`](17-application-foundation.md) — foundation del Punto 6B: package application, contratti base, eccezioni applicative, test architetturali e cosa manca prima dei primi use case.
 18. [`18-application-repository-ports.md`](18-application-repository-ports.md) — repository port del Punto 6C: `RepositoryPort`, `LocationRepository`, `CargoUnitRepository`, `ShipmentRepository`, contratti per ID/codice e prossimo passaggio verso repository in memory.
+19. [`19-application-in-memory-repositories.md`](19-application-in-memory-repositories.md) — repository in memory del Punto 6D: `InMemoryLocationRepository`, `InMemoryCargoUnitRepository`, `InMemoryShipmentRepository`, regole sui duplicati, test e limiti dello step.
 
 ## Stato del progetto documentato
 
@@ -71,7 +72,8 @@ Questa documentazione descrive la versione del progetto in cui il dominio contie
 - revisione finale della test suite del dominio puro documentata in `15-domain-test-suite-review.md`, con test architetturali, test contrattuali dei value object, casi limite cargo e shipment e spiegazione esplicita di cosa rimane fuori perché appartiene a moduli futuri;
 - blueprint del primo application layer documentato in `16-application-layer-blueprint.md`, che definisce struttura, responsabilità, package, command, result, port, use case, repository in memory e test strategy prima di introdurre codice applicativo;
 - foundation del primo application layer documentata in `17-application-foundation.md`, che introduce package application, contratti base, eccezioni applicative e test architetturali senza ancora aggiungere use case specifici o repository in memory;
-- repository port del primo application layer documentate in `18-application-repository-ports.md`, con `RepositoryPort`, `LocationRepository`, `CargoUnitRepository` e `ShipmentRepository` come primi contratti outbound per Locations, Cargo e Shipments.
+- repository port del primo application layer documentate in `18-application-repository-ports.md`, con `RepositoryPort`, `LocationRepository`, `CargoUnitRepository` e `ShipmentRepository` come primi contratti outbound per Locations, Cargo e Shipments;
+- repository in memory del primo infrastructure adapter documentate in `19-application-in-memory-repositories.md`, con `InMemoryLocationRepository`, `InMemoryCargoUnitRepository` e `InMemoryShipmentRepository` per test e sviluppo locale senza database.
 
 
 ## Nota sul packaging di `domain.vehicles`

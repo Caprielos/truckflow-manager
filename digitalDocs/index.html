@@ -28,6 +28,7 @@
 <input class="doc-toggle" type="radio" name="active-doc" id="doc-18">
 <input class="doc-toggle" type="radio" name="active-doc" id="doc-19">
 <input class="doc-toggle" type="radio" name="active-doc" id="doc-20">
+<input class="doc-toggle" type="radio" name="active-doc" id="doc-21">
 <div class="app-shell">
   <aside class="sidebar">
     <div class="brand">
@@ -66,7 +67,8 @@
 <label class="nav-item" for="doc-17"><span class="nav-number">18</span><span class="nav-label">Application Layer Blueprint</span><span class="nav-file">16-application-layer-blueprint.md</span></label>
 <label class="nav-item" for="doc-19"><span class="nav-number">19</span><span class="nav-label">Application Foundation</span><span class="nav-file">17-application-foundation.md</span></label>
 <label class="nav-item" for="doc-20"><span class="nav-number">20</span><span class="nav-label">Application Repository Ports</span><span class="nav-file">18-application-repository-ports.md</span></label>
-<label class="nav-item" for="doc-18"><span class="nav-number">21</span><span class="nav-label">Command Basic</span><span class="nav-file">command_basic.md</span></label>
+<label class="nav-item" for="doc-21"><span class="nav-number">21</span><span class="nav-label">In-Memory Repositories</span><span class="nav-file">19-application-in-memory-repositories.md</span></label>
+<label class="nav-item" for="doc-18"><span class="nav-number">22</span><span class="nav-label">Command Basic</span><span class="nav-file">command_basic.md</span></label>
     </nav>
   </aside>
 
@@ -79,7 +81,7 @@
       <div class="toolbar-badges">
         <span>HTML + CSS</span>
         <span>Markdown mirror</span>
-        <span>Domain + Repository Ports</span>
+        <span>Domain + In-Memory Repositories</span>
       </div>
     </div>
 
@@ -102,7 +104,7 @@
 </ul>
 <p>Il markup HTML resta identico in entrambi i casi. Cambia solo il CSS applicato dal flag globale.</p>
 <h2>Stato attuale del dominio</h2>
-<p>Il progetto ha consolidato il <strong><span class="term" data-it="livello di dominio">domain layer</span> puro</strong> e ha completato il <strong>Punto 6A — <span class="term" data-it="livello applicativo">Application Layer</span> Blueprint</strong> e ha introdotto il <strong>Punto 6B — <span class="term" data-it="fondazione applicativa">Application Foundation</span></strong> e sta introducendo il <strong>Punto 6C — <span class="term" data-it="porte repository">Application Repository Ports</span></strong>.</p>
+<p>Il progetto ha consolidato il <strong><span class="term" data-it="livello di dominio">domain layer</span> puro</strong> e ha completato il <strong>Punto 6A — <span class="term" data-it="livello applicativo">Application Layer</span> Blueprint</strong> e ha introdotto il <strong>Punto 6B — <span class="term" data-it="fondazione applicativa">Application Foundation</span></strong> e ha introdotto il <strong>Punto 6C — <span class="term" data-it="porte repository">Application Repository Ports</span></strong> e sta introducendo il <strong>Punto 6D — In-Memory Repositories</strong>.</p>
 <p>La versione attuale rappresenta la <strong><span class="term" data-it="fondazione del dominio puro TruckFlow versione 1.0">TruckFlow Domain Foundation v1.0</span></strong> rafforzata dalla prima review correttiva del dominio puro. La fondazione è definita, le regole sono documentate e sono stati applicati interventi mirati su invarianti, eccezioni, codici aziendali, test e pulizia del <span class="term" data-it="repository">repository</span>. Il passo successivo è trasformare il blueprint in una foundation applicativa concreta: package, contratti base, eccezioni applicative e test architetturali.</p>
 <p>I package principali sono:</p>
 <ul>
@@ -6469,6 +6471,73 @@ infrastructure implementa application.port.out</code></pre>
 <p>Mancano repository in-memory ufficiali, command specifici, result specifici, use case specifici, application service, primo flusso applicativo completo, controller REST, database, sicurezza, workflow e moduli enterprise.</p>
 <h2>9. Prossimo step</h2>
 <p>Il prossimo passo consigliato è <strong>Punto 6D — In-Memory Repositories</strong>, con <code>InMemoryLocationRepository</code>, <code>InMemoryCargoUnitRepository</code> e <code>InMemoryShipmentRepository</code>.</p>
+  </div>
+</article>
+
+
+<article class="doc-panel panel-21" id="19-application-in-memory-repositories-md">
+  <header class="doc-panel-header">
+    <p class="eyebrow">19-application-in-memory-repositories.md</p>
+    <h1>19 — In-Memory Repositories</h1>
+  </header>
+  <div class="markdown-body">
+<h1>19 — In-Memory Repositories</h1>
+<p>Questo documento descrive il <strong>Punto 6D — In-Memory Repositories</strong> di TruckFlow Manager.</p>
+<p>Il Punto 6D introduce le prime implementazioni concrete delle repository port create nel Punto 6C. Sono adapter tecnici leggeri, pensati per test, sviluppo locale e primi scenari applicativi, senza introdurre database, JPA, Spring Data o persistenza definitiva.</p>
+<h2>1. Obiettivo dello step</h2>
+<p>L'obiettivo è rendere utilizzabili le repository port dell'application layer tramite implementazioni in memoria.</p>
+<ul>
+<li><code>InMemoryLocationRepository</code> implementa <code>LocationRepository</code>;</li>
+<li><code>InMemoryCargoUnitRepository</code> implementa <code>CargoUnitRepository</code>;</li>
+<li><code>InMemoryShipmentRepository</code> implementa <code>ShipmentRepository</code>.</li>
+</ul>
+<p>Queste implementazioni permettono ai futuri use case di salvare e recuperare aggregate tramite ID e codice senza conoscere alcuna tecnologia di persistenza.</p>
+<h2>2. Perché repository in memory</h2>
+<ul>
+<li>permettono test veloci;</li>
+<li>evitano di introdurre subito un database;</li>
+<li>mantengono il dominio privo di annotazioni tecniche;</li>
+<li>dimostrano che le repository port sono implementabili;</li>
+<li>preparano i primi use case applicativi su Locations, Cargo e Shipments.</li>
+</ul>
+<h2>3. Package introdotti</h2>
+<ul>
+<li><code>infrastructure</code>;</li>
+<li><code>infrastructure.memory</code>;</li>
+<li><code>infrastructure.memory.locations</code>;</li>
+<li><code>infrastructure.memory.cargo</code>;</li>
+<li><code>infrastructure.memory.shipments</code>.</li>
+</ul>
+<p>Il package infrastructure implementa porte dell'application layer. Il domain layer resta indipendente.</p>
+<h2>4. Regole protette</h2>
+<p>Le repository in memory non duplicano regole di dominio. Proteggono solo regole applicative e tecniche minime:</p>
+<ul>
+<li>rifiuto di aggregate nulli;</li>
+<li>rifiuto di ID nulli;</li>
+<li>rifiuto di codici nulli;</li>
+<li>rifiuto di codici duplicati su aggregate diversi;</li>
+<li>mantenimento di indici separati per ID e codice.</li>
+</ul>
+<h2>5. Eccezioni usate</h2>
+<ul>
+<li><code>UseCaseValidationException</code> per input applicativi nulli;</li>
+<li><code>DuplicateResourceException</code> per codici duplicati.</li>
+</ul>
+<p>Queste sono eccezioni applicative, non eccezioni di dominio.</p>
+<h2>6. Cosa è stato testato</h2>
+<ul>
+<li>salvataggio e recupero per ID;</li>
+<li>salvataggio e recupero per codice;</li>
+<li>verifica di esistenza per ID e codice;</li>
+<li>comportamento quando una risorsa non esiste;</li>
+<li>rifiuto di input nulli;</li>
+<li>rifiuto di codici duplicati;</li>
+<li>assenza di dipendenze da Spring, JPA, Lombok e web adapter.</li>
+</ul>
+<h2>7. Cosa non è stato fatto</h2>
+<p>Il Punto 6D non introduce database reale, JPA, Spring Data, transazioni, query avanzate, paginazione, audit, locking, cache enterprise, repository per tutti i domini, use case specifici o controller REST.</p>
+<h2>8. Prossimo step</h2>
+<p>Il prossimo step è <strong>Punto 6E — First Use Cases</strong>. Ora che esistono repository port e repository in memory, si possono implementare i primi use case applicativi partendo da Locations, Cargo e Shipments.</p>
   </div>
 </article>
 

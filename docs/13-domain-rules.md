@@ -395,3 +395,17 @@ application può importare domain
 application non importa infrastructure
 infrastructure implementa application.port.out
 ```
+
+## Regola aggiornata — Infrastructure memory dopo repository port
+
+Con il Punto 6D il progetto introduce i primi adapter in memory nel package `infrastructure.memory`.
+
+Questa scelta non modifica le regole del dominio puro:
+
+- il domain layer non importa application;
+- il domain layer non importa infrastructure;
+- l'application layer definisce porte astratte;
+- l'infrastructure layer implementa quelle porte;
+- le repository in memory non devono contenere regole di dominio.
+
+Le repository in memory possono proteggere aspetti applicativi minimi, come input nulli e duplicati di codice, ma non devono decidere se un aggregate è valido dal punto di vista business. Questa responsabilità resta nel dominio.

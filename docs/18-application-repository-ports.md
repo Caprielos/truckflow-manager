@@ -298,3 +298,17 @@ In quella fase verranno create le prime implementazioni concrete temporanee:
 Queste implementazioni permetteranno di testare i futuri use case senza database.
 
 Dopo il Punto 6D sarà possibile iniziare il Punto 6E, dedicato ai primi use case reali.
+
+## Evoluzione nel Punto 6D
+
+Il Punto 6D implementa le repository port introdotte in questo documento tramite adapter in memory.
+
+La relazione è questa:
+
+- `LocationRepository` viene implementata da `InMemoryLocationRepository`;
+- `CargoUnitRepository` viene implementata da `InMemoryCargoUnitRepository`;
+- `ShipmentRepository` viene implementata da `InMemoryShipmentRepository`.
+
+Queste implementazioni dimostrano che i contratti definiti nel Punto 6C sono semplici, testabili e indipendenti da tecnologie esterne.
+
+Le repository in memory non sostituiscono il futuro database. Servono per test, prototipi locali e primi use case applicativi.

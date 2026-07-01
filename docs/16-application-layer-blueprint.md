@@ -559,3 +559,19 @@ La decisione ufficiale del Punto 6A è:
 > TruckFlow Manager inizierà l'application layer con un blueprint documentato, poi introdurrà gradualmente struttura applicativa, repository port, repository in memory, use case e test applicativi, partendo dal flusso Locations + Cargo + Shipments.
 
 Questo consente di crescere in modo ordinato senza confondere dominio, applicazione, infrastruttura e web.
+
+## Aggiornamento — Punto 6D In-Memory Repositories
+
+Il blueprint dell'application layer prevedeva l'introduzione di repository in memory dopo la definizione delle repository port. Questo passaggio è stato avviato con il Punto 6D.
+
+Le repository in memory sono il primo adapter concreto dell'infrastruttura. Implementano i contratti dell'application layer, ma non introducono persistenza definitiva.
+
+Le prime implementazioni sono:
+
+- `InMemoryLocationRepository`;
+- `InMemoryCargoUnitRepository`;
+- `InMemoryShipmentRepository`.
+
+Queste classi confermano la direzione del blueprint: i futuri use case potranno dipendere dalle repository port, mentre i test potranno usare implementazioni in memory semplici e veloci.
+
+La regola rimane invariata: l'application layer orchestra, il domain layer protegge le regole business e l'infrastructure layer fornisce adapter tecnici sostituibili.

@@ -50,6 +50,7 @@ This digital documentation mirrors:
 - `docs/16-application-layer-blueprint.md`
 - `docs/17-application-foundation.md`
 - `docs/18-application-repository-ports.md`
+- `docs/19-application-in-memory-repositories.md`
 - `command_basic.md`
 
 
@@ -69,3 +70,10 @@ Documento di riferimento: `docs/17-application-foundation.md`.
 La documentazione digitale include ora anche il Punto 6C — Application Repository Ports. Questo step aggiunge le prime porte repository specifiche per Locations, Cargo e Shipments, mantenendo l’application layer indipendente da database, Spring, JPA e infrastructure concreta.
 
 Documento di riferimento: `docs/18-application-repository-ports.md`.
+
+
+## Aggiornamento Punto 6D
+
+La documentazione digitale include ora anche il Punto 6D — In-Memory Repositories. Questo step aggiunge le prime implementazioni concrete e leggere delle repository port per Locations, Cargo e Shipments, senza introdurre database, JPA, Spring Data o persistenza definitiva.
+
+Documento di riferimento: `docs/19-application-in-memory-repositories.md`.

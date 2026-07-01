@@ -308,3 +308,17 @@ La distinzione rimane importante:
 
 - i test di dominio proteggono invarianti, value object, aggregate root e confini del domain layer;
 - i test applicativi proteggono contratti, orchestrazione, porte e use case dell'application layer.
+
+## Collegamento con i test del Punto 6D
+
+La revisione della test suite del dominio rimane separata dai test infrastrutturali.
+
+Con il Punto 6D sono stati aggiunti test specifici per `infrastructure.memory`. Questi test non sostituiscono i test del dominio. Verificano invece che gli adapter in memory:
+
+- implementino correttamente le repository port;
+- salvino e recuperino aggregate tramite ID e codice;
+- rifiutino input nulli con eccezioni applicative;
+- rifiutino duplicati di codice;
+- restino privi di dipendenze da framework.
+
+Questa separazione conferma la regola generale: test di dominio per regole business, test application/infrastructure per orchestrazione e adapter.
