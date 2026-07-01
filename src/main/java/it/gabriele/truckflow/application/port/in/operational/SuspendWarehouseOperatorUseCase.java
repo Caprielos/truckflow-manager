@@ -4,6 +4,6 @@ import it.gabriele.truckflow.application.command.operational.SuspendWarehouseOpe
 import it.gabriele.truckflow.application.port.in.UseCase;
 import it.gabriele.truckflow.application.result.operational.WarehouseOperatorResult;
 
-/** Inbound port for the suspend warehouseoperator use case. */
+/** Inbound port for the suspend warehouse operator use case. */
 public interface SuspendWarehouseOperatorUseCase
     extends UseCase<SuspendWarehouseOperatorCommand, WarehouseOperatorResult> {}

@@ -4,6 +4,6 @@ import it.gabriele.truckflow.application.command.operational.ActivateWarehouseOp
 import it.gabriele.truckflow.application.port.in.UseCase;
 import it.gabriele.truckflow.application.result.operational.WarehouseOperatorResult;
 
-/** Inbound port for the activate warehouseoperator use case. */
+/** Inbound port for the activate warehouse operator use case. */
 public interface ActivateWarehouseOperatorUseCase
     extends UseCase<ActivateWarehouseOperatorCommand, WarehouseOperatorResult> {}

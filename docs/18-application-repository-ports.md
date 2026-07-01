@@ -390,3 +390,9 @@ Anche queste port restano contratti astratti dell'application layer. Non sono re
 ## Aggiornamento Punto 6J — Operational repository ports
 
 Dopo il Punto 6J sono presenti anche le repository port `DriverRepository`, `MechanicRepository`, `WarehouseOperatorRepository`, `DispatcherRepository` e `ManagerRepository`. Espongono salvataggio, ricerca per ID, ricerca per `OperationalCode`, ricerca per `UserId` e controlli di esistenza.
+
+## Aggiornamento dopo il Punto 6K
+
+Dopo il Punto 6K, le repository port Operational Roles introdotte nel Punto 6J restano parte del contratto outbound dell'application layer. La review non aggiunge nuove porte, ma rafforza tramite test il loro uso nei service applicativi e negli adapter in memory.
+
+Le porte Operational attuali sono `DriverRepository`, `MechanicRepository`, `WarehouseOperatorRepository`, `DispatcherRepository` e `ManagerRepository`.

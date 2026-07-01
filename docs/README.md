@@ -1,8 +1,8 @@
 # TruckFlow Manager — Documentazione del dominio
 
-Questa cartella contiene la documentazione ufficiale di TruckFlow Manager, con la fondazione del dominio puro e i primi step dell’application layer: blueprint, foundation, repository port, repository in memory, primi use case applicativi, hardening dei use case, espansione controllata verso Documents, review/allineamento del Punto 6H, espansione controllata verso Vehicles nel Punto 6I ed espansione controllata verso Operational Roles nel Punto 6J.
+Questa cartella contiene la documentazione ufficiale di TruckFlow Manager, con la fondazione del dominio puro e i primi step dell’application layer: blueprint, foundation, repository port, repository in memory, primi use case applicativi, hardening dei use case, espansione controllata verso Documents, review/allineamento del Punto 6H, espansione controllata verso Vehicles nel Punto 6I, espansione controllata verso Operational Roles nel Punto 6J e hardening Operational Roles nel Punto 6K.
 
-Il progetto ha completato la fondazione del **domain layer**. L'**application layer** ha consolidato i primi casi d'uso, ha completato la prima espansione controllata verso Documents, l'ha rafforzata con una review tecnica e documentale e ha poi aggiunto i primi use case applicativi Vehicles e Operational Roles. La fondazione di dominio contiene i seguenti package principali:
+Il progetto ha completato la fondazione del **domain layer**. L'**application layer** ha consolidato i primi casi d'uso, ha completato la prima espansione controllata verso Documents, l'ha rafforzata con una review tecnica e documentale e ha poi aggiunto i primi use case applicativi Vehicles e Operational Roles, rafforzando questi ultimi con una review di hardening nel Punto 6K. La fondazione di dominio contiene i seguenti package principali:
 
 - `domain.users`
 - `domain.qualifications`
@@ -58,6 +58,7 @@ I nomi tecnici rimangono in inglese e allineati al codice Java.
 23. [`23-application-use-case-expansion-review.md`](23-application-use-case-expansion-review.md) — review del Punto 6H: contratti `UseCase`, service allineati alle port in, result null-safe, repository in memory uniformi, copy-on-write Documents e documentazione aggiornata.
 24. [`24-application-use-cases-expansion-vehicles.md`](24-application-use-cases-expansion-vehicles.md) — espansione del Punto 6I: primi use case applicativi Vehicles, `VehicleUnitRepository`, `VehicleCombinationRepository`, repository in memory, command/result/port/service e test applicativi.
 25. [`25-application-use-cases-expansion-operational-roles.md`](25-application-use-cases-expansion-operational-roles.md) — espansione del Punto 6J: primi use case applicativi Operational Roles, repository port Operational, repository in memory Operational e test applicativi.
+26. [`26-application-operational-use-case-hardening.md`](26-application-operational-use-case-hardening.md) — hardening del Punto 6K: review Operational Roles, copertura completa dei service di stato, test copy-on-write sulle attivazioni fallite e documentazione allineata.
 
 ## Stato del progetto documentato
 
@@ -254,3 +255,12 @@ Il documento `21-application-use-case-hardening.md` descrive il Punto 6F.
 Questo step rafforza i primi use case applicativi introdotti nel Punto 6E. Aggiunge `CancelShipmentUseCase`, `CancelShipmentCommand` e `CancelShipmentService`, introduce una protezione copy-on-write per i service che mutano shipment, estende la copertura dei test applicativi e verifica che command nulli, dependency nulle, risorse mancanti, duplicati e mutazioni fallite siano gestiti correttamente.
 
 Il Punto 6F non introduce ancora REST API, database, Spring, JPA, security, planning o tracking. Serve a rendere stabile il primo nucleo applicativo prima di estendere i casi d'uso ad altri domini.
+
+
+## Nota su `docs/26-application-operational-use-case-hardening.md`
+
+Il documento `26-application-operational-use-case-hardening.md` descrive il Punto 6K.
+
+Questo step non aggiunge nuovi use case business. Rafforza invece i use case Operational Roles introdotti nel Punto 6J con `ApplicationOperationalUseCaseHardeningTest`, copertura completa dei service di stato per Driver, Mechanic, WarehouseOperator, Dispatcher e Manager, controlli su command nulli, dependency nulle e protezione copy-on-write sulle attivazioni fallite.
+
+La fase mantiene fuori REST API, controller, database, JPA, security, planning, dispatching reale, turni, payroll, tracking e dashboard.

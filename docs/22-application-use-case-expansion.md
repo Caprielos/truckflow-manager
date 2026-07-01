@@ -321,3 +321,7 @@ Questa nuova fase non modifica il significato del Punto 6G: Documents rimane il 
 ## Aggiornamento successivo — Punto 6J Operational Roles
 
 Dopo Documents, review 6H e Vehicles 6I, il Punto 6J ha aggiunto i primi use case applicativi Operational Roles. Il principio rimane lo stesso: command, result, port, service e repository astratte, senza REST API, database o workflow enterprise.
+
+## Aggiornamento dopo il Punto 6K
+
+Il Punto 6K non modifica i use case Documents introdotti nel Punto 6G. Conferma però la regola generale delle espansioni applicative: ogni nuovo dominio applicativo deve essere seguito da review, test negativi e allineamento documentale prima di procedere oltre.

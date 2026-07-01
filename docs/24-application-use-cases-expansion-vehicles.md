@@ -332,3 +332,7 @@ Il prossimo step, dopo il Punto 6I, è stato applicato come Punto 6J — Applica
 ## Aggiornamento dopo il Punto 6J
 
 Il Punto 6J non modifica i use case Vehicles. Aggiunge invece il primo blocco applicativo Operational Roles. Le assegnazioni concrete driver/vehicle/shipment rimangono fuori: verranno valutate solo in una fase futura di planning o dispatching.
+
+## Aggiornamento dopo il Punto 6K
+
+Il Punto 6K non modifica i use case Vehicles. Rafforza invece il blocco Operational Roles introdotto dopo Vehicles. Le assegnazioni concrete tra driver, veicoli e shipment restano fuori dal progetto attuale e appartengono a future fasi di planning o dispatching.

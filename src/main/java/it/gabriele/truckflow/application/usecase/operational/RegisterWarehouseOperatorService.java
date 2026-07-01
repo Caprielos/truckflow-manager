@@ -8,7 +8,7 @@ import it.gabriele.truckflow.application.port.out.operational.WarehouseOperatorR
 import it.gabriele.truckflow.application.result.operational.WarehouseOperatorResult;
 import it.gabriele.truckflow.domain.operational.warehouse.WarehouseOperator;
 
-/** Application service that registers operational warehouseoperator roles. */
+/** Application service that registers operational warehouse operator roles. */
 public final class RegisterWarehouseOperatorService implements RegisterWarehouseOperatorUseCase {
 
   private final WarehouseOperatorRepository warehouseOperatorRepository;

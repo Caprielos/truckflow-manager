@@ -4,6 +4,6 @@ import it.gabriele.truckflow.application.command.operational.MarkNotEligibleMech
 import it.gabriele.truckflow.application.port.in.UseCase;
 import it.gabriele.truckflow.application.result.operational.MechanicResult;
 
-/** Inbound port for the markNotEligible mechanic use case. */
+/** Inbound port for the mark mechanic as not eligible use case. */
 public interface MarkNotEligibleMechanicUseCase
     extends UseCase<MarkNotEligibleMechanicCommand, MechanicResult> {}

@@ -4,7 +4,7 @@ import it.gabriele.truckflow.application.command.ApplicationCommand;
 import it.gabriele.truckflow.application.exception.UseCaseValidationException;
 import it.gabriele.truckflow.domain.operational.driver.DriverId;
 
-/** Command used to markNotEligible an operational driver role. */
+/** Command used to mark an operational driver role as not eligible. */
 public record MarkNotEligibleDriverCommand(DriverId id, String updatedBy)
     implements ApplicationCommand {
 

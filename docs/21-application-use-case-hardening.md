@@ -252,3 +252,9 @@ Non cambia le mutazioni shipment già rafforzate nel Punto 6F, ma aggiunge una r
 ## Aggiornamento di contesto dopo il Punto 6J
 
 Le regole di hardening introdotte nel Punto 6F rimangono valide anche per Documents, Vehicles e Operational Roles: command nulli rifiutati, repository dependency nulle rifiutate, errori applicativi distinti dagli errori di dominio e mutazioni protette tramite copy-on-write dove gli aggregate sono mutabili.
+
+## Aggiornamento dopo il Punto 6K
+
+Il principio di hardening introdotto nel Punto 6F viene confermato anche per Operational Roles nel Punto 6K: le mutazioni applicative devono evitare stati parziali quando una validazione di dominio fallisce.
+
+Per questo i service Operational Roles continuano a usare mutation support copy-on-write prima del salvataggio.

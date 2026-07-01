@@ -35,6 +35,7 @@
 <input class="doc-toggle" type="radio" name="active-doc" id="doc-25">
 <input class="doc-toggle" type="radio" name="active-doc" id="doc-26">
 <input class="doc-toggle" type="radio" name="active-doc" id="doc-27">
+<input class="doc-toggle" type="radio" name="active-doc" id="doc-28">
 <div class="app-shell">
   <aside class="sidebar">
     <div class="brand"><div class="brand-mark">TF</div><div><h1>TruckFlow Docs</h1><p>Digital mirror of the official Markdown documentation.</p></div></div>
@@ -68,10 +69,11 @@
 <label class="nav-item" for="doc-25"><span class="nav-number">26</span><span class="nav-label">Use Cases Vehicles</span><span class="nav-file">24-application-use-cases-expansion-vehicles.md</span></label>
 <label class="nav-item" for="doc-26"><span class="nav-number">27</span><span class="nav-label">Use Cases Operational Roles</span><span class="nav-file">25-application-use-cases-expansion-operational-roles.md</span></label>
 <label class="nav-item" for="doc-27"><span class="nav-number">28</span><span class="nav-label">Command Basic</span><span class="nav-file">command_basic.md</span></label>
+<label class="nav-item" for="doc-28"><span class="nav-number">29</span><span class="nav-label">Operational Hardening</span><span class="nav-file">26-application-operational-use-case-hardening.md</span></label>
     </nav>
   </aside>
   <main class="content">
-    <div class="content-toolbar"><div><p class="eyebrow">TruckFlow Manager</p><h2>Official Project Documentation</h2></div><div class="toolbar-badges"><span>HTML + CSS</span><span>Markdown mirror</span><span>Domain + Application Use Cases</span><span>Punto 6J</span></div></div>
+    <div class="content-toolbar"><div><p class="eyebrow">TruckFlow Manager</p><h2>Official Project Documentation</h2></div><div class="toolbar-badges"><span>HTML + CSS</span><span>Markdown mirror</span><span>Domain + Application Use Cases</span><span>Punto 6K</span></div></div>
 <article class="doc-panel panel-0" id="TRUCKFLOW_PROJECT_DOCUMENTATION-md">
   <header class="doc-panel-header">
     <p class="eyebrow">TRUCKFLOW_PROJECT_DOCUMENTATION.md</p>
@@ -91,8 +93,8 @@
 </ul>
 <p>Il markup HTML resta identico in entrambi i casi. Cambia solo il CSS applicato dal flag globale.</p>
 <h2>Stato attuale del dominio</h2>
-<p>Il progetto ha consolidato il <strong>domain layer puro</strong> e ha completato i primi step dell’application layer fino al <strong>Punto 6J — Application Use Cases Expansion III: Operational Roles</strong>.</p>
-<p>La versione attuale rappresenta la <strong>TruckFlow Domain Foundation v1.0</strong> rafforzata dalla prima review correttiva del dominio puro. La fondazione è definita, le regole sono documentate e sono stati applicati interventi mirati su invarianti, eccezioni, codici aziendali, test e pulizia del repository. Il passo attuale completato è il Punto 6J, cioè la terza espansione controllata dei use case applicativi verso Operational Roles. Ora l&#x27;application layer copre anche registrazione, ricerca e mutazioni di stato per Driver, Mechanic, WarehouseOperator, Dispatcher e Manager, con repository port Operational, repository in memory Operational e test applicativi dedicati, senza introdurre ancora REST API, database, JPA, Spring Data, planning, tracking, turni, disponibilità, payroll o persistenza definitiva.</p>
+<p>Il progetto ha consolidato il <strong>domain layer puro</strong> e ha completato i primi step dell’application layer fino al <strong>Punto 6K — Application Operational Use Case Review &amp; Hardening</strong>.</p>
+<p>La versione attuale rappresenta la <strong>TruckFlow Domain Foundation v1.0</strong> rafforzata dalla prima review correttiva del dominio puro. La fondazione è definita, le regole sono documentate e sono stati applicati interventi mirati su invarianti, eccezioni, codici aziendali, test e pulizia del repository. Il passo attuale completato è il Punto 6K, cioè la review e il rafforzamento dei use case Operational Roles introdotti nel Punto 6J. Ora l&#x27;application layer copre registrazione, ricerca e mutazioni di stato per Driver, Mechanic, WarehouseOperator, Dispatcher e Manager, con repository port Operational, repository in memory Operational, test applicativi dedicati e hardening copy-on-write sulle attivazioni fallite, senza introdurre ancora REST API, database, JPA, Spring Data, planning, tracking, turni, disponibilità, payroll o persistenza definitiva.</p>
 <p>I package principali sono:</p>
 <ul>
 <li><code>domain.users</code>;</li>
@@ -135,6 +137,7 @@
 <li><a href="docs/23-application-use-case-expansion-review.md"><code>docs/23-application-use-case-expansion-review.md</code></a> — review del Punto 6H: contratti <code>UseCase</code>, service allineati alle port in, result null-safe, repository in memory uniformi e documentazione aggiornata.</li>
 <li><a href="docs/24-application-use-cases-expansion-vehicles.md"><code>docs/24-application-use-cases-expansion-vehicles.md</code></a> — espansione del Punto 6I: primi use case applicativi Vehicles, repository port Vehicles, repository in memory Vehicles e test applicativi.</li>
 <li><a href="docs/25-application-use-cases-expansion-operational-roles.md"><code>docs/25-application-use-cases-expansion-operational-roles.md</code></a> — espansione del Punto 6J: primi use case applicativi Operational Roles, repository port Operational, repository in memory Operational e test applicativi.</li>
+<li><a href="docs/26-application-operational-use-case-hardening.md"><code>docs/26-application-operational-use-case-hardening.md</code></a> — hardening del Punto 6K: review Operational Roles, copertura completa dei service di stato, copy-on-write sulle attivazioni fallite e documentazione allineata.</li>
 </ul>
 <h2>Regole fondamentali della Domain Foundation</h2>
 <p>Le regole principali sono:</p>
@@ -196,7 +199,7 @@
 <li>Shipments, tramite <code>ShipmentRepository</code>;</li>
 <li>Documents, tramite <code>DocumentRepository</code> dopo il Punto 6G;</li>
 <li>Vehicles, tramite <code>VehicleUnitRepository</code> e <code>VehicleCombinationRepository</code> dopo il Punto 6I;</li>
-<li>Operational Roles, tramite <code>DriverRepository</code>, <code>MechanicRepository</code>, <code>WarehouseOperatorRepository</code>, <code>DispatcherRepository</code> e <code>ManagerRepository</code> dopo il Punto 6J.</li>
+<li>Operational Roles, tramite <code>DriverRepository</code>, <code>MechanicRepository</code>, <code>WarehouseOperatorRepository</code>, <code>DispatcherRepository</code> e <code>ManagerRepository</code> dopo il Punto 6J, rafforzate dal Punto 6K.</li>
 </ul>
 <p>Ogni porta permette salvataggio, ricerca per ID, ricerca per codice e verifica di esistenza per ID o codice. Questa scelta prepara i futuri use case senza introdurre database, JPA, Spring, file system o infrastructure concreta.</p>
 <p>Il Punto 6C è documentato in <a href="docs/18-application-repository-ports.md"><code>docs/18-application-repository-ports.md</code></a>.</p>
@@ -209,7 +212,7 @@
 <li><code>InMemoryShipmentRepository</code>;</li>
 <li><code>InMemoryDocumentRepository</code> dopo il Punto 6G;</li>
 <li><code>InMemoryVehicleUnitRepository</code> e <code>InMemoryVehicleCombinationRepository</code> dopo il Punto 6I;</li>
-<li><code>InMemoryDriverRepository</code>, <code>InMemoryMechanicRepository</code>, <code>InMemoryWarehouseOperatorRepository</code>, <code>InMemoryDispatcherRepository</code> e <code>InMemoryManagerRepository</code> dopo il Punto 6J.</li>
+<li><code>InMemoryDriverRepository</code>, <code>InMemoryMechanicRepository</code>, <code>InMemoryWarehouseOperatorRepository</code>, <code>InMemoryDispatcherRepository</code> e <code>InMemoryManagerRepository</code> dopo il Punto 6J, rafforzate dai test del Punto 6K.</li>
 </ul>
 <p>Queste repository permettono salvataggio, ricerca per ID, ricerca per codice e verifica di esistenza. Inoltre rifiutano input nulli con <code>UseCaseValidationException</code> e codici duplicati con <code>DuplicateResourceException</code>.</p>
 <p>Questa fase non introduce ancora database, JPA, Spring Data, transazioni o query avanzate. Serve a preparare test e primi use case applicativi mantenendo dominio, application e infrastruttura separati.</p>
@@ -249,6 +252,11 @@
 <p>Sono state aggiunte le repository port <code>DriverRepository</code>, <code>MechanicRepository</code>, <code>WarehouseOperatorRepository</code>, <code>DispatcherRepository</code> e <code>ManagerRepository</code>, insieme agli adapter temporanei <code>InMemoryDriverRepository</code>, <code>InMemoryMechanicRepository</code>, <code>InMemoryWarehouseOperatorRepository</code>, <code>InMemoryDispatcherRepository</code> e <code>InMemoryManagerRepository</code>.</p>
 <p>La fase mantiene il dominio Operational puro e non introduce ancora turni, availability, payroll, assegnazioni operative, planning, dispatching reale, tracking, security, database, JPA o REST API.</p>
 <p>Il Punto 6J è documentato in <a href="docs/25-application-use-cases-expansion-operational-roles.md"><code>docs/25-application-use-cases-expansion-operational-roles.md</code></a>.</p>
+<h2>Punto 6K — Application Operational Use Case Review &amp; Hardening</h2>
+<p>Il Punto 6K rivede e rafforza i use case Operational Roles introdotti nel Punto 6J.</p>
+<p>La fase aggiunge <code>ApplicationOperationalUseCaseHardeningTest</code>, che verifica copertura uniforme dei service di stato per Driver, Mechanic, WarehouseOperator, Dispatcher e Manager, command nulli, dependency repository nulle e assenza di mutazioni parziali quando una attivazione fallisce per mancanza di qualificazioni o scope.</p>
+<p>Questa fase non introduce nuovi use case business, REST API, controller, database, JPA, security, planning, dispatching reale, turni, payroll, tracking o dashboard.</p>
+<p>Il Punto 6K è documentato in <a href="docs/26-application-operational-use-case-hardening.md"><code>docs/26-application-operational-use-case-hardening.md</code></a>.</p>
 <h2>Prossimi step consigliati</h2>
 <p>La roadmap consigliata è:</p>
 <ol>
@@ -264,7 +272,8 @@
 <li>mantenere stabile il Punto 6H con review dei contratti <code>UseCase</code>, service, result null-safe, repository in memory e copy-on-write Documents;</li>
 <li>mantenere stabile il Punto 6I con i primi use case applicativi Vehicles, repository port Vehicles, repository in memory Vehicles e test dedicati;</li>
 <li>mantenere stabile il Punto 6J con i primi use case applicativi Operational Roles, repository port Operational, repository in memory Operational e test dedicati;</li>
-<li>scegliere con calma il Punto 6K, cioè una review/hardening dopo Operational Roles o una piccola espansione controllata verso Compliance base;</li>
+<li>mantenere stabile il Punto 6K con hardening dei use case Operational Roles, copertura completa dei service di stato e test copy-on-write sulle attivazioni fallite;</li>
+<li>scegliere con calma il Punto 6L, cioè una piccola espansione controllata verso Compliance base oppure una review finale dell'application layer;</li>
 <li>rimandare API REST, database e integrazioni esterne finché l&#x27;application layer non è stabile.</li>
 </ol>
   </div>
@@ -276,8 +285,8 @@
   </header>
   <div class="markdown-body">
 <h1>TruckFlow Manager — Documentazione del dominio</h1>
-<p>Questa cartella contiene la documentazione ufficiale di TruckFlow Manager, con la fondazione del dominio puro e i primi step dell’application layer: blueprint, foundation, repository port, repository in memory, primi use case applicativi, hardening dei use case, espansione controllata verso Documents, review/allineamento del Punto 6H, espansione controllata verso Vehicles nel Punto 6I ed espansione controllata verso Operational Roles nel Punto 6J.</p>
-<p>Il progetto ha completato la fondazione del <strong>domain layer</strong>. L&#x27;<strong>application layer</strong> ha consolidato i primi casi d&#x27;uso, ha completato la prima espansione controllata verso Documents, l&#x27;ha rafforzata con una review tecnica e documentale e ha poi aggiunto i primi use case applicativi Vehicles e Operational Roles. La fondazione di dominio contiene i seguenti package principali:</p>
+<p>Questa cartella contiene la documentazione ufficiale di TruckFlow Manager, con la fondazione del dominio puro e i primi step dell’application layer: blueprint, foundation, repository port, repository in memory, primi use case applicativi, hardening dei use case, espansione controllata verso Documents, review/allineamento del Punto 6H, espansione controllata verso Vehicles nel Punto 6I, espansione controllata verso Operational Roles nel Punto 6J e hardening Operational Roles nel Punto 6K.</p>
+<p>Il progetto ha completato la fondazione del <strong>domain layer</strong>. L&#x27;<strong>application layer</strong> ha consolidato i primi casi d&#x27;uso, ha completato la prima espansione controllata verso Documents, l&#x27;ha rafforzata con una review tecnica e documentale e ha poi aggiunto i primi use case applicativi Vehicles e Operational Roles, rafforzando questi ultimi con una review di hardening nel Punto 6K. La fondazione di dominio contiene i seguenti package principali:</p>
 <ul>
 <li><code>domain.users</code></li>
 <li><code>domain.qualifications</code></li>
@@ -327,6 +336,7 @@
 <li><a href="23-application-use-case-expansion-review.md"><code>23-application-use-case-expansion-review.md</code></a> — review del Punto 6H: contratti <code>UseCase</code>, service allineati alle port in, result null-safe, repository in memory uniformi, copy-on-write Documents e documentazione aggiornata.</li>
 <li><a href="24-application-use-cases-expansion-vehicles.md"><code>24-application-use-cases-expansion-vehicles.md</code></a> — espansione del Punto 6I: primi use case applicativi Vehicles, <code>VehicleUnitRepository</code>, <code>VehicleCombinationRepository</code>, repository in memory, command/result/port/service e test applicativi.</li>
 <li><a href="25-application-use-cases-expansion-operational-roles.md"><code>25-application-use-cases-expansion-operational-roles.md</code></a> — espansione del Punto 6J: primi use case applicativi Operational Roles, repository port Operational, repository in memory Operational e test applicativi.</li>
+<li><a href="26-application-operational-use-case-hardening.md"><code>26-application-operational-use-case-hardening.md</code></a> — hardening del Punto 6K: review Operational Roles, copertura completa dei service di stato, copy-on-write sulle attivazioni fallite e documentazione allineata.</li>
 </ol>
 <h2>Stato del progetto documentato</h2>
 <p>Questa documentazione descrive la versione del progetto in cui il dominio contiene:</p>
@@ -353,7 +363,8 @@
 <li>espansione controllata dei use case applicativi documentata in <code>22-application-use-case-expansion.md</code>, con <code>RegisterDocumentUseCase</code>, <code>FindDocumentUseCase</code>, <code>ActivateDocumentUseCase</code>, <code>ArchiveDocumentUseCase</code>, <code>DocumentRepository</code>, <code>InMemoryDocumentRepository</code> e test del flusso documentale logico;</li>
 <li>review e allineamento del Punto 6H documentati in <code>23-application-use-case-expansion-review.md</code>, con controlli su contratti <code>UseCase</code>, service, result null-safe, repository in memory e copy-on-write Documents;</li>
 <li>espansione controllata dei use case Vehicles documentata in <code>24-application-use-cases-expansion-vehicles.md</code>, con <code>RegisterVehicleUnitUseCase</code>, <code>FindVehicleUnitUseCase</code>, use case di stato VehicleUnit, <code>RegisterVehicleCombinationUseCase</code>, <code>FindVehicleCombinationUseCase</code>, repository port Vehicles, repository in memory Vehicles e test applicativi;</li>
-<li>espansione controllata dei use case Operational Roles documentata in <code>25-application-use-cases-expansion-operational-roles.md</code>, con use case per Driver, Mechanic, WarehouseOperator, Dispatcher e Manager, repository port Operational, repository in memory Operational e test applicativi.</li>
+<li>espansione controllata dei use case Operational Roles documentata in <code>25-application-use-cases-expansion-operational-roles.md</code>, con use case per Driver, Mechanic, WarehouseOperator, Dispatcher e Manager, repository port Operational, repository in memory Operational e test applicativi;</li>
+<li>hardening Operational Roles documentato in <code>26-application-operational-use-case-hardening.md</code>, con copertura completa dei service di stato, command nulli, dependency nulle e test copy-on-write sulle attivazioni fallite.</li>
 </ul>
 <h2>Nota sul packaging di <code>domain.vehicles</code></h2>
 <p>Il dominio veicoli è stato riorganizzato in sottopackage per renderlo più leggibile:</p>
@@ -8723,6 +8734,146 @@ find src/main/java/it/gabriele/truckflow/infrastructure/memory -type d | grep op
 <p>Commit consigliato:</p>
 <pre><code>git add -A
 git commit -m &quot;Expand application use cases with operational roles&quot;</code></pre>
+  </div>
+</article>
+<article class="doc-panel panel-28" id="26-application-operational-use-case-hardening-md">
+  <header class="doc-panel-header">
+    <p class="eyebrow">26-application-operational-use-case-hardening.md</p>
+    <h1>Punto 6K — Application Operational Use Case Review &amp; Hardening</h1>
+  </header>
+  <div class="markdown-body">
+<h1>Punto 6K — Application Operational Use Case Review &amp; Hardening</h1>
+<p>Il Punto 6K rivede e rafforza l&#x27;espansione applicativa verso gli <strong>Operational Roles</strong> introdotta nel Punto 6J.</p>
+<p>Questa fase non aggiunge nuovi domini business. Serve a controllare che i use case applicativi per <code>Driver</code>, <code>Mechanic</code>, <code>WarehouseOperator</code>, <code>Dispatcher</code> e <code>Manager</code> siano coerenti, simmetrici, testati e documentati prima di procedere verso altri domini applicativi.</p>
+<p>Il Punto 6K rimane dentro i confini dell&#x27;application layer. Non introduce REST API, controller Spring, database, JPA, Spring Data, security, tracking, planning, dispatching reale, turni, availability, payroll, dashboard, audit trail enterprise o workflow operativi.</p>
+<h2>Obiettivo dello step</h2>
+<p>L&#x27;obiettivo del Punto 6K è consolidare il blocco Operational Roles dopo la sua introduzione.</p>
+<p>La review verifica in particolare:</p>
+<ul>
+<li>copertura uniforme dei service di stato per tutti i ruoli operativi;</li>
+<li>assenza di mutazioni parziali quando una validazione di dominio fallisce;</li>
+<li>protezione copy-on-write su attivazione, sospensione e marcatura come non idoneo;</li>
+<li>gestione coerente di command nulli;</li>
+<li>gestione coerente di dependency repository nulle;</li>
+<li>documentazione allineata tra Markdown, documentazione digitale HTML + CSS e file di comandi;</li>
+<li>pulizia di piccoli commenti tecnici generati nel Punto 6J.</li>
+</ul>
+<h2>Nessuna nuova funzionalità business</h2>
+<p>Il Punto 6K non introduce nuovi casi d&#x27;uso funzionali.</p>
+<p>Non vengono aggiunti:</p>
+<ul>
+<li>assegnazioni driver-veicolo;</li>
+<li>assegnazioni driver-shipment;</li>
+<li>disponibilità giornaliera;</li>
+<li>turni;</li>
+<li>calendario operativo;</li>
+<li>payroll;</li>
+<li>HR avanzato;</li>
+<li>controlli reali su patente, CQC, ADR o visite mediche;</li>
+<li>dispatching reale;</li>
+<li>planning;</li>
+<li>tracking;</li>
+<li>dashboard;</li>
+<li>REST API;</li>
+<li>persistenza definitiva.</li>
+</ul>
+<p>Queste parti appartengono a moduli futuri e non devono entrare ora nel livello application di base.</p>
+<h2>Test aggiunto</h2>
+<p>È stato aggiunto il test:</p>
+<pre><code>
+ApplicationOperationalUseCaseHardeningTest
+</code></pre>
+<p>Questo test affianca i test introdotti nel Punto 6J e rafforza il contratto operativo applicativo.</p>
+<h2>Copertura dei service di stato per tutti i ruoli</h2>
+<p>Il test verifica che i use case di stato siano coperti per tutti i ruoli operativi correnti:</p>
+<ul>
+<li><code>Driver</code>;</li>
+<li><code>Mechanic</code>;</li>
+<li><code>WarehouseOperator</code>;</li>
+<li><code>Dispatcher</code>;</li>
+<li><code>Manager</code>.</li>
+</ul>
+<p>Per ogni ruolo vengono testati i passaggi principali:</p>
+<ul>
+<li>registrazione valida;</li>
+<li>sospensione;</li>
+<li>marcatura come non idoneo;</li>
+<li>riattivazione.</li>
+</ul>
+<p>In questo modo il progetto non dipende solo dai casi driver/dispatcher, ma protegge esplicitamente anche mechanic, warehouse operator e manager.</p>
+<h2>Hardening copy-on-write sulle attivazioni fallite</h2>
+<p>Il Punto 6J aveva già introdotto i mutation support copy-on-write:</p>
+<pre><code>
+DriverMutationSupport
+MechanicMutationSupport
+WarehouseOperatorMutationSupport
+DispatcherMutationSupport
+ManagerMutationSupport
+</code></pre>
+<p>Il Punto 6K verifica anche il caso negativo più importante: una figura operativa registrata come <code>SUSPENDED</code> senza qualificazioni o scope non può essere attivata.</p>
+<p>Il comportamento atteso è:</p>
+<ol>
+<li>il service carica l&#x27;aggregate dalla repository;</li>
+<li>crea una copia;</li>
+<li>prova ad attivare la copia;</li>
+<li>il dominio rifiuta l&#x27;attivazione perché mancano qualificazioni o scope;</li>
+<li>la repository mantiene l&#x27;aggregate originale in stato <code>SUSPENDED</code>;</li>
+<li>nessuna modifica parziale viene salvata.</li>
+</ol>
+<p>Questo protegge gli adapter in memory dal problema dei riferimenti mutabili.</p>
+<h2>Error handling applicativo verificato</h2>
+<p>Il Punto 6K rafforza il controllo degli errori applicativi.</p>
+<p>I test verificano che tutti i service Operational Roles rifiutino command nulli con:</p>
+<pre><code>
+UseCaseValidationException
+</code></pre>
+<p>Viene verificato lo stesso contratto anche per le dependency repository nulle nei costruttori dei service.</p>
+<p>Questa scelta mantiene coerente il comportamento già stabilito negli step precedenti dell&#x27;application layer.</p>
+<h2>Pulizia documentale nel codice</h2>
+<p>Sono stati corretti piccoli commenti tecnici nei package applicativi Operational Roles.</p>
+<p>In particolare:</p>
+<ul>
+<li><code>warehouseoperator</code> è stato uniformato in <code>warehouse operator</code> nei commenti JavaDoc;</li>
+<li>i commenti dei command e delle port <code>MarkNotEligible...</code> sono stati resi più leggibili, usando “mark as not eligible” invece di esporre il nome tecnico del metodo.</li>
+</ul>
+<p>Non sono stati cambiati nomi di classi, metodi, package o contratti pubblici.</p>
+<h2>Documentazione aggiornata</h2>
+<p>Il Punto 6K aggiorna la documentazione collegata:</p>
+<ul>
+<li>questo documento <code>docs/26-application-operational-use-case-hardening.md</code>;</li>
+<li><code>docs/README.md</code>;</li>
+<li><code>TRUCKFLOW_PROJECT_DOCUMENTATION.md</code>;</li>
+<li>i documenti applicativi precedenti dove è utile chiarire lo stato attuale;</li>
+<li><code>digitalDocs/index.html</code>;</li>
+<li><code>digitalDocs/styles.css</code>;</li>
+<li><code>digitalDocs/README.md</code>;</li>
+<li><code>digitalDocs/truckflow-manager-enterprise-documentation.html</code>;</li>
+<li><code>command_basic.md</code>.</li>
+</ul>
+<p>La documentazione digitale rimane un mirror navigabile della documentazione Markdown ufficiale.</p>
+<h2>Confini architetturali rispettati</h2>
+<p>Il Punto 6K non introduce:</p>
+<ul>
+<li>dipendenze dal dominio verso application o infrastructure;</li>
+<li>dipendenze dall&#x27;application layer verso infrastructure concreta;</li>
+<li>dipendenze dall&#x27;application layer verso controller, web, JPA o Spring Data;</li>
+<li>persistenza definitiva;</li>
+<li>API REST;</li>
+<li>motori di workflow;</li>
+<li>regole enterprise avanzate.</li>
+</ul>
+<p>Il dominio Operational continua a contenere le invarianti business. L&#x27;application layer orchestra i casi d&#x27;uso e gestisce errori applicativi, repository port e result.</p>
+<h2>Stato finale dopo il Punto 6K</h2>
+<p>Dopo il Punto 6K, il blocco Operational Roles risulta più solido:</p>
+<ul>
+<li>use case applicativi presenti per tutti i ruoli principali;</li>
+<li>repository port e repository in memory presenti;</li>
+<li>mutazioni di stato protette con copy-on-write;</li>
+<li>test positivi e negativi più completi;</li>
+<li>command nulli e dependency nulle controllati;</li>
+<li>documentazione aggiornata.</li>
+</ul>
+<p>Il prossimo step consigliato è il <strong>Punto 6L</strong>, che può essere una piccola espansione controllata verso i use case base di Compliance oppure una review finale dell&#x27;application layer prima della chiusura del Punto 6.</p>
   </div>
 </article>
   </main>

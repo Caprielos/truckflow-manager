@@ -286,3 +286,9 @@ Questi adapter restano temporanei e servono solo per test e sviluppo locale. Non
 ## Aggiornamento Punto 6J — Operational in-memory repositories
 
 Dopo il Punto 6J sono presenti anche `InMemoryDriverRepository`, `InMemoryMechanicRepository`, `InMemoryWarehouseOperatorRepository`, `InMemoryDispatcherRepository` e `InMemoryManagerRepository`. Sono adapter temporanei per test e sviluppo locale, non database reali.
+
+## Aggiornamento dopo il Punto 6K
+
+Il Punto 6K rafforza gli adapter in memory Operational Roles verificando che le mutazioni fallite non salvino stati parziali. Questo è importante perché gli adapter in memory conservano riferimenti a oggetti mutabili e devono essere protetti dai service applicativi con l'approccio copy-on-write.
+
+Non sono stati introdotti database, JPA, transazioni o persistenza definitiva.

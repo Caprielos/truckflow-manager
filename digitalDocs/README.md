@@ -57,6 +57,7 @@ This digital documentation mirrors:
 - `docs/23-application-use-case-expansion-review.md`
 - `docs/24-application-use-cases-expansion-vehicles.md`
 - `docs/25-application-use-cases-expansion-operational-roles.md`
+- `docs/26-application-operational-use-case-hardening.md`
 - `command_basic.md`
 
 
@@ -120,12 +121,32 @@ La fase resta una review: non introduce REST API, controller Spring, database, J
 Documento di riferimento: `docs/23-application-use-case-expansion-review.md`.
 
 
-## Aggiornamento Punto 6J
+## Aggiornamento Punto 6I
 
-La documentazione digitale include ora anche il Punto 6J — Application Use Cases Expansion III: Operational Roles.
+La documentazione digitale include ora anche il Punto 6I — Application Use Cases Expansion II: Vehicles.
 
-Questo aggiornamento documenta la seconda espansione controllata dell'application layer verso `vehicles`: command, result, port in, port out, service applicativi, `VehicleUnitRepository`, `VehicleCombinationRepository`, repository in memory e test per registrare/trovare unità veicolo, cambiare stato alle `VehicleUnit`, registrare combinazioni veicolo e trovarle per ID.
+Questo aggiornamento documenta l'espansione controllata dell'application layer verso `vehicles`: command, result, port in, port out, service applicativi, `VehicleUnitRepository`, `VehicleCombinationRepository`, repository in memory e test per registrare/trovare unità veicolo, cambiare stato alle `VehicleUnit`, registrare combinazioni veicolo e trovarle per ID.
 
 La fase resta coerente con i vincoli architetturali già decisi: niente REST API, controller Spring, database, JPA, security, tracking, planning, dispatching, manutenzione, disponibilità mezzi, dashboard o workflow enterprise.
 
 Documento di riferimento: `docs/24-application-use-cases-expansion-vehicles.md`.
+
+## Aggiornamento Punto 6J
+
+La documentazione digitale include ora anche il Punto 6J — Application Use Cases Expansion III: Operational Roles.
+
+Questo aggiornamento documenta l'espansione controllata dell'application layer verso `operational`: command, result, port in, port out, service applicativi, repository port Operational, repository in memory e test per registrare/trovare Driver, Mechanic, WarehouseOperator, Dispatcher e Manager e cambiarne lo stato applicativo.
+
+La fase resta coerente con i vincoli architetturali già decisi: niente REST API, controller Spring, database, JPA, security, tracking, planning, dispatching reale, turni, disponibilità persone, payroll, dashboard o workflow enterprise.
+
+Documento di riferimento: `docs/25-application-use-cases-expansion-operational-roles.md`.
+
+## Aggiornamento Punto 6K
+
+La documentazione digitale include ora anche il Punto 6K — Application Operational Use Case Review & Hardening.
+
+Questo aggiornamento documenta la review dei use case Operational Roles: copertura completa dei service di stato, test copy-on-write sulle attivazioni fallite, controllo di command nulli e dependency repository nulle, più allineamento della documentazione Markdown + HTML + CSS.
+
+La fase resta una review: non introduce REST API, controller Spring, database, JPA, security, tracking, planning, dispatching reale, turni, payroll, dashboard o nuovi use case business.
+
+Documento di riferimento: `docs/26-application-operational-use-case-hardening.md`.

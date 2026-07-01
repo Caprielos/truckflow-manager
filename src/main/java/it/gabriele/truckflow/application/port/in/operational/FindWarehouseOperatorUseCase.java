@@ -4,6 +4,6 @@ import it.gabriele.truckflow.application.command.operational.FindWarehouseOperat
 import it.gabriele.truckflow.application.port.in.UseCase;
 import it.gabriele.truckflow.application.result.operational.WarehouseOperatorResult;
 
-/** Inbound port for the find warehouseoperator use case. */
+/** Inbound port for the find warehouse operator use case. */
 public interface FindWarehouseOperatorUseCase
     extends UseCase<FindWarehouseOperatorCommand, WarehouseOperatorResult> {}

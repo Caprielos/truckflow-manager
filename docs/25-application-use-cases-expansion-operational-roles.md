@@ -291,3 +291,11 @@ Dopo il Punto 6J, l'application layer copre:
 Il progetto è ancora prima di REST API e database.
 
 Il prossimo step consigliato è una fase di review/hardening dopo Operational Roles oppure una piccola espansione controllata verso Compliance base, sempre senza introdurre controlli concreti di violazione o motori regolatori.
+
+## Aggiornamento dopo il Punto 6K
+
+Il Punto 6K rafforza il blocco introdotto in questo documento.
+
+La review aggiunge `ApplicationOperationalUseCaseHardeningTest`, copre i service di stato per tutti i ruoli operativi correnti, verifica command nulli e dependency nulle e controlla che una attivazione fallita per mancanza di qualificazioni o scope non modifichi l'aggregate persistito in memory.
+
+Il Punto 6K non introduce nuovi use case business né cambia i contratti pubblici aggiunti nel Punto 6J.

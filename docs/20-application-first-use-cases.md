@@ -333,3 +333,7 @@ La review aggiunge però una garanzia trasversale: i result applicativi collegat
 ## Aggiornamento di contesto dopo il Punto 6J
 
 I primi use case Locations + Cargo + Shipments restano il nucleo iniziale. Gli step successivi hanno esteso lo stesso modello applicativo a Documents, Vehicles e Operational Roles senza cambiare il principio architetturale del Punto 6E.
+
+## Aggiornamento dopo il Punto 6K
+
+Il primo nucleo Locations + Cargo + Shipments rimane invariato. Il Punto 6K opera sui use case Operational Roles, ma conferma lo stesso stile applicativo già avviato nel Punto 6E: command espliciti, service piccoli, repository port astratte, result applicativi e test con adapter in memory.

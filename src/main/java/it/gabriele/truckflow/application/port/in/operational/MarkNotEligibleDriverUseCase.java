@@ -4,6 +4,6 @@ import it.gabriele.truckflow.application.command.operational.MarkNotEligibleDriv
 import it.gabriele.truckflow.application.port.in.UseCase;
 import it.gabriele.truckflow.application.result.operational.DriverResult;
 
-/** Inbound port for the markNotEligible driver use case. */
+/** Inbound port for the mark driver as not eligible use case. */
 public interface MarkNotEligibleDriverUseCase
     extends UseCase<MarkNotEligibleDriverCommand, DriverResult> {}

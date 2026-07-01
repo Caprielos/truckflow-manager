@@ -7,7 +7,7 @@ import it.gabriele.truckflow.domain.operational.warehouse.WarehouseOperatorId;
 import it.gabriele.truckflow.domain.users.UserId;
 import java.util.Optional;
 
-/** Outbound repository port used by warehouseoperator operational role use cases. */
+/** Outbound repository port used by warehouse operator operational role use cases. */
 public interface WarehouseOperatorRepository extends RepositoryPort {
 
   WarehouseOperator save(WarehouseOperator warehouseOperator);

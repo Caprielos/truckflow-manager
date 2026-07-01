@@ -4,6 +4,6 @@ import it.gabriele.truckflow.application.command.operational.MarkNotEligibleMana
 import it.gabriele.truckflow.application.port.in.UseCase;
 import it.gabriele.truckflow.application.result.operational.ManagerResult;
 
-/** Inbound port for the markNotEligible manager use case. */
+/** Inbound port for the mark manager as not eligible use case. */
 public interface MarkNotEligibleManagerUseCase
     extends UseCase<MarkNotEligibleManagerCommand, ManagerResult> {}

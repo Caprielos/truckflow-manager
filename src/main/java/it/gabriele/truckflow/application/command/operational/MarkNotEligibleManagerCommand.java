@@ -4,7 +4,7 @@ import it.gabriele.truckflow.application.command.ApplicationCommand;
 import it.gabriele.truckflow.application.exception.UseCaseValidationException;
 import it.gabriele.truckflow.domain.operational.manager.ManagerId;
 
-/** Command used to markNotEligible an operational manager role. */
+/** Command used to mark an operational manager role as not eligible. */
 public record MarkNotEligibleManagerCommand(ManagerId id, String updatedBy)
     implements ApplicationCommand {
 

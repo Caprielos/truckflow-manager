@@ -258,3 +258,9 @@ La documentazione del nuovo step è in `24-application-use-cases-expansion-vehic
 ## Aggiornamento successivo — Punto 6J Operational Roles
 
 Dopo Vehicles, il progetto ha applicato il Punto 6J verso Operational Roles. Anche questa espansione mantiene i result null-safe, le port in basate su `UseCase`, service allineati alle port e repository in memory usate solo come adapter temporanei.
+
+## Aggiornamento dopo il Punto 6K
+
+Il Punto 6K applica agli Operational Roles la stessa logica di review introdotta nel Punto 6H dopo Documents.
+
+La differenza è che il Punto 6K si concentra sulla copertura completa dei service di stato e sulla protezione copy-on-write delle attivazioni fallite per Driver, Mechanic, WarehouseOperator, Dispatcher e Manager.

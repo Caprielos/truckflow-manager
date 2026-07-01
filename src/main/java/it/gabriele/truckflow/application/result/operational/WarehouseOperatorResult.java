@@ -8,7 +8,7 @@ import it.gabriele.truckflow.domain.operational.warehouse.WarehouseOperator;
 import it.gabriele.truckflow.domain.operational.warehouse.WarehouseOperatorId;
 import it.gabriele.truckflow.domain.users.UserId;
 
-/** Result returned by warehouseoperator operational role use cases. */
+/** Result returned by warehouse operator operational role use cases. */
 public record WarehouseOperatorResult(
     WarehouseOperatorId id,
     OperationalCode code,

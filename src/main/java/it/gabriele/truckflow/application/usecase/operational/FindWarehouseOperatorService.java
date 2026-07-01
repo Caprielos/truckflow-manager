@@ -7,7 +7,7 @@ import it.gabriele.truckflow.application.port.in.operational.FindWarehouseOperat
 import it.gabriele.truckflow.application.port.out.operational.WarehouseOperatorRepository;
 import it.gabriele.truckflow.application.result.operational.WarehouseOperatorResult;
 
-/** Application service that finds operational warehouseoperator roles. */
+/** Application service that finds operational warehouse operator roles. */
 public final class FindWarehouseOperatorService implements FindWarehouseOperatorUseCase {
 
   private final WarehouseOperatorRepository warehouseOperatorRepository;

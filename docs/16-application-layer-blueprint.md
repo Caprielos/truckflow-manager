@@ -639,3 +639,9 @@ Il Punto 6I conferma questa regola aggiungendo `VehicleUnit` e `VehicleCombinati
 ## Aggiornamento dopo il Punto 6J
 
 Il blueprint rimane valido anche dopo l'espansione verso Operational Roles. I nuovi use case seguono la stessa struttura command/result/port/service/repository già usata per gli altri domini e non introducono web, database o framework nel livello application.
+
+## Aggiornamento dopo il Punto 6K
+
+Il blueprint applicativo rimane valido dopo il Punto 6K. La review Operational Roles conferma che i nuovi use case continuano a seguire la struttura prevista: command, result, port in, repository port, application service, repository in memory e test applicativi.
+
+Il Punto 6K non modifica il blueprint e non introduce REST API, controller, database, JPA, security, planning o tracking. Rafforza soltanto i contratti già definiti per il livello application.

@@ -7,7 +7,7 @@ import it.gabriele.truckflow.application.port.in.operational.ActivateWarehouseOp
 import it.gabriele.truckflow.application.port.out.operational.WarehouseOperatorRepository;
 import it.gabriele.truckflow.application.result.operational.WarehouseOperatorResult;
 
-/** Application service that changes the status of operational warehouseoperator roles. */
+/** Application service that changes the status of operational warehouse operator roles. */
 public final class ActivateWarehouseOperatorService implements ActivateWarehouseOperatorUseCase {
 
   private final WarehouseOperatorRepository warehouseOperatorRepository;

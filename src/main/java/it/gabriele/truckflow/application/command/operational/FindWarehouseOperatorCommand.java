@@ -4,7 +4,7 @@ import it.gabriele.truckflow.application.command.ApplicationCommand;
 import it.gabriele.truckflow.application.exception.UseCaseValidationException;
 import it.gabriele.truckflow.domain.operational.warehouse.WarehouseOperatorId;
 
-/** Command used to find an operational warehouseoperator role. */
+/** Command used to find an operational warehouse operator role. */
 public record FindWarehouseOperatorCommand(WarehouseOperatorId id) implements ApplicationCommand {
 
   public FindWarehouseOperatorCommand {

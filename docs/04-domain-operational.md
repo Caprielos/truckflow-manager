@@ -336,3 +336,10 @@ Queste parti saranno gestite in moduli successivi.
 ## Nota applicativa dopo il Punto 6J
 
 Il dominio `operational` rimane puro. Dopo il Punto 6J l'application layer introduce i primi use case per registrare, trovare e cambiare stato a driver, mechanic, warehouse operator, dispatcher e manager. Non sono stati introdotti turni, disponibilità, payroll, planning, tracking o assegnazioni operative concrete.
+
+
+## Nota applicativa dopo il Punto 6K
+
+Il dominio `operational` rimane puro anche dopo il Punto 6K. La review applicativa rafforza i use case Operational Roles nel livello application, ma non sposta nel dominio concetti futuri come turni, disponibilità, payroll, assegnazioni operative, planning o tracking.
+
+Il Punto 6K aggiunge test applicativi di hardening e conferma che le invarianti rimangono nel dominio mentre l'application layer orchestra command, repository port, service e result.

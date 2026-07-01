@@ -350,3 +350,31 @@ Commit consigliato:
 git add -A
 git commit -m "Expand application use cases with operational roles"
 ```
+
+---
+
+## Nota progetto — Punto 6K
+
+Dopo l'aggiunta del Punto 6K — Application Operational Use Case Review & Hardening, il controllo consigliato resta:
+
+```bash
+mvn spotless:apply
+mvn spotless:check
+mvn clean test
+git status
+```
+
+Il Punto 6K non aggiunge nuovi domini o API. Rafforza i use case Operational Roles con:
+
+- `ApplicationOperationalUseCaseHardeningTest`;
+- copertura dei service di stato per Driver, Mechanic, WarehouseOperator, Dispatcher e Manager;
+- verifica copy-on-write sulle attivazioni fallite;
+- controllo di command nulli e dependency repository nulle;
+- documentazione Markdown, HTML e CSS aggiornata.
+
+Commit consigliato:
+
+```bash
+git add -A
+git commit -m "Harden operational application use cases"
+```

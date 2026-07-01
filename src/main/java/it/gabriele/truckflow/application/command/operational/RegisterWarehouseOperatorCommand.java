@@ -10,7 +10,7 @@ import it.gabriele.truckflow.domain.operational.common.OperationalStatus;
 import it.gabriele.truckflow.domain.users.UserId;
 import java.util.Set;
 
-/** Command used to register a new operational warehouseoperator role. */
+/** Command used to register a new operational warehouse operator role. */
 public record RegisterWarehouseOperatorCommand(
     OperationalCode code,
     UserId userId,
