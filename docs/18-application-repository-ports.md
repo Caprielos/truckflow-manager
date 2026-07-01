@@ -396,3 +396,15 @@ Dopo il Punto 6J sono presenti anche le repository port `DriverRepository`, `Mec
 Dopo il Punto 6K, le repository port Operational Roles introdotte nel Punto 6J restano parte del contratto outbound dell'application layer. La review non aggiunge nuove porte, ma rafforza tramite test il loro uso nei service applicativi e negli adapter in memory.
 
 Le porte Operational attuali sono `DriverRepository`, `MechanicRepository`, `WarehouseOperatorRepository`, `DispatcherRepository` e `ManagerRepository`.
+
+## Aggiornamento dopo il Punto 6L — ComplianceRequirementRepository
+
+Dopo il Punto 6L, l'application layer include anche la repository port:
+
+```text
+ComplianceRequirementRepository
+```
+
+La porta espone salvataggio, ricerca per `ComplianceRequirementId`, ricerca per `ComplianceRequirementCode` e controlli di esistenza per ID e codice.
+
+Come tutte le altre repository port, resta un contratto dell'application layer. Non è una repository JPA, non conosce database, Spring Data, query SQL, transazioni o persistenza definitiva.

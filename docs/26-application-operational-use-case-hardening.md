@@ -163,4 +163,10 @@ Dopo il Punto 6K, il blocco Operational Roles risulta più solido:
 - command nulli e dependency nulle controllati;
 - documentazione aggiornata.
 
-Il prossimo step consigliato è il **Punto 6L**, che può essere una piccola espansione controllata verso i use case base di Compliance oppure una review finale dell'application layer prima della chiusura del Punto 6.
+Il Punto 6L è stato poi applicato come espansione controllata verso i use case base di Compliance. Il prossimo step consigliato diventa il **Punto 6M — Application Layer Final Review & Freeze**.
+
+## Aggiornamento successivo — Punto 6L Compliance base
+
+Dopo l'hardening Operational Roles, il Punto 6L applica una nuova espansione controllata verso Compliance base.
+
+Il blocco Operational Roles rimane invariato. Compliance base aggiunge invece register/find/status use cases per `ComplianceRequirement`, mantenendo fuori controlli reali su persone, documenti, veicoli, cargo o shipment.

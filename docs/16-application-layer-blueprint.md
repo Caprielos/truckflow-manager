@@ -645,3 +645,11 @@ Il blueprint rimane valido anche dopo l'espansione verso Operational Roles. I nu
 Il blueprint applicativo rimane valido dopo il Punto 6K. La review Operational Roles conferma che i nuovi use case continuano a seguire la struttura prevista: command, result, port in, repository port, application service, repository in memory e test applicativi.
 
 Il Punto 6K non modifica il blueprint e non introduce REST API, controller, database, JPA, security, planning o tracking. Rafforza soltanto i contratti già definiti per il livello application.
+
+## Aggiornamento dopo il Punto 6L
+
+Il blueprint applicativo rimane valido anche dopo l'espansione base verso Compliance.
+
+Il Punto 6L segue la struttura prevista: command, result, port in, repository port, application service, repository in memory e test. La differenza è che il nuovo blocco lavora su `ComplianceRequirement`, mantenendo la compliance come catalogo astratto e non come motore di controllo operativo.
+
+Non vengono introdotti REST API, controller, database, JPA, Spring Data, security, audit trail, workflow o controlli concreti di violazione.

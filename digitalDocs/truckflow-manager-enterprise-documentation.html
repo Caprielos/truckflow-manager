@@ -495,7 +495,7 @@
           <li><span>Value Object principali</span><span class="badge done">Rafforzati</span></li>
           <li><span>Eccezioni custom</span><span class="badge done">Applicate</span></li>
           <li><span>Revisione test dominio</span><span class="badge done">Completata</span></li>
-          <li><span>Application layer</span><span class="badge now">Punto 6K hardening</span></li>
+          <li><span>Application layer</span><span class="badge now">Punto 6L compliance base</span></li>
         </ul>
       </aside>
     </div>
@@ -805,6 +805,10 @@
             <div><span class="badge done">Completato</span><div class="milestone">Punto 6K</div></div>
             <div><h3>Application Operational Use Case Review &amp; Hardening</h3><p>Review e rafforzamento dei use case Operational Roles: copertura completa dei service di stato, command nulli, dependency nulle e copy-on-write sulle attivazioni fallite.</p></div>
           </div>
+          <div class="timeline-item">
+            <div><span class="badge done">Completato</span><div class="milestone">Punto 6L</div></div>
+            <div><h3>Application Compliance Base Use Cases</h3><p>Espansione controllata verso Compliance base: primi use case per ComplianceRequirement, repository port, repository in memory, test applicativi e documentazione aggiornata.</p></div>
+          </div>
         </div>
         <h3>Obiettivi a breve termine</h3>
         <ul>
@@ -819,14 +823,15 @@
           <li>mantenere stabile il Punto 6H con review dei contratti UseCase, service, result null-safe, repository in memory e copy-on-write Documents;</li>
           <li>mantenere stabile il Punto 6I con i primi use case Vehicles, repository Vehicles, repository in memory Vehicles e test dedicati;</li>
           <li>mantenere stabile il Punto 6J con i primi use case Operational Roles, repository Operational, repository in memory Operational e test dedicati;</li>
-          <li>mantenere stabile il Punto 6K con hardening Operational Roles, test copy-on-write sulle attivazioni fallite e documentazione aggiornata.</li>
+          <li>mantenere stabile il Punto 6K con hardening Operational Roles, test copy-on-write sulle attivazioni fallite e documentazione aggiornata;</li>
+          <li>mantenere stabile il Punto 6L con primi use case Compliance base, repository port, repository in memory e test dedicati.</li>
         </ul>
         <h3>Obiettivi a medio termine</h3>
         <ul>
           <li>estendere progressivamente le repository port agli aggregate principali quando nasceranno nuovi use case;</li>
           <li>usare repository in memory per scenari e test applicativi;</li>
-          <li>scegliere il Punto 6L solo dopo aver verificato il Punto 6K sul Mac con Maven;</li>
-          <li>procedere gradualmente verso compliance base, review finale dell’application layer e ulteriori azioni documentali;</li>
+          <li>procedere al Punto 6M solo dopo aver verificato il Punto 6L sul Mac con Maven;</li>
+          <li>procedere gradualmente verso la review/freeze finale dell’application layer e ulteriori azioni documentali;</li>
           <li>preparare l’infrastructure layer senza sporcare il dominio.</li>
         </ul>
       </section>
@@ -834,7 +839,7 @@
 
       <section id="application-layer">
         <h2>8. Application Layer, In-Memory Repositories e Use Case Expansion</h2>
-        <p class="lead">Il Punto 6A ha definito il blueprint del livello applicativo. Il Punto 6B ha introdotto la foundation concreta. Il Punto 6C ha aggiunto le prime repository port. Il Punto 6D ha aggiunto le repository in memory. Il Punto 6E ha introdotto i primi use case applicativi per Locations, Cargo e Shipments. Il Punto 6F li ha rafforzati con CancelShipmentUseCase e copy-on-write. Il Punto 6G espande l'application layer verso Documents, il Punto 6H rivede e allinea questa espansione, il Punto 6I aggiunge i primi use case Vehicles, il Punto 6J aggiunge i primi use case Operational Roles e il Punto 6K rafforza questi use case con una review dedicata, senza introdurre ancora REST API, database o framework.</p>
+        <p class="lead">Il Punto 6A ha definito il blueprint del livello applicativo. Il Punto 6B ha introdotto la foundation concreta. Il Punto 6C ha aggiunto le prime repository port. Il Punto 6D ha aggiunto le repository in memory. Il Punto 6E ha introdotto i primi use case applicativi per Locations, Cargo e Shipments. Il Punto 6F li ha rafforzati con CancelShipmentUseCase e copy-on-write. Il Punto 6G espande l'application layer verso Documents, il Punto 6H rivede e allinea questa espansione, il Punto 6I aggiunge i primi use case Vehicles, il Punto 6J aggiunge i primi use case Operational Roles, il Punto 6K rafforza questi use case con una review dedicata e il Punto 6L aggiunge i primi use case Compliance base, senza introdurre ancora REST API, database o framework.</p>
         <div class="grid two">
           <div class="card">
             <h3>Responsabilità</h3>
@@ -842,11 +847,11 @@
           </div>
           <div class="card">
             <h3>Componenti previsti</h3>
-            <p>La struttura comprende command, result, port in, port out, use case, application service, eccezioni applicative, repository port e repository in memory per sviluppo e test. Il Punto 6E aggiunge i primi command e service concreti: registrazione e ricerca di Locations e Cargo, creazione di Shipment, aggiunta di item, aggiunta di leg, conferma e ricerca della Shipment. Il Punto 6F aggiunge cancellazione shipment, copy-on-write delle mutazioni shipment e hardening dei comportamenti negativi. Il Punto 6G aggiunge command, result, port e service per Documents: registrazione, ricerca, attivazione e archiviazione. Il Punto 6H rafforza result null-safe, contratti UseCase, service, repository in memory e copy-on-write. Il Punto 6I aggiunge command, result, port e service per Vehicles: registrazione/ricerca di unità veicolo, mutazioni di stato e registrazione/ricerca di combinazioni. Il Punto 6J aggiunge command, result, port e service per Operational Roles: registrazione, ricerca e mutazioni di stato per Driver, Mechanic, WarehouseOperator, Dispatcher e Manager. Il Punto 6K rafforza questo blocco con test sui service di stato, command nulli, dependency nulle e copy-on-write sulle attivazioni fallite.</p>
+            <p>La struttura comprende command, result, port in, port out, use case, application service, eccezioni applicative, repository port e repository in memory per sviluppo e test. Il Punto 6E aggiunge i primi command e service concreti: registrazione e ricerca di Locations e Cargo, creazione di Shipment, aggiunta di item, aggiunta di leg, conferma e ricerca della Shipment. Il Punto 6F aggiunge cancellazione shipment, copy-on-write delle mutazioni shipment e hardening dei comportamenti negativi. Il Punto 6G aggiunge command, result, port e service per Documents: registrazione, ricerca, attivazione e archiviazione. Il Punto 6H rafforza result null-safe, contratti UseCase, service, repository in memory e copy-on-write. Il Punto 6I aggiunge command, result, port e service per Vehicles: registrazione/ricerca di unità veicolo, mutazioni di stato e registrazione/ricerca di combinazioni. Il Punto 6J aggiunge command, result, port e service per Operational Roles: registrazione, ricerca e mutazioni di stato per Driver, Mechanic, WarehouseOperator, Dispatcher e Manager. Il Punto 6K rafforza questo blocco con test sui service di stato, command nulli, dependency nulle e copy-on-write sulle attivazioni fallite. Il Punto 6L aggiunge command, result, port e service per Compliance base: registrazione, ricerca, attivazione, sospensione, archiviazione e dismissione di ComplianceRequirement.</p>
           </div>
           <div class="card">
             <h3>Primo flusso</h3>
-            <p>Il primo blocco implementato è Locations + Cargo + Shipments: registrare location, registrare cargo, creare una shipment, aggiungere item e tratta, confermare o cancellare la shipment e recuperarla come risultato applicativo. Il Punto 6G aggiunge il primo blocco Documents: registrare, trovare, attivare e archiviare un documento logico. Il Punto 6H verifica che il blocco sia coerente prima di espandere altri domini. Il Punto 6I aggiunge il primo blocco Vehicles senza entrare ancora in planning, dispatching, tracking o manutenzione. Il Punto 6J aggiunge il primo blocco Operational Roles senza introdurre turni, availability, payroll o assegnazioni operative. Il Punto 6K stabilizza quel blocco prima di procedere verso nuovi domini applicativi.</p>
+            <p>Il primo blocco implementato è Locations + Cargo + Shipments: registrare location, registrare cargo, creare una shipment, aggiungere item e tratta, confermare o cancellare la shipment e recuperarla come risultato applicativo. Il Punto 6G aggiunge il primo blocco Documents: registrare, trovare, attivare e archiviare un documento logico. Il Punto 6H verifica che il blocco sia coerente prima di espandere altri domini. Il Punto 6I aggiunge il primo blocco Vehicles senza entrare ancora in planning, dispatching, tracking o manutenzione. Il Punto 6J aggiunge il primo blocco Operational Roles senza introdurre turni, availability, payroll o assegnazioni operative. Il Punto 6K stabilizza quel blocco prima di procedere verso nuovi domini applicativi. Il Punto 6L aggiunge il blocco Compliance base senza introdurre ancora controlli reali su violazioni, scadenze, audit o workflow.</p>
           </div>
           <div class="card">
             <h3>Cosa resta fuori</h3>
@@ -943,6 +948,7 @@
               <tr><td>Application Use Cases Expansion II: Vehicles</td><td><span class="badge done">Completata</span></td><td>Aggiunge i primi use case Vehicles: VehicleUnit register/find/status, VehicleCombination register/find, repository port, repository in memory e test dedicati.</td></tr>
               <tr><td>Application Use Cases Expansion III: Operational Roles</td><td><span class="badge done">Completata</span></td><td>Aggiunge i primi use case Operational Roles per Driver, Mechanic, WarehouseOperator, Dispatcher e Manager.</td></tr>
               <tr><td>Application Operational Use Case Review &amp; Hardening</td><td><span class="badge done">Completata</span></td><td>Rafforza Operational Roles con test di stato per tutti i ruoli, command nulli, dependency nulle e copy-on-write sulle attivazioni fallite.</td></tr>
+              <tr><td>Application Compliance Base Use Cases</td><td><span class="badge done">Completata</span></td><td>Aggiunge i primi use case Compliance base per ComplianceRequirement: register, find, activate, suspend, archive e discontinue.</td></tr>
               <tr><td>Database e repository reali</td><td><span class="badge planned">Futuro</span></td><td>Non vanno introdotti prima della stabilizzazione dei repository in memory e dei use case applicativi.</td></tr>
               <tr><td>API REST</td><td><span class="badge planned">Futuro</span></td><td>Le API devono esporre casi d’uso stabili, non accedere direttamente al dominio in modo improvvisato.</td></tr>
               <tr><td>Planning & Dispatching</td><td><span class="badge planned">Futuro</span></td><td>È il modulo che assegnerà risorse reali e verificherà compatibilità operative.</td></tr>
@@ -959,7 +965,7 @@
       <section id="conclusione" class="soft">
         <h2>12. Conclusione</h2>
         <p class="lead">TruckFlow Manager è oggi una fondazione di dominio solida per una futura piattaforma enterprise di trasporto e logistica.</p>
-        <p>Il progetto descrive i principali concetti aziendali con confini chiari, value object espressivi, invarianti protetti, eccezioni custom e documentazione strutturata. La fase attuale ha rafforzato i primi use case applicativi, li ha espansi verso Documents, Vehicles e Operational Roles, e ha poi aggiunto hardening dedicato agli Operational Roles senza introdurre ancora API REST, database o framework. L’obiettivo è costruire progressivamente un application layer stabile sopra il dominio puro.</p>
+        <p>Il progetto descrive i principali concetti aziendali con confini chiari, value object espressivi, invarianti protetti, eccezioni custom e documentazione strutturata. La fase attuale ha rafforzato i primi use case applicativi, li ha espansi verso Documents, Vehicles, Operational Roles e Compliance base, e ha aggiunto hardening dedicato agli Operational Roles senza introdurre ancora API REST, database o framework. L’obiettivo è costruire progressivamente un application layer stabile sopra il dominio puro.</p>
         <p>La direzione futura è costruire gradualmente una piattaforma completa: prima blueprint e foundation applicativa, poi repository port, repository in memory e primi use case applicativi, quindi infrastructure, API, workflow, planning, dispatching, document management avanzato, tracking, analytics e integrazioni enterprise.</p>
         <div class="pill-list">
           <span class="pill">Domain-first</span>

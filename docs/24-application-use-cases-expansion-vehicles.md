@@ -336,3 +336,9 @@ Il Punto 6J non modifica i use case Vehicles. Aggiunge invece il primo blocco ap
 ## Aggiornamento dopo il Punto 6K
 
 Il Punto 6K non modifica i use case Vehicles. Rafforza invece il blocco Operational Roles introdotto dopo Vehicles. Le assegnazioni concrete tra driver, veicoli e shipment restano fuori dal progetto attuale e appartengono a future fasi di planning o dispatching.
+
+## Aggiornamento dopo il Punto 6L
+
+Il Punto 6L non modifica i use case Vehicles. Aggiunge invece un blocco applicativo separato per Compliance base.
+
+Le compatibilità concrete tra veicoli, cargo, documenti e requisiti compliance restano fuori: verranno trattate solo in moduli futuri di planning, dispatching o compliance check.

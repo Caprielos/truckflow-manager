@@ -299,3 +299,9 @@ Il Punto 6K rafforza il blocco introdotto in questo documento.
 La review aggiunge `ApplicationOperationalUseCaseHardeningTest`, copre i service di stato per tutti i ruoli operativi correnti, verifica command nulli e dependency nulle e controlla che una attivazione fallita per mancanza di qualificazioni o scope non modifichi l'aggregate persistito in memory.
 
 Il Punto 6K non introduce nuovi use case business né cambia i contratti pubblici aggiunti nel Punto 6J.
+
+## Aggiornamento dopo il Punto 6L
+
+Il Punto 6L non modifica i use case Operational Roles. Aggiunge invece i primi use case applicativi per il catalogo base di Compliance.
+
+Le verifiche concrete su patente, CQC, ADR, visite mediche, ruoli e abilitazioni restano fuori dal Punto 6L e appartengono a futuri moduli di compliance check.

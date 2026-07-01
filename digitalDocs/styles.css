@@ -457,3 +457,6 @@ body.tooltip-disabled .term[data-it]::after {
 #doc-28:checked ~ .app-shell .panel-28 { display: block; }
 #doc-28:checked ~ .app-shell label[for="doc-28"] { background: var(--nav-active-bg); border-color: var(--accent); color: var(--text-strong); }
 #doc-28:checked ~ .app-shell label[for="doc-28"] .nav-number { background: var(--accent); color: white; }
+#doc-29:checked ~ .app-shell .panel-29 { display: block; }
+#doc-29:checked ~ .app-shell label[for="doc-29"] { background: var(--nav-active-bg); border-color: var(--accent); color: var(--text-strong); }
+#doc-29:checked ~ .app-shell label[for="doc-29"] .nav-number { background: var(--accent); color: white; }

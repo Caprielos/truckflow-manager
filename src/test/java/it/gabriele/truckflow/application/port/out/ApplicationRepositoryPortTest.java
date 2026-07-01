@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import it.gabriele.truckflow.application.port.out.cargo.CargoUnitRepository;
+import it.gabriele.truckflow.application.port.out.compliance.ComplianceRequirementRepository;
 import it.gabriele.truckflow.application.port.out.documents.DocumentRepository;
 import it.gabriele.truckflow.application.port.out.locations.LocationRepository;
 import it.gabriele.truckflow.application.port.out.shipments.ShipmentRepository;
@@ -124,10 +125,12 @@ class ApplicationRepositoryPortTest {
     assertTrue(RepositoryPort.class.isAssignableFrom(CargoUnitRepository.class));
     assertTrue(RepositoryPort.class.isAssignableFrom(ShipmentRepository.class));
     assertTrue(RepositoryPort.class.isAssignableFrom(DocumentRepository.class));
+    assertTrue(RepositoryPort.class.isAssignableFrom(ComplianceRequirementRepository.class));
     assertTrue(LocationRepository.class.isInterface());
     assertTrue(CargoUnitRepository.class.isInterface());
     assertTrue(ShipmentRepository.class.isInterface());
     assertTrue(DocumentRepository.class.isInterface());
+    assertTrue(ComplianceRequirementRepository.class.isInterface());
   }
 
   private static Location location(String code) {

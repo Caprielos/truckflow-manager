@@ -378,3 +378,42 @@ Commit consigliato:
 git add -A
 git commit -m "Harden operational application use cases"
 ```
+
+---
+
+## Nota progetto — Punto 6L
+
+Dopo l'aggiunta del Punto 6L — Application Compliance Base Use Cases, il controllo consigliato resta:
+
+```bash
+mvn spotless:apply
+mvn spotless:check
+mvn clean test
+git status
+```
+
+Il Punto 6L aggiunge i primi use case applicativi Compliance base, quindi prima del commit conviene controllare anche che siano presenti i nuovi package:
+
+```bash
+find src/main/java/it/gabriele/truckflow/application -type d | grep compliance
+find src/main/java/it/gabriele/truckflow/infrastructure/memory -type d | grep compliance
+```
+
+Il Punto 6L introduce:
+
+- `RegisterComplianceRequirementUseCase`;
+- `FindComplianceRequirementUseCase`;
+- `ActivateComplianceRequirementUseCase`;
+- `SuspendComplianceRequirementUseCase`;
+- `ArchiveComplianceRequirementUseCase`;
+- `DiscontinueComplianceRequirementUseCase`;
+- `ComplianceRequirementRepository`;
+- `InMemoryComplianceRequirementRepository`;
+- test applicativi, repository port test e test repository in memory.
+
+Commit consigliato:
+
+```bash
+git add -A
+git commit -m "Expand application use cases with compliance base"
+```

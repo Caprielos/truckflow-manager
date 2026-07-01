@@ -7,6 +7,12 @@ import it.gabriele.truckflow.application.exception.UseCaseValidationException;
 import it.gabriele.truckflow.application.port.in.UseCase;
 import it.gabriele.truckflow.application.port.in.cargo.FindCargoUnitUseCase;
 import it.gabriele.truckflow.application.port.in.cargo.RegisterCargoUnitUseCase;
+import it.gabriele.truckflow.application.port.in.compliance.ActivateComplianceRequirementUseCase;
+import it.gabriele.truckflow.application.port.in.compliance.ArchiveComplianceRequirementUseCase;
+import it.gabriele.truckflow.application.port.in.compliance.DiscontinueComplianceRequirementUseCase;
+import it.gabriele.truckflow.application.port.in.compliance.FindComplianceRequirementUseCase;
+import it.gabriele.truckflow.application.port.in.compliance.RegisterComplianceRequirementUseCase;
+import it.gabriele.truckflow.application.port.in.compliance.SuspendComplianceRequirementUseCase;
 import it.gabriele.truckflow.application.port.in.documents.ActivateDocumentUseCase;
 import it.gabriele.truckflow.application.port.in.documents.ArchiveDocumentUseCase;
 import it.gabriele.truckflow.application.port.in.documents.FindDocumentUseCase;
@@ -53,6 +59,7 @@ import it.gabriele.truckflow.application.port.in.vehicles.RegisterVehicleCombina
 import it.gabriele.truckflow.application.port.in.vehicles.RegisterVehicleUnitUseCase;
 import it.gabriele.truckflow.application.port.in.vehicles.SuspendVehicleUnitUseCase;
 import it.gabriele.truckflow.application.result.cargo.CargoUnitResult;
+import it.gabriele.truckflow.application.result.compliance.ComplianceRequirementResult;
 import it.gabriele.truckflow.application.result.documents.DocumentResult;
 import it.gabriele.truckflow.application.result.locations.LocationResult;
 import it.gabriele.truckflow.application.result.operational.DispatcherResult;
@@ -65,6 +72,12 @@ import it.gabriele.truckflow.application.result.vehicles.VehicleCombinationResul
 import it.gabriele.truckflow.application.result.vehicles.VehicleUnitResult;
 import it.gabriele.truckflow.application.usecase.cargo.FindCargoUnitService;
 import it.gabriele.truckflow.application.usecase.cargo.RegisterCargoUnitService;
+import it.gabriele.truckflow.application.usecase.compliance.ActivateComplianceRequirementService;
+import it.gabriele.truckflow.application.usecase.compliance.ArchiveComplianceRequirementService;
+import it.gabriele.truckflow.application.usecase.compliance.DiscontinueComplianceRequirementService;
+import it.gabriele.truckflow.application.usecase.compliance.FindComplianceRequirementService;
+import it.gabriele.truckflow.application.usecase.compliance.RegisterComplianceRequirementService;
+import it.gabriele.truckflow.application.usecase.compliance.SuspendComplianceRequirementService;
 import it.gabriele.truckflow.application.usecase.documents.ActivateDocumentService;
 import it.gabriele.truckflow.application.usecase.documents.ArchiveDocumentService;
 import it.gabriele.truckflow.application.usecase.documents.FindDocumentService;
@@ -123,6 +136,12 @@ class ApplicationUseCaseReviewTest {
             FindLocationUseCase.class,
             RegisterCargoUnitUseCase.class,
             FindCargoUnitUseCase.class,
+            RegisterComplianceRequirementUseCase.class,
+            FindComplianceRequirementUseCase.class,
+            ActivateComplianceRequirementUseCase.class,
+            SuspendComplianceRequirementUseCase.class,
+            ArchiveComplianceRequirementUseCase.class,
+            DiscontinueComplianceRequirementUseCase.class,
             CreateShipmentUseCase.class,
             FindShipmentUseCase.class,
             AddShipmentItemUseCase.class,
@@ -178,6 +197,24 @@ class ApplicationUseCaseReviewTest {
     assertTrue(FindLocationUseCase.class.isAssignableFrom(FindLocationService.class));
     assertTrue(RegisterCargoUnitUseCase.class.isAssignableFrom(RegisterCargoUnitService.class));
     assertTrue(FindCargoUnitUseCase.class.isAssignableFrom(FindCargoUnitService.class));
+    assertTrue(
+        RegisterComplianceRequirementUseCase.class.isAssignableFrom(
+            RegisterComplianceRequirementService.class));
+    assertTrue(
+        FindComplianceRequirementUseCase.class.isAssignableFrom(
+            FindComplianceRequirementService.class));
+    assertTrue(
+        ActivateComplianceRequirementUseCase.class.isAssignableFrom(
+            ActivateComplianceRequirementService.class));
+    assertTrue(
+        SuspendComplianceRequirementUseCase.class.isAssignableFrom(
+            SuspendComplianceRequirementService.class));
+    assertTrue(
+        ArchiveComplianceRequirementUseCase.class.isAssignableFrom(
+            ArchiveComplianceRequirementService.class));
+    assertTrue(
+        DiscontinueComplianceRequirementUseCase.class.isAssignableFrom(
+            DiscontinueComplianceRequirementService.class));
     assertTrue(CreateShipmentUseCase.class.isAssignableFrom(CreateShipmentService.class));
     assertTrue(FindShipmentUseCase.class.isAssignableFrom(FindShipmentService.class));
     assertTrue(AddShipmentItemUseCase.class.isAssignableFrom(AddShipmentItemService.class));
@@ -247,6 +284,7 @@ class ApplicationUseCaseReviewTest {
   void applicationResultsRejectNullDomainObjectsWithApplicationValidationErrors() {
     assertThrows(UseCaseValidationException.class, () -> LocationResult.from(null));
     assertThrows(UseCaseValidationException.class, () -> CargoUnitResult.from(null));
+    assertThrows(UseCaseValidationException.class, () -> ComplianceRequirementResult.from(null));
     assertThrows(UseCaseValidationException.class, () -> ShipmentResult.from(null));
     assertThrows(UseCaseValidationException.class, () -> DocumentResult.from(null));
     assertThrows(UseCaseValidationException.class, () -> VehicleUnitResult.from(null));

@@ -337,3 +337,11 @@ I primi use case Locations + Cargo + Shipments restano il nucleo iniziale. Gli s
 ## Aggiornamento dopo il Punto 6K
 
 Il primo nucleo Locations + Cargo + Shipments rimane invariato. Il Punto 6K opera sui use case Operational Roles, ma conferma lo stesso stile applicativo già avviato nel Punto 6E: command espliciti, service piccoli, repository port astratte, result applicativi e test con adapter in memory.
+
+## Aggiornamento dopo il Punto 6L
+
+Il nucleo iniziale Locations + Cargo + Shipments rimane invariato.
+
+Il Punto 6L estende lo stesso modello applicativo al catalogo base di Compliance: command espliciti, service piccoli, repository port astratte, result applicativi e test con adapter in memory.
+
+Anche in questo step non vengono introdotti REST API, database o framework.

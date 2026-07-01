@@ -292,3 +292,15 @@ Dopo il Punto 6J sono presenti anche `InMemoryDriverRepository`, `InMemoryMechan
 Il Punto 6K rafforza gli adapter in memory Operational Roles verificando che le mutazioni fallite non salvino stati parziali. Questo è importante perché gli adapter in memory conservano riferimenti a oggetti mutabili e devono essere protetti dai service applicativi con l'approccio copy-on-write.
 
 Non sono stati introdotti database, JPA, transazioni o persistenza definitiva.
+
+## Aggiornamento dopo il Punto 6L — InMemoryComplianceRequirementRepository
+
+Dopo il Punto 6L, l'infrastructure memory include anche:
+
+```text
+InMemoryComplianceRequirementRepository
+```
+
+Questo adapter implementa `ComplianceRequirementRepository`, indicizza i requisiti per ID e codice, rifiuta input nulli e impedisce codici duplicati.
+
+Rimane un adapter temporaneo per test e sviluppo locale. Non introduce database, JPA, Spring Data, transazioni, persistenza definitiva o controlli compliance concreti.

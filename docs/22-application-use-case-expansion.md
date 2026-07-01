@@ -325,3 +325,9 @@ Dopo Documents, review 6H e Vehicles 6I, il Punto 6J ha aggiunto i primi use cas
 ## Aggiornamento dopo il Punto 6K
 
 Il Punto 6K non modifica i use case Documents introdotti nel Punto 6G. Conferma però la regola generale delle espansioni applicative: ogni nuovo dominio applicativo deve essere seguito da review, test negativi e allineamento documentale prima di procedere oltre.
+
+## Aggiornamento successivo — Punto 6L Compliance base
+
+Dopo Documents, Vehicles e Operational Roles, il Punto 6L aggiunge una nuova espansione controllata verso Compliance base.
+
+Il principio rimane lo stesso: vengono aggiunti use case applicativi per un aggregate già puro (`ComplianceRequirement`) senza introdurre controlli reali di violazione, motori regole, audit trail, workflow, REST API o database.

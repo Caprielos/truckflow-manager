@@ -264,3 +264,9 @@ Dopo Vehicles, il progetto ha applicato il Punto 6J verso Operational Roles. Anc
 Il Punto 6K applica agli Operational Roles la stessa logica di review introdotta nel Punto 6H dopo Documents.
 
 La differenza è che il Punto 6K si concentra sulla copertura completa dei service di stato e sulla protezione copy-on-write delle attivazioni fallite per Driver, Mechanic, WarehouseOperator, Dispatcher e Manager.
+
+## Aggiornamento dopo il Punto 6L
+
+Il Punto 6L conferma la validità della review applicativa introdotta nel Punto 6H.
+
+Anche i nuovi use case Compliance base aggiungono port in basate su `UseCase`, service allineati alle port, result null-safe, repository port astratte e adapter in memory con input nulli controllati.

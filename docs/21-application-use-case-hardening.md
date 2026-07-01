@@ -258,3 +258,9 @@ Le regole di hardening introdotte nel Punto 6F rimangono valide anche per Docume
 Il principio di hardening introdotto nel Punto 6F viene confermato anche per Operational Roles nel Punto 6K: le mutazioni applicative devono evitare stati parziali quando una validazione di dominio fallisce.
 
 Per questo i service Operational Roles continuano a usare mutation support copy-on-write prima del salvataggio.
+
+## Aggiornamento dopo il Punto 6L
+
+Il principio di hardening del Punto 6F rimane valido anche per Compliance base.
+
+I nuovi service compliance rifiutano command nulli, dependency repository nulle e risorse mancanti. Le mutazioni di stato usano una copia dell'aggregate prima del salvataggio, mantenendo coerente l'approccio copy-on-write già adottato negli step precedenti.

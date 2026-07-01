@@ -58,6 +58,7 @@ This digital documentation mirrors:
 - `docs/24-application-use-cases-expansion-vehicles.md`
 - `docs/25-application-use-cases-expansion-operational-roles.md`
 - `docs/26-application-operational-use-case-hardening.md`
+- `docs/27-application-compliance-base-use-cases.md`
 - `command_basic.md`
 
 
@@ -150,3 +151,14 @@ Questo aggiornamento documenta la review dei use case Operational Roles: copertu
 La fase resta una review: non introduce REST API, controller Spring, database, JPA, security, tracking, planning, dispatching reale, turni, payroll, dashboard o nuovi use case business.
 
 Documento di riferimento: `docs/26-application-operational-use-case-hardening.md`.
+
+
+## Aggiornamento Punto 6L
+
+La documentazione digitale include ora anche il Punto 6L — Application Compliance Base Use Cases.
+
+Questo aggiornamento documenta la prima espansione controllata dell'application layer verso `compliance`: command, result, port in, port out, service applicativi, `ComplianceRequirementRepository`, `InMemoryComplianceRequirementRepository` e test per registrare, trovare, attivare, sospendere, archiviare e dismettere requisiti astratti di compliance.
+
+La fase resta coerente con i vincoli architetturali già decisi: niente REST API, controller Spring, database, JPA, security, audit trail, workflow, country engine operativo, scadenze reali o controlli concreti di violazione.
+
+Documento di riferimento: `docs/27-application-compliance-base-use-cases.md`.
