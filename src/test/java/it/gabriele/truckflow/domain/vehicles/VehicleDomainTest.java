@@ -29,7 +29,9 @@ import it.gabriele.truckflow.domain.vehicles.specification.VehicleTireSpecificat
 import it.gabriele.truckflow.domain.vehicles.specification.VehicleTransmissionSpecification;
 import it.gabriele.truckflow.domain.vehicles.specification.VehicleWeights;
 import it.gabriele.truckflow.domain.vehicles.unit.FleetCode;
+import it.gabriele.truckflow.domain.vehicles.unit.LicensePlate;
 import it.gabriele.truckflow.domain.vehicles.unit.PowerSource;
+import it.gabriele.truckflow.domain.vehicles.unit.VehicleIdentificationNumber;
 import it.gabriele.truckflow.domain.vehicles.unit.VehicleStatus;
 import it.gabriele.truckflow.domain.vehicles.unit.VehicleUnit;
 import it.gabriele.truckflow.domain.vehicles.unit.VehicleUnitType;
@@ -105,8 +107,8 @@ class VehicleDomainTest {
             new VehicleUnit(
                 null,
                 FleetCode.of("TRL-999"),
-                "XA999AA",
-                "VINTRAILER999",
+                LicensePlate.of("XA999AA"),
+                VehicleIdentificationNumber.of("VINTRAILER999"),
                 VehicleUnitType.SEMI_TRAILER,
                 VehicleBodyType.CURTAINSIDER,
                 PowerSource.DIESEL,
@@ -127,8 +129,8 @@ class VehicleDomainTest {
             new VehicleUnit(
                 null,
                 FleetCode.of("TRL-888"),
-                "XA888AA",
-                "VINTRAILER888",
+                LicensePlate.of("XA888AA"),
+                VehicleIdentificationNumber.of("VINTRAILER888"),
                 VehicleUnitType.SEMI_TRAILER,
                 VehicleBodyType.CURTAINSIDER,
                 PowerSource.NONE,
@@ -140,6 +142,70 @@ class VehicleDomainTest {
                 new CouplingProfile(CouplingType.KINGPIN, false, true, null, null, ""),
                 VehicleStatus.ACTIVE,
                 "Invalid profile"));
+  }
+
+  @Test
+  void roadVehicleUnitRequiresLicensePlate() {
+    assertThrows(
+        InvalidVehicleException.class,
+        () ->
+            new VehicleUnit(
+                null,
+                FleetCode.of("TRC-999"),
+                null,
+                VehicleIdentificationNumber.of("VINROAD999"),
+                VehicleUnitType.TRACTOR_UNIT,
+                VehicleBodyType.NONE,
+                PowerSource.DIESEL,
+                technicalSpecification(),
+                null,
+                Set.of(VehicleCapability.ADR),
+                Set.of(VehicleOperationalRole.LINE_HAUL),
+                new CouplingProfile(
+                    CouplingType.FIFTH_WHEEL,
+                    true,
+                    false,
+                    new BigDecimal("36000"),
+                    new BigDecimal("44000"),
+                    "Fifth wheel tractor"),
+                VehicleStatus.ACTIVE,
+                "Missing plate"));
+  }
+
+  @Test
+  void warehouseEquipmentCanHaveNoLicensePlate() {
+    var warehouseEquipment =
+        new VehicleUnit(
+            null,
+            FleetCode.of("FRK-001"),
+            null,
+            VehicleIdentificationNumber.of("FORKLIFT001"),
+            VehicleUnitType.WAREHOUSE_EQUIPMENT,
+            VehicleBodyType.NONE,
+            PowerSource.ELECTRIC,
+            technicalSpecification(),
+            null,
+            Set.of(),
+            Set.of(VehicleOperationalRole.WAREHOUSE_SUPPORT),
+            CouplingProfile.none(),
+            VehicleStatus.ACTIVE,
+            "Warehouse equipment");
+
+    assertFalse(warehouseEquipment.hasLicensePlate());
+  }
+
+  @Test
+  void licensePlateIsNormalizedByValueObject() {
+    var licensePlate = LicensePlate.of(" ab 123 cd ");
+
+    assertEquals("AB123CD", licensePlate.value());
+  }
+
+  @Test
+  void vehicleIdentificationNumberIsNormalizedByValueObject() {
+    var vin = VehicleIdentificationNumber.of(" vin tractor 001 ");
+
+    assertEquals("VINTRACTOR001", vin.value());
   }
 
   @Test
@@ -177,8 +243,8 @@ class VehicleDomainTest {
     return new VehicleUnit(
         null,
         FleetCode.of("TRC-001"),
-        "AB123CD",
-        "VINTRACTOR001",
+        LicensePlate.of("AB123CD"),
+        VehicleIdentificationNumber.of("VINTRACTOR001"),
         VehicleUnitType.TRACTOR_UNIT,
         VehicleBodyType.NONE,
         PowerSource.DIESEL,
@@ -201,8 +267,8 @@ class VehicleDomainTest {
     return new VehicleUnit(
         null,
         FleetCode.of("TRL-001"),
-        "XA123AA",
-        "VINTRAILER001",
+        LicensePlate.of("XA123AA"),
+        VehicleIdentificationNumber.of("VINTRAILER001"),
         VehicleUnitType.SEMI_TRAILER,
         VehicleBodyType.REFRIGERATED,
         PowerSource.NONE,
@@ -223,8 +289,8 @@ class VehicleDomainTest {
     return new VehicleUnit(
         null,
         FleetCode.of("TRK-001"),
-        "CD456EF",
-        "VINTRUCK001",
+        LicensePlate.of("CD456EF"),
+        VehicleIdentificationNumber.of("VINTRUCK001"),
         VehicleUnitType.RIGID_TRUCK,
         VehicleBodyType.CURTAINSIDER,
         PowerSource.DIESEL,
@@ -247,8 +313,8 @@ class VehicleDomainTest {
     return new VehicleUnit(
         null,
         FleetCode.of("DRW-001"),
-        "XB456BB",
-        "VINDRAWBAR001",
+        LicensePlate.of("XB456BB"),
+        VehicleIdentificationNumber.of("VINDRAWBAR001"),
         VehicleUnitType.DRAWBAR_TRAILER,
         VehicleBodyType.CURTAINSIDER,
         PowerSource.NONE,

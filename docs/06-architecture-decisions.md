@@ -670,3 +670,33 @@ Gli interventi della prima review concreta del dominio puro sono documentati in 
 
 Il documento non descrive procedure tecniche di applicazione, ma spiega cosa è stato cambiato e perché la modifica migliora la qualità del dominio.
 
+
+## 6.43 Decisione: modellare `LicensePlate` come Value Object della `VehicleUnit`
+
+La targa non deve essere rappresentata come una semplice `String`.
+
+Nel dominio `domain.vehicles`, la targa è un identificatore ufficiale dell'unità fisica e possiede semantica, regole di normalizzazione, validazione e invarianti propri.
+
+Per questo viene introdotto il value object `LicensePlate`.
+
+La targa appartiene alla singola `VehicleUnit`, non alla `VehicleCombination`.
+
+Questo significa che:
+
+- una `VehicleUnit` di tipo `TRACTOR_UNIT` deve avere una propria `LicensePlate`;
+- una `VehicleUnit` di tipo `SEMI_TRAILER` deve avere una propria `LicensePlate`;
+- una `VehicleUnit` di tipo `RIGID_TRUCK` deve avere una propria `LicensePlate`;
+- una `VehicleUnit` di tipo `DRAWBAR_TRAILER` o `CENTER_AXLE_TRAILER` deve avere una propria `LicensePlate`;
+- una `VehicleCombination` di tipo bilico, autotreno o furgone con rimorchio non possiede una targa propria, perché è una struttura logica composta da unità fisiche.
+
+Le unità non stradali, come `WAREHOUSE_EQUIPMENT`, possono non avere una targa stradale e possono essere identificate tramite `FleetCode` o futuri identificativi interni.
+
+`SPECIAL_VEHICLE` deve essere valutato caso per caso in una fase successiva, perché può rappresentare sia mezzi stradali immatricolati sia mezzi tecnici non stradali.
+
+## 6.44 Decisione: modellare `VehicleIdentificationNumber` come Value Object
+
+Anche VIN, numero telaio o identificativo tecnico del mezzo non devono rimanere semplici stringhe.
+
+Per questo viene introdotto `VehicleIdentificationNumber`, un value object dedicato alla rappresentazione dell'identificativo tecnico della singola `VehicleUnit`.
+
+Questa scelta evita primitive obsession e rende il dominio veicoli più coerente con gli altri identificativi già modellati come value object, come `FleetCode`, `CargoCode`, `ShipmentCode`, `DocumentCode` e `ComplianceRequirementCode`.

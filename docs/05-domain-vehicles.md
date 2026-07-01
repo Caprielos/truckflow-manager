@@ -81,6 +81,8 @@ domain.vehicles
 │  ├─ VehicleUnit
 │  ├─ VehicleUnitId
 │  ├─ FleetCode
+│  ├─ LicensePlate
+│  ├─ VehicleIdentificationNumber
 │  ├─ VehicleUnitType
 │  ├─ PowerSource
 │  └─ VehicleStatus
@@ -200,8 +202,8 @@ Contiene:
 
 - `VehicleUnitId`, cioè l’identità tecnica del dominio;
 - `FleetCode`, cioè il codice interno aziendale;
-- targa;
-- VIN o numero telaio;
+- `LicensePlate`, cioè la targa ufficiale dell'unità stradale, quando richiesta;
+- `VehicleIdentificationNumber`, cioè VIN, telaio o identificativo tecnico del mezzo;
 - `VehicleUnitType`, cioè la natura fisica dell’unità;
 - `VehicleBodyType`, cioè l’allestimento;
 - `PowerSource`, cioè la sorgente di alimentazione;
@@ -225,11 +227,11 @@ Esempio concettuale:
 
 È diverso da:
 
-- targa;
-- telaio;
-- codice flotta.
+- `LicensePlate`;
+- `VehicleIdentificationNumber`;
+- `FleetCode`.
 
-La targa è un dato reale del veicolo. Il telaio identifica fisicamente il mezzo. Il codice flotta è leggibile dall’azienda. L’ID, invece, è l’identità del dominio usata dal sistema.
+`LicensePlate` rappresenta la targa ufficiale, `VehicleIdentificationNumber` identifica tecnicamente il mezzo, `FleetCode` è leggibile dall'azienda. L'ID, invece, è l'identità del dominio usata dal sistema.
 
 ## 5.5.4 `FleetCode`
 
@@ -244,6 +246,58 @@ Esempi:
 - `FRK-003`.
 
 Serve perché in azienda spesso si lavora con codici più leggibili rispetto agli UUID o ai numeri telaio.
+
+## 5.5.4.1 `LicensePlate`
+
+`LicensePlate` rappresenta la targa ufficiale dell'unità fisica.
+
+La targa non è modellata come una semplice `String`, perché nel dominio veicoli non è testo libero: è un identificatore ufficiale del mezzo, usato in documenti, assicurazioni, revisioni, controlli, audit, compliance, spedizioni, ricerca veicoli e integrazioni future.
+
+Il value object `LicensePlate` centralizza:
+
+- normalizzazione;
+- validazione;
+- immutabilità;
+- semantica del dato;
+- protezione degli invarianti.
+
+La targa appartiene alla singola `VehicleUnit`, non alla `VehicleCombination`.
+
+Esempi:
+
+- in un bilico, la targa appartiene alla `VehicleUnit` di tipo `TRACTOR_UNIT` e alla `VehicleUnit` di tipo `SEMI_TRAILER`;
+- in un autotreno, la targa appartiene alla `VehicleUnit` di tipo `RIGID_TRUCK` e alla `VehicleUnit` di tipo `DRAWBAR_TRAILER` o `CENTER_AXLE_TRAILER`;
+- la `VehicleCombination` non possiede una targa propria, perché non è una unità fisica targabile.
+
+La regola del dominio è:
+
+```text
+Ogni VehicleUnit stradale deve avere una LicensePlate.
+Ogni VehicleUnit non stradale può non averla.
+VehicleCombination non possiede una LicensePlate.
+```
+
+In questa fase richiedono una targa le unità di tipo:
+
+- `TRACTOR_UNIT`;
+- `RIGID_TRUCK`;
+- `VAN`;
+- `PICKUP`;
+- `SEMI_TRAILER`;
+- `DRAWBAR_TRAILER`;
+- `CENTER_AXLE_TRAILER`.
+
+`WAREHOUSE_EQUIPMENT` può non avere una targa stradale.
+
+`SPECIAL_VEHICLE` va valutato caso per caso in una fase successiva, perché può rappresentare sia mezzi stradali immatricolati sia mezzi tecnici non stradali.
+
+## 5.5.4.2 `VehicleIdentificationNumber`
+
+`VehicleIdentificationNumber` rappresenta VIN, numero telaio o identificativo tecnico del mezzo.
+
+Anche questo concetto non è una semplice `String`, perché identifica tecnicamente una unità fisica e può essere usato in manutenzione, assicurazioni, documenti, controlli, audit e integrazioni future.
+
+Il value object centralizza normalizzazione e validazione generale, senza imporre subito una regola eccessivamente rigida legata a un solo formato nazionale o produttore.
 
 ## 5.5.5 `VehicleUnitType`
 
@@ -823,6 +877,8 @@ Le regole principali sono:
 
 - ID obbligatorio o generato;
 - `FleetCode` obbligatorio;
+- `LicensePlate` obbligatoria per le unità stradali;
+- `VehicleIdentificationNumber` obbligatorio;
 - `VehicleUnitType` obbligatorio;
 - `VehicleBodyType` obbligatorio;
 - `PowerSource` obbligatorio;
@@ -830,6 +886,7 @@ Le regole principali sono:
 - `VehicleStatus` obbligatorio;
 - note normalizzate;
 - trailer e semitrailer devono avere `PowerSource.NONE`;
+- rimorchi e semirimorchi stradali devono avere una propria `LicensePlate`;
 - un trattore stradale deve avere `VehicleBodyType.NONE`;
 - un trattore stradale deve poter trainare;
 - un semirimorchio deve poter essere trainato;

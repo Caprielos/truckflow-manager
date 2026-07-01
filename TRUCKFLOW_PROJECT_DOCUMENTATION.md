@@ -84,7 +84,7 @@ Queste eccezioni non obbligano a modificare immediatamente tutte le classi esist
 
 ## Review correttiva completata
 
-La prima review correttiva del dominio puro ha consolidato sei aspetti principali:
+La prima review correttiva del dominio puro ha consolidato sette aspetti principali:
 
 1. validazione completa prima delle mutazioni di stato degli aggregate;
 2. uso delle eccezioni custom nei domini semplici;
@@ -92,6 +92,7 @@ La prima review correttiva del dominio puro ha consolidato sei aspetti principal
 4. obbligatorietà di `OperationalCode` per le figure operative;
 5. test del catalogo qualificazioni basati su comportamento e coerenza, non su conteggi fragili;
 6. pulizia della documentazione e delle regole sui file locali, IDE, build e artefatti temporanei.
+7. modellazione di `LicensePlate` e `VehicleIdentificationNumber` come value object del dominio veicoli.
 
 Questi interventi non aggiungono nuove funzionalità operative, ma rendono il dominio più sicuro, leggibile e pronto per essere consumato dal livello application.
 

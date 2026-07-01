@@ -137,7 +137,7 @@ Queste parti verranno aggiunte in fasi successive, mantenendo il dominio attuale
 
 La versione attuale del dominio rappresenta la **TruckFlow Domain Foundation v1.0**.
 
-Questo significa che la fondazione del dominio puro è stata definita e che la prima review correttiva del dominio è stata eseguita con interventi mirati su invarianti, eccezioni, codici aziendali, test e pulizia del repository.
+Questo significa che la fondazione del dominio puro è stata definita e che la prima review correttiva del dominio è stata eseguita con interventi mirati su invarianti, eccezioni, codici aziendali, test, pulizia del repository e identificativi tecnici del dominio veicoli.
 
 Non significa che tutta la piattaforma sia già enterprise completa in senso assoluto. API, database, workflow, audit, planning, dispatching e integrazioni esterne rimangono attività successive.
 
@@ -150,6 +150,7 @@ Le regole fondamentali della fondazione sono:
 - le eccezioni custom devono essere usate per rappresentare errori specifici di dominio;
 - le mutazioni degli aggregate devono avvenire solo dopo il completamento delle validazioni;
 - i codici aziendali devono essere obbligatori quando rappresentano identificativi interni leggibili;
+- la targa e il VIN devono essere modellati come value object del dominio veicoli, non come semplici stringhe;
 - i test dei cataloghi devono proteggere comportamento e coerenza, non conteggi fragili;
 - le violazioni concrete di compliance non fanno ancora parte del dominio puro.
 

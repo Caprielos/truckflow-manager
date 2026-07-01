@@ -15,8 +15,8 @@ public final class VehicleUnit {
 
   private final VehicleUnitId id;
   private final FleetCode fleetCode;
-  private final String licensePlate;
-  private final String vin;
+  private final LicensePlate licensePlate;
+  private final VehicleIdentificationNumber vin;
   private final VehicleUnitType unitType;
   private final VehicleBodyType bodyType;
   private final PowerSource powerSource;
@@ -31,8 +31,8 @@ public final class VehicleUnit {
   public VehicleUnit(
       VehicleUnitId id,
       FleetCode fleetCode,
-      String licensePlate,
-      String vin,
+      LicensePlate licensePlate,
+      VehicleIdentificationNumber vin,
       VehicleUnitType unitType,
       VehicleBodyType bodyType,
       PowerSource powerSource,
@@ -45,8 +45,8 @@ public final class VehicleUnit {
       String notes) {
     this.id = id == null ? VehicleUnitId.random() : id;
     this.fleetCode = VehicleValidation.requireNonNull(fleetCode, "fleetCode");
-    this.licensePlate = normalizePlate(licensePlate);
-    this.vin = normalizeVin(vin);
+    this.licensePlate = licensePlate;
+    this.vin = VehicleValidation.requireNonNull(vin, "vin");
     this.unitType = VehicleValidation.requireNonNull(unitType, "unitType");
     this.bodyType = VehicleValidation.requireNonNull(bodyType, "bodyType");
     this.powerSource = VehicleValidation.requireNonNull(powerSource, "powerSource");
@@ -70,11 +70,15 @@ public final class VehicleUnit {
     return fleetCode;
   }
 
-  public String licensePlate() {
+  public LicensePlate licensePlate() {
     return licensePlate;
   }
 
-  public String vin() {
+  public boolean hasLicensePlate() {
+    return licensePlate != null;
+  }
+
+  public VehicleIdentificationNumber vin() {
     return vin;
   }
 
@@ -208,6 +212,10 @@ public final class VehicleUnit {
 
   private void validateConsistency(
       VehicleBodyProfile candidateBodyProfile, CouplingProfile candidateCouplingProfile) {
+    if (requiresLicensePlate(unitType) && licensePlate == null) {
+      throw new InvalidVehicleException("Road vehicle units must have a license plate.");
+    }
+
     if (isTrailerUnitType(unitType) && powerSource != PowerSource.NONE) {
       throw new InvalidVehicleException("Trailers must have power source NONE.");
     }
@@ -231,6 +239,16 @@ public final class VehicleUnit {
     if (candidateBodyProfile != null && candidateBodyProfile.bodyType() != bodyType) {
       throw new InvalidVehicleException("Body profile must match vehicle body type.");
     }
+  }
+
+  private static boolean requiresLicensePlate(VehicleUnitType unitType) {
+    return unitType == VehicleUnitType.TRACTOR_UNIT
+        || unitType == VehicleUnitType.RIGID_TRUCK
+        || unitType == VehicleUnitType.VAN
+        || unitType == VehicleUnitType.PICKUP
+        || unitType == VehicleUnitType.SEMI_TRAILER
+        || unitType == VehicleUnitType.DRAWBAR_TRAILER
+        || unitType == VehicleUnitType.CENTER_AXLE_TRAILER;
   }
 
   private static boolean isTrailerUnitType(VehicleUnitType unitType) {
@@ -261,13 +279,5 @@ public final class VehicleUnit {
 
     VehicleValidation.requireNoNullElements(operationalRoles, "operationalRoles");
     return Set.copyOf(operationalRoles);
-  }
-
-  private static String normalizePlate(String value) {
-    return VehicleValidation.normalize(value).toUpperCase().replace(" ", "");
-  }
-
-  private static String normalizeVin(String value) {
-    return VehicleValidation.normalize(value).toUpperCase().replace(" ", "");
   }
 }

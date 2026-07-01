@@ -27,7 +27,8 @@ Prima della review il dominio era già coerente, ma presentava alcuni punti migl
 - le eccezioni custom erano state introdotte ma non erano ancora usate in modo diffuso;
 - `OperationalCode` era opzionale, mentre gli altri codici aziendali erano obbligatori;
 - alcuni test del catalogo qualificazioni erano fragili perché basati su conteggi rigidi;
-- alcuni file locali dell'ambiente di sviluppo erano ancora presenti o visibili nel repository.
+- alcuni file locali dell'ambiente di sviluppo erano ancora presenti o visibili nel repository;
+- la targa e il VIN erano ancora rappresentati come primitive `String` nel dominio veicoli.
 
 Gli interventi hanno corretto questi punti senza introdurre application layer, database, API REST o logica infrastrutturale.
 
@@ -262,7 +263,52 @@ Tenere fuori file locali e artefatti generati evita commit inutili, conflitti no
 
 ---
 
-## 9. Stato finale dopo i sei interventi
+## 9. Intervento 7 — Trasformare targa e VIN in Value Object
+
+### Problema
+
+Nel dominio `domain.vehicles`, la targa era rappresentata come una semplice `String`.
+
+Questo è un caso di primitive obsession: un concetto importante del dominio viene modellato con un tipo troppo generico.
+
+La targa non è testo libero. È un identificatore ufficiale dell'unità fisica, usato in documenti, assicurazioni, revisioni, controlli, audit, compliance, spedizioni, ricerca veicoli e integrazioni future.
+
+Lo stesso ragionamento vale per VIN, telaio o identificativo tecnico del mezzo.
+
+### Correzione
+
+Sono stati introdotti due value object dedicati:
+
+- `LicensePlate`;
+- `VehicleIdentificationNumber`.
+
+`VehicleUnit` ora usa questi value object invece di semplici stringhe.
+
+È stata inoltre formalizzata la regola:
+
+```text
+Ogni VehicleUnit stradale deve avere una LicensePlate.
+Ogni VehicleUnit non stradale può non averla.
+VehicleCombination non possiede una LicensePlate.
+```
+
+Quindi rimorchi e semirimorchi hanno una propria targa, distinta da quella del trattore o della motrice.
+
+La `VehicleCombination` non ha una targa propria perché non è una unità fisica targabile, ma una struttura logica composta da `VehicleUnit`.
+
+### Perché è importante
+
+Questa correzione rende il dominio veicoli più robusto e più esplicito.
+
+Il tipo `LicensePlate` comunica chiaramente il significato del dato e centralizza normalizzazione, validazione e invarianti.
+
+Il tipo `VehicleIdentificationNumber` fa lo stesso per l'identificativo tecnico del mezzo.
+
+Il modello diventa più coerente con gli altri value object già presenti nel progetto, come `FleetCode`, `CargoCode`, `ShipmentCode`, `LocationCode`, `DocumentCode` e `ComplianceRequirementCode`.
+
+---
+
+## 10. Stato finale dopo i sette interventi
 
 Dopo questi interventi, il dominio puro di TruckFlow risulta più solido perché:
 
@@ -271,6 +317,7 @@ Dopo questi interventi, il dominio puro di TruckFlow risulta più solido perché
 - i codici aziendali sono più uniformi;
 - i test del catalogo qualificazioni sono meno fragili;
 - il repository è più pulito;
+- targa e VIN sono modellati come value object nel dominio veicoli;
 - la documentazione architetturale è più allineata al codice reale.
 
 Questa fase non introduce ancora:
@@ -293,7 +340,7 @@ TruckFlow Domain Foundation v1.0 rafforzata dalla prima review correttiva del do
 
 ---
 
-## 10. Prossimo passo consigliato
+## 11. Prossimo passo consigliato
 
 Il prossimo passo naturale è preparare il livello `application`.
 

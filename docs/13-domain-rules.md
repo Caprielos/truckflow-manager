@@ -10,7 +10,7 @@ Questo documento rappresenta la base della **TruckFlow Domain Foundation v1.0**.
 
 ## 2. Stato della Domain Review Finale
 
-La **Domain Review Finale** è stata avviata e la prima review correttiva del dominio puro è stata completata con sei interventi mirati.
+La **Domain Review Finale** è stata avviata e la prima review correttiva del dominio puro è stata completata con sette interventi mirati.
 
 Questa fase ha rafforzato il dominio, ma non sostituisce le future review che saranno necessarie quando verranno introdotti application layer, repository, API, workflow, audit, planning e dispatching.
 
@@ -79,6 +79,8 @@ Non bisogna unificare value object simili se hanno significato diverso nei rispe
 
 I codici aziendali interni devono essere obbligatori quando rappresentano l'identificativo leggibile usato dall'azienda, come `OperationalCode`, `FleetCode`, `CargoCode`, `ShipmentCode`, `DocumentCode` e `ComplianceRequirementCode`.
 
+Anche gli identificativi tecnici o ufficiali del mezzo non devono rimanere primitive generiche. Nel dominio veicoli, `LicensePlate` e `VehicleIdentificationNumber` sono value object dedicati, non semplici `String`.
+
 Esempi:
 
 - `CargoWeights`;
@@ -107,6 +109,22 @@ Esempi corretti:
 Esempio da evitare:
 
 - bloccare il test su un numero totale fisso quando il catalogo è destinato a crescere.
+
+
+## 5.2 Targhe e identificativi veicolo
+
+La targa è un concetto di dominio e deve essere modellata tramite `LicensePlate`.
+
+Regole:
+
+- `LicensePlate` appartiene alla singola `VehicleUnit`;
+- `VehicleCombination` non possiede una `LicensePlate`;
+- ogni `VehicleUnit` stradale deve avere una `LicensePlate`;
+- le `VehicleUnit` non stradali possono non avere una targa;
+- rimorchi e semirimorchi hanno una propria `LicensePlate`, distinta da quella del trattore o della motrice;
+- `VehicleIdentificationNumber` rappresenta VIN, telaio o identificativo tecnico della singola unità fisica.
+
+Questa regola evita primitive obsession e protegge la semantica del dominio veicoli.
 
 ## 6. Invarianti
 
@@ -307,7 +325,7 @@ Prima di chiudere la review del dominio puro verificare:
 
 ## 14. Roadmap successiva
 
-La prima review correttiva del dominio puro è stata completata con sei interventi mirati, documentati in [`14-domain-review-patches.md`](14-domain-review-patches.md).
+La prima review correttiva del dominio puro è stata completata con sette interventi mirati, documentati in [`14-domain-review-patches.md`](14-domain-review-patches.md).
 
 La roadmap successiva consigliata è:
 
