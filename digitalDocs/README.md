@@ -56,6 +56,7 @@ This digital documentation mirrors:
 - `docs/22-application-use-case-expansion.md`
 - `docs/23-application-use-case-expansion-review.md`
 - `docs/24-application-use-cases-expansion-vehicles.md`
+- `docs/25-application-use-cases-expansion-operational-roles.md`
 - `command_basic.md`
 
 
@@ -119,9 +120,9 @@ La fase resta una review: non introduce REST API, controller Spring, database, J
 Documento di riferimento: `docs/23-application-use-case-expansion-review.md`.
 
 
-## Aggiornamento Punto 6I
+## Aggiornamento Punto 6J
 
-La documentazione digitale include ora anche il Punto 6I — Application Use Cases Expansion II: Vehicles.
+La documentazione digitale include ora anche il Punto 6J — Application Use Cases Expansion III: Operational Roles.
 
 Questo aggiornamento documenta la seconda espansione controllata dell'application layer verso `vehicles`: command, result, port in, port out, service applicativi, `VehicleUnitRepository`, `VehicleCombinationRepository`, repository in memory e test per registrare/trovare unità veicolo, cambiare stato alle `VehicleUnit`, registrare combinazioni veicolo e trovarle per ID.
 

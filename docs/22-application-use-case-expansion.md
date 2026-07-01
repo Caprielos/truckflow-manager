@@ -317,3 +317,7 @@ Il prossimo step consigliato non è più la review 6H, perché ora è completata
 Dopo la prima espansione verso Documents del Punto 6G e la review del Punto 6H, il Punto 6I ha eseguito una seconda espansione controllata verso Vehicles.
 
 Questa nuova fase non modifica il significato del Punto 6G: Documents rimane il primo dominio applicativo espanso dopo Locations, Cargo e Shipments. Vehicles viene aggiunto come step successivo separato, con documentazione dedicata in `24-application-use-cases-expansion-vehicles.md`.
+
+## Aggiornamento successivo — Punto 6J Operational Roles
+
+Dopo Documents, review 6H e Vehicles 6I, il Punto 6J ha aggiunto i primi use case applicativi Operational Roles. Il principio rimane lo stesso: command, result, port, service e repository astratte, senza REST API, database o workflow enterprise.

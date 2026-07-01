@@ -797,6 +797,10 @@
             <div><span class="badge done">Completato</span><div class="milestone">Punto 6I</div></div>
             <div><h3>Application Use Cases Expansion II: Vehicles</h3><p>Seconda espansione controllata verso Vehicles: command, result, port, service, VehicleUnitRepository, VehicleCombinationRepository, repository in memory e test per unità veicolo e combinazioni.</p></div>
           </div>
+          <div class="timeline-item">
+            <div><span class="badge done">Completato</span><div class="milestone">Punto 6J</div></div>
+            <div><h3>Application Use Cases Expansion III: Operational Roles</h3><p>Terza espansione controllata verso Operational Roles: command, result, port, service, repository port, repository in memory e test per Driver, Mechanic, WarehouseOperator, Dispatcher e Manager.</p></div>
+          </div>
         </div>
         <h3>Obiettivi a breve termine</h3>
         <ul>
@@ -809,14 +813,15 @@
           <li>mantenere stabile il Punto 6F con hardening dei use case, CancelShipmentUseCase, copy-on-write delle mutazioni shipment e test negativi;</li>
           <li>mantenere stabile il Punto 6G con i primi use case Documents, DocumentRepository e InMemoryDocumentRepository;</li>
           <li>mantenere stabile il Punto 6H con review dei contratti UseCase, service, result null-safe, repository in memory e copy-on-write Documents;</li>
-          <li>mantenere stabile il Punto 6I con i primi use case Vehicles, repository Vehicles, repository in memory Vehicles e test dedicati.</li>
+          <li>mantenere stabile il Punto 6I con i primi use case Vehicles, repository Vehicles, repository in memory Vehicles e test dedicati;</li>
+          <li>mantenere stabile il Punto 6J con i primi use case Operational Roles, repository Operational, repository in memory Operational e test dedicati.</li>
         </ul>
         <h3>Obiettivi a medio termine</h3>
         <ul>
           <li>estendere progressivamente le repository port agli aggregate principali quando nasceranno nuovi use case;</li>
           <li>usare repository in memory per scenari e test applicativi;</li>
-          <li>scegliere il Punto 6J solo dopo aver verificato il Punto 6I sul Mac con Maven;</li>
-          <li>procedere gradualmente verso veicoli, compliance, ruoli operativi e ulteriori azioni documentali;</li>
+          <li>scegliere il Punto 6K solo dopo aver verificato il Punto 6J sul Mac con Maven;</li>
+          <li>procedere gradualmente verso compliance, review/hardening e ulteriori azioni documentali;</li>
           <li>preparare l’infrastructure layer senza sporcare il dominio.</li>
         </ul>
       </section>
@@ -824,7 +829,7 @@
 
       <section id="application-layer">
         <h2>8. Application Layer, In-Memory Repositories e Use Case Expansion</h2>
-        <p class="lead">Il Punto 6A ha definito il blueprint del livello applicativo. Il Punto 6B ha introdotto la foundation concreta. Il Punto 6C ha aggiunto le prime repository port. Il Punto 6D ha aggiunto le repository in memory. Il Punto 6E ha introdotto i primi use case applicativi per Locations, Cargo e Shipments. Il Punto 6F li ha rafforzati con CancelShipmentUseCase e copy-on-write. Il Punto 6G espande l'application layer verso Documents, il Punto 6H rivede e allinea questa espansione e il Punto 6I aggiunge i primi use case Vehicles, senza introdurre ancora REST API, database o framework.</p>
+        <p class="lead">Il Punto 6A ha definito il blueprint del livello applicativo. Il Punto 6B ha introdotto la foundation concreta. Il Punto 6C ha aggiunto le prime repository port. Il Punto 6D ha aggiunto le repository in memory. Il Punto 6E ha introdotto i primi use case applicativi per Locations, Cargo e Shipments. Il Punto 6F li ha rafforzati con CancelShipmentUseCase e copy-on-write. Il Punto 6G espande l'application layer verso Documents, il Punto 6H rivede e allinea questa espansione e il Punto 6I aggiunge i primi use case Vehicles e il Punto 6J aggiunge i primi use case Operational Roles, senza introdurre ancora REST API, database o framework.</p>
         <div class="grid two">
           <div class="card">
             <h3>Responsabilità</h3>
@@ -832,15 +837,15 @@
           </div>
           <div class="card">
             <h3>Componenti previsti</h3>
-            <p>La struttura comprende command, result, port in, port out, use case, application service, eccezioni applicative, repository port e repository in memory per sviluppo e test. Il Punto 6E aggiunge i primi command e service concreti: registrazione e ricerca di Locations e Cargo, creazione di Shipment, aggiunta di item, aggiunta di leg, conferma e ricerca della Shipment. Il Punto 6F aggiunge cancellazione shipment, copy-on-write delle mutazioni shipment e hardening dei comportamenti negativi. Il Punto 6G aggiunge command, result, port e service per Documents: registrazione, ricerca, attivazione e archiviazione. Il Punto 6H rafforza result null-safe, contratti UseCase, service, repository in memory e copy-on-write. Il Punto 6I aggiunge command, result, port e service per Vehicles: registrazione/ricerca di unità veicolo, mutazioni di stato e registrazione/ricerca di combinazioni.</p>
+            <p>La struttura comprende command, result, port in, port out, use case, application service, eccezioni applicative, repository port e repository in memory per sviluppo e test. Il Punto 6E aggiunge i primi command e service concreti: registrazione e ricerca di Locations e Cargo, creazione di Shipment, aggiunta di item, aggiunta di leg, conferma e ricerca della Shipment. Il Punto 6F aggiunge cancellazione shipment, copy-on-write delle mutazioni shipment e hardening dei comportamenti negativi. Il Punto 6G aggiunge command, result, port e service per Documents: registrazione, ricerca, attivazione e archiviazione. Il Punto 6H rafforza result null-safe, contratti UseCase, service, repository in memory e copy-on-write. Il Punto 6I aggiunge command, result, port e service per Vehicles: registrazione/ricerca di unità veicolo, mutazioni di stato e registrazione/ricerca di combinazioni. Il Punto 6J aggiunge command, result, port e service per Operational Roles: registrazione, ricerca e mutazioni di stato per Driver, Mechanic, WarehouseOperator, Dispatcher e Manager.</p>
           </div>
           <div class="card">
             <h3>Primo flusso</h3>
-            <p>Il primo blocco implementato è Locations + Cargo + Shipments: registrare location, registrare cargo, creare una shipment, aggiungere item e tratta, confermare o cancellare la shipment e recuperarla come risultato applicativo. Il Punto 6G aggiunge il primo blocco Documents: registrare, trovare, attivare e archiviare un documento logico. Il Punto 6H verifica che il blocco sia coerente prima di espandere altri domini. Il Punto 6I aggiunge il primo blocco Vehicles senza entrare ancora in planning, dispatching, tracking o manutenzione.</p>
+            <p>Il primo blocco implementato è Locations + Cargo + Shipments: registrare location, registrare cargo, creare una shipment, aggiungere item e tratta, confermare o cancellare la shipment e recuperarla come risultato applicativo. Il Punto 6G aggiunge il primo blocco Documents: registrare, trovare, attivare e archiviare un documento logico. Il Punto 6H verifica che il blocco sia coerente prima di espandere altri domini. Il Punto 6I aggiunge il primo blocco Vehicles senza entrare ancora in planning, dispatching, tracking o manutenzione. Il Punto 6J aggiunge il primo blocco Operational Roles senza introdurre turni, availability, payroll o assegnazioni operative.</p>
           </div>
           <div class="card">
             <h3>Cosa resta fuori</h3>
-            <p>Controller REST, DTO web, JPA, database, JWT, planning, dispatching, tracking, workflow documentali, file upload, file storage, audit trail, compliance check concreti e repository enterprise restano fuori da questo step.</p>
+            <p>Controller REST, DTO web, JPA, database, JWT, planning, dispatching, tracking, workflow documentali, file upload, file storage, audit trail, compliance check concreti, turni, payroll, availability e repository enterprise restano fuori da questo step.</p>
           </div>
         </div>
         <div class="callout">

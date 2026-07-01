@@ -13,6 +13,31 @@ import it.gabriele.truckflow.application.port.in.documents.FindDocumentUseCase;
 import it.gabriele.truckflow.application.port.in.documents.RegisterDocumentUseCase;
 import it.gabriele.truckflow.application.port.in.locations.FindLocationUseCase;
 import it.gabriele.truckflow.application.port.in.locations.RegisterLocationUseCase;
+import it.gabriele.truckflow.application.port.in.operational.ActivateDispatcherUseCase;
+import it.gabriele.truckflow.application.port.in.operational.ActivateDriverUseCase;
+import it.gabriele.truckflow.application.port.in.operational.ActivateManagerUseCase;
+import it.gabriele.truckflow.application.port.in.operational.ActivateMechanicUseCase;
+import it.gabriele.truckflow.application.port.in.operational.ActivateWarehouseOperatorUseCase;
+import it.gabriele.truckflow.application.port.in.operational.FindDispatcherUseCase;
+import it.gabriele.truckflow.application.port.in.operational.FindDriverUseCase;
+import it.gabriele.truckflow.application.port.in.operational.FindManagerUseCase;
+import it.gabriele.truckflow.application.port.in.operational.FindMechanicUseCase;
+import it.gabriele.truckflow.application.port.in.operational.FindWarehouseOperatorUseCase;
+import it.gabriele.truckflow.application.port.in.operational.MarkNotEligibleDispatcherUseCase;
+import it.gabriele.truckflow.application.port.in.operational.MarkNotEligibleDriverUseCase;
+import it.gabriele.truckflow.application.port.in.operational.MarkNotEligibleManagerUseCase;
+import it.gabriele.truckflow.application.port.in.operational.MarkNotEligibleMechanicUseCase;
+import it.gabriele.truckflow.application.port.in.operational.MarkNotEligibleWarehouseOperatorUseCase;
+import it.gabriele.truckflow.application.port.in.operational.RegisterDispatcherUseCase;
+import it.gabriele.truckflow.application.port.in.operational.RegisterDriverUseCase;
+import it.gabriele.truckflow.application.port.in.operational.RegisterManagerUseCase;
+import it.gabriele.truckflow.application.port.in.operational.RegisterMechanicUseCase;
+import it.gabriele.truckflow.application.port.in.operational.RegisterWarehouseOperatorUseCase;
+import it.gabriele.truckflow.application.port.in.operational.SuspendDispatcherUseCase;
+import it.gabriele.truckflow.application.port.in.operational.SuspendDriverUseCase;
+import it.gabriele.truckflow.application.port.in.operational.SuspendManagerUseCase;
+import it.gabriele.truckflow.application.port.in.operational.SuspendMechanicUseCase;
+import it.gabriele.truckflow.application.port.in.operational.SuspendWarehouseOperatorUseCase;
 import it.gabriele.truckflow.application.port.in.shipments.AddShipmentItemUseCase;
 import it.gabriele.truckflow.application.port.in.shipments.AddShipmentLegUseCase;
 import it.gabriele.truckflow.application.port.in.shipments.CancelShipmentUseCase;
@@ -30,6 +55,11 @@ import it.gabriele.truckflow.application.port.in.vehicles.SuspendVehicleUnitUseC
 import it.gabriele.truckflow.application.result.cargo.CargoUnitResult;
 import it.gabriele.truckflow.application.result.documents.DocumentResult;
 import it.gabriele.truckflow.application.result.locations.LocationResult;
+import it.gabriele.truckflow.application.result.operational.DispatcherResult;
+import it.gabriele.truckflow.application.result.operational.DriverResult;
+import it.gabriele.truckflow.application.result.operational.ManagerResult;
+import it.gabriele.truckflow.application.result.operational.MechanicResult;
+import it.gabriele.truckflow.application.result.operational.WarehouseOperatorResult;
 import it.gabriele.truckflow.application.result.shipments.ShipmentResult;
 import it.gabriele.truckflow.application.result.vehicles.VehicleCombinationResult;
 import it.gabriele.truckflow.application.result.vehicles.VehicleUnitResult;
@@ -41,6 +71,31 @@ import it.gabriele.truckflow.application.usecase.documents.FindDocumentService;
 import it.gabriele.truckflow.application.usecase.documents.RegisterDocumentService;
 import it.gabriele.truckflow.application.usecase.locations.FindLocationService;
 import it.gabriele.truckflow.application.usecase.locations.RegisterLocationService;
+import it.gabriele.truckflow.application.usecase.operational.ActivateDispatcherService;
+import it.gabriele.truckflow.application.usecase.operational.ActivateDriverService;
+import it.gabriele.truckflow.application.usecase.operational.ActivateManagerService;
+import it.gabriele.truckflow.application.usecase.operational.ActivateMechanicService;
+import it.gabriele.truckflow.application.usecase.operational.ActivateWarehouseOperatorService;
+import it.gabriele.truckflow.application.usecase.operational.FindDispatcherService;
+import it.gabriele.truckflow.application.usecase.operational.FindDriverService;
+import it.gabriele.truckflow.application.usecase.operational.FindManagerService;
+import it.gabriele.truckflow.application.usecase.operational.FindMechanicService;
+import it.gabriele.truckflow.application.usecase.operational.FindWarehouseOperatorService;
+import it.gabriele.truckflow.application.usecase.operational.MarkNotEligibleDispatcherService;
+import it.gabriele.truckflow.application.usecase.operational.MarkNotEligibleDriverService;
+import it.gabriele.truckflow.application.usecase.operational.MarkNotEligibleManagerService;
+import it.gabriele.truckflow.application.usecase.operational.MarkNotEligibleMechanicService;
+import it.gabriele.truckflow.application.usecase.operational.MarkNotEligibleWarehouseOperatorService;
+import it.gabriele.truckflow.application.usecase.operational.RegisterDispatcherService;
+import it.gabriele.truckflow.application.usecase.operational.RegisterDriverService;
+import it.gabriele.truckflow.application.usecase.operational.RegisterManagerService;
+import it.gabriele.truckflow.application.usecase.operational.RegisterMechanicService;
+import it.gabriele.truckflow.application.usecase.operational.RegisterWarehouseOperatorService;
+import it.gabriele.truckflow.application.usecase.operational.SuspendDispatcherService;
+import it.gabriele.truckflow.application.usecase.operational.SuspendDriverService;
+import it.gabriele.truckflow.application.usecase.operational.SuspendManagerService;
+import it.gabriele.truckflow.application.usecase.operational.SuspendMechanicService;
+import it.gabriele.truckflow.application.usecase.operational.SuspendWarehouseOperatorService;
 import it.gabriele.truckflow.application.usecase.shipments.AddShipmentItemService;
 import it.gabriele.truckflow.application.usecase.shipments.AddShipmentLegService;
 import it.gabriele.truckflow.application.usecase.shipments.CancelShipmentService;
@@ -85,7 +140,32 @@ class ApplicationUseCaseReviewTest {
             MarkVehicleUnitOutOfServiceUseCase.class,
             DismissVehicleUnitUseCase.class,
             RegisterVehicleCombinationUseCase.class,
-            FindVehicleCombinationUseCase.class);
+            FindVehicleCombinationUseCase.class,
+            RegisterDriverUseCase.class,
+            FindDriverUseCase.class,
+            ActivateDriverUseCase.class,
+            SuspendDriverUseCase.class,
+            MarkNotEligibleDriverUseCase.class,
+            RegisterMechanicUseCase.class,
+            FindMechanicUseCase.class,
+            ActivateMechanicUseCase.class,
+            SuspendMechanicUseCase.class,
+            MarkNotEligibleMechanicUseCase.class,
+            RegisterWarehouseOperatorUseCase.class,
+            FindWarehouseOperatorUseCase.class,
+            ActivateWarehouseOperatorUseCase.class,
+            SuspendWarehouseOperatorUseCase.class,
+            MarkNotEligibleWarehouseOperatorUseCase.class,
+            RegisterDispatcherUseCase.class,
+            FindDispatcherUseCase.class,
+            ActivateDispatcherUseCase.class,
+            SuspendDispatcherUseCase.class,
+            MarkNotEligibleDispatcherUseCase.class,
+            RegisterManagerUseCase.class,
+            FindManagerUseCase.class,
+            ActivateManagerUseCase.class,
+            SuspendManagerUseCase.class,
+            MarkNotEligibleManagerUseCase.class);
 
     assertTrue(
         useCasePorts.stream().allMatch(UseCase.class::isAssignableFrom),
@@ -121,6 +201,46 @@ class ApplicationUseCaseReviewTest {
             RegisterVehicleCombinationService.class));
     assertTrue(
         FindVehicleCombinationUseCase.class.isAssignableFrom(FindVehicleCombinationService.class));
+    assertTrue(RegisterDriverUseCase.class.isAssignableFrom(RegisterDriverService.class));
+    assertTrue(FindDriverUseCase.class.isAssignableFrom(FindDriverService.class));
+    assertTrue(ActivateDriverUseCase.class.isAssignableFrom(ActivateDriverService.class));
+    assertTrue(SuspendDriverUseCase.class.isAssignableFrom(SuspendDriverService.class));
+    assertTrue(
+        MarkNotEligibleDriverUseCase.class.isAssignableFrom(MarkNotEligibleDriverService.class));
+    assertTrue(RegisterMechanicUseCase.class.isAssignableFrom(RegisterMechanicService.class));
+    assertTrue(FindMechanicUseCase.class.isAssignableFrom(FindMechanicService.class));
+    assertTrue(ActivateMechanicUseCase.class.isAssignableFrom(ActivateMechanicService.class));
+    assertTrue(SuspendMechanicUseCase.class.isAssignableFrom(SuspendMechanicService.class));
+    assertTrue(
+        MarkNotEligibleMechanicUseCase.class.isAssignableFrom(
+            MarkNotEligibleMechanicService.class));
+    assertTrue(
+        RegisterWarehouseOperatorUseCase.class.isAssignableFrom(
+            RegisterWarehouseOperatorService.class));
+    assertTrue(
+        FindWarehouseOperatorUseCase.class.isAssignableFrom(FindWarehouseOperatorService.class));
+    assertTrue(
+        ActivateWarehouseOperatorUseCase.class.isAssignableFrom(
+            ActivateWarehouseOperatorService.class));
+    assertTrue(
+        SuspendWarehouseOperatorUseCase.class.isAssignableFrom(
+            SuspendWarehouseOperatorService.class));
+    assertTrue(
+        MarkNotEligibleWarehouseOperatorUseCase.class.isAssignableFrom(
+            MarkNotEligibleWarehouseOperatorService.class));
+    assertTrue(RegisterDispatcherUseCase.class.isAssignableFrom(RegisterDispatcherService.class));
+    assertTrue(FindDispatcherUseCase.class.isAssignableFrom(FindDispatcherService.class));
+    assertTrue(ActivateDispatcherUseCase.class.isAssignableFrom(ActivateDispatcherService.class));
+    assertTrue(SuspendDispatcherUseCase.class.isAssignableFrom(SuspendDispatcherService.class));
+    assertTrue(
+        MarkNotEligibleDispatcherUseCase.class.isAssignableFrom(
+            MarkNotEligibleDispatcherService.class));
+    assertTrue(RegisterManagerUseCase.class.isAssignableFrom(RegisterManagerService.class));
+    assertTrue(FindManagerUseCase.class.isAssignableFrom(FindManagerService.class));
+    assertTrue(ActivateManagerUseCase.class.isAssignableFrom(ActivateManagerService.class));
+    assertTrue(SuspendManagerUseCase.class.isAssignableFrom(SuspendManagerService.class));
+    assertTrue(
+        MarkNotEligibleManagerUseCase.class.isAssignableFrom(MarkNotEligibleManagerService.class));
   }
 
   @Test
@@ -131,5 +251,10 @@ class ApplicationUseCaseReviewTest {
     assertThrows(UseCaseValidationException.class, () -> DocumentResult.from(null));
     assertThrows(UseCaseValidationException.class, () -> VehicleUnitResult.from(null));
     assertThrows(UseCaseValidationException.class, () -> VehicleCombinationResult.from(null));
+    assertThrows(UseCaseValidationException.class, () -> DriverResult.from(null));
+    assertThrows(UseCaseValidationException.class, () -> MechanicResult.from(null));
+    assertThrows(UseCaseValidationException.class, () -> WarehouseOperatorResult.from(null));
+    assertThrows(UseCaseValidationException.class, () -> DispatcherResult.from(null));
+    assertThrows(UseCaseValidationException.class, () -> ManagerResult.from(null));
   }
 }

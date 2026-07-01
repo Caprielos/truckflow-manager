@@ -332,3 +332,7 @@ Il dominio operativo non contiene:
 - pianificazione.
 
 Queste parti saranno gestite in moduli successivi.
+
+## Nota applicativa dopo il Punto 6J
+
+Il dominio `operational` rimane puro. Dopo il Punto 6J l'application layer introduce i primi use case per registrare, trovare e cambiare stato a driver, mechanic, warehouse operator, dispatcher e manager. Non sono stati introdotti turni, disponibilità, payroll, planning, tracking o assegnazioni operative concrete.

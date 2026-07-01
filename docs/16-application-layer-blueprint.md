@@ -635,3 +635,7 @@ La roadmap applicativa ha ora raggiunto anche i primi use case Vehicles.
 Il blueprint rimane valido: ogni nuovo dominio applicativo deve continuare a introdurre command, result, port in, port out, application service, repository in memory e test senza saltare direttamente verso REST API, database o framework.
 
 Il Punto 6I conferma questa regola aggiungendo `VehicleUnit` e `VehicleCombination` all'application layer senza introdurre ancora planning, dispatching, tracking, manutenzione, disponibilità o assegnazioni operative.
+
+## Aggiornamento dopo il Punto 6J
+
+Il blueprint rimane valido anche dopo l'espansione verso Operational Roles. I nuovi use case seguono la stessa struttura command/result/port/service/repository già usata per gli altri domini e non introducono web, database o framework nel livello application.

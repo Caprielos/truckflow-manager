@@ -329,3 +329,7 @@ La documentazione specifica è disponibile in `docs/22-application-use-case-expa
 Il Punto 6H non modifica il primo flusso Locations + Cargo + Shipments introdotto nel Punto 6E.
 
 La review aggiunge però una garanzia trasversale: i result applicativi collegati ai primi use case (`LocationResult`, `CargoUnitResult` e `ShipmentResult`) ora rifiutano input nulli con `UseCaseValidationException`, evitando errori Java impliciti e mantenendo coerente l'error handling applicativo.
+
+## Aggiornamento di contesto dopo il Punto 6J
+
+I primi use case Locations + Cargo + Shipments restano il nucleo iniziale. Gli step successivi hanno esteso lo stesso modello applicativo a Documents, Vehicles e Operational Roles senza cambiare il principio architetturale del Punto 6E.

@@ -254,3 +254,7 @@ Il Punto 6I aggiunge i primi use case applicativi Vehicles mantenendo validi i p
 - non vengono introdotti REST API, database, JPA, controller, security, tracking, planning o dashboard.
 
 La documentazione del nuovo step è in `24-application-use-cases-expansion-vehicles.md`.
+
+## Aggiornamento successivo — Punto 6J Operational Roles
+
+Dopo Vehicles, il progetto ha applicato il Punto 6J verso Operational Roles. Anche questa espansione mantiene i result null-safe, le port in basate su `UseCase`, service allineati alle port e repository in memory usate solo come adapter temporanei.

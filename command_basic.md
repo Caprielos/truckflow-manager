@@ -322,3 +322,31 @@ Commit consigliato:
 git add -A
 git commit -m "Expand application use cases with vehicles"
 ```
+
+
+---
+
+## Nota progetto — Punto 6J
+
+Dopo l'aggiunta del Punto 6J — Application Use Cases Expansion III: Operational Roles, il controllo consigliato resta:
+
+```bash
+mvn spotless:apply
+mvn spotless:check
+mvn clean test
+git status
+```
+
+Il Punto 6J aggiunge i primi use case applicativi Operational Roles, quindi prima del commit conviene controllare anche che siano presenti i nuovi package:
+
+```bash
+find src/main/java/it/gabriele/truckflow/application -type d | grep operational
+find src/main/java/it/gabriele/truckflow/infrastructure/memory -type d | grep operational
+```
+
+Commit consigliato:
+
+```bash
+git add -A
+git commit -m "Expand application use cases with operational roles"
+```

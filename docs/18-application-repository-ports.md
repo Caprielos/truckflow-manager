@@ -386,3 +386,7 @@ Dopo il Punto 6I, l'application layer include anche le repository port del domin
 `VehicleCombinationRepository` espone invece salvataggio, ricerca e verifica per `VehicleCombinationId`, perché in questa fase le combinazioni veicolo non hanno ancora un codice business dedicato.
 
 Anche queste port restano contratti astratti dell'application layer. Non sono repository JPA, non conoscono database, query SQL, Spring Data o transazioni.
+
+## Aggiornamento Punto 6J — Operational repository ports
+
+Dopo il Punto 6J sono presenti anche le repository port `DriverRepository`, `MechanicRepository`, `WarehouseOperatorRepository`, `DispatcherRepository` e `ManagerRepository`. Espongono salvataggio, ricerca per ID, ricerca per `OperationalCode`, ricerca per `UserId` e controlli di esistenza.

@@ -310,7 +310,7 @@ Il Punto 6I registra e consulta solo il registro applicativo della flotta logica
 
 ## Stato finale dopo il Punto 6I
 
-Dopo questo step l'application layer copre:
+Dopo questo step l'application layer copriva:
 
 - Locations;
 - Cargo;
@@ -327,14 +327,8 @@ L'application layer ora possiede un primo nucleo coerente per:
 - unità veicolo;
 - combinazioni veicolo.
 
-Il prossimo step consigliato è:
+Il prossimo step, dopo il Punto 6I, è stato applicato come Punto 6J — Application Use Cases Expansion III: Operational Roles.
 
-```text
-Punto 6J — Application Use Cases Expansion III
-```
+## Aggiornamento dopo il Punto 6J
 
-La direzione più coerente per il Punto 6J è una delle seguenti:
-
-- Operational Roles use cases;
-- Compliance base use cases;
-- review/hardening specifica dopo Vehicles.
+Il Punto 6J non modifica i use case Vehicles. Aggiunge invece il primo blocco applicativo Operational Roles. Le assegnazioni concrete driver/vehicle/shipment rimangono fuori: verranno valutate solo in una fase futura di planning o dispatching.

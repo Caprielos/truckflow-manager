@@ -282,3 +282,7 @@ Rifiuta input nulli con `UseCaseValidationException` e duplicati di fleet code, 
 `InMemoryVehicleCombinationRepository` implementa `VehicleCombinationRepository` e indicizza le combinazioni per `VehicleCombinationId`.
 
 Questi adapter restano temporanei e servono solo per test e sviluppo locale. Non introducono database, JPA, Spring Data, transazioni o persistenza definitiva.
+
+## Aggiornamento Punto 6J — Operational in-memory repositories
+
+Dopo il Punto 6J sono presenti anche `InMemoryDriverRepository`, `InMemoryMechanicRepository`, `InMemoryWarehouseOperatorRepository`, `InMemoryDispatcherRepository` e `InMemoryManagerRepository`. Sono adapter temporanei per test e sviluppo locale, non database reali.
