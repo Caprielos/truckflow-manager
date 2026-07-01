@@ -439,3 +439,19 @@ Dopo gli interventi correttivi sul dominio e il blueprint del Punto 6A, il proge
 Questo step non è una correzione del dominio, ma il primo passo applicativo: crea la foundation dell'application layer con contratti base, package dedicati, eccezioni applicative e test architetturali.
 
 La review del dominio resta valida: il dominio rimane puro e non dipende dal nuovo layer applicativo.
+
+
+## Punto 6C — Application Repository Ports
+
+Dopo la foundation applicativa del Punto 6B, il progetto ha avviato il Punto 6C introducendo le prime porte repository specifiche.
+
+Sono stati aggiunti:
+
+- `RepositoryPort`;
+- `LocationRepository`;
+- `CargoUnitRepository`;
+- `ShipmentRepository`;
+- test contrattuali sulle porte repository;
+- documentazione dedicata in `docs/18-application-repository-ports.md`.
+
+Questa fase non introduce database, repository in memory ufficiali, use case operativi o REST API. Serve a stabilire i contratti che i prossimi use case useranno per salvare e recuperare aggregate.

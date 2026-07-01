@@ -296,3 +296,15 @@ Per questo il nuovo documento `16-application-layer-blueprint.md` separa chiaram
 Con il Punto 6B sono stati aggiunti test dedicati all'application layer.
 
 Questi test non sostituiscono la test suite del dominio. Servono a verificare che la nuova foundation applicativa resti separata da framework, web, JPA e infrastructure concreta, e che il dominio non importi il livello application.
+
+
+## Collegamento con i test application repository port
+
+La revisione della test suite del dominio rimane separata dai test applicativi.
+
+Con il Punto 6C sono stati aggiunti test specifici per le repository port dell'application layer. Questi test non verificano nuove regole di dominio, ma controllano che i contratti repository per Locations, Cargo e Shipments siano implementabili senza dipendenze da framework o infrastructure concreta.
+
+La distinzione rimane importante:
+
+- i test di dominio proteggono invarianti, value object, aggregate root e confini del domain layer;
+- i test applicativi proteggono contratti, orchestrazione, porte e use case dell'application layer.

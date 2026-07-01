@@ -20,9 +20,9 @@ Il markup HTML resta identico in entrambi i casi. Cambia solo il CSS applicato d
 
 ## Stato attuale del dominio
 
-Il progetto ha consolidato il **domain layer puro** e sta entrando nel **Punto 6B — Application Foundation**.
+Il progetto ha consolidato il **domain layer puro** e ha completato il **Punto 6B — Application Foundation** e sta introducendo il **Punto 6C — Repository Ports**.
 
-La versione attuale rappresenta la **TruckFlow Domain Foundation v1.0** rafforzata dalla prima review correttiva del dominio puro. La fondazione è definita, le regole sono documentate e sono stati applicati interventi mirati su invarianti, eccezioni, codici aziendali, test e pulizia del repository. Il passo successivo è trasformare il blueprint in una foundation applicativa concreta: package, contratti base, eccezioni applicative e test architetturali.
+La versione attuale rappresenta la **TruckFlow Domain Foundation v1.0** rafforzata dalla prima review correttiva del dominio puro. La fondazione è definita, le regole sono documentate e sono stati applicati interventi mirati su invarianti, eccezioni, codici aziendali, test e pulizia del repository. Il passo attuale è completare i primi contratti repository dell’application layer, partendo da Locations, Cargo e Shipments, senza introdurre ancora database o repository concreti.
 
 I package principali sono:
 
@@ -59,6 +59,7 @@ Il dominio è stato costruito seguendo una regola precisa: modellare prima i con
 - [`docs/15-domain-test-suite-review.md`](docs/15-domain-test-suite-review.md) — revisione finale della test suite del dominio puro, con cosa è stato aggiunto, cosa manca e perché.
 - [`docs/16-application-layer-blueprint.md`](docs/16-application-layer-blueprint.md) — blueprint del Punto 6A, dedicato a struttura application, command, result, port, repository, use case e test applicativi.
 - [`docs/17-application-foundation.md`](docs/17-application-foundation.md) — foundation del Punto 6B: package application, contratti base, eccezioni applicative e test architetturali.
+- [`docs/18-application-repository-ports.md`](docs/18-application-repository-ports.md) — repository port del Punto 6C: `RepositoryPort`, `LocationRepository`, `CargoUnitRepository` e `ShipmentRepository`.
 
 ## Regole fondamentali della Domain Foundation
 
@@ -106,6 +107,8 @@ Dopo questi interventi è stata aggiunta anche una revisione finale della test s
 
 Dopo il blueprint è stata avviata la foundation del Punto 6B: sono stati creati i package applicativi principali, i contratti base `ApplicationCommand`, `ApplicationResult` e `UseCase`, le prime eccezioni applicative e i test architetturali che proteggono il nuovo livello.
 
+Con il Punto 6C sono state introdotte le prime repository port specifiche: `RepositoryPort`, `LocationRepository`, `CargoUnitRepository` e `ShipmentRepository`. Questi contratti permettono ai futuri use case di salvare e recuperare aggregate tramite ID e codice senza conoscere implementazioni concrete.
+
 
 
 ## Punto 6A — Application Layer Blueprint
@@ -122,6 +125,20 @@ La foundation include i contratti `ApplicationCommand`, `ApplicationResult` e `U
 
 Questa fase non introduce ancora use case specifici, repository port specifici, repository in memory, API REST o database. Serve a rendere stabile la struttura prima di costruire Locations, Cargo e Shipments nel livello applicativo.
 
+## Punto 6C — Repository Ports
+
+Il Punto 6C aggiunge il primo gruppo di porte repository dell'application layer. Sono contratti astratti, non repository concreti.
+
+Le prime porte sono dedicate a:
+
+- Locations, tramite `LocationRepository`;
+- Cargo, tramite `CargoUnitRepository`;
+- Shipments, tramite `ShipmentRepository`.
+
+Ogni porta permette salvataggio, ricerca per ID, ricerca per codice e verifica di esistenza per ID o codice. Questa scelta prepara i futuri use case senza introdurre database, JPA, Spring, file system o infrastructure concreta.
+
+Il Punto 6C è documentato in [`docs/18-application-repository-ports.md`](docs/18-application-repository-ports.md).
+
 ## Prossimi step consigliati
 
 La roadmap consigliata è:
@@ -129,8 +146,8 @@ La roadmap consigliata è:
 1. verificare sul Mac `mvn spotless:apply` e `mvn clean test` dopo ogni intervento importante;
 2. mantenere aggiornata la documentazione `docs/13-domain-rules.md`, `docs/14-domain-review-patches.md`, `docs/15-domain-test-suite-review.md` e `docs/16-application-layer-blueprint.md` quando cambiano regole, test, confini o struttura applicativa;
 3. mantenere il Punto 6A come blueprint ufficiale dell'application layer;
-4. completare il Punto 6B con foundation applicativa, package, eccezioni applicative, command, result e test;
-5. introdurre nel Punto 6C le prime porte repository specifiche;
-6. aggiungere repository in-memory per test e scenari;
+4. mantenere stabile il Punto 6B con foundation applicativa, package, eccezioni applicative, command, result e test;
+5. mantenere stabile il Punto 6C con le prime repository port specifiche;
+6. aggiungere repository in-memory per test e scenari nel Punto 6D;
 7. implementare i primi use case piccoli e chiari, partendo da Locations + Cargo + Shipments;
 8. rimandare API REST, database e integrazioni esterne finché l'application layer non è stabile.

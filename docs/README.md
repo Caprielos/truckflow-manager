@@ -1,6 +1,6 @@
 # TruckFlow Manager — Documentazione del dominio
 
-Questa cartella contiene la documentazione ufficiale di TruckFlow Manager, con la fondazione del dominio puro e il blueprint e la foundation del primo application layer.
+Questa cartella contiene la documentazione ufficiale di TruckFlow Manager, con la fondazione del dominio puro e i primi step dell’application layer: blueprint, foundation e repository port.
 
 Il progetto ha completato la fondazione del **domain layer** e sta iniziando la progettazione dell'**application layer**. La fondazione di dominio contiene i seguenti package principali:
 
@@ -50,6 +50,7 @@ I nomi tecnici rimangono in inglese e allineati al codice Java.
 15. [`15-domain-test-suite-review.md`](15-domain-test-suite-review.md) — revisione finale della test suite del dominio puro, con cosa è stato aggiunto, cosa manca e perché.
 16. [`16-application-layer-blueprint.md`](16-application-layer-blueprint.md) — blueprint del Punto 6A: obiettivi, struttura, package, use case, repository port, repository in memory, test strategy e roadmap dell'application layer.
 17. [`17-application-foundation.md`](17-application-foundation.md) — foundation del Punto 6B: package application, contratti base, eccezioni applicative, test architetturali e cosa manca prima dei primi use case.
+18. [`18-application-repository-ports.md`](18-application-repository-ports.md) — repository port del Punto 6C: `RepositoryPort`, `LocationRepository`, `CargoUnitRepository`, `ShipmentRepository`, contratti per ID/codice e prossimo passaggio verso repository in memory.
 
 ## Stato del progetto documentato
 
@@ -69,7 +70,8 @@ Questa documentazione descrive la versione del progetto in cui il dominio contie
 - prima review correttiva del dominio puro completata con otto interventi mirati: mutazioni atomiche, eccezioni custom, `OperationalCode` obbligatorio, test catalogo qualificazioni meno fragili, pulizia dei file locali/generati e introduzione di `LicensePlate` e `VehicleIdentificationNumber` come value object del dominio veicoli, più `LanguageCode`, `UserTheme`, `CountryCode`, `JurisdictionRegion`, `ComplianceJurisdictionScope` e `OperationalScopeCode` per ridurre primitive obsession;
 - revisione finale della test suite del dominio puro documentata in `15-domain-test-suite-review.md`, con test architetturali, test contrattuali dei value object, casi limite cargo e shipment e spiegazione esplicita di cosa rimane fuori perché appartiene a moduli futuri;
 - blueprint del primo application layer documentato in `16-application-layer-blueprint.md`, che definisce struttura, responsabilità, package, command, result, port, use case, repository in memory e test strategy prima di introdurre codice applicativo;
-- foundation del primo application layer documentata in `17-application-foundation.md`, che introduce package application, contratti base, eccezioni applicative e test architetturali senza ancora aggiungere use case specifici, repository port o repository in memory.
+- foundation del primo application layer documentata in `17-application-foundation.md`, che introduce package application, contratti base, eccezioni applicative e test architetturali senza ancora aggiungere use case specifici o repository in memory;
+- repository port del primo application layer documentate in `18-application-repository-ports.md`, con `RepositoryPort`, `LocationRepository`, `CargoUnitRepository` e `ShipmentRepository` come primi contratti outbound per Locations, Cargo e Shipments.
 
 
 ## Nota sul packaging di `domain.vehicles`
@@ -203,4 +205,14 @@ Il documento `17-application-foundation.md` descrive il Punto 6B.
 
 Questo step inizia il codice dell'application layer senza introdurre ancora funzionalità operative complete. Aggiunge package applicativi, contratti base, eccezioni applicative e test architetturali.
 
-La foundation serve a preparare i prossimi step: repository port specifici, repository in memory e primi use case del blocco Locations + Cargo + Shipments.
+La foundation ha preparato i successivi step: repository port specifici, repository in memory e primi use case del blocco Locations + Cargo + Shipments.
+
+## Nota su `docs/18-application-repository-ports.md`
+
+Il documento `18-application-repository-ports.md` descrive il Punto 6C.
+
+Questo step aggiunge i primi contratti outbound specifici dell’application layer: `RepositoryPort`, `LocationRepository`, `CargoUnitRepository` e `ShipmentRepository`.
+
+Le porte permettono ai futuri use case di salvare e recuperare aggregate tramite ID e codice, senza conoscere database, JPA, Spring, file system o infrastructure concreta.
+
+Il prossimo step sarà creare repository in memory ufficiali per testare i primi flussi applicativi senza database.

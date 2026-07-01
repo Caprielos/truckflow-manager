@@ -427,3 +427,6 @@ body.tooltip-disabled .term[data-it]::after {
 #doc-19:checked ~ .app-shell .panel-19 { display: block; }
 #doc-19:checked ~ .app-shell label[for="doc-19"] { background: var(--nav-active-bg); border-color: var(--accent); color: var(--text-strong); }
 #doc-19:checked ~ .app-shell label[for="doc-19"] .nav-number { background: var(--accent); color: white; }
+#doc-20:checked ~ .app-shell .panel-20 { display: block; }
+#doc-20:checked ~ .app-shell label[for="doc-20"] { background: var(--nav-active-bg); border-color: var(--accent); color: var(--text-strong); }
+#doc-20:checked ~ .app-shell label[for="doc-20"] .nav-number { background: var(--accent); color: white; }

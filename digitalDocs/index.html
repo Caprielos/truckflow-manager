@@ -27,6 +27,7 @@
 <input class="doc-toggle" type="radio" name="active-doc" id="doc-17">
 <input class="doc-toggle" type="radio" name="active-doc" id="doc-18">
 <input class="doc-toggle" type="radio" name="active-doc" id="doc-19">
+<input class="doc-toggle" type="radio" name="active-doc" id="doc-20">
 <div class="app-shell">
   <aside class="sidebar">
     <div class="brand">
@@ -64,7 +65,8 @@
 <label class="nav-item" for="doc-16"><span class="nav-number">17</span><span class="nav-label">Domain Test Suite Review</span><span class="nav-file">15-domain-test-suite-review.md</span></label>
 <label class="nav-item" for="doc-17"><span class="nav-number">18</span><span class="nav-label">Application Layer Blueprint</span><span class="nav-file">16-application-layer-blueprint.md</span></label>
 <label class="nav-item" for="doc-19"><span class="nav-number">19</span><span class="nav-label">Application Foundation</span><span class="nav-file">17-application-foundation.md</span></label>
-<label class="nav-item" for="doc-18"><span class="nav-number">20</span><span class="nav-label">Command Basic</span><span class="nav-file">command_basic.md</span></label>
+<label class="nav-item" for="doc-20"><span class="nav-number">20</span><span class="nav-label">Application Repository Ports</span><span class="nav-file">18-application-repository-ports.md</span></label>
+<label class="nav-item" for="doc-18"><span class="nav-number">21</span><span class="nav-label">Command Basic</span><span class="nav-file">command_basic.md</span></label>
     </nav>
   </aside>
 
@@ -77,7 +79,7 @@
       <div class="toolbar-badges">
         <span>HTML + CSS</span>
         <span>Markdown mirror</span>
-        <span>Domain + Application Foundation</span>
+        <span>Domain + Repository Ports</span>
       </div>
     </div>
 
@@ -100,7 +102,7 @@
 </ul>
 <p>Il markup HTML resta identico in entrambi i casi. Cambia solo il CSS applicato dal flag globale.</p>
 <h2>Stato attuale del dominio</h2>
-<p>Il progetto ha consolidato il <strong><span class="term" data-it="livello di dominio">domain layer</span> puro</strong> e ha completato il <strong>Punto 6A — <span class="term" data-it="livello applicativo">Application Layer</span> Blueprint</strong> e sta introducendo il <strong>Punto 6B — <span class="term" data-it="fondazione applicativa">Application Foundation</span></strong>.</p>
+<p>Il progetto ha consolidato il <strong><span class="term" data-it="livello di dominio">domain layer</span> puro</strong> e ha completato il <strong>Punto 6A — <span class="term" data-it="livello applicativo">Application Layer</span> Blueprint</strong> e ha introdotto il <strong>Punto 6B — <span class="term" data-it="fondazione applicativa">Application Foundation</span></strong> e sta introducendo il <strong>Punto 6C — <span class="term" data-it="porte repository">Application Repository Ports</span></strong>.</p>
 <p>La versione attuale rappresenta la <strong><span class="term" data-it="fondazione del dominio puro TruckFlow versione 1.0">TruckFlow Domain Foundation v1.0</span></strong> rafforzata dalla prima review correttiva del dominio puro. La fondazione è definita, le regole sono documentate e sono stati applicati interventi mirati su invarianti, eccezioni, codici aziendali, test e pulizia del <span class="term" data-it="repository">repository</span>. Il passo successivo è trasformare il blueprint in una foundation applicativa concreta: package, contratti base, eccezioni applicative e test architetturali.</p>
 <p>I package principali sono:</p>
 <ul>
@@ -136,6 +138,7 @@
 <li><a href="docs/15-domain-test-suite-review.md"><code>docs/15-domain-test-suite-review.md</code></a> — revisione finale della test suite del dominio puro, con cosa è stato aggiunto, cosa manca e perché.</li>
 <li><a href="docs/16-application-layer-blueprint.md"><code>docs/16-application-layer-blueprint.md</code></a> — blueprint del Punto 6A, dedicato a struttura application, <span class="term" data-it="comando applicativo">command</span>, <span class="term" data-it="risultato applicativo">result</span>, port, <span class="term" data-it="repository">repository</span>, <span class="term" data-it="caso d’uso">use case</span> e test applicativi.</li>
 <li><a href="docs/17-application-foundation.md"><code>docs/17-application-foundation.md</code></a> — foundation del Punto 6B: package application, contratti base, eccezioni applicative, test architetturali e cosa manca prima dei primi <span class="term" data-it="caso d’uso">use case</span>.</li>
+<li><a href="docs/18-application-repository-ports.md"><code>docs/18-application-repository-ports.md</code></a> — repository port del Punto 6C: <code>RepositoryPort</code>, <code>LocationRepository</code>, <code>CargoUnitRepository</code> e <code>ShipmentRepository</code>.</li>
 </ul>
 <h2>Regole fondamentali della Domain Foundation</h2>
 <p>Le regole principali sono:</p>
@@ -6399,9 +6402,76 @@ git push
 <h2>5. Cosa non è stato ancora fatto</h2>
 <p>Il Punto 6B non introduce ancora use case specifici, command specifici, result specifici, repository port specifici, repository in memory, controller REST, database, JPA, Spring annotations, sicurezza, API pubbliche o workflow operativi.</p>
 <h2>6. Prossimo step</h2>
-<p>Dopo il Punto 6B, il passo successivo consigliato è <strong>Punto 6C — Repository Ports</strong>, partendo da Locations, Cargo e Shipments.</p>
+<p>Dopo il Punto 6B, il progetto ha avviato <strong>Punto 6C — Repository Ports</strong>, partendo da Locations, Cargo e Shipments. Le implementazioni in memory arriveranno nel Punto 6D.</p>
   </div>
 </article>
+
+
+<article class="doc-panel panel-20" id="18-application-repository-ports-md">
+  <header class="doc-panel-header">
+    <p class="eyebrow">18-application-repository-ports.md</p>
+    <h1>18 — Application Repository Ports</h1>
+  </header>
+  <div class="markdown-body">
+<h1>18 — <span class="term" data-it="porte repository applicative">Application Repository Ports</span></h1>
+<p>Questo documento descrive il <strong>Punto 6C — <span class="term" data-it="porte repository">Repository Ports</span></strong> di TruckFlow Manager.</p>
+<p>Il Punto 6A ha definito il blueprint dell'application layer. Il Punto 6B ha creato la foundation applicativa. Il Punto 6C introduce le prime porte repository specifiche, cioè contratti astratti che i futuri <span class="term" data-it="casi d’uso">use case</span> useranno per salvare e recuperare aggregate del dominio senza conoscere database, file system, API esterne o implementazioni concrete.</p>
+<h2>1. Obiettivo del Punto 6C</h2>
+<ul>
+<li>aggiungere il marker <code>RepositoryPort</code>;</li>
+<li>aggiungere <code>LocationRepository</code> per il dominio locations;</li>
+<li>aggiungere <code>CargoUnitRepository</code> per il dominio cargo;</li>
+<li>aggiungere <code>ShipmentRepository</code> per il dominio shipments;</li>
+<li>aggiungere test contrattuali sulle porte repository;</li>
+<li>aggiornare la documentazione Markdown e HTML.</li>
+</ul>
+<p>Il risultato non è ancora un sistema con database. Le repository port sono interfacce applicative.</p>
+<h2>2. Perché servono</h2>
+<p>Il dominio sa costruire, validare e modificare aggregate, ma non deve sapere dove questi oggetti vengono salvati. L'application layer deve poter orchestrare i futuri casi d'uso usando contratti astratti.</p>
+<pre><code class="language-text">Use case -> Repository port -> implementazione futura</code></pre>
+<p>Non vogliamo che un use case dipenda direttamente da database concreti, file system, repository JPA o implementazioni in memory.</p>
+<h2>3. Porte aggiunte</h2>
+<h3><code>RepositoryPort</code></h3>
+<p>Marker delle porte repository in uscita dell'application layer.</p>
+<h3><code>LocationRepository</code></h3>
+<p>Permette salvataggio, ricerca per <code>LocationId</code>, ricerca per <code>LocationCode</code> e verifica di esistenza per ID o codice.</p>
+<h3><code>CargoUnitRepository</code></h3>
+<p>Permette salvataggio, ricerca per <code>CargoId</code>, ricerca per <code>CargoCode</code> e verifica di esistenza per ID o codice.</p>
+<h3><code>ShipmentRepository</code></h3>
+<p>Permette salvataggio, ricerca per <code>ShipmentId</code>, ricerca per <code>ShipmentCode</code> e verifica di esistenza per ID o codice.</p>
+<h2>4. Perché Locations + Cargo + Shipments</h2>
+<p>Questi tre domini permettono di costruire il primo flusso applicativo reale: registrare luoghi, registrare merce, creare una shipment, aggiungere item e tratte, poi confermare la shipment. Tutto questo senza introdurre ancora planning, dispatching, tracking, database o API REST.</p>
+<h2>5. Cosa NON fanno</h2>
+<ul>
+<li>non persistono su database;</li>
+<li>non sono repository in memory ufficiali;</li>
+<li>non fanno query avanzate o paginazione;</li>
+<li>non gestiscono transazioni, audit o locking;</li>
+<li>non contengono mapping JPA;</li>
+<li>non espongono API REST.</li>
+</ul>
+<h2>6. Regole architetturali</h2>
+<p>Le repository port appartengono all'application layer. Possono importare aggregate, ID e code del dominio, ma non possono dipendere da Spring, JPA, Hibernate, Lombok, web, infrastructure concreta o database.</p>
+<pre><code class="language-text">domain non importa application
+application può importare domain
+application non importa infrastructure
+infrastructure implementa application.port.out</code></pre>
+<h2>7. Cosa è stato testato</h2>
+<ul>
+<li>salvataggio e ricerca per ID/codice di location;</li>
+<li>salvataggio e ricerca per ID/codice di cargo unit;</li>
+<li>salvataggio e ricerca per ID/codice di shipment;</li>
+<li>le repository port sono interfacce;</li>
+<li>le repository port estendono <code>RepositoryPort</code>;</li>
+<li>i contratti sono implementabili senza framework o infrastructure concreta.</li>
+</ul>
+<h2>8. Cosa manca ancora</h2>
+<p>Mancano repository in-memory ufficiali, command specifici, result specifici, use case specifici, application service, primo flusso applicativo completo, controller REST, database, sicurezza, workflow e moduli enterprise.</p>
+<h2>9. Prossimo step</h2>
+<p>Il prossimo passo consigliato è <strong>Punto 6D — In-Memory Repositories</strong>, con <code>InMemoryLocationRepository</code>, <code>InMemoryCargoUnitRepository</code> e <code>InMemoryShipmentRepository</code>.</p>
+  </div>
+</article>
+
   </main>
 </div>
 </body>

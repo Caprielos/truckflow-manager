@@ -158,8 +158,10 @@ I documenti operativi di riferimento sono [`13-domain-rules.md`](13-domain-rules
 
 ## Avvio del Punto 6 — Application Layer
 
-Dopo la stabilizzazione della TruckFlow Domain Foundation, il progetto entra nel Punto 6A: blueprint dell'application layer.
+Dopo la stabilizzazione della TruckFlow Domain Foundation, il progetto è entrato nel Punto 6: application layer.
+
+Il Punto 6A ha definito il blueprint dell'application layer. Il Punto 6B ha introdotto la foundation applicativa con package, contratti base ed eccezioni applicative. Il Punto 6C introduce ora le prime repository port specifiche: `LocationRepository`, `CargoUnitRepository` e `ShipmentRepository`.
 
 Questo passaggio non introduce ancora REST API, database o framework. Serve a definire come il sistema dovrà eseguire azioni applicative usando il dominio: registrare location, registrare cargo, creare shipment, aggiungere item e tratte, confermare shipment e recuperare informazioni tramite repository astratti.
 
-Il primo blocco consigliato è Locations + Cargo + Shipments, perché rappresenta un flusso logistico reale senza anticipare moduli futuri come planning, dispatching, tracking o availability.
+Il primo blocco consigliato rimane Locations + Cargo + Shipments, perché rappresenta un flusso logistico reale senza anticipare moduli futuri come planning, dispatching, tracking o availability.

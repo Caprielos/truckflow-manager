@@ -48,6 +48,8 @@ This digital documentation mirrors:
 - `docs/14-domain-review-patches.md`
 - `docs/15-domain-test-suite-review.md`
 - `docs/16-application-layer-blueprint.md`
+- `docs/17-application-foundation.md`
+- `docs/18-application-repository-ports.md`
 - `command_basic.md`
 
 
@@ -60,3 +62,10 @@ The digital documentation now also mirrors the Punto 6A application layer bluepr
 La documentazione digitale include ora anche il riferimento al Punto 6B — Application Foundation, che introduce i primi package e contratti dell'application layer senza modificare la documentazione Markdown esistente.
 
 Documento di riferimento: `docs/17-application-foundation.md`.
+
+
+## Aggiornamento Punto 6C
+
+La documentazione digitale include ora anche il Punto 6C — Application Repository Ports. Questo step aggiunge le prime porte repository specifiche per Locations, Cargo e Shipments, mantenendo l’application layer indipendente da database, Spring, JPA e infrastructure concreta.
+
+Documento di riferimento: `docs/18-application-repository-ports.md`.

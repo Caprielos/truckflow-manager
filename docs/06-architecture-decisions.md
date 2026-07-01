@@ -756,3 +756,22 @@ Le regole sono:
 - i repository concreti arriveranno in infrastructure, non nel dominio e non nella foundation.
 
 Il Punto 6B non implementa ancora casi d'uso completi. Prepara la base tecnica per il Punto 6C, dedicato alle prime repository port specifiche.
+
+
+## Decisione architetturale — Repository port prima delle implementazioni
+
+Con il Punto 6C il progetto introduce le prime repository port dell'application layer prima di creare repository in memory, database o adapter tecnici.
+
+Questa scelta conferma la direzione architetturale del progetto:
+
+```text
+application -> domain
+infrastructure -> application
+web -> application
+```
+
+Le porte `LocationRepository`, `CargoUnitRepository` e `ShipmentRepository` appartengono ad `application.port.out` e sono contratti astratti. Possono importare aggregate, ID e code del dominio perché devono esprimere ciò che i futuri use case richiedono al mondo esterno.
+
+Non possono invece dipendere da Spring, JPA, Hibernate, Lombok, web, infrastructure concreta o database.
+
+Il vantaggio è che i futuri use case potranno essere scritti e testati contro contratti stabili, mentre le implementazioni potranno cambiare: in memory, file, database, API o altro.

@@ -364,10 +364,34 @@ Regola ufficiale:
 
 REST API, database, JPA, tracking, planning, dispatching, workflow documentali e compliance check concreti restano fuori dal Punto 6A.
 
-## Stato successivo alla Domain Foundation — Punto 6B
+## Stato successivo alla Domain Foundation — Punto 6B e Punto 6C
 
-Dopo la chiusura della fondazione del dominio puro e il blueprint del Punto 6A, il progetto ha avviato il Punto 6B — Application Foundation.
+Dopo la chiusura della fondazione del dominio puro e il blueprint del Punto 6A, il progetto ha introdotto il Punto 6B — Application Foundation e il Punto 6C — Repository Ports.
 
-Questa fase non modifica le regole del dominio. Introduce il livello applicativo come layer separato, con package, contratti base, eccezioni applicative e test architetturali.
+Queste fasi non modificano le regole del dominio. Introducono il livello applicativo come layer separato, con package, contratti base, eccezioni applicative, test architetturali e prime repository port.
 
 La regola rimane invariata: il dominio non importa l'application layer. L'application layer può usare il dominio per orchestrare futuri casi d'uso.
+
+
+## Regola — Le repository port appartengono all’application layer
+
+Le repository port non appartengono al dominio puro.
+
+Il dominio continua a non conoscere repository, database, file system, framework o infrastruttura.
+
+Con il Punto 6C sono state introdotte le prime repository port in `application.port.out`:
+
+- `LocationRepository`;
+- `CargoUnitRepository`;
+- `ShipmentRepository`.
+
+Queste porte possono importare aggregate root, ID e code del dominio perché sono contratti applicativi. Le implementazioni concrete arriveranno in infrastructure.
+
+La regola ufficiale rimane:
+
+```text
+domain non importa application
+application può importare domain
+application non importa infrastructure
+infrastructure implementa application.port.out
+```

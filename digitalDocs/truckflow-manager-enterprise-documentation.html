@@ -479,7 +479,7 @@
   <div class="hero">
     <div class="hero-inner">
       <div>
-        <div class="eyebrow">Documentazione professionale • Domain Foundation • Application Foundation</div>
+        <div class="eyebrow">Documentazione professionale • Domain Foundation • Repository Ports</div>
         <h1>TruckFlow Manager — Documentazione Enterprise</h1>
         <p>Una panoramica completa, tecnica e commerciale, del progetto TruckFlow Manager: cosa fa oggi, perché è progettato in questo modo, quali domini contiene, come sta nascendo l’application layer e quali moduli dovranno essere aggiunti per evolvere in una piattaforma enterprise completa per trasporto, logistica e gestione flotta.</p>
         <div class="hero-actions">
@@ -739,7 +739,7 @@
 
       <section id="roadmap" class="soft">
         <h2>7. Roadmap ufficiale del progetto</h2>
-        <p class="lead">La roadmap reale riflette il lavoro svolto finora: prima il dominio, poi la sua stabilizzazione, poi i test, ora la foundation dell’application layer.</p>
+        <p class="lead">La roadmap reale riflette il lavoro svolto finora: prima il dominio, poi la sua stabilizzazione, poi i test, poi la foundation dell’application layer e ora le prime repository port.</p>
         <div class="timeline">
           <div class="timeline-item">
             <div><span class="badge done">Completato</span><div class="milestone">Punto 1</div></div>
@@ -766,25 +766,29 @@
             <div><h3>Application Layer Blueprint</h3><p>Definizione professionale di struttura application, command, result, port in, port out, use case, repository in memory, eccezioni applicative e test strategy.</p></div>
           </div>
           <div class="timeline-item">
-            <div><span class="badge now">In corso</span><div class="milestone">Punto 6B</div></div>
+            <div><span class="badge done">Completato</span><div class="milestone">Punto 6B</div></div>
             <div><h3>Application Foundation</h3><p>Creazione dei package application, dei contratti base ApplicationCommand, ApplicationResult e UseCase, delle prime eccezioni applicative e dei test architetturali.</p></div>
           </div>
           <div class="timeline-item">
-            <div><span class="badge planned">Pianificato</span><div class="milestone">Punto 6C–6F</div></div>
-            <div><h3>Repository ports, memory e primi use case</h3><p>Creazione progressiva di repository port, repository in memory, use case e test applicativi sul primo flusso Locations + Cargo + Shipments.</p></div>
+            <div><span class="badge now">In corso</span><div class="milestone">Punto 6C</div></div>
+            <div><h3>Application Repository Ports</h3><p>Introduzione di RepositoryPort, LocationRepository, CargoUnitRepository e ShipmentRepository come primi contratti outbound dell’application layer.</p></div>
+          </div>
+          <div class="timeline-item">
+            <div><span class="badge planned">Pianificato</span><div class="milestone">Punto 6D–6F</div></div>
+            <div><h3>Repository memory e primi use case</h3><p>Creazione progressiva di repository in memory, use case e test applicativi sul primo flusso Locations + Cargo + Shipments.</p></div>
           </div>
         </div>
         <h3>Obiettivi a breve termine</h3>
         <ul>
           <li>mantenere verdi test e formattazione;</li>
           <li>usare il blueprint del Punto 6A come guida ufficiale;</li>
-          <li>consolidare il Punto 6B come foundation tecnica dell'application layer;</li>
-          <li>creare la foundation applicativa senza introdurre ancora web o database;</li>
-          <li>iniziare use case piccoli e chiari partendo da Locations + Cargo + Shipments.</li>
+          <li>mantenere stabile il Punto 6B come foundation tecnica dell'application layer;</li>
+          <li>consolidare il Punto 6C con le prime repository port;</li>
+          <li>preparare il Punto 6D con repository in memory senza introdurre ancora web o database.</li>
         </ul>
         <h3>Obiettivi a medio termine</h3>
         <ul>
-          <li>definire repository port per gli aggregate principali;</li>
+          <li>estendere progressivamente le repository port agli aggregate principali quando nasceranno nuovi use case;</li>
           <li>introdurre repository in memory per scenari e test applicativi;</li>
           <li>modellare i primi flussi applicativi: creazione veicolo, registrazione cargo, creazione shipment, conferma shipment, gestione documento e requisito compliance;</li>
           <li>preparare l’infrastructure layer senza sporcare il dominio.</li>
@@ -793,8 +797,8 @@
 
 
       <section id="application-layer">
-        <h2>8. Application Layer Foundation</h2>
-        <p class="lead">Il Punto 6A ha definito il blueprint del livello applicativo. Il Punto 6B inizia ora la foundation concreta: package application, contratti base, eccezioni applicative e test architetturali, senza introdurre ancora REST API, database o framework.</p>
+        <h2>8. Application Layer e Repository Ports</h2>
+        <p class="lead">Il Punto 6A ha definito il blueprint del livello applicativo. Il Punto 6B ha introdotto la foundation concreta. Il Punto 6C aggiunge ora le prime repository port specifiche per Locations, Cargo e Shipments, senza introdurre ancora REST API, database o framework.</p>
         <div class="grid two">
           <div class="card">
             <h3>Responsabilità</h3>
@@ -802,7 +806,7 @@
           </div>
           <div class="card">
             <h3>Componenti previsti</h3>
-            <p>La struttura prevista comprende command, result, port in, port out, use case, application service, eccezioni applicative, repository port e repository in memory per sviluppo e test. Il Punto 6B ha iniziato questa struttura con i package e i contratti base.</p>
+            <p>La struttura comprende command, result, port in, port out, use case, application service, eccezioni applicative, repository port e repository in memory per sviluppo e test. Il Punto 6C introduce i primi contratti repository: LocationRepository, CargoUnitRepository e ShipmentRepository.</p>
           </div>
           <div class="card">
             <h3>Primo flusso</h3>
@@ -810,7 +814,7 @@
           </div>
           <div class="card">
             <h3>Cosa resta fuori</h3>
-            <p>Controller REST, DTO web, JPA, database, JWT, planning, dispatching, tracking, workflow documentali e compliance check concreti restano fuori da questo step.</p>
+            <p>Controller REST, DTO web, JPA, database, JWT, planning, dispatching, tracking, workflow documentali, compliance check concreti e repository infrastructure restano fuori da questo step.</p>
           </div>
         </div>
         <div class="callout">
@@ -882,8 +886,9 @@
               <tr><td>Domain Foundation</td><td><span class="badge done">Fatto</span></td><td>Il dominio puro è modellato, documentato e rafforzato con value object, eccezioni custom e invarianti.</td></tr>
               <tr><td>Test suite del dominio</td><td><span class="badge done">Completata</span></td><td>Sono stati aggiunti test trasversali di architettura e contratti value object. La suite va mantenuta verde durante ogni evoluzione.</td></tr>
               <tr><td>Application Layer Blueprint</td><td><span class="badge done">Completato</span></td><td>È stato documentato il Punto 6A per definire struttura, responsabilità, package, use case e strategia di test prima del codice applicativo.</td></tr>
-              <tr><td>Application Foundation</td><td><span class="badge now">In corso</span></td><td>Introduce package application, contratti base, eccezioni applicative e test architetturali senza ancora creare use case specifici o repository port.</td></tr>
-              <tr><td>Database e repository reali</td><td><span class="badge planned">Futuro</span></td><td>Non vanno introdotti prima dei repository port e dei use case applicativi.</td></tr>
+              <tr><td>Application Foundation</td><td><span class="badge done">Completata</span></td><td>Introduce package application, contratti base, eccezioni applicative e test architetturali senza ancora creare use case specifici.</td></tr>
+              <tr><td>Application Repository Ports</td><td><span class="badge now">In corso</span></td><td>Introduce RepositoryPort, LocationRepository, CargoUnitRepository e ShipmentRepository come contratti outbound senza database o infrastructure concreta.</td></tr>
+              <tr><td>Database e repository reali</td><td><span class="badge planned">Futuro</span></td><td>Non vanno introdotti prima dei repository in memory e dei use case applicativi.</td></tr>
               <tr><td>API REST</td><td><span class="badge planned">Futuro</span></td><td>Le API devono esporre casi d’uso stabili, non accedere direttamente al dominio in modo improvvisato.</td></tr>
               <tr><td>Planning & Dispatching</td><td><span class="badge planned">Futuro</span></td><td>È il modulo che assegnerà risorse reali e verificherà compatibilità operative.</td></tr>
               <tr><td>Availability, Maintenance, Tracking</td><td><span class="badge planned">Futuro</span></td><td>Sono moduli enterprise importanti, ma non appartengono alla fondazione pura attuale.</td></tr>
@@ -893,7 +898,7 @@
           </table>
         </div>
         <h3>Perché questa sequenza è corretta</h3>
-        <p>Costruire prima il dominio evita che il progetto nasca dipendente da database, controller o dettagli tecnici. Una volta che il dominio è stabile, i casi d’uso applicativi possono essere costruiti sopra regole chiare. Solo dopo ha senso introdurre repository, API, storage, integrazioni e UI.</p>
+        <p>Costruire prima il dominio evita che il progetto nasca dipendente da database, controller o dettagli tecnici. Una volta che il dominio è stabile, i casi d’uso applicativi possono essere costruiti sopra regole chiare. Le repository port permettono di preparare questo passaggio senza legarsi a dettagli tecnici. Solo dopo ha senso introdurre repository concreti, API, storage, integrazioni e UI.</p>
       </section>
 
       <section id="conclusione" class="soft">

@@ -137,7 +137,7 @@ it.gabriele.truckflow.application.port.out
 
 Per ora contiene solo la documentazione di package.
 
-I repository port concreti non sono stati ancora introdotti in questa fase, perché appartengono allo step successivo.
+I repository port concreti non sono stati introdotti nel Punto 6B perché appartengono allo step successivo. Sono stati poi aggiunti nel Punto 6C e documentati in `18-application-repository-ports.md`.
 
 Esempi futuri:
 
@@ -277,26 +277,27 @@ In questo modo i prossimi use case potranno seguire una forma coerente.
 
 ---
 
-## 7. Prossimo step
+## 7. Stato dopo il Punto 6C
 
-Dopo il Punto 6B, il passo successivo consigliato è:
+Il passo successivo al Punto 6B è stato avviato con:
 
 ```text
 Punto 6C — Repository Ports
 ```
 
-Nel Punto 6C verranno introdotte le prime porte repository astratte, partendo dal blocco:
+Nel Punto 6C sono state introdotte le prime porte repository astratte del blocco:
 
 - Locations;
 - Cargo;
 - Shipments.
 
-Repository previsti:
+Repository aggiunti:
 
 - `LocationRepository`;
 - `CargoUnitRepository`;
-- `ShipmentRepository`.
+- `ShipmentRepository`;
+- `RepositoryPort`.
 
-Questi repository saranno interfacce applicative, non implementazioni tecniche.
+Questi repository sono interfacce applicative, non implementazioni tecniche.
 
-Le implementazioni in memory arriveranno nello step successivo.
+Le implementazioni in memory arriveranno nello step successivo, Punto 6D.

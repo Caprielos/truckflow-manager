@@ -2,7 +2,7 @@
 
 Questo documento definisce il **Punto 6A — Application Layer Blueprint** di TruckFlow Manager.
 
-> Stato: il blueprint del Punto 6A è stato completato come guida architetturale. Il progetto ha avviato il Punto 6B con la creazione della foundation applicativa descritta in `docs/17-application-foundation.md`.
+> Stato: il blueprint del Punto 6A è stato completato come guida architetturale. Il progetto ha completato il Punto 6B con la foundation applicativa e ha avviato il Punto 6C con le prime repository port descritte in `docs/18-application-repository-ports.md`.
 
 
 Il dominio puro è stato modellato, rafforzato, testato e documentato. Il passo successivo non è introdurre subito REST API, database o Spring, ma progettare il livello applicativo che userà il dominio attraverso casi d'uso chiari.
@@ -195,6 +195,8 @@ Esempi futuri:
 - `LocationRepository`;
 - `CargoUnitRepository`;
 - `ShipmentRepository`;
+
+Queste tre porte sono state introdotte nel Punto 6C come primi contratti outbound concreti dell’application layer. Non sono implementazioni database e non appartengono all’infrastructure.
 - `DocumentRepository`;
 - `ComplianceRequirementRepository`.
 
