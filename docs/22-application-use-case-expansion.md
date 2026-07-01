@@ -310,7 +310,7 @@ La review ha rafforzato:
 - test copy-on-write su activate/archive documentali;
 - documentazione Markdown e HTML.
 
-Il prossimo step consigliato non è più la review 6H, perché ora è completata. Il prossimo passo diventa il Punto 6I, cioè una nuova espansione applicativa controllata da scegliere tra Vehicles, Operational Roles, Compliance o ulteriori azioni logiche su Documents.
+Storicamente, dopo la review 6H, il progetto ha scelto il Punto 6I come espansione controllata verso Vehicles. Oggi anche 6I, 6J, 6K, 6L e 6M sono completati.
 
 ## Aggiornamento successivo — Punto 6I Vehicles
 

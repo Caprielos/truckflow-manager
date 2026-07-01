@@ -161,3 +161,15 @@ Dopo il Punto 6M, TruckFlow Manager si trova in questo stato:
 - nessun layer web o database ancora introdotto;
 - documentazione Markdown e HTML allineata;
 - progetto pronto per aprire il prossimo grande punto della roadmap.
+
+## Allineamento documentale successivo
+
+Dopo il Punto 6M è stata aggiunta una pulizia solo documentale, descritta in `docs/29-final-roadmap-documentation-alignment.md`.
+
+Questa pulizia non cambia il codice e non riapre il Punto 6. Serve solo a rendere esplicito che:
+
+- il Punto 6 è chiuso da 6A a 6M;
+- il Punto 6G Documents include register, find, activate e archive;
+- attach fisico, generazione PDF, upload, storage, versioning e workflow documentali sono ancora futuri;
+- le dipendenze Spring eventualmente già presenti nel `pom.xml` sono preparatorie o storiche;
+- il prossimo lavoro deve aprire un nuovo punto roadmap, non un ulteriore sotto-step del Punto 6.

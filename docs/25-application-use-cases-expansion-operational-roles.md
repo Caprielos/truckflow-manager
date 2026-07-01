@@ -290,7 +290,7 @@ Dopo il Punto 6J, l'application layer copre:
 
 Il progetto è ancora prima di REST API e database.
 
-Il prossimo step consigliato è una fase di review/hardening dopo Operational Roles oppure una piccola espansione controllata verso Compliance base, sempre senza introdurre controlli concreti di violazione o motori regolatori.
+Storicamente, dopo Operational Roles, il progetto ha scelto una fase di review/hardening dedicata nel Punto 6K. Successivamente sono stati completati anche Compliance base nel Punto 6L e il freeze finale nel Punto 6M.
 
 ## Aggiornamento dopo il Punto 6K
 

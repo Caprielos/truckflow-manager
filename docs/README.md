@@ -1,6 +1,8 @@
 # TruckFlow Manager — Documentazione del dominio
 
-Questa cartella contiene la documentazione ufficiale di TruckFlow Manager, con la fondazione del dominio puro e i primi step dell’application layer: blueprint, foundation, repository port, repository in memory, primi use case applicativi, hardening dei use case, espansione controllata verso Documents, review/allineamento del Punto 6H, espansione controllata verso Vehicles nel Punto 6I, espansione controllata verso Operational Roles nel Punto 6J, hardening Operational Roles nel Punto 6K, primi use case Compliance base nel Punto 6L e review/freeze finale dell’application layer nel Punto 6M.
+Questa cartella contiene la documentazione ufficiale di TruckFlow Manager, con la fondazione del dominio puro e il primo ciclo completo dell’application layer: blueprint, foundation, repository port, repository in memory, primi use case applicativi, hardening, espansione verso Documents, Vehicles, Operational Roles e Compliance base, review dedicate e freeze finale al Punto 6M.
+
+Il documento `29-final-roadmap-documentation-alignment.md` chiarisce lo stato reale dopo il Punto 6M: il Punto 6 è chiuso, la descrizione corretta del Punto 6G Documents è register/find/activate/archive e le dipendenze Spring presenti nel `pom.xml` sono preparatorie, non ancora usate come architettura REST o persistence.
 
 Il progetto ha completato la fondazione del **domain layer**. L'**application layer** ha consolidato i primi casi d'uso, ha completato la prima espansione controllata verso Documents, l'ha rafforzata con una review tecnica e documentale, ha aggiunto i primi use case applicativi Vehicles e Operational Roles, ha rafforzato Operational Roles con il Punto 6K, ha introdotto i primi use case Compliance base nel Punto 6L e ha chiuso il primo ciclo dell'application layer con il Punto 6M. La fondazione di dominio contiene i seguenti package principali:
 
@@ -61,6 +63,7 @@ I nomi tecnici rimangono in inglese e allineati al codice Java.
 26. [`26-application-operational-use-case-hardening.md`](26-application-operational-use-case-hardening.md) — hardening del Punto 6K: review Operational Roles, copertura completa dei service di stato, test copy-on-write sulle attivazioni fallite e documentazione allineata.
 27. [`27-application-compliance-base-use-cases.md`](27-application-compliance-base-use-cases.md) — espansione del Punto 6L: primi use case Compliance base, `ComplianceRequirementRepository`, `InMemoryComplianceRequirementRepository` e flusso register/find/status.
 28. [`28-application-layer-final-review-freeze.md`](28-application-layer-final-review-freeze.md) — chiusura del Punto 6M: review finale, freeze dell'application layer, controlli architetturali e documentazione di cosa resta fuori.
+29. [`29-final-roadmap-documentation-alignment.md`](29-final-roadmap-documentation-alignment.md) — allineamento documentale finale: roadmap reale 1 → 6M, correzione del 6G Documents, nota sulle dipendenze Spring preparatorie e Guided Links.
 
 ## Stato del progetto documentato
 
@@ -77,6 +80,7 @@ Questa documentazione descrive la versione del progetto in cui il dominio contie
 - dominio documents per descrivere il concetto puro di documento aziendale, con identità, codice, tipo, categoria, stato, metadati, contenuto logico e riferimenti astratti, senza introdurre file fisici, upload, storage, workflow, scadenze o compliance operativa;
 - dominio compliance per descrivere requisiti astratti di conformità, categorie, livelli di obbligatorietà, severità, target, regole, fonti e giurisdizioni senza introdurre controlli automatici, workflow, audit, scadenze o risultati di verifica;
 - application layer base chiuso al Punto 6M con use case, repository port, repository in memory, test e documentazione allineati per Locations, Cargo, Shipments, Documents, Vehicles, Operational Roles e Compliance base;
+- roadmap finale chiarita nel documento `29-final-roadmap-documentation-alignment.md`, che sostituisce le descrizioni intermedie ormai superate;
 - regole ufficiali di dominio per guidare la TruckFlow Domain Foundation v1.0, la review finale del dominio puro e l'introduzione graduale delle eccezioni custom;
 - prima review correttiva del dominio puro completata con otto interventi mirati: mutazioni atomiche, eccezioni custom, `OperationalCode` obbligatorio, test catalogo qualificazioni meno fragili, pulizia dei file locali/generati e introduzione di `LicensePlate` e `VehicleIdentificationNumber` come value object del dominio veicoli, più `LanguageCode`, `UserTheme`, `CountryCode`, `JurisdictionRegion`, `ComplianceJurisdictionScope` e `OperationalScopeCode` per ridurre primitive obsession;
 - revisione finale della test suite del dominio puro documentata in `15-domain-test-suite-review.md`, con test architetturali, test contrattuali dei value object, casi limite cargo e shipment e spiegazione esplicita di cosa rimane fuori perché appartiene a moduli futuri;
@@ -126,6 +130,12 @@ Quindi il dominio non contiene:
 - GPS o telematica.
 
 Tutte queste parti potranno essere aggiunte in futuro in layer o moduli separati, senza sporcare il dominio.
+
+## Nota sulle dipendenze Spring preparatorie
+
+Il `pom.xml` può contenere dipendenze Spring Boot, Web, Validation o OpenAPI già aggiunte in precedenza.
+
+Questa presenza non cambia lo stato architetturale del progetto: fino al Punto 6M non sono stati introdotti controller REST, entity JPA, repository Spring Data, security configuration o persistence reale. Il dominio e l'application layer restano indipendenti da Spring.
 
 ## Nota su `domain.locations` e `domain.triptemplates`
 
@@ -192,7 +202,7 @@ Questo documento serve come storico architetturale della review e come riferimen
 
 Il documento `13-domain-rules.md` definisce la roadmap ufficiale della TruckFlow Domain Foundation v1.0.
 
-La Domain Review Finale è considerata avviata e la roadmap è approvata, ma non ancora completata dominio per dominio.
+La Domain Review Finale della TruckFlow Domain Foundation v1.0 è considerata completata per il perimetro attuale del dominio puro. Future review saranno necessarie solo quando verranno introdotti nuovi punti roadmap come infrastructure, API, planning, dispatching, workflow o moduli enterprise avanzati.
 
 Le regole principali sono:
 
@@ -233,7 +243,7 @@ Questo step aggiunge i primi contratti outbound specifici dell’application lay
 
 Le porte permettono ai futuri use case di salvare e recuperare aggregate tramite ID e codice, senza conoscere database, JPA, Spring, file system o infrastructure concreta.
 
-Il prossimo step sarà creare repository in memory ufficiali per testare i primi flussi applicativi senza database.
+Storicamente, dopo questo step il progetto ha creato repository in memory ufficiali per testare i primi flussi applicativi senza database. Oggi questo lavoro è già stato completato e consolidato fino al Punto 6M.
 
 ## Nota su `docs/19-application-in-memory-repositories.md`
 
@@ -260,6 +270,30 @@ Questo step rafforza i primi use case applicativi introdotti nel Punto 6E. Aggiu
 Il Punto 6F non introduce ancora REST API, database, Spring, JPA, security, planning o tracking. Serve a rendere stabile il primo nucleo applicativo prima di estendere i casi d'uso ad altri domini.
 
 
+## Nota su `docs/22-application-use-case-expansion.md`
+
+Il documento `22-application-use-case-expansion.md` descrive il Punto 6G.
+
+La descrizione corretta del blocco Documents è: registrazione, ricerca, attivazione e archiviazione di documenti logici aziendali. Non introduce update documentale completo, attach di file fisici, generazione PDF, upload, storage, firma digitale, versioning o workflow documentale.
+
+## Nota su `docs/23-application-use-case-expansion-review.md`
+
+Il documento `23-application-use-case-expansion-review.md` descrive il Punto 6H.
+
+Questo step è una review tecnica e documentale dopo Documents: controlla contratti `UseCase`, service, result null-safe, repository in memory e copy-on-write documentale. Non aggiunge nuovi domini e non introduce REST API o database.
+
+## Nota su `docs/24-application-use-cases-expansion-vehicles.md`
+
+Il documento `24-application-use-cases-expansion-vehicles.md` descrive il Punto 6I.
+
+Questo step aggiunge i primi use case Vehicles per registro logico di unità e combinazioni veicolo. Non introduce planning, dispatching, tracking, manutenzione, disponibilità mezzi o assegnazioni operative.
+
+## Nota su `docs/25-application-use-cases-expansion-operational-roles.md`
+
+Il documento `25-application-use-cases-expansion-operational-roles.md` descrive il Punto 6J.
+
+Questo step aggiunge i primi use case Operational Roles per Driver, Mechanic, WarehouseOperator, Dispatcher e Manager. Non introduce turni, availability, payroll o assegnazioni reali.
+
 ## Nota su `docs/26-application-operational-use-case-hardening.md`
 
 Il documento `26-application-operational-use-case-hardening.md` descrive il Punto 6K.
@@ -275,3 +309,10 @@ Il documento `27-application-compliance-base-use-cases.md` descrive il Punto 6L.
 Questo step aggiunge i primi use case applicativi Compliance base per `ComplianceRequirement`: registrazione, ricerca, attivazione, sospensione, archiviazione e dismissione.
 
 La fase non introduce controlli legali reali, violazioni concrete, audit trail, workflow, REST API, database, JPA o Spring Data.
+
+
+## Nota su `docs/29-final-roadmap-documentation-alignment.md`
+
+Il documento `29-final-roadmap-documentation-alignment.md` chiude la pulizia documentale dopo il Punto 6M.
+
+Serve a rendere esplicita la roadmap reale dal Punto 1 al Punto 6M, correggere la descrizione del Punto 6G Documents, chiarire il ruolo preparatorio delle dipendenze Spring nel `pom.xml` e formalizzare il concetto di Guided Links nella documentazione digitale.

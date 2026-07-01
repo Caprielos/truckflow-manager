@@ -160,17 +160,17 @@ I documenti operativi di riferimento sono [`13-domain-rules.md`](13-domain-rules
 
 Dopo la stabilizzazione della TruckFlow Domain Foundation, il progetto è entrato nel Punto 6: application layer.
 
-Il Punto 6A ha definito il blueprint dell'application layer. Il Punto 6B ha introdotto la foundation applicativa con package, contratti base ed eccezioni applicative. Il Punto 6C introduce ora le prime repository port specifiche: `LocationRepository`, `CargoUnitRepository` e `ShipmentRepository`.
+Il Punto 6A ha definito il blueprint dell'application layer. Il Punto 6B ha introdotto la foundation applicativa con package, contratti base ed eccezioni applicative. Il Punto 6C ha introdotto le prime repository port specifiche: `LocationRepository`, `CargoUnitRepository` e `ShipmentRepository`.
 
 Questo passaggio non introduce ancora REST API, database o framework. Serve a definire come il sistema dovrà eseguire azioni applicative usando il dominio: registrare location, registrare cargo, creare shipment, aggiungere item e tratte, confermare shipment e recuperare informazioni tramite repository astratti.
 
-Il primo blocco consigliato rimane Locations + Cargo + Shipments, perché rappresenta un flusso logistico reale senza anticipare moduli futuri come planning, dispatching, tracking o availability.
+Il primo blocco applicato è stato Locations + Cargo + Shipments, perché rappresenta un flusso logistico reale senza anticipare moduli futuri come planning, dispatching, tracking o availability.
 
 ## Stato applicativo aggiornato
 
-Dopo la stabilizzazione del domain layer, TruckFlow Manager ha iniziato il Punto 6 dedicato all'application layer.
+Dopo la stabilizzazione del domain layer, TruckFlow Manager ha avviato il Punto 6 dedicato all'application layer.
 
-Lo stato attuale include:
+Lo stato di quella prima fase includeva:
 
 - blueprint dell'application layer;
 - foundation con command, result, use case base ed eccezioni applicative;
@@ -190,3 +190,21 @@ I nuovi use case permettono di registrare location, registrare cargo, creare una
 Dopo l'introduzione dei primi use case applicativi, il progetto ha aggiunto una fase di hardening dedicata. Il Punto 6F rafforza il blocco Locations + Cargo + Shipments aggiungendo `CancelShipmentUseCase` e testando casi negativi, risorse mancanti, duplicati, command nulli e mutazioni fallite.
 
 Questo conferma la direzione architetturale del progetto: prima si stabilizza il comportamento applicativo puro, poi si passa a REST API, database, security e moduli enterprise avanzati.
+
+## Aggiornamento finale — Application Layer chiuso al Punto 6M
+
+Dopo il Punto 6F, il progetto ha completato l'intero primo ciclo dell'application layer fino al Punto 6M.
+
+La sequenza reale completata è:
+
+- 6G — primi use case applicativi Documents: register, find, activate e archive;
+- 6H — review e allineamento dopo Documents;
+- 6I — primi use case applicativi Vehicles;
+- 6J — primi use case applicativi Operational Roles;
+- 6K — hardening dei use case Operational Roles;
+- 6L — primi use case Compliance base;
+- 6M — review/freeze finale dell'application layer.
+
+Lo stato attuale del progetto non è più un application layer appena avviato: è una base applicativa stabile, documentata e testata per Locations, Cargo, Shipments, Documents, Vehicles, Operational Roles e Compliance base.
+
+Il progetto continua però a non introdurre ancora REST API, controller, database, JPA, Spring Data, security, tracking, planning, dashboard, workflow, audit trail o integrazioni esterne.

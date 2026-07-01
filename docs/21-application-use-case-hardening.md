@@ -213,21 +213,13 @@ Dopo questo step, TruckFlow Manager ha un primo application layer più robusto.
 
 Il progetto non è ancora una piattaforma enterprise completa e non espone ancora API esterne, ma ora possiede una base applicativa più affidabile per continuare verso i prossimi use case.
 
-## Prossimo step consigliato
+## Evoluzione successiva storica
 
-Il prossimo step consigliato è:
+Storicamente, dopo il Punto 6F, il progetto è passato al **Punto 6G — Application Use Cases Expansion**.
 
-**Punto 6G — Application Use Cases Expansion**.
+La scelta reale è stata l'espansione controllata verso Documents. Successivamente sono stati completati anche Vehicles, Operational Roles, hardening Operational Roles, Compliance base e il freeze finale del Punto 6M.
 
-In quella fase si potrà decidere se estendere i casi d'uso a:
-
-- Documents;
-- Compliance;
-- Vehicles;
-- Operational Roles;
-- altre azioni su Shipments.
-
-Prima di passare a REST API, database o Spring, conviene completare un set minimo ma coerente di use case applicativi.
+Prima di passare a REST API, database o Spring operativo, il progetto ha quindi completato un set minimo ma coerente di use case applicativi.
 
 ## Aggiornamento successivo — Punto 6G completato
 
@@ -241,7 +233,7 @@ La nuova documentazione di riferimento è:
 docs/22-application-use-case-expansion.md
 ```
 
-Il prossimo step consigliato non è ancora REST API o database, ma una review del nuovo blocco applicativo Documents nel Punto 6H.
+Storicamente, dopo il Punto 6G, il passo successivo è stato la review del blocco Documents nel Punto 6H. Oggi quella review è già stata completata e il Punto 6 è chiuso al 6M.
 
 ## Aggiornamento dopo il Punto 6H
 

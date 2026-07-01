@@ -595,9 +595,9 @@ La logica di selezione futura, come "Europa -> lista nazioni -> Italia come defa
 
 La fondazione del dominio puro viene formalizzata come **TruckFlow Domain Foundation v1.0**.
 
-Questa decisione non indica che tutta la piattaforma sia enterprise ready. Indica che il domain layer puro ha una base stabile, documentata e pronta per una review concreta dominio per dominio.
+Questa decisione non indica che tutta la piattaforma sia enterprise ready. Indica che il domain layer puro ha una base stabile, documentata e pronta a sostenere i layer successivi.
 
-La Domain Review Finale è quindi considerata avviata e la roadmap è approvata, ma non ancora completata.
+Dopo le review successive, la Domain Review Finale della TruckFlow Domain Foundation v1.0 è considerata completata per il perimetro attuale del dominio puro. Le future review riguarderanno nuovi punti roadmap, non la riapertura automatica della fondazione già consolidata.
 
 ## 6.35 Decisione: introdurre eccezioni custom gradualmente
 

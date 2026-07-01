@@ -18,11 +18,15 @@ Il comportamento è controllato da due flag CSS globali:
 
 Il markup HTML resta identico in entrambi i casi. Cambia solo il CSS applicato dal flag globale.
 
+La documentazione digitale funziona anche come sistema di **Guided Links**: un indice laterale guida la lettura tra i documenti principali, mantenendo i file Markdown come fonte ufficiale e offrendo una consultazione più rapida tramite pannelli HTML navigabili.
+
 ## Stato attuale del dominio
 
 Il progetto ha consolidato il **domain layer puro** e ha completato i primi step dell’application layer fino al **Punto 6M — Application Layer Final Review & Freeze**.
 
 La versione attuale rappresenta la **TruckFlow Domain Foundation v1.0** rafforzata dalla prima review correttiva del dominio puro. La fondazione è definita, le regole sono documentate e sono stati applicati interventi mirati su invarianti, eccezioni, codici aziendali, test e pulizia del repository. Il passo attuale completato è il Punto 6M, cioè la review/freeze finale del primo ciclo dell'application layer. Ora l'application layer copre Locations, Cargo, Shipments, Documents, Vehicles, Operational Roles e Compliance base con command, result, port in, port out, service, repository in memory, test e documentazione allineati, senza introdurre ancora REST API, database, JPA, Spring Data, planning, tracking, audit trail, workflow, country engine operativo o controlli concreti di violazione.
+
+Nota importante: eventuali dipendenze Spring Boot, Web, Validation o OpenAPI già presenti nel `pom.xml` sono da considerare preparatorie o storiche. Non rappresentano ancora l'introduzione architetturale di REST API, controller, database, JPA, Spring Data o security nel Punto 6.
 
 I package principali sono:
 
@@ -70,6 +74,7 @@ Il dominio è stato costruito seguendo una regola precisa: modellare prima i con
 - [`docs/26-application-operational-use-case-hardening.md`](docs/26-application-operational-use-case-hardening.md) — hardening del Punto 6K: review Operational Roles, copertura completa dei service di stato, copy-on-write sulle attivazioni fallite e documentazione allineata.
 - [`docs/27-application-compliance-base-use-cases.md`](docs/27-application-compliance-base-use-cases.md) — espansione del Punto 6L: primi use case Compliance base, `ComplianceRequirementRepository`, `InMemoryComplianceRequirementRepository` e flusso register/find/status.
 - [`docs/28-application-layer-final-review-freeze.md`](docs/28-application-layer-final-review-freeze.md) — chiusura del Punto 6M: review finale, freeze dell’application layer, controlli architetturali e documentazione di cosa resta fuori.
+- [`docs/29-final-roadmap-documentation-alignment.md`](docs/29-final-roadmap-documentation-alignment.md) — pulizia documentale finale: roadmap reale 1 → 6M, correzione del 6G Documents, chiarimento sulle dipendenze Spring preparatorie e definizione del concetto di Guided Links.
 
 ## Regole fondamentali della Domain Foundation
 
@@ -131,7 +136,15 @@ Con il Punto 6H è stata eseguita una review tecnica e documentale dell'espansio
 
 Con il Punto 6I è stata eseguita la seconda espansione controllata dell'application layer verso `vehicles`: sono stati aggiunti command, result, port in, port out, service applicativi, repository in memory e test per registrare, trovare e cambiare stato alle unità veicolo, oltre a registrare e trovare combinazioni veicolo costruite da unità già esistenti.
 
+Con il Punto 6J è stata eseguita la terza espansione controllata dell'application layer verso `operational`: sono stati aggiunti command, result, port in, port out, service applicativi, repository in memory e test per registrare, trovare e cambiare stato a Driver, Mechanic, WarehouseOperator, Dispatcher e Manager.
 
+Con il Punto 6K è stata eseguita la review/hardening dei use case Operational Roles: sono stati rafforzati i test sui service di stato, sui command nulli, sulle dependency nulle e sul copy-on-write in caso di attivazioni fallite.
+
+Con il Punto 6L è stata eseguita l'espansione controllata verso Compliance base: sono stati aggiunti command, result, port in, port out, service applicativi, repository in memory e test per registrare, trovare, attivare, sospendere, archiviare e dismettere requisiti astratti di compliance.
+
+Con il Punto 6M è stata eseguita la review/freeze finale del primo ciclo application layer: `ApplicationLayerFinalFreezeTest` verifica completezza dei package, allineamento tra port in e service, presenza della documentazione applicativa e assenza di layer prematuri come web, security, JPA, persistence o database.
+
+Con la pulizia documentale finale è stato aggiunto il documento [`docs/29-final-roadmap-documentation-alignment.md`](docs/29-final-roadmap-documentation-alignment.md), che rende esplicita la roadmap reale dal Punto 1 al Punto 6M, corregge la descrizione del Punto 6G Documents e chiarisce il ruolo preparatorio delle dipendenze Spring presenti nel `pom.xml`.
 
 ## Punto 6A — Application Layer Blueprint
 
@@ -291,6 +304,28 @@ Il Punto 6M conferma che l'application layer base è ora stabile per Locations, 
 
 Il Punto 6M è documentato in [`docs/28-application-layer-final-review-freeze.md`](docs/28-application-layer-final-review-freeze.md).
 
+## Roadmap finale allineata dopo il Punto 6M
+
+La roadmap ufficiale completata è ora:
+
+1. Domain Review Finale;
+2. Review concreta dominio per dominio;
+3. Eccezioni custom;
+4. Aggiornamento delle regole e della documentazione del dominio;
+5. Pulizia finale del dominio puro;
+6. Application Layer completo da 6A a 6M.
+
+Il Punto 6 è considerato chiuso. I sotto-step reali finali sono:
+
+- 6I — Vehicles use cases;
+- 6J — Operational Roles use cases;
+- 6K — Operational Roles review & hardening;
+- 6L — Compliance base use cases;
+- 6M — Application Layer final review & freeze.
+
+La descrizione corretta del Punto 6G Documents è: register, find, activate e archive. Non sono stati introdotti update documentale completo, attach di file fisici, generate/PDF, upload, storage, firma digitale, versioning o workflow documentali.
+
+La roadmap finale e le note di allineamento sono documentate in [`docs/29-final-roadmap-documentation-alignment.md`](docs/29-final-roadmap-documentation-alignment.md).
 
 ## Prossimi step consigliati
 

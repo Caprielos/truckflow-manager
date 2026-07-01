@@ -256,7 +256,7 @@ Dopo il Punto 6L, l'application layer copre i primi blocchi fondamentali:
 - Operational Roles;
 - Compliance base requirements.
 
-Il prossimo step consigliato è il **Punto 6M — Application Layer Final Review & Freeze**, cioè la chiusura finale del Punto 6 con revisione complessiva, documentazione finale e verifica dei confini architetturali.
+Storicamente, dopo Compliance base, il passo successivo è stato il **Punto 6M — Application Layer Final Review & Freeze**, che oggi è già completato.
 
 ## Allineamento Punto 6M
 

@@ -481,7 +481,7 @@
       <div>
         <div class="eyebrow">Documentazione professionale • Domain Foundation • Application Freeze</div>
         <h1>TruckFlow Manager — Documentazione Enterprise</h1>
-        <p>Una panoramica completa, tecnica e commerciale, del progetto TruckFlow Manager: cosa fa oggi, perché è progettato in questo modo, quali domini contiene, come sta nascendo l’application layer e quali moduli dovranno essere aggiunti per evolvere in una piattaforma enterprise completa per trasporto, logistica e gestione flotta.</p>
+        <p>Una panoramica completa, tecnica e commerciale, del progetto TruckFlow Manager: cosa fa oggi, perché è progettato in questo modo, quali domini contiene, come è stato consolidato l’application layer e quali moduli dovranno essere aggiunti per evolvere in una piattaforma enterprise completa per trasporto, logistica e gestione flotta.</p>
         <div class="hero-actions">
           <a class="button primary" href="#overview">Inizia dalla visione</a>
           <a class="button" href="#roadmap">Vai alla roadmap</a>
@@ -495,7 +495,7 @@
           <li><span>Value Object principali</span><span class="badge done">Rafforzati</span></li>
           <li><span>Eccezioni custom</span><span class="badge done">Applicate</span></li>
           <li><span>Revisione test dominio</span><span class="badge done">Completata</span></li>
-          <li><span>Application layer</span><span class="badge now">Punto 6M freeze finale</span></li>
+          <li><span>Application layer</span><span class="badge done">Punto 6M completato</span></li>
         </ul>
       </aside>
     </div>
@@ -538,6 +538,9 @@
         <div class="callout">
           <p><strong>Scelta strategica:</strong> il progetto parte dal dominio puro, non da database, API o interfacce. Questo permette di definire prima le regole del business e solo dopo collegare infrastruttura, application layer, web API e integrazioni esterne.</p>
         </div>
+        <div class="callout">
+          <p><strong>Guided Links:</strong> la documentazione digitale è una lettura guidata della documentazione Markdown ufficiale. L'indice laterale e i pannelli HTML aiutano a seguire il percorso dal dominio puro al freeze dell'application layer, senza sostituire i file Markdown nella cartella <code>docs</code>.</p>
+        </div>
         <h3>Perché è progettato in questo modo</h3>
         <p>TruckFlow Manager segue una filosofia ispirata a Domain-Driven Design e Clean Architecture. Il dominio contiene le regole essenziali del business. L’application layer, che verrà introdotto dopo, orchestrerà i casi d’uso. L’infrastructure layer gestirà salvataggio, database, servizi esterni e dettagli tecnici. Questa separazione riduce l’accoppiamento e rende il sistema più facile da testare, mantenere ed estendere.</p>
         <h3>Vantaggi rispetto a soluzioni improvvisate</h3>
@@ -552,7 +555,7 @@
 
       <section id="stato-attuale">
         <h2>2. Cosa fa oggi il progetto</h2>
-        <p class="lead">La versione attuale rappresenta la TruckFlow Domain Foundation: una fondazione di dominio puro che descrive i principali concetti aziendali senza introdurre ancora API REST, database, workflow operativi, tracking, dispatching o moduli esterni.</p>
+        <p class="lead">La versione attuale rappresenta la TruckFlow Domain Foundation più il primo application layer chiuso al Punto 6M: una fondazione di dominio puro e una base applicativa a casi d’uso per Locations, Cargo, Shipments, Documents, Vehicles, Operational Roles e Compliance base, senza introdurre ancora API REST, controller, database, JPA, workflow operativi, tracking, dispatching o moduli esterni.</p>
         <div class="grid three">
           <div class="card">
             <h3>Dominio puro</h3>
@@ -739,7 +742,10 @@
 
       <section id="roadmap" class="soft">
         <h2>7. Roadmap ufficiale del progetto</h2>
-        <p class="lead">La roadmap reale riflette il lavoro svolto finora: prima il dominio, poi la sua stabilizzazione, poi i test, poi la foundation dell’application layer, le repository, i primi use case applicativi, il loro hardening, l'espansione verso Documents, la review e ora l'espansione controllata verso Vehicles.</p>
+        <p class="lead">La roadmap reale riflette il lavoro svolto finora: prima il dominio, poi la sua stabilizzazione, poi i test, poi il primo ciclo completo dell’application layer da 6A a 6M. Il Punto 6 è ora chiuso: Documents, Vehicles, Operational Roles e Compliance base sono stati integrati nell’application layer senza introdurre REST API, database, JPA o security.</p>
+        <div class="callout">
+          <p><strong>Allineamento finale:</strong> la descrizione corretta del Punto 6G Documents è register/find/activate/archive. Non sono stati introdotti update documentali completi, attach di file fisici, generazione PDF, upload, storage, firma digitale, versioning o workflow documentali. Le dipendenze Spring eventualmente presenti nel <code>pom.xml</code> sono preparatorie o storiche: il codice domain/application non usa ancora controller, JPA, Spring Data o security.</p>
+        </div>
         <div class="timeline">
           <div class="timeline-item">
             <div><span class="badge done">Completato</span><div class="milestone">Punto 1</div></div>
@@ -812,6 +818,10 @@
           <div class="timeline-item">
             <div><span class="badge done">Completato</span><div class="milestone">Punto 6M</div></div>
             <div><h3>Application Layer Final Review &amp; Freeze</h3><p>Review finale del primo ciclo application layer: package completi, port in allineate ai service, documentazione 6A-6M presente e controllo contro layer prematuri come web, security, JPA o database.</p></div>
+          </div>
+          <div class="timeline-item">
+            <div><span class="badge done">Documentazione</span><div class="milestone">Allineamento finale</div></div>
+            <div><h3>Roadmap finale 1 → 6M</h3><p>Pulizia documentale: roadmap reale completata, correzione del Punto 6G Documents, nota sulle dipendenze Spring preparatorie e formalizzazione dei Guided Links nella documentazione digitale.</p></div>
           </div>
         </div>
         <h3>Obiettivi a breve termine</h3>
@@ -955,6 +965,7 @@
               <tr><td>Application Operational Use Case Review &amp; Hardening</td><td><span class="badge done">Completata</span></td><td>Rafforza Operational Roles con test di stato per tutti i ruoli, command nulli, dependency nulle e copy-on-write sulle attivazioni fallite.</td></tr>
               <tr><td>Application Compliance Base Use Cases</td><td><span class="badge done">Completata</span></td><td>Aggiunge i primi use case Compliance base per ComplianceRequirement: register, find, activate, suspend, archive e discontinue.</td></tr>
               <tr><td>Application Layer Final Review &amp; Freeze</td><td><span class="badge done">Completata</span></td><td>Chiude il Punto 6 con ApplicationLayerFinalFreezeTest, documentazione 6A-6M allineata e controllo contro layer prematuri.</td></tr>
+              <tr><td>Roadmap finale e allineamento documentale</td><td><span class="badge done">Completata</span></td><td>Chiarisce che il Punto 6 è chiuso al 6M, corregge il 6G Documents, spiega le dipendenze Spring preparatorie e formalizza i Guided Links.</td></tr>
               <tr><td>Database e repository reali</td><td><span class="badge planned">Futuro</span></td><td>Non vanno introdotti prima della stabilizzazione dei repository in memory e dei use case applicativi.</td></tr>
               <tr><td>API REST</td><td><span class="badge planned">Futuro</span></td><td>Le API devono esporre casi d’uso stabili, non accedere direttamente al dominio in modo improvvisato.</td></tr>
               <tr><td>Planning & Dispatching</td><td><span class="badge planned">Futuro</span></td><td>È il modulo che assegnerà risorse reali e verificherà compatibilità operative.</td></tr>
@@ -971,7 +982,7 @@
       <section id="conclusione" class="soft">
         <h2>12. Conclusione</h2>
         <p class="lead">TruckFlow Manager è oggi una fondazione di dominio solida per una futura piattaforma enterprise di trasporto e logistica.</p>
-        <p>Il progetto descrive i principali concetti aziendali con confini chiari, value object espressivi, invarianti protetti, eccezioni custom e documentazione strutturata. La fase attuale ha rafforzato i primi use case applicativi, li ha espansi verso Documents, Vehicles, Operational Roles e Compliance base, ha aggiunto hardening dedicato agli Operational Roles e ha chiuso il Punto 6 con un freeze finale senza introdurre ancora API REST, database o framework. L’obiettivo è costruire progressivamente nuovi layer sopra una base application stabile.</p>
+        <p>Il progetto descrive i principali concetti aziendali con confini chiari, value object espressivi, invarianti protetti, eccezioni custom e documentazione strutturata. La fase attuale ha rafforzato i primi use case applicativi, li ha espansi verso Documents, Vehicles, Operational Roles e Compliance base, ha aggiunto hardening dedicato agli Operational Roles e ha chiuso il Punto 6 con un freeze finale senza introdurre ancora API REST, controller, database, JPA, security o uso architetturale di Spring nel codice applicativo. L’obiettivo è costruire progressivamente nuovi layer sopra una base application stabile.</p>
         <p>La direzione futura è costruire gradualmente una piattaforma completa: prima blueprint e foundation applicativa, poi repository port, repository in memory e primi use case applicativi, quindi infrastructure, API, workflow, planning, dispatching, document management avanzato, tracking, analytics e integrazioni enterprise.</p>
         <div class="pill-list">
           <span class="pill">Domain-first</span>

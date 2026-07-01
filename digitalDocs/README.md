@@ -8,6 +8,8 @@ The page is a faithful digital mirror of the Markdown documentation files.
 
 The left sidebar contains the documentation index. Selecting an item shows the corresponding document on the right.
 
+This guided navigation is the project documentation's **Guided Links** layer: it does not replace the Markdown files, but helps readers move through the official project history from the domain foundation to the final application-layer freeze.
+
 ## Tooltip modes
 
 The tooltip behavior is controlled only by the class on the `<body>` tag in `index.html`.
@@ -60,6 +62,7 @@ This digital documentation mirrors:
 - `docs/26-application-operational-use-case-hardening.md`
 - `docs/27-application-compliance-base-use-cases.md`
 - `docs/28-application-layer-final-review-freeze.md`
+- `docs/29-final-roadmap-documentation-alignment.md`
 - `command_basic.md`
 
 
@@ -174,3 +177,16 @@ Questo aggiornamento documenta la chiusura del primo ciclo dell'application laye
 La fase resta una review/freeze: non introduce nuovi use case business, REST API, controller Spring, database, JPA, Spring Data, security, planning, tracking, audit trail, workflow o dashboard.
 
 Documento di riferimento: `docs/28-application-layer-final-review-freeze.md`.
+
+
+## Final roadmap alignment
+
+The digital documentation now includes `docs/29-final-roadmap-documentation-alignment.md`.
+
+This document clarifies the official final state after Punto 6M:
+
+- Punto 6 is closed from 6A to 6M;
+- Punto 6G Documents means register/find/activate/archive only;
+- file attach, PDF generation, upload, storage, document versioning and workflows are still future work;
+- Spring dependencies already present in `pom.xml` are preparatory/historical and do not mean REST API, controllers, JPA or security have been introduced;
+- the next work should start a new roadmap point, most likely Punto 7.

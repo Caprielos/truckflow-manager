@@ -274,7 +274,7 @@ Questa scelta permette di testare l'orchestrazione senza introdurre ancora veico
 
 Il Punto 6E introduce i primi use case.
 
-Il prossimo step consigliato è il **Punto 6F — Application Use Case Review & Hardening**.
+Storicamente, dopo il Punto 6E, il passo successivo è stato il **Punto 6F — Application Use Case Review & Hardening**. Oggi quel percorso è già stato completato fino al Punto 6M.
 
 Il Punto 6F dovrebbe:
 

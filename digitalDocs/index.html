@@ -38,6 +38,7 @@
 <input class="doc-toggle" type="radio" name="active-doc" id="doc-28">
 <input class="doc-toggle" type="radio" name="active-doc" id="doc-29">
 <input class="doc-toggle" type="radio" name="active-doc" id="doc-30">
+<input class="doc-toggle" type="radio" name="active-doc" id="doc-31">
 <div class="app-shell">
   <aside class="sidebar">
     <div class="brand"><div class="brand-mark">TF</div><div><h1>TruckFlow Docs</h1><p>Digital mirror of the official Markdown documentation.</p></div></div>
@@ -74,10 +75,11 @@
 <label class="nav-item" for="doc-28"><span class="nav-number">29</span><span class="nav-label">Compliance Base</span><span class="nav-file">27-application-compliance-base-use-cases.md</span></label>
 <label class="nav-item" for="doc-29"><span class="nav-number">30</span><span class="nav-label">Application Freeze</span><span class="nav-file">28-application-layer-final-review-freeze.md</span></label>
 <label class="nav-item" for="doc-30"><span class="nav-number">31</span><span class="nav-label">Command Basic</span><span class="nav-file">command_basic.md</span></label>
+<label class="nav-item" for="doc-31"><span class="nav-number">32</span><span class="nav-label">Final Roadmap Alignment</span><span class="nav-file">29-final-roadmap-documentation-alignment.md</span></label>
     </nav>
   </aside>
   <main class="content">
-    <div class="content-toolbar"><div><p class="eyebrow">TruckFlow Manager</p><h2>Official Project Documentation</h2></div><div class="toolbar-badges"><span>HTML + CSS</span><span>Markdown mirror</span><span>Application Layer Freeze</span><span>Punto 6M</span></div></div>
+    <div class="content-toolbar"><div><p class="eyebrow">TruckFlow Manager</p><h2>Official Project Documentation</h2></div><div class="toolbar-badges"><span>HTML + CSS</span><span>Markdown mirror</span><span>Application Layer Freeze</span><span>Punto 6M</span><span>Roadmap 1→6M</span></div></div>
 <article class="doc-panel panel-0" id="TRUCKFLOW_PROJECT_DOCUMENTATION-md">
   <header class="doc-panel-header">
     <p class="eyebrow">TRUCKFLOW_PROJECT_DOCUMENTATION.md</p>
@@ -112,6 +114,11 @@ direttamente nella pagina.</li>
 </ul>
 <p>Il markup HTML resta identico in entrambi i casi. Cambia solo il CSS
 applicato dal flag globale.</p>
+<p>La documentazione digitale funziona anche come sistema di
+<strong>Guided Links</strong>: un indice laterale guida la lettura tra i
+documenti principali, mantenendo i file Markdown come fonte ufficiale e
+offrendo una consultazione più rapida tramite pannelli HTML
+navigabili.</p>
 <h2 id="stato-attuale-del-dominio">Stato attuale del dominio</h2>
 <p>Il progetto ha consolidato il <strong>domain layer puro</strong> e ha
 completato i primi step dell’application layer fino al <strong>Punto 6M
@@ -128,6 +135,11 @@ command, result, port in, port out, service, repository in memory, test
 e documentazione allineati, senza introdurre ancora REST API, database,
 JPA, Spring Data, planning, tracking, audit trail, workflow, country
 engine operativo o controlli concreti di violazione.</p>
+<p>Nota importante: eventuali dipendenze Spring Boot, Web, Validation o
+OpenAPI già presenti nel <code>pom.xml</code> sono da considerare
+preparatorie o storiche. Non rappresentano ancora l’introduzione
+architetturale di REST API, controller, database, JPA, Spring Data o
+security nel Punto 6.</p>
 <p>I package principali sono:</p>
 <ul>
 <li><code>domain.users</code>;</li>
@@ -258,6 +270,11 @@ register/find/status.</li>
 href="docs/28-application-layer-final-review-freeze.md"><code>docs/28-application-layer-final-review-freeze.md</code></a>
 — chiusura del Punto 6M: review finale, freeze dell’application layer,
 controlli architetturali e documentazione di cosa resta fuori.</li>
+<li><a
+href="docs/29-final-roadmap-documentation-alignment.md"><code>docs/29-final-roadmap-documentation-alignment.md</code></a>
+— pulizia documentale finale: roadmap reale 1 → 6M, correzione del 6G
+Documents, chiarimento sulle dipendenze Spring preparatorie e
+definizione del concetto di Guided Links.</li>
 </ul>
 <h2 id="regole-fondamentali-della-domain-foundation">Regole fondamentali
 della Domain Foundation</h2>
@@ -375,6 +392,30 @@ command, result, port in, port out, service applicativi, repository in
 memory e test per registrare, trovare e cambiare stato alle unità
 veicolo, oltre a registrare e trovare combinazioni veicolo costruite da
 unità già esistenti.</p>
+<p>Con il Punto 6J è stata eseguita la terza espansione controllata
+dell’application layer verso <code>operational</code>: sono stati
+aggiunti command, result, port in, port out, service applicativi,
+repository in memory e test per registrare, trovare e cambiare stato a
+Driver, Mechanic, WarehouseOperator, Dispatcher e Manager.</p>
+<p>Con il Punto 6K è stata eseguita la review/hardening dei use case
+Operational Roles: sono stati rafforzati i test sui service di stato,
+sui command nulli, sulle dependency nulle e sul copy-on-write in caso di
+attivazioni fallite.</p>
+<p>Con il Punto 6L è stata eseguita l’espansione controllata verso
+Compliance base: sono stati aggiunti command, result, port in, port out,
+service applicativi, repository in memory e test per registrare,
+trovare, attivare, sospendere, archiviare e dismettere requisiti
+astratti di compliance.</p>
+<p>Con il Punto 6M è stata eseguita la review/freeze finale del primo
+ciclo application layer: <code>ApplicationLayerFinalFreezeTest</code>
+verifica completezza dei package, allineamento tra port in e service,
+presenza della documentazione applicativa e assenza di layer prematuri
+come web, security, JPA, persistence o database.</p>
+<p>Con la pulizia documentale finale è stato aggiunto il documento <a
+href="docs/29-final-roadmap-documentation-alignment.md"><code>docs/29-final-roadmap-documentation-alignment.md</code></a>,
+che rende esplicita la roadmap reale dal Punto 1 al Punto 6M, corregge
+la descrizione del Punto 6G Documents e chiarisce il ruolo preparatorio
+delle dipendenze Spring presenti nel <code>pom.xml</code>.</p>
 <h2 id="punto-6a-application-layer-blueprint">Punto 6A — Application
 Layer Blueprint</h2>
 <p>Il Punto 6A ha progettato il livello applicativo prima di scrivere
@@ -638,6 +679,31 @@ JPA, Spring Data, security, planning, tracking, workflow, audit trail e
 dashboard.</p>
 <p>Il Punto 6M è documentato in <a
 href="docs/28-application-layer-final-review-freeze.md"><code>docs/28-application-layer-final-review-freeze.md</code></a>.</p>
+<h2 id="roadmap-finale-allineata-dopo-il-punto-6m">Roadmap finale
+allineata dopo il Punto 6M</h2>
+<p>La roadmap ufficiale completata è ora:</p>
+<ol type="1">
+<li>Domain Review Finale;</li>
+<li>Review concreta dominio per dominio;</li>
+<li>Eccezioni custom;</li>
+<li>Aggiornamento delle regole e della documentazione del dominio;</li>
+<li>Pulizia finale del dominio puro;</li>
+<li>Application Layer completo da 6A a 6M.</li>
+</ol>
+<p>Il Punto 6 è considerato chiuso. I sotto-step reali finali sono:</p>
+<ul>
+<li>6I — Vehicles use cases;</li>
+<li>6J — Operational Roles use cases;</li>
+<li>6K — Operational Roles review &amp; hardening;</li>
+<li>6L — Compliance base use cases;</li>
+<li>6M — Application Layer final review &amp; freeze.</li>
+</ul>
+<p>La descrizione corretta del Punto 6G Documents è: register, find,
+activate e archive. Non sono stati introdotti update documentale
+completo, attach di file fisici, generate/PDF, upload, storage, firma
+digitale, versioning o workflow documentali.</p>
+<p>La roadmap finale e le note di allineamento sono documentate in <a
+href="docs/29-final-roadmap-documentation-alignment.md"><code>docs/29-final-roadmap-documentation-alignment.md</code></a>.</p>
 <h2 id="prossimi-step-consigliati">Prossimi step consigliati</h2>
 <p>La roadmap consigliata è:</p>
 <ol type="1">
@@ -699,14 +765,17 @@ definito il prossimo punto ufficiale.</li>
 <h1 id="truckflow-manager-documentazione-del-dominio">TruckFlow Manager
 — Documentazione del dominio</h1>
 <p>Questa cartella contiene la documentazione ufficiale di TruckFlow
-Manager, con la fondazione del dominio puro e i primi step
+Manager, con la fondazione del dominio puro e il primo ciclo completo
 dell’application layer: blueprint, foundation, repository port,
-repository in memory, primi use case applicativi, hardening dei use
-case, espansione controllata verso Documents, review/allineamento del
-Punto 6H, espansione controllata verso Vehicles nel Punto 6I, espansione
-controllata verso Operational Roles nel Punto 6J, hardening Operational
-Roles nel Punto 6K, primi use case Compliance base nel Punto 6L e
-review/freeze finale dell’application layer nel Punto 6M.</p>
+repository in memory, primi use case applicativi, hardening, espansione
+verso Documents, Vehicles, Operational Roles e Compliance base, review
+dedicate e freeze finale al Punto 6M.</p>
+<p>Il documento <code>29-final-roadmap-documentation-alignment.md</code>
+chiarisce lo stato reale dopo il Punto 6M: il Punto 6 è chiuso, la
+descrizione corretta del Punto 6G Documents è
+register/find/activate/archive e le dipendenze Spring presenti nel
+<code>pom.xml</code> sono preparatorie, non ancora usate come
+architettura REST o persistence.</p>
 <p>Il progetto ha completato la fondazione del <strong>domain
 layer</strong>. L’<strong>application layer</strong> ha consolidato i
 primi casi d’uso, ha completato la prima espansione controllata verso
@@ -872,6 +941,11 @@ register/find/status.</li>
 href="28-application-layer-final-review-freeze.md"><code>28-application-layer-final-review-freeze.md</code></a>
 — chiusura del Punto 6M: review finale, freeze dell’application layer,
 controlli architetturali e documentazione di cosa resta fuori.</li>
+<li><a
+href="29-final-roadmap-documentation-alignment.md"><code>29-final-roadmap-documentation-alignment.md</code></a>
+— allineamento documentale finale: roadmap reale 1 → 6M, correzione del
+6G Documents, nota sulle dipendenze Spring preparatorie e Guided
+Links.</li>
 </ol>
 <h2 id="stato-del-progetto-documentato">Stato del progetto
 documentato</h2>
@@ -915,6 +989,9 @@ scadenze o risultati di verifica;</li>
 port, repository in memory, test e documentazione allineati per
 Locations, Cargo, Shipments, Documents, Vehicles, Operational Roles e
 Compliance base;</li>
+<li>roadmap finale chiarita nel documento
+<code>29-final-roadmap-documentation-alignment.md</code>, che
+sostituisce le descrizioni intermedie ormai superate;</li>
 <li>regole ufficiali di dominio per guidare la TruckFlow Domain
 Foundation v1.0, la review finale del dominio puro e l’introduzione
 graduale delle eccezioni custom;</li>
@@ -1025,6 +1102,14 @@ dipendere da framework o infrastruttura.</p>
 </ul>
 <p>Tutte queste parti potranno essere aggiunte in futuro in layer o
 moduli separati, senza sporcare il dominio.</p>
+<h2 id="nota-sulle-dipendenze-spring-preparatorie">Nota sulle dipendenze
+Spring preparatorie</h2>
+<p>Il <code>pom.xml</code> può contenere dipendenze Spring Boot, Web,
+Validation o OpenAPI già aggiunte in precedenza.</p>
+<p>Questa presenza non cambia lo stato architetturale del progetto: fino
+al Punto 6M non sono stati introdotti controller REST, entity JPA,
+repository Spring Data, security configuration o persistence reale. Il
+dominio e l’application layer restano indipendenti da Spring.</p>
 <h2 id="nota-su-domain.locations-e-domain.triptemplates">Nota su
 <code>domain.locations</code> e <code>domain.triptemplates</code></h2>
 <p>Le location sono state modellate come dominio separato perché i
@@ -1126,8 +1211,11 @@ come riferimento per le prossime fasi.</p>
 <code>docs/13-domain-rules.md</code></h2>
 <p>Il documento <code>13-domain-rules.md</code> definisce la roadmap
 ufficiale della TruckFlow Domain Foundation v1.0.</p>
-<p>La Domain Review Finale è considerata avviata e la roadmap è
-approvata, ma non ancora completata dominio per dominio.</p>
+<p>La Domain Review Finale della TruckFlow Domain Foundation v1.0 è
+considerata completata per il perimetro attuale del dominio puro. Future
+review saranno necessarie solo quando verranno introdotti nuovi punti
+roadmap come infrastructure, API, planning, dispatching, workflow o
+moduli enterprise avanzati.</p>
 <p>Le regole principali sono:</p>
 <ul>
 <li>non unificare value object simili se hanno significato diverso;</li>
@@ -1183,8 +1271,10 @@ dell’application layer: <code>RepositoryPort</code>,
 <p>Le porte permettono ai futuri use case di salvare e recuperare
 aggregate tramite ID e codice, senza conoscere database, JPA, Spring,
 file system o infrastructure concreta.</p>
-<p>Il prossimo step sarà creare repository in memory ufficiali per
-testare i primi flussi applicativi senza database.</p>
+<p>Storicamente, dopo questo step il progetto ha creato repository in
+memory ufficiali per testare i primi flussi applicativi senza database.
+Oggi questo lavoro è già stato completato e consolidato fino al Punto
+6M.</p>
 <h2 id="nota-su-docs19-application-in-memory-repositories.md">Nota su
 <code>docs/19-application-in-memory-repositories.md</code></h2>
 <p>Il documento <code>19-application-in-memory-repositories.md</code>
@@ -1220,6 +1310,42 @@ fallite siano gestiti correttamente.</p>
 <p>Il Punto 6F non introduce ancora REST API, database, Spring, JPA,
 security, planning o tracking. Serve a rendere stabile il primo nucleo
 applicativo prima di estendere i casi d’uso ad altri domini.</p>
+<h2 id="nota-su-docs22-application-use-case-expansion.md">Nota su
+<code>docs/22-application-use-case-expansion.md</code></h2>
+<p>Il documento <code>22-application-use-case-expansion.md</code>
+descrive il Punto 6G.</p>
+<p>La descrizione corretta del blocco Documents è: registrazione,
+ricerca, attivazione e archiviazione di documenti logici aziendali. Non
+introduce update documentale completo, attach di file fisici,
+generazione PDF, upload, storage, firma digitale, versioning o workflow
+documentale.</p>
+<h2 id="nota-su-docs23-application-use-case-expansion-review.md">Nota su
+<code>docs/23-application-use-case-expansion-review.md</code></h2>
+<p>Il documento <code>23-application-use-case-expansion-review.md</code>
+descrive il Punto 6H.</p>
+<p>Questo step è una review tecnica e documentale dopo Documents:
+controlla contratti <code>UseCase</code>, service, result null-safe,
+repository in memory e copy-on-write documentale. Non aggiunge nuovi
+domini e non introduce REST API o database.</p>
+<h2 id="nota-su-docs24-application-use-cases-expansion-vehicles.md">Nota
+su <code>docs/24-application-use-cases-expansion-vehicles.md</code></h2>
+<p>Il documento
+<code>24-application-use-cases-expansion-vehicles.md</code> descrive il
+Punto 6I.</p>
+<p>Questo step aggiunge i primi use case Vehicles per registro logico di
+unità e combinazioni veicolo. Non introduce planning, dispatching,
+tracking, manutenzione, disponibilità mezzi o assegnazioni
+operative.</p>
+<h2
+id="nota-su-docs25-application-use-cases-expansion-operational-roles.md">Nota
+su
+<code>docs/25-application-use-cases-expansion-operational-roles.md</code></h2>
+<p>Il documento
+<code>25-application-use-cases-expansion-operational-roles.md</code>
+descrive il Punto 6J.</p>
+<p>Questo step aggiunge i primi use case Operational Roles per Driver,
+Mechanic, WarehouseOperator, Dispatcher e Manager. Non introduce turni,
+availability, payroll o assegnazioni reali.</p>
 <h2
 id="nota-su-docs26-application-operational-use-case-hardening.md">Nota
 su
@@ -1244,13 +1370,22 @@ descrive il Punto 6L.</p>
 sospensione, archiviazione e dismissione.</p>
 <p>La fase non introduce controlli legali reali, violazioni concrete,
 audit trail, workflow, REST API, database, JPA o Spring Data.</p>
+<h2 id="nota-su-docs29-final-roadmap-documentation-alignment.md">Nota su
+<code>docs/29-final-roadmap-documentation-alignment.md</code></h2>
+<p>Il documento <code>29-final-roadmap-documentation-alignment.md</code>
+chiude la pulizia documentale dopo il Punto 6M.</p>
+<p>Serve a rendere esplicita la roadmap reale dal Punto 1 al Punto 6M,
+correggere la descrizione del Punto 6G Documents, chiarire il ruolo
+preparatorio delle dipendenze Spring nel <code>pom.xml</code> e
+formalizzare il concetto di Guided Links nella documentazione
+digitale.</p>
 
   </div>
 </article>
-<article class="doc-panel panel-2" id="01-project-overview-md">
+<article class="doc-panel panel-2" id="docs-01-project-overview-md">
   <header class="doc-panel-header">
     <p class="eyebrow">docs/01-project-overview.md</p>
-    <h1>1. Visione generale del progetto TruckFlow Manager</h1>
+    <h1>1 – Project Overview</h1>
   </header>
   <div class="markdown-body">
 <h1 id="visione-generale-del-progetto-truckflow-manager">1. Visione
@@ -1464,7 +1599,7 @@ Application Layer</h2>
 progetto è entrato nel Punto 6: application layer.</p>
 <p>Il Punto 6A ha definito il blueprint dell’application layer. Il Punto
 6B ha introdotto la foundation applicativa con package, contratti base
-ed eccezioni applicative. Il Punto 6C introduce ora le prime repository
+ed eccezioni applicative. Il Punto 6C ha introdotto le prime repository
 port specifiche: <code>LocationRepository</code>,
 <code>CargoUnitRepository</code> e <code>ShipmentRepository</code>.</p>
 <p>Questo passaggio non introduce ancora REST API, database o framework.
@@ -1472,13 +1607,13 @@ Serve a definire come il sistema dovrà eseguire azioni applicative
 usando il dominio: registrare location, registrare cargo, creare
 shipment, aggiungere item e tratte, confermare shipment e recuperare
 informazioni tramite repository astratti.</p>
-<p>Il primo blocco consigliato rimane Locations + Cargo + Shipments,
+<p>Il primo blocco applicato è stato Locations + Cargo + Shipments,
 perché rappresenta un flusso logistico reale senza anticipare moduli
 futuri come planning, dispatching, tracking o availability.</p>
 <h2 id="stato-applicativo-aggiornato">Stato applicativo aggiornato</h2>
 <p>Dopo la stabilizzazione del domain layer, TruckFlow Manager ha
-iniziato il Punto 6 dedicato all’application layer.</p>
-<p>Lo stato attuale include:</p>
+avviato il Punto 6 dedicato all’application layer.</p>
+<p>Lo stato di quella prima fase includeva:</p>
 <ul>
 <li>blueprint dell’application layer;</li>
 <li>foundation con command, result, use case base ed eccezioni
@@ -1508,6 +1643,29 @@ mancanti, duplicati, command nulli e mutazioni fallite.</p>
 <p>Questo conferma la direzione architetturale del progetto: prima si
 stabilizza il comportamento applicativo puro, poi si passa a REST API,
 database, security e moduli enterprise avanzati.</p>
+<h2
+id="aggiornamento-finale-application-layer-chiuso-al-punto-6m">Aggiornamento
+finale — Application Layer chiuso al Punto 6M</h2>
+<p>Dopo il Punto 6F, il progetto ha completato l’intero primo ciclo
+dell’application layer fino al Punto 6M.</p>
+<p>La sequenza reale completata è:</p>
+<ul>
+<li>6G — primi use case applicativi Documents: register, find, activate
+e archive;</li>
+<li>6H — review e allineamento dopo Documents;</li>
+<li>6I — primi use case applicativi Vehicles;</li>
+<li>6J — primi use case applicativi Operational Roles;</li>
+<li>6K — hardening dei use case Operational Roles;</li>
+<li>6L — primi use case Compliance base;</li>
+<li>6M — review/freeze finale dell’application layer.</li>
+</ul>
+<p>Lo stato attuale del progetto non è più un application layer appena
+avviato: è una base applicativa stabile, documentata e testata per
+Locations, Cargo, Shipments, Documents, Vehicles, Operational Roles e
+Compliance base.</p>
+<p>Il progetto continua però a non introdurre ancora REST API,
+controller, database, JPA, Spring Data, security, tracking, planning,
+dashboard, workflow, audit trail o integrazioni esterne.</p>
 
   </div>
 </article>
@@ -3327,10 +3485,10 @@ troppo grande e difficile da mantenere.</p>
 
   </div>
 </article>
-<article class="doc-panel panel-7" id="06-architecture-decisions-md">
+<article class="doc-panel panel-7" id="docs-06-architecture-decisions-md">
   <header class="doc-panel-header">
     <p class="eyebrow">docs/06-architecture-decisions.md</p>
-    <h1>6. Decisioni architetturali del dominio</h1>
+    <h1>6 – Architecture Decisions</h1>
   </header>
   <div class="markdown-body">
 <h1 id="decisioni-architetturali-del-dominio">6. Decisioni
@@ -3929,9 +4087,11 @@ Decisione: formalizzare TruckFlow Domain Foundation v1.0</h2>
 <strong>TruckFlow Domain Foundation v1.0</strong>.</p>
 <p>Questa decisione non indica che tutta la piattaforma sia enterprise
 ready. Indica che il domain layer puro ha una base stabile, documentata
-e pronta per una review concreta dominio per dominio.</p>
-<p>La Domain Review Finale è quindi considerata avviata e la roadmap è
-approvata, ma non ancora completata.</p>
+e pronta a sostenere i layer successivi.</p>
+<p>Dopo le review successive, la Domain Review Finale della TruckFlow
+Domain Foundation v1.0 è considerata completata per il perimetro attuale
+del dominio puro. Le future review riguarderanno nuovi punti roadmap,
+non la riapertura automatica della fondazione già consolidata.</p>
 <h2 id="decisione-introdurre-eccezioni-custom-gradualmente">6.35
 Decisione: introdurre eccezioni custom gradualmente</h2>
 <p>Sono state definite eccezioni base condivise in
@@ -6894,7 +7054,7 @@ applicativi di planning, dispatching e compliance check.</p>
 
   </div>
 </article>
-<article class="doc-panel panel-14" id="13-domain-rules-md">
+<article class="doc-panel panel-14" id="docs-13-domain-rules-md">
   <header class="doc-panel-header">
     <p class="eyebrow">docs/13-domain-rules.md</p>
     <h1>13 – Domain Rules</h1>
@@ -6914,12 +7074,16 @@ stato, eccezioni custom, codici aziendali, test di catalogo e pulizia
 del repository.</p>
 <h2 id="stato-della-domain-review-finale">2. Stato della Domain Review
 Finale</h2>
-<p>La <strong>Domain Review Finale</strong> è stata avviata e la prima
-review correttiva del dominio puro è stata completata con otto
-interventi mirati.</p>
+<p>La <strong>Domain Review Finale</strong> della TruckFlow Domain
+Foundation v1.0 è considerata completata per il perimetro attuale del
+dominio puro.</p>
+<p>La prima review correttiva del dominio puro è stata completata con
+otto interventi mirati. Successivamente, l’application layer è stato
+completato e congelato fino al Punto 6M.</p>
 <p>Questa fase ha rafforzato il dominio, ma non sostituisce le future
-review che saranno necessarie quando verranno introdotti application
-layer, repository, API, workflow, audit, planning e dispatching.</p>
+review che saranno necessarie quando verranno introdotti nuovi punti
+roadmap come infrastructure, repository reali, API, workflow, audit,
+planning, dispatching o moduli enterprise avanzati.</p>
 <h2 id="confini-del-dominio">3. Confini del dominio</h2>
 <p>Ogni dominio deve contenere solo concetti propri.</p>
 <p>Un dominio non deve importare aggregate root completi di altri
@@ -7266,6 +7430,9 @@ href="14-domain-review-patches.md"><code>14-domain-review-patches.md</code></a>.
 La revisione finale della test suite del dominio puro è documentata in
 <a
 href="15-domain-test-suite-review.md"><code>15-domain-test-suite-review.md</code></a>.</p>
+<p>Lo stato finale della roadmap fino al Punto 6M e la pulizia
+documentale successiva sono riassunti in <a
+href="29-final-roadmap-documentation-alignment.md"><code>29-final-roadmap-documentation-alignment.md</code></a>.</p>
 <p>La roadmap successiva consigliata è:</p>
 <ol type="1">
 <li>mantenere verdi formattazione e test con
@@ -9957,7 +10124,7 @@ esterne.</p>
 
   </div>
 </article>
-<article class="doc-panel panel-21" id="20-application-first-use-cases-md">
+<article class="doc-panel panel-21" id="docs-20-application-first-use-cases-md">
   <header class="doc-panel-header">
     <p class="eyebrow">docs/20-application-first-use-cases.md</p>
     <h1>Punto 6E — First Use Cases</h1>
@@ -10233,8 +10400,9 @@ trasporto.</li>
 ancora veicoli, autisti, pianificazione, disponibilità o tracking.</p>
 <h2 id="relazione-con-il-punto-6f">Relazione con il Punto 6F</h2>
 <p>Il Punto 6E introduce i primi use case.</p>
-<p>Il prossimo step consigliato è il <strong>Punto 6F — Application Use
-Case Review &amp; Hardening</strong>.</p>
+<p>Storicamente, dopo il Punto 6E, il passo successivo è stato il
+<strong>Punto 6F — Application Use Case Review &amp; Hardening</strong>.
+Oggi quel percorso è già stato completato fino al Punto 6M.</p>
 <p>Il Punto 6F dovrebbe:</p>
 <ul>
 <li>rivedere i primi use case;</li>
@@ -10334,7 +10502,7 @@ esterne.</p>
 
   </div>
 </article>
-<article class="doc-panel panel-22" id="21-application-use-case-hardening-md">
+<article class="doc-panel panel-22" id="docs-21-application-use-case-hardening-md">
   <header class="doc-panel-header">
     <p class="eyebrow">docs/21-application-use-case-hardening.md</p>
     <h1>Punto 6F — Application Use Case Review &amp; Hardening</h1>
@@ -10596,19 +10764,17 @@ robusto.</p>
 <p>Il progetto non è ancora una piattaforma enterprise completa e non
 espone ancora API esterne, ma ora possiede una base applicativa più
 affidabile per continuare verso i prossimi use case.</p>
-<h2 id="prossimo-step-consigliato">Prossimo step consigliato</h2>
-<p>Il prossimo step consigliato è:</p>
-<p><strong>Punto 6G — Application Use Cases Expansion</strong>.</p>
-<p>In quella fase si potrà decidere se estendere i casi d’uso a:</p>
-<ul>
-<li>Documents;</li>
-<li>Compliance;</li>
-<li>Vehicles;</li>
-<li>Operational Roles;</li>
-<li>altre azioni su Shipments.</li>
-</ul>
-<p>Prima di passare a REST API, database o Spring, conviene completare
-un set minimo ma coerente di use case applicativi.</p>
+<h2 id="evoluzione-successiva-storica">Evoluzione successiva
+storica</h2>
+<p>Storicamente, dopo il Punto 6F, il progetto è passato al
+<strong>Punto 6G — Application Use Cases Expansion</strong>.</p>
+<p>La scelta reale è stata l’espansione controllata verso Documents.
+Successivamente sono stati completati anche Vehicles, Operational Roles,
+hardening Operational Roles, Compliance base e il freeze finale del
+Punto 6M.</p>
+<p>Prima di passare a REST API, database o Spring operativo, il progetto
+ha quindi completato un set minimo ma coerente di use case
+applicativi.</p>
 <h2 id="aggiornamento-successivo-punto-6g-completato">Aggiornamento
 successivo — Punto 6G completato</h2>
 <p>Dopo il Punto 6F è stato applicato il Punto 6G — Application Use
@@ -10620,8 +10786,9 @@ aggiunge invece un nuovo blocco applicativo separato per
 error handling, repository usage, test e documentazione.</p>
 <p>La nuova documentazione di riferimento è:</p>
 <pre class="text"><code>docs/22-application-use-case-expansion.md</code></pre>
-<p>Il prossimo step consigliato non è ancora REST API o database, ma una
-review del nuovo blocco applicativo Documents nel Punto 6H.</p>
+<p>Storicamente, dopo il Punto 6G, il passo successivo è stato la review
+del blocco Documents nel Punto 6H. Oggi quella review è già stata
+completata e il Punto 6 è chiuso al 6M.</p>
 <h2 id="aggiornamento-dopo-il-punto-6h">Aggiornamento dopo il Punto
 6H</h2>
 <p>Il Punto 6H estende l’idea di hardening applicativo anche dopo
@@ -10664,7 +10831,7 @@ esterne.</p>
 
   </div>
 </article>
-<article class="doc-panel panel-23" id="22-application-use-case-expansion-md">
+<article class="doc-panel panel-23" id="docs-22-application-use-case-expansion-md">
   <header class="doc-panel-header">
     <p class="eyebrow">docs/22-application-use-case-expansion.md</p>
     <h1>Punto 6G — Application Use Cases Expansion</h1>
@@ -10965,11 +11132,9 @@ in questo step.</p>
 <li>test copy-on-write su activate/archive documentali;</li>
 <li>documentazione Markdown e HTML.</li>
 </ul>
-<p>Il prossimo step consigliato non è più la review 6H, perché ora è
-completata. Il prossimo passo diventa il Punto 6I, cioè una nuova
-espansione applicativa controllata da scegliere tra Vehicles,
-Operational Roles, Compliance o ulteriori azioni logiche su
-Documents.</p>
+<p>Storicamente, dopo la review 6H, il progetto ha scelto il Punto 6I
+come espansione controllata verso Vehicles. Oggi anche 6I, 6J, 6K, 6L e
+6M sono completati.</p>
 <h2 id="aggiornamento-successivo-punto-6i-vehicles">Aggiornamento
 successivo — Punto 6I Vehicles</h2>
 <p>Dopo la prima espansione verso Documents del Punto 6G e la review del
@@ -11675,7 +11840,7 @@ esterne.</p>
 
   </div>
 </article>
-<article class="doc-panel panel-26" id="25-application-use-cases-expansion-operational-roles-md">
+<article class="doc-panel panel-26" id="docs-25-application-use-cases-expansion-operational-roles-md">
   <header class="doc-panel-header">
     <p class="eyebrow">docs/25-application-use-cases-expansion-operational-roles.md</p>
     <h1>Punto 6J — Application Use Cases Expansion III: Operational Roles</h1>
@@ -11956,10 +12121,10 @@ astratte.</p>
 <li>Operational Roles.</li>
 </ul>
 <p>Il progetto è ancora prima di REST API e database.</p>
-<p>Il prossimo step consigliato è una fase di review/hardening dopo
-Operational Roles oppure una piccola espansione controllata verso
-Compliance base, sempre senza introdurre controlli concreti di
-violazione o motori regolatori.</p>
+<p>Storicamente, dopo Operational Roles, il progetto ha scelto una fase
+di review/hardening dedicata nel Punto 6K. Successivamente sono stati
+completati anche Compliance base nel Punto 6L e il freeze finale nel
+Punto 6M.</p>
 <h2 id="aggiornamento-dopo-il-punto-6k">Aggiornamento dopo il Punto
 6K</h2>
 <p>Il Punto 6K rafforza il blocco introdotto in questo documento.</p>
@@ -11990,10 +12155,10 @@ esterne.</p>
 
   </div>
 </article>
-<article class="doc-panel panel-27" id="26-application-operational-use-case-hardening-md">
+<article class="doc-panel panel-27" id="docs-26-application-operational-use-case-hardening-md">
   <header class="doc-panel-header">
     <p class="eyebrow">docs/26-application-operational-use-case-hardening.md</p>
-    <h1>Punto 6K — Application Operational Use Case Review &amp; Hardening</h1>
+    <h1>Punto 6K — Application Operational Use Case Review & Hardening</h1>
   </header>
   <div class="markdown-body">
 <h1
@@ -12171,7 +12336,7 @@ applicativi, repository port e result.</p>
 <li>documentazione aggiornata.</li>
 </ul>
 <p>Il Punto 6L è stato poi applicato come espansione controllata verso i
-use case base di Compliance. Il prossimo step consigliato diventa il
+use case base di Compliance. Successivamente è stato completato anche il
 <strong>Punto 6M — Application Layer Final Review &amp;
 Freeze</strong>.</p>
 <h2 id="aggiornamento-successivo-punto-6l-compliance-base">Aggiornamento
@@ -12193,7 +12358,7 @@ esterne.</p>
 
   </div>
 </article>
-<article class="doc-panel panel-28" id="27-application-compliance-base-use-cases-md">
+<article class="doc-panel panel-28" id="docs-27-application-compliance-base-use-cases-md">
   <header class="doc-panel-header">
     <p class="eyebrow">docs/27-application-compliance-base-use-cases.md</p>
     <h1>Punto 6L — Application Compliance Base Use Cases</h1>
@@ -12427,10 +12592,9 @@ fondamentali:</p>
 <li>Operational Roles;</li>
 <li>Compliance base requirements.</li>
 </ul>
-<p>Il prossimo step consigliato è il <strong>Punto 6M — Application
-Layer Final Review &amp; Freeze</strong>, cioè la chiusura finale del
-Punto 6 con revisione complessiva, documentazione finale e verifica dei
-confini architetturali.</p>
+<p>Storicamente, dopo Compliance base, il passo successivo è stato il
+<strong>Punto 6M — Application Layer Final Review &amp; Freeze</strong>,
+che oggi è già completato.</p>
 <h2 id="allineamento-punto-6m">Allineamento Punto 6M</h2>
 <p>Il Punto 6M chiude il primo ciclo dell’application layer con una
 review/freeze finale. Da questo momento i contenuti documentati nei
@@ -12442,7 +12606,7 @@ esterne.</p>
 
   </div>
 </article>
-<article class="doc-panel panel-29" id="28-application-layer-final-review-freeze-md">
+<article class="doc-panel panel-29" id="docs-28-application-layer-final-review-freeze-md">
   <header class="doc-panel-header">
     <p class="eyebrow">docs/28-application-layer-final-review-freeze.md</p>
     <h1>Punto 6M — Application Layer Final Review &amp; Freeze</h1>
@@ -12616,6 +12780,24 @@ class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="
 <li>documentazione Markdown e HTML allineata;</li>
 <li>progetto pronto per aprire il prossimo grande punto della
 roadmap.</li>
+</ul>
+<h2 id="allineamento-documentale-successivo">Allineamento documentale
+successivo</h2>
+<p>Dopo il Punto 6M è stata aggiunta una pulizia solo documentale,
+descritta in
+<code>docs/29-final-roadmap-documentation-alignment.md</code>.</p>
+<p>Questa pulizia non cambia il codice e non riapre il Punto 6. Serve
+solo a rendere esplicito che:</p>
+<ul>
+<li>il Punto 6 è chiuso da 6A a 6M;</li>
+<li>il Punto 6G Documents include register, find, activate e
+archive;</li>
+<li>attach fisico, generazione PDF, upload, storage, versioning e
+workflow documentali sono ancora futuri;</li>
+<li>le dipendenze Spring eventualmente già presenti nel
+<code>pom.xml</code> sono preparatorie o storiche;</li>
+<li>il prossimo lavoro deve aprire un nuovo punto roadmap, non un
+ulteriore sotto-step del Punto 6.</li>
 </ul>
 
   </div>
@@ -12977,6 +13159,391 @@ class="sourceCode bash"><code class="sourceCode bash"><span id="cb42-1"><a href=
 <div class="sourceCode" id="cb43"><pre
 class="sourceCode bash"><code class="sourceCode bash"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add <span class="at">-A</span></span>
 <span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">&quot;Finalize application layer review and freeze&quot;</span></span></code></pre></div>
+<hr />
+<h2 id="nota-progetto-pulizia-documentale-finale-dopo-il-punto-6m">Nota
+progetto — Pulizia documentale finale dopo il Punto 6M</h2>
+<p>Dopo il Punto 6M, è stata prevista una piccola patch solo documentale
+per chiarire la roadmap finale.</p>
+<p>Questa pulizia non modifica codice Java, test, package, use case o
+dipendenze Maven. Serve solo a rendere più chiara la documentazione
+ufficiale.</p>
+<p>La patch documentale chiarisce che:</p>
+<ul>
+<li>il Punto 6 è completato da 6A a 6M;</li>
+<li>il Punto 6G Documents include register, find, activate e
+archive;</li>
+<li>il Punto 6G non include attach fisico, generazione PDF, upload,
+storage, versioning o workflow documentali;</li>
+<li>i punti 6I, 6J, 6K, 6L e 6M sono già stati applicati con la sequenza
+reale Vehicles, Operational Roles, hardening Operational Roles,
+Compliance base e final freeze;</li>
+<li>le dipendenze Spring eventualmente presenti nel <code>pom.xml</code>
+sono preparatorie o storiche, non ancora usate per controller REST, JPA,
+Spring Data o security;</li>
+<li>la documentazione digitale usa Guided Links per navigare in modo
+ordinato i file Markdown ufficiali.</li>
+</ul>
+<p>Controllo consigliato dopo questa patch solo documentale:</p>
+<div class="sourceCode" id="cb44"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="ex">mvn</span> spotless:check</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="ex">mvn</span> clean test</span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> status</span></code></pre></div>
+<p>Commit consigliato:</p>
+<div class="sourceCode" id="cb45"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add <span class="at">-A</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">&quot;Align final roadmap documentation&quot;</span></span></code></pre></div>
+
+  </div>
+</article>
+
+<article class="doc-panel panel-31" id="docs-29-final-roadmap-documentation-alignment-md">
+  <header class="doc-panel-header">
+    <p class="eyebrow">docs/29-final-roadmap-documentation-alignment.md</p>
+    <h1>Roadmap finale e allineamento documentale</h1>
+  </header>
+  <div class="markdown-body">
+<h1 id="roadmap-finale-e-allineamento-documentale">Roadmap finale e
+allineamento documentale</h1>
+<p>Questo documento chiude la pulizia documentale successiva al
+<strong>Punto 6M — Application Layer Final Review &amp;
+Freeze</strong>.</p>
+<p>Serve a rendere esplicita la roadmap reale del progetto, correggere
+alcune descrizioni storiche ormai superate e chiarire lo stato attuale
+prima dell’apertura del Punto 7.</p>
+<p>Questo step è <strong>solo documentale</strong>: non modifica codice
+Java, test, package, use case o dipendenze Maven.</p>
+<h2 id="stato-ufficiale-attuale">Stato ufficiale attuale</h2>
+<p>TruckFlow Manager ha completato il primo grande ciclo tecnico del
+progetto:</p>
+<ul>
+<li>il <strong>domain layer puro</strong> è stato modellato, pulito,
+testato e documentato;</li>
+<li>il <strong>Punto 6 — Application Layer</strong> è stato completato
+da <strong>6A</strong> a <strong>6M</strong>;</li>
+<li>l’application layer contiene use case applicativi per Locations,
+Cargo, Shipments, Documents, Vehicles, Operational Roles e Compliance
+base;</li>
+<li>i repository concreti disponibili sono ancora solo repository
+<strong>in memory</strong>;</li>
+<li>non sono ancora stati introdotti database reali, JPA, Spring Data,
+REST API, controller, security, tracking, planning, dashboard, workflow
+o integrazioni esterne.</li>
+</ul>
+<p>Lo stato corretto non è più “siamo al 6H”. Lo stato corretto è:</p>
+<p><strong>Punto 6M completato — primo ciclo dell’application layer
+chiuso.</strong></p>
+<h2 id="roadmap-ufficiale-completata">Roadmap ufficiale completata</h2>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Punto</th>
+<th>Stato</th>
+<th>Descrizione reale</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>completato</td>
+<td>Domain Review Finale</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>completato</td>
+<td>Review concreta dominio per dominio</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>completato</td>
+<td>Eccezioni custom di dominio</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>completato</td>
+<td>Aggiornamento delle regole e della documentazione del dominio</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>completato</td>
+<td>Pulizia finale del dominio puro</td>
+</tr>
+<tr class="even">
+<td>6A</td>
+<td>completato</td>
+<td>Application Layer Blueprint</td>
+</tr>
+<tr class="odd">
+<td>6B</td>
+<td>completato</td>
+<td>Application Foundation</td>
+</tr>
+<tr class="even">
+<td>6C</td>
+<td>completato</td>
+<td>Application Repository Ports</td>
+</tr>
+<tr class="odd">
+<td>6D</td>
+<td>completato</td>
+<td>In-Memory Repositories</td>
+</tr>
+<tr class="even">
+<td>6E</td>
+<td>completato</td>
+<td>First Use Cases: Locations, Cargo, Shipments</td>
+</tr>
+<tr class="odd">
+<td>6F</td>
+<td>completato</td>
+<td>Application Use Case Review &amp; Hardening</td>
+</tr>
+<tr class="even">
+<td>6G</td>
+<td>completato</td>
+<td>Application Use Cases Expansion: Documents</td>
+</tr>
+<tr class="odd">
+<td>6H</td>
+<td>completato</td>
+<td>Application Use Case Expansion Review &amp; Documentation
+Alignment</td>
+</tr>
+<tr class="even">
+<td>6I</td>
+<td>completato</td>
+<td>Application Use Cases Expansion II: Vehicles</td>
+</tr>
+<tr class="odd">
+<td>6J</td>
+<td>completato</td>
+<td>Application Use Cases Expansion III: Operational Roles</td>
+</tr>
+<tr class="even">
+<td>6K</td>
+<td>completato</td>
+<td>Application Operational Use Case Review &amp; Hardening</td>
+</tr>
+<tr class="odd">
+<td>6L</td>
+<td>completato</td>
+<td>Application Compliance Base Use Cases</td>
+</tr>
+<tr class="even">
+<td>6M</td>
+<td>completato</td>
+<td>Application Layer Final Review &amp; Freeze</td>
+</tr>
+</tbody>
+</table>
+<p>Dopo il Punto 6M, il Punto 6 deve essere considerato
+<strong>chiuso</strong>. Le prossime evoluzioni non devono essere
+aggiunte come altri sotto-step 6N, 6O o simili, ma devono aprire un
+nuovo punto roadmap.</p>
+<h2 id="correzione-importante-sul-punto-6g-documents">Correzione
+importante sul Punto 6G Documents</h2>
+<p>Una descrizione precedente indicava il Punto 6G Documents come:</p>
+<ul>
+<li>register;</li>
+<li>update;</li>
+<li>attach;</li>
+<li>generate;</li>
+<li>find.</li>
+</ul>
+<p>Questa descrizione non rappresenta lo stato reale del progetto.</p>
+<p>Il Punto 6G reale ha introdotto solo i primi use case applicativi
+logici del dominio Documents:</p>
+<ul>
+<li>register;</li>
+<li>find;</li>
+<li>activate;</li>
+<li>archive.</li>
+</ul>
+<p>Non sono stati introdotti:</p>
+<ul>
+<li>update documentale completo;</li>
+<li>attach di file fisici;</li>
+<li>generazione PDF;</li>
+<li>upload;</li>
+<li>storage;</li>
+<li>firma digitale;</li>
+<li>versioning documentale;</li>
+<li>workflow documentali.</li>
+</ul>
+<p>Questa scelta è corretta perché il Punto 6 doveva restare nel
+perimetro dell’application layer puro, senza anticipare infrastructure,
+file system, document management avanzato o processi enterprise.</p>
+<h2 id="allineamento-reale-dei-punti-6i-6j-6k-6l-e-6m">Allineamento
+reale dei punti 6I, 6J, 6K, 6L e 6M</h2>
+<p>La roadmap iniziale lasciava aperta la scelta dei domini successivi.
+Il progetto ha poi seguito questa sequenza reale:</p>
+<table>
+<thead>
+<tr class="header">
+<th>Punto</th>
+<th>Scelta reale applicata</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>6I</td>
+<td>Vehicles use cases</td>
+</tr>
+<tr class="even">
+<td>6J</td>
+<td>Operational Roles use cases</td>
+</tr>
+<tr class="odd">
+<td>6K</td>
+<td>Review &amp; hardening degli Operational Roles</td>
+</tr>
+<tr class="even">
+<td>6L</td>
+<td>Compliance base use cases</td>
+</tr>
+<tr class="odd">
+<td>6M</td>
+<td>Final review &amp; freeze dell’application layer</td>
+</tr>
+</tbody>
+</table>
+<p>Questa sequenza è coerente perché:</p>
+<ul>
+<li>Vehicles prepara il registro applicativo della flotta logica;</li>
+<li>Operational Roles prepara il registro applicativo delle figure
+operative;</li>
+<li>il 6K stabilizza Operational Roles prima di procedere;</li>
+<li>Compliance base aggiunge il catalogo applicativo dei requisiti
+astratti;</li>
+<li>il 6M chiude il ciclo con un controllo finale di coerenza.</li>
+</ul>
+<h2 id="stato-finale-dellapplication-layer">Stato finale
+dell’application layer</h2>
+<p>Alla chiusura del Punto 6M, l’application layer contiene:</p>
+<ul>
+<li>command applicativi;</li>
+<li>result applicativi;</li>
+<li>port in;</li>
+<li>port out;</li>
+<li>application service;</li>
+<li>eccezioni applicative;</li>
+<li>repository port;</li>
+<li>repository in memory;</li>
+<li>test applicativi;</li>
+<li>test architetturali;</li>
+<li>test di hardening;</li>
+<li>test finale di freeze.</li>
+</ul>
+<p>I contesti applicativi attivi sono:</p>
+<ul>
+<li>Locations;</li>
+<li>Cargo;</li>
+<li>Shipments;</li>
+<li>Documents;</li>
+<li>Vehicles;</li>
+<li>Operational Roles;</li>
+<li>Compliance base.</li>
+</ul>
+<h2 id="cosa-resta-intenzionalmente-fuori">Cosa resta intenzionalmente
+fuori</h2>
+<p>Il progetto non deve ancora introdurre:</p>
+<ul>
+<li>REST API;</li>
+<li>controller Spring;</li>
+<li>DTO web;</li>
+<li>database;</li>
+<li>JPA;</li>
+<li>Hibernate;</li>
+<li>Spring Data;</li>
+<li>security;</li>
+<li>JWT;</li>
+<li>tracking;</li>
+<li>planning;</li>
+<li>dispatching reale;</li>
+<li>dashboard;</li>
+<li>audit trail enterprise;</li>
+<li>workflow;</li>
+<li>file upload;</li>
+<li>file storage;</li>
+<li>generazione PDF;</li>
+<li>document versioning;</li>
+<li>country engine operativo;</li>
+<li>controlli concreti di violazione compliance;</li>
+<li>notifiche;</li>
+<li>integrazioni esterne.</li>
+</ul>
+<p>Questi elementi appartengono a punti futuri della roadmap.</p>
+<h2 id="nota-sulle-dipendenze-spring-nel-pom.xml">Nota sulle dipendenze
+Spring nel <code>pom.xml</code></h2>
+<p>Nel <code>pom.xml</code> possono essere presenti dipendenze Spring
+Boot, Web, Validation o OpenAPI già preparate in precedenza.</p>
+<p>Questa presenza non significa che il Punto 6 abbia introdotto REST
+API, controller o infrastruttura Spring operativa.</p>
+<p>La regola corretta è:</p>
+<ul>
+<li>le dipendenze possono essere considerate preparatorie o
+storiche;</li>
+<li>il codice dell’application layer non deve dipendere da Spring;</li>
+<li>il dominio non deve dipendere da Spring;</li>
+<li>non devono esistere controller, entity JPA, repository Spring Data o
+security configuration finché non verrà aperto un punto roadmap
+dedicato.</li>
+</ul>
+<p>Il Punto 6M protegge questa regola tramite controlli architetturali e
+documentazione.</p>
+<h2 id="guided-links-e-documentazione-digitale">Guided Links e
+documentazione digitale</h2>
+<p>La documentazione digitale in <code>digitalDocs/index.html</code> è
+il mirror navigabile della documentazione Markdown.</p>
+<p>Il concetto di <strong>Guided Links</strong> indica la navigazione
+guidata tra i documenti principali:</p>
+<ul>
+<li>indice laterale;</li>
+<li>pannelli HTML separati;</li>
+<li>collegamenti ai file Markdown ufficiali;</li>
+<li>tooltip CSS per spiegazioni italiane sui termini tecnici;</li>
+<li>lettura ordinata dal dominio fino all’application layer.</li>
+</ul>
+<p>La fonte ufficiale rimane la documentazione Markdown nella cartella
+<code>docs</code>, ma la documentazione digitale rende più semplice
+consultare il progetto in modo guidato.</p>
+<h2 id="regola-per-il-prossimo-punto-roadmap">Regola per il prossimo
+punto roadmap</h2>
+<p>Dopo il Punto 6M, il prossimo lavoro dovrà iniziare come
+<strong>Punto 7</strong>.</p>
+<p>La direzione più naturale è:</p>
+<p><strong>Punto 7 — Infrastructure Layer</strong></p>
+<p>Il Punto 7 dovrà essere definito prima in modo teorico e documentale,
+senza introdurre subito controller REST o database se non sono ancora
+stati progettati i confini.</p>
+<p>Il Punto 7 potrà preparare:</p>
+<ul>
+<li>infrastructure layer blueprint;</li>
+<li>adapter reali futuri;</li>
+<li>mapping domain/application verso persistence;</li>
+<li>strategia database;</li>
+<li>strategia Spring controllata;</li>
+<li>separazione tra repository port e implementazioni concrete.</li>
+</ul>
+<p>Le REST API dovrebbero restare un punto successivo, perché devono
+esporre use case stabili e non accedere direttamente al dominio.</p>
+<h2 id="conclusione">Conclusione</h2>
+<p>La documentazione ufficiale deve ora dire chiaramente che:</p>
+<ul>
+<li>il dominio puro è completato come fondazione;</li>
+<li>il Punto 6 è completato fino al 6M;</li>
+<li>il 6G Documents non include file upload, attach o generate;</li>
+<li>Vehicles, Operational Roles e Compliance base sono già stati
+applicati;</li>
+<li>il Punto 6 non ha introdotto REST API, database o security;</li>
+<li>il prossimo lavoro deve aprire un nuovo punto roadmap.</li>
+</ul>
+<p>Questa è la base documentale corretta prima di procedere con il Punto
+7.</p>
 
   </div>
 </article>

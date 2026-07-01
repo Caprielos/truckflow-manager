@@ -451,3 +451,35 @@ Commit consigliato:
 git add -A
 git commit -m "Finalize application layer review and freeze"
 ```
+
+---
+
+## Nota progetto — Pulizia documentale finale dopo il Punto 6M
+
+Dopo il Punto 6M, è stata prevista una piccola patch solo documentale per chiarire la roadmap finale.
+
+Questa pulizia non modifica codice Java, test, package, use case o dipendenze Maven. Serve solo a rendere più chiara la documentazione ufficiale.
+
+La patch documentale chiarisce che:
+
+- il Punto 6 è completato da 6A a 6M;
+- il Punto 6G Documents include register, find, activate e archive;
+- il Punto 6G non include attach fisico, generazione PDF, upload, storage, versioning o workflow documentali;
+- i punti 6I, 6J, 6K, 6L e 6M sono già stati applicati con la sequenza reale Vehicles, Operational Roles, hardening Operational Roles, Compliance base e final freeze;
+- le dipendenze Spring eventualmente presenti nel `pom.xml` sono preparatorie o storiche, non ancora usate per controller REST, JPA, Spring Data o security;
+- la documentazione digitale usa Guided Links per navigare in modo ordinato i file Markdown ufficiali.
+
+Controllo consigliato dopo questa patch solo documentale:
+
+```bash
+mvn spotless:check
+mvn clean test
+git status
+```
+
+Commit consigliato:
+
+```bash
+git add -A
+git commit -m "Align final roadmap documentation"
+```

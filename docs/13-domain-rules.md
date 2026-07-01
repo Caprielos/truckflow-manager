@@ -10,9 +10,11 @@ Questo documento rappresenta la base della **TruckFlow Domain Foundation v1.0**.
 
 ## 2. Stato della Domain Review Finale
 
-La **Domain Review Finale** è stata avviata e la prima review correttiva del dominio puro è stata completata con otto interventi mirati.
+La **Domain Review Finale** della TruckFlow Domain Foundation v1.0 è considerata completata per il perimetro attuale del dominio puro.
 
-Questa fase ha rafforzato il dominio, ma non sostituisce le future review che saranno necessarie quando verranno introdotti application layer, repository, API, workflow, audit, planning e dispatching.
+La prima review correttiva del dominio puro è stata completata con otto interventi mirati. Successivamente, l'application layer è stato completato e congelato fino al Punto 6M.
+
+Questa fase ha rafforzato il dominio, ma non sostituisce le future review che saranno necessarie quando verranno introdotti nuovi punti roadmap come infrastructure, repository reali, API, workflow, audit, planning, dispatching o moduli enterprise avanzati.
 
 ## 3. Confini del dominio
 
@@ -340,6 +342,8 @@ Prima di chiudere la review del dominio puro verificare:
 ## 14. Roadmap successiva
 
 La prima review correttiva del dominio puro è stata completata con otto interventi mirati, documentati in [`14-domain-review-patches.md`](14-domain-review-patches.md). La revisione finale della test suite del dominio puro è documentata in [`15-domain-test-suite-review.md`](15-domain-test-suite-review.md).
+
+Lo stato finale della roadmap fino al Punto 6M e la pulizia documentale successiva sono riassunti in [`29-final-roadmap-documentation-alignment.md`](29-final-roadmap-documentation-alignment.md).
 
 La roadmap successiva consigliata è:
 
