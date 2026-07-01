@@ -21,7 +21,7 @@ class UserTest {
     assertTrue(user.hasPermission(UserPermission.VIEW_TRIPS));
     assertFalse(user.hasPermission(UserPermission.MANAGE_TRIPS));
     assertEquals("Mario Rossi", user.profile().fullName());
-    assertEquals("en", user.preferences().language());
+    assertEquals(LanguageCode.of("EN"), user.preferences().language());
   }
 
   @Test

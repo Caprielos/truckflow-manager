@@ -53,9 +53,9 @@ class ComplianceDomainTest {
   void jurisdictionNormalizesCountryRegionAndScope() {
     var jurisdiction = new ComplianceJurisdiction(" it ", " eu ", " national ", "Italy rule");
 
-    assertEquals("IT", jurisdiction.country());
-    assertEquals("EU", jurisdiction.region());
-    assertEquals("NATIONAL", jurisdiction.scope());
+    assertEquals(CountryCode.of("IT"), jurisdiction.country().orElseThrow());
+    assertEquals(JurisdictionRegion.of("EU"), jurisdiction.region().orElseThrow());
+    assertEquals(ComplianceJurisdictionScope.NATIONAL, jurisdiction.scope());
   }
 
   @Test

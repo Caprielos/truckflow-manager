@@ -85,6 +85,9 @@ it.gabriele.truckflow.domain.compliance
 ├── ComplianceSource.java
 ├── ComplianceSourceType.java
 ├── ComplianceJurisdiction.java
+├── CountryCode.java
+├── JurisdictionRegion.java
+├── ComplianceJurisdictionScope.java
 └── ComplianceValidation.java
 ```
 
@@ -363,9 +366,9 @@ Questa scelta rende il dominio più enterprise, perché un requisito non è solo
 
 ```text
 ComplianceJurisdiction
-├─ country
-├─ region
-├─ scope
+├─ Optional<CountryCode> country
+├─ Optional<JurisdictionRegion> region
+├─ ComplianceJurisdictionScope scope
 └─ notes
 ```
 
@@ -388,6 +391,24 @@ scope = COMPANY_INTERNAL
 La giurisdizione non calcola se una norma vale oggi, non gestisce date di validità e non applica automaticamente regole diverse per Stato.
 
 Descrive solo l'ambito concettuale del requisito.
+
+`CountryCode` rappresenta un paese specifico, per esempio `IT`, `FR`, `DE` o `ES`.
+
+`ComplianceJurisdictionScope` rappresenta il livello della giurisdizione, per esempio:
+
+```text
+NATIONAL
+EUROPEAN_UNION
+INTERNATIONAL
+COMPANY_INTERNAL
+CUSTOMER_SPECIFIC
+REGIONAL
+OTHER
+```
+
+`JurisdictionRegion` rappresenta un'area geografica o normativa ampia, per esempio `EU`, `EMEA`, `LOMBARDY` o `NORTH_ITALY`. È un value object leggero e non contiene una lista rigida di nazioni.
+
+La logica applicativa del tipo "scelgo Europa, vedo le nazioni europee e il paese predefinito è Italia" non appartiene al dominio puro. Quella logica verrà gestita più avanti da application layer, configurazione aziendale o interfaccia utente.
 
 ---
 
@@ -414,6 +435,8 @@ Inoltre:
 - `ComplianceRule` deve avere titolo e statement;
 - `ComplianceSource` deve avere nome e tipo;
 - `ComplianceJurisdiction` deve avere uno scope;
+- `CountryCode`, quando presente, deve usare un codice paese valido;
+- `JurisdictionRegion`, quando presente, deve essere normalizzata;
 - `ComplianceTarget` deve avere un target type.
 
 ---
@@ -514,6 +537,9 @@ ComplianceRule = descrizione della regola
 ComplianceTarget = tipo di dominio a cui si applica
 ComplianceSource = origine del requisito
 ComplianceJurisdiction = ambito di validità concettuale
+CountryCode = paese specifico della giurisdizione
+JurisdictionRegion = area geografica o normativa ampia
+ComplianceJurisdictionScope = livello della giurisdizione
 ComplianceObligationLevel = obbligatorietà
 ComplianceSeverity = severità
 ```

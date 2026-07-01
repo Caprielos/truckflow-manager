@@ -63,7 +63,7 @@ Questa documentazione descrive la versione del progetto in cui il dominio contie
 - dominio documents per descrivere il concetto puro di documento aziendale, con identità, codice, tipo, categoria, stato, metadati, contenuto logico e riferimenti astratti, senza introdurre file fisici, upload, storage, workflow, scadenze o compliance operativa;
 - dominio compliance per descrivere requisiti astratti di conformità, categorie, livelli di obbligatorietà, severità, target, regole, fonti e giurisdizioni senza introdurre controlli automatici, workflow, audit, scadenze o risultati di verifica.
 - regole ufficiali di dominio per guidare la TruckFlow Domain Foundation v1.0, la review finale del dominio puro e l'introduzione graduale delle eccezioni custom;
-- prima review correttiva del dominio puro completata con sette interventi mirati: mutazioni atomiche, eccezioni custom, `OperationalCode` obbligatorio, test catalogo qualificazioni meno fragili, pulizia dei file locali/generati e introduzione di `LicensePlate` e `VehicleIdentificationNumber` come value object del dominio veicoli.
+- prima review correttiva del dominio puro completata con otto interventi mirati: mutazioni atomiche, eccezioni custom, `OperationalCode` obbligatorio, test catalogo qualificazioni meno fragili, pulizia dei file locali/generati e introduzione di `LicensePlate` e `VehicleIdentificationNumber` come value object del dominio veicoli, più `LanguageCode`, `UserTheme`, `CountryCode`, `JurisdictionRegion`, `ComplianceJurisdictionScope` e `OperationalScopeCode` per ridurre primitive obsession.
 
 
 ## Nota sul packaging di `domain.vehicles`
@@ -149,7 +149,7 @@ Questa scelta completa la prima grande fondazione del dominio puro enterprise di
 
 Il documento `14-domain-review-patches.md` riepiloga la prima review correttiva concreta del dominio puro.
 
-Non descrive procedure operative di applicazione tecnica, ma spiega perché sono stati eseguiti i sette interventi principali:
+Non descrive procedure operative di applicazione tecnica, ma spiega perché sono stati eseguiti gli otto interventi principali:
 
 - validare prima di mutare lo stato degli aggregate;
 - usare eccezioni custom nei domini semplici;
@@ -157,7 +157,8 @@ Non descrive procedure operative di applicazione tecnica, ma spiega perché sono
 - rendere `OperationalCode` obbligatorio;
 - rendere meno fragili i test del catalogo qualificazioni;
 - tenere fuori dal repository file locali, artefatti generati e file temporanei;
-- trasformare targa e VIN da primitive `String` a value object del dominio veicoli.
+- trasformare targa e VIN da primitive `String` a value object del dominio veicoli;
+- rafforzare preferenze utente, giurisdizione compliance e scope operativi con `LanguageCode`, `UserTheme`, `CountryCode`, `JurisdictionRegion`, `ComplianceJurisdictionScope` e `OperationalScopeCode`.
 
 Questo documento serve come storico architetturale della review e come riferimento per le prossime fasi.
 

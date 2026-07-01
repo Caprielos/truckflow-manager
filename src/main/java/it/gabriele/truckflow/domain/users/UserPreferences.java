@@ -1,44 +1,39 @@
 package it.gabriele.truckflow.domain.users;
 
-import it.gabriele.truckflow.domain.users.exceptions.InvalidUserException;
-import java.util.Locale;
-import java.util.Set;
-
-public record UserPreferences(String language, String theme, boolean notificationsEnabled) {
-
-  private static final String DEFAULT_LANGUAGE = "en";
-  private static final String DEFAULT_THEME = "light";
-  private static final Set<String> SUPPORTED_THEMES = Set.of("light", "dark");
+public record UserPreferences(
+    LanguageCode language, UserTheme theme, boolean notificationsEnabled) {
 
   public UserPreferences {
-    language =
-        normalize(language).isBlank()
-            ? DEFAULT_LANGUAGE
-            : normalize(language).toLowerCase(Locale.ROOT);
-    theme = normalize(theme).isBlank() ? DEFAULT_THEME : normalize(theme).toLowerCase(Locale.ROOT);
+    language = language == null ? LanguageCode.DEFAULT : language;
+    theme = theme == null ? UserTheme.DEFAULT : theme;
+  }
 
-    if (!SUPPORTED_THEMES.contains(theme)) {
-      throw new InvalidUserException("Theme must be either 'light' or 'dark'.");
-    }
+  public UserPreferences(String language, String theme, boolean notificationsEnabled) {
+    this(
+        LanguageCode.fromOrDefault(language), UserTheme.fromOrDefault(theme), notificationsEnabled);
   }
 
   public static UserPreferences defaults() {
-    return new UserPreferences(DEFAULT_LANGUAGE, DEFAULT_THEME, true);
+    return new UserPreferences(LanguageCode.DEFAULT, UserTheme.DEFAULT, true);
+  }
+
+  public UserPreferences withLanguage(LanguageCode language) {
+    return new UserPreferences(language, theme, notificationsEnabled);
   }
 
   public UserPreferences withLanguage(String language) {
+    return withLanguage(LanguageCode.fromOrDefault(language));
+  }
+
+  public UserPreferences withTheme(UserTheme theme) {
     return new UserPreferences(language, theme, notificationsEnabled);
   }
 
   public UserPreferences withTheme(String theme) {
-    return new UserPreferences(language, theme, notificationsEnabled);
+    return withTheme(UserTheme.fromOrDefault(theme));
   }
 
   public UserPreferences withNotificationsEnabled(boolean notificationsEnabled) {
     return new UserPreferences(language, theme, notificationsEnabled);
-  }
-
-  private static String normalize(String value) {
-    return value == null ? "" : value.trim();
   }
 }

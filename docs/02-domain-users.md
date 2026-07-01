@@ -209,6 +209,21 @@ Per le figure operative è stato creato `OperationalMetadata`, perché `UserMeta
 
 Tiene separate le impostazioni dell’utente dal resto del dominio.
 
+Le preferenze non usano più stringhe libere per lingua e tema. Usano value object e enum dedicati:
+
+- `LanguageCode`, per rappresentare un codice lingua normalizzato;
+- `UserTheme`, per rappresentare il tema grafico scelto dall'utente.
+
+Questa scelta evita valori casuali come `italiano`, `english`, `nero` o `dark-mode` e rende il modello più chiaro.
+
+I valori principali di `UserTheme` sono:
+
+- `LIGHT`;
+- `DARK`;
+- `SYSTEM`.
+
+`LanguageCode` è pensato come codice breve normalizzato, per esempio `EN`, `IT`, `FR`, `DE` o `ES`.
+
 ## 2.4 Perché usare value object dedicati
 
 Il progetto usa value object dedicati perché molte informazioni non sono semplici stringhe o set generici.
@@ -218,7 +233,9 @@ Esempi:
 - `Username` non è una stringa qualsiasi;
 - `UserPasswordHash` non è una password qualsiasi;
 - `UserId` non è un UUID qualunque;
-- `UserPermissions` non è un set senza regole.
+- `UserPermissions` non è un set senza regole;
+- `LanguageCode` non è una lingua scritta come testo libero;
+- `UserTheme` non è una stringa arbitraria.
 
 Questa scelta rende il dominio più chiaro, leggibile e sicuro.
 

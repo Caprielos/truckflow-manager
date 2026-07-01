@@ -308,7 +308,55 @@ Il modello diventa più coerente con gli altri value object già presenti nel pr
 
 ---
 
-## 10. Stato finale dopo i sette interventi
+## 10. Intervento 8 — Rafforzare giurisdizione, scope operativi e preferenze utente
+
+### Problema
+
+Durante la pulizia finale del dominio puro erano rimasti alcuni concetti modellati come stringhe libere.
+
+I casi principali erano:
+
+- `UserPreferences.language`;
+- `UserPreferences.theme`;
+- `ComplianceJurisdiction.country`;
+- `ComplianceJurisdiction.region`;
+- `ComplianceJurisdiction.scope`;
+- `OperationalScope.code`.
+
+Questi campi non sono semplici testi descrittivi. Rappresentano concetti con semantica, normalizzazione e regole proprie.
+
+### Correzione
+
+Sono stati introdotti concetti più espliciti:
+
+- `LanguageCode`;
+- `UserTheme`;
+- `CountryCode`;
+- `JurisdictionRegion`;
+- `ComplianceJurisdictionScope`;
+- `OperationalScopeCode`.
+
+La giurisdizione di compliance distingue ora tra:
+
+```text
+scope   = livello della giurisdizione
+region  = area geografica o normativa ampia
+country = paese specifico
+```
+
+La logica futura del tipo "Europa -> lista nazioni -> Italia come default" non è stata inserita nel dominio puro. Appartiene ad application layer, configurazione o interfaccia utente.
+
+### Perché è importante
+
+Questa correzione riduce primitive obsession senza introdurre overengineering.
+
+Il dominio diventa più esplicito: lingua, tema, paese, regione, scope di giurisdizione e codice dello scope operativo non sono più stringhe generiche.
+
+Allo stesso tempo, il modello rimane flessibile: non vengono creati `UserCode`, `VehicleCode` o `QualificationCode` solo per simmetria e non viene introdotta logica UI dentro il dominio.
+
+---
+
+## 11. Stato finale dopo gli otto interventi
 
 Dopo questi interventi, il dominio puro di TruckFlow risulta più solido perché:
 
@@ -318,6 +366,7 @@ Dopo questi interventi, il dominio puro di TruckFlow risulta più solido perché
 - i test del catalogo qualificazioni sono meno fragili;
 - il repository è più pulito;
 - targa e VIN sono modellati come value object nel dominio veicoli;
+- giurisdizione, scope operativi e preferenze utente usano concetti più espliciti;
 - la documentazione architetturale è più allineata al codice reale.
 
 Questa fase non introduce ancora:
@@ -340,7 +389,7 @@ TruckFlow Domain Foundation v1.0 rafforzata dalla prima review correttiva del do
 
 ---
 
-## 11. Prossimo passo consigliato
+## 12. Prossimo passo consigliato
 
 Il prossimo passo naturale è preparare il livello `application`.
 

@@ -150,15 +150,16 @@
 <p>Sono state inoltre definite eccezioni specifiche per i domini principali, come <code>InvalidUserException</code>, <code>InvalidShipmentException</code>, <code>InvalidDocumentException</code> e <code>InvalidComplianceRequirementException</code>.</p>
 <p>Queste eccezioni non obbligano a modificare immediatamente tutte le classi esistenti. Il refactoring dalle eccezioni standard Java alle eccezioni custom deve avvenire gradualmente, dominio per dominio, aggiornando i test.</p>
 <h2 id="review-correttiva-completata">Review correttiva completata</h2>
-<p>La prima review correttiva del dominio puro ha consolidato sette aspetti principali:</p>
+<p>La prima review correttiva del dominio puro ha consolidato otto aspetti principali:</p>
 <ol>
 <li>validazione completa prima delle mutazioni di stato degli aggregate;</li>
 <li>uso delle eccezioni custom nei domini semplici;</li>
 <li>uso delle eccezioni custom nei domini complessi;</li>
 <li>obbligatorietà di <code>OperationalCode</code> per le figure operative;</li>
 <li>test del catalogo qualificazioni basati su comportamento e coerenza, non su conteggi fragili;</li>
-<li>pulizia della documentazione e delle regole sui file locali, IDE, build e artefatti temporanei.</li>
-<li>modellazione di <code>LicensePlate</code> e <code>VehicleIdentificationNumber</code> come <span class="term" data-it="oggetto valore">value object</span> del dominio veicoli.</li>
+<li>pulizia della documentazione e delle regole sui file locali, IDE, build e artefatti temporanei;</li>
+<li>modellazione di <code>LicensePlate</code> e <code>VehicleIdentificationNumber</code> come <span class="term" data-it="oggetto valore">value object</span> del dominio veicoli;</li>
+<li>rafforzamento di preferenze utente, giurisdizione compliance e scope operativi con <code>LanguageCode</code>, <code>UserTheme</code>, <code>CountryCode</code>, <code>JurisdictionRegion</code>, <code>ComplianceJurisdictionScope</code> e <code>OperationalScopeCode</code>.</li>
 </ol>
 <p>Questi interventi non aggiungono nuove funzionalità operative, ma rendono il dominio più sicuro, leggibile e pronto per essere consumato dal livello application.</p>
 <h2 id="prossimi-step-consigliati">Prossimi step consigliati</h2>
@@ -235,7 +236,7 @@
 <li>dominio documents per descrivere il concetto puro di documento aziendale, con identità, codice, tipo, categoria, stato, metadati, contenuto logico e riferimenti astratti, senza introdurre file fisici, upload, storage, <span class="term" data-it="flusso operativo">workflow</span>, scadenze o compliance operativa;</li>
 <li>dominio compliance per descrivere requisiti astratti di conformità, categorie, livelli di obbligatorietà, severità, target, regole, fonti e giurisdizioni senza introdurre controlli automatici, <span class="term" data-it="flusso operativo">workflow</span>, audit, scadenze o risultati di verifica.</li>
 <li>regole ufficiali di dominio per guidare la <span class="term" data-it="fondazione del dominio puro TruckFlow versione 1.0">TruckFlow Domain Foundation v1.0</span>, la review finale del dominio puro e l&#x27;introduzione graduale delle eccezioni custom;</li>
-<li>prima review correttiva del dominio puro completata con sette interventi mirati: mutazioni atomiche, eccezioni custom, <code>OperationalCode</code> obbligatorio, test catalogo qualificazioni meno fragili, pulizia dei file locali/generati e introduzione di <code>LicensePlate</code> e <code>VehicleIdentificationNumber</code> come <span class="term" data-it="oggetto valore">value object</span> del dominio veicoli.</li>
+<li>prima review correttiva del dominio puro completata con otto interventi mirati: mutazioni atomiche, eccezioni custom, <code>OperationalCode</code> obbligatorio, test catalogo qualificazioni meno fragili, pulizia dei file locali/generati, introduzione di <code>LicensePlate</code> e <code>VehicleIdentificationNumber</code> come <span class="term" data-it="oggetto valore">value object</span> del dominio veicoli e rafforzamento di preferenze utente, giurisdizione compliance e scope operativi.</li>
 </ul>
 <h2 id="nota-sul-packaging-di-domain-vehicles">Nota sul packaging di <code>domain.vehicles</code></h2>
 <p>Il dominio veicoli è stato riorganizzato in sottopackage per renderlo più leggibile:</p>
@@ -295,7 +296,7 @@
 <p>Questa scelta completa la prima grande fondazione del dominio puro enterprise di TruckFlow, mantenendo separati requisiti astratti e verifiche operative.</p>
 <h2 id="nota-su-docs-14-domain-review-patches-md">Nota su <code>docs/14-domain-review-patches.md</code></h2>
 <p>Il documento <code>14-domain-review-patches.md</code> riepiloga la prima review correttiva concreta del dominio puro.</p>
-<p>Non descrive procedure operative di applicazione tecnica, ma spiega perché sono stati eseguiti i sette interventi principali:</p>
+<p>Non descrive procedure operative di applicazione tecnica, ma spiega perché sono stati eseguiti gli otto interventi principali:</p>
 <ul>
 <li>validare prima di mutare lo stato degli aggregate;</li>
 <li>usare eccezioni custom nei domini semplici;</li>
@@ -303,7 +304,8 @@
 <li>rendere <code>OperationalCode</code> obbligatorio;</li>
 <li>rendere meno fragili i test del catalogo qualificazioni;</li>
 <li>tenere fuori dal <span class="term" data-it="repository">repository</span> file locali, artefatti generati e file temporanei;</li>
-<li>trasformare targa e VIN da primitive <code>String</code> a <span class="term" data-it="oggetto valore">value object</span> del dominio veicoli.</li>
+<li>trasformare targa e VIN da primitive <code>String</code> a <span class="term" data-it="oggetto valore">value object</span> del dominio veicoli;</li>
+<li>rafforzare preferenze utente, giurisdizione compliance e scope operativi con <code>LanguageCode</code>, <code>UserTheme</code>, <code>CountryCode</code>, <code>JurisdictionRegion</code>, <code>ComplianceJurisdictionScope</code> e <code>OperationalScopeCode</code>.</li>
 </ul>
 <p>Questo documento serve come storico architetturale della review e come riferimento per le prossime fasi.</p>
 <h2 id="nota-su-docs-13-domain-rules-md">Nota su <code>docs/13-domain-rules.md</code></h2>
@@ -601,6 +603,7 @@
 <h3 id="userpreferences"><code>UserPreferences</code></h3>
 <p><code>UserPreferences</code> rappresenta preferenze dell’account applicativo.</p>
 <p>Tiene separate le impostazioni dell’utente dal resto del dominio.</p>
+<p>Le preferenze non usano più stringhe libere per lingua e tema. Usano <code>LanguageCode</code> e <code>UserTheme</code>, così il dominio evita valori casuali e mantiene più chiaro il significato del dato.</p>
 <h2 id="2-4-perché-usare-value-object-dedicati">2.4 Perché usare <span class="term" data-it="oggetto valore">value object</span> dedicati</h2>
 <p>Il progetto usa <span class="term" data-it="oggetto valore">value object</span> dedicati perché molte informazioni non sono semplici stringhe o set generici.</p>
 <p>Esempi:</p>
@@ -608,7 +611,9 @@
 <li><code>Username</code> non è una stringa qualsiasi;</li>
 <li><code>UserPasswordHash</code> non è una password qualsiasi;</li>
 <li><code>UserId</code> non è un UUID qualunque;</li>
-<li><code>UserPermissions</code> non è un set senza regole.</li>
+<li><code>UserPermissions</code> non è un set senza regole;</li>
+<li><code>LanguageCode</code> non è una lingua scritta come testo libero;</li>
+<li><code>UserTheme</code> non è una stringa arbitraria.</li>
 </ul>
 <p>Questa scelta rende il dominio più chiaro, leggibile e sicuro.</p>
 <h2 id="2-5-perché-user-non-contiene-patenti-o-abilitazioni">2.5 Perché User non contiene patenti o abilitazioni</h2>
@@ -886,7 +891,7 @@
 <p>È usato soprattutto da dispatcher e manager.</p>
 <p>Contiene:</p>
 <ul>
-<li>codice;</li>
+<li><code>OperationalScopeCode</code>, cioè il codice dell'ambito operativo;</li>
 <li>nome;</li>
 <li>descrizione;</li>
 <li>area.</li>
@@ -901,6 +906,7 @@
 <li>Fleet operations.</li>
 </ul>
 <p>Lo scope permette di dire dove o su cosa una figura ha responsabilità.</p>
+<p>Il codice dello scope non è più una semplice <code>String</code>: è modellato tramite <code>OperationalScopeCode</code>. Il campo <code>area</code> rimane invece descrittivo e flessibile.</p>
 <h3 id="operationalstatus"><code>OperationalStatus</code></h3>
 <p><code>OperationalStatus</code> rappresenta lo stato operativo.</p>
 <p>I valori sono:</p>
@@ -4498,9 +4504,9 @@ OTHER</code></pre>
 <h2 id="10-giurisdizione">10. Giurisdizione</h2>
 <p><code>ComplianceJurisdiction</code> descrive l&#x27;ambito di validità concettuale del requisito.</p>
 <pre><code>ComplianceJurisdiction
-├─ country
-├─ region
-├─ scope
+├─ Optional&lt;CountryCode&gt; country
+├─ Optional&lt;JurisdictionRegion&gt; region
+├─ ComplianceJurisdictionScope scope
 └─ notes</code></pre>
 <p>Esempi:</p>
 <pre><code>country = IT
@@ -4510,6 +4516,8 @@ scope = EUROPEAN_UNION</code></pre>
 <pre><code>scope = COMPANY_INTERNAL</code></pre>
 <p>La giurisdizione non calcola se una norma vale oggi, non gestisce date di validità e non applica automaticamente regole diverse per Stato.</p>
 <p>Descrive solo l&#x27;ambito concettuale del requisito.</p>
+<p><code>CountryCode</code> rappresenta un paese specifico, per esempio <code>IT</code>, <code>FR</code> o <code>DE</code>. <code>JurisdictionRegion</code> rappresenta un'area geografica o normativa ampia, per esempio <code>EU</code> o <code>EMEA</code>. <code>ComplianceJurisdictionScope</code> rappresenta il livello della giurisdizione, per esempio <code>NATIONAL</code>, <code>EUROPEAN_UNION</code> o <code>COMPANY_INTERNAL</code>.</p>
+<p>La logica applicativa del tipo “scelgo Europa, vedo le nazioni europee e il paese predefinito è Italia” non appartiene al dominio puro. Verrà gestita più avanti da application layer, configurazione aziendale o interfaccia utente.</p>
 <hr>
 <h2 id="11-invarianti-principali">11. Invarianti principali</h2>
 <p>Le invarianti principali sono:</p>
@@ -4627,7 +4635,7 @@ ComplianceSeverity = severità</code></pre>
 <p>Le regole qui descritte servono a mantenere il dominio coerente, pulito, disaccoppiato e pronto per essere utilizzato dal livello application.</p>
 <p>Questo documento rappresenta la base della <strong><span class="term" data-it="fondazione del dominio puro TruckFlow versione 1.0">TruckFlow Domain Foundation v1.0</span></strong>. Dopo la prima review correttiva, le regole qui descritte sono state applicate a interventi mirati su mutazioni di stato, eccezioni custom, codici aziendali, test di catalogo e pulizia del <span class="term" data-it="repository">repository</span>.</p>
 <h2 id="2-stato-della-domain-review-finale">2. Stato della Domain Review Finale</h2>
-<p>La <strong>Domain Review Finale</strong> è stata avviata e la prima review correttiva del dominio puro è stata completata con sette interventi mirati.</p>
+<p>La <strong>Domain Review Finale</strong> è stata avviata e la prima review correttiva del dominio puro è stata completata con otto interventi mirati.</p>
 <p>Questa fase ha rafforzato il dominio, ma non sostituisce le future review che saranno necessarie quando verranno introdotti application layer, <span class="term" data-it="repository">repository</span>, API, <span class="term" data-it="flusso operativo">workflow</span>, audit, planning e dispatching.</p>
 <h2 id="3-confini-del-dominio">3. Confini del dominio</h2>
 <p>Ogni dominio deve contenere solo concetti propri.</p>
@@ -4892,7 +4900,7 @@ it.gabriele.truckflow.domain.compliance.exceptions
 <li>documentazione aggiornata.</li>
 </ul>
 <h2 id="14-roadmap-successiva">14. Roadmap successiva</h2>
-<p>La prima review correttiva del dominio puro è stata completata con sette interventi mirati, documentati in <a href="14-domain-review-patches.md"><code>14-domain-review-patches.md</code></a>.</p>
+<p>La prima review correttiva del dominio puro è stata completata con otto interventi mirati, documentati in <a href="14-domain-review-patches.md"><code>14-domain-review-patches.md</code></a>.</p>
 <p>La roadmap successiva consigliata è:</p>
 <ol>
 <li>mantenere verdi formattazione e test con <code>mvn spotless:apply</code> e <code>mvn clean test</code>;</li>
@@ -5123,7 +5131,16 @@ VehicleCombination non possiede una LicensePlate.</code></pre>
 <p>Il tipo <code>VehicleIdentificationNumber</code> fa lo stesso per l&#x27;identificativo tecnico del mezzo.</p>
 <p>Il modello diventa più coerente con gli altri <span class="term" data-it="oggetto valore">value object</span> già presenti nel progetto, come <code>FleetCode</code>, <code>CargoCode</code>, <code>ShipmentCode</code>, <code>LocationCode</code>, <code>DocumentCode</code> e <code>ComplianceRequirementCode</code>.</p>
 <hr>
-<h2 id="10-stato-finale-dopo-i-sette-interventi">10. Stato finale dopo i sette interventi</h2>
+<h2 id="10-intervento-8-rafforzare-giurisdizione-scope-operativi-e-preferenze-utente">10. Intervento 8 — Rafforzare giurisdizione, scope operativi e preferenze utente</h2>
+<h3 id="problema-8">Problema</h3>
+<p>Durante la pulizia finale del dominio puro erano rimasti alcuni concetti modellati come stringhe libere: <code>UserPreferences.language</code>, <code>UserPreferences.theme</code>, <code>ComplianceJurisdiction.country</code>, <code>ComplianceJurisdiction.region</code>, <code>ComplianceJurisdiction.scope</code> e <code>OperationalScope.code</code>.</p>
+<h3 id="correzione-8">Correzione</h3>
+<p>Sono stati introdotti <code>LanguageCode</code>, <code>UserTheme</code>, <code>CountryCode</code>, <code>JurisdictionRegion</code>, <code>ComplianceJurisdictionScope</code> e <code>OperationalScopeCode</code>.</p>
+<p>La giurisdizione distingue ora tra scope, region e country. La logica futura “Europa -&gt; lista nazioni -&gt; Italia come default” resta fuori dal dominio puro.</p>
+<h3 id="perché-è-importante-8">Perché è importante</h3>
+<p>Questa correzione riduce primitive obsession senza introdurre overengineering e senza creare codici inutili solo per simmetria.</p>
+<hr>
+<h2 id="11-stato-finale-dopo-gli-otto-interventi">11. Stato finale dopo gli otto interventi</h2>
 <p>Dopo questi interventi, il dominio puro di TruckFlow risulta più solido perché:</p>
 <ul>
 <li>le modifiche di stato sono più sicure;</li>
@@ -5132,6 +5149,7 @@ VehicleCombination non possiede una LicensePlate.</code></pre>
 <li>i test del catalogo qualificazioni sono meno fragili;</li>
 <li>il <span class="term" data-it="repository">repository</span> è più pulito;</li>
 <li>targa e VIN sono modellati come <span class="term" data-it="oggetto valore">value object</span> nel dominio veicoli;</li>
+<li>giurisdizione, scope operativi e preferenze utente usano concetti più espliciti;</li>
 <li>la documentazione architetturale è più allineata al codice reale.</li>
 </ul>
 <p>Questa fase non introduce ancora:</p>
@@ -5149,7 +5167,7 @@ VehicleCombination non possiede una LicensePlate.</code></pre>
 <p>Il risultato corretto è:</p>
 <pre><code>TruckFlow Domain Foundation v1.0 rafforzata dalla prima review correttiva del dominio puro.</code></pre>
 <hr>
-<h2 id="11-prossimo-passo-consigliato">11. Prossimo passo consigliato</h2>
+<h2 id="12-prossimo-passo-consigliato">12. Prossimo passo consigliato</h2>
 <p>Il prossimo passo naturale è preparare il livello <code>application</code>.</p>
 <p>Prima di introdurre API REST o database, conviene definire:</p>
 <ul>

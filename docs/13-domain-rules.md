@@ -10,7 +10,7 @@ Questo documento rappresenta la base della **TruckFlow Domain Foundation v1.0**.
 
 ## 2. Stato della Domain Review Finale
 
-La **Domain Review Finale** è stata avviata e la prima review correttiva del dominio puro è stata completata con sette interventi mirati.
+La **Domain Review Finale** è stata avviata e la prima review correttiva del dominio puro è stata completata con otto interventi mirati.
 
 Questa fase ha rafforzato il dominio, ma non sostituisce le future review che saranno necessarie quando verranno introdotti application layer, repository, API, workflow, audit, planning e dispatching.
 
@@ -80,6 +80,8 @@ Non bisogna unificare value object simili se hanno significato diverso nei rispe
 I codici aziendali interni devono essere obbligatori quando rappresentano l'identificativo leggibile usato dall'azienda, come `OperationalCode`, `FleetCode`, `CargoCode`, `ShipmentCode`, `DocumentCode` e `ComplianceRequirementCode`.
 
 Anche gli identificativi tecnici o ufficiali del mezzo non devono rimanere primitive generiche. Nel dominio veicoli, `LicensePlate` e `VehicleIdentificationNumber` sono value object dedicati, non semplici `String`.
+
+La stessa regola vale per altri concetti con semantica propria: `LanguageCode`, `UserTheme`, `CountryCode`, `JurisdictionRegion`, `ComplianceJurisdictionScope` e `OperationalScopeCode` non devono essere trattati come stringhe libere.
 
 Esempi:
 
@@ -305,6 +307,16 @@ Questi file dipendono dall'ambiente locale dello sviluppatore o da operazioni te
 
 La regola operativa è: il repository deve contenere solo codice sorgente, test, configurazioni condivise realmente necessarie e documentazione ufficiale.
 
+## 12.2 Primitive obsession e Value Object leggeri
+
+Non ogni `String` è sbagliata. Campi descrittivi come `name`, `description`, `notes`, `title`, `statement` o `expectedCondition` possono restare testo libero.
+
+Una `String` diventa problematica quando rappresenta un concetto di dominio con regole proprie, come paese, scope, lingua, tema, targa, VIN o codice operativo.
+
+In questi casi il dominio deve preferire value object o enum dedicati.
+
+La logica di configurazione o interfaccia utente non deve entrare nel dominio puro. Per esempio, la scelta futura "Europa -> lista nazioni -> Italia come paese predefinito" appartiene ad application layer, configurazione aziendale o UI, non a `ComplianceJurisdiction`.
+
 ## 13. Checklist finale
 
 Prima di chiudere la review del dominio puro verificare:
@@ -325,7 +337,7 @@ Prima di chiudere la review del dominio puro verificare:
 
 ## 14. Roadmap successiva
 
-La prima review correttiva del dominio puro è stata completata con sette interventi mirati, documentati in [`14-domain-review-patches.md`](14-domain-review-patches.md).
+La prima review correttiva del dominio puro è stata completata con otto interventi mirati, documentati in [`14-domain-review-patches.md`](14-domain-review-patches.md).
 
 La roadmap successiva consigliata è:
 

@@ -4,6 +4,7 @@ import it.gabriele.truckflow.domain.operational.common.OperationalCode;
 import it.gabriele.truckflow.domain.operational.common.OperationalMetadata;
 import it.gabriele.truckflow.domain.operational.common.OperationalProfile;
 import it.gabriele.truckflow.domain.operational.common.OperationalScope;
+import it.gabriele.truckflow.domain.operational.common.OperationalScopeCode;
 import it.gabriele.truckflow.domain.operational.common.OperationalStatus;
 import it.gabriele.truckflow.domain.operational.exceptions.InvalidManagerException;
 import it.gabriele.truckflow.domain.users.UserId;
@@ -79,7 +80,7 @@ public final class Manager {
   }
 
   public boolean hasScope(String code) {
-    String normalizedCode = requireText(code, "code").toUpperCase();
+    OperationalScopeCode normalizedCode = OperationalScopeCode.of(code);
     return scopes.stream().anyMatch(scope -> scope.code().equals(normalizedCode));
   }
 

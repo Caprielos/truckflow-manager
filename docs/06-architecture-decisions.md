@@ -581,7 +581,15 @@ Ogni requisito di compliance può avere una fonte e una giurisdizione.
 
 `ComplianceJurisdiction` indica l'ambito concettuale in cui il requisito vale, per esempio Italia, Unione Europea, ambito internazionale, policy interna aziendale o requisito specifico cliente.
 
+La giurisdizione è stata rafforzata con tre concetti espliciti:
+
+- `CountryCode`, per il paese specifico, per esempio `IT`, `FR` o `DE`;
+- `JurisdictionRegion`, per un'area geografica o normativa ampia, per esempio `EU` o `EMEA`;
+- `ComplianceJurisdictionScope`, per il livello della giurisdizione, per esempio `NATIONAL`, `EUROPEAN_UNION` o `COMPANY_INTERNAL`.
+
 Questi concetti non applicano automaticamente la legge e non gestiscono date di validità. Servono solo a descrivere il requisito in modo enterprise e scalabile.
+
+La logica di selezione futura, come "Europa -> lista nazioni -> Italia come default", appartiene ad application layer, configurazione o interfaccia utente, non al dominio puro.
 
 ## 6.34 Decisione: formalizzare TruckFlow Domain Foundation v1.0
 
@@ -700,3 +708,15 @@ Anche VIN, numero telaio o identificativo tecnico del mezzo non devono rimanere 
 Per questo viene introdotto `VehicleIdentificationNumber`, un value object dedicato alla rappresentazione dell'identificativo tecnico della singola `VehicleUnit`.
 
 Questa scelta evita primitive obsession e rende il dominio veicoli più coerente con gli altri identificativi già modellati come value object, come `FleetCode`, `CargoCode`, `ShipmentCode`, `DocumentCode` e `ComplianceRequirementCode`.
+
+## 6.44 Decisione: rafforzare giurisdizione, scope operativi e preferenze utente
+
+Durante la pulizia finale del dominio puro sono stati rafforzati alcuni concetti che erano ancora rappresentati da stringhe libere.
+
+Nel dominio users, `UserPreferences` usa ora `LanguageCode` e `UserTheme` per evitare che lingua e tema siano valori arbitrari.
+
+Nel dominio compliance, `ComplianceJurisdiction` usa ora `CountryCode`, `JurisdictionRegion` e `ComplianceJurisdictionScope` per separare paese, area geografica o normativa e livello della giurisdizione.
+
+Nel dominio operational, `OperationalScope` usa ora `OperationalScopeCode` per rappresentare il codice dello scope operativo.
+
+Queste modifiche non introducono logica applicativa, UI, default aziendali o configurazioni dinamiche. Rafforzano solo il linguaggio del dominio e riducono primitive obsession.

@@ -128,7 +128,7 @@ Non contiene scadenze o documenti. Quelli verranno gestiti in moduli futuri.
 
 Contiene:
 
-- codice;
+- `OperationalScopeCode`, cioè il codice dell'ambito operativo;
 - nome;
 - descrizione;
 - area.
@@ -143,6 +143,12 @@ Esempi:
 - Fleet operations.
 
 Lo scope permette di dire dove o su cosa una figura ha responsabilità.
+
+Il codice dello scope non è più una semplice `String`: è modellato tramite `OperationalScopeCode`.
+
+Questa scelta rende il modello coerente con gli altri codici aziendali del dominio, come `OperationalCode`, `FleetCode`, `CargoCode`, `ShipmentCode`, `LocationCode`, `DocumentCode` e `ComplianceRequirementCode`.
+
+Il campo `area` rimane invece descrittivo e flessibile. Non viene trasformato subito in enum, perché può indicare aree operative diverse come North Italy, ADR operations, Warehouse A, Fleet operations o International transport.
 
 ### `OperationalStatus`
 
