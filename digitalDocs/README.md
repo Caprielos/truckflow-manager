@@ -46,4 +46,11 @@ This digital documentation mirrors:
 - `docs/12-domain-compliance.md`
 - `docs/13-domain-rules.md`
 - `docs/14-domain-review-patches.md`
+- `docs/15-domain-test-suite-review.md`
+- `docs/16-application-layer-blueprint.md`
 - `command_basic.md`
+
+
+## Application layer blueprint
+
+The digital documentation now also mirrors the Punto 6A application layer blueprint. This step explains the intended structure for command, result, port in, port out, use cases, repository ports, in-memory repositories and application tests before introducing REST APIs or databases.

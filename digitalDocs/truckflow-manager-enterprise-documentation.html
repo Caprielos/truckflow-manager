@@ -469,6 +469,7 @@
         <a href="#domini">Domini</a>
         <a href="#architettura">Architettura</a>
         <a href="#roadmap">Roadmap</a>
+        <a href="#application-layer">Application Layer</a>
         <a href="#enterprise">Enterprise</a>
         <a href="#business">Business</a>
       </nav>
@@ -478,9 +479,9 @@
   <div class="hero">
     <div class="hero-inner">
       <div>
-        <div class="eyebrow">Documentazione professionale • Domain Foundation • Roadmap Enterprise</div>
+        <div class="eyebrow">Documentazione professionale • Domain Foundation • Application Layer Blueprint</div>
         <h1>TruckFlow Manager — Documentazione Enterprise</h1>
-        <p>Una panoramica completa, tecnica e commerciale, del progetto TruckFlow Manager: cosa fa oggi, perché è progettato in questo modo, quali domini contiene e quali moduli dovranno essere aggiunti per evolvere in una piattaforma enterprise completa per trasporto, logistica e gestione flotta.</p>
+        <p>Una panoramica completa, tecnica e commerciale, del progetto TruckFlow Manager: cosa fa oggi, perché è progettato in questo modo, quali domini contiene, come inizia l’application layer e quali moduli dovranno essere aggiunti per evolvere in una piattaforma enterprise completa per trasporto, logistica e gestione flotta.</p>
         <div class="hero-actions">
           <a class="button primary" href="#overview">Inizia dalla visione</a>
           <a class="button" href="#roadmap">Vai alla roadmap</a>
@@ -493,8 +494,8 @@
           <li><span>Dominio puro</span><span class="badge done">Stabile</span></li>
           <li><span>Value Object principali</span><span class="badge done">Rafforzati</span></li>
           <li><span>Eccezioni custom</span><span class="badge done">Applicate</span></li>
-          <li><span>Revisione test dominio</span><span class="badge now">In consolidamento</span></li>
-          <li><span>Application layer</span><span class="badge planned">Prossimo step</span></li>
+          <li><span>Revisione test dominio</span><span class="badge done">Completata</span></li>
+          <li><span>Application layer</span><span class="badge now">Blueprint in corso</span></li>
         </ul>
       </aside>
     </div>
@@ -511,10 +512,11 @@
         <li><a href="#architettura">5. Architettura del dominio</a></li>
         <li><a href="#requisiti-attuali">6. Requisiti attuali</a></li>
         <li><a href="#roadmap">7. Roadmap ufficiale</a></li>
-        <li><a href="#enterprise">8. Evoluzione enterprise</a></li>
-        <li><a href="#business">9. Presentazione commerciale</a></li>
-        <li><a href="#fatto-manca">10. Fatto, manca, perché</a></li>
-        <li><a href="#conclusione">11. Conclusione</a></li>
+        <li><a href="#application-layer">8. Application Layer Blueprint</a></li>
+        <li><a href="#enterprise">9. Evoluzione enterprise</a></li>
+        <li><a href="#business">10. Presentazione commerciale</a></li>
+        <li><a href="#fatto-manca">11. Fatto, manca, perché</a></li>
+        <li><a href="#conclusione">12. Conclusione</a></li>
       </ol>
     </aside>
 
@@ -737,7 +739,7 @@
 
       <section id="roadmap" class="soft">
         <h2>7. Roadmap ufficiale del progetto</h2>
-        <p class="lead">La roadmap reale riflette il lavoro svolto finora: prima il dominio, poi la sua stabilizzazione, poi i test, infine l’application layer.</p>
+        <p class="lead">La roadmap reale riflette il lavoro svolto finora: prima il dominio, poi la sua stabilizzazione, poi i test, ora il blueprint dell’application layer.</p>
         <div class="timeline">
           <div class="timeline-item">
             <div><span class="badge done">Completato</span><div class="milestone">Punto 1</div></div>
@@ -756,20 +758,24 @@
             <div><h3>Aggiornamento documentazione</h3><p>Allineamento delle regole del dominio, delle decisioni architetturali e della documentazione delle patch correttive.</p></div>
           </div>
           <div class="timeline-item">
-            <div><span class="badge now">In chiusura</span><div class="milestone">Punto 5</div></div>
+            <div><span class="badge done">Completato</span><div class="milestone">Punto 5</div></div>
             <div><h3>Pulizia finale del dominio puro</h3><p>Rafforzamento dei value object, controllo primitive obsession, revisione confini, test suite review, pulizia file e verifica generale prima dell’application layer.</p></div>
           </div>
           <div class="timeline-item">
-            <div><span class="badge planned">Prossimo</span><div class="milestone">Punto 6</div></div>
-            <div><h3>Application Layer</h3><p>Introduzione graduale dei casi d’uso, delle porte in ingresso e delle porte repository in uscita, senza partire da controller o database.</p></div>
+            <div><span class="badge now">In corso</span><div class="milestone">Punto 6A</div></div>
+            <div><h3>Application Layer Blueprint</h3><p>Definizione professionale di struttura application, command, result, port in, port out, use case, repository in memory, eccezioni applicative e test strategy.</p></div>
+          </div>
+          <div class="timeline-item">
+            <div><span class="badge planned">Pianificato</span><div class="milestone">Punto 6B–6F</div></div>
+            <div><h3>Foundation e primi use case</h3><p>Creazione progressiva di package application, repository port, repository in memory, use case e test applicativi sul primo flusso Locations + Cargo + Shipments.</p></div>
           </div>
         </div>
         <h3>Obiettivi a breve termine</h3>
         <ul>
-          <li>chiudere la revisione finale della test suite del dominio puro;</li>
           <li>mantenere verdi test e formattazione;</li>
-          <li>allineare branch di lavoro e main;</li>
-          <li>iniziare application layer con use case piccoli e chiari.</li>
+          <li>usare il blueprint del Punto 6A come guida ufficiale;</li>
+          <li>creare la foundation applicativa senza introdurre ancora web o database;</li>
+          <li>iniziare use case piccoli e chiari partendo da Locations + Cargo + Shipments.</li>
         </ul>
         <h3>Obiettivi a medio termine</h3>
         <ul>
@@ -780,8 +786,35 @@
         </ul>
       </section>
 
+
+      <section id="application-layer">
+        <h2>8. Application Layer Blueprint</h2>
+        <p class="lead">Il nuovo step ufficiale del progetto è il Punto 6A. Questa fase non introduce ancora REST API, database o framework: definisce il livello che orchestrerà il dominio tramite casi d’uso applicativi.</p>
+        <div class="grid two">
+          <div class="card">
+            <h3>Responsabilità</h3>
+            <p>L’application layer riceve richieste applicative, carica gli aggregate necessari tramite repository astratti, chiama il dominio, salva il risultato e restituisce una risposta leggibile.</p>
+          </div>
+          <div class="card">
+            <h3>Componenti previsti</h3>
+            <p>La struttura prevista comprende command, result, port in, port out, use case, application service, eccezioni applicative, repository port e repository in memory per sviluppo e test.</p>
+          </div>
+          <div class="card">
+            <h3>Primo flusso</h3>
+            <p>Il primo blocco consigliato è Locations + Cargo + Shipments: registrare location, registrare cargo, creare una shipment, aggiungere item e tratta, poi confermare la shipment.</p>
+          </div>
+          <div class="card">
+            <h3>Cosa resta fuori</h3>
+            <p>Controller REST, DTO web, JPA, database, JWT, planning, dispatching, tracking, workflow documentali e compliance check concreti restano fuori da questo step.</p>
+          </div>
+        </div>
+        <div class="callout">
+          <p><strong>Principio guida:</strong> il dominio decide se un oggetto è valido; l’application layer decide quando caricarlo, come orchestrarlo e dove salvarlo tramite porte astratte.</p>
+        </div>
+      </section>
+
       <section id="enterprise">
-        <h2>8. Requisiti futuri per una piattaforma enterprise completa</h2>
+        <h2>9. Requisiti futuri per una piattaforma enterprise completa</h2>
         <p class="lead">TruckFlow Manager ha una fondazione pronta per crescere. Per diventare una piattaforma enterprise completa dovrà introdurre moduli applicativi e infrastrutturali separati, ognuno con responsabilità chiare.</p>
         <div class="grid two">
           <div class="card"><h3>Planning & Dispatching</h3><p>Assegnazione reale di veicoli, combinazioni, autisti, cargo, orari e tratte. Gestirà compatibilità cargo‑vehicle, qualificazioni autista, vincoli di capacità e priorità delle shipment.</p></div>
@@ -798,7 +831,7 @@
       </section>
 
       <section id="business" class="soft">
-        <h2>9. Presentazione commerciale del progetto</h2>
+        <h2>10. Presentazione commerciale del progetto</h2>
         <p class="lead">TruckFlow Manager può essere presentato come una piattaforma gestionale moderna per aziende che vogliono governare trasporto, logistica e flotta con un modello strutturato e scalabile.</p>
         <div class="quote">TruckFlow Manager non nasce come semplice archivio mezzi. Nasce come fondazione enterprise per controllare mezzi, merci, spedizioni, documenti, compliance e persone operative con coerenza e visione di crescita.</div>
         <div class="grid two">
@@ -836,14 +869,15 @@
       </section>
 
       <section id="fatto-manca">
-        <h2>10. Cosa è fatto, cosa manca e perché</h2>
+        <h2>11. Cosa è fatto, cosa manca e perché</h2>
         <div class="table-wrap">
           <table>
             <thead><tr><th>Area</th><th>Stato</th><th>Motivo</th></tr></thead>
             <tbody>
               <tr><td>Domain Foundation</td><td><span class="badge done">Fatto</span></td><td>Il dominio puro è modellato, documentato e rafforzato con value object, eccezioni custom e invarianti.</td></tr>
-              <tr><td>Test suite del dominio</td><td><span class="badge now">In consolidamento</span></td><td>Sono stati aggiunti test trasversali di architettura e contratti value object. La suite va mantenuta verde prima di chiudere il Punto 5.</td></tr>
-              <tr><td>Application Layer</td><td><span class="badge planned">Da iniziare</span></td><td>Arriva dopo il dominio, perché deve orchestrare casi d’uso usando regole già solide.</td></tr>
+              <tr><td>Test suite del dominio</td><td><span class="badge done">Completata</span></td><td>Sono stati aggiunti test trasversali di architettura e contratti value object. La suite va mantenuta verde durante ogni evoluzione.</td></tr>
+              <tr><td>Application Layer Blueprint</td><td><span class="badge now">In corso</span></td><td>È stato documentato il Punto 6A per definire struttura, responsabilità, package, use case e strategia di test prima del codice applicativo.</td></tr>
+              <tr><td>Application Foundation</td><td><span class="badge planned">Prossimo</span></td><td>Creerà package application, eccezioni applicative, command, result e prime porte.</td></tr>
               <tr><td>Database e repository reali</td><td><span class="badge planned">Futuro</span></td><td>Non vanno introdotti prima dei repository port e dei use case applicativi.</td></tr>
               <tr><td>API REST</td><td><span class="badge planned">Futuro</span></td><td>Le API devono esporre casi d’uso stabili, non accedere direttamente al dominio in modo improvvisato.</td></tr>
               <tr><td>Planning & Dispatching</td><td><span class="badge planned">Futuro</span></td><td>È il modulo che assegnerà risorse reali e verificherà compatibilità operative.</td></tr>
@@ -858,10 +892,10 @@
       </section>
 
       <section id="conclusione" class="soft">
-        <h2>11. Conclusione</h2>
+        <h2>12. Conclusione</h2>
         <p class="lead">TruckFlow Manager è oggi una fondazione di dominio solida per una futura piattaforma enterprise di trasporto e logistica.</p>
-        <p>Il progetto descrive i principali concetti aziendali con confini chiari, value object espressivi, invarianti protetti, eccezioni custom e documentazione strutturata. La fase attuale non mira ad aggiungere nuove funzionalità operative, ma a chiudere il dominio puro e prepararlo al passo successivo: l’application layer.</p>
-        <p>La direzione futura è costruire gradualmente una piattaforma completa: prima use case applicativi e repository port, poi infrastructure, API, workflow, planning, dispatching, document management avanzato, tracking, analytics e integrazioni enterprise.</p>
+        <p>Il progetto descrive i principali concetti aziendali con confini chiari, value object espressivi, invarianti protetti, eccezioni custom e documentazione strutturata. La fase attuale non mira ad aggiungere nuove funzionalità operative, ma a usare il dominio puro come base per progettare e poi implementare l’application layer.</p>
+        <p>La direzione futura è costruire gradualmente una piattaforma completa: prima blueprint e use case applicativi, poi repository port e repository in memory, quindi infrastructure, API, workflow, planning, dispatching, document management avanzato, tracking, analytics e integrazioni enterprise.</p>
         <div class="pill-list">
           <span class="pill">Domain-first</span>
           <span class="pill">Enterprise-ready foundation</span>

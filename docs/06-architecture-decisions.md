@@ -720,3 +720,23 @@ Nel dominio compliance, `ComplianceJurisdiction` usa ora `CountryCode`, `Jurisdi
 Nel dominio operational, `OperationalScope` usa ora `OperationalScopeCode` per rappresentare il codice dello scope operativo.
 
 Queste modifiche non introducono logica applicativa, UI, default aziendali o configurazioni dinamiche. Rafforzano solo il linguaggio del dominio e riducono primitive obsession.
+
+## Decisione architetturale — Application Layer prima di Web e Database
+
+Dopo il dominio puro, TruckFlow Manager introduce l'application layer come secondo livello architetturale.
+
+La decisione è costruire prima use case, command, result, port in, port out, repository astratti e repository in memory, rimandando controller REST, JPA, database, sicurezza avanzata e integrazioni.
+
+Questa scelta mantiene il dominio indipendente, evita controller che manipolano direttamente gli aggregate e prepara una Clean Architecture ordinata:
+
+```text
+web / api / jobs
+        ↓
+application
+        ↓
+domain
+        ↑
+infrastructure implementa le port out definite dall'application layer
+```
+
+L'application layer potrà dipendere dal dominio. Il dominio non potrà dipendere dall'application layer. L'infrastructure potrà implementare le porte definite dall'application layer.

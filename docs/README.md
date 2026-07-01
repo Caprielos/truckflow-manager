@@ -1,8 +1,8 @@
 # TruckFlow Manager — Documentazione del dominio
 
-Questa cartella contiene la documentazione del dominio puro di TruckFlow Manager.
+Questa cartella contiene la documentazione ufficiale di TruckFlow Manager, con la fondazione del dominio puro e il blueprint del primo application layer.
 
-Il progetto, allo stato attuale, è concentrato sul **domain layer** e contiene i seguenti package principali:
+Il progetto ha completato la fondazione del **domain layer** e sta iniziando la progettazione dell'**application layer**. La fondazione di dominio contiene i seguenti package principali:
 
 - `domain.users`
 - `domain.qualifications`
@@ -15,7 +15,7 @@ Il progetto, allo stato attuale, è concentrato sul **domain layer** e contiene 
 - `domain.documents`
 - `domain.compliance`
 
-L’obiettivo di questa documentazione è spiegare in italiano, in modo chiaro e professionale, **perché il dominio è stato modellato così**, quali scelte sono state fatte e cosa ogni package rappresenta.
+L’obiettivo di questa documentazione è spiegare in italiano, in modo chiaro e professionale, **perché il dominio è stato modellato così**, quali scelte sono state fatte, cosa ogni package rappresenta e come il progetto sta preparando il livello applicativo.
 
 
 ## Documentazione digitale HTML + CSS
@@ -48,6 +48,7 @@ I nomi tecnici rimangono in inglese e allineati al codice Java.
 13. [`13-domain-rules.md`](13-domain-rules.md) — regole ufficiali della TruckFlow Domain Foundation v1.0 e roadmap della domain review.
 14. [`14-domain-review-patches.md`](14-domain-review-patches.md) — riepilogo degli interventi correttivi eseguiti durante la prima review concreta del dominio puro.
 15. [`15-domain-test-suite-review.md`](15-domain-test-suite-review.md) — revisione finale della test suite del dominio puro, con cosa è stato aggiunto, cosa manca e perché.
+16. [`16-application-layer-blueprint.md`](16-application-layer-blueprint.md) — blueprint del Punto 6A: obiettivi, struttura, package, use case, repository port, repository in memory, test strategy e roadmap dell'application layer.
 
 ## Stato del progetto documentato
 
@@ -65,7 +66,8 @@ Questa documentazione descrive la versione del progetto in cui il dominio contie
 - dominio compliance per descrivere requisiti astratti di conformità, categorie, livelli di obbligatorietà, severità, target, regole, fonti e giurisdizioni senza introdurre controlli automatici, workflow, audit, scadenze o risultati di verifica.
 - regole ufficiali di dominio per guidare la TruckFlow Domain Foundation v1.0, la review finale del dominio puro e l'introduzione graduale delle eccezioni custom;
 - prima review correttiva del dominio puro completata con otto interventi mirati: mutazioni atomiche, eccezioni custom, `OperationalCode` obbligatorio, test catalogo qualificazioni meno fragili, pulizia dei file locali/generati e introduzione di `LicensePlate` e `VehicleIdentificationNumber` come value object del dominio veicoli, più `LanguageCode`, `UserTheme`, `CountryCode`, `JurisdictionRegion`, `ComplianceJurisdictionScope` e `OperationalScopeCode` per ridurre primitive obsession;
-- revisione finale della test suite del dominio puro documentata in `15-domain-test-suite-review.md`, con test architetturali, test contrattuali dei value object, casi limite cargo e shipment e spiegazione esplicita di cosa rimane fuori perché appartiene a moduli futuri.
+- revisione finale della test suite del dominio puro documentata in `15-domain-test-suite-review.md`, con test architetturali, test contrattuali dei value object, casi limite cargo e shipment e spiegazione esplicita di cosa rimane fuori perché appartiene a moduli futuri;
+- blueprint del primo application layer documentato in `16-application-layer-blueprint.md`, che definisce struttura, responsabilità, package, command, result, port, use case, repository in memory e test strategy prima di introdurre codice applicativo.
 
 
 ## Nota sul packaging di `domain.vehicles`
@@ -184,3 +186,11 @@ Le regole principali sono:
 Il documento `15-domain-test-suite-review.md` descrive la revisione finale della test suite del dominio puro.
 
 Spiega cosa è stato aggiunto nei test, perché sono stati aggiunti test architetturali e test contrattuali dei value object, quali invarianti sono stati rafforzati e quali aree non vengono ancora testate perché appartengono a moduli futuri come availability, maintenance, planning, dispatching, workflow documentali e compliance check concreti.
+
+## Nota su `docs/16-application-layer-blueprint.md`
+
+Il documento `16-application-layer-blueprint.md` apre ufficialmente il Punto 6A.
+
+Non introduce ancora controller REST, database, JPA, Spring, API o workflow operativi. Definisce invece come TruckFlow Manager dovrà costruire il livello che orchestra il dominio: command, result, port in, port out, application service, eccezioni applicative, repository astratti, repository in memory e test dei casi d'uso.
+
+Il primo blocco applicativo consigliato è `Locations + Cargo + Shipments`, perché permette di costruire un flusso reale senza anticipare planning, dispatching, tracking o compatibilità cargo-veicolo operative.

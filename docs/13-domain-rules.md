@@ -351,3 +351,15 @@ La roadmap successiva consigliata è:
 6. iniziare il livello `application` con use case piccoli, porte in ingresso e porte repository in uscita;
 7. introdurre `infrastructure.memory` solo come adattatore tecnico, senza riportare logica applicativa o infrastrutturale nel dominio;
 8. rimandare API REST, database e integrazioni esterne finché application layer e use case principali non sono stabili.
+
+## Handoff verso il Punto 6 — Application Layer
+
+La Domain Foundation non deve essere estesa all'infinito prima di iniziare il livello successivo. Dopo la pulizia finale, la review dei test e la documentazione enterprise, il progetto può passare al Punto 6A.
+
+Il nuovo step non modifica i confini del dominio: li usa. L'application layer dovrà orchestrare il dominio tramite casi d'uso, command, result e port repository, senza introdurre regole di business duplicate.
+
+Regola ufficiale:
+
+> Il dominio decide se un oggetto è valido. L'application layer decide quando caricarlo, come orchestrarlo e dove salvarlo tramite porte astratte.
+
+REST API, database, JPA, tracking, planning, dispatching, workflow documentali e compliance check concreti restano fuori dal Punto 6A.

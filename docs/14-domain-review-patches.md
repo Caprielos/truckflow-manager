@@ -423,3 +423,11 @@ domain -> application -> infrastructure -> api
 ```
 
 Il dominio deve rimanere stabile e protetto: i nuovi livelli dovranno consumare il dominio, non sporcarlo.
+
+## Passaggio successivo documentato — Punto 6A
+
+Dopo la review correttiva del dominio puro e la revisione finale della test suite, il progetto introduce `docs/16-application-layer-blueprint.md`.
+
+Questo non è un nuovo refactoring del dominio. È il documento di handoff verso il livello applicativo. Definisce come TruckFlow Manager dovrà organizzare use case, command, result, port in, port out, repository in memory, eccezioni applicative e test applicativi.
+
+La scelta protegge il lavoro fatto nel dominio: i futuri controller, database e moduli infrastrutturali dovranno passare dall'application layer e non manipolare direttamente gli aggregate in modo disordinato.

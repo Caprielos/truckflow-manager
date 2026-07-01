@@ -282,3 +282,11 @@ Il dominio rimane pronto per il prossimo passo:
 ```text
 Punto 6 — Application Layer
 ```
+
+## Collegamento con il Punto 6A
+
+La revisione della test suite del dominio puro prepara il progetto all'application layer.
+
+I test di dominio continuano a proteggere invarianti, value object, aggregate root, eccezioni custom e confini tra bounded context. I futuri test applicativi avranno invece un compito diverso: verificare che i casi d'uso orchestrino correttamente repository, command, result e aggregate già validati dal dominio.
+
+Per questo il nuovo documento `16-application-layer-blueprint.md` separa chiaramente test di dominio e test applicativi.

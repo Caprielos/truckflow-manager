@@ -1,6 +1,6 @@
-# TruckFlow Manager — Documentazione completa del dominio
+# TruckFlow Manager — Documentazione completa del progetto
 
-Questa è la pagina di ingresso della documentazione del dominio di TruckFlow Manager.
+Questa è la pagina di ingresso della documentazione ufficiale di TruckFlow Manager.
 
 La documentazione ufficiale aggiornata si trova nella cartella [`docs`](docs/README.md).
 
@@ -20,9 +20,9 @@ Il markup HTML resta identico in entrambi i casi. Cambia solo il CSS applicato d
 
 ## Stato attuale del dominio
 
-Il progetto è attualmente concentrato sul **domain layer puro**.
+Il progetto ha consolidato il **domain layer puro** e sta entrando nel **Punto 6A — Application Layer Blueprint**.
 
-La versione attuale rappresenta la **TruckFlow Domain Foundation v1.0** rafforzata dalla prima review correttiva del dominio puro. La fondazione è definita, le regole sono documentate e sono stati applicati interventi mirati su invarianti, eccezioni, codici aziendali, test e pulizia del repository.
+La versione attuale rappresenta la **TruckFlow Domain Foundation v1.0** rafforzata dalla prima review correttiva del dominio puro. La fondazione è definita, le regole sono documentate e sono stati applicati interventi mirati su invarianti, eccezioni, codici aziendali, test e pulizia del repository. Il passo successivo è progettare il livello applicativo che userà il dominio tramite casi d'uso, porte e repository astratti.
 
 I package principali sono:
 
@@ -57,6 +57,7 @@ Il dominio è stato costruito seguendo una regola precisa: modellare prima i con
 - [`docs/13-domain-rules.md`](docs/13-domain-rules.md) — regole ufficiali della TruckFlow Domain Foundation v1.0.
 - [`docs/14-domain-review-patches.md`](docs/14-domain-review-patches.md) — riepilogo degli interventi correttivi della prima review concreta del dominio puro.
 - [`docs/15-domain-test-suite-review.md`](docs/15-domain-test-suite-review.md) — revisione finale della test suite del dominio puro, con cosa è stato aggiunto, cosa manca e perché.
+- [`docs/16-application-layer-blueprint.md`](docs/16-application-layer-blueprint.md) — blueprint del Punto 6A, dedicato a struttura application, command, result, port, repository, use case e test applicativi.
 
 ## Regole fondamentali della Domain Foundation
 
@@ -100,13 +101,27 @@ Questi interventi non aggiungono nuove funzionalità operative, ma rendono il do
 
 Dopo questi interventi è stata aggiunta anche una revisione finale della test suite del dominio puro. Questa revisione introduce test architetturali sui confini tra domini, test contrattuali sui value object principali, casi limite aggiuntivi su cargo e shipment e un documento dedicato che chiarisce cosa è coperto e cosa rimane fuori perché appartiene a moduli futuri.
 
+È stato inoltre aggiunto il blueprint del Punto 6A. Questo nuovo step non implementa ancora il codice applicativo, ma definisce come dovranno essere organizzati use case, command, result, port in, port out, repository in memory, eccezioni applicative e test dell'application layer.
+
+
+
+## Punto 6A — Application Layer Blueprint
+
+Il nuovo step documentato è il Punto 6A.
+
+Questo step serve a progettare il livello applicativo prima di scrivere codice operativo. L'application layer dovrà orchestrare il dominio tramite casi d'uso, senza duplicare le regole di business e senza introdurre subito controller, database, JPA, Spring o API REST.
+
+La struttura prevista include command, result, port in, port out, application service, eccezioni applicative e repository astratti. Il primo flusso consigliato parte da Locations + Cargo + Shipments, perché permette di creare un caso d'uso reale mantenendo separati dominio, applicazione e infrastruttura.
+
 ## Prossimi step consigliati
 
 La roadmap consigliata è:
 
 1. verificare sul Mac `mvn spotless:apply` e `mvn clean test` dopo ogni intervento importante;
-2. mantenere aggiornata la documentazione `docs/13-domain-rules.md`, `docs/14-domain-review-patches.md` e `docs/15-domain-test-suite-review.md` quando cambiano regole, test o confini del dominio;
-3. iniziare il livello application con use case piccoli e chiari;
-4. introdurre porte in ingresso e porte repository in uscita;
-5. aggiungere repository in-memory per test e scenari;
-6. rimandare API REST, database e integrazioni esterne finché l'application layer non è stabile.
+2. mantenere aggiornata la documentazione `docs/13-domain-rules.md`, `docs/14-domain-review-patches.md`, `docs/15-domain-test-suite-review.md` e `docs/16-application-layer-blueprint.md` quando cambiano regole, test, confini o struttura applicativa;
+3. chiudere il Punto 6A con il blueprint dell'application layer;
+4. introdurre la foundation applicativa: package, eccezioni applicative, command e result;
+5. introdurre porte in ingresso e porte repository in uscita;
+6. aggiungere repository in-memory per test e scenari;
+7. implementare i primi use case piccoli e chiari, partendo da Locations + Cargo + Shipments;
+8. rimandare API REST, database e integrazioni esterne finché l'application layer non è stabile.
