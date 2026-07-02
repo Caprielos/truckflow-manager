@@ -582,3 +582,35 @@ Commit consigliato:
 git add -A
 git commit -m "Add Spring wiring foundation"
 ```
+
+---
+
+## Nota progetto — Punto 7D
+
+Il Punto 7D — Persistence Mapping Blueprint introduce il blueprint del mapping domain ↔ persistence.
+
+La patch aggiunge classi descrittive nel package `infrastructure.mapping`, un catalogo dei mapping blueprint per i contesti applicativi attivi e un test dedicato. Non introduce database, JPA, Spring Data, repository reali, schema SQL, controller REST o security.
+
+Dopo l'applicazione della patch, il controllo consigliato è:
+
+```bash
+mvn spotless:apply
+mvn spotless:check
+mvn clean test
+git status
+```
+
+Documenti e file principali da controllare:
+
+```bash
+ls docs/33-persistence-mapping-blueprint.md
+ls src/main/java/it/gabriele/truckflow/infrastructure/mapping
+ls src/test/java/it/gabriele/truckflow/infrastructure/mapping/PersistenceMappingBlueprintTest.java
+```
+
+Commit consigliato:
+
+```bash
+git add -A
+git commit -m "Add persistence mapping blueprint"
+```

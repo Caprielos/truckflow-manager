@@ -22,9 +22,9 @@ La documentazione digitale funziona anche come sistema di **Guided Links**: un i
 
 ## Stato attuale del dominio
 
-Il progetto ha consolidato il **domain layer puro**, ha completato il primo ciclo dell’application layer fino al **Punto 6M — Application Layer Final Review & Freeze**, ha aperto il **Punto 7A — Infrastructure Layer Blueprint**, ha applicato il **Punto 7B — Infrastructure Foundation** e ha introdotto il **Punto 7C — Spring Wiring Foundation** come wiring tecnico non web del nuovo ciclo infrastrutturale.
+Il progetto ha consolidato il **domain layer puro**, ha completato il primo ciclo dell’application layer fino al **Punto 6M — Application Layer Final Review & Freeze**, ha aperto il **Punto 7A — Infrastructure Layer Blueprint**, ha applicato il **Punto 7B — Infrastructure Foundation** e ha introdotto il **Punto 7C — Spring Wiring Foundation** come wiring tecnico non web del nuovo ciclo infrastrutturale e ha aggiunto il **Punto 7D — Persistence Mapping Blueprint** come blueprint neutro del mapping domain ↔ persistence.
 
-La versione attuale rappresenta la **TruckFlow Domain Foundation v1.0** rafforzata dalla prima review correttiva del dominio puro. La fondazione è definita, le regole sono documentate e sono stati applicati interventi mirati su invarianti, eccezioni, codici aziendali, test e pulizia del repository. Il Punto 6M ha chiuso la review/freeze finale del primo ciclo dell'application layer; il Punto 7A ha definito il blueprint dell'Infrastructure Layer; il Punto 7B ha introdotto la foundation tecnica con package, eccezioni e convenzioni infrastrutturali; il Punto 7C ha introdotto Spring come wiring tecnico non web, mantenendo domain e application privi di dipendenze framework. Ora l'application layer copre Locations, Cargo, Shipments, Documents, Vehicles, Operational Roles e Compliance base con command, result, port in, port out, service, repository in memory, test e documentazione allineati, senza introdurre ancora REST API, database, JPA, Spring Data, planning, tracking, audit trail, workflow, country engine operativo o controlli concreti di violazione.
+La versione attuale rappresenta la **TruckFlow Domain Foundation v1.0** rafforzata dalla prima review correttiva del dominio puro. La fondazione è definita, le regole sono documentate e sono stati applicati interventi mirati su invarianti, eccezioni, codici aziendali, test e pulizia del repository. Il Punto 6M ha chiuso la review/freeze finale del primo ciclo dell'application layer; il Punto 7A ha definito il blueprint dell'Infrastructure Layer; il Punto 7B ha introdotto la foundation tecnica con package, eccezioni e convenzioni infrastrutturali; il Punto 7C ha introdotto Spring come wiring tecnico non web, mantenendo domain e application privi di dipendenze framework; il Punto 7D ha definito il catalogo dei mapping blueprint senza introdurre ancora database, JPA, Spring Data o repository reali. Ora l'application layer copre Locations, Cargo, Shipments, Documents, Vehicles, Operational Roles e Compliance base con command, result, port in, port out, service, repository in memory, test e documentazione allineati, senza introdurre ancora REST API, database, JPA, Spring Data, planning, tracking, audit trail, workflow, country engine operativo o controlli concreti di violazione.
 
 Nota importante: eventuali dipendenze Spring Boot, Web, Validation o OpenAPI già presenti nel `pom.xml` sono da considerare preparatorie o storiche. Non rappresentano ancora l'introduzione architetturale di REST API, controller, database, JPA, Spring Data o security nel Punto 6.
 
@@ -78,6 +78,7 @@ Il dominio è stato costruito seguendo una regola precisa: modellare prima i con
 - [`docs/30-infrastructure-layer-blueprint.md`](docs/30-infrastructure-layer-blueprint.md) — apertura del Punto 7A: principi, confini, roadmap 7A → 7H, ruolo di Spring, repository reali, repository in memory, mapping, adapter e relazione con il futuro Punto 8 API Layer.
 - [`docs/31-infrastructure-foundation.md`](docs/31-infrastructure-foundation.md) — Punto 7B: foundation tecnica leggera dell'Infrastructure Layer, package base, eccezioni infrastrutturali, convenzioni, marker tecnici e test architetturale.
 - [`docs/32-spring-wiring-foundation.md`](docs/32-spring-wiring-foundation.md) — Punto 7C: Spring Wiring Foundation, entry point tecnico, configurazioni bean, profilo memory, runtime non web e test dedicato.
+- [`docs/33-persistence-mapping-blueprint.md`](docs/33-persistence-mapping-blueprint.md) — Punto 7D: Persistence Mapping Blueprint, catalogo dei mapping blueprint, regole su ID/codice/stato/value object/reference e test dedicato.
 
 ## Regole fondamentali della Domain Foundation
 
@@ -154,6 +155,8 @@ Con il Punto 7A è stato aggiunto il documento [`docs/30-infrastructure-layer-bl
 Con il Punto 7B è stato aggiunto il documento [`docs/31-infrastructure-foundation.md`](docs/31-infrastructure-foundation.md) e sono stati introdotti package infrastrutturali base, eccezioni tecniche, marker di adapter/repository/service, profili tecnici e un contratto generico di mapping. La fase resta prudente: niente database, JPA, Spring Data, REST API, controller, security o repository reali completi.
 
 Con il Punto 7C è stato aggiunto il documento [`docs/32-spring-wiring-foundation.md`](docs/32-spring-wiring-foundation.md) e Spring è stato introdotto come wiring tecnico controllato: `TruckFlowApplication`, configurazioni bean in `infrastructure.config.spring`, profilo `memory`, runtime non web e test architetturale dedicato. Domain e application layer restano privi di dipendenze Spring.
+
+Con il Punto 7D è stato aggiunto il documento [`docs/33-persistence-mapping-blueprint.md`](docs/33-persistence-mapping-blueprint.md) e sono stati introdotti `PersistenceMappingKind`, `PersistenceFieldMapping`, `PersistenceMappingBlueprint` e `PersistenceMappingBlueprintCatalog`. Questo step definisce il blueprint del mapping domain ↔ persistence per i contesti applicativi attivi senza introdurre database, JPA, Spring Data, repository reali o schema fisico.
 
 ## Punto 6A — Application Layer Blueprint
 
@@ -380,6 +383,15 @@ La configurazione Spring vive nel layer infrastructure e collega i port.out ai r
 Il Punto 7C è documentato in [`docs/32-spring-wiring-foundation.md`](docs/32-spring-wiring-foundation.md).
 
 
+## Punto 7D — Persistence Mapping Blueprint
+
+Il Punto 7D introduce il blueprint del mapping domain ↔ persistence.
+
+La fase aggiunge classi descrittive e un catalogo tecnico nel package `infrastructure.mapping`, ma non introduce ancora database reale, JPA, Spring Data, repository reali o schema fisico. Il suo obiettivo è chiarire come i futuri persistence model dovranno rappresentare ID, codici business, stati, value object, enum, collection e reference.
+
+Il Punto 7D è documentato in [`docs/33-persistence-mapping-blueprint.md`](docs/33-persistence-mapping-blueprint.md).
+
+
 ## Prossimi step consigliati
 
 La roadmap consigliata è:
@@ -402,4 +414,5 @@ La roadmap consigliata è:
 16. usare il Punto 7A come riferimento ufficiale prima di introdurre qualunque infrastruttura reale;
 17. mantenere stabile il Punto 7B come foundation tecnica dell'Infrastructure Layer, senza trasformarlo prematuramente in database, JPA, REST API o security;
 18. procedere con il Punto 7C — Spring Wiring Foundation solo dopo verifica locale completa con `mvn spotless:check` e `mvn clean test`;
-19. rimandare API REST, database completi e integrazioni esterne finché non viene definito lo step specifico corretto.
+19. procedere con il Punto 7D — Persistence Mapping Blueprint per formalizzare mapping e catalogo prima di qualsiasi repository reale;
+20. rimandare API REST, database completi e integrazioni esterne finché non viene definito lo step specifico corretto.

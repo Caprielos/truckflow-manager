@@ -1,5 +1,8 @@
 # Punto 7B — Infrastructure Foundation
 
+
+> Aggiornamento 7D: il contratto generico `PersistenceMapper` della foundation è ora affiancato da blueprint descrittivi di mapping. Questi blueprint preparano il futuro 7E, ma non sono ancora mapper concreti né persistence model reali.
+
 Questo documento descrive il **Punto 7B — Infrastructure Foundation** di TruckFlow Manager.
 
 > Aggiornamento 7C: la foundation del 7B è ora usata dal wiring Spring controllato documentato in `32-spring-wiring-foundation.md`. Il 7C aggiunge configurazioni bean e bootstrap tecnico, ma non introduce repository reali, database, REST API, JPA o security.

@@ -1,5 +1,8 @@
 # Punto 7C — Spring Wiring Foundation
 
+
+> Aggiornamento 7D: il wiring Spring del Punto 7C resta invariato. Il Punto 7D aggiunge solo blueprint di mapping nel package `infrastructure.mapping` e non modifica i bean, i profili Spring o il runtime non web.
+
 Questo documento descrive il **Punto 7C — Spring Wiring Foundation** di TruckFlow Manager.
 
 Il Punto 7C introduce Spring in modo **controllato, tecnico e non web**. Lo scopo non è creare API, controller, database o sicurezza HTTP. Lo scopo è solo permettere al progetto di comporre repository in memory e use case applicativi tramite configurazioni Spring esplicite, lasciando intatti i confini già stabiliti da dominio, application layer e infrastructure foundation.
@@ -336,21 +339,21 @@ Il passaggio è coerente:
 
 ## Relazione con il Punto 7D
 
-Il prossimo step sarà:
+Dopo il Punto 7C, il Punto 7D introduce:
 
 ```text
 7D — Persistence Mapping Blueprint
 ```
 
-Il Punto 7D non dovrebbe ancora partire subito con JPA o database completi. Prima dovrà definire in modo ordinato:
+Il Punto 7D non parte con JPA o database completi. Definisce invece in modo ordinato:
 
 - regole di mapping domain ↔ persistence;
-- struttura dei modelli persistenti futuri;
-- mapper concettuali;
+- blueprint dei modelli persistenti futuri;
+- catalogo dei contesti applicativi attivi;
 - vincoli per non rompere il dominio;
 - strategia per un futuro repository reale pilota.
 
-Il Punto 7C prepara il terreno perché i futuri adapter possano essere collegati tramite Spring senza cambiare application layer.
+Il Punto 7C prepara il terreno perché i futuri adapter possano essere collegati tramite Spring senza cambiare application layer. Il Punto 7D usa questa base per descrivere cosa dovrà essere mappato, prima di scegliere una tecnologia concreta di persistenza.
 
 ## Stato finale del Punto 7C
 

@@ -219,3 +219,12 @@ Documento di riferimento: `docs/31-infrastructure-foundation.md`.
 ## Punto 7C — Spring Wiring Foundation
 
 La documentazione digitale include ora anche `32-spring-wiring-foundation.md`, che descrive l’introduzione controllata di Spring come wiring tecnico non web. Domain e application layer restano privi di dipendenze Spring; REST, controller, JPA, Spring Data e security restano fuori dal Punto 7C.
+
+
+## Punto 7D — Persistence Mapping Blueprint
+
+La documentazione digitale include ora anche `33-persistence-mapping-blueprint.md`, che descrive il blueprint del mapping domain ↔ persistence.
+
+Questo aggiornamento introduce una mappa tecnica dei futuri mapping per Locations, Cargo, Shipments, Documents, Vehicles, Operational Roles e Compliance base. Il Punto 7D chiarisce come trattare ID, codici business, stati, value object, enum, collection e reference senza introdurre ancora database reale, JPA, Spring Data, repository reali, schema SQL o package `infrastructure.persistence`.
+
+Documento di riferimento: `docs/33-persistence-mapping-blueprint.md`.
