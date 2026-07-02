@@ -325,7 +325,7 @@
       </div>
       <aside class="hero-side">
         <strong>Stato progetto</strong>
-        <span>Domain, Application e Infrastructure completati. API Layer pianificato come Punto 8.</span>
+        <span>Domain, Application e Infrastructure completati. Punto 8A API Layer Blueprint formalizzato; prossimo Punto 8B.</span>
         <a href="../professional/00-software-engineering-overview.md" target="_blank" rel="noopener">Apri sorgente Markdown</a>
       </aside>
     </section>
@@ -354,7 +354,7 @@
         <article class="metric"><strong>Domain</strong><span>Punti 1 → 5</span><p>Completato</p></article>
         <article class="metric"><strong>Application</strong><span>6A → 6M</span><p>Completato</p></article>
         <article class="metric"><strong>Infrastructure</strong><span>7A → 7H</span><p>Completato</p></article>
-        <article class="metric"><strong>API</strong><span>8A → 8H</span><p>Pianificato</p></article>
+        <article class="metric"><strong>API</strong><span>8A completato</span><p>8B → 8H pianificato</p></article>
       </div>
     </section>
 
@@ -368,7 +368,7 @@
           <tr><td>RF-02</td><td>Eseguire casi d’uso applicativi tramite port in, command e result.</td><td><span class="status">Presente</span></td><td>Application</td></tr>
           <tr><td>RF-03</td><td>Separare repository port e implementazioni tecniche.</td><td><span class="status">Presente</span></td><td>Application / Infrastructure</td></tr>
           <tr><td>RF-04</td><td>Persistenza file-backed limitata per contesti validati.</td><td><span class="status">Presente</span></td><td>Infrastructure</td></tr>
-          <tr><td>RF-05</td><td>Esporre API REST versionate con DTO e mapping.</td><td><span class="status planned">Pianificato</span></td><td>API futura</td></tr>
+          <tr><td>RF-05</td><td>Esporre API REST versionate con DTO e mapping.</td><td><span class="status planned">Runtime pianificato</span></td><td>API 8B → 8H</td></tr>
         </tbody>
       </table>
       <table style="margin-top:1rem">
@@ -388,7 +388,7 @@
       <h2>Separazione dei layer</h2>
       <div class="architecture">
         <div class="layer-stack">
-          <div class="layer">API Layer <small>Futuro Punto 8: controller, DTO, error handling, OpenAPI.</small></div>
+          <div class="layer">API Layer <small>Punto 8A formalizzato; controller, DTO, error handling e OpenAPI nei punti successivi.</small></div>
           <div class="layer">Application Layer <small>Use case, command, result, port in/out.</small></div>
           <div class="layer">Domain Layer <small>Business model puro, senza Spring/JPA/REST.</small></div>
         </div>
@@ -450,7 +450,8 @@ api → repository concreti</div>
         <div class="timeline-item"><strong>Punto 1 → 5</strong><span>Domain Layer: modellazione e freeze del dominio.</span><span class="status">Completato</span></div>
         <div class="timeline-item"><strong>Punto 6A → 6M</strong><span>Application Layer: use case, port, repository interfaces e freeze.</span><span class="status">Completato</span></div>
         <div class="timeline-item"><strong>Punto 7A → 7H</strong><span>Infrastructure Layer: wiring, mapping, repository file-backed e freeze.</span><span class="status">Completato</span></div>
-        <div class="timeline-item"><strong>Punto 8A → 8H</strong><span>API Layer: blueprint, foundation, controller Locations, DTO, error handling, test, OpenAPI e freeze.</span><span class="status planned">Pianificato</span></div>
+        <div class="timeline-item"><strong>Punto 8A</strong><span>API Layer Blueprint: regole, versionamento /api/v1, primo contesto Locations e test architetturale.</span><span class="status">Completato</span></div>
+        <div class="timeline-item"><strong>Punto 8B → 8H</strong><span>API Layer runtime: foundation, controller Locations, DTO, error handling, test, OpenAPI e freeze.</span><span class="status planned">Pianificato</span></div>
       </div>
     </section>
 
@@ -474,7 +475,7 @@ api → repository concreti</div>
       <table>
         <thead><tr><th>Rischio</th><th>Mitigazione</th></tr></thead>
         <tbody>
-          <tr><td>Introdurre API troppo presto</td><td>Punto 8A parte solo dopo documentazione e layer freeze.</td></tr>
+          <tr><td>Introdurre API troppo presto</td><td>Punto 8A introduce solo blueprint e test architetturali; controller e DTO restano nei punti successivi.</td></tr>
           <tr><td>Mescolare layer interni e tecnici</td><td>Test architetturali e convenzioni chiare.</td></tr>
           <tr><td>Package Explorer ingestibile</td><td>Albero gerarchico e pannello dettaglio.</td></tr>
           <tr><td>Documentazione generica</td><td>Descrizioni specifiche e documento enterprise visuale.</td></tr>
@@ -489,7 +490,7 @@ api → repository concreti</div>
         <article><h3>Domain Layer</h3><p>Layer con concetti e regole di business.</p></article>
         <article><h3>Application Layer</h3><p>Layer dei casi d’uso e delle port.</p></article>
         <article><h3>Infrastructure Layer</h3><p>Layer tecnico con adapter e repository concreti.</p></article>
-        <article><h3>API Layer</h3><p>Futuro layer REST versionato.</p></article>
+        <article><h3>API Layer</h3><p>Layer REST versionato: blueprint formalizzato in 8A, runtime nei punti successivi.</p></article>
         <article><h3>Port</h3><p>Interfaccia applicativa di ingresso o uscita.</p></article>
         <article><h3>Adapter</h3><p>Implementazione tecnica collegata a una port.</p></article>
       </div>

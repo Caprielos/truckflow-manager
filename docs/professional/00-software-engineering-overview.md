@@ -25,7 +25,7 @@ Sistema Java enterprise-oriented per la gestione progressiva di concetti logisti
 | Main Java files analizzati | 505 |
 | Test Java files analizzati | 43 |
 | Package Java reali analizzati | 103 |
-| Stato roadmap | Punto 7 completato; Punto 8 API Layer pianificato |
+| Stato roadmap | Punto 7 completato; Punto 8A API Layer Blueprint formalizzato; prossimo Punto 8B |
 
 ---
 
@@ -51,7 +51,7 @@ Lo stato attuale è maturo per quanto riguarda la base interna del sistema:
 - **Domain Layer completato**: bounded context, entità, value object, invarianti, eccezioni e test di dominio.
 - **Application Layer completato**: command, result, inbound port, outbound repository port e use case service.
 - **Infrastructure Layer completato**: Spring wiring non-web, repository in-memory, mapping persistence, repository file-backed selezionati e test infrastrutturali.
-- **API Layer non ancora implementato**: pianificato come Punto 8, con controller REST, DTO, error handling, test web e OpenAPI.
+- **API Layer non ancora implementato come delivery runtime**: il Punto 8A formalizza blueprint, versionamento, regole architetturali e test future-proof; controller, DTO, endpoint reali, error handling runtime e OpenAPI restano nei punti successivi.
 
 Il progetto non include ancora database relazionale, JPA, Spring Data, security HTTP/JWT, frontend, workflow, dashboard, audit trail o integrazioni esterne. Tali esclusioni sono intenzionali e risultano coerenti con una roadmap che privilegia stabilità, testabilità e riduzione della complessità prematura.
 
@@ -85,7 +85,7 @@ Gli obiettivi tecnici e funzionali del sistema sono:
 5. Definire repository port outbound indipendenti dalle implementazioni tecniche.
 6. Fornire adapter in-memory per test e runtime locale.
 7. Fornire repository file-backed limitati ai contesti già sufficientemente stabili.
-8. Preparare il futuro API Layer senza anticipare controller, DTO o sicurezza.
+8. Preparare il futuro API Layer senza anticipare controller, DTO o sicurezza; il Punto 8A introduce solo blueprint e test architetturale.
 9. Mantenere documentazione storica, semplice, professionale e digitale allineata al codice.
 10. Proteggere i confini architetturali tramite test e freeze progressivi.
 
@@ -156,8 +156,8 @@ I requisiti funzionali sotto riportati sono derivati dai package Java reali, dal
 | RF-11 | Repository ports | Esporre contratti repository outbound per Cargo, Compliance, Documents, Locations, Operational, Shipments e Vehicles. | Implementato |
 | RF-12 | Repository in-memory | Fornire adapter in-memory per test, sviluppo locale e wiring non web. | Implementato |
 | RF-13 | Repository file-backed | Fornire persistenza file-backed controllata per Locations, Cargo, Documents e Compliance. | Implementato in scope limitato |
-| RF-14 | API REST | Esporre endpoint HTTP versionati `/api/v1` tramite futuro API Layer. | Pianificato Punto 8 |
-| RF-15 | Error handling API | Definire mapping errore applicativo/dominio verso risposte HTTP strutturate. | Pianificato Punto 8 |
+| RF-14 | API REST | Esporre endpoint HTTP versionati `/api/v1` tramite futuro API Layer. | Pianificato da 8C in poi |
+| RF-15 | Error handling API | Definire mapping errore applicativo/dominio verso risposte HTTP strutturate. | Pianificato 8E |
 
 ### Repository outbound implementati come contratti applicativi
 
@@ -442,7 +442,8 @@ La gestione del progetto è organizzata per milestone:
 - Punti 1 → 5: Domain Layer;
 - Punto 6A → 6M: Application Layer;
 - Punto 7A → 7H: Infrastructure Layer;
-- Punto 8A → 8H: API Layer pianificato.
+- Punto 8A: API Layer Blueprint formalizzato;
+- Punto 8B → 8H: API Layer runtime ancora pianificato.
 
 Ogni ciclo ha obiettivi, output e freeze.
 
@@ -560,7 +561,7 @@ La scelta architetturale consente:
 - Maven
 - JUnit / Spring Boot Test
 - Spotless Maven Plugin / Google Java Format
-- Springdoc OpenAPI dependency già presente nel `pom.xml`, ma API Layer non ancora implementato
+- Springdoc OpenAPI dependency già presente nel `pom.xml`, ma API runtime non ancora implementata
 - Spring Boot Web/Validation dependencies presenti, con runtime configurato come non-web tramite `spring.main.web-application-type: none`
 
 ### Alternative scartate o rimandate
@@ -585,7 +586,7 @@ La scelta architetturale consente:
 | Domain Layer | Completato |
 | Application Layer | Completato |
 | Infrastructure Layer | Completato per il primo ciclo |
-| API Layer | Pianificato |
+| API Layer Blueprint | Formalizzato in Punto 8A |
 | Database/JPA | Non presente |
 | Security HTTP/JWT | Non presente |
 | Frontend | Non presente |
@@ -652,6 +653,17 @@ Sono mancanti o intenzionalmente rimandate:
 
 ---
 
+
+### Documento Punto 8A
+
+Il blueprint ufficiale del Punto 8A è documentato in:
+
+```text
+docs/professional/38-api-layer-blueprint.md
+```
+
+Il documento definisce regole API, versionamento `/api/v1`, primo contesto REST Locations, endpoint futuri e test `ApiLayerArchitectureTest`.
+
 ## 19. Roadmap tecnica completa
 
 | Milestone | Stato | Descrizione formale |
@@ -682,25 +694,25 @@ Sono mancanti o intenzionalmente rimandate:
 | Punto 7F | Completato | Repository Expansion: espansione file-backed verso Cargo, Documents e Compliance. |
 | Punto 7G | Completato | Infrastructure Testing: test tecnici su repository, mapping e confini. |
 | Punto 7H | Completato | Infrastructure Review & Freeze: review finale e chiusura Punto 7. |
-| Punto 8A | Pianificato | API Layer Blueprint: definizione formale del layer API. |
-| Punto 8B | Pianificato | API Layer Foundation: package e convenzioni API. |
+| Punto 8A | Completato | API Layer Blueprint: definizione formale del layer API, versionamento `/api/v1`, primo contesto Locations e test architetturale future-proof. |
+| Punto 8B | Prossimo | API Layer Foundation: package e convenzioni API. |
 | Punto 8C | Pianificato | Locations Controller Prototype: primo controller REST su contesto stabile. |
 | Punto 8D | Pianificato | API DTO & Mapping Conventions: request/response DTO e mapping verso command/result. |
 | Punto 8E | Pianificato | API Error Handling: modello errore HTTP strutturato. |
 | Punto 8F | Pianificato | API Controller Tests: test web/controller. |
 | Punto 8G | Pianificato | OpenAPI & Swagger Review: documentazione API e revisione contratto. |
 | Punto 8H | Pianificato | API Layer Freeze: review e chiusura controllata del primo ciclo API. |
-|
 
 ### Punti completati
 
 - Punto 1 → 5: Domain Layer.
 - Punto 6A → 6M: Application Layer.
 - Punto 7A → 7H: Infrastructure Layer.
+- Punto 8A: API Layer Blueprint.
 
 ### Punti mancanti
 
-- Punto 8A → 8H: API Layer.
+- Punto 8B → 8H: API Layer runtime, controller, DTO, error handling, test web, OpenAPI e freeze.
 - Cicli successivi non ancora formalizzati: security, database/JPA, frontend, audit, workflow, integrazioni e dashboard.
 
 ---
@@ -719,7 +731,7 @@ API futura      → deve dipendere da application, non da repository concreti
 ### Vincoli attuali
 
 - Nessun controller REST nel codice main.
-- Nessun package API prima del Punto 8.
+- Nessun package API runtime prima del Punto 8B.
 - Nessuna entity JPA.
 - Nessun Spring Data repository.
 - Nessuna configurazione security HTTP.
@@ -742,7 +754,7 @@ API futura      → deve dipendere da application, non da repository concreti
 
 | Rischio / Criticità | Impatto | Mitigazione |
 |---|---|---|
-| Introduzione prematura di API | Alto | Avviare Punto 8 solo con blueprint e test architetturali. |
+| Introduzione prematura di API runtime | Alto | Il Punto 8A introduce solo blueprint e test architetturali; controller e DTO restano nei punti successivi. |
 | Controller che chiamano repository concreti | Alto | Regola: API → use case application. |
 | Accoppiamento domain/Spring | Alto | Test architetturali e divieto import Spring nel dominio. |
 | JPA introdotto senza strategia | Medio/Alto | Rimandare DB/JPA a ciclo dedicato. |
@@ -938,12 +950,12 @@ TruckFlow Manager presenta una fondazione tecnica solida, coerente e ben separat
 
 ### Giudizio complessivo
 
-Il progetto è **architetturalmente maturo per la fase foundation** e pronto per avviare un Punto 8 API Layer controllato. Non è ancora un prodotto enterprise operativo, ma possiede una base progettuale adeguata per evolvere verso una piattaforma enterprise reale.
+Il progetto è **architetturalmente maturo per la fase foundation** e ha formalizzato il Punto 8A API Layer Blueprint. Non è ancora un prodotto enterprise operativo, ma possiede una base progettuale adeguata per evolvere verso una piattaforma enterprise reale.
 
 La priorità successiva dovrebbe essere:
 
 ```text
-Punto 8A — API Layer Blueprint
+Punto 8B — API Layer Foundation
 ```
 
 seguito da un primo controller su Locations, mantenendo le stesse regole di disciplina già adottate nei cicli Domain, Application e Infrastructure.

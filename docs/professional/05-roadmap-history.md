@@ -47,6 +47,20 @@ Key steps:
 - 7G Infrastructure Testing;
 - 7H Infrastructure Review and Freeze.
 
+## Punto 8A: API Layer Blueprint
+
+The fourth cycle has started with a controlled blueprint step.
+
+Completed 8A activities include:
+
+- official API Layer Blueprint document;
+- API versioning strategy through `/api/v1`;
+- first REST context selection: Locations;
+- future endpoint direction: `POST /api/v1/locations` and `GET /api/v1/locations/{id}`;
+- architecture rules for API → Application → Domain;
+- future-proof `ApiLayerArchitectureTest`;
+- documentation update for the new API roadmap.
+
 ## Current conclusion
 
-Punto 7 is closed. The project is prepared for Punto 8, where the API Layer can be designed and introduced.
+Punto 7 is closed and Punto 8A is formalized. The project is prepared for **Punto 8B — API Layer Foundation**, where the API package structure can be introduced in a controlled way.

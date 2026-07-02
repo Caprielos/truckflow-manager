@@ -9,7 +9,7 @@ Apri [`index.html`](index.html) dal browser per navigare la documentazione.
 - **Home** pulita con il documento enterprise in evidenza;
 - **Software Engineering Overview** in versione HTML visuale;
 - **Simple Documentation**;
-- **Professional Documentation**;
+- **Professional Documentation**, incluso il blueprint `38-api-layer-blueprint.md`;
 - **Package Explorer** ad albero apribile/chiudibile come in un IDE;
 - **Old Style Archive** come sezione centrale, non come lista fissa in sidebar;
 - **Roadmap & Freeze**;
@@ -30,7 +30,7 @@ Non introduce e non deve introdurre:
 - generazione automatica runtime della documentazione;
 - scansione runtime del filesystem;
 - modifica dei file dal browser;
-- dipendenze dal futuro Punto 8.
+- dipendenze runtime dal futuro API Layer. Il Punto 8A è documentale e architetturale, non introduce endpoint reali.
 
 ## File principali
 

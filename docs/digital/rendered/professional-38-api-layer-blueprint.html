@@ -1,0 +1,407 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>38. API Layer Blueprint — Punto 8A — TruckFlow Docs</title>
+  <style>:root{--bg:#f5f7fb;--panel:#fff;--text:#172033;--muted:#64748b;--accent:#3554d1;--border:#d9e1ef;--code:#0f172a;--shadow:0 18px 44px rgba(15,23,42,.08)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:radial-gradient(circle at top left,rgba(53,84,209,.10),transparent 30rem),var(--bg);color:var(--text);line-height:1.68;font-size:16px}.page{width:min(980px,calc(100% - 2rem));margin:0 auto;padding:2rem 0 4rem}.topbar{display:flex;justify-content:space-between;gap:1rem;align-items:center;margin-bottom:1rem}.back{display:inline-flex;align-items:center;gap:.35rem;padding:.55rem .85rem;border:1px solid var(--border);border-radius:999px;background:#fff;color:var(--accent);font-weight:850;text-decoration:none;box-shadow:0 8px 22px rgba(15,23,42,.05)}.source{color:var(--muted);font-size:.88rem}.doc{padding:2rem;border:1px solid var(--border);border-radius:24px;background:rgba(255,255,255,.94);box-shadow:var(--shadow)}.doc-header{padding-bottom:1rem;margin-bottom:1.25rem;border-bottom:1px solid var(--border)}.kicker{display:inline-flex;width:fit-content;padding:.25rem .65rem;border-radius:999px;background:#dbeafe;color:#1e3a8a;font-size:.72rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase}.doc h1{margin:.7rem 0 .4rem;font-size:clamp(2rem,4vw,3.6rem);line-height:1;letter-spacing:-.05em}.doc h2{margin:2rem 0 .6rem;font-size:1.55rem;line-height:1.15;letter-spacing:-.03em}.doc h3{margin:1.35rem 0 .45rem;font-size:1.18rem}.doc p{margin:.65rem 0;color:#334155}.doc ul,.doc ol{padding-left:1.35rem}.doc li{margin:.35rem 0}.doc a{color:var(--accent);font-weight:800}.doc blockquote{margin:1rem 0;padding:.85rem 1rem;border-left:5px solid var(--accent);border-radius:14px;background:#eef2ff;color:#334155}.doc pre{overflow:auto;padding:1rem;border-radius:16px;background:var(--code);color:#e5e7eb;font-size:.9rem;line-height:1.55}.doc code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}.doc :not(pre)>code{padding:.15rem .32rem;border-radius:7px;background:#eef2f7;color:#1e293b}.doc table{width:100%;border-collapse:collapse;margin:1rem 0;border:1px solid var(--border);border-radius:16px;overflow:hidden;display:block}.doc thead,.doc tbody,.doc tr{width:100%}.doc th,.doc td{padding:.75rem;border-bottom:1px solid var(--border);text-align:left;vertical-align:top}.doc th{background:#f1f5f9;color:#334155;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}.doc tr:last-child td{border-bottom:0}.doc hr{border:0;border-top:1px solid var(--border);margin:2rem 0}.doc img{max-width:100%;border-radius:16px;border:1px solid var(--border)}@media(max-width:720px){.page{width:min(100% - 1rem,980px);padding-top:1rem}.doc{padding:1.15rem;border-radius:18px}.topbar{display:grid}.source{overflow-wrap:anywhere}}</style>
+</head>
+<body>
+  <main class="page">
+    <div class="topbar">
+      <a class="back" href="../index.html">← Torna alla Home</a>
+      <span class="source">Sorgente Markdown: ../professional/38-api-layer-blueprint.md</span>
+    </div>
+    <article class="doc">
+      <header class="doc-header">
+        <span class="kicker">professional</span>
+        <h1>38. API Layer Blueprint — Punto 8A</h1>
+      </header>
+      <h1>38. API Layer Blueprint — Punto 8A</h1>
+<h2>1. Scopo del documento</h2>
+<p>Questo documento formalizza il <strong>Punto 8A — API Layer Blueprint</strong> di TruckFlow Manager.</p>
+<p>Il Punto 8A introduce la progettazione del futuro <strong>API Layer</strong> senza creare ancora controller, DTO, endpoint reali, mapper API, sicurezza HTTP, database, JPA o frontend.</p>
+<p>L’obiettivo è definire in modo stabile il boundary esterno del sistema prima dell’implementazione runtime.</p>
+<h2>2. Obiettivo generale del Punto 8</h2>
+<p>Il <strong>Punto 8</strong> introduce il layer API del progetto:</p>
+<pre><code class="language-text">it.gabriele.truckflow.api
+</code></pre>
+<p>Questo layer rappresenta il boundary esterno ufficiale del sistema, cioè il punto attraverso cui client, interfacce web, strumenti esterni o futuri sistemi integrati potranno comunicare con TruckFlow Manager.</p>
+<p>L’API Layer deve essere progettato con criteri di:</p>
+<ul>
+<li>stabilità;</li>
+<li>versionamento;</li>
+<li>chiarezza contrattuale;</li>
+<li>separazione dei layer;</li>
+<li>backward compatibility;</li>
+<li>testabilità;</li>
+<li>documentabilità;</li>
+<li>assenza di dipendenze tecniche premature.</li>
+</ul>
+<p>La regola architetturale fondamentale è:</p>
+<pre><code class="language-text">API Layer → Application Layer → Domain Layer
+</code></pre>
+<p>Il layer API deve comunicare con il sistema tramite i <strong>use case applicativi</strong>, non tramite repository concreti o dettagli infrastrutturali.</p>
+<h2>3. Stato attuale prima dell’API Layer</h2>
+<p>TruckFlow Manager ha completato:</p>
+<table>
+<thead>
+<tr>
+  <th>Ciclo</th>
+  <th>Stato</th>
+  <th>Descrizione</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Punto 1 → 5</td>
+  <td>Completato</td>
+  <td>Domain Layer, bounded context, value object, invarianti e regole di dominio.</td>
+</tr>
+<tr>
+  <td>Punto 6A → 6M</td>
+  <td>Completato</td>
+  <td>Application Layer, use case, command, result e port.</td>
+</tr>
+<tr>
+  <td>Punto 7A → 7H</td>
+  <td>Completato</td>
+  <td>Infrastructure Layer, wiring Spring non-web, repository in-memory e repository file-backed selezionati.</td>
+</tr>
+<tr>
+  <td>Punto 8A</td>
+  <td>Formalizzato da questo documento</td>
+  <td>API Layer Blueprint e test architetturale future-proof.</td>
+</tr>
+</tbody>
+</table>
+<p>Il progetto è Spring-ready, ma non espone ancora REST API reali.</p>
+<h2>4. Roadmap completa del Punto 8</h2>
+<table>
+<thead>
+<tr>
+  <th>Punto</th>
+  <th>Stato dopo questo documento</th>
+  <th>Descrizione</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>8A — API Layer Blueprint</td>
+  <td>Completato</td>
+  <td>Definizione formale del layer API, versionamento, primo contesto REST e test architetturale.</td>
+</tr>
+<tr>
+  <td>8B — API Layer Foundation</td>
+  <td>Prossimo</td>
+  <td>Creazione controllata dei package API e delle prime convenzioni comuni.</td>
+</tr>
+<tr>
+  <td>8C — Locations Controller Prototype</td>
+  <td>Pianificato</td>
+  <td>Primo controller REST su contesto Locations.</td>
+</tr>
+<tr>
+  <td>8D — API DTO &amp; Mapping Conventions</td>
+  <td>Pianificato</td>
+  <td>Request DTO, response DTO e mapper API verso command/result applicativi.</td>
+</tr>
+<tr>
+  <td>8E — API Error Handling</td>
+  <td>Pianificato</td>
+  <td>Modello errore HTTP stabile e mapping errori application/domain verso API.</td>
+</tr>
+<tr>
+  <td>8F — API Controller Tests</td>
+  <td>Pianificato</td>
+  <td>Test controller con <code>@WebMvcTest</code> e use case mockati.</td>
+</tr>
+<tr>
+  <td>8G — OpenAPI &amp; Swagger Review</td>
+  <td>Pianificato</td>
+  <td>Documentazione del contratto API realmente implementato.</td>
+</tr>
+<tr>
+  <td>8H — API Layer Freeze</td>
+  <td>Pianificato</td>
+  <td>Review finale e congelamento del primo ciclo API.</td>
+</tr>
+</tbody>
+</table>
+<h2>5. Regola principale di dipendenza</h2>
+<p>La dipendenza ammessa è:</p>
+<pre><code class="language-text">api → application → domain
+</code></pre>
+<p>Il layer API <strong>non deve</strong> dipendere direttamente da:</p>
+<ul>
+<li><code>it.gabriele.truckflow.infrastructure</code>;</li>
+<li>repository concreti;</li>
+<li>repository file-backed;</li>
+<li>mapper di persistenza;</li>
+<li>storage file;</li>
+<li>dettagli tecnici interni;</li>
+<li>package <code>domain</code> usati come scorciatoia per bypassare i use case.</li>
+</ul>
+<p>La comunicazione corretta avviene tramite Application Layer:</p>
+<pre><code class="language-text">HTTP request
+      ↓
+API request DTO
+      ↓
+Application command
+      ↓
+Application use case
+      ↓
+Application result
+      ↓
+API response DTO
+      ↓
+HTTP response
+</code></pre>
+<h2>6. Package API futuro</h2>
+<p>Il package radice futuro sarà:</p>
+<pre><code class="language-text">it.gabriele.truckflow.api
+</code></pre>
+<p>La struttura iniziale prevista è:</p>
+<pre><code class="language-text">it.gabriele.truckflow.api
+└── v1
+    ├── common
+    └── locations
+</code></pre>
+<p>Significato:</p>
+<table>
+<thead>
+<tr>
+  <th>Package</th>
+  <th>Responsabilità</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><code>api</code></td>
+  <td>Radice del delivery layer HTTP.</td>
+</tr>
+<tr>
+  <td><code>api.v1</code></td>
+  <td>Prima major version del contratto HTTP pubblico.</td>
+</tr>
+<tr>
+  <td><code>api.v1.common</code></td>
+  <td>Componenti comuni API: error response, eventuali costanti, convenzioni comuni.</td>
+</tr>
+<tr>
+  <td><code>api.v1.locations</code></td>
+  <td>Primo contesto REST esposto in modo controllato.</td>
+</tr>
+</tbody>
+</table>
+<p>Nel Punto 8A questi package <strong>non vengono ancora creati</strong>. La loro creazione appartiene al Punto 8B.</p>
+<h2>7. Versionamento API</h2>
+<p>Il versionamento pubblico dell’API avverrà tramite path versionato:</p>
+<pre><code class="language-text">/api/v1
+</code></pre>
+<p>Questa strategia è <strong>API versioning by URI path</strong>.</p>
+<p>Il principio seguito è la stabilità del contratto HTTP pubblico:</p>
+<ul>
+<li><code>/api/v1</code> resta stabile per i client compatibili con la prima versione pubblica;</li>
+<li>modifiche compatibili possono restare nella stessa major version;</li>
+<li>breaking change richiedono una nuova major API version, ad esempio <code>/api/v2</code>.</li>
+</ul>
+<p>Il versionamento del path API non deve essere confuso con il Semantic Versioning del software, espresso da versioni come <code>1.0.0</code>, <code>1.1.0</code> o <code>2.0.0</code>.</p>
+<h2>8. Primo contesto REST</h2>
+<p>Il primo contesto REST sarà:</p>
+<pre><code class="language-text">Locations
+</code></pre>
+<p>Motivazioni:</p>
+<ul>
+<li>è già presente nel Domain Layer;</li>
+<li>è già presente nell’Application Layer;</li>
+<li>è già supportato dall’Infrastructure Layer;</li>
+<li>è già supportato da repository file-backed;</li>
+<li>è concettualmente più semplice di shipments, vehicles o operational roles;</li>
+<li>permette di validare la pipeline API senza introdurre workflow complessi.</li>
+</ul>
+<h2>9. Endpoint futuri iniziali</h2>
+<p>Endpoint previsto per il primo prototipo:</p>
+<pre><code class="language-text">POST /api/v1/locations
+</code></pre>
+<p>Endpoint successivo previsto:</p>
+<pre><code class="language-text">GET /api/v1/locations/{id}
+</code></pre>
+<p>Nel Punto 8A questi endpoint sono solo documentati. Non devono essere ancora implementati.</p>
+<h2>10. Convenzioni future per DTO e mapping</h2>
+<p>DTO request futuro:</p>
+<pre><code class="language-text">RegisterLocationRequest
+</code></pre>
+<p>DTO response futuro:</p>
+<pre><code class="language-text">LocationResponse
+</code></pre>
+<p>Mapper API futuro:</p>
+<pre><code class="language-text">LocationApiMapper
+</code></pre>
+<p>Regola fondamentale:</p>
+<pre><code class="language-text">I DTO non sono oggetti di dominio.
+I DTO non contengono logica business.
+I DTO servono solo per comunicare con l’esterno.
+</code></pre>
+<p>Esempio request futura:</p>
+<pre><code class="language-json">{
+  &quot;name&quot;: &quot;Milano Hub&quot;,
+  &quot;address&quot;: {
+    &quot;street&quot;: &quot;Via Roma 10&quot;,
+    &quot;city&quot;: &quot;Milano&quot;,
+    &quot;country&quot;: &quot;IT&quot;
+  }
+}
+</code></pre>
+<p>Esempio response futura:</p>
+<pre><code class="language-json">{
+  &quot;id&quot;: &quot;LOC-001&quot;,
+  &quot;name&quot;: &quot;Milano Hub&quot;,
+  &quot;address&quot;: {
+    &quot;street&quot;: &quot;Via Roma 10&quot;,
+    &quot;city&quot;: &quot;Milano&quot;,
+    &quot;country&quot;: &quot;IT&quot;
+  }
+}
+</code></pre>
+<p>Gli ID esposti via API saranno stringhe, perché il dominio usa identificativi forti e value object.</p>
+<h2>11. Error handling futuro</h2>
+<p>Il modello errore API dovrà essere stabile e non dovrà esporre dettagli Java interni.</p>
+<p>Formato previsto:</p>
+<pre><code class="language-json">{
+  &quot;code&quot;: &quot;LOCATION_NOT_FOUND&quot;,
+  &quot;category&quot;: &quot;NOT_FOUND&quot;,
+  &quot;message&quot;: &quot;Location not found&quot;
+}
+</code></pre>
+<p>Categorie iniziali previste:</p>
+<ul>
+<li><code>VALIDATION_ERROR</code>;</li>
+<li><code>NOT_FOUND</code>;</li>
+<li><code>CONFLICT</code>;</li>
+<li><code>INTERNAL_ERROR</code>.</li>
+</ul>
+<p>L’API non dovrà esporre:</p>
+<ul>
+<li>stack trace;</li>
+<li>nomi di classi interne;</li>
+<li>path locali;</li>
+<li>dettagli file-backed;</li>
+<li>dettagli infrastructure;</li>
+<li>messaggi tecnici non filtrati.</li>
+</ul>
+<h2>12. Test architetturale del Punto 8A</h2>
+<p>Il Punto 8A introduce:</p>
+<pre><code class="language-text">ApiLayerArchitectureTest
+</code></pre>
+<p>Percorso:</p>
+<pre><code class="language-text">src/test/java/it/gabriele/truckflow/architecture/ApiLayerArchitectureTest.java
+</code></pre>
+<p>Il test è future-proof: deve passare anche se <code>it.gabriele.truckflow.api</code> non esiste ancora.</p>
+<p>Quando il package API verrà creato, il test dovrà proteggere queste regole:</p>
+<ul>
+<li>API può dipendere dall’Application Layer;</li>
+<li>API non può dipendere dall’Infrastructure Layer;</li>
+<li>API non può usare repository concreti;</li>
+<li>API non deve bypassare l’Application Layer usando direttamente il Domain Layer;</li>
+<li>Domain non può dipendere da API;</li>
+<li>Application non può dipendere da API.</li>
+</ul>
+<h2>13. Cosa è ammesso nel Punto 8A</h2>
+<p>Il Punto 8A ammette:</p>
+<ul>
+<li>documentazione del blueprint API;</li>
+<li>definizione del versionamento;</li>
+<li>definizione del primo contesto REST;</li>
+<li>definizione degli endpoint futuri;</li>
+<li>definizione delle regole architetturali;</li>
+<li>test architetturale future-proof;</li>
+<li>aggiornamento della documentazione generale.</li>
+</ul>
+<h2>14. Cosa non è ammesso nel Punto 8A</h2>
+<p>Il Punto 8A non deve introdurre:</p>
+<ul>
+<li>controller REST;</li>
+<li>DTO API;</li>
+<li>endpoint reali;</li>
+<li>mapper API;</li>
+<li>security;</li>
+<li>JWT;</li>
+<li>database;</li>
+<li>JPA;</li>
+<li>Spring Data;</li>
+<li>frontend;</li>
+<li>workflow;</li>
+<li>audit trail;</li>
+<li>dipendenze API verso Infrastructure;</li>
+<li>dipendenze Domain/Application verso API.</li>
+</ul>
+<h2>15. Motivazione architetturale</h2>
+<p>La scelta di iniziare con un blueprint è coerente con l’approccio adottato nei cicli precedenti:</p>
+<pre><code class="language-text">prima si progetta
+poi si crea la fondazione
+poi si introduce un prototipo controllato
+poi si consolidano convenzioni
+poi si testa
+poi si documenta
+poi si congela
+</code></pre>
+<p>Questo riduce il rischio di creare un delivery layer disordinato, accoppiato ai repository o contaminato da logica business.</p>
+<h2>16. Alternative escluse</h2>
+<table>
+<thead>
+<tr>
+  <th>Alternativa</th>
+  <th>Motivo dell’esclusione</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Creare subito tutti i controller</td>
+  <td>Rischio di API superficiale e accoppiata ai dettagli interni.</td>
+</tr>
+<tr>
+  <td>Esporre direttamente repository</td>
+  <td>Violazione della Clean Architecture e del principio API → Application.</td>
+</tr>
+<tr>
+  <td>Creare DTO per tutti i bounded context</td>
+  <td>Espansione prematura e alto rischio di incoerenza.</td>
+</tr>
+<tr>
+  <td>Partire da Shipments</td>
+  <td>Contesto più complesso, legato a workflow e pianificazione futura.</td>
+</tr>
+<tr>
+  <td>Introdurre security subito</td>
+  <td>Security HTTP ha senso dopo un primo contratto API reale.</td>
+</tr>
+<tr>
+  <td>Introdurre database/JPA</td>
+  <td>La persistenza relazionale è un ciclo futuro separato.</td>
+</tr>
+</tbody>
+</table>
+<h2>17. Primo risultato atteso</h2>
+<p>Dopo il Punto 8A il progetto deve avere:</p>
+<ul>
+<li>direzione API formalizzata;</li>
+<li>documento blueprint ufficiale;</li>
+<li>roadmap API esplicita;</li>
+<li>regole architetturali testate;</li>
+<li>nessun controller prematuro;</li>
+<li>nessun DTO prematuro;</li>
+<li>nessun endpoint prematuro;</li>
+<li>nessuna contaminazione di Domain, Application o Infrastructure.</li>
+</ul>
+<h2>18. Prossimo step</h2>
+<p>Il prossimo step dopo questo blueprint è:</p>
+<pre><code class="language-text">Punto 8B — API Layer Foundation
+</code></pre>
+<p>Il Punto 8B potrà introdurre i package base del layer API, ma dovrà continuare a evitare implementazioni REST eccessive o non motivate.</p>
+
+    </article>
+  </main>
+</body>
+</html>

@@ -20,7 +20,7 @@
       </header>
       <h1>6. Current Status and Next Steps</h1>
 <h2>Current status</h2>
-<p>TruckFlow Manager is currently at the end of <strong>Punto 7 — Infrastructure Layer</strong>.</p>
+<p>TruckFlow Manager is currently after <strong>Punto 8A — API Layer Blueprint</strong>.</p>
 <p>The project has:</p>
 <ul>
 <li>a pure Domain Layer;</li>
@@ -30,43 +30,52 @@
 <li>in-memory repositories;</li>
 <li>selected file-backed repositories;</li>
 <li>architecture and freeze tests;</li>
-<li>reorganized documentation.</li>
+<li>an official API Layer Blueprint;</li>
+<li>a future-proof <code>ApiLayerArchitectureTest</code>;</li>
+<li>reorganized documentation and digital reader.</li>
 </ul>
 <h2>What is intentionally not present</h2>
-<p>The project still does not include:</p>
+<p>The project still does not include runtime API implementation:</p>
 <ul>
-<li>REST API;</li>
-<li>controller layer;</li>
-<li>web DTOs;</li>
-<li>HTTP error mapping;</li>
+<li>REST controllers;</li>
+<li>endpoint implementations;</li>
+<li>API DTOs;</li>
+<li>API mappers;</li>
+<li>HTTP error mapping runtime;</li>
 <li>security configuration;</li>
 <li>JPA persistence;</li>
 <li>Spring Data;</li>
 <li>relational database schema;</li>
 <li>frontend.</li>
 </ul>
-<p>This is intentional and consistent with the roadmap.</p>
-<h2>Recommended next roadmap cycle</h2>
-<p>The next cycle should be <strong>Punto 8 — API Layer</strong>.</p>
-<p>A controlled Punto 8 could include:</p>
+<p>This is intentional and consistent with Punto 8A: the blueprint defines rules before implementation.</p>
+<h2>Completed roadmap cycles</h2>
 <ul>
-<li>API Layer Blueprint;</li>
-<li>API Foundation;</li>
-<li>REST controller prototype for a safe context such as Locations;</li>
-<li>request DTO and response DTO conventions;</li>
-<li>API error handling;</li>
-<li>API testing;</li>
-<li>OpenAPI/Swagger documentation when appropriate;</li>
-<li>API review and freeze.</li>
+<li>Punto 1 → 5: Domain Layer;</li>
+<li>Punto 6A → 6M: Application Layer;</li>
+<li>Punto 7A → 7H: Infrastructure Layer;</li>
+<li>Punto 8A: API Layer Blueprint.</li>
+</ul>
+<h2>Recommended next roadmap step</h2>
+<p>The next step should be <strong>Punto 8B — API Layer Foundation</strong>.</p>
+<p>A controlled Punto 8B should include:</p>
+<ul>
+<li>creation of the API package root;</li>
+<li>first versioned package structure under <code>/api/v1</code>;</li>
+<li>common API conventions;</li>
+<li>no uncontrolled controller expansion;</li>
+<li>no direct dependency from API to Infrastructure;</li>
+<li>no bypassing application use cases.</li>
 </ul>
 <h2>Recommended approach</h2>
-<p>Punto 8 should follow the same discipline used in Punto 6 and Punto 7:</p>
+<p>Punto 8 should continue the same discipline used in Punto 6 and Punto 7:</p>
 <ul>
 <li>one step at a time;</li>
 <li>no uncontrolled expansion;</li>
 <li>tests for every architectural boundary;</li>
 <li>documentation updated with every step;</li>
-<li>no bypassing application use cases from controllers.</li>
+<li>no bypassing application use cases from controllers;</li>
+<li>API contracts documented only when the implementation exists.</li>
 </ul>
 
     </article>

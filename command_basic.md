@@ -1,6 +1,6 @@
 # Comandi base TruckFlow Manager
 
-> Nota documentale: la documentazione è in `docs/`. Il documento enterprise principale è `docs/professional/00-software-engineering-overview.md`; la versione visuale è `docs/digital/software-engineering-overview.html`; il lettore digitale è `docs/digital/index.html`.
+> Nota documentale: la documentazione è in `docs/`. Il documento enterprise principale è `docs/professional/00-software-engineering-overview.md`; la versione visuale è `docs/digital/software-engineering-overview.html`; il lettore digitale è `docs/digital/index.html`; il blueprint del Punto 8A è `docs/professional/38-api-layer-blueprint.md`.
 
 ---
 

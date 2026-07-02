@@ -3,108 +3,109 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Software Engineering Overview — TruckFlow Docs</title>
-  <style>
-    :root{--bg:#f5f7fb;--panel:#fff;--text:#172033;--muted:#64748b;--accent:#3554d1;--border:#d9e1ef;--code:#0f172a;--shadow:0 18px 44px rgba(15,23,42,.08)}
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:radial-gradient(circle at top left,rgba(53,84,209,.10),transparent 30rem),var(--bg);color:var(--text);line-height:1.68;font-size:16px}
-    .page{width:min(1100px,calc(100% - 2rem));margin:0 auto;padding:2rem 0 4rem}
-    .topbar{display:flex;justify-content:space-between;gap:1rem;align-items:center;margin-bottom:1rem;position:sticky;top:0;background:rgba(245,247,251,.88);backdrop-filter:blur(12px);padding:.75rem 0;z-index:10}
-    .back{display:inline-flex;align-items:center;gap:.35rem;padding:.55rem .85rem;border:1px solid var(--border);border-radius:999px;background:#fff;color:var(--accent);font-weight:850;text-decoration:none;box-shadow:0 8px 22px rgba(15,23,42,.05)}
-    .source{color:var(--muted);font-size:.88rem}
-    .doc{padding:2rem;border:1px solid var(--border);border-radius:24px;background:rgba(255,255,255,.94);box-shadow:var(--shadow)}
-    h1{font-size:clamp(2.2rem,4vw,4.2rem);line-height:.98;letter-spacing:-.055em;margin:0 0 1rem}
-    h2{font-size:clamp(1.55rem,2.4vw,2.35rem);letter-spacing:-.035em;margin-top:2.2rem;border-top:1px solid var(--border);padding-top:1.25rem}
-    h3{font-size:1.35rem;margin-top:1.6rem}h4{font-size:1.1rem;margin-top:1.2rem}
-    p,li{color:#334155}blockquote{margin:1rem 0;padding:1rem 1.1rem;border-left:5px solid var(--accent);border-radius:14px;background:#e8edff;color:#1e3a8a}
-    code{padding:.12rem .32rem;border-radius:.35rem;background:#eef2ff;color:#1e3a8a;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.9em}
-    pre{overflow:auto;padding:1rem;border-radius:16px;background:var(--code);color:#e5e7eb}pre code{background:transparent;color:inherit;padding:0}
-    .table-wrap{overflow:auto;margin:1rem 0;border:1px solid var(--border);border-radius:16px;background:#fff}
-    table{width:100%;border-collapse:collapse;min-width:720px}th,td{padding:.72rem .8rem;border-bottom:1px solid var(--border);text-align:left;vertical-align:top}th{background:#f1f5f9;color:#334155;font-size:.8rem;text-transform:uppercase;letter-spacing:.05em}tr:last-child td{border-bottom:0}
-    a{color:var(--accent);font-weight:800;text-decoration:none}a:hover{text-decoration:underline}
-    @media(max-width:700px){.doc{padding:1rem;border-radius:16px}.topbar{display:grid}}
-  </style>
+  <title>00 — Software Engineering Overview — TruckFlow Manager — TruckFlow Docs</title>
+  <style>:root{--bg:#f5f7fb;--panel:#fff;--text:#172033;--muted:#64748b;--accent:#3554d1;--border:#d9e1ef;--code:#0f172a;--shadow:0 18px 44px rgba(15,23,42,.08)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:radial-gradient(circle at top left,rgba(53,84,209,.10),transparent 30rem),var(--bg);color:var(--text);line-height:1.68;font-size:16px}.page{width:min(980px,calc(100% - 2rem));margin:0 auto;padding:2rem 0 4rem}.topbar{display:flex;justify-content:space-between;gap:1rem;align-items:center;margin-bottom:1rem}.back{display:inline-flex;align-items:center;gap:.35rem;padding:.55rem .85rem;border:1px solid var(--border);border-radius:999px;background:#fff;color:var(--accent);font-weight:850;text-decoration:none;box-shadow:0 8px 22px rgba(15,23,42,.05)}.source{color:var(--muted);font-size:.88rem}.doc{padding:2rem;border:1px solid var(--border);border-radius:24px;background:rgba(255,255,255,.94);box-shadow:var(--shadow)}.doc-header{padding-bottom:1rem;margin-bottom:1.25rem;border-bottom:1px solid var(--border)}.kicker{display:inline-flex;width:fit-content;padding:.25rem .65rem;border-radius:999px;background:#dbeafe;color:#1e3a8a;font-size:.72rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase}.doc h1{margin:.7rem 0 .4rem;font-size:clamp(2rem,4vw,3.6rem);line-height:1;letter-spacing:-.05em}.doc h2{margin:2rem 0 .6rem;font-size:1.55rem;line-height:1.15;letter-spacing:-.03em}.doc h3{margin:1.35rem 0 .45rem;font-size:1.18rem}.doc p{margin:.65rem 0;color:#334155}.doc ul,.doc ol{padding-left:1.35rem}.doc li{margin:.35rem 0}.doc a{color:var(--accent);font-weight:800}.doc blockquote{margin:1rem 0;padding:.85rem 1rem;border-left:5px solid var(--accent);border-radius:14px;background:#eef2ff;color:#334155}.doc pre{overflow:auto;padding:1rem;border-radius:16px;background:var(--code);color:#e5e7eb;font-size:.9rem;line-height:1.55}.doc code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}.doc :not(pre)>code{padding:.15rem .32rem;border-radius:7px;background:#eef2f7;color:#1e293b}.doc table{width:100%;border-collapse:collapse;margin:1rem 0;border:1px solid var(--border);border-radius:16px;overflow:hidden;display:block}.doc thead,.doc tbody,.doc tr{width:100%}.doc th,.doc td{padding:.75rem;border-bottom:1px solid var(--border);text-align:left;vertical-align:top}.doc th{background:#f1f5f9;color:#334155;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}.doc tr:last-child td{border-bottom:0}.doc hr{border:0;border-top:1px solid var(--border);margin:2rem 0}.doc img{max-width:100%;border-radius:16px;border:1px solid var(--border)}@media(max-width:720px){.page{width:min(100% - 1rem,980px);padding-top:1rem}.doc{padding:1.15rem;border-radius:18px}.topbar{display:grid}.source{overflow-wrap:anywhere}}</style>
 </head>
 <body>
   <main class="page">
     <div class="topbar">
       <a class="back" href="../index.html">← Torna alla Home</a>
-      <span class="source">Sorgente Markdown: docs/professional/00-software-engineering-overview.md</span>
+      <span class="source">Sorgente Markdown: ../professional/00-software-engineering-overview.md</span>
     </div>
     <article class="doc">
-      <h1 id="00-software-engineering-overview-truckflow-manager">00 — Software Engineering Overview — TruckFlow Manager</h1>
-<blockquote>Documento ufficiale di Ingegneria del Software per il progetto <strong>TruckFlow Manager</strong>.</blockquote>
-<blockquote>Riferimenti metodologici: <strong>ISO/IEC 25010</strong> per la qualità del prodotto software e <strong>ISO/IEC 12207</strong> per i processi del ciclo di vita del software.</blockquote>
-<blockquote>Nota: il presente documento è strutturato secondo tali riferimenti, ma non costituisce certificazione ISO formale, che richiederebbe audit esterno indipendente.</blockquote>
-<p>---</p>
-<h2 id="1-titolo-del-progetto">1. Titolo del progetto</h2>
-<p><strong>TruckFlow Manager</strong> Sistema Java enterprise-oriented per la gestione progressiva di concetti logistici, trasporto merci, ruoli operativi, veicoli, carichi, sedi, spedizioni, documenti, requisiti di compliance e futura esposizione API.</p>
-<h3 id="identificazione-tecnica">Identificazione tecnica</h3>
-<div class="table-wrap"><table><thead><tr>
-<th>Voce</th>
-<th>Valore</th>
-</tr></thead><tbody>
+      <header class="doc-header">
+        <span class="kicker">professional</span>
+        <h1>00 — Software Engineering Overview — TruckFlow Manager</h1>
+      </header>
+      <h1>00 — Software Engineering Overview — TruckFlow Manager</h1>
+<blockquote>
+<p>Documento ufficiale di Ingegneria del Software per il progetto <strong>TruckFlow Manager</strong>.
+Riferimenti metodologici: <strong>ISO/IEC 25010</strong> per la qualità del prodotto software e <strong>ISO/IEC 12207</strong> per i processi del ciclo di vita del software.
+Nota: il presente documento è strutturato secondo tali riferimenti, ma non costituisce certificazione ISO formale, che richiederebbe audit esterno indipendente.</p>
+</blockquote>
+<hr />
+<h2>1. Titolo del progetto</h2>
+<p><strong>TruckFlow Manager</strong>
+Sistema Java enterprise-oriented per la gestione progressiva di concetti logistici, trasporto merci, ruoli operativi, veicoli, carichi, sedi, spedizioni, documenti, requisiti di compliance e futura esposizione API.</p>
+<h3>Identificazione tecnica</h3>
+<table>
+<thead>
 <tr>
-<td>Nome progetto</td>
-<td>TruckFlow Manager</td>
+  <th>Voce</th>
+  <th>Valore</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Nome progetto</td>
+  <td>TruckFlow Manager</td>
 </tr>
 <tr>
-<td>GroupId Maven</td>
-<td><code>it.gabriele.truckflow</code></td>
+  <td>GroupId Maven</td>
+  <td><code>it.gabriele.truckflow</code></td>
 </tr>
 <tr>
-<td>ArtifactId Maven</td>
-<td><code>truckflow-manager</code></td>
+  <td>ArtifactId Maven</td>
+  <td><code>truckflow-manager</code></td>
 </tr>
 <tr>
-<td>Versione</td>
-<td><code>0.1.0-SNAPSHOT</code></td>
+  <td>Versione</td>
+  <td><code>0.1.0-SNAPSHOT</code></td>
 </tr>
 <tr>
-<td>Linguaggio</td>
-<td>Java 21</td>
+  <td>Linguaggio</td>
+  <td>Java 21</td>
 </tr>
 <tr>
-<td>Build tool</td>
-<td>Maven</td>
+  <td>Build tool</td>
+  <td>Maven</td>
 </tr>
 <tr>
-<td>Root package</td>
-<td><code>it.gabriele.truckflow</code></td>
+  <td>Root package</td>
+  <td><code>it.gabriele.truckflow</code></td>
 </tr>
 <tr>
-<td>Main Java files analizzati</td>
-<td>505</td>
+  <td>Main Java files analizzati</td>
+  <td>505</td>
 </tr>
 <tr>
-<td>Test Java files analizzati</td>
-<td>43</td>
+  <td>Test Java files analizzati</td>
+  <td>43</td>
 </tr>
 <tr>
-<td>Package Java reali analizzati</td>
-<td>103</td>
+  <td>Package Java reali analizzati</td>
+  <td>103</td>
 </tr>
 <tr>
-<td>Stato roadmap</td>
-<td>Punto 7 completato; Punto 8 API Layer pianificato</td>
+  <td>Stato roadmap</td>
+  <td>Punto 7 completato; Punto 8A API Layer Blueprint formalizzato; prossimo Punto 8B</td>
 </tr>
-</tbody></table></div>
-<p>---</p>
-<h2 id="2-executive-summary">2. Executive Summary</h2>
+</tbody>
+</table>
+<hr />
+<h2>2. Executive Summary</h2>
 <p>TruckFlow Manager è un progetto software costruito con approccio incrementale, orientato alla qualità architetturale e alla separazione rigorosa delle responsabilità. Il progetto modella un dominio logistico articolato, evitando di partire da un semplice CRUD o da una struttura database-first.</p>
 <p>La direzione architetturale è coerente con Clean Architecture e Hexagonal Architecture:</p>
-<pre><code>API Layer futuro\n        ↓\nApplication Layer\n        ↓\nDomain Layer\n\nInfrastructure Layer implementa dettagli tecnici e adapter,\nsenza contaminare domain e application.</code></pre>
+<pre><code class="language-text">API Layer futuro
+        ↓
+Application Layer
+        ↓
+Domain Layer
+
+Infrastructure Layer implementa dettagli tecnici e adapter,
+senza contaminare domain e application.
+</code></pre>
 <p>Lo stato attuale è maturo per quanto riguarda la base interna del sistema:</p>
 <ul>
 <li><strong>Domain Layer completato</strong>: bounded context, entità, value object, invarianti, eccezioni e test di dominio.</li>
 <li><strong>Application Layer completato</strong>: command, result, inbound port, outbound repository port e use case service.</li>
 <li><strong>Infrastructure Layer completato</strong>: Spring wiring non-web, repository in-memory, mapping persistence, repository file-backed selezionati e test infrastrutturali.</li>
-<li><strong>API Layer non ancora implementato</strong>: pianificato come Punto 8, con controller REST, DTO, error handling, test web e OpenAPI.</li>
+<li><strong>API Layer non ancora implementato come delivery runtime</strong>: il Punto 8A formalizza blueprint, versionamento, regole architetturali e test future-proof; controller, DTO, endpoint reali, error handling runtime e OpenAPI restano nei punti successivi.</li>
 </ul>
 <p>Il progetto non include ancora database relazionale, JPA, Spring Data, security HTTP/JWT, frontend, workflow, dashboard, audit trail o integrazioni esterne. Tali esclusioni sono intenzionali e risultano coerenti con una roadmap che privilegia stabilità, testabilità e riduzione della complessità prematura.</p>
-<p>---</p>
-<h2 id="3-problema-reale-che-il-sistema-risolve">3. Problema reale che il sistema risolve</h2>
+<hr />
+<h2>3. Problema reale che il sistema risolve</h2>
 <p>Le organizzazioni di trasporto e logistica devono gestire informazioni eterogenee, interdipendenti e spesso soggette a vincoli normativi o operativi:</p>
 <ul>
 <li>veicoli e combinazioni veicolari;</li>
@@ -117,8 +118,8 @@
 <li>futura esposizione API verso sistemi esterni, UI o integrazioni enterprise.</li>
 </ul>
 <p>Un sistema costruito senza separazione architetturale rischia di mescolare regole di business, persistenza, controller, DTO, sicurezza e configurazioni tecniche. TruckFlow Manager risolve questo problema costruendo prima un nucleo stabile e framework-independent, per poi aggiungere progressivamente i layer tecnici.</p>
-<p>---</p>
-<h2 id="4-obiettivi-del-sistema">4. Obiettivi del sistema</h2>
+<hr />
+<h2>4. Obiettivi del sistema</h2>
 <p>Gli obiettivi tecnici e funzionali del sistema sono:</p>
 <ol>
 <li>Modellare il dominio logistico in modo realistico e non banale.</li>
@@ -128,14 +129,14 @@
 <li>Definire repository port outbound indipendenti dalle implementazioni tecniche.</li>
 <li>Fornire adapter in-memory per test e runtime locale.</li>
 <li>Fornire repository file-backed limitati ai contesti già sufficientemente stabili.</li>
-<li>Preparare il futuro API Layer senza anticipare controller, DTO o sicurezza.</li>
+<li>Preparare il futuro API Layer senza anticipare controller, DTO o sicurezza; il Punto 8A introduce solo blueprint e test architetturale.</li>
 <li>Mantenere documentazione storica, semplice, professionale e digitale allineata al codice.</li>
 <li>Proteggere i confini architetturali tramite test e freeze progressivi.</li>
 </ol>
-<p>---</p>
-<h2 id="5-contesto-applicativo-e-scenario-d-uso">5. Contesto applicativo e scenario d’uso</h2>
+<hr />
+<h2>5. Contesto applicativo e scenario d’uso</h2>
 <p>TruckFlow Manager è pensato come base enterprise per una piattaforma di gestione logistica e trasporto merci.</p>
-<h3 id="scenario-attuale">Scenario attuale</h3>
+<h3>Scenario attuale</h3>
 <p>Nello stato corrente, il sistema opera principalmente come fondazione backend non-web:</p>
 <ul>
 <li>modella concetti di dominio;</li>
@@ -145,405 +146,469 @@
 <li>usa Spring come meccanismo tecnico di wiring;</li>
 <li>mantiene runtime non web tramite <code>spring.main.web-application-type: none</code>.</li>
 </ul>
-<h3 id="scenario-futuro">Scenario futuro</h3>
+<h3>Scenario futuro</h3>
 <p>Con il Punto 8, il sistema potrà diventare esponibile tramite API REST versionate:</p>
-<pre><code>/api/v1/locations\n/api/v1/documents\n/api/v1/cargo-units\n/api/v1/compliance-requirements</code></pre>
+<pre><code class="language-text">/api/v1/locations
+/api/v1/documents
+/api/v1/cargo-units
+/api/v1/compliance-requirements
+</code></pre>
 <p>Il primo candidato API previsto è <strong>Locations</strong>, perché è un bounded context stabile, con regole chiare, basso rischio workflow e repository file-backed già validato.</p>
-<p>---</p>
-<h2 id="6-attori-e-stakeholder">6. Attori e stakeholder</h2>
-<div class="table-wrap"><table><thead><tr>
-<th>Attore / Stakeholder</th>
-<th>Interesse principale</th>
-<th>Stato nel progetto</th>
-</tr></thead><tbody>
+<hr />
+<h2>6. Attori e stakeholder</h2>
+<table>
+<thead>
 <tr>
-<td>CTO / Revisore architetturale</td>
-<td>Valutare qualità strutturale, manutenibilità, testabilità e roadmap tecnica</td>
-<td>Supportato dalla documentazione e dai test architetturali</td>
+  <th>Attore / Stakeholder</th>
+  <th>Interesse principale</th>
+  <th>Stato nel progetto</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>CTO / Revisore architetturale</td>
+  <td>Valutare qualità strutturale, manutenibilità, testabilità e roadmap tecnica</td>
+  <td>Supportato dalla documentazione e dai test architetturali</td>
 </tr>
 <tr>
-<td>Manager logistico</td>
-<td>Monitorare sedi, veicoli, ruoli, carichi, spedizioni e compliance</td>
-<td>Modellato a livello di dominio; UI/API future</td>
+  <td>Manager logistico</td>
+  <td>Monitorare sedi, veicoli, ruoli, carichi, spedizioni e compliance</td>
+  <td>Modellato a livello di dominio; UI/API future</td>
 </tr>
 <tr>
-<td>Dispatcher</td>
-<td>Coordinare operazioni, risorse e spedizioni</td>
-<td>Ruolo modellato nel dominio e nei use case operational</td>
+  <td>Dispatcher</td>
+  <td>Coordinare operazioni, risorse e spedizioni</td>
+  <td>Ruolo modellato nel dominio e nei use case operational</td>
 </tr>
 <tr>
-<td>Driver</td>
-<td>Figura operativa soggetta a qualifiche, stato e requisiti</td>
-<td>Modellata nel dominio operational</td>
+  <td>Driver</td>
+  <td>Figura operativa soggetta a qualifiche, stato e requisiti</td>
+  <td>Modellata nel dominio operational</td>
 </tr>
 <tr>
-<td>Mechanic</td>
-<td>Figura tecnica per manutenzione e operatività futura</td>
-<td>Modellata nel dominio operational</td>
+  <td>Mechanic</td>
+  <td>Figura tecnica per manutenzione e operatività futura</td>
+  <td>Modellata nel dominio operational</td>
 </tr>
 <tr>
-<td>Warehouse Operator</td>
-<td>Figura operativa per magazzino, carico/scarico e sedi</td>
-<td>Modellata nel dominio operational</td>
+  <td>Warehouse Operator</td>
+  <td>Figura operativa per magazzino, carico/scarico e sedi</td>
+  <td>Modellata nel dominio operational</td>
 </tr>
 <tr>
-<td>Compliance Manager</td>
-<td>Gestire requisiti normativi, documenti e giurisdizioni</td>
-<td>Modellato tramite compliance e documents</td>
+  <td>Compliance Manager</td>
+  <td>Gestire requisiti normativi, documenti e giurisdizioni</td>
+  <td>Modellato tramite compliance e documents</td>
 </tr>
 <tr>
-<td>Sviluppatore / Maintainer</td>
-<td>Evolvere il sistema senza violare i layer</td>
-<td>Supportato da package structure, test e docs</td>
+  <td>Sviluppatore / Maintainer</td>
+  <td>Evolvere il sistema senza violare i layer</td>
+  <td>Supportato da package structure, test e docs</td>
 </tr>
 <tr>
-<td>Cliente corporate</td>
-<td>Valutare capacità evolutiva e solidità tecnica</td>
-<td>Supportato dal documento enterprise e roadmap</td>
+  <td>Cliente corporate</td>
+  <td>Valutare capacità evolutiva e solidità tecnica</td>
+  <td>Supportato dal documento enterprise e roadmap</td>
 </tr>
-</tbody></table></div>
-<p>---</p>
-<h2 id="7-requisiti-funzionali-completi">7. Requisiti funzionali completi</h2>
+</tbody>
+</table>
+<hr />
+<h2>7. Requisiti funzionali completi</h2>
 <p>I requisiti funzionali sotto riportati sono derivati dai package Java reali, dalle port applicative, dai use case presenti e dalla documentazione di progetto.</p>
-<div class="table-wrap"><table><thead><tr>
-<th>ID</th>
-<th>Area</th>
-<th>Requisito funzionale</th>
-<th>Stato</th>
-</tr></thead><tbody>
+<table>
+<thead>
 <tr>
-<td>RF-01</td>
-<td>Locations</td>
-<td>Supportare i casi d’uso applicativi: FindLocation, RegisterLocation.</td>
-<td>Implementato nell’Application Layer</td>
+  <th>ID</th>
+  <th>Area</th>
+  <th>Requisito funzionale</th>
+  <th>Stato</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>RF-01</td>
+  <td>Locations</td>
+  <td>Supportare i casi d’uso applicativi: FindLocation, RegisterLocation.</td>
+  <td>Implementato nell’Application Layer</td>
 </tr>
 <tr>
-<td>RF-02</td>
-<td>Cargo</td>
-<td>Supportare i casi d’uso applicativi: FindCargoUnit, RegisterCargoUnit.</td>
-<td>Implementato nell’Application Layer</td>
+  <td>RF-02</td>
+  <td>Cargo</td>
+  <td>Supportare i casi d’uso applicativi: FindCargoUnit, RegisterCargoUnit.</td>
+  <td>Implementato nell’Application Layer</td>
 </tr>
 <tr>
-<td>RF-03</td>
-<td>Documents</td>
-<td>Supportare i casi d’uso applicativi: ActivateDocument, ArchiveDocument, FindDocument, RegisterDocument.</td>
-<td>Implementato nell’Application Layer</td>
+  <td>RF-03</td>
+  <td>Documents</td>
+  <td>Supportare i casi d’uso applicativi: ActivateDocument, ArchiveDocument, FindDocument, RegisterDocument.</td>
+  <td>Implementato nell’Application Layer</td>
 </tr>
 <tr>
-<td>RF-04</td>
-<td>Compliance</td>
-<td>Supportare i casi d’uso applicativi: ActivateComplianceRequirement, ArchiveComplianceRequirement, DiscontinueComplianceRequirement, FindComplianceRequirement, RegisterComplianceRequirement, SuspendComplianceRequirement.</td>
-<td>Implementato nell’Application Layer</td>
+  <td>RF-04</td>
+  <td>Compliance</td>
+  <td>Supportare i casi d’uso applicativi: ActivateComplianceRequirement, ArchiveComplianceRequirement, DiscontinueComplianceRequirement, FindComplianceRequirement, RegisterComplianceRequirement, SuspendComplianceRequirement.</td>
+  <td>Implementato nell’Application Layer</td>
 </tr>
 <tr>
-<td>RF-05</td>
-<td>Operational Roles</td>
-<td>Supportare i casi d’uso applicativi: ActivateDispatcher, ActivateDriver, ActivateManager, ActivateMechanic, ActivateWarehouseOperator, FindDispatcher, FindDriver, FindManager, FindMechanic, FindWarehouseOperator, MarkNotEligibleDispatcher, MarkNotEligibleDriver, MarkNotEligibleManager, MarkNotEligibleMechanic, MarkNotEligibleWarehouseOperator, RegisterDispatcher, RegisterDriver, RegisterManager, RegisterMechanic, RegisterWarehouseOperator, SuspendDispatcher, SuspendDriver, SuspendManager, SuspendMechanic, SuspendWarehouseOperator.</td>
-<td>Implementato nell’Application Layer</td>
+  <td>RF-05</td>
+  <td>Operational Roles</td>
+  <td>Supportare i casi d’uso applicativi: ActivateDispatcher, ActivateDriver, ActivateManager, ActivateMechanic, ActivateWarehouseOperator, FindDispatcher, FindDriver, FindManager, FindMechanic, FindWarehouseOperator, MarkNotEligibleDispatcher, MarkNotEligibleDriver, MarkNotEligibleManager, MarkNotEligibleMechanic, MarkNotEligibleWarehouseOperator, RegisterDispatcher, RegisterDriver, RegisterManager, RegisterMechanic, RegisterWarehouseOperator, SuspendDispatcher, SuspendDriver, SuspendManager, SuspendMechanic, SuspendWarehouseOperator.</td>
+  <td>Implementato nell’Application Layer</td>
 </tr>
 <tr>
-<td>RF-06</td>
-<td>Vehicles</td>
-<td>Supportare i casi d’uso applicativi: ActivateVehicleUnit, DismissVehicleUnit, FindVehicleCombination, FindVehicleUnit, MarkVehicleUnitOutOfService, RegisterVehicleCombination, RegisterVehicleUnit, SuspendVehicleUnit.</td>
-<td>Implementato nell’Application Layer</td>
+  <td>RF-06</td>
+  <td>Vehicles</td>
+  <td>Supportare i casi d’uso applicativi: ActivateVehicleUnit, DismissVehicleUnit, FindVehicleCombination, FindVehicleUnit, MarkVehicleUnitOutOfService, RegisterVehicleCombination, RegisterVehicleUnit, SuspendVehicleUnit.</td>
+  <td>Implementato nell’Application Layer</td>
 </tr>
 <tr>
-<td>RF-07</td>
-<td>Shipments</td>
-<td>Supportare i casi d’uso applicativi: AddShipmentItem, AddShipmentLeg, CancelShipment, ConfirmShipment, CreateShipment, FindShipment.</td>
-<td>Implementato nell’Application Layer</td>
+  <td>RF-07</td>
+  <td>Shipments</td>
+  <td>Supportare i casi d’uso applicativi: AddShipmentItem, AddShipmentLeg, CancelShipment, ConfirmShipment, CreateShipment, FindShipment.</td>
+  <td>Implementato nell’Application Layer</td>
 </tr>
 <tr>
-<td>RF-08</td>
-<td>Users</td>
-<td>modellare utenti, profili, contatti, preferenze, ruoli, permessi e stato utente.</td>
-<td>Implementato nel Domain Layer; use case dedicati non ancora esposti</td>
+  <td>RF-08</td>
+  <td>Users</td>
+  <td>modellare utenti, profili, contatti, preferenze, ruoli, permessi e stato utente.</td>
+  <td>Implementato nel Domain Layer; use case dedicati non ancora esposti</td>
 </tr>
 <tr>
-<td>RF-09</td>
-<td>Qualifications</td>
-<td>modellare catalogo, categoria e definizione delle qualifiche professionali.</td>
-<td>Implementato nel Domain Layer; use case dedicati non ancora esposti</td>
+  <td>RF-09</td>
+  <td>Qualifications</td>
+  <td>modellare catalogo, categoria e definizione delle qualifiche professionali.</td>
+  <td>Implementato nel Domain Layer; use case dedicati non ancora esposti</td>
 </tr>
 <tr>
-<td>RF-10</td>
-<td>TripTemplates</td>
-<td>modellare template di viaggio, segmenti, distanza, tipo rotta e stato del template.</td>
-<td>Implementato nel Domain Layer; use case dedicati non ancora esposti</td>
+  <td>RF-10</td>
+  <td>TripTemplates</td>
+  <td>modellare template di viaggio, segmenti, distanza, tipo rotta e stato del template.</td>
+  <td>Implementato nel Domain Layer; use case dedicati non ancora esposti</td>
 </tr>
 <tr>
-<td>RF-11</td>
-<td>Repository ports</td>
-<td>Esporre contratti repository outbound per Cargo, Compliance, Documents, Locations, Operational, Shipments e Vehicles.</td>
-<td>Implementato</td>
+  <td>RF-11</td>
+  <td>Repository ports</td>
+  <td>Esporre contratti repository outbound per Cargo, Compliance, Documents, Locations, Operational, Shipments e Vehicles.</td>
+  <td>Implementato</td>
 </tr>
 <tr>
-<td>RF-12</td>
-<td>Repository in-memory</td>
-<td>Fornire adapter in-memory per test, sviluppo locale e wiring non web.</td>
-<td>Implementato</td>
+  <td>RF-12</td>
+  <td>Repository in-memory</td>
+  <td>Fornire adapter in-memory per test, sviluppo locale e wiring non web.</td>
+  <td>Implementato</td>
 </tr>
 <tr>
-<td>RF-13</td>
-<td>Repository file-backed</td>
-<td>Fornire persistenza file-backed controllata per Locations, Cargo, Documents e Compliance.</td>
-<td>Implementato in scope limitato</td>
+  <td>RF-13</td>
+  <td>Repository file-backed</td>
+  <td>Fornire persistenza file-backed controllata per Locations, Cargo, Documents e Compliance.</td>
+  <td>Implementato in scope limitato</td>
 </tr>
 <tr>
-<td>RF-14</td>
-<td>API REST</td>
-<td>Esporre endpoint HTTP versionati <code>/api/v1</code> tramite futuro API Layer.</td>
-<td>Pianificato Punto 8</td>
+  <td>RF-14</td>
+  <td>API REST</td>
+  <td>Esporre endpoint HTTP versionati <code>/api/v1</code> tramite futuro API Layer.</td>
+  <td>Pianificato da 8C in poi</td>
 </tr>
 <tr>
-<td>RF-15</td>
-<td>Error handling API</td>
-<td>Definire mapping errore applicativo/dominio verso risposte HTTP strutturate.</td>
-<td>Pianificato Punto 8</td>
+  <td>RF-15</td>
+  <td>Error handling API</td>
+  <td>Definire mapping errore applicativo/dominio verso risposte HTTP strutturate.</td>
+  <td>Pianificato 8E</td>
 </tr>
-</tbody></table></div>
-<h3 id="repository-outbound-implementati-come-contratti-applicativi">Repository outbound implementati come contratti applicativi</h3>
-<div class="table-wrap"><table><thead><tr>
-<th>Area</th>
-<th>Repository port</th>
-</tr></thead><tbody>
+</tbody>
+</table>
+<h3>Repository outbound implementati come contratti applicativi</h3>
+<table>
+<thead>
 <tr>
-<td>Cargo</td>
-<td><code>CargoUnitRepository</code></td>
+  <th>Area</th>
+  <th>Repository port</th>
 </tr>
+</thead>
+<tbody>
 <tr>
-<td>Compliance</td>
-<td><code>ComplianceRequirementRepository</code></td>
-</tr>
-<tr>
-<td>Documents</td>
-<td><code>DocumentRepository</code></td>
+  <td>Cargo</td>
+  <td><code>CargoUnitRepository</code></td>
 </tr>
 <tr>
-<td>Locations</td>
-<td><code>LocationRepository</code></td>
+  <td>Compliance</td>
+  <td><code>ComplianceRequirementRepository</code></td>
 </tr>
 <tr>
-<td>Operational</td>
-<td><code>DriverRepository</code>, <code>DispatcherRepository</code>, <code>ManagerRepository</code>, <code>MechanicRepository</code>, <code>WarehouseOperatorRepository</code></td>
+  <td>Documents</td>
+  <td><code>DocumentRepository</code></td>
 </tr>
 <tr>
-<td>Shipments</td>
-<td><code>ShipmentRepository</code></td>
+  <td>Locations</td>
+  <td><code>LocationRepository</code></td>
 </tr>
 <tr>
-<td>Vehicles</td>
-<td><code>VehicleUnitRepository</code>, <code>VehicleCombinationRepository</code></td>
-</tr>
-</tbody></table></div>
-<h3 id="repository-concreti-disponibili">Repository concreti disponibili</h3>
-<div class="table-wrap"><table><thead><tr>
-<th>Categoria</th>
-<th>Implementazioni</th>
-</tr></thead><tbody>
-<tr>
-<td>In-memory</td>
-<td>Cargo, Compliance, Documents, Locations, Operational Roles, Shipments, Vehicles</td>
+  <td>Operational</td>
+  <td><code>DriverRepository</code>, <code>DispatcherRepository</code>, <code>ManagerRepository</code>, <code>MechanicRepository</code>, <code>WarehouseOperatorRepository</code></td>
 </tr>
 <tr>
-<td>File-backed</td>
-<td>Locations, Cargo, Documents, Compliance</td>
+  <td>Shipments</td>
+  <td><code>ShipmentRepository</code></td>
 </tr>
 <tr>
-<td>Non ancora file-backed</td>
-<td>Shipments, Vehicles, Operational Roles</td>
+  <td>Vehicles</td>
+  <td><code>VehicleUnitRepository</code>, <code>VehicleCombinationRepository</code></td>
 </tr>
-</tbody></table></div>
-<p>---</p>
-<h2 id="8-requisiti-non-funzionali-conformi-a-iso-iec-25010">8. Requisiti non funzionali conformi a ISO/IEC 25010</h2>
+</tbody>
+</table>
+<h3>Repository concreti disponibili</h3>
+<table>
+<thead>
+<tr>
+  <th>Categoria</th>
+  <th>Implementazioni</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>In-memory</td>
+  <td>Cargo, Compliance, Documents, Locations, Operational Roles, Shipments, Vehicles</td>
+</tr>
+<tr>
+  <td>File-backed</td>
+  <td>Locations, Cargo, Documents, Compliance</td>
+</tr>
+<tr>
+  <td>Non ancora file-backed</td>
+  <td>Shipments, Vehicles, Operational Roles</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>8. Requisiti non funzionali conformi a ISO/IEC 25010</h2>
 <p>La seguente analisi usa le caratteristiche di qualità del software come riferimento metodologico. Lo stato indicato rappresenta il grado di copertura attuale nel progetto.</p>
-<h3 id="8-1-affidabilit">8.1 Affidabilità</h3>
-<div class="table-wrap"><table><thead><tr>
-<th>Aspetto</th>
-<th>Valutazione</th>
-</tr></thead><tbody>
+<h3>8.1 Affidabilità</h3>
+<table>
+<thead>
 <tr>
-<td>Maturità</td>
-<td>Il progetto contiene test di dominio, application, infrastructure, repository e freeze.</td>
+  <th>Aspetto</th>
+  <th>Valutazione</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Maturità</td>
+  <td>Il progetto contiene test di dominio, application, infrastructure, repository e freeze.</td>
 </tr>
 <tr>
-<td>Disponibilità</td>
-<td>Non valutabile in produzione perché il sistema non è ancora distribuito come servizio web.</td>
+  <td>Disponibilità</td>
+  <td>Non valutabile in produzione perché il sistema non è ancora distribuito come servizio web.</td>
 </tr>
 <tr>
-<td>Tolleranza ai guasti</td>
-<td>Presente a livello di eccezioni di dominio, application e infrastructure; assente gestione runtime enterprise.</td>
+  <td>Tolleranza ai guasti</td>
+  <td>Presente a livello di eccezioni di dominio, application e infrastructure; assente gestione runtime enterprise.</td>
 </tr>
 <tr>
-<td>Recuperabilità</td>
-<td>Limitata ai repository file-backed; non esistono ancora DB transaction, backup o recovery strategy.</td>
+  <td>Recuperabilità</td>
+  <td>Limitata ai repository file-backed; non esistono ancora DB transaction, backup o recovery strategy.</td>
 </tr>
-</tbody></table></div>
+</tbody>
+</table>
 <p><strong>Conclusione</strong>: affidabilità strutturale buona per la fase attuale; affidabilità operativa da progettare con API, persistenza e deployment.</p>
-<h3 id="8-2-sicurezza">8.2 Sicurezza</h3>
-<div class="table-wrap"><table><thead><tr>
-<th>Aspetto</th>
-<th>Valutazione</th>
-</tr></thead><tbody>
+<h3>8.2 Sicurezza</h3>
+<table>
+<thead>
 <tr>
-<td>Autenticazione</td>
-<td>Non ancora implementata.</td>
+  <th>Aspetto</th>
+  <th>Valutazione</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Autenticazione</td>
+  <td>Non ancora implementata.</td>
 </tr>
 <tr>
-<td>Autorizzazione</td>
-<td>Concetti domain-level come ruoli e permessi esistono, ma non esiste security HTTP.</td>
+  <td>Autorizzazione</td>
+  <td>Concetti domain-level come ruoli e permessi esistono, ma non esiste security HTTP.</td>
 </tr>
 <tr>
-<td>Protezione dati</td>
-<td>Non ancora implementata a livello storage/trasporto.</td>
+  <td>Protezione dati</td>
+  <td>Non ancora implementata a livello storage/trasporto.</td>
 </tr>
 <tr>
-<td>Auditability</td>
-<td>Pianificata, non implementata.</td>
+  <td>Auditability</td>
+  <td>Pianificata, non implementata.</td>
 </tr>
 <tr>
-<td>Isolamento layer</td>
-<td>Buono: domain/application non dipendono da web/security.</td>
+  <td>Isolamento layer</td>
+  <td>Buono: domain/application non dipendono da web/security.</td>
 </tr>
-</tbody></table></div>
+</tbody>
+</table>
 <p><strong>Conclusione</strong>: sicurezza applicativa HTTP non presente per scelta di roadmap; modello predisposto, ma Punto 8 e cicli successivi dovranno introdurre security formalizzata.</p>
-<h3 id="8-3-manutenibilit">8.3 Manutenibilità</h3>
-<div class="table-wrap"><table><thead><tr>
-<th>Aspetto</th>
-<th>Valutazione</th>
-</tr></thead><tbody>
+<h3>8.3 Manutenibilità</h3>
+<table>
+<thead>
 <tr>
-<td>Modularità</td>
-<td>Alta: 103 package reali organizzati per layer e bounded context.</td>
+  <th>Aspetto</th>
+  <th>Valutazione</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Modularità</td>
+  <td>Alta: 103 package reali organizzati per layer e bounded context.</td>
 </tr>
 <tr>
-<td>Analizzabilità</td>
-<td>Buona: documentazione simple/professional/old_style/digital presente.</td>
+  <td>Analizzabilità</td>
+  <td>Buona: documentazione simple/professional/old_style/digital presente.</td>
 </tr>
 <tr>
-<td>Modificabilità</td>
-<td>Buona: use case, port e repository sono separati.</td>
+  <td>Modificabilità</td>
+  <td>Buona: use case, port e repository sono separati.</td>
 </tr>
 <tr>
-<td>Testabilità</td>
-<td>Buona: 43 file test e test architetturali.</td>
+  <td>Testabilità</td>
+  <td>Buona: 43 file test e test architetturali.</td>
 </tr>
 <tr>
-<td>Riusabilità</td>
-<td>Buona: value object, command, result, port e repository adapter favoriscono evoluzione controllata.</td>
+  <td>Riusabilità</td>
+  <td>Buona: value object, command, result, port e repository adapter favoriscono evoluzione controllata.</td>
 </tr>
-</tbody></table></div>
+</tbody>
+</table>
 <p><strong>Conclusione</strong>: la manutenibilità è il punto di qualità più forte del progetto.</p>
-<h3 id="8-4-scalabilit">8.4 Scalabilità</h3>
-<div class="table-wrap"><table><thead><tr>
-<th>Aspetto</th>
-<th>Valutazione</th>
-</tr></thead><tbody>
+<h3>8.4 Scalabilità</h3>
+<table>
+<thead>
 <tr>
-<td>Scalabilità architetturale</td>
-<td>Buona: i layer permettono crescita verso API, DB e integrazioni.</td>
+  <th>Aspetto</th>
+  <th>Valutazione</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Scalabilità architetturale</td>
+  <td>Buona: i layer permettono crescita verso API, DB e integrazioni.</td>
 </tr>
 <tr>
-<td>Scalabilità runtime</td>
-<td>Non ancora valutabile: assenti API, deployment e database.</td>
+  <td>Scalabilità runtime</td>
+  <td>Non ancora valutabile: assenti API, deployment e database.</td>
 </tr>
 <tr>
-<td>Scalabilità funzionale</td>
-<td>Buona: bounded context separati e roadmap progressiva.</td>
+  <td>Scalabilità funzionale</td>
+  <td>Buona: bounded context separati e roadmap progressiva.</td>
 </tr>
 <tr>
-<td>Scalabilità organizzativa</td>
-<td>Buona: package e documentazione permettono onboarding tecnico.</td>
+  <td>Scalabilità organizzativa</td>
+  <td>Buona: package e documentazione permettono onboarding tecnico.</td>
 </tr>
-</tbody></table></div>
+</tbody>
+</table>
 <p><strong>Conclusione</strong>: scalabilità architetturale buona; scalabilità operativa futura da validare.</p>
-<h3 id="8-5-efficienza-delle-prestazioni">8.5 Efficienza delle prestazioni</h3>
-<div class="table-wrap"><table><thead><tr>
-<th>Aspetto</th>
-<th>Valutazione</th>
-</tr></thead><tbody>
+<h3>8.5 Efficienza delle prestazioni</h3>
+<table>
+<thead>
 <tr>
-<td>Performance runtime</td>
-<td>Non misurata in ambiente produttivo.</td>
+  <th>Aspetto</th>
+  <th>Valutazione</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Performance runtime</td>
+  <td>Non misurata in ambiente produttivo.</td>
 </tr>
 <tr>
-<td>Overhead architetturale</td>
-<td>Controllato: layer espliciti ma senza infrastruttura pesante.</td>
+  <td>Overhead architetturale</td>
+  <td>Controllato: layer espliciti ma senza infrastruttura pesante.</td>
 </tr>
 <tr>
-<td>Persistenza</td>
-<td>File-backed limitato; nessuna ottimizzazione DB ancora richiesta.</td>
+  <td>Persistenza</td>
+  <td>File-backed limitato; nessuna ottimizzazione DB ancora richiesta.</td>
 </tr>
 <tr>
-<td>Benchmark</td>
-<td>Non presenti.</td>
+  <td>Benchmark</td>
+  <td>Non presenti.</td>
 </tr>
-</tbody></table></div>
+</tbody>
+</table>
 <p><strong>Conclusione</strong>: prestazioni non ancora oggetto di misurazione formale; accettabile per fase foundation.</p>
-<h3 id="8-6-usabilit">8.6 Usabilità</h3>
-<div class="table-wrap"><table><thead><tr>
-<th>Aspetto</th>
-<th>Valutazione</th>
-</tr></thead><tbody>
+<h3>8.6 Usabilità</h3>
+<table>
+<thead>
 <tr>
-<td>Usabilità utente finale</td>
-<td>Non valutabile: manca frontend/API user-facing.</td>
+  <th>Aspetto</th>
+  <th>Valutazione</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Usabilità utente finale</td>
+  <td>Non valutabile: manca frontend/API user-facing.</td>
 </tr>
 <tr>
-<td>Usabilità sviluppatore</td>
-<td>Buona: docs, package explorer, comandi Maven e test.</td>
+  <td>Usabilità sviluppatore</td>
+  <td>Buona: docs, package explorer, comandi Maven e test.</td>
 </tr>
 <tr>
-<td>Usabilità documentale</td>
-<td>Buona e in miglioramento: Digital Reader statico con documenti renderizzati.</td>
+  <td>Usabilità documentale</td>
+  <td>Buona e in miglioramento: Digital Reader statico con documenti renderizzati.</td>
 </tr>
-</tbody></table></div>
+</tbody>
+</table>
 <p><strong>Conclusione</strong>: usabilità tecnica buona; usabilità prodotto finale futura.</p>
-<h3 id="8-7-compatibilit">8.7 Compatibilità</h3>
-<div class="table-wrap"><table><thead><tr>
-<th>Aspetto</th>
-<th>Valutazione</th>
-</tr></thead><tbody>
+<h3>8.7 Compatibilità</h3>
+<table>
+<thead>
 <tr>
-<td>Coesistenza</td>
-<td>Buona: runtime non-web e file-backed non richiedono servizi esterni.</td>
+  <th>Aspetto</th>
+  <th>Valutazione</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Coesistenza</td>
+  <td>Buona: runtime non-web e file-backed non richiedono servizi esterni.</td>
 </tr>
 <tr>
-<td>Interoperabilità</td>
-<td>Pianificata tramite API Layer e future integrazioni.</td>
+  <td>Interoperabilità</td>
+  <td>Pianificata tramite API Layer e future integrazioni.</td>
 </tr>
 <tr>
-<td>Contratti esterni</td>
-<td>Non ancora presenti.</td>
+  <td>Contratti esterni</td>
+  <td>Non ancora presenti.</td>
 </tr>
-</tbody></table></div>
+</tbody>
+</table>
 <p><strong>Conclusione</strong>: compatibilità interna buona; interoperabilità esterna pianificata.</p>
-<h3 id="8-8-portabilit">8.8 Portabilità</h3>
-<div class="table-wrap"><table><thead><tr>
-<th>Aspetto</th>
-<th>Valutazione</th>
-</tr></thead><tbody>
+<h3>8.8 Portabilità</h3>
+<table>
+<thead>
 <tr>
-<td>Portabilità codice</td>
-<td>Buona: Java 21 e Maven.</td>
+  <th>Aspetto</th>
+  <th>Valutazione</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Portabilità codice</td>
+  <td>Buona: Java 21 e Maven.</td>
 </tr>
 <tr>
-<td>Portabilità ambiente</td>
-<td>Buona: nessun DB obbligatorio nello stato attuale.</td>
+  <td>Portabilità ambiente</td>
+  <td>Buona: nessun DB obbligatorio nello stato attuale.</td>
 </tr>
 <tr>
-<td>Installabilità</td>
-<td>Maven-based; richiede JDK 21.</td>
+  <td>Installabilità</td>
+  <td>Maven-based; richiede JDK 21.</td>
 </tr>
 <tr>
-<td>Sostituibilità infrastruttura</td>
-<td>Buona: repository port permettono sostituzione adapter.</td>
+  <td>Sostituibilità infrastruttura</td>
+  <td>Buona: repository port permettono sostituzione adapter.</td>
 </tr>
-</tbody></table></div>
+</tbody>
+</table>
 <p><strong>Conclusione</strong>: portabilità buona nella fase attuale.</p>
-<p>---</p>
-<h2 id="9-processi-di-sviluppo-conformi-a-iso-iec-12207">9. Processi di sviluppo conformi a ISO/IEC 12207</h2>
-<h3 id="9-1-analisi-dei-requisiti">9.1 Analisi dei requisiti</h3>
+<hr />
+<h2>9. Processi di sviluppo conformi a ISO/IEC 12207</h2>
+<h3>9.1 Analisi dei requisiti</h3>
 <p>Il progetto mostra una progressiva identificazione dei requisiti attraverso:</p>
 <ul>
 <li>definizione dei bounded context;</li>
@@ -552,7 +617,7 @@
 <li>formalizzazione della roadmap;</li>
 <li>documenti simple/professional/digital.</li>
 </ul>
-<h3 id="9-2-progettazione">9.2 Progettazione</h3>
+<h3>9.2 Progettazione</h3>
 <p>La progettazione è basata su:</p>
 <ul>
 <li>Domain-Driven Design;</li>
@@ -563,7 +628,7 @@
 <li>mapping persistence separato;</li>
 <li>freeze per layer.</li>
 </ul>
-<h3 id="9-3-implementazione">9.3 Implementazione</h3>
+<h3>9.3 Implementazione</h3>
 <p>L’implementazione è incrementale:</p>
 <ul>
 <li>prima dominio;</li>
@@ -572,7 +637,7 @@
 <li>poi futura API.</li>
 </ul>
 <p>Questo riduce la probabilità di accoppiamento prematuro tra modello business e tecnologia.</p>
-<h3 id="9-4-verifica">9.4 Verifica</h3>
+<h3>9.4 Verifica</h3>
 <p>La verifica è supportata da test dedicati:</p>
 <ul>
 <li><code>src/test/java/it/gabriele/truckflow/application/ApplicationArchitectureTest.java</code></li>
@@ -619,7 +684,7 @@
 <li><code>src/test/java/it/gabriele/truckflow/infrastructure/repository/file/FileRepositoryStorageTest.java</code></li>
 <li><code>src/test/java/it/gabriele/truckflow/infrastructure/repository/locations/FileLocationRepositoryPrototypeTest.java</code></li>
 </ul>
-<h3 id="9-5-validazione">9.5 Validazione</h3>
+<h3>9.5 Validazione</h3>
 <p>La validazione attuale è tecnica e architetturale, non ancora business/utente finale. Sono validati:</p>
 <ul>
 <li>confini dei layer;</li>
@@ -629,7 +694,7 @@
 <li>coerenza della documentazione.</li>
 </ul>
 <p>La validazione con stakeholder finali sarà appropriata dopo l’introduzione di API e interfacce applicative.</p>
-<h3 id="9-6-manutenzione">9.6 Manutenzione</h3>
+<h3>9.6 Manutenzione</h3>
 <p>La manutenzione è favorita da:</p>
 <ul>
 <li>struttura package stabile;</li>
@@ -639,37 +704,42 @@
 <li>roadmap esplicita;</li>
 <li>separazione tra scelte implementate e future.</li>
 </ul>
-<p>---</p>
-<h2 id="10-processi-di-supporto-iso-iec-12207">10. Processi di supporto ISO/IEC 12207</h2>
-<h3 id="10-1-documentazione">10.1 Documentazione</h3>
+<hr />
+<h2>10. Processi di supporto ISO/IEC 12207</h2>
+<h3>10.1 Documentazione</h3>
 <p>La documentazione è organizzata in:</p>
-<div class="table-wrap"><table><thead><tr>
-<th>Area</th>
-<th>Contenuto</th>
-<th>Quantità rilevata</th>
-</tr></thead><tbody>
+<table>
+<thead>
 <tr>
-<td><code>docs/simple</code></td>
-<td>Guide didattiche e spiegazioni semplici</td>
-<td>14 file Markdown</td>
+  <th>Area</th>
+  <th>Contenuto</th>
+  <th style="text-align:right">Quantità rilevata</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><code>docs/simple</code></td>
+  <td>Guide didattiche e spiegazioni semplici</td>
+  <td style="text-align:right">14 file Markdown</td>
 </tr>
 <tr>
-<td><code>docs/professional</code></td>
-<td>Documentazione tecnica ufficiale</td>
-<td>9 file Markdown</td>
+  <td><code>docs/professional</code></td>
+  <td>Documentazione tecnica ufficiale</td>
+  <td style="text-align:right">9 file Markdown</td>
 </tr>
 <tr>
-<td><code>docs/old_style</code></td>
-<td>Archivio storico e roadmap step-by-step</td>
-<td>38 file Markdown</td>
+  <td><code>docs/old_style</code></td>
+  <td>Archivio storico e roadmap step-by-step</td>
+  <td style="text-align:right">38 file Markdown</td>
 </tr>
 <tr>
-<td><code>docs/digital</code></td>
-<td>Reader statico e documenti renderizzati</td>
-<td>61 file HTML renderizzati</td>
+  <td><code>docs/digital</code></td>
+  <td>Reader statico e documenti renderizzati</td>
+  <td style="text-align:right">61 file HTML renderizzati</td>
 </tr>
-</tbody></table></div>
-<h3 id="10-2-gestione-della-configurazione">10.2 Gestione della configurazione</h3>
+</tbody>
+</table>
+<h3>10.2 Gestione della configurazione</h3>
 <p>La gestione della configurazione è supportata da:</p>
 <ul>
 <li>Maven;</li>
@@ -681,7 +751,7 @@
 <li>repository Git;</li>
 <li>patch documentali e tecniche applicabili.</li>
 </ul>
-<h3 id="10-3-gestione-della-qualit">10.3 Gestione della qualità</h3>
+<h3>10.3 Gestione della qualità</h3>
 <p>La qualità è gestita tramite:</p>
 <ul>
 <li>test di dominio;</li>
@@ -691,7 +761,7 @@
 <li>documentazione di review;</li>
 <li>controllo formattazione tramite Maven/Spotless.</li>
 </ul>
-<h3 id="10-4-audit-tecnico">10.4 Audit tecnico</h3>
+<h3>10.4 Audit tecnico</h3>
 <p>Il progetto include elementi auditabili:</p>
 <ul>
 <li>roadmap storica;</li>
@@ -701,18 +771,19 @@
 <li>package explorer statico;</li>
 <li>separazione tra implementato e pianificato.</li>
 </ul>
-<p>---</p>
-<h2 id="11-processi-organizzativi-iso-iec-12207">11. Processi organizzativi ISO/IEC 12207</h2>
-<h3 id="11-1-gestione-del-progetto">11.1 Gestione del progetto</h3>
+<hr />
+<h2>11. Processi organizzativi ISO/IEC 12207</h2>
+<h3>11.1 Gestione del progetto</h3>
 <p>La gestione del progetto è organizzata per milestone:</p>
 <ul>
 <li>Punti 1 → 5: Domain Layer;</li>
 <li>Punto 6A → 6M: Application Layer;</li>
 <li>Punto 7A → 7H: Infrastructure Layer;</li>
-<li>Punto 8A → 8H: API Layer pianificato.</li>
+<li>Punto 8A: API Layer Blueprint formalizzato;</li>
+<li>Punto 8B → 8H: API Layer runtime ancora pianificato.</li>
 </ul>
 <p>Ogni ciclo ha obiettivi, output e freeze.</p>
-<h3 id="11-2-gestione-dei-rischi">11.2 Gestione dei rischi</h3>
+<h3>11.2 Gestione dei rischi</h3>
 <p>I rischi principali sono:</p>
 <ul>
 <li>introdurre API prima della stabilizzazione;</li>
@@ -722,92 +793,97 @@
 <li>produrre documentazione non allineata al codice.</li>
 </ul>
 <p>Le mitigazioni sono descritte nella sezione 21.</p>
-<h3 id="11-3-pianificazione">11.3 Pianificazione</h3>
+<h3>11.3 Pianificazione</h3>
 <p>La pianificazione è incrementale e conservativa. Ogni fase abilita la successiva:</p>
-<pre><code>Domain stabile\n  → Application stabile\n    → Infrastructure stabile\n      → API controllata\n        → Persistence enterprise / Security / Frontend / Integrations</code></pre>
-<p>---</p>
-<h2 id="12-modello-di-dominio-ddd">12. Modello di dominio DDD</h2>
+<pre><code class="language-text">Domain stabile
+  → Application stabile
+    → Infrastructure stabile
+      → API controllata
+        → Persistence enterprise / Security / Frontend / Integrations
+</code></pre>
+<hr />
+<h2>12. Modello di dominio DDD</h2>
 <p>Il progetto segue una modellazione DDD pragmatica. I bounded context sono separati per dominio e non per tecnologia.</p>
-<div class="table-wrap"><table><thead><tr>
-<th>Bounded context</th>
-<th>Entità/Aggregati principali</th>
-<th>Value Object / Enumerazioni principali</th>
-<th>Invarianti e regole principali</th>
-</tr></thead><tbody>
+<table>
+<thead>
 <tr>
-<td>Users</td>
-<td><code>User</code></td>
-<td><code>UserId</code>, <code>Username</code>, <code>UserProfile</code>, <code>UserContact</code>, <code>UserAddress</code>, <code>UserRole</code>, <code>UserStatus</code>, <code>UserPermission</code>, <code>UserPreferences</code>, <code>LanguageCode</code>, <code>UserTheme</code></td>
-<td>Identità utente obbligatoria, username coerente, stato esplicito, separazione tra profilo, contatti, permessi e preferenze.</td>
+  <th>Bounded context</th>
+  <th>Entità/Aggregati principali</th>
+  <th>Value Object / Enumerazioni principali</th>
+  <th>Invarianti e regole principali</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Users</td>
+  <td><code>User</code></td>
+  <td><code>UserId</code>, <code>Username</code>, <code>UserProfile</code>, <code>UserContact</code>, <code>UserAddress</code>, <code>UserRole</code>, <code>UserStatus</code>, <code>UserPermission</code>, <code>UserPreferences</code>, <code>LanguageCode</code>, <code>UserTheme</code></td>
+  <td>Identità utente obbligatoria, username coerente, stato esplicito, separazione tra profilo, contatti, permessi e preferenze.</td>
 </tr>
 <tr>
-<td>Qualifications</td>
-<td><code>Qualification</code>, <code>QualificationCatalog</code></td>
-<td><code>QualificationCategory</code></td>
-<td>Catalogo qualifiche separato dal ruolo operativo; qualifiche modellate come concetti di dominio e non come semplici stringhe.</td>
+  <td>Qualifications</td>
+  <td><code>Qualification</code>, <code>QualificationCatalog</code></td>
+  <td><code>QualificationCategory</code></td>
+  <td>Catalogo qualifiche separato dal ruolo operativo; qualifiche modellate come concetti di dominio e non come semplici stringhe.</td>
 </tr>
 <tr>
-<td>Operational</td>
-<td><code>Driver</code>, <code>Dispatcher</code>, <code>Manager</code>, <code>Mechanic</code>, <code>WarehouseOperator</code></td>
-<td><code>DriverId</code>, <code>DispatcherId</code>, <code>ManagerId</code>, <code>MechanicId</code>, <code>WarehouseOperatorId</code>, <code>OperationalProfile</code>, <code>OperationalStatus</code>, <code>OperationalQualification</code>, <code>OperationalScope</code></td>
-<td>Ogni ruolo operativo ha identità propria, profilo coerente, stato operativo controllato e qualifiche/scope espliciti.</td>
+  <td>Operational</td>
+  <td><code>Driver</code>, <code>Dispatcher</code>, <code>Manager</code>, <code>Mechanic</code>, <code>WarehouseOperator</code></td>
+  <td><code>DriverId</code>, <code>DispatcherId</code>, <code>ManagerId</code>, <code>MechanicId</code>, <code>WarehouseOperatorId</code>, <code>OperationalProfile</code>, <code>OperationalStatus</code>, <code>OperationalQualification</code>, <code>OperationalScope</code></td>
+  <td>Ogni ruolo operativo ha identità propria, profilo coerente, stato operativo controllato e qualifiche/scope espliciti.</td>
 </tr>
 <tr>
-<td>Vehicles</td>
-<td><code>VehicleUnit</code>, <code>VehicleCombination</code></td>
-<td><code>VehicleUnitId</code>, <code>VehicleCombinationId</code>, <code>LicensePlate</code>, <code>FleetCode</code>, <code>VehicleIdentificationNumber</code>, <code>VehicleUnitType</code>, <code>VehicleCombinationType</code>, profili body, coupling, specification e weights</td>
-<td>Separazione tra unità veicolare e combinazione; plate/VIN/fleet code come value object; stato veicolo e compatibilità tecnica non ridotti a primitive.</td>
+  <td>Vehicles</td>
+  <td><code>VehicleUnit</code>, <code>VehicleCombination</code></td>
+  <td><code>VehicleUnitId</code>, <code>VehicleCombinationId</code>, <code>LicensePlate</code>, <code>FleetCode</code>, <code>VehicleIdentificationNumber</code>, <code>VehicleUnitType</code>, <code>VehicleCombinationType</code>, profili body, coupling, specification e weights</td>
+  <td>Separazione tra unità veicolare e combinazione; plate/VIN/fleet code come value object; stato veicolo e compatibilità tecnica non ridotti a primitive.</td>
 </tr>
 <tr>
-<td>Cargo</td>
-<td><code>CargoUnit</code></td>
-<td><code>CargoId</code>, <code>CargoCode</code>, <code>CargoType</code>, <code>CargoCategory</code>, <code>CargoWeights</code>, <code>CargoDimensions</code>, <code>CargoPackaging</code>, <code>CargoTemperature</code>, <code>CargoTransportRequirement</code>, <code>CargoCompatibilityRequirement</code>, <code>CargoRegulatory</code>, <code>CargoStatus</code></td>
-<td>Cargo come concetto centrale per requisiti di trasporto, compatibilità, peso, dimensione, packaging e regolamentazione.</td>
+  <td>Cargo</td>
+  <td><code>CargoUnit</code></td>
+  <td><code>CargoId</code>, <code>CargoCode</code>, <code>CargoType</code>, <code>CargoCategory</code>, <code>CargoWeights</code>, <code>CargoDimensions</code>, <code>CargoPackaging</code>, <code>CargoTemperature</code>, <code>CargoTransportRequirement</code>, <code>CargoCompatibilityRequirement</code>, <code>CargoRegulatory</code>, <code>CargoStatus</code></td>
+  <td>Cargo come concetto centrale per requisiti di trasporto, compatibilità, peso, dimensione, packaging e regolamentazione.</td>
 </tr>
 <tr>
-<td>Locations</td>
-<td><code>Location</code></td>
-<td><code>LocationId</code>, <code>LocationCode</code>, <code>LocationAddress</code>, <code>GeoCoordinates</code>, <code>LocationType</code>, <code>LocationStatus</code></td>
-<td>Location identificata da ID/code, indirizzo e stato; candidata naturale per primo controller API perché stabile e poco workflow-dependent.</td>
+  <td>Locations</td>
+  <td><code>Location</code></td>
+  <td><code>LocationId</code>, <code>LocationCode</code>, <code>LocationAddress</code>, <code>GeoCoordinates</code>, <code>LocationType</code>, <code>LocationStatus</code></td>
+  <td>Location identificata da ID/code, indirizzo e stato; candidata naturale per primo controller API perché stabile e poco workflow-dependent.</td>
 </tr>
 <tr>
-<td>TripTemplates</td>
-<td><code>TripTemplate</code>, <code>TripTemplateSegment</code></td>
-<td><code>TripTemplateId</code>, <code>TripTemplateCode</code>, <code>TripTemplateSegmentId</code>, <code>Distance</code>, <code>DistanceUnit</code>, <code>RouteSpecification</code>, <code>RouteRoadType</code>, <code>TripTemplateStatus</code>, <code>TripTemplateType</code></td>
-<td>Template e segmenti separati; distanza e specifica strada modellate esplicitamente; pianificazione avanzata rimandata.</td>
+  <td>TripTemplates</td>
+  <td><code>TripTemplate</code>, <code>TripTemplateSegment</code></td>
+  <td><code>TripTemplateId</code>, <code>TripTemplateCode</code>, <code>TripTemplateSegmentId</code>, <code>Distance</code>, <code>DistanceUnit</code>, <code>RouteSpecification</code>, <code>RouteRoadType</code>, <code>TripTemplateStatus</code>, <code>TripTemplateType</code></td>
+  <td>Template e segmenti separati; distanza e specifica strada modellate esplicitamente; pianificazione avanzata rimandata.</td>
 </tr>
 <tr>
-<td>Shipments</td>
-<td><code>Shipment</code>, <code>ShipmentItem</code>, <code>ShipmentLeg</code></td>
-<td><code>ShipmentId</code>, <code>ShipmentCode</code>, <code>ShipmentStatus</code>, <code>ShipmentPriority</code>, <code>ShipmentServiceLevel</code>, <code>ShipmentWeight</code>, <code>ShipmentVolume</code>, <code>ShipmentTemperature</code>, <code>ShipmentRequirementSet</code>, <code>ShipmentReferences</code>, <code>ShipmentNotes</code></td>
-<td>Shipment separa core, item, legs, metriche, requisiti e riferimenti; workflow complesso non anticipato oltre i casi d’uso base.</td>
+  <td>Shipments</td>
+  <td><code>Shipment</code>, <code>ShipmentItem</code>, <code>ShipmentLeg</code></td>
+  <td><code>ShipmentId</code>, <code>ShipmentCode</code>, <code>ShipmentStatus</code>, <code>ShipmentPriority</code>, <code>ShipmentServiceLevel</code>, <code>ShipmentWeight</code>, <code>ShipmentVolume</code>, <code>ShipmentTemperature</code>, <code>ShipmentRequirementSet</code>, <code>ShipmentReferences</code>, <code>ShipmentNotes</code></td>
+  <td>Shipment separa core, item, legs, metriche, requisiti e riferimenti; workflow complesso non anticipato oltre i casi d’uso base.</td>
 </tr>
 <tr>
-<td>Documents</td>
-<td><code>Document</code></td>
-<td><code>DocumentId</code>, <code>DocumentCode</code>, <code>DocumentType</code>, <code>DocumentCategory</code>, <code>DocumentContent</code>, <code>DocumentMetadata</code>, <code>DocumentReference</code>, <code>DocumentReferenceType</code>, <code>DocumentStatus</code></td>
-<td>Documento modellato come concetto generico riutilizzabile, indipendente da file upload, PDF handling, workflow e permessi.</td>
+  <td>Documents</td>
+  <td><code>Document</code></td>
+  <td><code>DocumentId</code>, <code>DocumentCode</code>, <code>DocumentType</code>, <code>DocumentCategory</code>, <code>DocumentContent</code>, <code>DocumentMetadata</code>, <code>DocumentReference</code>, <code>DocumentReferenceType</code>, <code>DocumentStatus</code></td>
+  <td>Documento modellato come concetto generico riutilizzabile, indipendente da file upload, PDF handling, workflow e permessi.</td>
 </tr>
 <tr>
-<td>Compliance</td>
-<td><code>ComplianceRequirement</code></td>
-<td><code>ComplianceRequirementId</code>, <code>ComplianceRequirementCode</code>, <code>ComplianceCategory</code>, <code>ComplianceJurisdiction</code>, <code>CountryCode</code>, <code>ComplianceTarget</code>, <code>ComplianceRule</code>, <code>ComplianceSeverity</code>, <code>ComplianceSource</code>, <code>ComplianceRequirementStatus</code></td>
-<td>Requisiti di compliance separati da implementazioni tecniche; giurisdizione, target, source e severity espliciti.</td>
+  <td>Compliance</td>
+  <td><code>ComplianceRequirement</code></td>
+  <td><code>ComplianceRequirementId</code>, <code>ComplianceRequirementCode</code>, <code>ComplianceCategory</code>, <code>ComplianceJurisdiction</code>, <code>CountryCode</code>, <code>ComplianceTarget</code>, <code>ComplianceRule</code>, <code>ComplianceSeverity</code>, <code>ComplianceSource</code>, <code>ComplianceRequirementStatus</code></td>
+  <td>Requisiti di compliance separati da implementazioni tecniche; giurisdizione, target, source e severity espliciti.</td>
 </tr>
 <tr>
-<td>Shared Exceptions</td>
-<td><code>DomainException</code>, <code>DomainValidationException</code>, <code>InvariantViolationException</code></td>
-<td>Eccezioni specifiche per bounded context</td>
-<td>Gerarchia comune per distinguere violazioni di dominio, validazione e invarianti.</td>
+  <td>Shared Exceptions</td>
+  <td><code>DomainException</code>, <code>DomainValidationException</code>, <code>InvariantViolationException</code></td>
+  <td>Eccezioni specifiche per bounded context</td>
+  <td>Gerarchia comune per distinguere violazioni di dominio, validazione e invarianti.</td>
 </tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody></table></div>
-<h3 id="regole-ddd-osservate">Regole DDD osservate</h3>
+</tbody>
+</table>
+<p>|</p>
+<h3>Regole DDD osservate</h3>
 <ul>
 <li>I bounded context non dipendono da Spring, REST, JPA o database.</li>
 <li>Gli ID sono modellati come value object o classi dedicate.</li>
@@ -816,36 +892,41 @@
 <li>I concetti con significato diverso non vengono unificati solo perché strutturalmente simili.</li>
 <li>Le relazioni cross-domain devono preferire ID, value object stabili o concetti astratti, non aggregate root completi.</li>
 </ul>
-<p>---</p>
-<h2 id="13-architettura-software">13. Architettura software</h2>
-<h3 id="13-1-layer-attuali-e-futuri">13.1 Layer attuali e futuri</h3>
-<div class="table-wrap"><table><thead><tr>
-<th>Layer</th>
-<th>Stato</th>
-<th>Responsabilità</th>
-</tr></thead><tbody>
+<hr />
+<h2>13. Architettura software</h2>
+<h3>13.1 Layer attuali e futuri</h3>
+<table>
+<thead>
 <tr>
-<td>Domain</td>
-<td>Completato</td>
-<td>Modello business, value object, entità, invarianti, eccezioni.</td>
+  <th>Layer</th>
+  <th>Stato</th>
+  <th>Responsabilità</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Domain</td>
+  <td>Completato</td>
+  <td>Modello business, value object, entità, invarianti, eccezioni.</td>
 </tr>
 <tr>
-<td>Application</td>
-<td>Completato</td>
-<td>Use case, command, result, inbound port, outbound port.</td>
+  <td>Application</td>
+  <td>Completato</td>
+  <td>Use case, command, result, inbound port, outbound port.</td>
 </tr>
 <tr>
-<td>Infrastructure</td>
-<td>Completato per il primo ciclo</td>
-<td>Adapter tecnici, repository memory/file-backed, mapping, Spring wiring non-web.</td>
+  <td>Infrastructure</td>
+  <td>Completato per il primo ciclo</td>
+  <td>Adapter tecnici, repository memory/file-backed, mapping, Spring wiring non-web.</td>
 </tr>
 <tr>
-<td>API</td>
-<td>Pianificato</td>
-<td>Controller REST, DTO, mapping API, error handling HTTP, OpenAPI.</td>
+  <td>API</td>
+  <td>Pianificato</td>
+  <td>Controller REST, DTO, mapping API, error handling HTTP, OpenAPI.</td>
 </tr>
-</tbody></table></div>
-<h3 id="13-2-motivazioni-formali">13.2 Motivazioni formali</h3>
+</tbody>
+</table>
+<h3>13.2 Motivazioni formali</h3>
 <p>La scelta architetturale consente:</p>
 <ul>
 <li>indipendenza del dominio;</li>
@@ -854,169 +935,189 @@
 <li>evoluzione controllata verso REST API;</li>
 <li>isolamento delle scelte future come JPA, security e frontend.</li>
 </ul>
-<h3 id="13-3-alternative-considerate-e-scartate">13.3 Alternative considerate e scartate</h3>
-<div class="table-wrap"><table><thead><tr>
-<th>Alternativa</th>
-<th>Motivo dello scarto/rinvio</th>
-</tr></thead><tbody>
+<h3>13.3 Alternative considerate e scartate</h3>
+<table>
+<thead>
 <tr>
-<td>CRUD monolitico controller-service-repository</td>
-<td>Avrebbe accoppiato business, web e persistenza troppo presto.</td>
+  <th>Alternativa</th>
+  <th>Motivo dello scarto/rinvio</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>CRUD monolitico controller-service-repository</td>
+  <td>Avrebbe accoppiato business, web e persistenza troppo presto.</td>
 </tr>
 <tr>
-<td>Database-first / JPA-first</td>
-<td>Avrebbe orientato il modello al dato invece che al dominio.</td>
+  <td>Database-first / JPA-first</td>
+  <td>Avrebbe orientato il modello al dato invece che al dominio.</td>
 </tr>
 <tr>
-<td>API-first immediato</td>
-<td>Avrebbe imposto DTO e controller prima della stabilità del dominio.</td>
+  <td>API-first immediato</td>
+  <td>Avrebbe imposto DTO e controller prima della stabilità del dominio.</td>
 </tr>
 <tr>
-<td>Spring Data immediato</td>
-<td>Avrebbe anticipato tecnologia non necessaria nella fase foundation.</td>
+  <td>Spring Data immediato</td>
+  <td>Avrebbe anticipato tecnologia non necessaria nella fase foundation.</td>
 </tr>
 <tr>
-<td>Frontend immediato</td>
-<td>Avrebbe spostato il focus sulla UI invece che sulla correttezza architetturale.</td>
+  <td>Frontend immediato</td>
+  <td>Avrebbe spostato il focus sulla UI invece che sulla correttezza architetturale.</td>
 </tr>
-</tbody></table></div>
-<p>---</p>
-<h2 id="14-motivazione-delle-scelte-tecniche">14. Motivazione delle scelte tecniche</h2>
-<div class="table-wrap"><table><thead><tr>
-<th>Scelta</th>
-<th>Motivazione</th>
-</tr></thead><tbody>
+</tbody>
+</table>
+<hr />
+<h2>14. Motivazione delle scelte tecniche</h2>
+<table>
+<thead>
 <tr>
-<td>Java 21</td>
-<td>Linguaggio stabile, moderno e adatto a sistemi enterprise.</td>
+  <th>Scelta</th>
+  <th>Motivazione</th>
 </tr>
+</thead>
+<tbody>
 <tr>
-<td>Maven</td>
-<td>Build riproducibile e standard nel mondo Java.</td>
-</tr>
-<tr>
-<td>JUnit</td>
-<td>Verifica automatizzata dei layer e dei comportamenti principali.</td>
+  <td>Java 21</td>
+  <td>Linguaggio stabile, moderno e adatto a sistemi enterprise.</td>
 </tr>
 <tr>
-<td>Spring Boot</td>
-<td>Usato come wiring tecnico, non come driver architetturale del dominio.</td>
+  <td>Maven</td>
+  <td>Build riproducibile e standard nel mondo Java.</td>
 </tr>
 <tr>
-<td>Runtime non-web</td>
-<td>Evita di introdurre delivery layer prima del Punto 8.</td>
+  <td>JUnit</td>
+  <td>Verifica automatizzata dei layer e dei comportamenti principali.</td>
 </tr>
 <tr>
-<td>Port/Adapter</td>
-<td>Isola le dipendenze tecniche dai layer interni.</td>
+  <td>Spring Boot</td>
+  <td>Usato come wiring tecnico, non come driver architetturale del dominio.</td>
 </tr>
 <tr>
-<td>Repository in-memory</td>
-<td>Permette test e sviluppo senza database.</td>
+  <td>Runtime non-web</td>
+  <td>Evita di introdurre delivery layer prima del Punto 8.</td>
 </tr>
 <tr>
-<td>Repository file-backed limitati</td>
-<td>Introduce persistenza reale solo dove il modello è stabile.</td>
+  <td>Port/Adapter</td>
+  <td>Isola le dipendenze tecniche dai layer interni.</td>
 </tr>
 <tr>
-<td>Markdown/HTML statico</td>
-<td>Documentazione versionabile, leggibile e indipendente dal runtime applicativo.</td>
+  <td>Repository in-memory</td>
+  <td>Permette test e sviluppo senza database.</td>
 </tr>
-</tbody></table></div>
-<p>---</p>
-<h2 id="15-tecnologie-adottate-e-alternative-scartate">15. Tecnologie adottate e alternative scartate</h2>
-<h3 id="tecnologie-adottate">Tecnologie adottate</h3>
+<tr>
+  <td>Repository file-backed limitati</td>
+  <td>Introduce persistenza reale solo dove il modello è stabile.</td>
+</tr>
+<tr>
+  <td>Markdown/HTML statico</td>
+  <td>Documentazione versionabile, leggibile e indipendente dal runtime applicativo.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>15. Tecnologie adottate e alternative scartate</h2>
+<h3>Tecnologie adottate</h3>
 <ul>
 <li>Spring Boot <code>3.5.15</code></li>
 <li>Java <code>21</code></li>
 <li>Maven</li>
 <li>JUnit / Spring Boot Test</li>
 <li>Spotless Maven Plugin / Google Java Format</li>
-<li>Springdoc OpenAPI dependency già presente nel <code>pom.xml</code>, ma API Layer non ancora implementato</li>
+<li>Springdoc OpenAPI dependency già presente nel <code>pom.xml</code>, ma API runtime non ancora implementata</li>
 <li>Spring Boot Web/Validation dependencies presenti, con runtime configurato come non-web tramite <code>spring.main.web-application-type: none</code></li>
 </ul>
-<h3 id="alternative-scartate-o-rimandate">Alternative scartate o rimandate</h3>
-<div class="table-wrap"><table><thead><tr>
-<th>Tecnologia / approccio</th>
-<th>Stato</th>
-<th>Motivazione</th>
-</tr></thead><tbody>
+<h3>Alternative scartate o rimandate</h3>
+<table>
+<thead>
 <tr>
-<td>JPA / Hibernate</td>
-<td>Rimandato</td>
-<td>Richiede schema, entity mapping e transaction strategy.</td>
+  <th>Tecnologia / approccio</th>
+  <th>Stato</th>
+  <th>Motivazione</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>JPA / Hibernate</td>
+  <td>Rimandato</td>
+  <td>Richiede schema, entity mapping e transaction strategy.</td>
 </tr>
 <tr>
-<td>Spring Data</td>
-<td>Rimandato</td>
-<td>Prematuro senza decisione DB e modello persistence definitivo.</td>
+  <td>Spring Data</td>
+  <td>Rimandato</td>
+  <td>Prematuro senza decisione DB e modello persistence definitivo.</td>
 </tr>
 <tr>
-<td>Security HTTP / JWT</td>
-<td>Rimandato</td>
-<td>Ha senso dopo API Layer.</td>
+  <td>Security HTTP / JWT</td>
+  <td>Rimandato</td>
+  <td>Ha senso dopo API Layer.</td>
 </tr>
 <tr>
-<td>Frontend</td>
-<td>Rimandato</td>
-<td>Richiede API stabili.</td>
+  <td>Frontend</td>
+  <td>Rimandato</td>
+  <td>Richiede API stabili.</td>
 </tr>
 <tr>
-<td>Database relazionale</td>
-<td>Rimandato</td>
-<td>Persistenza enterprise successiva al primo ciclo infrastructure.</td>
+  <td>Database relazionale</td>
+  <td>Rimandato</td>
+  <td>Persistenza enterprise successiva al primo ciclo infrastructure.</td>
 </tr>
 <tr>
-<td>Telematics/Tachograph/ERP integrations</td>
-<td>Rimandato</td>
-<td>Richiedono port esterne e adapter dedicati futuri.</td>
+  <td>Telematics/Tachograph/ERP integrations</td>
+  <td>Rimandato</td>
+  <td>Richiedono port esterne e adapter dedicati futuri.</td>
 </tr>
-</tbody></table></div>
-<p>---</p>
-<h2 id="16-stato-attuale-del-progetto">16. Stato attuale del progetto</h2>
-<h3 id="stato-sintetico">Stato sintetico</h3>
-<div class="table-wrap"><table><thead><tr>
-<th>Area</th>
-<th>Stato</th>
-</tr></thead><tbody>
+</tbody>
+</table>
+<hr />
+<h2>16. Stato attuale del progetto</h2>
+<h3>Stato sintetico</h3>
+<table>
+<thead>
 <tr>
-<td>Domain Layer</td>
-<td>Completato</td>
+  <th>Area</th>
+  <th>Stato</th>
 </tr>
+</thead>
+<tbody>
 <tr>
-<td>Application Layer</td>
-<td>Completato</td>
-</tr>
-<tr>
-<td>Infrastructure Layer</td>
-<td>Completato per il primo ciclo</td>
+  <td>Domain Layer</td>
+  <td>Completato</td>
 </tr>
 <tr>
-<td>API Layer</td>
-<td>Pianificato</td>
+  <td>Application Layer</td>
+  <td>Completato</td>
 </tr>
 <tr>
-<td>Database/JPA</td>
-<td>Non presente</td>
+  <td>Infrastructure Layer</td>
+  <td>Completato per il primo ciclo</td>
 </tr>
 <tr>
-<td>Security HTTP/JWT</td>
-<td>Non presente</td>
+  <td>API Layer Blueprint</td>
+  <td>Formalizzato in Punto 8A</td>
 </tr>
 <tr>
-<td>Frontend</td>
-<td>Non presente</td>
+  <td>Database/JPA</td>
+  <td>Non presente</td>
 </tr>
 <tr>
-<td>External integrations</td>
-<td>Non presenti</td>
+  <td>Security HTTP/JWT</td>
+  <td>Non presente</td>
 </tr>
 <tr>
-<td>Documentazione digitale</td>
-<td>Presente e rifinita</td>
+  <td>Frontend</td>
+  <td>Non presente</td>
 </tr>
-</tbody></table></div>
-<h3 id="evidenze-tecniche">Evidenze tecniche</h3>
+<tr>
+  <td>External integrations</td>
+  <td>Non presenti</td>
+</tr>
+<tr>
+  <td>Documentazione digitale</td>
+  <td>Presente e rifinita</td>
+</tr>
+</tbody>
+</table>
+<h3>Evidenze tecniche</h3>
 <ul>
 <li><code>src/main/java</code>: 505 file Java.</li>
 <li><code>src/test/java</code>: 43 file Java di test.</li>
@@ -1026,8 +1127,8 @@
 <li>Nessun package <code>api</code> presente nel codice main.</li>
 <li>Nessun controller REST, entity JPA o Spring Data repository presente nel codice main.</li>
 </ul>
-<p>---</p>
-<h2 id="17-funzionalit-implementate">17. Funzionalità implementate</h2>
+<hr />
+<h2>17. Funzionalità implementate</h2>
 <p>Sono implementate:</p>
 <ol>
 <li>Modello dominio per utenti, qualifiche, ruoli operativi, veicoli, cargo, locations, triptemplates, shipments, documents e compliance.</li>
@@ -1045,8 +1146,8 @@
 <li>Documentazione simple, professional, old_style e digital.</li>
 <li>Digital Documentation Reader statico.</li>
 </ol>
-<p>---</p>
-<h2 id="18-funzionalit-mancanti">18. Funzionalità mancanti</h2>
+<hr />
+<h2>18. Funzionalità mancanti</h2>
 <p>Sono mancanti o intenzionalmente rimandate:</p>
 <ol>
 <li>API REST.</li>
@@ -1070,208 +1171,218 @@
 <li>Validazione utente finale.</li>
 <li>Deployment e osservabilità runtime.</li>
 </ol>
-<p>---</p>
-<h2 id="19-roadmap-tecnica-completa">19. Roadmap tecnica completa</h2>
-<div class="table-wrap"><table><thead><tr>
-<th>Milestone</th>
-<th>Stato</th>
-<th>Descrizione formale</th>
-</tr></thead><tbody>
+<hr />
+<h3>Documento Punto 8A</h3>
+<p>Il blueprint ufficiale del Punto 8A è documentato in:</p>
+<pre><code class="language-text">docs/professional/38-api-layer-blueprint.md
+</code></pre>
+<p>Il documento definisce regole API, versionamento <code>/api/v1</code>, primo contesto REST Locations, endpoint futuri e test <code>ApiLayerArchitectureTest</code>.</p>
+<h2>19. Roadmap tecnica completa</h2>
+<table>
+<thead>
 <tr>
-<td>Punto 1</td>
-<td>Completato</td>
-<td>Avvio della fondazione di dominio e definizione della visione iniziale del progetto.</td>
+  <th>Milestone</th>
+  <th>Stato</th>
+  <th>Descrizione formale</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Punto 1</td>
+  <td>Completato</td>
+  <td>Avvio della fondazione di dominio e definizione della visione iniziale del progetto.</td>
 </tr>
 <tr>
-<td>Punto 2</td>
-<td>Completato</td>
-<td>Modellazione dei primi bounded context e consolidamento di utenti, qualifiche, ruoli operativi e veicoli.</td>
+  <td>Punto 2</td>
+  <td>Completato</td>
+  <td>Modellazione dei primi bounded context e consolidamento di utenti, qualifiche, ruoli operativi e veicoli.</td>
 </tr>
 <tr>
-<td>Punto 3</td>
-<td>Completato</td>
-<td>Espansione del dominio verso cargo, locations, trip templates, shipments, documents e compliance.</td>
+  <td>Punto 3</td>
+  <td>Completato</td>
+  <td>Espansione del dominio verso cargo, locations, trip templates, shipments, documents e compliance.</td>
 </tr>
 <tr>
-<td>Punto 4</td>
-<td>Completato</td>
-<td>Revisione delle regole di dominio, correzioni architetturali e protezione delle invarianti.</td>
+  <td>Punto 4</td>
+  <td>Completato</td>
+  <td>Revisione delle regole di dominio, correzioni architetturali e protezione delle invarianti.</td>
 </tr>
 <tr>
-<td>Punto 5</td>
-<td>Completato</td>
-<td>Review finale del Domain Layer e consolidamento della suite di test di dominio.</td>
+  <td>Punto 5</td>
+  <td>Completato</td>
+  <td>Review finale del Domain Layer e consolidamento della suite di test di dominio.</td>
 </tr>
 <tr>
-<td>Punto 6A</td>
-<td>Completato</td>
-<td>Application Layer Blueprint: definizione struttura, obiettivi e confini dell’application layer.</td>
+  <td>Punto 6A</td>
+  <td>Completato</td>
+  <td>Application Layer Blueprint: definizione struttura, obiettivi e confini dell’application layer.</td>
 </tr>
 <tr>
-<td>Punto 6B</td>
-<td>Completato</td>
-<td>Application Foundation: introduzione di command, result, port e convenzioni applicative.</td>
+  <td>Punto 6B</td>
+  <td>Completato</td>
+  <td>Application Foundation: introduzione di command, result, port e convenzioni applicative.</td>
 </tr>
 <tr>
-<td>Punto 6C</td>
-<td>Completato</td>
-<td>Application Repository Ports: definizione dei contratti outbound verso repository.</td>
+  <td>Punto 6C</td>
+  <td>Completato</td>
+  <td>Application Repository Ports: definizione dei contratti outbound verso repository.</td>
 </tr>
 <tr>
-<td>Punto 6D</td>
-<td>Completato</td>
-<td>In-Memory Repositories: introduzione di adapter in-memory per test e runtime locale.</td>
+  <td>Punto 6D</td>
+  <td>Completato</td>
+  <td>In-Memory Repositories: introduzione di adapter in-memory per test e runtime locale.</td>
 </tr>
 <tr>
-<td>Punto 6E</td>
-<td>Completato</td>
-<td>First Use Cases: implementazione iniziale dei casi d’uso applicativi.</td>
+  <td>Punto 6E</td>
+  <td>Completato</td>
+  <td>First Use Cases: implementazione iniziale dei casi d’uso applicativi.</td>
 </tr>
 <tr>
-<td>Punto 6F</td>
-<td>Completato</td>
-<td>Use Case Hardening: rafforzamento dei casi d’uso e delle validazioni applicative.</td>
+  <td>Punto 6F</td>
+  <td>Completato</td>
+  <td>Use Case Hardening: rafforzamento dei casi d’uso e delle validazioni applicative.</td>
 </tr>
 <tr>
-<td>Punto 6G</td>
-<td>Completato</td>
-<td>Use Case Expansion: estensione controllata verso ulteriori bounded context.</td>
+  <td>Punto 6G</td>
+  <td>Completato</td>
+  <td>Use Case Expansion: estensione controllata verso ulteriori bounded context.</td>
 </tr>
 <tr>
-<td>Punto 6H</td>
-<td>Completato</td>
-<td>Expansion Review &amp; Documentation Alignment: revisione e allineamento documentale.</td>
+  <td>Punto 6H</td>
+  <td>Completato</td>
+  <td>Expansion Review &amp; Documentation Alignment: revisione e allineamento documentale.</td>
 </tr>
 <tr>
-<td>Punto 6I</td>
-<td>Completato</td>
-<td>Vehicles Use Cases Expansion: espansione dei casi d’uso veicoli.</td>
+  <td>Punto 6I</td>
+  <td>Completato</td>
+  <td>Vehicles Use Cases Expansion: espansione dei casi d’uso veicoli.</td>
 </tr>
 <tr>
-<td>Punto 6J</td>
-<td>Completato</td>
-<td>Operational Roles Use Cases Expansion: espansione dei casi d’uso dei ruoli operativi.</td>
+  <td>Punto 6J</td>
+  <td>Completato</td>
+  <td>Operational Roles Use Cases Expansion: espansione dei casi d’uso dei ruoli operativi.</td>
 </tr>
 <tr>
-<td>Punto 6K</td>
-<td>Completato</td>
-<td>Operational Use Case Hardening: rafforzamento dei casi d’uso operational.</td>
+  <td>Punto 6K</td>
+  <td>Completato</td>
+  <td>Operational Use Case Hardening: rafforzamento dei casi d’uso operational.</td>
 </tr>
 <tr>
-<td>Punto 6L</td>
-<td>Completato</td>
-<td>Compliance Base Use Cases: introduzione dei casi d’uso compliance.</td>
+  <td>Punto 6L</td>
+  <td>Completato</td>
+  <td>Compliance Base Use Cases: introduzione dei casi d’uso compliance.</td>
 </tr>
 <tr>
-<td>Punto 6M</td>
-<td>Completato</td>
-<td>Application Layer Final Review &amp; Freeze: chiusura e congelamento dell’application layer.</td>
+  <td>Punto 6M</td>
+  <td>Completato</td>
+  <td>Application Layer Final Review &amp; Freeze: chiusura e congelamento dell’application layer.</td>
 </tr>
 <tr>
-<td>Punto 7A</td>
-<td>Completato</td>
-<td>Infrastructure Layer Blueprint: definizione del layer tecnico e dei vincoli.</td>
+  <td>Punto 7A</td>
+  <td>Completato</td>
+  <td>Infrastructure Layer Blueprint: definizione del layer tecnico e dei vincoli.</td>
 </tr>
 <tr>
-<td>Punto 7B</td>
-<td>Completato</td>
-<td>Infrastructure Foundation: package tecnici di base, marker, eccezioni e adapter.</td>
+  <td>Punto 7B</td>
+  <td>Completato</td>
+  <td>Infrastructure Foundation: package tecnici di base, marker, eccezioni e adapter.</td>
 </tr>
 <tr>
-<td>Punto 7C</td>
-<td>Completato</td>
-<td>Spring Wiring Foundation: wiring Spring non-web confinato in infrastructure.</td>
+  <td>Punto 7C</td>
+  <td>Completato</td>
+  <td>Spring Wiring Foundation: wiring Spring non-web confinato in infrastructure.</td>
 </tr>
 <tr>
-<td>Punto 7D</td>
-<td>Completato</td>
-<td>Persistence Mapping Blueprint: formalizzazione del mapping domain/persistence.</td>
+  <td>Punto 7D</td>
+  <td>Completato</td>
+  <td>Persistence Mapping Blueprint: formalizzazione del mapping domain/persistence.</td>
 </tr>
 <tr>
-<td>Punto 7E</td>
-<td>Completato</td>
-<td>Real Repository Prototype: repository file-backed prototipale per Locations.</td>
+  <td>Punto 7E</td>
+  <td>Completato</td>
+  <td>Real Repository Prototype: repository file-backed prototipale per Locations.</td>
 </tr>
 <tr>
-<td>Punto 7F</td>
-<td>Completato</td>
-<td>Repository Expansion: espansione file-backed verso Cargo, Documents e Compliance.</td>
+  <td>Punto 7F</td>
+  <td>Completato</td>
+  <td>Repository Expansion: espansione file-backed verso Cargo, Documents e Compliance.</td>
 </tr>
 <tr>
-<td>Punto 7G</td>
-<td>Completato</td>
-<td>Infrastructure Testing: test tecnici su repository, mapping e confini.</td>
+  <td>Punto 7G</td>
+  <td>Completato</td>
+  <td>Infrastructure Testing: test tecnici su repository, mapping e confini.</td>
 </tr>
 <tr>
-<td>Punto 7H</td>
-<td>Completato</td>
-<td>Infrastructure Review &amp; Freeze: review finale e chiusura Punto 7.</td>
+  <td>Punto 7H</td>
+  <td>Completato</td>
+  <td>Infrastructure Review &amp; Freeze: review finale e chiusura Punto 7.</td>
 </tr>
 <tr>
-<td>Punto 8A</td>
-<td>Pianificato</td>
-<td>API Layer Blueprint: definizione formale del layer API.</td>
+  <td>Punto 8A</td>
+  <td>Completato</td>
+  <td>API Layer Blueprint: definizione formale del layer API, versionamento <code>/api/v1</code>, primo contesto Locations e test architetturale future-proof.</td>
 </tr>
 <tr>
-<td>Punto 8B</td>
-<td>Pianificato</td>
-<td>API Layer Foundation: package e convenzioni API.</td>
+  <td>Punto 8B</td>
+  <td>Prossimo</td>
+  <td>API Layer Foundation: package e convenzioni API.</td>
 </tr>
 <tr>
-<td>Punto 8C</td>
-<td>Pianificato</td>
-<td>Locations Controller Prototype: primo controller REST su contesto stabile.</td>
+  <td>Punto 8C</td>
+  <td>Pianificato</td>
+  <td>Locations Controller Prototype: primo controller REST su contesto stabile.</td>
 </tr>
 <tr>
-<td>Punto 8D</td>
-<td>Pianificato</td>
-<td>API DTO &amp; Mapping Conventions: request/response DTO e mapping verso command/result.</td>
+  <td>Punto 8D</td>
+  <td>Pianificato</td>
+  <td>API DTO &amp; Mapping Conventions: request/response DTO e mapping verso command/result.</td>
 </tr>
 <tr>
-<td>Punto 8E</td>
-<td>Pianificato</td>
-<td>API Error Handling: modello errore HTTP strutturato.</td>
+  <td>Punto 8E</td>
+  <td>Pianificato</td>
+  <td>API Error Handling: modello errore HTTP strutturato.</td>
 </tr>
 <tr>
-<td>Punto 8F</td>
-<td>Pianificato</td>
-<td>API Controller Tests: test web/controller.</td>
+  <td>Punto 8F</td>
+  <td>Pianificato</td>
+  <td>API Controller Tests: test web/controller.</td>
 </tr>
 <tr>
-<td>Punto 8G</td>
-<td>Pianificato</td>
-<td>OpenAPI &amp; Swagger Review: documentazione API e revisione contratto.</td>
+  <td>Punto 8G</td>
+  <td>Pianificato</td>
+  <td>OpenAPI &amp; Swagger Review: documentazione API e revisione contratto.</td>
 </tr>
 <tr>
-<td>Punto 8H</td>
-<td>Pianificato</td>
-<td>API Layer Freeze: review e chiusura controllata del primo ciclo API.</td>
+  <td>Punto 8H</td>
+  <td>Pianificato</td>
+  <td>API Layer Freeze: review e chiusura controllata del primo ciclo API.</td>
 </tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody></table></div>
-<h3 id="punti-completati">Punti completati</h3>
+</tbody>
+</table>
+<h3>Punti completati</h3>
 <ul>
 <li>Punto 1 → 5: Domain Layer.</li>
 <li>Punto 6A → 6M: Application Layer.</li>
 <li>Punto 7A → 7H: Infrastructure Layer.</li>
+<li>Punto 8A: API Layer Blueprint.</li>
 </ul>
-<h3 id="punti-mancanti">Punti mancanti</h3>
+<h3>Punti mancanti</h3>
 <ul>
-<li>Punto 8A → 8H: API Layer.</li>
+<li>Punto 8B → 8H: API Layer runtime, controller, DTO, error handling, test web, OpenAPI e freeze.</li>
 <li>Cicli successivi non ancora formalizzati: security, database/JPA, frontend, audit, workflow, integrazioni e dashboard.</li>
 </ul>
-<p>---</p>
-<h2 id="20-regole-architetturali-vincoli-e-linee-guida">20. Regole architetturali, vincoli e linee guida</h2>
-<h3 id="regole-di-dipendenza">Regole di dipendenza</h3>
-<pre><code>Domain          → nessuna dipendenza verso application, infrastructure, api, Spring, JPA, REST\nApplication     → può dipendere dal domain, non da infrastructure/api\nInfrastructure  → può implementare port application e usare domain/application\nAPI futura      → deve dipendere da application, non da repository concreti</code></pre>
-<h3 id="vincoli-attuali">Vincoli attuali</h3>
+<hr />
+<h2>20. Regole architetturali, vincoli e linee guida</h2>
+<h3>Regole di dipendenza</h3>
+<pre><code class="language-text">Domain          → nessuna dipendenza verso application, infrastructure, api, Spring, JPA, REST
+Application     → può dipendere dal domain, non da infrastructure/api
+Infrastructure  → può implementare port application e usare domain/application
+API futura      → deve dipendere da application, non da repository concreti
+</code></pre>
+<h3>Vincoli attuali</h3>
 <ul>
 <li>Nessun controller REST nel codice main.</li>
-<li>Nessun package API prima del Punto 8.</li>
+<li>Nessun package API runtime prima del Punto 8B.</li>
 <li>Nessuna entity JPA.</li>
 <li>Nessun Spring Data repository.</li>
 <li>Nessuna configurazione security HTTP.</li>
@@ -1279,7 +1390,7 @@
 <li>Nessun frontend.</li>
 <li>Nessuna integrazione esterna.</li>
 </ul>
-<h3 id="linee-guida-per-punto-8">Linee guida per Punto 8</h3>
+<h3>Linee guida per Punto 8</h3>
 <ul>
 <li>Primo controller: <code>LocationController</code>.</li>
 <li>Prima base endpoint: <code>/api/v1/locations</code>.</li>
@@ -1288,923 +1399,938 @@
 <li>Error handling HTTP deve mappare eccezioni applicative/domain in risposta strutturata.</li>
 <li>API Layer deve avere test dedicati.</li>
 </ul>
-<p>---</p>
-<h2 id="21-rischi-tecnici-criticit-e-strategie-di-mitigazione">21. Rischi tecnici, criticità e strategie di mitigazione</h2>
-<div class="table-wrap"><table><thead><tr>
-<th>Rischio / Criticità</th>
-<th>Impatto</th>
-<th>Mitigazione</th>
-</tr></thead><tbody>
+<hr />
+<h2>21. Rischi tecnici, criticità e strategie di mitigazione</h2>
+<table>
+<thead>
 <tr>
-<td>Introduzione prematura di API</td>
-<td>Alto</td>
-<td>Avviare Punto 8 solo con blueprint e test architetturali.</td>
+  <th>Rischio / Criticità</th>
+  <th>Impatto</th>
+  <th>Mitigazione</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Introduzione prematura di API runtime</td>
+  <td>Alto</td>
+  <td>Il Punto 8A introduce solo blueprint e test architetturali; controller e DTO restano nei punti successivi.</td>
 </tr>
 <tr>
-<td>Controller che chiamano repository concreti</td>
-<td>Alto</td>
-<td>Regola: API → use case application.</td>
+  <td>Controller che chiamano repository concreti</td>
+  <td>Alto</td>
+  <td>Regola: API → use case application.</td>
 </tr>
 <tr>
-<td>Accoppiamento domain/Spring</td>
-<td>Alto</td>
-<td>Test architetturali e divieto import Spring nel dominio.</td>
+  <td>Accoppiamento domain/Spring</td>
+  <td>Alto</td>
+  <td>Test architetturali e divieto import Spring nel dominio.</td>
 </tr>
 <tr>
-<td>JPA introdotto senza strategia</td>
-<td>Medio/Alto</td>
-<td>Rimandare DB/JPA a ciclo dedicato.</td>
+  <td>JPA introdotto senza strategia</td>
+  <td>Medio/Alto</td>
+  <td>Rimandare DB/JPA a ciclo dedicato.</td>
 </tr>
 <tr>
-<td>Repository file-backed estesi a contesti complessi</td>
-<td>Medio</td>
-<td>Limitare file-backed a contesti stabili; progettare mapping dedicato per shipments/vehicles/operational.</td>
+  <td>Repository file-backed estesi a contesti complessi</td>
+  <td>Medio</td>
+  <td>Limitare file-backed a contesti stabili; progettare mapping dedicato per shipments/vehicles/operational.</td>
 </tr>
 <tr>
-<td>Security rimandata troppo a lungo</td>
-<td>Medio</td>
-<td>Inserire security dopo API foundation, non prima.</td>
+  <td>Security rimandata troppo a lungo</td>
+  <td>Medio</td>
+  <td>Inserire security dopo API foundation, non prima.</td>
 </tr>
 <tr>
-<td>Documentazione non allineata al codice</td>
-<td>Medio</td>
-<td>Aggiornare docs e package explorer a ogni ciclo.</td>
+  <td>Documentazione non allineata al codice</td>
+  <td>Medio</td>
+  <td>Aggiornare docs e package explorer a ogni ciclo.</td>
 </tr>
 <tr>
-<td>Crescita del dominio senza governance</td>
-<td>Medio</td>
-<td>Continuare con freeze, review e bounded context espliciti.</td>
+  <td>Crescita del dominio senza governance</td>
+  <td>Medio</td>
+  <td>Continuare con freeze, review e bounded context espliciti.</td>
 </tr>
 <tr>
-<td>Mancanza di performance baseline</td>
-<td>Medio</td>
-<td>Introdurre benchmark dopo API e persistenza enterprise.</td>
+  <td>Mancanza di performance baseline</td>
+  <td>Medio</td>
+  <td>Introdurre benchmark dopo API e persistenza enterprise.</td>
 </tr>
 <tr>
-<td>Mancanza di validazione utente finale</td>
-<td>Medio</td>
-<td>Pianificare validazione funzionale dopo primi endpoint/API.</td>
+  <td>Mancanza di validazione utente finale</td>
+  <td>Medio</td>
+  <td>Pianificare validazione funzionale dopo primi endpoint/API.</td>
 </tr>
-</tbody></table></div>
-<p>---</p>
-<h2 id="22-glossario-tecnico-completo">22. Glossario tecnico completo</h2>
-<div class="table-wrap"><table><thead><tr>
-<th>Termine</th>
-<th>Definizione</th>
-</tr></thead><tbody>
+</tbody>
+</table>
+<hr />
+<h2>22. Glossario tecnico completo</h2>
+<table>
+<thead>
 <tr>
-<td>API Layer</td>
-<td>Futuro layer di delivery HTTP con controller, DTO, error handling e OpenAPI.</td>
+  <th>Termine</th>
+  <th>Definizione</th>
 </tr>
+</thead>
+<tbody>
 <tr>
-<td>Application Layer</td>
-<td>Layer che contiene use case, command, result e port.</td>
-</tr>
-<tr>
-<td>Architecture Freeze</td>
-<td>Punto di stabilizzazione che impedisce derive premature.</td>
+  <td>API Layer</td>
+  <td>Futuro layer di delivery HTTP con controller, DTO, error handling e OpenAPI.</td>
 </tr>
 <tr>
-<td>Adapter</td>
-<td>Implementazione tecnica di una port.</td>
+  <td>Application Layer</td>
+  <td>Layer che contiene use case, command, result e port.</td>
 </tr>
 <tr>
-<td>Aggregate</td>
-<td>Oggetto di dominio che protegge un insieme coerente di invarianti.</td>
+  <td>Architecture Freeze</td>
+  <td>Punto di stabilizzazione che impedisce derive premature.</td>
 </tr>
 <tr>
-<td>Bounded Context</td>
-<td>Confine semantico di un sotto-dominio.</td>
+  <td>Adapter</td>
+  <td>Implementazione tecnica di una port.</td>
 </tr>
 <tr>
-<td>Clean Architecture</td>
-<td>Stile architetturale in cui le dipendenze puntano verso il nucleo business.</td>
+  <td>Aggregate</td>
+  <td>Oggetto di dominio che protegge un insieme coerente di invarianti.</td>
 </tr>
 <tr>
-<td>Command</td>
-<td>Oggetto applicativo che rappresenta una richiesta di esecuzione use case.</td>
+  <td>Bounded Context</td>
+  <td>Confine semantico di un sotto-dominio.</td>
 </tr>
 <tr>
-<td>Compliance Requirement</td>
-<td>Requisito normativo/operativo modellato nel dominio compliance.</td>
+  <td>Clean Architecture</td>
+  <td>Stile architetturale in cui le dipendenze puntano verso il nucleo business.</td>
 </tr>
 <tr>
-<td>Domain Layer</td>
-<td>Layer contenente business rules, entità, value object, invarianti ed eccezioni.</td>
+  <td>Command</td>
+  <td>Oggetto applicativo che rappresenta una richiesta di esecuzione use case.</td>
 </tr>
 <tr>
-<td>DTO</td>
-<td>Oggetto di trasferimento dati previsto per il futuro API Layer.</td>
+  <td>Compliance Requirement</td>
+  <td>Requisito normativo/operativo modellato nel dominio compliance.</td>
 </tr>
 <tr>
-<td>Entity</td>
-<td>Oggetto di dominio con identità persistente nel tempo.</td>
+  <td>Domain Layer</td>
+  <td>Layer contenente business rules, entità, value object, invarianti ed eccezioni.</td>
 </tr>
 <tr>
-<td>File-backed Repository</td>
-<td>Repository concreto basato su storage testuale/file.</td>
+  <td>DTO</td>
+  <td>Oggetto di trasferimento dati previsto per il futuro API Layer.</td>
 </tr>
 <tr>
-<td>Hexagonal Architecture</td>
-<td>Stile port/adapter che separa core applicativo e dettagli esterni.</td>
+  <td>Entity</td>
+  <td>Oggetto di dominio con identità persistente nel tempo.</td>
 </tr>
 <tr>
-<td>Infrastructure Layer</td>
-<td>Layer tecnico con adapter, repository, mapping e configurazioni.</td>
+  <td>File-backed Repository</td>
+  <td>Repository concreto basato su storage testuale/file.</td>
 </tr>
 <tr>
-<td>In-memory Repository</td>
-<td>Repository tecnico in RAM per test e sviluppo locale.</td>
+  <td>Hexagonal Architecture</td>
+  <td>Stile port/adapter che separa core applicativo e dettagli esterni.</td>
 </tr>
 <tr>
-<td>Invariant</td>
-<td>Regola che deve restare vera per mantenere valido un oggetto di dominio.</td>
+  <td>Infrastructure Layer</td>
+  <td>Layer tecnico con adapter, repository, mapping e configurazioni.</td>
 </tr>
 <tr>
-<td>JPA</td>
-<td>Tecnologia di persistenza ORM rimandata a ciclo futuro.</td>
+  <td>In-memory Repository</td>
+  <td>Repository tecnico in RAM per test e sviluppo locale.</td>
 </tr>
 <tr>
-<td>Maven</td>
-<td>Build tool Java usato dal progetto.</td>
+  <td>Invariant</td>
+  <td>Regola che deve restare vera per mantenere valido un oggetto di dominio.</td>
 </tr>
 <tr>
-<td>OpenAPI</td>
-<td>Specifica futura per documentare endpoint REST.</td>
+  <td>JPA</td>
+  <td>Tecnologia di persistenza ORM rimandata a ciclo futuro.</td>
 </tr>
 <tr>
-<td>Port</td>
-<td>Interfaccia che definisce ingresso o uscita del layer application.</td>
+  <td>Maven</td>
+  <td>Build tool Java usato dal progetto.</td>
 </tr>
 <tr>
-<td>Repository</td>
-<td>Astrazione per recupero/salvataggio dati.</td>
+  <td>OpenAPI</td>
+  <td>Specifica futura per documentare endpoint REST.</td>
 </tr>
 <tr>
-<td>Result</td>
-<td>Oggetto applicativo restituito da un use case.</td>
+  <td>Port</td>
+  <td>Interfaccia che definisce ingresso o uscita del layer application.</td>
 </tr>
 <tr>
-<td>Spring Wiring</td>
-<td>Uso di Spring per collegare bean e implementazioni, confinato in infrastructure.</td>
+  <td>Repository</td>
+  <td>Astrazione per recupero/salvataggio dati.</td>
 </tr>
 <tr>
-<td>Use Case</td>
-<td>Azione applicativa eseguibile che orchestra dominio e repository port.</td>
+  <td>Result</td>
+  <td>Oggetto applicativo restituito da un use case.</td>
 </tr>
 <tr>
-<td>Value Object</td>
-<td>Oggetto immutabile o semanticamente identificato dal valore, non dall’identità.</td>
+  <td>Spring Wiring</td>
+  <td>Uso di Spring per collegare bean e implementazioni, confinato in infrastructure.</td>
 </tr>
-</tbody></table></div>
-<p>---</p>
-<h2 id="23-package-explorer-reale">23. Package Explorer reale</h2>
+<tr>
+  <td>Use Case</td>
+  <td>Azione applicativa eseguibile che orchestra dominio e repository port.</td>
+</tr>
+<tr>
+  <td>Value Object</td>
+  <td>Oggetto immutabile o semanticamente identificato dal valore, non dall’identità.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>23. Package Explorer reale</h2>
 <p>Il seguente Package Explorer rispecchia i package Java reali rilevati in <code>src/main/java</code>.</p>
-<h3 id="criteri-di-classificazione-documentale">Criteri di classificazione documentale</h3>
+<h3>Criteri di classificazione documentale</h3>
 <ul>
 <li><strong>Documentato</strong>: package o area direttamente trattata nella documentazione ufficiale o storica.</li>
 <li><strong>Parzialmente documentato</strong>: package coperto dal documento del layer o bounded context padre, ma senza documento specifico dedicato.</li>
 <li><strong>Non documentato</strong>: package privo di copertura diretta o indiretta rilevante nella documentazione disponibile.</li>
 </ul>
-<h3 id="sintesi-classificazione">Sintesi classificazione</h3>
+<h3>Sintesi classificazione</h3>
 <ul>
 <li>Documentato: 31</li>
 <li>Parzialmente documentato: 72</li>
 <li>Non documentato: 0</li>
 </ul>
-<div class="table-wrap"><table><thead><tr>
-<th>#</th>
-<th>Package Java reale</th>
-<th>Layer</th>
-<th>File Java</th>
-<th>Stato documentazione</th>
-</tr></thead><tbody>
+<table>
+<thead>
 <tr>
-<td>1</td>
-<td><code>it.gabriele.truckflow</code></td>
-<td>Bootstrap</td>
-<td>2</td>
-<td>Documentato</td>
+  <th style="text-align:right">#</th>
+  <th>Package Java reale</th>
+  <th>Layer</th>
+  <th style="text-align:right">File Java</th>
+  <th>Stato documentazione</th>
 </tr>
+</thead>
+<tbody>
 <tr>
-<td>2</td>
-<td><code>it.gabriele.truckflow.application</code></td>
-<td>Application</td>
-<td>1</td>
-<td>Documentato</td>
+  <td style="text-align:right">1</td>
+  <td><code>it.gabriele.truckflow</code></td>
+  <td>Bootstrap</td>
+  <td style="text-align:right">2</td>
+  <td>Documentato</td>
 </tr>
 <tr>
-<td>3</td>
-<td><code>it.gabriele.truckflow.application.command</code></td>
-<td>Application</td>
-<td>2</td>
-<td>Documentato</td>
+  <td style="text-align:right">2</td>
+  <td><code>it.gabriele.truckflow.application</code></td>
+  <td>Application</td>
+  <td style="text-align:right">1</td>
+  <td>Documentato</td>
 </tr>
 <tr>
-<td>4</td>
-<td><code>it.gabriele.truckflow.application.command.cargo</code></td>
-<td>Application</td>
-<td>3</td>
-<td>Parzialmente documentato</td>
+  <td style="text-align:right">3</td>
+  <td><code>it.gabriele.truckflow.application.command</code></td>
+  <td>Application</td>
+  <td style="text-align:right">2</td>
+  <td>Documentato</td>
 </tr>
 <tr>
-<td>5</td>
-<td><code>it.gabriele.truckflow.application.command.compliance</code></td>
-<td>Application</td>
-<td>7</td>
-<td>Parzialmente documentato</td>
+  <td style="text-align:right">4</td>
+  <td><code>it.gabriele.truckflow.application.command.cargo</code></td>
+  <td>Application</td>
+  <td style="text-align:right">3</td>
+  <td>Parzialmente documentato</td>
 </tr>
 <tr>
-<td>6</td>
-<td><code>it.gabriele.truckflow.application.command.documents</code></td>
-<td>Application</td>
-<td>5</td>
-<td>Parzialmente documentato</td>
+  <td style="text-align:right">5</td>
+  <td><code>it.gabriele.truckflow.application.command.compliance</code></td>
+  <td>Application</td>
+  <td style="text-align:right">7</td>
+  <td>Parzialmente documentato</td>
 </tr>
 <tr>
-<td>7</td>
-<td><code>it.gabriele.truckflow.application.command.locations</code></td>
-<td>Application</td>
-<td>3</td>
-<td>Parzialmente documentato</td>
+  <td style="text-align:right">6</td>
+  <td><code>it.gabriele.truckflow.application.command.documents</code></td>
+  <td>Application</td>
+  <td style="text-align:right">5</td>
+  <td>Parzialmente documentato</td>
 </tr>
 <tr>
-<td>8</td>
-<td><code>it.gabriele.truckflow.application.command.operational</code></td>
-<td>Application</td>
-<td>26</td>
-<td>Parzialmente documentato</td>
+  <td style="text-align:right">7</td>
+  <td><code>it.gabriele.truckflow.application.command.locations</code></td>
+  <td>Application</td>
+  <td style="text-align:right">3</td>
+  <td>Parzialmente documentato</td>
 </tr>
 <tr>
-<td>9</td>
-<td><code>it.gabriele.truckflow.application.command.shipments</code></td>
-<td>Application</td>
-<td>7</td>
-<td>Parzialmente documentato</td>
+  <td style="text-align:right">8</td>
+  <td><code>it.gabriele.truckflow.application.command.operational</code></td>
+  <td>Application</td>
+  <td style="text-align:right">26</td>
+  <td>Parzialmente documentato</td>
 </tr>
 <tr>
-<td>10</td>
-<td><code>it.gabriele.truckflow.application.command.vehicles</code></td>
-<td>Application</td>
-<td>9</td>
-<td>Parzialmente documentato</td>
+  <td style="text-align:right">9</td>
+  <td><code>it.gabriele.truckflow.application.command.shipments</code></td>
+  <td>Application</td>
+  <td style="text-align:right">7</td>
+  <td>Parzialmente documentato</td>
 </tr>
 <tr>
-<td>11</td>
-<td><code>it.gabriele.truckflow.application.exception</code></td>
-<td>Application</td>
-<td>5</td>
-<td>Documentato</td>
+  <td style="text-align:right">10</td>
+  <td><code>it.gabriele.truckflow.application.command.vehicles</code></td>
+  <td>Application</td>
+  <td style="text-align:right">9</td>
+  <td>Parzialmente documentato</td>
 </tr>
 <tr>
-<td>12</td>
-<td><code>it.gabriele.truckflow.application.port.in</code></td>
-<td>Application</td>
-<td>2</td>
-<td>Documentato</td>
+  <td style="text-align:right">11</td>
+  <td><code>it.gabriele.truckflow.application.exception</code></td>
+  <td>Application</td>
+  <td style="text-align:right">5</td>
+  <td>Documentato</td>
 </tr>
 <tr>
-<td>13</td>
-<td><code>it.gabriele.truckflow.application.port.in.cargo</code></td>
-<td>Application</td>
-<td>3</td>
-<td>Parzialmente documentato</td>
+  <td style="text-align:right">12</td>
+  <td><code>it.gabriele.truckflow.application.port.in</code></td>
+  <td>Application</td>
+  <td style="text-align:right">2</td>
+  <td>Documentato</td>
 </tr>
 <tr>
-<td>14</td>
-<td><code>it.gabriele.truckflow.application.port.in.compliance</code></td>
-<td>Application</td>
-<td>7</td>
-<td>Parzialmente documentato</td>
+  <td style="text-align:right">13</td>
+  <td><code>it.gabriele.truckflow.application.port.in.cargo</code></td>
+  <td>Application</td>
+  <td style="text-align:right">3</td>
+  <td>Parzialmente documentato</td>
 </tr>
 <tr>
-<td>15</td>
-<td><code>it.gabriele.truckflow.application.port.in.documents</code></td>
-<td>Application</td>
-<td>5</td>
-<td>Parzialmente documentato</td>
+  <td style="text-align:right">14</td>
+  <td><code>it.gabriele.truckflow.application.port.in.compliance</code></td>
+  <td>Application</td>
+  <td style="text-align:right">7</td>
+  <td>Parzialmente documentato</td>
 </tr>
 <tr>
-<td>16</td>
-<td><code>it.gabriele.truckflow.application.port.in.locations</code></td>
-<td>Application</td>
-<td>3</td>
-<td>Parzialmente documentato</td>
+  <td style="text-align:right">15</td>
+  <td><code>it.gabriele.truckflow.application.port.in.documents</code></td>
+  <td>Application</td>
+  <td style="text-align:right">5</td>
+  <td>Parzialmente documentato</td>
 </tr>
 <tr>
-<td>17</td>
-<td><code>it.gabriele.truckflow.application.port.in.operational</code></td>
-<td>Application</td>
-<td>26</td>
-<td>Parzialmente documentato</td>
+  <td style="text-align:right">16</td>
+  <td><code>it.gabriele.truckflow.application.port.in.locations</code></td>
+  <td>Application</td>
+  <td style="text-align:right">3</td>
+  <td>Parzialmente documentato</td>
 </tr>
 <tr>
-<td>18</td>
-<td><code>it.gabriele.truckflow.application.port.in.shipments</code></td>
-<td>Application</td>
-<td>7</td>
-<td>Parzialmente documentato</td>
+  <td style="text-align:right">17</td>
+  <td><code>it.gabriele.truckflow.application.port.in.operational</code></td>
+  <td>Application</td>
+  <td style="text-align:right">26</td>
+  <td>Parzialmente documentato</td>
 </tr>
 <tr>
-<td>19</td>
-<td><code>it.gabriele.truckflow.application.port.in.vehicles</code></td>
-<td>Application</td>
-<td>9</td>
-<td>Parzialmente documentato</td>
+  <td style="text-align:right">18</td>
+  <td><code>it.gabriele.truckflow.application.port.in.shipments</code></td>
+  <td>Application</td>
+  <td style="text-align:right">7</td>
+  <td>Parzialmente documentato</td>
 </tr>
 <tr>
-<td>20</td>
-<td><code>it.gabriele.truckflow.application.port.out</code></td>
-<td>Application</td>
-<td>2</td>
-<td>Documentato</td>
+  <td style="text-align:right">19</td>
+  <td><code>it.gabriele.truckflow.application.port.in.vehicles</code></td>
+  <td>Application</td>
+  <td style="text-align:right">9</td>
+  <td>Parzialmente documentato</td>
 </tr>
 <tr>
-<td>21</td>
-<td><code>it.gabriele.truckflow.application.port.out.cargo</code></td>
-<td>Application</td>
-<td>2</td>
-<td>Parzialmente documentato</td>
+  <td style="text-align:right">20</td>
+  <td><code>it.gabriele.truckflow.application.port.out</code></td>
+  <td>Application</td>
+  <td style="text-align:right">2</td>
+  <td>Documentato</td>
 </tr>
 <tr>
-<td>22</td>
-<td><code>it.gabriele.truckflow.application.port.out.compliance</code></td>
-<td>Application</td>
-<td>2</td>
-<td>Parzialmente documentato</td>
+  <td style="text-align:right">21</td>
+  <td><code>it.gabriele.truckflow.application.port.out.cargo</code></td>
+  <td>Application</td>
+  <td style="text-align:right">2</td>
+  <td>Parzialmente documentato</td>
 </tr>
 <tr>
-<td>23</td>
-<td><code>it.gabriele.truckflow.application.port.out.documents</code></td>
-<td>Application</td>
-<td>2</td>
-<td>Parzialmente documentato</td>
+  <td style="text-align:right">22</td>
+  <td><code>it.gabriele.truckflow.application.port.out.compliance</code></td>
+  <td>Application</td>
+  <td style="text-align:right">2</td>
+  <td>Parzialmente documentato</td>
 </tr>
 <tr>
-<td>24</td>
-<td><code>it.gabriele.truckflow.application.port.out.locations</code></td>
-<td>Application</td>
-<td>2</td>
-<td>Parzialmente documentato</td>
+  <td style="text-align:right">23</td>
+  <td><code>it.gabriele.truckflow.application.port.out.documents</code></td>
+  <td>Application</td>
+  <td style="text-align:right">2</td>
+  <td>Parzialmente documentato</td>
 </tr>
 <tr>
-<td>25</td>
-<td><code>it.gabriele.truckflow.application.port.out.operational</code></td>
-<td>Application</td>
-<td>6</td>
-<td>Parzialmente documentato</td>
+  <td style="text-align:right">24</td>
+  <td><code>it.gabriele.truckflow.application.port.out.locations</code></td>
+  <td>Application</td>
+  <td style="text-align:right">2</td>
+  <td>Parzialmente documentato</td>
 </tr>
 <tr>
-<td>26</td>
-<td><code>it.gabriele.truckflow.application.port.out.shipments</code></td>
-<td>Application</td>
-<td>2</td>
-<td>Parzialmente documentato</td>
+  <td style="text-align:right">25</td>
+  <td><code>it.gabriele.truckflow.application.port.out.operational</code></td>
+  <td>Application</td>
+  <td style="text-align:right">6</td>
+  <td>Parzialmente documentato</td>
 </tr>
 <tr>
-<td>27</td>
-<td><code>it.gabriele.truckflow.application.port.out.vehicles</code></td>
-<td>Application</td>
-<td>3</td>
-<td>Parzialmente documentato</td>
+  <td style="text-align:right">26</td>
+  <td><code>it.gabriele.truckflow.application.port.out.shipments</code></td>
+  <td>Application</td>
+  <td style="text-align:right">2</td>
+  <td>Parzialmente documentato</td>
 </tr>
 <tr>
-<td>28</td>
-<td><code>it.gabriele.truckflow.application.result</code></td>
-<td>Application</td>
-<td>2</td>
-<td>Documentato</td>
+  <td style="text-align:right">27</td>
+  <td><code>it.gabriele.truckflow.application.port.out.vehicles</code></td>
+  <td>Application</td>
+  <td style="text-align:right">3</td>
+  <td>Parzialmente documentato</td>
 </tr>
 <tr>
-<td>29</td>
-<td><code>it.gabriele.truckflow.application.result.cargo</code></td>
-<td>Application</td>
-<td>2</td>
-<td>Parzialmente documentato</td>
+  <td style="text-align:right">28</td>
+  <td><code>it.gabriele.truckflow.application.result</code></td>
+  <td>Application</td>
+  <td style="text-align:right">2</td>
+  <td>Documentato</td>
 </tr>
 <tr>
-<td>30</td>
-<td><code>it.gabriele.truckflow.application.result.compliance</code></td>
-<td>Application</td>
-<td>2</td>
-<td>Parzialmente documentato</td>
+  <td style="text-align:right">29</td>
+  <td><code>it.gabriele.truckflow.application.result.cargo</code></td>
+  <td>Application</td>
+  <td style="text-align:right">2</td>
+  <td>Parzialmente documentato</td>
 </tr>
 <tr>
-<td>31</td>
-<td><code>it.gabriele.truckflow.application.result.documents</code></td>
-<td>Application</td>
-<td>2</td>
-<td>Parzialmente documentato</td>
+  <td style="text-align:right">30</td>
+  <td><code>it.gabriele.truckflow.application.result.compliance</code></td>
+  <td>Application</td>
+  <td style="text-align:right">2</td>
+  <td>Parzialmente documentato</td>
 </tr>
 <tr>
-<td>32</td>
-<td><code>it.gabriele.truckflow.application.result.locations</code></td>
-<td>Application</td>
-<td>2</td>
-<td>Parzialmente documentato</td>
+  <td style="text-align:right">31</td>
+  <td><code>it.gabriele.truckflow.application.result.documents</code></td>
+  <td>Application</td>
+  <td style="text-align:right">2</td>
+  <td>Parzialmente documentato</td>
 </tr>
 <tr>
-<td>33</td>
-<td><code>it.gabriele.truckflow.application.result.operational</code></td>
-<td>Application</td>
-<td>6</td>
-<td>Parzialmente documentato</td>
+  <td style="text-align:right">32</td>
+  <td><code>it.gabriele.truckflow.application.result.locations</code></td>
+  <td>Application</td>
+  <td style="text-align:right">2</td>
+  <td>Parzialmente documentato</td>
 </tr>
 <tr>
-<td>34</td>
-<td><code>it.gabriele.truckflow.application.result.shipments</code></td>
-<td>Application</td>
-<td>2</td>
-<td>Parzialmente documentato</td>
+  <td style="text-align:right">33</td>
+  <td><code>it.gabriele.truckflow.application.result.operational</code></td>
+  <td>Application</td>
+  <td style="text-align:right">6</td>
+  <td>Parzialmente documentato</td>
 </tr>
 <tr>
-<td>35</td>
-<td><code>it.gabriele.truckflow.application.result.vehicles</code></td>
-<td>Application</td>
-<td>3</td>
-<td>Parzialmente documentato</td>
+  <td style="text-align:right">34</td>
+  <td><code>it.gabriele.truckflow.application.result.shipments</code></td>
+  <td>Application</td>
+  <td style="text-align:right">2</td>
+  <td>Parzialmente documentato</td>
 </tr>
 <tr>
-<td>36</td>
-<td><code>it.gabriele.truckflow.application.usecase</code></td>
-<td>Application</td>
-<td>1</td>
-<td>Documentato</td>
+  <td style="text-align:right">35</td>
+  <td><code>it.gabriele.truckflow.application.result.vehicles</code></td>
+  <td>Application</td>
+  <td style="text-align:right">3</td>
+  <td>Parzialmente documentato</td>
 </tr>
 <tr>
-<td>37</td>
-<td><code>it.gabriele.truckflow.application.usecase.cargo</code></td>
-<td>Application</td>
-<td>3</td>
-<td>Parzialmente documentato</td>
+  <td style="text-align:right">36</td>
+  <td><code>it.gabriele.truckflow.application.usecase</code></td>
+  <td>Application</td>
+  <td style="text-align:right">1</td>
+  <td>Documentato</td>
 </tr>
 <tr>
-<td>38</td>
-<td><code>it.gabriele.truckflow.application.usecase.compliance</code></td>
-<td>Application</td>
-<td>8</td>
-<td>Parzialmente documentato</td>
+  <td style="text-align:right">37</td>
+  <td><code>it.gabriele.truckflow.application.usecase.cargo</code></td>
+  <td>Application</td>
+  <td style="text-align:right">3</td>
+  <td>Parzialmente documentato</td>
 </tr>
 <tr>
-<td>39</td>
-<td><code>it.gabriele.truckflow.application.usecase.documents</code></td>
-<td>Application</td>
-<td>6</td>
-<td>Parzialmente documentato</td>
+  <td style="text-align:right">38</td>
+  <td><code>it.gabriele.truckflow.application.usecase.compliance</code></td>
+  <td>Application</td>
+  <td style="text-align:right">8</td>
+  <td>Parzialmente documentato</td>
 </tr>
 <tr>
-<td>40</td>
-<td><code>it.gabriele.truckflow.application.usecase.locations</code></td>
-<td>Application</td>
-<td>3</td>
-<td>Parzialmente documentato</td>
+  <td style="text-align:right">39</td>
+  <td><code>it.gabriele.truckflow.application.usecase.documents</code></td>
+  <td>Application</td>
+  <td style="text-align:right">6</td>
+  <td>Parzialmente documentato</td>
 </tr>
 <tr>
-<td>41</td>
-<td><code>it.gabriele.truckflow.application.usecase.operational</code></td>
-<td>Application</td>
-<td>31</td>
-<td>Parzialmente documentato</td>
+  <td style="text-align:right">40</td>
+  <td><code>it.gabriele.truckflow.application.usecase.locations</code></td>
+  <td>Application</td>
+  <td style="text-align:right">3</td>
+  <td>Parzialmente documentato</td>
 </tr>
 <tr>
-<td>42</td>
-<td><code>it.gabriele.truckflow.application.usecase.shipments</code></td>
-<td>Application</td>
-<td>8</td>
-<td>Parzialmente documentato</td>
+  <td style="text-align:right">41</td>
+  <td><code>it.gabriele.truckflow.application.usecase.operational</code></td>
+  <td>Application</td>
+  <td style="text-align:right">31</td>
+  <td>Parzialmente documentato</td>
 </tr>
 <tr>
-<td>43</td>
-<td><code>it.gabriele.truckflow.application.usecase.vehicles</code></td>
-<td>Application</td>
-<td>11</td>
-<td>Parzialmente documentato</td>
+  <td style="text-align:right">42</td>
+  <td><code>it.gabriele.truckflow.application.usecase.shipments</code></td>
+  <td>Application</td>
+  <td style="text-align:right">8</td>
+  <td>Parzialmente documentato</td>
 </tr>
 <tr>
-<td>44</td>
-<td><code>it.gabriele.truckflow.domain.cargo</code></td>
-<td>Domain</td>
-<td>17</td>
-<td>Documentato</td>
+  <td style="text-align:right">43</td>
+  <td><code>it.gabriele.truckflow.application.usecase.vehicles</code></td>
+  <td>Application</td>
+  <td style="text-align:right">11</td>
+  <td>Parzialmente documentato</td>
 </tr>
 <tr>
-<td>45</td>
-<td><code>it.gabriele.truckflow.domain.cargo.exceptions</code></td>
-<td>Domain</td>
-<td>1</td>
-<td>Documentato</td>
+  <td style="text-align:right">44</td>
+  <td><code>it.gabriele.truckflow.domain.cargo</code></td>
+  <td>Domain</td>
+  <td style="text-align:right">17</td>
+  <td>Documentato</td>
 </tr>
 <tr>
-<td>46</td>
-<td><code>it.gabriele.truckflow.domain.compliance</code></td>
-<td>Domain</td>
-<td>18</td>
-<td>Documentato</td>
+  <td style="text-align:right">45</td>
+  <td><code>it.gabriele.truckflow.domain.cargo.exceptions</code></td>
+  <td>Domain</td>
+  <td style="text-align:right">1</td>
+  <td>Documentato</td>
 </tr>
 <tr>
-<td>47</td>
-<td><code>it.gabriele.truckflow.domain.compliance.exceptions</code></td>
-<td>Domain</td>
-<td>1</td>
-<td>Documentato</td>
+  <td style="text-align:right">46</td>
+  <td><code>it.gabriele.truckflow.domain.compliance</code></td>
+  <td>Domain</td>
+  <td style="text-align:right">18</td>
+  <td>Documentato</td>
 </tr>
 <tr>
-<td>48</td>
-<td><code>it.gabriele.truckflow.domain.documents</code></td>
-<td>Domain</td>
-<td>11</td>
-<td>Documentato</td>
+  <td style="text-align:right">47</td>
+  <td><code>it.gabriele.truckflow.domain.compliance.exceptions</code></td>
+  <td>Domain</td>
+  <td style="text-align:right">1</td>
+  <td>Documentato</td>
 </tr>
 <tr>
-<td>49</td>
-<td><code>it.gabriele.truckflow.domain.documents.exceptions</code></td>
-<td>Domain</td>
-<td>1</td>
-<td>Documentato</td>
+  <td style="text-align:right">48</td>
+  <td><code>it.gabriele.truckflow.domain.documents</code></td>
+  <td>Domain</td>
+  <td style="text-align:right">11</td>
+  <td>Documentato</td>
 </tr>
 <tr>
-<td>50</td>
-<td><code>it.gabriele.truckflow.domain.locations</code></td>
-<td>Domain</td>
-<td>8</td>
-<td>Documentato</td>
+  <td style="text-align:right">49</td>
+  <td><code>it.gabriele.truckflow.domain.documents.exceptions</code></td>
+  <td>Domain</td>
+  <td style="text-align:right">1</td>
+  <td>Documentato</td>
 </tr>
 <tr>
-<td>51</td>
-<td><code>it.gabriele.truckflow.domain.locations.exceptions</code></td>
-<td>Domain</td>
-<td>1</td>
-<td>Documentato</td>
+  <td style="text-align:right">50</td>
+  <td><code>it.gabriele.truckflow.domain.locations</code></td>
+  <td>Domain</td>
+  <td style="text-align:right">8</td>
+  <td>Documentato</td>
 </tr>
 <tr>
-<td>52</td>
-<td><code>it.gabriele.truckflow.domain.operational.common</code></td>
-<td>Domain</td>
-<td>7</td>
-<td>Parzialmente documentato</td>
+  <td style="text-align:right">51</td>
+  <td><code>it.gabriele.truckflow.domain.locations.exceptions</code></td>
+  <td>Domain</td>
+  <td style="text-align:right">1</td>
+  <td>Documentato</td>
 </tr>
 <tr>
-<td>53</td>
-<td><code>it.gabriele.truckflow.domain.operational.dispatcher</code></td>
-<td>Domain</td>
-<td>2</td>
-<td>Parzialmente documentato</td>
+  <td style="text-align:right">52</td>
+  <td><code>it.gabriele.truckflow.domain.operational.common</code></td>
+  <td>Domain</td>
+  <td style="text-align:right">7</td>
+  <td>Parzialmente documentato</td>
 </tr>
 <tr>
-<td>54</td>
-<td><code>it.gabriele.truckflow.domain.operational.driver</code></td>
-<td>Domain</td>
-<td>2</td>
-<td>Parzialmente documentato</td>
+  <td style="text-align:right">53</td>
+  <td><code>it.gabriele.truckflow.domain.operational.dispatcher</code></td>
+  <td>Domain</td>
+  <td style="text-align:right">2</td>
+  <td>Parzialmente documentato</td>
 </tr>
 <tr>
-<td>55</td>
-<td><code>it.gabriele.truckflow.domain.operational.exceptions</code></td>
-<td>Domain</td>
-<td>5</td>
-<td>Documentato</td>
+  <td style="text-align:right">54</td>
+  <td><code>it.gabriele.truckflow.domain.operational.driver</code></td>
+  <td>Domain</td>
+  <td style="text-align:right">2</td>
+  <td>Parzialmente documentato</td>
 </tr>
 <tr>
-<td>56</td>
-<td><code>it.gabriele.truckflow.domain.operational.manager</code></td>
-<td>Domain</td>
-<td>2</td>
-<td>Parzialmente documentato</td>
+  <td style="text-align:right">55</td>
+  <td><code>it.gabriele.truckflow.domain.operational.exceptions</code></td>
+  <td>Domain</td>
+  <td style="text-align:right">5</td>
+  <td>Documentato</td>
 </tr>
 <tr>
-<td>57</td>
-<td><code>it.gabriele.truckflow.domain.operational.mechanic</code></td>
-<td>Domain</td>
-<td>2</td>
-<td>Parzialmente documentato</td>
+  <td style="text-align:right">56</td>
+  <td><code>it.gabriele.truckflow.domain.operational.manager</code></td>
+  <td>Domain</td>
+  <td style="text-align:right">2</td>
+  <td>Parzialmente documentato</td>
 </tr>
 <tr>
-<td>58</td>
-<td><code>it.gabriele.truckflow.domain.operational.warehouse</code></td>
-<td>Domain</td>
-<td>2</td>
-<td>Parzialmente documentato</td>
+  <td style="text-align:right">57</td>
+  <td><code>it.gabriele.truckflow.domain.operational.mechanic</code></td>
+  <td>Domain</td>
+  <td style="text-align:right">2</td>
+  <td>Parzialmente documentato</td>
 </tr>
 <tr>
-<td>59</td>
-<td><code>it.gabriele.truckflow.domain.qualifications</code></td>
-<td>Domain</td>
-<td>3</td>
-<td>Documentato</td>
+  <td style="text-align:right">58</td>
+  <td><code>it.gabriele.truckflow.domain.operational.warehouse</code></td>
+  <td>Domain</td>
+  <td style="text-align:right">2</td>
+  <td>Parzialmente documentato</td>
 </tr>
 <tr>
-<td>60</td>
-<td><code>it.gabriele.truckflow.domain.qualifications.exceptions</code></td>
-<td>Domain</td>
-<td>1</td>
-<td>Documentato</td>
+  <td style="text-align:right">59</td>
+  <td><code>it.gabriele.truckflow.domain.qualifications</code></td>
+  <td>Domain</td>
+  <td style="text-align:right">3</td>
+  <td>Documentato</td>
 </tr>
 <tr>
-<td>61</td>
-<td><code>it.gabriele.truckflow.domain.shared.exceptions</code></td>
-<td>Domain</td>
-<td>3</td>
-<td>Documentato</td>
+  <td style="text-align:right">60</td>
+  <td><code>it.gabriele.truckflow.domain.qualifications.exceptions</code></td>
+  <td>Domain</td>
+  <td style="text-align:right">1</td>
+  <td>Documentato</td>
 </tr>
 <tr>
-<td>62</td>
-<td><code>it.gabriele.truckflow.domain.shipments.core</code></td>
-<td>Domain</td>
-<td>7</td>
-<td>Parzialmente documentato</td>
+  <td style="text-align:right">61</td>
+  <td><code>it.gabriele.truckflow.domain.shared.exceptions</code></td>
+  <td>Domain</td>
+  <td style="text-align:right">3</td>
+  <td>Documentato</td>
 </tr>
 <tr>
-<td>63</td>
-<td><code>it.gabriele.truckflow.domain.shipments.exceptions</code></td>
-<td>Domain</td>
-<td>3</td>
-<td>Documentato</td>
+  <td style="text-align:right">62</td>
+  <td><code>it.gabriele.truckflow.domain.shipments.core</code></td>
+  <td>Domain</td>
+  <td style="text-align:right">7</td>
+  <td>Parzialmente documentato</td>
 </tr>
 <tr>
-<td>64</td>
-<td><code>it.gabriele.truckflow.domain.shipments.items</code></td>
-<td>Domain</td>
-<td>3</td>
-<td>Parzialmente documentato</td>
+  <td style="text-align:right">63</td>
+  <td><code>it.gabriele.truckflow.domain.shipments.exceptions</code></td>
+  <td>Domain</td>
+  <td style="text-align:right">3</td>
+  <td>Documentato</td>
 </tr>
 <tr>
-<td>65</td>
-<td><code>it.gabriele.truckflow.domain.shipments.legs</code></td>
-<td>Domain</td>
-<td>3</td>
-<td>Parzialmente documentato</td>
+  <td style="text-align:right">64</td>
+  <td><code>it.gabriele.truckflow.domain.shipments.items</code></td>
+  <td>Domain</td>
+  <td style="text-align:right">3</td>
+  <td>Parzialmente documentato</td>
 </tr>
 <tr>
-<td>66</td>
-<td><code>it.gabriele.truckflow.domain.shipments.metrics</code></td>
-<td>Domain</td>
-<td>5</td>
-<td>Parzialmente documentato</td>
+  <td style="text-align:right">65</td>
+  <td><code>it.gabriele.truckflow.domain.shipments.legs</code></td>
+  <td>Domain</td>
+  <td style="text-align:right">3</td>
+  <td>Parzialmente documentato</td>
 </tr>
 <tr>
-<td>67</td>
-<td><code>it.gabriele.truckflow.domain.shipments.notes</code></td>
-<td>Domain</td>
-<td>1</td>
-<td>Parzialmente documentato</td>
+  <td style="text-align:right">66</td>
+  <td><code>it.gabriele.truckflow.domain.shipments.metrics</code></td>
+  <td>Domain</td>
+  <td style="text-align:right">5</td>
+  <td>Parzialmente documentato</td>
 </tr>
 <tr>
-<td>68</td>
-<td><code>it.gabriele.truckflow.domain.shipments.properties</code></td>
-<td>Domain</td>
-<td>2</td>
-<td>Parzialmente documentato</td>
+  <td style="text-align:right">67</td>
+  <td><code>it.gabriele.truckflow.domain.shipments.notes</code></td>
+  <td>Domain</td>
+  <td style="text-align:right">1</td>
+  <td>Parzialmente documentato</td>
 </tr>
 <tr>
-<td>69</td>
-<td><code>it.gabriele.truckflow.domain.shipments.references</code></td>
-<td>Domain</td>
-<td>1</td>
-<td>Parzialmente documentato</td>
+  <td style="text-align:right">68</td>
+  <td><code>it.gabriele.truckflow.domain.shipments.properties</code></td>
+  <td>Domain</td>
+  <td style="text-align:right">2</td>
+  <td>Parzialmente documentato</td>
 </tr>
 <tr>
-<td>70</td>
-<td><code>it.gabriele.truckflow.domain.shipments.requirements</code></td>
-<td>Domain</td>
-<td>2</td>
-<td>Parzialmente documentato</td>
+  <td style="text-align:right">69</td>
+  <td><code>it.gabriele.truckflow.domain.shipments.references</code></td>
+  <td>Domain</td>
+  <td style="text-align:right">1</td>
+  <td>Parzialmente documentato</td>
 </tr>
 <tr>
-<td>71</td>
-<td><code>it.gabriele.truckflow.domain.triptemplates</code></td>
-<td>Domain</td>
-<td>13</td>
-<td>Documentato</td>
+  <td style="text-align:right">70</td>
+  <td><code>it.gabriele.truckflow.domain.shipments.requirements</code></td>
+  <td>Domain</td>
+  <td style="text-align:right">2</td>
+  <td>Parzialmente documentato</td>
 </tr>
 <tr>
-<td>72</td>
-<td><code>it.gabriele.truckflow.domain.triptemplates.exceptions</code></td>
-<td>Domain</td>
-<td>2</td>
-<td>Documentato</td>
+  <td style="text-align:right">71</td>
+  <td><code>it.gabriele.truckflow.domain.triptemplates</code></td>
+  <td>Domain</td>
+  <td style="text-align:right">13</td>
+  <td>Documentato</td>
 </tr>
 <tr>
-<td>73</td>
-<td><code>it.gabriele.truckflow.domain.users</code></td>
-<td>Domain</td>
-<td>15</td>
-<td>Documentato</td>
+  <td style="text-align:right">72</td>
+  <td><code>it.gabriele.truckflow.domain.triptemplates.exceptions</code></td>
+  <td>Domain</td>
+  <td style="text-align:right">2</td>
+  <td>Documentato</td>
 </tr>
 <tr>
-<td>74</td>
-<td><code>it.gabriele.truckflow.domain.users.exceptions</code></td>
-<td>Domain</td>
-<td>1</td>
-<td>Documentato</td>
+  <td style="text-align:right">73</td>
+  <td><code>it.gabriele.truckflow.domain.users</code></td>
+  <td>Domain</td>
+  <td style="text-align:right">15</td>
+  <td>Documentato</td>
 </tr>
 <tr>
-<td>75</td>
-<td><code>it.gabriele.truckflow.domain.vehicles.body</code></td>
-<td>Domain</td>
-<td>11</td>
-<td>Parzialmente documentato</td>
+  <td style="text-align:right">74</td>
+  <td><code>it.gabriele.truckflow.domain.users.exceptions</code></td>
+  <td>Domain</td>
+  <td style="text-align:right">1</td>
+  <td>Documentato</td>
 </tr>
 <tr>
-<td>76</td>
-<td><code>it.gabriele.truckflow.domain.vehicles.combination</code></td>
-<td>Domain</td>
-<td>3</td>
-<td>Parzialmente documentato</td>
+  <td style="text-align:right">75</td>
+  <td><code>it.gabriele.truckflow.domain.vehicles.body</code></td>
+  <td>Domain</td>
+  <td style="text-align:right">11</td>
+  <td>Parzialmente documentato</td>
 </tr>
 <tr>
-<td>77</td>
-<td><code>it.gabriele.truckflow.domain.vehicles.common</code></td>
-<td>Domain</td>
-<td>1</td>
-<td>Parzialmente documentato</td>
+  <td style="text-align:right">76</td>
+  <td><code>it.gabriele.truckflow.domain.vehicles.combination</code></td>
+  <td>Domain</td>
+  <td style="text-align:right">3</td>
+  <td>Parzialmente documentato</td>
 </tr>
 <tr>
-<td>78</td>
-<td><code>it.gabriele.truckflow.domain.vehicles.coupling</code></td>
-<td>Domain</td>
-<td>2</td>
-<td>Parzialmente documentato</td>
+  <td style="text-align:right">77</td>
+  <td><code>it.gabriele.truckflow.domain.vehicles.common</code></td>
+  <td>Domain</td>
+  <td style="text-align:right">1</td>
+  <td>Parzialmente documentato</td>
 </tr>
 <tr>
-<td>79</td>
-<td><code>it.gabriele.truckflow.domain.vehicles.exceptions</code></td>
-<td>Domain</td>
-<td>2</td>
-<td>Documentato</td>
+  <td style="text-align:right">78</td>
+  <td><code>it.gabriele.truckflow.domain.vehicles.coupling</code></td>
+  <td>Domain</td>
+  <td style="text-align:right">2</td>
+  <td>Parzialmente documentato</td>
 </tr>
 <tr>
-<td>80</td>
-<td><code>it.gabriele.truckflow.domain.vehicles.operation</code></td>
-<td>Domain</td>
-<td>2</td>
-<td>Parzialmente documentato</td>
+  <td style="text-align:right">79</td>
+  <td><code>it.gabriele.truckflow.domain.vehicles.exceptions</code></td>
+  <td>Domain</td>
+  <td style="text-align:right">2</td>
+  <td>Documentato</td>
 </tr>
 <tr>
-<td>81</td>
-<td><code>it.gabriele.truckflow.domain.vehicles.specification</code></td>
-<td>Domain</td>
-<td>12</td>
-<td>Parzialmente documentato</td>
+  <td style="text-align:right">80</td>
+  <td><code>it.gabriele.truckflow.domain.vehicles.operation</code></td>
+  <td>Domain</td>
+  <td style="text-align:right">2</td>
+  <td>Parzialmente documentato</td>
 </tr>
 <tr>
-<td>82</td>
-<td><code>it.gabriele.truckflow.domain.vehicles.unit</code></td>
-<td>Domain</td>
-<td>8</td>
-<td>Parzialmente documentato</td>
+  <td style="text-align:right">81</td>
+  <td><code>it.gabriele.truckflow.domain.vehicles.specification</code></td>
+  <td>Domain</td>
+  <td style="text-align:right">12</td>
+  <td>Parzialmente documentato</td>
 </tr>
 <tr>
-<td>83</td>
-<td><code>it.gabriele.truckflow.infrastructure</code></td>
-<td>Infrastructure</td>
-<td>1</td>
-<td>Documentato</td>
+  <td style="text-align:right">82</td>
+  <td><code>it.gabriele.truckflow.domain.vehicles.unit</code></td>
+  <td>Domain</td>
+  <td style="text-align:right">8</td>
+  <td>Parzialmente documentato</td>
 </tr>
 <tr>
-<td>84</td>
-<td><code>it.gabriele.truckflow.infrastructure.adapter</code></td>
-<td>Infrastructure</td>
-<td>2</td>
-<td>Parzialmente documentato</td>
+  <td style="text-align:right">83</td>
+  <td><code>it.gabriele.truckflow.infrastructure</code></td>
+  <td>Infrastructure</td>
+  <td style="text-align:right">1</td>
+  <td>Documentato</td>
 </tr>
 <tr>
-<td>85</td>
-<td><code>it.gabriele.truckflow.infrastructure.config</code></td>
-<td>Infrastructure</td>
-<td>2</td>
-<td>Documentato</td>
+  <td style="text-align:right">84</td>
+  <td><code>it.gabriele.truckflow.infrastructure.adapter</code></td>
+  <td>Infrastructure</td>
+  <td style="text-align:right">2</td>
+  <td>Parzialmente documentato</td>
 </tr>
 <tr>
-<td>86</td>
-<td><code>it.gabriele.truckflow.infrastructure.config.spring</code></td>
-<td>Infrastructure</td>
-<td>11</td>
-<td>Documentato</td>
+  <td style="text-align:right">85</td>
+  <td><code>it.gabriele.truckflow.infrastructure.config</code></td>
+  <td>Infrastructure</td>
+  <td style="text-align:right">2</td>
+  <td>Documentato</td>
 </tr>
 <tr>
-<td>87</td>
-<td><code>it.gabriele.truckflow.infrastructure.exception</code></td>
-<td>Infrastructure</td>
-<td>6</td>
-<td>Parzialmente documentato</td>
+  <td style="text-align:right">86</td>
+  <td><code>it.gabriele.truckflow.infrastructure.config.spring</code></td>
+  <td>Infrastructure</td>
+  <td style="text-align:right">11</td>
+  <td>Documentato</td>
 </tr>
 <tr>
-<td>88</td>
-<td><code>it.gabriele.truckflow.infrastructure.mapping</code></td>
-<td>Infrastructure</td>
-<td>6</td>
-<td>Parzialmente documentato</td>
+  <td style="text-align:right">87</td>
+  <td><code>it.gabriele.truckflow.infrastructure.exception</code></td>
+  <td>Infrastructure</td>
+  <td style="text-align:right">6</td>
+  <td>Parzialmente documentato</td>
 </tr>
 <tr>
-<td>89</td>
-<td><code>it.gabriele.truckflow.infrastructure.memory</code></td>
-<td>Infrastructure</td>
-<td>1</td>
-<td>Parzialmente documentato</td>
+  <td style="text-align:right">88</td>
+  <td><code>it.gabriele.truckflow.infrastructure.mapping</code></td>
+  <td>Infrastructure</td>
+  <td style="text-align:right">6</td>
+  <td>Parzialmente documentato</td>
 </tr>
 <tr>
-<td>90</td>
-<td><code>it.gabriele.truckflow.infrastructure.memory.cargo</code></td>
-<td>Infrastructure</td>
-<td>2</td>
-<td>Parzialmente documentato</td>
+  <td style="text-align:right">89</td>
+  <td><code>it.gabriele.truckflow.infrastructure.memory</code></td>
+  <td>Infrastructure</td>
+  <td style="text-align:right">1</td>
+  <td>Parzialmente documentato</td>
 </tr>
 <tr>
-<td>91</td>
-<td><code>it.gabriele.truckflow.infrastructure.memory.compliance</code></td>
-<td>Infrastructure</td>
-<td>2</td>
-<td>Parzialmente documentato</td>
+  <td style="text-align:right">90</td>
+  <td><code>it.gabriele.truckflow.infrastructure.memory.cargo</code></td>
+  <td>Infrastructure</td>
+  <td style="text-align:right">2</td>
+  <td>Parzialmente documentato</td>
 </tr>
 <tr>
-<td>92</td>
-<td><code>it.gabriele.truckflow.infrastructure.memory.documents</code></td>
-<td>Infrastructure</td>
-<td>1</td>
-<td>Parzialmente documentato</td>
+  <td style="text-align:right">91</td>
+  <td><code>it.gabriele.truckflow.infrastructure.memory.compliance</code></td>
+  <td>Infrastructure</td>
+  <td style="text-align:right">2</td>
+  <td>Parzialmente documentato</td>
 </tr>
 <tr>
-<td>93</td>
-<td><code>it.gabriele.truckflow.infrastructure.memory.locations</code></td>
-<td>Infrastructure</td>
-<td>2</td>
-<td>Parzialmente documentato</td>
+  <td style="text-align:right">92</td>
+  <td><code>it.gabriele.truckflow.infrastructure.memory.documents</code></td>
+  <td>Infrastructure</td>
+  <td style="text-align:right">1</td>
+  <td>Parzialmente documentato</td>
 </tr>
 <tr>
-<td>94</td>
-<td><code>it.gabriele.truckflow.infrastructure.memory.operational</code></td>
-<td>Infrastructure</td>
-<td>6</td>
-<td>Parzialmente documentato</td>
+  <td style="text-align:right">93</td>
+  <td><code>it.gabriele.truckflow.infrastructure.memory.locations</code></td>
+  <td>Infrastructure</td>
+  <td style="text-align:right">2</td>
+  <td>Parzialmente documentato</td>
 </tr>
 <tr>
-<td>95</td>
-<td><code>it.gabriele.truckflow.infrastructure.memory.shipments</code></td>
-<td>Infrastructure</td>
-<td>2</td>
-<td>Parzialmente documentato</td>
+  <td style="text-align:right">94</td>
+  <td><code>it.gabriele.truckflow.infrastructure.memory.operational</code></td>
+  <td>Infrastructure</td>
+  <td style="text-align:right">6</td>
+  <td>Parzialmente documentato</td>
 </tr>
 <tr>
-<td>96</td>
-<td><code>it.gabriele.truckflow.infrastructure.memory.vehicles</code></td>
-<td>Infrastructure</td>
-<td>3</td>
-<td>Parzialmente documentato</td>
+  <td style="text-align:right">95</td>
+  <td><code>it.gabriele.truckflow.infrastructure.memory.shipments</code></td>
+  <td>Infrastructure</td>
+  <td style="text-align:right">2</td>
+  <td>Parzialmente documentato</td>
 </tr>
 <tr>
-<td>97</td>
-<td><code>it.gabriele.truckflow.infrastructure.repository</code></td>
-<td>Infrastructure</td>
-<td>2</td>
-<td>Documentato</td>
+  <td style="text-align:right">96</td>
+  <td><code>it.gabriele.truckflow.infrastructure.memory.vehicles</code></td>
+  <td>Infrastructure</td>
+  <td style="text-align:right">3</td>
+  <td>Parzialmente documentato</td>
 </tr>
 <tr>
-<td>98</td>
-<td><code>it.gabriele.truckflow.infrastructure.repository.cargo</code></td>
-<td>Infrastructure</td>
-<td>5</td>
-<td>Parzialmente documentato</td>
+  <td style="text-align:right">97</td>
+  <td><code>it.gabriele.truckflow.infrastructure.repository</code></td>
+  <td>Infrastructure</td>
+  <td style="text-align:right">2</td>
+  <td>Documentato</td>
 </tr>
 <tr>
-<td>99</td>
-<td><code>it.gabriele.truckflow.infrastructure.repository.compliance</code></td>
-<td>Infrastructure</td>
-<td>5</td>
-<td>Parzialmente documentato</td>
+  <td style="text-align:right">98</td>
+  <td><code>it.gabriele.truckflow.infrastructure.repository.cargo</code></td>
+  <td>Infrastructure</td>
+  <td style="text-align:right">5</td>
+  <td>Parzialmente documentato</td>
 </tr>
 <tr>
-<td>100</td>
-<td><code>it.gabriele.truckflow.infrastructure.repository.documents</code></td>
-<td>Infrastructure</td>
-<td>5</td>
-<td>Parzialmente documentato</td>
+  <td style="text-align:right">99</td>
+  <td><code>it.gabriele.truckflow.infrastructure.repository.compliance</code></td>
+  <td>Infrastructure</td>
+  <td style="text-align:right">5</td>
+  <td>Parzialmente documentato</td>
 </tr>
 <tr>
-<td>101</td>
-<td><code>it.gabriele.truckflow.infrastructure.repository.file</code></td>
-<td>Infrastructure</td>
-<td>4</td>
-<td>Documentato</td>
+  <td style="text-align:right">100</td>
+  <td><code>it.gabriele.truckflow.infrastructure.repository.documents</code></td>
+  <td>Infrastructure</td>
+  <td style="text-align:right">5</td>
+  <td>Parzialmente documentato</td>
 </tr>
 <tr>
-<td>102</td>
-<td><code>it.gabriele.truckflow.infrastructure.repository.locations</code></td>
-<td>Infrastructure</td>
-<td>4</td>
-<td>Parzialmente documentato</td>
+  <td style="text-align:right">101</td>
+  <td><code>it.gabriele.truckflow.infrastructure.repository.file</code></td>
+  <td>Infrastructure</td>
+  <td style="text-align:right">4</td>
+  <td>Documentato</td>
 </tr>
 <tr>
-<td>103</td>
-<td><code>it.gabriele.truckflow.infrastructure.service</code></td>
-<td>Infrastructure</td>
-<td>2</td>
-<td>Parzialmente documentato</td>
+  <td style="text-align:right">102</td>
+  <td><code>it.gabriele.truckflow.infrastructure.repository.locations</code></td>
+  <td>Infrastructure</td>
+  <td style="text-align:right">4</td>
+  <td>Parzialmente documentato</td>
 </tr>
-</tbody></table></div>
-<p>---</p>
-<h2 id="24-valutazione-tecnica-finale-del-progetto">24. Valutazione tecnica finale del progetto</h2>
+<tr>
+  <td style="text-align:right">103</td>
+  <td><code>it.gabriele.truckflow.infrastructure.service</code></td>
+  <td>Infrastructure</td>
+  <td style="text-align:right">2</td>
+  <td>Parzialmente documentato</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>24. Valutazione tecnica finale del progetto</h2>
 <p>TruckFlow Manager presenta una fondazione tecnica solida, coerente e ben separata. Il progetto dimostra una forte attenzione a manutenibilità, testabilità, modularità e controllo della complessità. La scelta di procedere per layer e freeze riduce il rischio di accumulare debito architetturale precoce.</p>
-<h3 id="punti-di-forza">Punti di forza</h3>
+<h3>Punti di forza</h3>
 <ul>
 <li>Dominio ampio e realistico.</li>
 <li>Layer ben separati.</li>
@@ -2215,7 +2341,7 @@
 <li>Documentazione estesa e organizzata.</li>
 <li>Roadmap coerente verso API Layer.</li>
 </ul>
-<h3 id="limiti-attuali">Limiti attuali</h3>
+<h3>Limiti attuali</h3>
 <ul>
 <li>Sistema non ancora esposto via API.</li>
 <li>Assenza di sicurezza HTTP.</li>
@@ -2224,11 +2350,13 @@
 <li>Assenza di audit trail, workflow e dashboard.</li>
 <li>Prestazioni e deployment non ancora valutati.</li>
 </ul>
-<h3 id="giudizio-complessivo">Giudizio complessivo</h3>
-<p>Il progetto è <strong>architetturalmente maturo per la fase foundation</strong> e pronto per avviare un Punto 8 API Layer controllato. Non è ancora un prodotto enterprise operativo, ma possiede una base progettuale adeguata per evolvere verso una piattaforma enterprise reale.</p>
+<h3>Giudizio complessivo</h3>
+<p>Il progetto è <strong>architetturalmente maturo per la fase foundation</strong> e ha formalizzato il Punto 8A API Layer Blueprint. Non è ancora un prodotto enterprise operativo, ma possiede una base progettuale adeguata per evolvere verso una piattaforma enterprise reale.</p>
 <p>La priorità successiva dovrebbe essere:</p>
-<pre><code>Punto 8A — API Layer Blueprint</code></pre>
+<pre><code class="language-text">Punto 8B — API Layer Foundation
+</code></pre>
 <p>seguito da un primo controller su Locations, mantenendo le stesse regole di disciplina già adottate nei cicli Domain, Application e Infrastructure.</p>
+
     </article>
   </main>
 </body>

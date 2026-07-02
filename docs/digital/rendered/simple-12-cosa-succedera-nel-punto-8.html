@@ -19,11 +19,26 @@
         <h1>12. Cosa succederà nel Punto 8</h1>
       </header>
       <h1>12. Cosa succederà nel Punto 8</h1>
-<p>Il Punto 8 sarà il ciclo dedicato all'API Layer.</p>
-<p>Questo significa che TruckFlow Manager inizierà a esporre alcune funzioni verso l'esterno tramite REST API.</p>
-<h2>Cosa introdurrà il Punto 8</h2>
-<p>Il Punto 8 potrà introdurre:</p>
+<p>Il Punto 8 è il ciclo dedicato all'API Layer.</p>
+<p>Questo significa che TruckFlow Manager inizierà a preparare l'esposizione di alcune funzioni verso l'esterno tramite REST API.</p>
+<h2>Stato attuale</h2>
+<p>Il primo step è stato avviato con:</p>
+<pre><code class="language-text">Punto 8A — API Layer Blueprint
+</code></pre>
+<p>Questo step non crea ancora API vere.</p>
+<p>Serve a definire:</p>
 <ul>
+<li>regole dell’API Layer;</li>
+<li>package futuro <code>it.gabriele.truckflow.api</code>;</li>
+<li>versionamento <code>/api/v1</code>;</li>
+<li>primo contesto REST: Locations;</li>
+<li>primi endpoint futuri;</li>
+<li>test architetturale che protegge i layer.</li>
+</ul>
+<h2>Cosa introdurrà il Punto 8 nei prossimi step</h2>
+<p>Il Punto 8 potrà introdurre gradualmente:</p>
+<ul>
+<li>package API;</li>
 <li>controller REST;</li>
 <li>DTO web;</li>
 <li>mapping tra request HTTP e command applicativi;</li>
@@ -33,15 +48,22 @@
 <li>documentazione API.</li>
 </ul>
 <h2>Cosa deve restare pulito</h2>
-<p>Anche quando arriveranno le API, domain e application devono restare puliti.</p>
+<p>Anche quando arriveranno le API, Domain e Application devono restare puliti.</p>
 <p>Il controller non deve contenere business logic.</p>
 <p>Il controller deve solo ricevere la richiesta, chiamare il use case giusto e restituire una risposta.</p>
-<h2>Esempio futuro</h2>
-<p>Per registrare una location, un endpoint REST potrebbe ricevere una richiesta HTTP.</p>
+<p>Il controller non deve chiamare repository concreti o file-backed repository.</p>
+<h2>Primo contesto REST</h2>
+<p>Il primo contesto scelto sarà:</p>
+<pre><code class="language-text">Locations
+</code></pre>
+<p>Per registrare una location, un endpoint REST futuro potrebbe ricevere una richiesta HTTP.</p>
 <p>Il controller trasformerebbe quella richiesta in <code>RegisterLocationCommand</code> e chiamerebbe <code>RegisterLocationUseCase</code>.</p>
 <p>Questo è il motivo per cui abbiamo costruito prima i use case: l'API dovrà appoggiarsi su qualcosa di già solido.</p>
-<h2>Prossima regola</h2>
-<p>Nel Punto 8 dovremo procedere come sempre: piccoli step, test, documentazione e confini chiari.</p>
+<h2>Prossimo step</h2>
+<p>Dopo il blueprint, il prossimo step sarà:</p>
+<pre><code class="language-text">Punto 8B — API Layer Foundation
+</code></pre>
+<p>Nel Punto 8B si potrà creare la struttura base del package API, ma senza espansione incontrollata.</p>
 
     </article>
   </main>

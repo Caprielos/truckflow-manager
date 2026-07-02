@@ -11,7 +11,7 @@
   <main class="page">
     <div class="topbar">
       <a class="back" href="../index.html">← Torna alla Home</a>
-      <span class="source">Sorgente Markdown: README.md</span>
+      <span class="source">Sorgente Markdown: ../digital/README.md</span>
     </div>
     <article class="doc">
       <header class="doc-header">
@@ -26,7 +26,7 @@
 <li><strong>Home</strong> pulita con il documento enterprise in evidenza;</li>
 <li><strong>Software Engineering Overview</strong> in versione HTML visuale;</li>
 <li><strong>Simple Documentation</strong>;</li>
-<li><strong>Professional Documentation</strong>;</li>
+<li><strong>Professional Documentation</strong>, incluso il blueprint <code>38-api-layer-blueprint.md</code>;</li>
 <li><strong>Package Explorer</strong> ad albero apribile/chiudibile come in un IDE;</li>
 <li><strong>Old Style Archive</strong> come sezione centrale, non come lista fissa in sidebar;</li>
 <li><strong>Roadmap &amp; Freeze</strong>;</li>
@@ -45,7 +45,7 @@
 <li>generazione automatica runtime della documentazione;</li>
 <li>scansione runtime del filesystem;</li>
 <li>modifica dei file dal browser;</li>
-<li>dipendenze dal futuro Punto 8.</li>
+<li>dipendenze runtime dal futuro API Layer. Il Punto 8A è documentale e architetturale, non introduce endpoint reali.</li>
 </ul>
 <h2>File principali</h2>
 <pre><code class="language-text">docs/digital/
@@ -53,6 +53,7 @@
 ├── styles.css
 ├── docs-catalog.js
 ├── software-engineering-overview.html
+├── rendered/
 ├── truckflow-manager-enterprise-documentation.html
 └── README.md
 </code></pre>
@@ -60,10 +61,11 @@
 <ul>
 <li><code>index.html</code>: navigatore principale con sidebar pulita, ricerca, sezioni documentali e package tree. I documenti si aprono in una nuova scheda, senza iframe interno.</li>
 <li><code>styles.css</code>: stile grafico del reader.</li>
-<li><code>docs-catalog.js</code>: catalogo statico dei documenti, dei package Java reali e dello stato documentale.</li>
+<li><code>docs-catalog.js</code>: catalogo statico dei documenti, dei package Java reali e dello stato documentale. I documenti Markdown puntano alle versioni HTML renderizzate in <code>rendered/</code>.</li>
 <li><code>software-engineering-overview.html</code>: versione visuale e funzionale del documento enterprise di Ingegneria del Software.</li>
 <li><code>truckflow-manager-enterprise-documentation.html</code>: pagina enterprise sintetica già presente.</li>
 <li><code>README.md</code>: spiegazione di questa cartella.</li>
+<li><code>rendered/</code>: versioni HTML statiche dei documenti Markdown, pensate per essere aperte in nuova scheda e lette senza testo grezzo.</li>
 </ul>
 <h2>Package Explorer</h2>
 <p>Il Package Explorer non mostra una griglia enorme di card.</p>
@@ -92,7 +94,7 @@
 <p>I documenti Markdown possono essere mostrati dal browser come testo. I documenti principali, come <code>software-engineering-overview.html</code>, hanno una versione HTML visuale pensata per la lettura nel reader.</p>
 <h2>Apertura documenti</h2>
 <p>Il reader non usa più un iframe interno per i documenti.</p>
-<p>Quando clicchi un documento, questo viene aperto in una nuova scheda del browser. Questa scelta evita la lettura del Markdown come testo grezzo dentro il reader e impedisce che un documento rimanga visualizzato in modo persistente nella pagina principale.</p>
+<p>Quando clicchi un documento, questo viene aperto in una nuova scheda del browser. I documenti Markdown vengono indirizzati a una versione HTML statica dentro <code>rendered/</code>, così non appaiono come testo grezzo nel reader e non rimangono visualizzati in modo persistente nella pagina principale.</p>
 <p>Il pulsante <strong>Home</strong> e il comando <strong>Torna alla Home</strong> riportano alla schermata iniziale del reader.</p>
 
     </article>

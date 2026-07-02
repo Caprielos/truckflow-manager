@@ -5,7 +5,7 @@
 window.TRUCKFLOW_DOCS = {
   "meta": {
     "project": "TruckFlow Manager",
-    "status": "Punto 7 completato — prossimo ciclo Punto 8 API Layer",
+    "status": "Punto 8A completato — prossimo ciclo Punto 8B API Layer Foundation",
     "reader": "Digital Documentation Reader statico",
     "mainJavaFiles": 505,
     "mainJavaPackages": 103,
@@ -250,7 +250,7 @@ window.TRUCKFLOW_DOCS = {
       "path": "rendered/simple-12-cosa-succedera-nel-punto-8.html",
       "type": "simple",
       "layer": "guide",
-      "description": "Anticipa il Punto 8 API Layer e chiarisce come nasceranno controller, DTO, mapping, error handling e documentazione API.",
+      "description": "Spiega in modo semplice il Punto 8, chiarendo che 8A è blueprint e che controller, DTO ed endpoint arriveranno solo nei passi successivi.",
       "keywords": [
         "../simple/12-cosa-succedera-nel-punto-8.md",
         "12-cosa-succedera-nel-punto-8.md",
@@ -260,7 +260,10 @@ window.TRUCKFLOW_DOCS = {
         "html rendered",
         "nuova scheda",
         "rendered/simple-12-cosa-succedera-nel-punto-8.html",
-        "simple"
+        "simple",
+        "Punto 8A",
+        "blueprint",
+        "Punto 8B"
       ],
       "sourcePath": "../simple/12-cosa-succedera-nel-punto-8.md"
     },
@@ -313,7 +316,7 @@ window.TRUCKFLOW_DOCS = {
       "path": "rendered/professional-00-software-engineering-overview.html",
       "type": "professional",
       "layer": "professional",
-      "description": "Documento principale del progetto: descrive TruckFlow Manager come relazione di Ingegneria del Software, con problema, requisiti, attori, architettura, stato attuale, vincoli tecnici, roadmap e rischi.",
+      "description": "Documento enterprise aggiornato: stato reale del progetto dopo Punto 8A, roadmap API, requisiti, architettura, rischi e Package Explorer.",
       "keywords": [
         "../professional/00-software-engineering-overview.md",
         "00-software-engineering-overview.md",
@@ -322,7 +325,11 @@ window.TRUCKFLOW_DOCS = {
         "html rendered",
         "nuova scheda",
         "professional",
-        "rendered/professional-00-software-engineering-overview.html"
+        "rendered/professional-00-software-engineering-overview.html",
+        "Punto 8A",
+        "API Layer Blueprint",
+        "Punto 8B",
+        "/api/v1"
       ],
       "sourcePath": "../professional/00-software-engineering-overview.md"
     },
@@ -413,7 +420,7 @@ window.TRUCKFLOW_DOCS = {
       "path": "rendered/professional-05-roadmap-history.html",
       "type": "professional",
       "layer": "professional",
-      "description": "Ricostruisce la cronologia progettuale e la progressione dai primi punti del dominio fino al completamento dell’infrastructure layer.",
+      "description": "Ricostruisce la roadmap dal dominio fino al Punto 8A, includendo il blueprint API e il prossimo step Punto 8B.",
       "keywords": [
         "../professional/05-roadmap-history.md",
         "05-roadmap-history.md",
@@ -422,7 +429,10 @@ window.TRUCKFLOW_DOCS = {
         "html rendered",
         "nuova scheda",
         "professional",
-        "rendered/professional-05-roadmap-history.html"
+        "rendered/professional-05-roadmap-history.html",
+        "Punto 8A",
+        "API Layer Blueprint",
+        "Punto 8B"
       ],
       "sourcePath": "../professional/05-roadmap-history.md"
     },
@@ -433,7 +443,7 @@ window.TRUCKFLOW_DOCS = {
       "path": "rendered/professional-06-current-status-and-next-steps.html",
       "type": "professional",
       "layer": "professional",
-      "description": "Riassume lo stato attuale del progetto e chiarisce i prossimi step, in particolare la preparazione al Punto 8 API Layer.",
+      "description": "Riassume lo stato dopo Punto 8A: Domain, Application e Infrastructure completati, blueprint API formalizzato e prossimo step Punto 8B Foundation.",
       "keywords": [
         "../professional/06-current-status-and-next-steps.md",
         "06-current-status-and-next-steps.md",
@@ -442,7 +452,10 @@ window.TRUCKFLOW_DOCS = {
         "html rendered",
         "nuova scheda",
         "professional",
-        "rendered/professional-06-current-status-and-next-steps.html"
+        "rendered/professional-06-current-status-and-next-steps.html",
+        "Punto 8A",
+        "Punto 8B",
+        "API Layer Foundation"
       ],
       "sourcePath": "../professional/06-current-status-and-next-steps.md"
     },
@@ -1311,6 +1324,33 @@ window.TRUCKFLOW_DOCS = {
         "digital",
         "truckflow-manager-enterprise-documentation.html"
       ]
+    },
+    {
+      "id": "professional-38-api-layer-blueprint",
+      "number": "38",
+      "title": "38. API Layer Blueprint — Punto 8A",
+      "path": "rendered/professional-38-api-layer-blueprint.html",
+      "type": "professional",
+      "layer": "api",
+      "description": "Blueprint ufficiale del Punto 8A: definisce boundary API, versionamento /api/v1, primo contesto REST Locations, endpoint futuri, regole di dipendenza e test ApiLayerArchitectureTest.",
+      "keywords": [
+        "../professional/38-api-layer-blueprint.md",
+        "38-api-layer-blueprint.md",
+        "38. API Layer Blueprint — Punto 8A",
+        "Punto 8A",
+        "API Layer",
+        "API Layer Blueprint",
+        "/api/v1",
+        "Locations",
+        "ApiLayerArchitectureTest",
+        "Architecture Rules",
+        "Roadmap",
+        "rendered/professional-38-api-layer-blueprint.html",
+        "professional",
+        "html rendered",
+        "nuova scheda"
+      ],
+      "sourcePath": "../professional/38-api-layer-blueprint.md"
     }
   ],
   "sections": [
@@ -1320,6 +1360,7 @@ window.TRUCKFLOW_DOCS = {
       "subtitle": "Punto di ingresso del Digital Documentation Reader.",
       "documents": [
         "digital-software-engineering-overview",
+        "professional-38-api-layer-blueprint",
         "professional-00-software-engineering-overview",
         "professional-01-project-overview",
         "professional-02-architecture",
@@ -1363,7 +1404,8 @@ window.TRUCKFLOW_DOCS = {
         "professional-05-roadmap-history",
         "professional-06-current-status-and-next-steps",
         "professional-readme",
-        "professional-technical-glossary"
+        "professional-technical-glossary",
+        "professional-38-api-layer-blueprint"
       ]
     },
     {
@@ -1415,6 +1457,7 @@ window.TRUCKFLOW_DOCS = {
       "title": "Roadmap & Freeze",
       "subtitle": "Roadmap, allineamenti, review e freeze dei layer.",
       "documents": [
+        "professional-38-api-layer-blueprint",
         "simple-12-cosa-succedera-nel-punto-8",
         "professional-00-software-engineering-overview",
         "professional-04-testing-and-quality",
@@ -1435,6 +1478,7 @@ window.TRUCKFLOW_DOCS = {
       "title": "Architecture Rules",
       "subtitle": "Regole architetturali, dependency rules e confini tra layer.",
       "documents": [
+        "professional-38-api-layer-blueprint",
         "simple-02-perche-il-progetto-e-organizzato-cosi",
         "simple-03-domain-layer-spiegato-semplice",
         "simple-04-application-layer-spiegato-semplice",
