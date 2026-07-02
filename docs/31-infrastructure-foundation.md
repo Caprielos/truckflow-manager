@@ -2,6 +2,8 @@
 
 Questo documento descrive il **Punto 7B — Infrastructure Foundation** di TruckFlow Manager.
 
+> Aggiornamento 7C: la foundation del 7B è ora usata dal wiring Spring controllato documentato in `32-spring-wiring-foundation.md`. Il 7C aggiunge configurazioni bean e bootstrap tecnico, ma non introduce repository reali, database, REST API, JPA o security.
+
 Il Punto 7B è il primo passo implementativo leggero del nuovo ciclo infrastrutturale aperto con il Punto 7A. Non introduce ancora database, JPA, Spring Data, controller REST, security o repository reali completi. Il suo obiettivo è creare una base tecnica ordinata in cui gli step successivi del Punto 7 possano inserire wiring Spring, mapping, adapter e repository reali senza rompere i confini costruiti nel dominio e nell'application layer.
 
 ## Stato da cui partiamo

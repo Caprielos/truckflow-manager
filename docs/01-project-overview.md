@@ -225,3 +225,7 @@ Dopo il blueprint del Punto 7A, TruckFlow Manager applica il **Punto 7B — Infr
 Questo aggiornamento introduce una base tecnica leggera del layer infrastrutturale: package dedicati, eccezioni infrastrutturali, marker di adapter, profili tecnici e un contratto generico di mapping. La fase non introduce ancora database, JPA, Spring Data, repository reali completi, controller REST, DTO web o security.
 
 Il valore del 7B è preparare una casa ordinata per gli step successivi del Punto 7, mantenendo intatti i confini: il dominio resta puro, l'application layer resta indipendente da infrastructure e i repository in memory restano disponibili per test e sviluppo locale.
+
+## Nota di avanzamento — Punto 7C
+
+Dopo il freeze dell’application layer e la foundation infrastrutturale, il Punto 7C introduce Spring solo come wiring tecnico non web. Il dominio e l’application layer restano privi di dipendenze Spring; REST API, controller, JPA, Spring Data e security sono rimandati agli step corretti.

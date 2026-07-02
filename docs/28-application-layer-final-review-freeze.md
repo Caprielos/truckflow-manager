@@ -190,3 +190,7 @@ Dopo il 7A, il progetto introduce il **Punto 7B — Infrastructure Foundation**.
 Questa fase non riapre l'application layer e non modifica i use case congelati. Aggiunge solo la prima struttura tecnica del layer infrastrutturale: package base, eccezioni tecniche, marker di adapter/repository/service, profili infrastrutturali e un contratto generico di mapping.
 
 Il freeze del Punto 6M resta valido: domain e application non dipendono da infrastructure, e REST API, controller, database, JPA, Spring Data e security restano fuori dal ciclo applicativo.
+
+## Nota successiva — Punto 7C
+
+Il freeze dell’application layer rimane valido anche dopo l’introduzione del wiring Spring: nessuna classe application riceve annotazioni framework e i use case restano indipendenti dall’infrastruttura.

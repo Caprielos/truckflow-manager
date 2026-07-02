@@ -1,8 +1,8 @@
 # TruckFlow Manager — Documentazione del dominio
 
-Questa cartella contiene la documentazione ufficiale di TruckFlow Manager, con la fondazione del dominio puro, il primo ciclo completo dell’application layer fino al Punto 6M, l’apertura documentale del Punto 7A — Infrastructure Layer Blueprint e la foundation tecnica leggera del Punto 7B.
+Questa cartella contiene la documentazione ufficiale di TruckFlow Manager, con la fondazione del dominio puro, il primo ciclo completo dell’application layer fino al Punto 6M, l’apertura documentale del Punto 7A — Infrastructure Layer Blueprint, la foundation tecnica leggera del Punto 7B e il wiring Spring controllato del Punto 7C.
 
-Il documento `29-final-roadmap-documentation-alignment.md` chiarisce lo stato reale dopo il Punto 6M: il Punto 6 è chiuso, la descrizione corretta del Punto 6G Documents è register/find/activate/archive e le dipendenze Spring presenti nel `pom.xml` sono preparatorie, non ancora usate come architettura REST o persistence. Il documento `30-infrastructure-layer-blueprint.md` apre il Punto 7A e definisce confini, filosofia, roadmap 7A→7H e regole dell’infrastructure layer prima di qualunque implementazione reale. Il documento `31-infrastructure-foundation.md` descrive il Punto 7B e formalizza package, eccezioni e convenzioni tecniche della foundation infrastrutturale.
+Il documento `29-final-roadmap-documentation-alignment.md` chiarisce lo stato reale dopo il Punto 6M: il Punto 6 è chiuso, la descrizione corretta del Punto 6G Documents è register/find/activate/archive e le dipendenze Spring presenti nel `pom.xml` sono preparatorie, non ancora usate come architettura REST o persistence. Il documento `30-infrastructure-layer-blueprint.md` apre il Punto 7A e definisce confini, filosofia, roadmap 7A→7H e regole dell’infrastructure layer prima di qualunque implementazione reale. Il documento `31-infrastructure-foundation.md` descrive il Punto 7B e formalizza package, eccezioni e convenzioni tecniche della foundation infrastrutturale. Il documento `32-spring-wiring-foundation.md` descrive il Punto 7C e spiega come Spring viene usato solo come wiring tecnico non web, mantenendo domain e application layer privi di dipendenze framework.
 
 Il progetto ha completato la fondazione del **domain layer**. L'**application layer** ha consolidato i primi casi d'uso, ha completato la prima espansione controllata verso Documents, l'ha rafforzata con una review tecnica e documentale, ha aggiunto i primi use case applicativi Vehicles e Operational Roles, ha rafforzato Operational Roles con il Punto 6K, ha introdotto i primi use case Compliance base nel Punto 6L e ha chiuso il primo ciclo dell'application layer con il Punto 6M. La fondazione di dominio contiene i seguenti package principali:
 
@@ -66,6 +66,7 @@ I nomi tecnici rimangono in inglese e allineati al codice Java.
 29. [`29-final-roadmap-documentation-alignment.md`](29-final-roadmap-documentation-alignment.md) — allineamento documentale finale: roadmap reale 1 → 6M, correzione del 6G Documents, nota sulle dipendenze Spring preparatorie e Guided Links.
 30. [`30-infrastructure-layer-blueprint.md`](30-infrastructure-layer-blueprint.md) — Punto 7A: blueprint dell'Infrastructure Layer, confini architetturali, roadmap 7A → 7H, ruolo di Spring, repository reali, adapter, mapping e relazione con il futuro Punto 8 API Layer.
 31. [`31-infrastructure-foundation.md`](31-infrastructure-foundation.md) — Punto 7B: foundation tecnica leggera dell'Infrastructure Layer, package base, eccezioni tecniche, convenzioni, marker infrastructure e test architetturale.
+32. [`32-spring-wiring-foundation.md`](32-spring-wiring-foundation.md) — Punto 7C: wiring Spring controllato, entry point tecnico, configurazioni bean, profilo memory, runtime non web e test architetturale dedicato.
 
 ## Stato del progetto documentato
 
@@ -85,6 +86,7 @@ Questa documentazione descrive la versione del progetto in cui il dominio contie
 - roadmap finale chiarita nel documento `29-final-roadmap-documentation-alignment.md`, che sostituisce le descrizioni intermedie ormai superate;
 - blueprint del Punto 7A documentato in `30-infrastructure-layer-blueprint.md`, che apre il ciclo Infrastructure Layer senza introdurre ancora codice operativo, database, REST API, controller, JPA o security;
 - foundation tecnica del Punto 7B documentata in `31-infrastructure-foundation.md`, che introduce package infrastrutturali, eccezioni tecniche, marker di adapter, profili tecnici e test architetturale senza ancora introdurre database, JPA, Spring Data, controller o repository reali completi;
+- wiring Spring controllato del Punto 7C documentato in `32-spring-wiring-foundation.md`, che collega repository in memory e use case tramite configurazioni Spring, mantenendo il runtime non web e lasciando domain/application privi di dipendenze framework;
 - regole ufficiali di dominio per guidare la TruckFlow Domain Foundation v1.0, la review finale del dominio puro e l'introduzione graduale delle eccezioni custom;
 - prima review correttiva del dominio puro completata con otto interventi mirati: mutazioni atomiche, eccezioni custom, `OperationalCode` obbligatorio, test catalogo qualificazioni meno fragili, pulizia dei file locali/generati e introduzione di `LicensePlate` e `VehicleIdentificationNumber` come value object del dominio veicoli, più `LanguageCode`, `UserTheme`, `CountryCode`, `JurisdictionRegion`, `ComplianceJurisdictionScope` e `OperationalScopeCode` per ridurre primitive obsession;
 - revisione finale della test suite del dominio puro documentata in `15-domain-test-suite-review.md`, con test architetturali, test contrattuali dei value object, casi limite cargo e shipment e spiegazione esplicita di cosa rimane fuori perché appartiene a moduli futuri;
@@ -364,3 +366,13 @@ La struttura infrastrutturale ufficiale introdotta è:
 Il package `infrastructure.memory` resta valido e non viene sostituito. I nuovi package preparano gli step successivi del Punto 7.
 
 Il Punto 7B è documentato in [`31-infrastructure-foundation.md`](31-infrastructure-foundation.md).
+
+## Punto 7C — Spring Wiring Foundation
+
+Il Punto 7C introduce Spring solo come motore di wiring tecnico.
+
+La configurazione Spring vive nel layer infrastructure e collega i port.out ai repository in memory e le port.in ai service applicativi già esistenti. L'application layer non viene annotato e il dominio resta completamente framework-free.
+
+`application.yml` mantiene `spring.main.web-application-type: none`, quindi il progetto non avvia ancora un server HTTP e non espone API. REST, DTO web, controller, JPA, Spring Data e security rimangono fuori da questo step.
+
+Il Punto 7C è documentato in [`32-spring-wiring-foundation.md`](32-spring-wiring-foundation.md).

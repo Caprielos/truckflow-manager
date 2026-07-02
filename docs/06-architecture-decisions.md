@@ -841,3 +841,7 @@ La decisione principale è separare fin da subito le responsabilità infrastrutt
 Le eccezioni tecniche partono da `InfrastructureException` e non devono essere confuse con eccezioni di dominio o validazioni applicative. Errori di database, mapping, configurazione o servizi esterni sono problemi infrastrutturali.
 
 Il Punto 7B conferma che domain e application non devono dipendere da infrastructure. L'infrastructure layer può preparare marker, contratti e convenzioni, ma non deve ancora introdurre controller, JPA entity, Spring Data repository o security HTTP.
+
+## Decisione architetturale — Spring Wiring Foundation
+
+Dal Punto 7C Spring può essere usato nel layer infrastructure per configurare bean e profili tecnici. Questa decisione non autorizza annotazioni Spring nel dominio o nell’application layer e non apre ancora REST API, persistence JPA o security HTTP.

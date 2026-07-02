@@ -672,3 +672,7 @@ Il Punto 7B — Infrastructure Foundation conferma i confini definiti da questo 
 L'application layer continua a non dipendere da infrastructure. I nuovi package infrastrutturali, le eccezioni tecniche, i marker di adapter e il contratto generico di mapping sono elementi esterni al core applicativo. Servono a preparare gli adapter futuri, non a modificare command, result, port in, port out o service applicativi già congelati.
 
 Questa separazione permette al Punto 7 di crescere senza trasformare l'application layer in codice tecnico o framework-specific.
+
+## Nota post-application — Punto 7C
+
+Il Punto 7C conferma il confine definito dal blueprint applicativo: i service applicativi restano classi Java pure. Il wiring Spring viene dichiarato esternamente, nel layer infrastructure, tramite configurazioni dedicate.

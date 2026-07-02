@@ -3,6 +3,8 @@
 Questo documento apre ufficialmente il **Punto 7 — Infrastructure Layer** di TruckFlow Manager.
 
 > Aggiornamento 7B: il blueprint è stato trasformato in foundation tecnica leggera con package, eccezioni e convenzioni infrastrutturali documentate in `31-infrastructure-foundation.md`.
+>
+> Aggiornamento 7C: Spring è stato introdotto solo come wiring tecnico non web, documentato in `32-spring-wiring-foundation.md`, senza contaminare domain/application e senza introdurre REST, JPA, Spring Data o security.
 
 Il Punto 7A è una fase **solo documentale e architetturale**: non introduce codice Java operativo, non crea repository reali, non configura database, non attiva controller REST e non cambia il comportamento dell'application layer.
 

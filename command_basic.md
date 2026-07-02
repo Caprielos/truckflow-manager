@@ -547,3 +547,38 @@ Commit consigliato:
 git add -A
 git commit -m "Add infrastructure foundation"
 ```
+
+
+---
+
+## Nota progetto — Punto 7C
+
+Il Punto 7C — Spring Wiring Foundation introduce Spring come wiring tecnico controllato.
+
+La patch aggiunge l’entry point `TruckFlowApplication`, configurazioni Spring in `infrastructure.config.spring`, `application.yml` con runtime non web e un test dedicato. Non introduce REST API, controller, database, JPA, Spring Data o security.
+
+Dopo l'applicazione della patch, il controllo consigliato è:
+
+```bash
+mvn spotless:apply
+mvn spotless:check
+mvn clean test
+git status
+```
+
+Documenti e file principali da controllare:
+
+```bash
+ls docs/32-spring-wiring-foundation.md
+ls src/main/java/it/gabriele/truckflow/TruckFlowApplication.java
+ls src/main/java/it/gabriele/truckflow/infrastructure/config/spring
+ls src/main/resources/application.yml
+ls src/test/java/it/gabriele/truckflow/infrastructure/SpringWiringFoundationTest.java
+```
+
+Commit consigliato:
+
+```bash
+git add -A
+git commit -m "Add Spring wiring foundation"
+```

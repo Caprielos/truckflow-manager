@@ -214,3 +214,8 @@ Questo aggiornamento documenta la prima foundation tecnica del layer infrastrutt
 La fase resta prudente: non introduce database, JPA, Spring Data, repository reali completi, REST API, controller, DTO web, security o servizi esterni operativi.
 
 Documento di riferimento: `docs/31-infrastructure-foundation.md`.
+
+
+## Punto 7C — Spring Wiring Foundation
+
+La documentazione digitale include ora anche `32-spring-wiring-foundation.md`, che descrive l’introduzione controllata di Spring come wiring tecnico non web. Domain e application layer restano privi di dipendenze Spring; REST, controller, JPA, Spring Data e security restano fuori dal Punto 7C.

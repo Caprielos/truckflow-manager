@@ -22,9 +22,9 @@ La documentazione digitale funziona anche come sistema di **Guided Links**: un i
 
 ## Stato attuale del dominio
 
-Il progetto ha consolidato il **domain layer puro**, ha completato il primo ciclo dell’application layer fino al **Punto 6M — Application Layer Final Review & Freeze**, ha aperto il **Punto 7A — Infrastructure Layer Blueprint** e ha applicato il **Punto 7B — Infrastructure Foundation** come prima foundation tecnica leggera del nuovo ciclo infrastrutturale.
+Il progetto ha consolidato il **domain layer puro**, ha completato il primo ciclo dell’application layer fino al **Punto 6M — Application Layer Final Review & Freeze**, ha aperto il **Punto 7A — Infrastructure Layer Blueprint**, ha applicato il **Punto 7B — Infrastructure Foundation** e ha introdotto il **Punto 7C — Spring Wiring Foundation** come wiring tecnico non web del nuovo ciclo infrastrutturale.
 
-La versione attuale rappresenta la **TruckFlow Domain Foundation v1.0** rafforzata dalla prima review correttiva del dominio puro. La fondazione è definita, le regole sono documentate e sono stati applicati interventi mirati su invarianti, eccezioni, codici aziendali, test e pulizia del repository. Il Punto 6M ha chiuso la review/freeze finale del primo ciclo dell'application layer; il Punto 7A ha definito il blueprint dell'Infrastructure Layer; il Punto 7B ha introdotto la foundation tecnica con package, eccezioni e convenzioni infrastrutturali. Ora l'application layer copre Locations, Cargo, Shipments, Documents, Vehicles, Operational Roles e Compliance base con command, result, port in, port out, service, repository in memory, test e documentazione allineati, senza introdurre ancora REST API, database, JPA, Spring Data, planning, tracking, audit trail, workflow, country engine operativo o controlli concreti di violazione.
+La versione attuale rappresenta la **TruckFlow Domain Foundation v1.0** rafforzata dalla prima review correttiva del dominio puro. La fondazione è definita, le regole sono documentate e sono stati applicati interventi mirati su invarianti, eccezioni, codici aziendali, test e pulizia del repository. Il Punto 6M ha chiuso la review/freeze finale del primo ciclo dell'application layer; il Punto 7A ha definito il blueprint dell'Infrastructure Layer; il Punto 7B ha introdotto la foundation tecnica con package, eccezioni e convenzioni infrastrutturali; il Punto 7C ha introdotto Spring come wiring tecnico non web, mantenendo domain e application privi di dipendenze framework. Ora l'application layer copre Locations, Cargo, Shipments, Documents, Vehicles, Operational Roles e Compliance base con command, result, port in, port out, service, repository in memory, test e documentazione allineati, senza introdurre ancora REST API, database, JPA, Spring Data, planning, tracking, audit trail, workflow, country engine operativo o controlli concreti di violazione.
 
 Nota importante: eventuali dipendenze Spring Boot, Web, Validation o OpenAPI già presenti nel `pom.xml` sono da considerare preparatorie o storiche. Non rappresentano ancora l'introduzione architetturale di REST API, controller, database, JPA, Spring Data o security nel Punto 6.
 
@@ -77,6 +77,7 @@ Il dominio è stato costruito seguendo una regola precisa: modellare prima i con
 - [`docs/29-final-roadmap-documentation-alignment.md`](docs/29-final-roadmap-documentation-alignment.md) — pulizia documentale finale: roadmap reale 1 → 6M, correzione del 6G Documents, chiarimento sulle dipendenze Spring preparatorie e definizione del concetto di Guided Links.
 - [`docs/30-infrastructure-layer-blueprint.md`](docs/30-infrastructure-layer-blueprint.md) — apertura del Punto 7A: principi, confini, roadmap 7A → 7H, ruolo di Spring, repository reali, repository in memory, mapping, adapter e relazione con il futuro Punto 8 API Layer.
 - [`docs/31-infrastructure-foundation.md`](docs/31-infrastructure-foundation.md) — Punto 7B: foundation tecnica leggera dell'Infrastructure Layer, package base, eccezioni infrastrutturali, convenzioni, marker tecnici e test architetturale.
+- [`docs/32-spring-wiring-foundation.md`](docs/32-spring-wiring-foundation.md) — Punto 7C: Spring Wiring Foundation, entry point tecnico, configurazioni bean, profilo memory, runtime non web e test dedicato.
 
 ## Regole fondamentali della Domain Foundation
 
@@ -151,6 +152,8 @@ Con la pulizia documentale finale è stato aggiunto il documento [`docs/29-final
 Con il Punto 7A è stato aggiunto il documento [`docs/30-infrastructure-layer-blueprint.md`](docs/30-infrastructure-layer-blueprint.md), che apre ufficialmente il ciclo Infrastructure Layer senza introdurre ancora codice operativo. Il blueprint definisce cosa entra e cosa resta fuori dal Punto 7, mantiene i repository in memory come adapter validi e stabilisce una roadmap progressiva 7A → 7H prima del futuro Punto 8 API Layer.
 
 Con il Punto 7B è stato aggiunto il documento [`docs/31-infrastructure-foundation.md`](docs/31-infrastructure-foundation.md) e sono stati introdotti package infrastrutturali base, eccezioni tecniche, marker di adapter/repository/service, profili tecnici e un contratto generico di mapping. La fase resta prudente: niente database, JPA, Spring Data, REST API, controller, security o repository reali completi.
+
+Con il Punto 7C è stato aggiunto il documento [`docs/32-spring-wiring-foundation.md`](docs/32-spring-wiring-foundation.md) e Spring è stato introdotto come wiring tecnico controllato: `TruckFlowApplication`, configurazioni bean in `infrastructure.config.spring`, profilo `memory`, runtime non web e test architetturale dedicato. Domain e application layer restano privi di dipendenze Spring.
 
 ## Punto 6A — Application Layer Blueprint
 
@@ -365,6 +368,16 @@ La foundation aggiunge marker/convenzioni tecniche come `InfrastructureAdapter`,
 Il Punto 7B mantiene fuori REST API, controller, DTO web, security HTTP, JPA, Hibernate, Spring Data, database e servizi esterni operativi.
 
 Il Punto 7B è documentato in [`docs/31-infrastructure-foundation.md`](docs/31-infrastructure-foundation.md).
+
+## Punto 7C — Spring Wiring Foundation
+
+Il Punto 7C introduce Spring solo come motore di wiring tecnico.
+
+La configurazione Spring vive nel layer infrastructure e collega i port.out ai repository in memory e le port.in ai service applicativi già esistenti. L'application layer non viene annotato e il dominio resta completamente framework-free.
+
+`application.yml` mantiene `spring.main.web-application-type: none`, quindi il progetto non avvia ancora un server HTTP e non espone API. REST, DTO web, controller, JPA, Spring Data e security rimangono fuori da questo step.
+
+Il Punto 7C è documentato in [`docs/32-spring-wiring-foundation.md`](docs/32-spring-wiring-foundation.md).
 
 
 ## Prossimi step consigliati
