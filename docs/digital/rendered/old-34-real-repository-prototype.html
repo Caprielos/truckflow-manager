@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Archivio storico — 34-real-repository-prototype — TruckFlow Docs</title>
+  <style>:root{--bg:#f5f7fb;--panel:#fff;--text:#172033;--muted:#64748b;--accent:#3554d1;--border:#d9e1ef;--code:#0f172a;--shadow:0 18px 44px rgba(15,23,42,.08)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:radial-gradient(circle at top left,rgba(53,84,209,.10),transparent 30rem),var(--bg);color:var(--text);line-height:1.68;font-size:16px}.page{width:min(980px,calc(100% - 2rem));margin:0 auto;padding:2rem 0 4rem}.topbar{display:flex;justify-content:space-between;gap:1rem;align-items:center;margin-bottom:1rem}.back{display:inline-flex;align-items:center;gap:.35rem;padding:.55rem .85rem;border:1px solid var(--border);border-radius:999px;background:#fff;color:var(--accent);font-weight:850;text-decoration:none;box-shadow:0 8px 22px rgba(15,23,42,.05)}.source{color:var(--muted);font-size:.88rem}.doc{padding:2rem;border:1px solid var(--border);border-radius:24px;background:rgba(255,255,255,.94);box-shadow:var(--shadow)}.doc-header{padding-bottom:1rem;margin-bottom:1.25rem;border-bottom:1px solid var(--border)}.kicker{display:inline-flex;width:fit-content;padding:.25rem .65rem;border-radius:999px;background:#dbeafe;color:#1e3a8a;font-size:.72rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase}.doc h1{margin:.7rem 0 .4rem;font-size:clamp(2rem,4vw,3.6rem);line-height:1;letter-spacing:-.05em}.doc h2{margin:2rem 0 .6rem;font-size:1.55rem;line-height:1.15;letter-spacing:-.03em}.doc h3{margin:1.35rem 0 .45rem;font-size:1.18rem}.doc p{margin:.65rem 0;color:#334155}.doc ul,.doc ol{padding-left:1.35rem}.doc li{margin:.35rem 0}.doc a{color:var(--accent);font-weight:800}.doc blockquote{margin:1rem 0;padding:.85rem 1rem;border-left:5px solid var(--accent);border-radius:14px;background:#eef2ff;color:#334155}.doc pre{overflow:auto;padding:1rem;border-radius:16px;background:var(--code);color:#e5e7eb;font-size:.9rem;line-height:1.55}.doc code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}.doc :not(pre)>code{padding:.15rem .32rem;border-radius:7px;background:#eef2f7;color:#1e293b}.doc table{width:100%;border-collapse:collapse;margin:1rem 0;border:1px solid var(--border);border-radius:16px;overflow:hidden;display:block}.doc thead,.doc tbody,.doc tr{width:100%}.doc th,.doc td{padding:.75rem;border-bottom:1px solid var(--border);text-align:left;vertical-align:top}.doc th{background:#f1f5f9;color:#334155;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}.doc tr:last-child td{border-bottom:0}.doc hr{border:0;border-top:1px solid var(--border);margin:2rem 0}.doc img{max-width:100%;border-radius:16px;border:1px solid var(--border)}@media(max-width:720px){.page{width:min(100% - 1rem,980px);padding-top:1rem}.doc{padding:1.15rem;border-radius:18px}.topbar{display:grid}.source{overflow-wrap:anywhere}}</style>
+</head>
+<body>
+  <main class="page">
+    <div class="topbar">
+      <a class="back" href="../index.html">← Torna alla Home</a>
+      <span class="source">Sorgente Markdown: ../old_style/34-real-repository-prototype.md</span>
+    </div>
+    <article class="doc">
+      <header class="doc-header">
+        <span class="kicker">old_style</span>
+        <h1>Archivio storico — 34-real-repository-prototype</h1>
+      </header>
+      <h1>Archivio storico — 34-real-repository-prototype</h1>
+<blockquote>
+<p>Questo documento fa parte dell'archivio storico <code>docs/old_style/</code>.
+Mantiene il percorso step-by-step del progetto, ma la documentazione principale aggiornata si trova in:
+<code>docs/simple/</code>, <code>docs/professional/</code> e <code>docs/digital/</code>.</p>
+</blockquote>
+<hr />
+<h1>Punto 7E — Real Repository Prototype</h1>
+<p>Questo documento descrive il <strong>Punto 7E — Real Repository Prototype</strong> di TruckFlow Manager.</p>
+<p>Il Punto 7E è il primo passo in cui l'infrastructure layer non è più solo foundation, wiring o blueprint: introduce un <strong>repository reale prototipale</strong> per un dominio pilota, mantenendo però un confine molto prudente.</p>
+<p>Il dominio scelto è <strong>Locations</strong>.</p>
+<p>La scelta è intenzionale: <code>Location</code> è un aggregate stabile, semplice, con identità, codice business, stato, indirizzo e coordinate. Permette di validare il pattern completo senza introdurre subito la complessità di Shipments, Vehicles, Operational Roles o Compliance.</p>
+<h2>Stato da cui partiamo</h2>
+<p>Prima del Punto 7E il progetto contiene già:</p>
+<ul>
+<li>domain layer puro, completato, testato e documentato;</li>
+<li>application layer completato e congelato con il Punto 6M;</li>
+<li>repository port definiti nell'application layer;</li>
+<li>repository in memory ancora validi per test e profilo <code>memory</code>;</li>
+<li>Punto 7A come blueprint generale dell'infrastructure layer;</li>
+<li>Punto 7B come foundation tecnica dell'infrastructure layer;</li>
+<li>Punto 7C come Spring wiring tecnico non web;</li>
+<li>Punto 7D come blueprint del mapping domain ↔ persistence;</li>
+<li>nessun controller REST;</li>
+<li>nessun database;</li>
+<li>nessun JPA;</li>
+<li>nessun Spring Data;</li>
+<li>nessuna security HTTP.</li>
+</ul>
+<p>Il Punto 7E mantiene questi confini.</p>
+<h2>Obiettivo del Punto 7E</h2>
+<p>L'obiettivo è validare il primo pattern completo:</p>
+<pre><code class="language-text">Application port.out
+        ↓
+Infrastructure repository adapter
+        ↓
+Persistence mapper
+        ↓
+Technical persistence model
+        ↓
+Technical storage mechanism
+</code></pre>
+<p>Per il 7E questo pattern viene applicato solo a <code>LocationRepository</code>.</p>
+<p>Il risultato è un repository tecnico reale, ma volutamente piccolo e controllato.</p>
+<h2>Perché Locations come dominio pilota</h2>
+<p>Locations è il dominio più adatto per il prototipo perché:</p>
+<ul>
+<li>ha un aggregate root chiaro: <code>Location</code>;</li>
+<li>ha un identificatore stabile: <code>LocationId</code>;</li>
+<li>ha un codice business stabile: <code>LocationCode</code>;</li>
+<li>ha uno stato semplice: <code>LocationStatus</code>;</li>
+<li>ha value object facili da mappare: <code>LocationAddress</code> e <code>GeoCoordinates</code>;</li>
+<li>non richiede collection figlie complesse;</li>
+<li>non richiede workflow;</li>
+<li>non richiede assegnazioni operative;</li>
+<li>non richiede calcoli di compatibilità;</li>
+<li>non richiede integrazioni esterne.</li>
+</ul>
+<p>Questo permette di testare la forma infrastrutturale senza rischiare di sporcare il dominio o l'application layer.</p>
+<h2>Cosa introduce il Punto 7E</h2>
+<p>Il Punto 7E introduce il package:</p>
+<pre><code class="language-text">src/main/java/it/gabriele/truckflow/infrastructure/repository/locations
+</code></pre>
+<p>Dentro questo package vengono aggiunti:</p>
+<pre><code class="language-text">FileLocationRepository.java
+LocationPersistenceMapper.java
+LocationPersistenceRecord.java
+package-info.java
+</code></pre>
+<p>Viene inoltre aggiunto il test:</p>
+<pre><code class="language-text">src/test/java/it/gabriele/truckflow/infrastructure/repository/locations/FileLocationRepositoryPrototypeTest.java
+</code></pre>
+<h2><code>LocationPersistenceRecord</code></h2>
+<p><code>LocationPersistenceRecord</code> è il primo modello tecnico persistente del progetto.</p>
+<p>Non è:</p>
+<ul>
+<li>una entity JPA;</li>
+<li>una tabella SQL;</li>
+<li>un DTO web;</li>
+<li>un oggetto di dominio;</li>
+<li>un command applicativo;</li>
+<li>un result applicativo.</li>
+</ul>
+<p>È un record tecnico usato solo dal prototipo file-backed.</p>
+<p>Rappresenta in forma persistibile i dati necessari a ricostruire una <code>Location</code>:</p>
+<ul>
+<li><code>id</code>;</li>
+<li><code>code</code>;</li>
+<li><code>name</code>;</li>
+<li><code>type</code>;</li>
+<li><code>status</code>;</li>
+<li>campi dell'indirizzo;</li>
+<li>latitudine;</li>
+<li>longitudine;</li>
+<li>note.</li>
+</ul>
+<h2><code>LocationPersistenceMapper</code></h2>
+<p><code>LocationPersistenceMapper</code> implementa il contratto generico:</p>
+<pre><code class="language-text">PersistenceMapper&lt;Location, LocationPersistenceRecord&gt;
+</code></pre>
+<p>Il mapper ha due responsabilità:</p>
+<ul>
+<li>trasformare una <code>Location</code> valida in <code>LocationPersistenceRecord</code>;</li>
+<li>ricostruire una <code>Location</code> valida da <code>LocationPersistenceRecord</code>.</li>
+</ul>
+<p>Il mapper non deve introdurre regole business nuove.</p>
+<p>Le regole restano nel dominio:</p>
+<ul>
+<li>validazione del <code>LocationCode</code>;</li>
+<li>validazione del nome;</li>
+<li>validazione delle coordinate;</li>
+<li>validazione dei value object.</li>
+</ul>
+<p>Se la ricostruzione tecnica fallisce, l'errore viene espresso come <code>MappingException</code>.</p>
+<h2><code>FileLocationRepository</code></h2>
+<p><code>FileLocationRepository</code> è il primo repository reale prototipale.</p>
+<p>Implementa:</p>
+<pre><code class="language-text">LocationRepository
+InfrastructureRepositoryAdapter
+</code></pre>
+<p>Quindi è contemporaneamente:</p>
+<ul>
+<li>un adapter infrastrutturale;</li>
+<li>un'implementazione concreta della port.out applicativa <code>LocationRepository</code>.</li>
+</ul>
+<p>Supporta le operazioni già previste dal contratto applicativo:</p>
+<ul>
+<li><code>save</code>;</li>
+<li><code>findById</code>;</li>
+<li><code>findByCode</code>;</li>
+<li><code>existsById</code>;</li>
+<li><code>existsByCode</code>.</li>
+</ul>
+<p>Il repository salva i record su un file locale tecnico.</p>
+<p>Questa scelta è intenzionale: serve a validare la persistenza reale senza introdurre ancora un database.</p>
+<h2>Perché file-backed e non database</h2>
+<p>Nel Punto 7E non vogliamo ancora scegliere una tecnologia definitiva.</p>
+<p>Per questo il prototipo usa un file locale:</p>
+<ul>
+<li>è reale, perché i dati sopravvivono a una nuova istanza del repository;</li>
+<li>è semplice, perché non richiede JPA, SQL, schema o migrazioni;</li>
+<li>è tecnico, perché vive interamente nell'infrastructure layer;</li>
+<li>è reversibile, perché potrà essere sostituito da un adapter database futuro;</li>
+<li>è utile per testare mapper, repository e gestione errori.</li>
+</ul>
+<p>Il Punto 7E non è il database definitivo del progetto.</p>
+<p>È il primo prototipo del pattern.</p>
+<h2>Formato tecnico del file</h2>
+<p>Il file repository usa una rappresentazione tecnica semplice:</p>
+<ul>
+<li>una location per riga;</li>
+<li>campi separati da tabulazione;</li>
+<li>ogni campo codificato in Base64 URL-safe;</li>
+<li>lettura e scrittura tramite <code>java.nio.file</code>.</li>
+</ul>
+<p>Questa scelta evita di introdurre JSON, librerie esterne, database, JPA o Spring Data.</p>
+<p>Il formato non è pensato come formato enterprise definitivo.</p>
+<p>È un formato tecnico locale per validare il comportamento del repository reale.</p>
+<h2>Error handling</h2>
+<p>Il Punto 7E mantiene separati gli errori:</p>
+<ul>
+<li>input applicativi nulli → <code>UseCaseValidationException</code>;</li>
+<li>codice location duplicato → <code>DuplicateResourceException</code>;</li>
+<li>problemi di lettura/scrittura file → <code>RepositoryException</code>;</li>
+<li>problemi di ricostruzione domain ↔ persistence → <code>MappingException</code>.</li>
+</ul>
+<p>Questo conferma la regola generale:</p>
+<blockquote>
+<p>L'infrastructure può fallire per motivi tecnici, ma non deve trasformare quegli errori in regole di dominio false.</p>
+</blockquote>
+<h2>Cosa viene testato</h2>
+<p><code>FileLocationRepositoryPrototypeTest</code> verifica che:</p>
+<ul>
+<li>il repository implementi <code>LocationRepository</code>;</li>
+<li>il repository implementi <code>InfrastructureRepositoryAdapter</code>;</li>
+<li>una location salvata possa essere ritrovata per ID;</li>
+<li>una location salvata possa essere ritrovata per codice;</li>
+<li>una nuova istanza del repository possa rileggere i dati dal file;</li>
+<li>un codice business duplicato venga rifiutato;</li>
+<li>un file mancante venga trattato come repository vuoto;</li>
+<li>input nulli vengano rifiutati;</li>
+<li>un file malformato produca un errore tecnico;</li>
+<li>il mapper faccia round-trip tra domain e persistence record.</li>
+</ul>
+<p>Questi sono test tecnici, non test di business.</p>
+<p>Il business resta coperto dai test di dominio e application layer.</p>
+<h2>Cosa NON introduce il Punto 7E</h2>
+<p>Il Punto 7E non introduce:</p>
+<ul>
+<li>database;</li>
+<li>JPA;</li>
+<li>Hibernate;</li>
+<li>Spring Data;</li>
+<li>repository reali per tutti i domini;</li>
+<li>schema SQL;</li>
+<li>migration tool;</li>
+<li>transazioni enterprise;</li>
+<li>controller REST;</li>
+<li>DTO web;</li>
+<li>JSON API;</li>
+<li>security;</li>
+<li>servizi esterni;</li>
+<li>storage documentale enterprise;</li>
+<li>audit trail;</li>
+<li>workflow.</li>
+</ul>
+<h2>Relazione con i repository in memory</h2>
+<p>I repository in memory non vengono rimossi.</p>
+<p>Restano validi per:</p>
+<ul>
+<li>test applicativi veloci;</li>
+<li>sviluppo locale leggero;</li>
+<li>profilo Spring <code>memory</code>;</li>
+<li>scenari didattici;</li>
+<li>verifica dei use case senza persistenza tecnica.</li>
+</ul>
+<p><code>FileLocationRepository</code> non sostituisce automaticamente <code>InMemoryLocationRepository</code>.</p>
+<p>È un adapter prototipale separato.</p>
+<p>Il wiring Spring resta sul profilo <code>memory</code> fino a una scelta esplicita futura.</p>
+<h2>Relazione con il Punto 7F</h2>
+<p>Il Punto 7E valida il pattern su Locations.</p>
+<p>Il Punto 7F potrà decidere se:</p>
+<ul>
+<li>estendere lo stesso approccio file-backed ad altri domini;</li>
+<li>introdurre un adapter database più serio;</li>
+<li>creare una seconda configurazione Spring per scegliere repository reali;</li>
+<li>iniziare da Cargo o Documents come secondo dominio.</li>
+</ul>
+<p>La cosa importante è che il Punto 7F non dovrà inventare il pattern da zero: potrà riusare la struttura validata dal 7E.</p>
+<h2>Stato dopo il Punto 7E</h2>
+<p>Dopo questo step il progetto ha:</p>
+<ul>
+<li>il primo repository reale prototipale;</li>
+<li>il primo persistence record concreto;</li>
+<li>il primo mapper concreto domain ↔ persistence;</li>
+<li>test tecnici dedicati al prototipo;</li>
+<li>documentazione aggiornata;</li>
+<li>domain layer ancora puro;</li>
+<li>application layer ancora indipendente dall'infrastructure;</li>
+<li>Spring ancora non web;</li>
+<li>nessun database;</li>
+<li>nessun JPA;</li>
+<li>nessun controller REST.</li>
+</ul>
+<p>Il prossimo step naturale è:</p>
+<pre><code class="language-text">Punto 7F — Repository Expansion
+</code></pre>
+<hr />
+<h2>Allineamento Punto 7F</h2>
+<p>Il Punto 7F — Repository Expansion estende il pattern file-backed validato dal prototipo Locations.</p>
+<p>La prima espansione controllata aggiunge repository file-backed per Cargo, Documents e Compliance base, mantenendo fuori database, JPA, Hibernate, Spring Data, schema SQL, REST API, controller, security, servizi esterni, workflow e audit trail.</p>
+<p>I repository in-memory restano validi e non vengono sostituiti.</p>
+<hr />
+<h2>Allineamento Punto 7G</h2>
+<p>Il Punto 7G conferma il prototipo Locations usando <code>FileLocationRepository</code> direttamente attraverso i use case applicativi <code>RegisterLocationService</code> e <code>FindLocationService</code>.</p>
+<h2>Allineamento Punto 7H</h2>
+<p>Il Punto 7H conferma che il prototipo Locations del Punto 7E è il pattern pilota ufficiale. Lo stesso approccio è stato esteso in modo prudente nel Punto 7F e consolidato con test nel Punto 7G, senza sostituire i repository in-memory.</p>
+
+    </article>
+  </main>
+</body>
+</html>

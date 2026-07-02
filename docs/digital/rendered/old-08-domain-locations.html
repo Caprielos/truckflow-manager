@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Archivio storico — 08-domain-locations — TruckFlow Docs</title>
+  <style>:root{--bg:#f5f7fb;--panel:#fff;--text:#172033;--muted:#64748b;--accent:#3554d1;--border:#d9e1ef;--code:#0f172a;--shadow:0 18px 44px rgba(15,23,42,.08)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:radial-gradient(circle at top left,rgba(53,84,209,.10),transparent 30rem),var(--bg);color:var(--text);line-height:1.68;font-size:16px}.page{width:min(980px,calc(100% - 2rem));margin:0 auto;padding:2rem 0 4rem}.topbar{display:flex;justify-content:space-between;gap:1rem;align-items:center;margin-bottom:1rem}.back{display:inline-flex;align-items:center;gap:.35rem;padding:.55rem .85rem;border:1px solid var(--border);border-radius:999px;background:#fff;color:var(--accent);font-weight:850;text-decoration:none;box-shadow:0 8px 22px rgba(15,23,42,.05)}.source{color:var(--muted);font-size:.88rem}.doc{padding:2rem;border:1px solid var(--border);border-radius:24px;background:rgba(255,255,255,.94);box-shadow:var(--shadow)}.doc-header{padding-bottom:1rem;margin-bottom:1.25rem;border-bottom:1px solid var(--border)}.kicker{display:inline-flex;width:fit-content;padding:.25rem .65rem;border-radius:999px;background:#dbeafe;color:#1e3a8a;font-size:.72rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase}.doc h1{margin:.7rem 0 .4rem;font-size:clamp(2rem,4vw,3.6rem);line-height:1;letter-spacing:-.05em}.doc h2{margin:2rem 0 .6rem;font-size:1.55rem;line-height:1.15;letter-spacing:-.03em}.doc h3{margin:1.35rem 0 .45rem;font-size:1.18rem}.doc p{margin:.65rem 0;color:#334155}.doc ul,.doc ol{padding-left:1.35rem}.doc li{margin:.35rem 0}.doc a{color:var(--accent);font-weight:800}.doc blockquote{margin:1rem 0;padding:.85rem 1rem;border-left:5px solid var(--accent);border-radius:14px;background:#eef2ff;color:#334155}.doc pre{overflow:auto;padding:1rem;border-radius:16px;background:var(--code);color:#e5e7eb;font-size:.9rem;line-height:1.55}.doc code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}.doc :not(pre)>code{padding:.15rem .32rem;border-radius:7px;background:#eef2f7;color:#1e293b}.doc table{width:100%;border-collapse:collapse;margin:1rem 0;border:1px solid var(--border);border-radius:16px;overflow:hidden;display:block}.doc thead,.doc tbody,.doc tr{width:100%}.doc th,.doc td{padding:.75rem;border-bottom:1px solid var(--border);text-align:left;vertical-align:top}.doc th{background:#f1f5f9;color:#334155;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}.doc tr:last-child td{border-bottom:0}.doc hr{border:0;border-top:1px solid var(--border);margin:2rem 0}.doc img{max-width:100%;border-radius:16px;border:1px solid var(--border)}@media(max-width:720px){.page{width:min(100% - 1rem,980px);padding-top:1rem}.doc{padding:1.15rem;border-radius:18px}.topbar{display:grid}.source{overflow-wrap:anywhere}}</style>
+</head>
+<body>
+  <main class="page">
+    <div class="topbar">
+      <a class="back" href="../index.html">← Torna alla Home</a>
+      <span class="source">Sorgente Markdown: ../old_style/08-domain-locations.md</span>
+    </div>
+    <article class="doc">
+      <header class="doc-header">
+        <span class="kicker">old_style</span>
+        <h1>Archivio storico — 08-domain-locations</h1>
+      </header>
+      <h1>Archivio storico — 08-domain-locations</h1>
+<blockquote>
+<p>Questo documento fa parte dell'archivio storico <code>docs/old_style/</code>.
+Mantiene il percorso step-by-step del progetto, ma la documentazione principale aggiornata si trova in:
+<code>docs/simple/</code>, <code>docs/professional/</code> e <code>docs/digital/</code>.</p>
+</blockquote>
+<hr />
+<h1>8. Dominio <code>domain.locations</code></h1>
+<h2>8.1 Scopo del dominio locations</h2>
+<p>Il package <code>domain.locations</code> rappresenta i luoghi logistici e geografici usati da TruckFlow Manager.</p>
+<p>Una location può essere un deposito, un magazzino, un cliente, un fornitore, un hub, un porto, un aeroporto, un terminal ferroviario, un terminal intermodale, un punto di confine, un'area di servizio o un piazzale operativo.</p>
+<p>La scelta di creare un dominio separato per le location nasce da un principio importante: i luoghi non appartengono solo ai percorsi. In futuro potranno essere usati anche da spedizioni, magazzini, clienti, fornitori, pianificazione, documenti, tracking e prenotazioni di slot.</p>
+<p>Per questo <code>Location</code> non è stata inserita dentro <code>domain.triptemplates</code>. È un concetto riutilizzabile e merita un proprio bounded context.</p>
+<h2>8.2 Cosa rappresenta una Location</h2>
+<p><code>Location</code> rappresenta un luogo astratto del dominio.</p>
+<p>Non rappresenta ancora:</p>
+<ul>
+<li>disponibilità di una baia di carico;</li>
+<li>slot di carico o scarico;</li>
+<li>inventario di magazzino;</li>
+<li>geofencing;</li>
+<li>tracking GPS;</li>
+<li>prenotazioni;</li>
+<li>chiusure temporanee;</li>
+<li>code in piazzale;</li>
+<li>operazioni reali di carico o scarico.</li>
+</ul>
+<p>Queste informazioni appartengono a domini futuri, come warehouse, planning, dispatching, slot booking o tracking.</p>
+<p>Nel dominio puro, una location descrive solo:</p>
+<ul>
+<li>come il luogo è identificato;</li>
+<li>come si chiama;</li>
+<li>che tipo di luogo è;</li>
+<li>qual è il suo stato anagrafico;</li>
+<li>qual è il suo indirizzo;</li>
+<li>quali coordinate geografiche possiede;</li>
+<li>eventuali note descrittive.</li>
+</ul>
+<h2>8.3 Struttura del package</h2>
+<p>Il package contiene:</p>
+<pre><code class="language-text">Location
+LocationId
+LocationCode
+LocationType
+LocationStatus
+LocationAddress
+GeoCoordinates
+</code></pre>
+<p>Questa struttura è volutamente semplice, ma enterprise: separa l'identità tecnica dal codice aziendale, l'indirizzo dalle coordinate e lo stato anagrafico dallo stato operativo.</p>
+<h2>8.4 <code>Location</code></h2>
+<p><code>Location</code> è l'entità principale del dominio locations.</p>
+<p>Contiene:</p>
+<pre><code class="language-text">Location
+├─ LocationId id
+├─ LocationCode code
+├─ name
+├─ LocationType type
+├─ LocationStatus status
+├─ LocationAddress address
+├─ GeoCoordinates coordinates
+└─ notes
+</code></pre>
+<p>Il campo <code>id</code> identifica tecnicamente la location nel dominio.</p>
+<p>Il campo <code>code</code> identifica la location con un codice leggibile dall'azienda.</p>
+<p>Il campo <code>name</code> contiene il nome descrittivo del luogo.</p>
+<p>Il campo <code>type</code> classifica il luogo.</p>
+<p>Il campo <code>status</code> indica se la location è attiva, sospesa, archiviata o dismessa dal punto di vista anagrafico.</p>
+<p>Il campo <code>address</code> contiene l'indirizzo strutturato.</p>
+<p>Il campo <code>coordinates</code> contiene latitudine e longitudine, quando disponibili.</p>
+<p>Le <code>notes</code> servono solo come annotazioni descrittive.</p>
+<h2>8.5 <code>LocationId</code></h2>
+<p><code>LocationId</code> è l'identificatore tecnico della location.</p>
+<p>È un value object basato su UUID.</p>
+<p>Serve al sistema per distinguere in modo univoco una location da un'altra.</p>
+<p>Non è pensato per essere letto o gestito manualmente dagli utenti aziendali.</p>
+<p>La distinzione è:</p>
+<pre><code class="language-text">LocationId = identificatore tecnico interno
+LocationCode = codice aziendale leggibile
+name = nome descrittivo del luogo
+</code></pre>
+<p>Questa scelta è coerente con gli altri domini del progetto, come <code>CargoId</code>, <code>VehicleUnitId</code>, <code>TripTemplateId</code>, <code>UserId</code> e <code>DriverId</code>.</p>
+<h2>8.6 <code>LocationCode</code></h2>
+<p><code>LocationCode</code> è il codice aziendale leggibile della location.</p>
+<p>Esempi:</p>
+<pre><code class="language-text">DEP-MIL-001
+HUB-BO-001
+YARD-FI-002
+WH-ROMA-001
+PORT-GEN-001
+CUS-ROMA-010
+</code></pre>
+<p>Questo codice è utile perché in un gestionale reale gli utenti non lavorano con UUID, ma con codici interni comprensibili.</p>
+<p><code>LocationCode</code> viene normalizzato in maiuscolo e accetta lettere, numeri, trattini e underscore.</p>
+<p>Questa scelta è coerente con:</p>
+<ul>
+<li><code>OperationalCode</code> per le figure operative;</li>
+<li><code>FleetCode</code> per i veicoli;</li>
+<li><code>CargoCode</code> per la merce;</li>
+<li><code>TripTemplateCode</code> per i percorsi tipo.</li>
+</ul>
+<h2>8.7 <code>LocationType</code></h2>
+<p><code>LocationType</code> descrive il tipo di luogo.</p>
+<p>I valori previsti sono:</p>
+<pre><code class="language-text">DEPOT
+WAREHOUSE
+CUSTOMER
+SUPPLIER
+YARD
+HUB
+PORT
+AIRPORT
+RAIL_TERMINAL
+INTERMODAL_TERMINAL
+BORDER_CROSSING
+SERVICE_AREA
+OTHER
+</code></pre>
+<p>Questa classificazione serve per distinguere contesti logistici diversi senza introdurre ancora logiche operative.</p>
+<p>Per esempio:</p>
+<ul>
+<li><code>DEPOT</code> indica un deposito aziendale;</li>
+<li><code>WAREHOUSE</code> indica un magazzino;</li>
+<li><code>CUSTOMER</code> indica un luogo cliente;</li>
+<li><code>SUPPLIER</code> indica un luogo fornitore;</li>
+<li><code>YARD</code> indica un piazzale operativo;</li>
+<li><code>HUB</code> indica un nodo logistico;</li>
+<li><code>PORT</code> indica un porto;</li>
+<li><code>RAIL_TERMINAL</code> indica un terminal ferroviario;</li>
+<li><code>INTERMODAL_TERMINAL</code> indica un terminal intermodale;</li>
+<li><code>SERVICE_AREA</code> indica una sosta tecnica o area di servizio.</li>
+</ul>
+<h2>8.8 Il concetto di Yard</h2>
+<p><code>YARD</code> è uno dei tipi più importanti per TruckFlow.</p>
+<p>Un yard rappresenta un piazzale operativo, cioè un luogo interno o controllato dove avvengono movimenti tecnici.</p>
+<p>Esempi reali:</p>
+<ul>
+<li>piazzale del deposito;</li>
+<li>area di scambio rimorchi;</li>
+<li>parcheggio camion;</li>
+<li>area di staging;</li>
+<li>zona di attesa;</li>
+<li>area di pre-carico;</li>
+<li>area di pre-scarico;</li>
+<li>zona dove si lascia un semirimorchio;</li>
+<li>area dove si aggancia o sgancia un rimorchio.</li>
+</ul>
+<p>Il concetto di yard è stato separato da magazzino, deposito e cliente perché molti movimenti logistici non sono viaggi stradali completi. Sono movimenti interni o tecnici.</p>
+<p>Un esempio futuro potrebbe essere:</p>
+<pre><code class="language-text">TripTemplateSegment
+├─ type: YARD_MOVEMENT
+├─ originLocationId: YARD-A
+└─ destinationLocationId: YARD-B
+</code></pre>
+<p>Questo non significa ancora che il movimento sia stato eseguito. Significa solo che esiste una struttura descrittiva del movimento.</p>
+<h2>8.9 <code>LocationStatus</code></h2>
+<p><code>LocationStatus</code> è uno stato anagrafico.</p>
+<p>I valori sono:</p>
+<pre><code class="language-text">ACTIVE
+SUSPENDED
+ARCHIVED
+DISCONTINUED
+</code></pre>
+<p>Significato:</p>
+<ul>
+<li><code>ACTIVE</code>: location utilizzabile nel sistema;</li>
+<li><code>SUSPENDED</code>: location temporaneamente sospesa;</li>
+<li><code>ARCHIVED</code>: location storica, conservata per consultazione;</li>
+<li><code>DISCONTINUED</code>: location non più gestita dall'azienda.</li>
+</ul>
+<p>Non sono stati di <code>LocationStatus</code>:</p>
+<ul>
+<li><code>AVAILABLE</code>;</li>
+<li><code>FULL</code>;</li>
+<li><code>CLOSED_TODAY</code>;</li>
+<li><code>BOOKED</code>;</li>
+<li><code>BUSY</code>.</li>
+</ul>
+<p>Questi ultimi sarebbero stati operativi, non anagrafici. Appartengono a moduli futuri come slot booking, warehouse operations o planning.</p>
+<h2>8.10 <code>LocationAddress</code></h2>
+<p><code>LocationAddress</code> rappresenta l'indirizzo strutturato di una location.</p>
+<p>Contiene:</p>
+<pre><code class="language-text">LocationAddress
+├─ street
+├─ city
+├─ postalCode
+├─ province
+├─ country
+└─ notes
+</code></pre>
+<p>Non è una semplice stringa perché l'indirizzo ha parti importanti e distinte.</p>
+<p>La normalizzazione mantiene i testi puliti e porta provincia e paese in maiuscolo.</p>
+<p>Questa classe non fa geocoding, non consulta servizi esterni e non valida l'esistenza reale dell'indirizzo.</p>
+<p>È solo un value object del dominio puro.</p>
+<h2>8.11 <code>GeoCoordinates</code></h2>
+<p><code>GeoCoordinates</code> rappresenta latitudine e longitudine.</p>
+<p>Contiene:</p>
+<pre><code class="language-text">GeoCoordinates
+├─ latitude
+└─ longitude
+</code></pre>
+<p>Le coordinate sono validate nei limiti geografici fondamentali:</p>
+<ul>
+<li>latitudine tra -90 e 90;</li>
+<li>longitudine tra -180 e 180.</li>
+</ul>
+<p>Questa classe non introduce tracking GPS, mappe, navigazione o geofencing.</p>
+<p>Serve solo a rappresentare dove si trova una location quando questa informazione è disponibile.</p>
+<h2>8.12 Perché Location è un dominio separato</h2>
+<p>Separare <code>domain.locations</code> da <code>domain.triptemplates</code> è una scelta importante.</p>
+<p>Un percorso tipo usa location, ma non le possiede.</p>
+<p>Un magazzino potrà usare location.</p>
+<p>Un cliente potrà usare location.</p>
+<p>Una spedizione potrà usare location.</p>
+<p>Un documento potrà riferirsi a una location.</p>
+<p>Un sistema di tracking potrà confrontare una posizione reale con una location.</p>
+<p>Per questo <code>Location</code> non deve vivere dentro <code>TripTemplate</code>.</p>
+<p>La relazione corretta è tramite ID:</p>
+<pre><code class="language-text">TripTemplateSegment
+├─ originLocationId
+└─ destinationLocationId
+</code></pre>
+<p>In questo modo il percorso conosce i riferimenti ai luoghi, ma non ingloba l'intero aggregato Location.</p>
+<h2>8.13 Invarianti principali</h2>
+<p>Le invarianti principali sono:</p>
+<ul>
+<li><code>id</code> obbligatorio;</li>
+<li><code>code</code> obbligatorio;</li>
+<li><code>name</code> obbligatorio;</li>
+<li><code>type</code> obbligatorio;</li>
+<li><code>status</code> obbligatorio;</li>
+<li><code>address</code> opzionale, con default vuoto;</li>
+<li><code>coordinates</code> opzionali;</li>
+<li>note normalizzate;</li>
+<li>latitudine e longitudine entro limiti validi.</li>
+</ul>
+<p>Queste regole proteggono il dominio senza trasformarlo in un modulo operativo.</p>
+<h2>8.14 Cosa non gestisce questo dominio</h2>
+<p><code>domain.locations</code> non gestisce:</p>
+<ul>
+<li>disponibilità banchine;</li>
+<li>orari di apertura;</li>
+<li>prenotazioni;</li>
+<li>chiusure temporanee;</li>
+<li>slot di carico e scarico;</li>
+<li>inventario;</li>
+<li>tracking GPS;</li>
+<li>geofencing;</li>
+<li>mappe;</li>
+<li>routing;</li>
+<li>code in piazzale.</li>
+</ul>
+<p>Queste funzionalità verranno modellate più avanti in domini o moduli dedicati.</p>
+<h2>8.15 Sintesi</h2>
+<p><code>domain.locations</code> fornisce una base pulita, riutilizzabile ed enterprise per rappresentare i luoghi del sistema.</p>
+<p>La scelta più importante è che Location non appartiene al dominio dei percorsi, ma è un concetto autonomo.</p>
+<p>Questo rende TruckFlow più scalabile perché lo stesso luogo potrà essere usato da percorsi tipo, spedizioni, magazzini, clienti, fornitori, documenti, pianificazione e tracking senza duplicazioni.</p>
+
+    </article>
+  </main>
+</body>
+</html>

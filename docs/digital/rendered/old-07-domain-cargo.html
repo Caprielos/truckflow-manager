@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Archivio storico — 07-domain-cargo — TruckFlow Docs</title>
+  <style>:root{--bg:#f5f7fb;--panel:#fff;--text:#172033;--muted:#64748b;--accent:#3554d1;--border:#d9e1ef;--code:#0f172a;--shadow:0 18px 44px rgba(15,23,42,.08)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:radial-gradient(circle at top left,rgba(53,84,209,.10),transparent 30rem),var(--bg);color:var(--text);line-height:1.68;font-size:16px}.page{width:min(980px,calc(100% - 2rem));margin:0 auto;padding:2rem 0 4rem}.topbar{display:flex;justify-content:space-between;gap:1rem;align-items:center;margin-bottom:1rem}.back{display:inline-flex;align-items:center;gap:.35rem;padding:.55rem .85rem;border:1px solid var(--border);border-radius:999px;background:#fff;color:var(--accent);font-weight:850;text-decoration:none;box-shadow:0 8px 22px rgba(15,23,42,.05)}.source{color:var(--muted);font-size:.88rem}.doc{padding:2rem;border:1px solid var(--border);border-radius:24px;background:rgba(255,255,255,.94);box-shadow:var(--shadow)}.doc-header{padding-bottom:1rem;margin-bottom:1.25rem;border-bottom:1px solid var(--border)}.kicker{display:inline-flex;width:fit-content;padding:.25rem .65rem;border-radius:999px;background:#dbeafe;color:#1e3a8a;font-size:.72rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase}.doc h1{margin:.7rem 0 .4rem;font-size:clamp(2rem,4vw,3.6rem);line-height:1;letter-spacing:-.05em}.doc h2{margin:2rem 0 .6rem;font-size:1.55rem;line-height:1.15;letter-spacing:-.03em}.doc h3{margin:1.35rem 0 .45rem;font-size:1.18rem}.doc p{margin:.65rem 0;color:#334155}.doc ul,.doc ol{padding-left:1.35rem}.doc li{margin:.35rem 0}.doc a{color:var(--accent);font-weight:800}.doc blockquote{margin:1rem 0;padding:.85rem 1rem;border-left:5px solid var(--accent);border-radius:14px;background:#eef2ff;color:#334155}.doc pre{overflow:auto;padding:1rem;border-radius:16px;background:var(--code);color:#e5e7eb;font-size:.9rem;line-height:1.55}.doc code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}.doc :not(pre)>code{padding:.15rem .32rem;border-radius:7px;background:#eef2f7;color:#1e293b}.doc table{width:100%;border-collapse:collapse;margin:1rem 0;border:1px solid var(--border);border-radius:16px;overflow:hidden;display:block}.doc thead,.doc tbody,.doc tr{width:100%}.doc th,.doc td{padding:.75rem;border-bottom:1px solid var(--border);text-align:left;vertical-align:top}.doc th{background:#f1f5f9;color:#334155;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}.doc tr:last-child td{border-bottom:0}.doc hr{border:0;border-top:1px solid var(--border);margin:2rem 0}.doc img{max-width:100%;border-radius:16px;border:1px solid var(--border)}@media(max-width:720px){.page{width:min(100% - 1rem,980px);padding-top:1rem}.doc{padding:1.15rem;border-radius:18px}.topbar{display:grid}.source{overflow-wrap:anywhere}}</style>
+</head>
+<body>
+  <main class="page">
+    <div class="topbar">
+      <a class="back" href="../index.html">← Torna alla Home</a>
+      <span class="source">Sorgente Markdown: ../old_style/07-domain-cargo.md</span>
+    </div>
+    <article class="doc">
+      <header class="doc-header">
+        <span class="kicker">old_style</span>
+        <h1>Archivio storico — 07-domain-cargo</h1>
+      </header>
+      <h1>Archivio storico — 07-domain-cargo</h1>
+<blockquote>
+<p>Questo documento fa parte dell'archivio storico <code>docs/old_style/</code>.
+Mantiene il percorso step-by-step del progetto, ma la documentazione principale aggiornata si trova in:
+<code>docs/simple/</code>, <code>docs/professional/</code> e <code>docs/digital/</code>.</p>
+</blockquote>
+<hr />
+<h1>7. Package <code>domain.cargo</code></h1>
+<h2>7.1 Scopo del dominio cargo</h2>
+<p>Il package <code>domain.cargo</code> rappresenta la merce gestita da TruckFlow Manager.</p>
+<p>Il suo scopo è descrivere la merce come concetto di dominio puro, senza collegarla direttamente a viaggi, mezzi, autisti, magazzini, documenti o pianificazione.</p>
+<p>Il dominio cargo risponde alla domanda:</p>
+<pre><code class="language-text">Che tipo di merce devo trasportare e quali requisiti ha?
+</code></pre>
+<p>Esempi di cargo sono:</p>
+<ul>
+<li>merce generica pallettizzata;</li>
+<li>prodotti alimentari freschi;</li>
+<li>farmaci a temperatura controllata;</li>
+<li>merci ADR;</li>
+<li>rifiuti;</li>
+<li>liquidi in cisterna;</li>
+<li>container;</li>
+<li>auto da trasportare con bisarca;</li>
+<li>animali vivi;</li>
+<li>merci fragili o di alto valore.</li>
+</ul>
+<h2>7.2 Cosa non contiene il dominio cargo</h2>
+<p>Il dominio cargo non contiene logiche operative.</p>
+<p>Quindi non gestisce:</p>
+<ul>
+<li>assegnazione del cargo a un veicolo;</li>
+<li>assegnazione a un viaggio;</li>
+<li>disponibilità del mezzo;</li>
+<li>pianificazione;</li>
+<li>magazzino;</li>
+<li>tracking;</li>
+<li>documenti di trasporto;</li>
+<li>stato della spedizione;</li>
+<li>consegna;</li>
+<li>danni, sinistri o reclami.</li>
+</ul>
+<p>Questi concetti verranno modellati più avanti in altri bounded context, come <code>shipments</code>, <code>planning</code>, <code>dispatching</code>, <code>warehouse</code>, <code>documents</code>, <code>tracking</code> o <code>claims</code>.</p>
+<h2>7.3 Struttura del package</h2>
+<p>La struttura introdotta è:</p>
+<pre><code class="language-text">domain.cargo
+├─ CargoUnit
+├─ CargoId
+├─ CargoCode
+├─ CargoType
+├─ CargoCategory
+├─ CargoStatus
+│
+├─ CargoDimensions
+├─ CargoWeights
+├─ CargoPackaging
+├─ CargoPackagingType
+├─ CargoTemperature
+├─ CargoHazard
+├─ CargoRegulatory
+├─ CargoProperties
+│
+├─ CargoCompatibilityRequirement
+├─ CargoTransportRequirement
+└─ CargoValidation
+</code></pre>
+<p><code>CargoValidation</code> è una classe interna di supporto usata solo per mantenere coerenti le validazioni del package.</p>
+<h2>7.4 <code>CargoUnit</code></h2>
+<p><code>CargoUnit</code> rappresenta la scheda tecnica della merce.</p>
+<p>Non rappresenta una spedizione specifica, ma il tipo di merce che l'azienda può gestire.</p>
+<p>Contiene:</p>
+<ul>
+<li>identificativo tecnico (<code>CargoId</code>);</li>
+<li>codice aziendale leggibile (<code>CargoCode</code>);</li>
+<li>nome e descrizione;</li>
+<li>tipo principale della merce (<code>CargoType</code>);</li>
+<li>categorie logistiche multiple (<code>Set&lt;CargoCategory&gt;</code>);</li>
+<li>dimensioni;</li>
+<li>pesi;</li>
+<li>imballaggio;</li>
+<li>temperatura richiesta;</li>
+<li>pericolosità;</li>
+<li>requisiti normativi;</li>
+<li>proprietà generali;</li>
+<li>requisiti di compatibilità al trasporto;</li>
+<li>stato anagrafico;</li>
+<li>note.</li>
+</ul>
+<p>La scelta importante è separare:</p>
+<pre><code class="language-text">CargoType = che merce è
+CargoCategory = come viene classificata logisticamente
+CargoCompatibilityRequirement = quali requisiti impone al trasporto
+</code></pre>
+<h2>7.5 <code>CargoId</code> e <code>CargoCode</code></h2>
+<p><code>CargoId</code> è l'identificatore tecnico del dominio, pensato per il sistema.</p>
+<p><code>CargoCode</code> è invece un codice aziendale leggibile dagli utenti.</p>
+<p>Esempi:</p>
+<pre><code class="language-text">CGO-001
+FOOD-023
+ADR-120
+PHARMA-004
+AUTO-010
+WASTE-044
+</code></pre>
+<p>Questa scelta è coerente con altri codici interni del progetto, come <code>OperationalCode</code> e <code>FleetCode</code>.</p>
+<h2>7.6 <code>CargoType</code></h2>
+<p><code>CargoType</code> indica il tipo principale della merce.</p>
+<p>Esempi:</p>
+<ul>
+<li><code>GENERAL_GOODS</code>;</li>
+<li><code>FOOD</code>;</li>
+<li><code>PHARMACEUTICAL</code>;</li>
+<li><code>CHEMICAL</code>;</li>
+<li><code>FUEL</code>;</li>
+<li><code>LIVESTOCK</code>;</li>
+<li><code>WASTE</code>;</li>
+<li><code>AUTOMOTIVE</code>;</li>
+<li><code>CONSTRUCTION_MATERIAL</code>;</li>
+<li><code>INDUSTRIAL_GOODS</code>;</li>
+<li><code>OTHER</code>.</li>
+</ul>
+<p>Non contiene concetti come <code>PALLETIZED</code> o <code>CONTAINERIZED</code>, perché quelli non descrivono la natura della merce, ma il modo in cui la merce viene gestita o confezionata.</p>
+<h2>7.7 <code>CargoCategory</code></h2>
+<p><code>CargoCategory</code> classifica la merce dal punto di vista logistico.</p>
+<p>Una merce può avere più categorie contemporaneamente.</p>
+<p>Per questo <code>CargoUnit</code> usa:</p>
+<pre><code class="language-text">Set&lt;CargoCategory&gt;
+</code></pre>
+<p>Esempi:</p>
+<pre><code class="language-text">Prodotto chimico liquido ADR:
+- CHEMICAL come CargoType
+- ADR, LIQUID come CargoCategory
+</code></pre>
+<pre><code class="language-text">Farmaci refrigerati su pallet:
+- PHARMACEUTICAL come CargoType
+- REFRIGERATED, HIGH_VALUE, PALLETIZED come CargoCategory
+</code></pre>
+<p>Questa scelta evita di forzare la merce dentro una sola categoria e rende il modello più realistico.</p>
+<h2>7.8 <code>CargoStatus</code></h2>
+<p><code>CargoStatus</code> è uno stato anagrafico, non operativo.</p>
+<p>Gli stati sono:</p>
+<ul>
+<li><code>ACTIVE</code>;</li>
+<li><code>SUSPENDED</code>;</li>
+<li><code>ARCHIVED</code>;</li>
+<li><code>DISCONTINUED</code>.</li>
+</ul>
+<p>Non sono stati del cargo:</p>
+<ul>
+<li><code>IN_TRANSIT</code>;</li>
+<li><code>DELIVERED</code>;</li>
+<li><code>DAMAGED</code>;</li>
+<li><code>CANCELLED</code>.</li>
+</ul>
+<p>Questi ultimi appartengono a spedizioni, consegne, incidenti o reclami, non alla scheda tecnica della merce.</p>
+<h2>7.9 Dimensioni, pesi e imballaggio</h2>
+<p><code>CargoDimensions</code> descrive l'ingombro fisico della merce:</p>
+<ul>
+<li>lunghezza;</li>
+<li>larghezza;</li>
+<li>altezza;</li>
+<li>volume.</li>
+</ul>
+<p><code>CargoWeights</code> descrive:</p>
+<ul>
+<li>peso lordo;</li>
+<li>peso netto;</li>
+<li>tara.</li>
+</ul>
+<p><code>CargoPackaging</code> descrive il modo in cui la merce è confezionata o movimentata.</p>
+<p>Usa <code>CargoPackagingType</code> per evitare stringhe libere troppo generiche.</p>
+<p>Esempi di packaging:</p>
+<ul>
+<li>pallet;</li>
+<li>scatola;</li>
+<li>cartone;</li>
+<li>container da 20 piedi;</li>
+<li>container da 40 piedi;</li>
+<li>big bag;</li>
+<li>IBC;</li>
+<li>fusto;</li>
+<li>tank container;</li>
+<li>gabbia;</li>
+<li>merce sfusa.</li>
+</ul>
+<h2>7.10 Temperatura, pericolosità e normative</h2>
+<p><code>CargoTemperature</code> descrive eventuali limiti di temperatura richiesti dalla merce.</p>
+<p>Esempi:</p>
+<ul>
+<li>fresco alimentare: +2°C / +4°C;</li>
+<li>surgelato: -18°C;</li>
+<li>farmaceutico: +15°C / +25°C.</li>
+</ul>
+<p><code>CargoHazard</code> descrive la pericolosità, soprattutto per merci ADR:</p>
+<ul>
+<li>classe ADR;</li>
+<li>numero UN;</li>
+<li>packing group;</li>
+<li>disposizioni speciali.</li>
+</ul>
+<p><code>CargoRegulatory</code> descrive requisiti normativi richiesti dalla merce:</p>
+<ul>
+<li>ADR;</li>
+<li>ATP;</li>
+<li>food grade;</li>
+<li>pharma grade;</li>
+<li>autorizzazione rifiuti;</li>
+<li>autorizzazione animali vivi.</li>
+</ul>
+<p>Queste classi descrivono i requisiti, ma non eseguono la compliance completa.</p>
+<h2>7.11 <code>CargoProperties</code></h2>
+<p><code>CargoProperties</code> raccoglie proprietà trasversali della merce:</p>
+<ul>
+<li>fragile;</li>
+<li>deperibile;</li>
+<li>pericolosa;</li>
+<li>alto valore;</li>
+<li>richiede separazione.</li>
+</ul>
+<p>La proprietà <code>stackable</code> non è stata inserita qui, perché appartiene meglio a <code>CargoPackaging</code>: la sovrapponibilità dipende spesso dall'imballaggio e dalla movimentazione.</p>
+<h2>7.12 <code>CargoCompatibilityRequirement</code></h2>
+<p><code>CargoCompatibilityRequirement</code> è il collegamento concettuale tra cargo e futuro controllo di compatibilità.</p>
+<p>Non importa direttamente il dominio veicoli e non copia le capacità dei veicoli.</p>
+<p>Descrive solo cosa richiede la merce.</p>
+<p>Contiene:</p>
+<ul>
+<li>un insieme di <code>CargoTransportRequirement</code>;</li>
+<li>payload minimo richiesto;</li>
+<li>volume minimo richiesto;</li>
+<li>lunghezza interna minima;</li>
+<li>larghezza interna minima;</li>
+<li>altezza interna minima;</li>
+<li>note.</li>
+</ul>
+<p>Questa scelta è più scalabile rispetto a tanti booleani come <code>requiresADR</code>, <code>requiresRefrigerated</code>, <code>requiresContainerChassis</code>, ecc.</p>
+<h2>7.13 <code>CargoTransportRequirement</code></h2>
+<p><code>CargoTransportRequirement</code> è il linguaggio del cargo per dichiarare i propri requisiti di trasporto.</p>
+<p>Esempi:</p>
+<ul>
+<li><code>REFRIGERATED_VEHICLE_REQUIRED</code>;</li>
+<li><code>FROZEN_TRANSPORT_REQUIRED</code>;</li>
+<li><code>TEMPERATURE_CONTROL_REQUIRED</code>;</li>
+<li><code>ADR_VEHICLE_REQUIRED</code>;</li>
+<li><code>ATP_CERTIFICATION_REQUIRED</code>;</li>
+<li><code>FOOD_GRADE_BODY_REQUIRED</code>;</li>
+<li><code>PHARMA_GRADE_REQUIRED</code>;</li>
+<li><code>WASTE_AUTHORIZATION_REQUIRED</code>;</li>
+<li><code>LIVESTOCK_BODY_REQUIRED</code>;</li>
+<li><code>BULK_BODY_REQUIRED</code>;</li>
+<li><code>TANK_BODY_REQUIRED</code>;</li>
+<li><code>CONTAINER_CHASSIS_REQUIRED</code>;</li>
+<li><code>CAR_CARRIER_REQUIRED</code>;</li>
+<li><code>LOW_LOADER_REQUIRED</code>;</li>
+<li><code>SIDE_LOADING_REQUIRED</code>;</li>
+<li><code>REAR_LOADING_REQUIRED</code>;</li>
+<li><code>SEPARATION_REQUIRED</code>.</li>
+</ul>
+<p>Il cargo quindi dichiara requisiti propri, mentre il dominio veicoli dichiara capacità e caratteristiche dei mezzi.</p>
+<h2>7.14 Relazione con <code>domain.vehicles</code></h2>
+<p>La relazione concettuale è:</p>
+<pre><code class="language-text">Cargo dichiara requisiti.
+Vehicles dichiara capacità.
+Planning/Dispatching verifica la compatibilità.
+</code></pre>
+<p>Esempio:</p>
+<pre><code class="language-text">Cargo frigo:
+- richiede temperatura controllata
+- richiede ATP
+
+Vehicle frigo:
+- ha bodyType REFRIGERATED
+- ha capability ATP
+- ha reefer unit
+
+Planning:
+- verifica se quel mezzo può caricare quel cargo
+</code></pre>
+<p>Questa separazione evita dipendenze dirette e mantiene il dominio cargo puro.</p>
+<h2>7.15 Invarianti principali</h2>
+<p>Le principali invarianti sono:</p>
+<ul>
+<li><code>CargoId</code> obbligatorio, generato se non fornito;</li>
+<li><code>CargoCode</code> obbligatorio;</li>
+<li>nome obbligatorio;</li>
+<li><code>CargoType</code> obbligatorio;</li>
+<li>almeno una <code>CargoCategory</code> obbligatoria;</li>
+<li><code>CargoStatus</code> obbligatorio;</li>
+<li>pesi non negativi;</li>
+<li>peso netto non maggiore del peso lordo;</li>
+<li>tara non maggiore del peso lordo;</li>
+<li>temperatura minima non maggiore della temperatura massima;</li>
+<li>se la temperatura è controllata, deve essere presente almeno un limite;</li>
+<li>cargo ADR deve dichiarare il requisito <code>ADR_VEHICLE_REQUIRED</code>;</li>
+<li>cargo ATP deve dichiarare il requisito <code>ATP_CERTIFICATION_REQUIRED</code>;</li>
+<li>cargo a temperatura controllata deve dichiarare <code>TEMPERATURE_CONTROL_REQUIRED</code>;</li>
+<li>cargo che richiede separazione deve dichiarare <code>SEPARATION_REQUIRED</code>.</li>
+</ul>
+<h2>7.16 Sintesi</h2>
+<p>Il dominio cargo è stato modellato come dominio puro e separato.</p>
+<p>Non decide quale veicolo usare, non assegna viaggi e non gestisce spedizioni.</p>
+<p>Descrive invece la merce e i suoi requisiti.</p>
+<p>Questa scelta rende TruckFlow più pulito, più scalabile e coerente con il dominio veicoli già introdotto.</p>
+
+    </article>
+  </main>
+</body>
+</html>

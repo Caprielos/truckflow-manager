@@ -1,0 +1,559 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Archivio storico — 16-application-layer-blueprint — TruckFlow Docs</title>
+  <style>:root{--bg:#f5f7fb;--panel:#fff;--text:#172033;--muted:#64748b;--accent:#3554d1;--border:#d9e1ef;--code:#0f172a;--shadow:0 18px 44px rgba(15,23,42,.08)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:radial-gradient(circle at top left,rgba(53,84,209,.10),transparent 30rem),var(--bg);color:var(--text);line-height:1.68;font-size:16px}.page{width:min(980px,calc(100% - 2rem));margin:0 auto;padding:2rem 0 4rem}.topbar{display:flex;justify-content:space-between;gap:1rem;align-items:center;margin-bottom:1rem}.back{display:inline-flex;align-items:center;gap:.35rem;padding:.55rem .85rem;border:1px solid var(--border);border-radius:999px;background:#fff;color:var(--accent);font-weight:850;text-decoration:none;box-shadow:0 8px 22px rgba(15,23,42,.05)}.source{color:var(--muted);font-size:.88rem}.doc{padding:2rem;border:1px solid var(--border);border-radius:24px;background:rgba(255,255,255,.94);box-shadow:var(--shadow)}.doc-header{padding-bottom:1rem;margin-bottom:1.25rem;border-bottom:1px solid var(--border)}.kicker{display:inline-flex;width:fit-content;padding:.25rem .65rem;border-radius:999px;background:#dbeafe;color:#1e3a8a;font-size:.72rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase}.doc h1{margin:.7rem 0 .4rem;font-size:clamp(2rem,4vw,3.6rem);line-height:1;letter-spacing:-.05em}.doc h2{margin:2rem 0 .6rem;font-size:1.55rem;line-height:1.15;letter-spacing:-.03em}.doc h3{margin:1.35rem 0 .45rem;font-size:1.18rem}.doc p{margin:.65rem 0;color:#334155}.doc ul,.doc ol{padding-left:1.35rem}.doc li{margin:.35rem 0}.doc a{color:var(--accent);font-weight:800}.doc blockquote{margin:1rem 0;padding:.85rem 1rem;border-left:5px solid var(--accent);border-radius:14px;background:#eef2ff;color:#334155}.doc pre{overflow:auto;padding:1rem;border-radius:16px;background:var(--code);color:#e5e7eb;font-size:.9rem;line-height:1.55}.doc code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}.doc :not(pre)>code{padding:.15rem .32rem;border-radius:7px;background:#eef2f7;color:#1e293b}.doc table{width:100%;border-collapse:collapse;margin:1rem 0;border:1px solid var(--border);border-radius:16px;overflow:hidden;display:block}.doc thead,.doc tbody,.doc tr{width:100%}.doc th,.doc td{padding:.75rem;border-bottom:1px solid var(--border);text-align:left;vertical-align:top}.doc th{background:#f1f5f9;color:#334155;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}.doc tr:last-child td{border-bottom:0}.doc hr{border:0;border-top:1px solid var(--border);margin:2rem 0}.doc img{max-width:100%;border-radius:16px;border:1px solid var(--border)}@media(max-width:720px){.page{width:min(100% - 1rem,980px);padding-top:1rem}.doc{padding:1.15rem;border-radius:18px}.topbar{display:grid}.source{overflow-wrap:anywhere}}</style>
+</head>
+<body>
+  <main class="page">
+    <div class="topbar">
+      <a class="back" href="../index.html">← Torna alla Home</a>
+      <span class="source">Sorgente Markdown: ../old_style/16-application-layer-blueprint.md</span>
+    </div>
+    <article class="doc">
+      <header class="doc-header">
+        <span class="kicker">old_style</span>
+        <h1>Archivio storico — 16-application-layer-blueprint</h1>
+      </header>
+      <h1>Archivio storico — 16-application-layer-blueprint</h1>
+<blockquote>
+<p>Questo documento fa parte dell'archivio storico <code>docs/old_style/</code>.
+Mantiene il percorso step-by-step del progetto, ma la documentazione principale aggiornata si trova in:
+<code>docs/simple/</code>, <code>docs/professional/</code> e <code>docs/digital/</code>.</p>
+</blockquote>
+<hr />
+<h1>16 — Application Layer Blueprint</h1>
+<p>Questo documento definisce il <strong>Punto 6A — Application Layer Blueprint</strong> di TruckFlow Manager.</p>
+<blockquote>
+<p>Stato: il blueprint del Punto 6A è stato completato come guida architetturale. Il progetto ha completato il Punto 6B con la foundation applicativa e ha avviato il Punto 6C con le prime repository port descritte in <code>docs/old_style/18-application-repository-ports.md</code>.</p>
+</blockquote>
+<p>Il dominio puro è stato modellato, rafforzato, testato e documentato. Il passo successivo non è introdurre subito REST API, database o Spring, ma progettare il livello applicativo che userà il dominio attraverso casi d'uso chiari.</p>
+<p>L'application layer è il ponte tra il modello di dominio e i futuri ingressi tecnici del sistema, come API REST, interfacce grafiche, job automatici, import/export, workflow e integrazioni esterne.</p>
+<hr />
+<h2>1. Obiettivo del Punto 6A</h2>
+<p>Il Punto 6A ha un obiettivo preciso:</p>
+<blockquote>
+<p>definire struttura, responsabilità, convenzioni e roadmap dell'application layer prima di scrivere use case e repository.</p>
+</blockquote>
+<p>Questa fase serve a evitare che il progetto cresca in modo caotico.</p>
+<p>L'application layer dovrà:</p>
+<ul>
+<li>esporre le azioni che TruckFlow Manager può eseguire;</li>
+<li>orchestrare aggregate root e value object del dominio;</li>
+<li>usare repository astratti tramite porte in uscita;</li>
+<li>restituire risultati applicativi leggibili;</li>
+<li>tradurre problemi applicativi in eccezioni applicative coerenti;</li>
+<li>preparare il futuro collegamento con web, database, API e integrazioni;</li>
+<li>mantenere il dominio puro indipendente da framework e infrastruttura.</li>
+</ul>
+<p>Questa fase non aggiunge ancora funzionalità operative enterprise come planning, dispatching, tracking, dashboard, workflow o availability. Quelle arriveranno in moduli successivi.</p>
+<hr />
+<h2>2. Perché serve un application layer</h2>
+<p>Il dominio contiene le regole di business.</p>
+<p>Esempi:</p>
+<ul>
+<li>una shipment può essere confermata solo se rispetta le sue invarianti;</li>
+<li>un cargo non può avere pesi o dimensioni incoerenti;</li>
+<li>un veicolo stradale deve rispettare le regole di identificazione;</li>
+<li>un documento deve avere metadati validi;</li>
+<li>un requisito di compliance deve avere target, regola, fonte e giurisdizione.</li>
+</ul>
+<p>Il dominio però non deve sapere:</p>
+<ul>
+<li>chi ha richiesto l'operazione;</li>
+<li>da quale controller arriva la richiesta;</li>
+<li>dove l'oggetto verrà salvato;</li>
+<li>se il dato arriva da REST, UI, file, job o integrazione esterna;</li>
+<li>come recuperare una shipment esistente;</li>
+<li>come verificare se un codice è già presente in un repository.</li>
+</ul>
+<p>Queste responsabilità appartengono all'application layer.</p>
+<p>L'application layer risponde alla domanda:</p>
+<blockquote>
+<p>quali azioni può eseguire il sistema usando il dominio?</p>
+</blockquote>
+<p>Esempi di azioni applicative:</p>
+<ul>
+<li>registrare una location;</li>
+<li>registrare un cargo;</li>
+<li>creare una shipment;</li>
+<li>aggiungere un cargo a una shipment;</li>
+<li>aggiungere una tratta a una shipment;</li>
+<li>confermare una shipment;</li>
+<li>registrare un documento;</li>
+<li>registrare un requisito di compliance;</li>
+<li>recuperare oggetti esistenti tramite repository.</li>
+</ul>
+<hr />
+<h2>3. Cosa contiene l'application layer</h2>
+<p>L'application layer conterrà principalmente:</p>
+<ul>
+<li><strong>use case</strong>: azioni applicative eseguibili;</li>
+<li><strong>command</strong>: input dei casi d'uso;</li>
+<li><strong>result</strong>: output dei casi d'uso;</li>
+<li><strong>port in</strong>: interfacce dei casi d'uso esposte verso l'esterno;</li>
+<li><strong>port out</strong>: interfacce verso repository e servizi esterni astratti;</li>
+<li><strong>application service</strong>: implementazioni dei casi d'uso;</li>
+<li><strong>application exception</strong>: errori applicativi;</li>
+<li><strong>test applicativi</strong>: verifica dell'orchestrazione tra domini e repository.</li>
+</ul>
+<p>L'application layer non contiene regole fondamentali di business che appartengono al dominio.</p>
+<hr />
+<h2>4. Cosa non contiene l'application layer</h2>
+<p>Nel Punto 6 non devono entrare ancora:</p>
+<ul>
+<li>controller REST;</li>
+<li>DTO web;</li>
+<li>Spring Boot annotations;</li>
+<li>JPA;</li>
+<li>Hibernate;</li>
+<li>database reali;</li>
+<li>JWT;</li>
+<li>sicurezza avanzata;</li>
+<li>Swagger/OpenAPI;</li>
+<li>frontend;</li>
+<li>tracking GPS;</li>
+<li>telematica;</li>
+<li>planning operativo completo;</li>
+<li>dispatching reale;</li>
+<li>workflow documentali;</li>
+<li>dashboard e analytics;</li>
+<li>audit trail enterprise;</li>
+<li>multi-tenant;</li>
+<li>integrazioni esterne reali.</li>
+</ul>
+<p>Queste parti arriveranno dopo, quando i casi d'uso saranno stabili.</p>
+<p>La regola è:</p>
+<blockquote>
+<p>prima si definisce cosa il sistema può fare, poi si decide come esporlo e dove salvarlo.</p>
+</blockquote>
+<hr />
+<h2>5. Struttura package consigliata</h2>
+<p>La struttura iniziale consigliata è:</p>
+<pre><code class="language-text">src/main/java/it/gabriele/truckflow/application
+├── command
+├── result
+├── port
+│   ├── in
+│   └── out
+├── usecase
+└── exception
+</code></pre>
+<p>Questa struttura mantiene il livello applicativo leggibile e separato dal dominio.</p>
+<h3>5.1 <code>application.command</code></h3>
+<p>Contiene gli input dei casi d'uso.</p>
+<p>Un command rappresenta una richiesta applicativa, non un DTO REST.</p>
+<p>Esempi futuri:</p>
+<ul>
+<li><code>RegisterLocationCommand</code>;</li>
+<li><code>RegisterCargoUnitCommand</code>;</li>
+<li><code>CreateShipmentCommand</code>;</li>
+<li><code>AddShipmentItemCommand</code>;</li>
+<li><code>AddShipmentLegCommand</code>;</li>
+<li><code>ConfirmShipmentCommand</code>.</li>
+</ul>
+<p>Un command deve essere semplice, esplicito e orientato all'azione.</p>
+<h3>5.2 <code>application.result</code></h3>
+<p>Contiene gli output restituiti dai casi d'uso.</p>
+<p>Esempi futuri:</p>
+<ul>
+<li><code>LocationResult</code>;</li>
+<li><code>CargoUnitResult</code>;</li>
+<li><code>ShipmentResult</code>;</li>
+<li><code>DocumentResult</code>;</li>
+<li><code>ComplianceRequirementResult</code>.</li>
+</ul>
+<p>Il result serve a non esporre necessariamente l'aggregate root completo verso l'esterno.</p>
+<h3>5.3 <code>application.port.in</code></h3>
+<p>Contiene le interfacce dei casi d'uso.</p>
+<p>Esempi futuri:</p>
+<ul>
+<li><code>RegisterLocationUseCase</code>;</li>
+<li><code>RegisterCargoUnitUseCase</code>;</li>
+<li><code>CreateShipmentUseCase</code>;</li>
+<li><code>ConfirmShipmentUseCase</code>.</li>
+</ul>
+<p>Queste interfacce sono ciò che, in futuro, i controller REST, i job o altri ingressi tecnici potranno chiamare.</p>
+<h3>5.4 <code>application.port.out</code></h3>
+<p>Contiene le porte verso l'esterno.</p>
+<p>La prima categoria di port out sarà quella dei repository astratti.</p>
+<p>Esempi futuri:</p>
+<ul>
+<li><code>LocationRepository</code>;</li>
+<li><code>CargoUnitRepository</code>;</li>
+<li><code>ShipmentRepository</code>;</li>
+</ul>
+<p>Queste tre porte sono state introdotte nel Punto 6C come primi contratti outbound concreti dell’application layer. Non sono implementazioni database e non appartengono all’infrastructure.</p>
+<ul>
+<li><code>DocumentRepository</code>;</li>
+<li><code>ComplianceRequirementRepository</code>.</li>
+</ul>
+<p>Questi repository non sono database. Sono contratti.</p>
+<h3>5.5 <code>application.usecase</code></h3>
+<p>Contiene le implementazioni dei casi d'uso.</p>
+<p>Convenzione consigliata:</p>
+<ul>
+<li>interfaccia: <code>CreateShipmentUseCase</code>;</li>
+<li>implementazione: <code>CreateShipmentService</code>.</li>
+</ul>
+<p>La parola <code>Service</code> qui indica un application service, non un domain service.</p>
+<h3>5.6 <code>application.exception</code></h3>
+<p>Contiene errori applicativi.</p>
+<p>Esempi futuri:</p>
+<ul>
+<li><code>ApplicationException</code>;</li>
+<li><code>ResourceNotFoundException</code>;</li>
+<li><code>DuplicateResourceException</code>;</li>
+<li><code>UseCaseValidationException</code>.</li>
+</ul>
+<p>Le eccezioni applicative non sostituiscono quelle di dominio. Hanno responsabilità diversa.</p>
+<hr />
+<h2>6. Differenza tra eccezione di dominio ed eccezione applicativa</h2>
+<p>Le eccezioni di dominio indicano che una regola di business è stata violata.</p>
+<p>Esempi:</p>
+<ul>
+<li>una shipment incompleta non può essere confermata;</li>
+<li>un cargo ha temperature incoerenti;</li>
+<li>un documento ha metadati non validi;</li>
+<li>un veicolo ha dati tecnici non accettabili.</li>
+</ul>
+<p>Le eccezioni applicative indicano problemi nell'esecuzione del caso d'uso.</p>
+<p>Esempi:</p>
+<ul>
+<li>la shipment richiesta non esiste;</li>
+<li>esiste già una location con lo stesso codice;</li>
+<li>il command ricevuto è nullo;</li>
+<li>il cargo da aggiungere alla shipment non è stato trovato;</li>
+<li>il repository non può completare l'operazione richiesta.</li>
+</ul>
+<p>Regola:</p>
+<blockquote>
+<p>il dominio decide se un oggetto è valido; l'application layer decide come caricare, salvare e coordinare quell'oggetto.</p>
+</blockquote>
+<hr />
+<h2>7. Repository port</h2>
+<p>I repository dell'application layer saranno interfacce.</p>
+<p>Servono a separare i casi d'uso dalla tecnologia di persistenza.</p>
+<p>Un repository port deve esprimere intenzioni applicative semplici:</p>
+<ul>
+<li>salvare un aggregate;</li>
+<li>trovare un aggregate per ID;</li>
+<li>verificare se un aggregate esiste;</li>
+<li>verificare duplicati per codice quando necessario;</li>
+<li>recuperare un aggregate per codice quando ha senso.</li>
+</ul>
+<p>I repository port non devono contenere dettagli tecnici come query SQL, entity JPA, sessioni, connessioni o annotazioni framework.</p>
+<hr />
+<h2>8. Infrastructure memory</h2>
+<p>Dopo le port repository verrà introdotta una prima infrastruttura in memoria.</p>
+<p>La struttura consigliata è:</p>
+<pre><code class="language-text">src/main/java/it/gabriele/truckflow/infrastructure/memory
+├── cargo
+├── locations
+└── shipments
+</code></pre>
+<p>Nel primo blocco non serve coprire tutti i domini.</p>
+<p>Le prime implementazioni previste sono:</p>
+<ul>
+<li><code>InMemoryLocationRepository</code>;</li>
+<li><code>InMemoryCargoUnitRepository</code>;</li>
+<li><code>InMemoryShipmentRepository</code>.</li>
+</ul>
+<p>Queste implementazioni serviranno per:</p>
+<ul>
+<li>testare i casi d'uso senza database;</li>
+<li>costruire scenari applicativi realistici;</li>
+<li>preparare il futuro passaggio a repository persistenti;</li>
+<li>mantenere il dominio indipendente dall'infrastruttura.</li>
+</ul>
+<p>La memoria non è il database finale. È una prima implementazione tecnica utile per sviluppo e test.</p>
+<hr />
+<h2>9. Primo blocco funzionale consigliato</h2>
+<p>Il primo blocco applicativo consigliato è:</p>
+<blockquote>
+<p>Locations + Cargo + Shipments.</p>
+</blockquote>
+<p>Questa scelta è naturale perché una shipment usa location e cargo tramite ID.</p>
+<p>Il primo flusso applicativo reale sarà:</p>
+<ol>
+<li>registrare una location di partenza;</li>
+<li>registrare una location di destinazione;</li>
+<li>registrare un cargo;</li>
+<li>creare una shipment;</li>
+<li>aggiungere il cargo alla shipment;</li>
+<li>aggiungere una tratta alla shipment;</li>
+<li>confermare la shipment.</li>
+</ol>
+<p>Questo flusso dimostra che l'application layer sa orchestrare più domini senza sporcare il dominio stesso.</p>
+<hr />
+<h2>10. Use case iniziali previsti</h2>
+<h3>10.1 Locations</h3>
+<p>Use case iniziali:</p>
+<ul>
+<li><code>RegisterLocationUseCase</code>;</li>
+<li><code>FindLocationUseCase</code>.</li>
+</ul>
+<p>Responsabilità:</p>
+<ul>
+<li>creare location valide usando il dominio;</li>
+<li>evitare duplicati applicativi per codice;</li>
+<li>salvare e recuperare location tramite repository port;</li>
+<li>restituire un result leggibile.</li>
+</ul>
+<h3>10.2 Cargo</h3>
+<p>Use case iniziali:</p>
+<ul>
+<li><code>RegisterCargoUnitUseCase</code>;</li>
+<li><code>FindCargoUnitUseCase</code>.</li>
+</ul>
+<p>Responsabilità:</p>
+<ul>
+<li>creare cargo validi usando il dominio;</li>
+<li>verificare duplicati applicativi per codice;</li>
+<li>salvare e recuperare cargo tramite repository port;</li>
+<li>mantenere hazard, regulatory, packaging, temperature, weights e dimensions dentro le regole del dominio.</li>
+</ul>
+<h3>10.3 Shipments</h3>
+<p>Use case iniziali:</p>
+<ul>
+<li><code>CreateShipmentUseCase</code>;</li>
+<li><code>AddShipmentItemUseCase</code>;</li>
+<li><code>AddShipmentLegUseCase</code>;</li>
+<li><code>ConfirmShipmentUseCase</code>;</li>
+<li><code>CancelShipmentUseCase</code>;</li>
+<li><code>FindShipmentUseCase</code>.</li>
+</ul>
+<p>Responsabilità:</p>
+<ul>
+<li>creare una shipment come richiesta di spedizione;</li>
+<li>aggiungere item cargo usando <code>CargoId</code>;</li>
+<li>aggiungere tratte logiche usando <code>LocationId</code>;</li>
+<li>confermare una shipment chiamando le regole del dominio;</li>
+<li>salvare ogni modifica in modo coerente;</li>
+<li>restituire errori applicativi quando shipment, cargo o location non esistono.</li>
+</ul>
+<hr />
+<h2>11. Come deve comportarsi un use case</h2>
+<p>Ogni use case deve seguire una logica semplice:</p>
+<ol>
+<li>riceve un command;</li>
+<li>valida che il command sia presente e minimamente completo;</li>
+<li>carica dal repository gli aggregate necessari;</li>
+<li>se una risorsa non esiste, genera un errore applicativo;</li>
+<li>chiama i metodi del dominio;</li>
+<li>salva l'aggregate aggiornato;</li>
+<li>restituisce un result.</li>
+</ol>
+<p>Il caso d'uso non deve duplicare le regole del dominio.</p>
+<p>Esempio concettuale:</p>
+<ul>
+<li><code>ConfirmShipmentUseCase</code> carica la shipment, chiama <code>confirm</code>, salva la shipment e restituisce il risultato;</li>
+<li>non riscrive nel service la regola secondo cui una shipment confermata deve avere item e tratte.</li>
+</ul>
+<hr />
+<h2>12. Test strategy dell'application layer</h2>
+<p>I test del dominio verificano invarianti e regole interne.</p>
+<p>I test dell'application layer dovranno verificare orchestrazione e comportamento dei casi d'uso.</p>
+<p>Esempi di test applicativi futuri:</p>
+<ul>
+<li>registrare una location valida salva la location nel repository;</li>
+<li>registrare una location con codice duplicato produce errore applicativo;</li>
+<li>registrare un cargo valido salva il cargo;</li>
+<li>creare una shipment salva una shipment in stato iniziale coerente;</li>
+<li>aggiungere un cargo a una shipment fallisce se la shipment non esiste;</li>
+<li>aggiungere un cargo a una shipment fallisce se il cargo non esiste;</li>
+<li>confermare una shipment completa aggiorna lo stato;</li>
+<li>confermare una shipment incompleta propaga l'errore di dominio;</li>
+<li>il flusso completo location + cargo + shipment funziona senza database.</li>
+</ul>
+<p>Questi test non devono verificare di nuovo tutti gli invarianti del dominio. Devono verificare che l'application layer usi correttamente il dominio.</p>
+<hr />
+<h2>13. Regole architetturali da rispettare</h2>
+<p>L'application layer può dipendere dal domain layer.</p>
+<p>Il domain layer non può dipendere dall'application layer.</p>
+<p>L'infrastructure può dipendere dall'application layer e dal domain layer per implementare le porte.</p>
+<p>Il futuro web layer dovrà dipendere dall'application layer, non accedere direttamente al dominio per modificare lo stato.</p>
+<p>Schema concettuale:</p>
+<pre><code class="language-text">web / api / jobs
+        ↓
+application
+        ↓
+domain
+        ↑
+infrastructure implementa le port out definite dall'application layer
+</code></pre>
+<p>Regola fondamentale:</p>
+<blockquote>
+<p>il flusso delle dipendenze deve proteggere il dominio.</p>
+</blockquote>
+<hr />
+<h2>14. Cosa non va anticipato nel primo ciclo applicativo</h2>
+<p>Nel primo ciclo application non bisogna introdurre:</p>
+<ul>
+<li>compatibilità cargo-veicolo reale;</li>
+<li>assegnazione autista;</li>
+<li>assegnazione veicolo;</li>
+<li>disponibilità giornaliera;</li>
+<li>calendario operativo;</li>
+<li>tracking spedizioni;</li>
+<li>stati come <code>IN_TRANSIT</code> o <code>DELIVERED</code>;</li>
+<li>manutenzione flotta;</li>
+<li>workflow documentali;</li>
+<li>verifica compliance concreta;</li>
+<li>notifiche;</li>
+<li>dashboard;</li>
+<li>SLA e penali;</li>
+<li>multi-tenant.</li>
+</ul>
+<p>Questi concetti sono corretti per la roadmap enterprise, ma non per il primo application layer.</p>
+<p>Il primo application layer deve essere piccolo, testabile e stabile.</p>
+<hr />
+<h2>15. Roadmap del Punto 6</h2>
+<p>Il Punto 6 può essere diviso in fasi.</p>
+<h3>Punto 6A — Application Layer Blueprint</h3>
+<p>Stato: documentato da questo file.</p>
+<p>Obiettivo:</p>
+<ul>
+<li>definire struttura e regole dell'application layer;</li>
+<li>decidere convenzioni di package, use case, command, result e port;</li>
+<li>chiarire cosa entra e cosa resta fuori.</li>
+</ul>
+<h3>Punto 6B — Application Foundation</h3>
+<p>Obiettivo:</p>
+<ul>
+<li>creare package application;</li>
+<li>creare eccezioni applicative base;</li>
+<li>definire convenzioni concrete per command e result;</li>
+<li>preparare i primi contratti di use case.</li>
+</ul>
+<h3>Punto 6C — Repository Ports</h3>
+<p>Obiettivo:</p>
+<ul>
+<li>creare repository astratti per location, cargo e shipment;</li>
+<li>definire operazioni minime di salvataggio e ricerca;</li>
+<li>evitare qualsiasi dipendenza tecnica.</li>
+</ul>
+<h3>Punto 6D — In-Memory Repositories</h3>
+<p>Obiettivo:</p>
+<ul>
+<li>implementare repository in memory per location, cargo e shipment;</li>
+<li>supportare i test applicativi;</li>
+<li>preparare il passaggio futuro a repository persistenti.</li>
+</ul>
+<h3>Punto 6E — First Use Cases</h3>
+<p>Obiettivo:</p>
+<ul>
+<li>implementare i primi use case applicativi;</li>
+<li>partire da locations, cargo e shipments;</li>
+<li>mantenere servizi piccoli e leggibili.</li>
+</ul>
+<h3>Punto 6F — Application Use Case Review &amp; Hardening</h3>
+<p>Obiettivo:</p>
+<ul>
+<li>rafforzare i primi use case esistenti;</li>
+<li>aggiungere <code>CancelShipmentUseCase</code>;</li>
+<li>testare errori applicativi e risorse mancanti;</li>
+<li>verificare duplicati e mutazioni fallite;</li>
+<li>consolidare il primo flusso completo senza database.</li>
+</ul>
+<h3>Punto 6G — Application Use Cases Expansion</h3>
+<p>Obiettivo:</p>
+<ul>
+<li>estendere i casi d'uso ad altri domini solo dopo il consolidamento del blocco iniziale;</li>
+<li>valutare Documents, Compliance, Vehicles e Operational Roles;</li>
+<li>rimandare REST API, database e security finché l'application layer non è stabile.</li>
+</ul>
+<hr />
+<h2>16. Documentazione da mantenere aggiornata</h2>
+<p>Quando inizierà il codice applicativo, dovranno essere aggiornati:</p>
+<ul>
+<li><code>docs/README.md</code>;</li>
+<li><code>docs/old_style/16-application-layer-blueprint.md</code>;</li>
+<li><code>TRUCKFLOW_PROJECT_DOCUMENTATION.md</code>;</li>
+<li><code>docs/digital/index.html</code>;</li>
+<li><code>docs/digital/truckflow-manager-enterprise-documentation.html</code>;</li>
+<li>eventuali nuovi documenti specifici sui repository o sugli use case.</li>
+</ul>
+<p>La documentazione deve continuare a distinguere chiaramente:</p>
+<ul>
+<li>ciò che è già implementato;</li>
+<li>ciò che è solo pianificato;</li>
+<li>ciò che appartiene a layer futuri;</li>
+<li>ciò che non deve entrare nel dominio.</li>
+</ul>
+<hr />
+<h2>17. Decisione ufficiale</h2>
+<p>La decisione ufficiale del Punto 6A è:</p>
+<blockquote>
+<p>TruckFlow Manager inizierà l'application layer con un blueprint documentato, poi introdurrà gradualmente struttura applicativa, repository port, repository in memory, use case e test applicativi, partendo dal flusso Locations + Cargo + Shipments.</p>
+</blockquote>
+<p>Questo consente di crescere in modo ordinato senza confondere dominio, applicazione, infrastruttura e web.</p>
+<h2>Aggiornamento — Punto 6D In-Memory Repositories</h2>
+<p>Il blueprint dell'application layer prevedeva l'introduzione di repository in memory dopo la definizione delle repository port. Questo passaggio è stato avviato con il Punto 6D.</p>
+<p>Le repository in memory sono il primo adapter concreto dell'infrastruttura. Implementano i contratti dell'application layer, ma non introducono persistenza definitiva.</p>
+<p>Le prime implementazioni sono:</p>
+<ul>
+<li><code>InMemoryLocationRepository</code>;</li>
+<li><code>InMemoryCargoUnitRepository</code>;</li>
+<li><code>InMemoryShipmentRepository</code>.</li>
+</ul>
+<p>Queste classi confermano la direzione del blueprint: i futuri use case potranno dipendere dalle repository port, mentre i test potranno usare implementazioni in memory semplici e veloci.</p>
+<p>La regola rimane invariata: l'application layer orchestra, il domain layer protegge le regole business e l'infrastructure layer fornisce adapter tecnici sostituibili.</p>
+<h2>Aggiornamento dopo il Punto 6E</h2>
+<p>Il blueprint è stato rispettato nel primo blocco applicativo reale.</p>
+<p>Con il Punto 6E sono stati creati command, result, port in e application service per Locations, Cargo e Shipments. Il primo flusso consigliato nel blueprint è ora implementato e testato: registrazione di due location, registrazione di un cargo, creazione di una shipment draft, aggiunta di item, aggiunta di leg, conferma e recupero della shipment.</p>
+<p>Il Punto 6E conferma una scelta architetturale importante: l'application layer orchestra il dominio ma non duplica le regole di dominio. Per esempio, la conferma della shipment viene eseguita chiamando <code>shipment.confirm()</code>, mentre le regole di conferma restano dentro l'aggregate <code>Shipment</code>.</p>
+<h2>Aggiornamento roadmap — Punto 6F</h2>
+<p>Dopo il Punto 6E, la roadmap applicativa prevede una fase di hardening.</p>
+<p>Il Punto 6F consolida i primi use case prima di estenderli ad altri domini. Aggiunge <code>CancelShipmentUseCase</code>, rafforza i test applicativi e verifica che errori applicativi, errori di dominio e mutazioni fallite siano gestiti correttamente.</p>
+<p>Il passo successivo consigliato diventa quindi il Punto 6G, dedicato all'espansione dei use case verso altri domini, non ancora a REST API o database.</p>
+<h2>Aggiornamento dopo il Punto 6G</h2>
+<p>Il Punto 6G ha realizzato la prima espansione controllata prevista dalla roadmap del blueprint.</p>
+<p>La scelta concreta è stata partire da <code>documents</code>, perché il dominio Documents era già puro, indipendente e utilizzabile senza introdurre ancora workflow documentali, file fisici, upload, database, REST API o compliance check concreti.</p>
+<p>Con il Punto 6G sono stati aggiunti:</p>
+<ul>
+<li>command documentali;</li>
+<li>result documentale;</li>
+<li>port in documentali;</li>
+<li><code>DocumentRepository</code> come nuova repository port;</li>
+<li>application service documentali;</li>
+<li><code>InMemoryDocumentRepository</code>;</li>
+<li>test applicativi e test repository aggiornati.</li>
+</ul>
+<p>La roadmap successiva diventa quindi il Punto 6H, dedicato alla review dell'espansione Documents e all'allineamento della documentazione prima di procedere con altri domini applicativi.</p>
+<h2>Aggiornamento dopo il Punto 6H</h2>
+<p>Il Punto 6H conferma che il blueprint del Punto 6A resta valido anche dopo l'espansione Documents.</p>
+<p>La review ha verificato che le port in continuino a estendere il contratto base <code>UseCase</code>, che i service concreti implementino la propria port, che i result applicativi gestiscano input nulli con <code>UseCaseValidationException</code> e che le repository in memory rimangano adapter sostituibili.</p>
+<p>Il prossimo passo non deve ancora essere REST API o database. La roadmap corretta resta una nuova espansione applicativa controllata, mantenendo gli stessi confini definiti da questo blueprint.</p>
+<h2>Aggiornamento dopo il Punto 6I</h2>
+<p>La roadmap applicativa ha ora raggiunto anche i primi use case Vehicles.</p>
+<p>Il blueprint rimane valido: ogni nuovo dominio applicativo deve continuare a introdurre command, result, port in, port out, application service, repository in memory e test senza saltare direttamente verso REST API, database o framework.</p>
+<p>Il Punto 6I conferma questa regola aggiungendo <code>VehicleUnit</code> e <code>VehicleCombination</code> all'application layer senza introdurre ancora planning, dispatching, tracking, manutenzione, disponibilità o assegnazioni operative.</p>
+<h2>Aggiornamento dopo il Punto 6J</h2>
+<p>Il blueprint rimane valido anche dopo l'espansione verso Operational Roles. I nuovi use case seguono la stessa struttura command/result/port/service/repository già usata per gli altri domini e non introducono web, database o framework nel livello application.</p>
+<h2>Aggiornamento dopo il Punto 6K</h2>
+<p>Il blueprint applicativo rimane valido dopo il Punto 6K. La review Operational Roles conferma che i nuovi use case continuano a seguire la struttura prevista: command, result, port in, repository port, application service, repository in memory e test applicativi.</p>
+<p>Il Punto 6K non modifica il blueprint e non introduce REST API, controller, database, JPA, security, planning o tracking. Rafforza soltanto i contratti già definiti per il livello application.</p>
+<h2>Aggiornamento dopo il Punto 6L</h2>
+<p>Il blueprint applicativo rimane valido anche dopo l'espansione base verso Compliance.</p>
+<p>Il Punto 6L segue la struttura prevista: command, result, port in, repository port, application service, repository in memory e test. La differenza è che il nuovo blocco lavora su <code>ComplianceRequirement</code>, mantenendo la compliance come catalogo astratto e non come motore di controllo operativo.</p>
+<p>Non vengono introdotti REST API, controller, database, JPA, Spring Data, security, audit trail, workflow o controlli concreti di violazione.</p>
+<h2>Allineamento Punto 6M</h2>
+<p>Il Punto 6M chiude il primo ciclo dell'application layer con una review/freeze finale. Da questo momento i contenuti documentati nei punti 6A-6L sono considerati fondazione applicativa stabile: eventuali evoluzioni future dovranno essere introdotte in nuovi punti roadmap, mantenendo ancora fuori REST API, controller, database, JPA, Spring Data, security, tracking, planning, dashboard, workflow e integrazioni esterne.</p>
+<h2>Collegamento con il Punto 7A</h2>
+<p>Il primo ciclo dell'application layer è stato chiuso con il Punto 6M. Il Punto 7A apre il layer infrastrutturale senza modificare i principi definiti in questo blueprint: domain e application restano indipendenti da infrastructure, Spring, database, controller e security.</p>
+<p>Il documento di riferimento per il nuovo ciclo è <a href="30-infrastructure-layer-blueprint.md"><code>30-infrastructure-layer-blueprint.md</code></a>.</p>
+<h2>Collegamento con il Punto 7B</h2>
+<p>Il Punto 7B — Infrastructure Foundation conferma i confini definiti da questo blueprint applicativo.</p>
+<p>L'application layer continua a non dipendere da infrastructure. I nuovi package infrastrutturali, le eccezioni tecniche, i marker di adapter e il contratto generico di mapping sono elementi esterni al core applicativo. Servono a preparare gli adapter futuri, non a modificare command, result, port in, port out o service applicativi già congelati.</p>
+<p>Questa separazione permette al Punto 7 di crescere senza trasformare l'application layer in codice tecnico o framework-specific.</p>
+<h2>Nota post-application — Punto 7C</h2>
+<p>Il Punto 7C conferma il confine definito dal blueprint applicativo: i service applicativi restano classi Java pure. Il wiring Spring viene dichiarato esternamente, nel layer infrastructure, tramite configurazioni dedicate.</p>
+
+    </article>
+  </main>
+</body>
+</html>

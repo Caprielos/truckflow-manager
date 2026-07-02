@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Archivio storico — 31-infrastructure-foundation — TruckFlow Docs</title>
+  <style>:root{--bg:#f5f7fb;--panel:#fff;--text:#172033;--muted:#64748b;--accent:#3554d1;--border:#d9e1ef;--code:#0f172a;--shadow:0 18px 44px rgba(15,23,42,.08)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:radial-gradient(circle at top left,rgba(53,84,209,.10),transparent 30rem),var(--bg);color:var(--text);line-height:1.68;font-size:16px}.page{width:min(980px,calc(100% - 2rem));margin:0 auto;padding:2rem 0 4rem}.topbar{display:flex;justify-content:space-between;gap:1rem;align-items:center;margin-bottom:1rem}.back{display:inline-flex;align-items:center;gap:.35rem;padding:.55rem .85rem;border:1px solid var(--border);border-radius:999px;background:#fff;color:var(--accent);font-weight:850;text-decoration:none;box-shadow:0 8px 22px rgba(15,23,42,.05)}.source{color:var(--muted);font-size:.88rem}.doc{padding:2rem;border:1px solid var(--border);border-radius:24px;background:rgba(255,255,255,.94);box-shadow:var(--shadow)}.doc-header{padding-bottom:1rem;margin-bottom:1.25rem;border-bottom:1px solid var(--border)}.kicker{display:inline-flex;width:fit-content;padding:.25rem .65rem;border-radius:999px;background:#dbeafe;color:#1e3a8a;font-size:.72rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase}.doc h1{margin:.7rem 0 .4rem;font-size:clamp(2rem,4vw,3.6rem);line-height:1;letter-spacing:-.05em}.doc h2{margin:2rem 0 .6rem;font-size:1.55rem;line-height:1.15;letter-spacing:-.03em}.doc h3{margin:1.35rem 0 .45rem;font-size:1.18rem}.doc p{margin:.65rem 0;color:#334155}.doc ul,.doc ol{padding-left:1.35rem}.doc li{margin:.35rem 0}.doc a{color:var(--accent);font-weight:800}.doc blockquote{margin:1rem 0;padding:.85rem 1rem;border-left:5px solid var(--accent);border-radius:14px;background:#eef2ff;color:#334155}.doc pre{overflow:auto;padding:1rem;border-radius:16px;background:var(--code);color:#e5e7eb;font-size:.9rem;line-height:1.55}.doc code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}.doc :not(pre)>code{padding:.15rem .32rem;border-radius:7px;background:#eef2f7;color:#1e293b}.doc table{width:100%;border-collapse:collapse;margin:1rem 0;border:1px solid var(--border);border-radius:16px;overflow:hidden;display:block}.doc thead,.doc tbody,.doc tr{width:100%}.doc th,.doc td{padding:.75rem;border-bottom:1px solid var(--border);text-align:left;vertical-align:top}.doc th{background:#f1f5f9;color:#334155;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}.doc tr:last-child td{border-bottom:0}.doc hr{border:0;border-top:1px solid var(--border);margin:2rem 0}.doc img{max-width:100%;border-radius:16px;border:1px solid var(--border)}@media(max-width:720px){.page{width:min(100% - 1rem,980px);padding-top:1rem}.doc{padding:1.15rem;border-radius:18px}.topbar{display:grid}.source{overflow-wrap:anywhere}}</style>
+</head>
+<body>
+  <main class="page">
+    <div class="topbar">
+      <a class="back" href="../index.html">← Torna alla Home</a>
+      <span class="source">Sorgente Markdown: ../old_style/31-infrastructure-foundation.md</span>
+    </div>
+    <article class="doc">
+      <header class="doc-header">
+        <span class="kicker">old_style</span>
+        <h1>Archivio storico — 31-infrastructure-foundation</h1>
+      </header>
+      <h1>Archivio storico — 31-infrastructure-foundation</h1>
+<blockquote>
+<p>Questo documento fa parte dell'archivio storico <code>docs/old_style/</code>.
+Mantiene il percorso step-by-step del progetto, ma la documentazione principale aggiornata si trova in:
+<code>docs/simple/</code>, <code>docs/professional/</code> e <code>docs/digital/</code>.</p>
+</blockquote>
+<hr />
+<h1>Punto 7B — Infrastructure Foundation</h1>
+<blockquote>
+<p>Aggiornamento 7E: il contratto generico <code>PersistenceMapper</code> della foundation è ora usato dal primo mapper concreto del prototipo Locations. La foundation resta neutra: il 7E aggiunge un adapter file-backed pilota, non database, JPA o Spring Data.</p>
+</blockquote>
+<p>Questo documento descrive il <strong>Punto 7B — Infrastructure Foundation</strong> di TruckFlow Manager.</p>
+<blockquote>
+<p>Aggiornamento 7C: la foundation del 7B è ora usata dal wiring Spring controllato documentato in <code>32-spring-wiring-foundation.md</code>. Il 7C aggiunge configurazioni bean e bootstrap tecnico, ma non introduce repository reali, database, REST API, JPA o security.</p>
+</blockquote>
+<p>Il Punto 7B è il primo passo implementativo leggero del nuovo ciclo infrastrutturale aperto con il Punto 7A. Non introduce ancora database, JPA, Spring Data, controller REST, security o repository reali completi. Il suo obiettivo è creare una base tecnica ordinata in cui gli step successivi del Punto 7 possano inserire wiring Spring, mapping, adapter e repository reali senza rompere i confini costruiti nel dominio e nell'application layer.</p>
+<h2>Stato da cui partiamo</h2>
+<p>Prima del Punto 7B il progetto contiene già:</p>
+<ul>
+<li>dominio puro completato e documentato;</li>
+<li>application layer completato e congelato con il Punto 6M;</li>
+<li>roadmap finale allineata dopo il Punto 6M;</li>
+<li>Punto 7A documentato con il blueprint dell'Infrastructure Layer;</li>
+<li>repository in memory esistenti sotto <code>infrastructure.memory</code>;</li>
+<li>nessun controller REST operativo;</li>
+<li>nessun database reale;</li>
+<li>nessuna entity JPA;</li>
+<li>nessuna security HTTP.</li>
+</ul>
+<p>Il Punto 7B non cambia questa scelta. Aggiunge solo la <strong>fondazione tecnica</strong> del layer infrastrutturale.</p>
+<h2>Obiettivo del Punto 7B</h2>
+<p>L'obiettivo è creare una struttura infrastrutturale chiara e stabile:</p>
+<pre><code class="language-text">src/main/java/it/gabriele/truckflow/infrastructure
+├── adapter
+├── config
+├── exception
+├── mapping
+├── repository
+├── service
+└── memory
+</code></pre>
+<p>Questa struttura serve a separare responsabilità tecniche diverse:</p>
+<ul>
+<li><code>adapter</code> contiene convenzioni per adapter tecnici;</li>
+<li><code>config</code> contiene concetti di configurazione infrastrutturale;</li>
+<li><code>exception</code> contiene eccezioni tecniche;</li>
+<li><code>mapping</code> contiene contratti per tradurre domain ↔ persistence;</li>
+<li><code>repository</code> contiene convenzioni per futuri repository reali;</li>
+<li><code>service</code> contiene convenzioni per servizi tecnici infrastrutturali;</li>
+<li><code>memory</code> resta il package degli adapter in memory già esistenti.</li>
+</ul>
+<h2>Cosa è stato introdotto</h2>
+<p>Il Punto 7B introduce:</p>
+<ul>
+<li>package infrastrutturali documentati con <code>package-info.java</code>;</li>
+<li>un contratto marker <code>InfrastructureAdapter</code>;</li>
+<li>un enum tecnico <code>InfrastructureProfile</code>;</li>
+<li>una gerarchia base di eccezioni infrastrutturali;</li>
+<li>un contratto generico <code>PersistenceMapper</code>;</li>
+<li>un marker per repository adapter infrastrutturali;</li>
+<li>un marker per servizi tecnici infrastrutturali;</li>
+<li>un test architetturale dedicato alla foundation infrastrutturale.</li>
+</ul>
+<p>Questi elementi sono volutamente piccoli. Il loro scopo è fissare linguaggio, convenzioni e confini, non implementare subito persistenza reale.</p>
+<h2>Cosa NON è stato introdotto</h2>
+<p>Il Punto 7B non introduce:</p>
+<ul>
+<li>database;</li>
+<li>JPA;</li>
+<li>Hibernate;</li>
+<li>Spring Data;</li>
+<li>repository reali completi;</li>
+<li>entity persistenti;</li>
+<li>controller REST;</li>
+<li>DTO web;</li>
+<li>endpoint HTTP;</li>
+<li>security HTTP;</li>
+<li>JWT;</li>
+<li>application service nuovi;</li>
+<li>use case nuovi;</li>
+<li>mapping concreto di un dominio;</li>
+<li>integrazioni esterne;</li>
+<li>file storage reale;</li>
+<li>email service operativo;</li>
+<li>audit trail operativo.</li>
+</ul>
+<p>Queste scelte sono intenzionali. Il Punto 7B deve essere una foundation, non un salto diretto a una infrastruttura completa.</p>
+<h2>Package <code>infrastructure.adapter</code></h2>
+<p>Il package <code>infrastructure.adapter</code> definisce il concetto tecnico di adapter.</p>
+<p>Un adapter è una classe infrastrutturale che collega un contratto astratto del core a un dettaglio tecnico esterno o interno.</p>
+<p>Esempi futuri:</p>
+<ul>
+<li>repository database adapter;</li>
+<li>storage adapter;</li>
+<li>email adapter;</li>
+<li>document generation adapter;</li>
+<li>external service adapter;</li>
+<li>technical logging adapter.</li>
+</ul>
+<p>Il contratto <code>InfrastructureAdapter</code> espone solo un nome tecnico stabile tramite <code>adapterName()</code>.</p>
+<p>Questo non è business logic. Serve solo a rendere più chiari diagnostica, documentazione e convenzioni future.</p>
+<h2>Package <code>infrastructure.config</code></h2>
+<p>Il package <code>infrastructure.config</code> prepara il terreno per la configurazione tecnica.</p>
+<p>Nel Punto 7B viene introdotto <code>InfrastructureProfile</code> con quattro profili:</p>
+<ul>
+<li><code>MEMORY</code>;</li>
+<li><code>LOCAL</code>;</li>
+<li><code>TEST</code>;</li>
+<li><code>PRODUCTION</code>.</li>
+</ul>
+<p>Questi profili non attivano ancora Spring. Servono a stabilire una nomenclatura tecnica che sarà utile nel Punto 7C, quando Spring verrà introdotto come motore di wiring.</p>
+<p>Il significato è:</p>
+<ul>
+<li><code>MEMORY</code>: adapter in memory per test e scenari locali;</li>
+<li><code>LOCAL</code>: configurazione locale per sviluppo;</li>
+<li><code>TEST</code>: configurazione tecnica per test automatizzati;</li>
+<li><code>PRODUCTION</code>: configurazione futura per ambiente reale.</li>
+</ul>
+<h2>Package <code>infrastructure.exception</code></h2>
+<p>Gli errori tecnici non devono finire nel dominio.</p>
+<p>Per questo il Punto 7B introduce una gerarchia base:</p>
+<pre><code class="language-text">InfrastructureException
+├── RepositoryException
+├── ExternalServiceException
+├── InfrastructureConfigurationException
+└── MappingException
+</code></pre>
+<h3><code>InfrastructureException</code></h3>
+<p>È la radice delle eccezioni tecniche infrastrutturali.</p>
+<p>Rappresenta problemi del mondo tecnico, non violazioni di regole business.</p>
+<h3><code>RepositoryException</code></h3>
+<p>Rappresenta errori tecnici di persistenza o repository adapter.</p>
+<p>Esempi futuri:</p>
+<ul>
+<li>database non raggiungibile;</li>
+<li>errore durante una query;</li>
+<li>timeout di persistenza;</li>
+<li>vincolo tecnico non gestibile a livello domain.</li>
+</ul>
+<h3><code>ExternalServiceException</code></h3>
+<p>Rappresenta errori nel dialogo con servizi esterni.</p>
+<p>Esempi futuri:</p>
+<ul>
+<li>servizio esterno non disponibile;</li>
+<li>risposta non valida;</li>
+<li>timeout;</li>
+<li>credenziali tecniche rifiutate.</li>
+</ul>
+<h3><code>InfrastructureConfigurationException</code></h3>
+<p>Rappresenta errori di configurazione.</p>
+<p>Esempi futuri:</p>
+<ul>
+<li>property mancante;</li>
+<li>profilo non valido;</li>
+<li>endpoint tecnico non configurato;</li>
+<li>credenziale mancante.</li>
+</ul>
+<h3><code>MappingException</code></h3>
+<p>Rappresenta errori di traduzione tra domain model e modello tecnico.</p>
+<p>Esempi futuri:</p>
+<ul>
+<li>enum persistito non riconosciuto;</li>
+<li>valore tecnico impossibile da ricostruire come value object;</li>
+<li>record persistente incompleto.</li>
+</ul>
+<h2>Package <code>infrastructure.mapping</code></h2>
+<p>Il package <code>infrastructure.mapping</code> prepara il concetto di mapping domain ↔ persistence.</p>
+<p>Il contratto <code>PersistenceMapper&lt;D, P&gt;</code> definisce due direzioni:</p>
+<ul>
+<li><code>toPersistence(D domainModel)</code>;</li>
+<li><code>toDomain(P persistenceModel)</code>.</li>
+</ul>
+<p>Il mapper è infrastrutturale perché traduce tra:</p>
+<ul>
+<li>un modello di dominio espressivo;</li>
+<li>un modello tecnico persistibile.</li>
+</ul>
+<p>Regole fondamentali:</p>
+<ul>
+<li>il mapper non deve inventare regole business;</li>
+<li>il mapper non deve bypassare invarianti del dominio;</li>
+<li>il mapper non deve costringere il dominio ad adattarsi al database;</li>
+<li>il mapper deve usare API pubbliche del dominio;</li>
+<li>il mapper dovrà essere testato quando arriveranno i mapping concreti.</li>
+</ul>
+<p>Nel Punto 7B non viene ancora creato un mapper concreto per Locations, Shipments, Vehicles o altri domini. Questo arriverà più avanti.</p>
+<h2>Package <code>infrastructure.repository</code></h2>
+<p>Il package <code>infrastructure.repository</code> ospiterà i futuri repository reali.</p>
+<p>Il Punto 7B introduce solo il marker <code>InfrastructureRepositoryAdapter</code>, che rappresenta un adapter repository infrastrutturale.</p>
+<p>Un repository adapter reale dovrà:</p>
+<ul>
+<li>implementare un port.out dell'application layer;</li>
+<li>usare mapping infrastrutturale quando serve;</li>
+<li>nascondere il dettaglio tecnico all'application layer;</li>
+<li>tradurre errori tecnici in eccezioni infrastrutturali coerenti;</li>
+<li>non contenere regole business nuove.</li>
+</ul>
+<p>I repository in memory esistenti restano in <code>infrastructure.memory</code>. Non vengono spostati e non vengono sostituiti.</p>
+<h2>Package <code>infrastructure.service</code></h2>
+<p>Il package <code>infrastructure.service</code> ospiterà futuri servizi tecnici.</p>
+<p>Esempi futuri:</p>
+<ul>
+<li>document storage;</li>
+<li>document generation;</li>
+<li>email notification;</li>
+<li>technical logging;</li>
+<li>audit adapter;</li>
+<li>external integration service.</li>
+</ul>
+<p>Nel Punto 7B viene introdotto solo il marker <code>InfrastructureService</code>.</p>
+<p>Non viene implementato nessun servizio operativo.</p>
+<h2>Rapporto con <code>infrastructure.memory</code></h2>
+<p><code>infrastructure.memory</code> resta valido.</p>
+<p>Non è un package da cancellare.</p>
+<p>Gli adapter in memory restano utili per:</p>
+<ul>
+<li>test applicativi;</li>
+<li>sviluppo locale;</li>
+<li>prototipi;</li>
+<li>verifica dei port.out;</li>
+<li>scenari senza database.</li>
+</ul>
+<p>Il Punto 7B affianca nuovi package infrastrutturali al package memory, ma non lo sostituisce.</p>
+<p>La regola resta:</p>
+<blockquote>
+<p>l'application layer conosce solo i port.out; la scelta dell'adapter è responsabilità dell'infrastructure layer.</p>
+</blockquote>
+<h2>Confini architetturali dopo il 7B</h2>
+<p>Dopo il Punto 7B, la direzione delle dipendenze resta:</p>
+<pre><code class="language-text">infrastructure -&gt; application -&gt; domain
+</code></pre>
+<p>Sono ancora vietate:</p>
+<pre><code class="language-text">domain -&gt; application
+domain -&gt; infrastructure
+application -&gt; infrastructure
+application -&gt; web
+application -&gt; JPA
+application -&gt; Spring controller
+</code></pre>
+<p>L'infrastructure layer può dipendere da application e domain, ma in questo step i nuovi contratti sono volutamente neutrali e non introducono ancora implementazioni collegate a port.out specifici.</p>
+<h2>Test introdotti</h2>
+<p>Il Punto 7B introduce <code>InfrastructureFoundationTest</code>.</p>
+<p>Il test verifica:</p>
+<ul>
+<li>presenza dei package infrastrutturali fondamentali;</li>
+<li>presenza dei <code>package-info.java</code>;</li>
+<li>gerarchia delle eccezioni infrastrutturali;</li>
+<li>profili tecnici dichiarati;</li>
+<li>assenza di controller, JPA, Spring Data e security nel foundation step;</li>
+<li>assenza di dipendenze da domain/application verso infrastructure;</li>
+<li>presenza della documentazione del Punto 7A e 7B;</li>
+<li>assenza di package prematuri <code>infrastructure.jpa</code> e <code>infrastructure.database</code>.</li>
+</ul>
+<p>Questo test non sostituisce i test futuri di repository reali o mapping concreti. Serve solo a proteggere la foundation.</p>
+<h2>Decisioni ufficiali del Punto 7B</h2>
+<p>Le decisioni ufficiali sono:</p>
+<ol>
+<li>il package <code>infrastructure.memory</code> resta nel progetto;</li>
+<li>i nuovi package infrastrutturali sono foundation, non implementazioni database;</li>
+<li>le eccezioni tecniche partono da <code>InfrastructureException</code>;</li>
+<li>gli errori tecnici non sono errori di dominio;</li>
+<li>il mapping domain ↔ persistence è responsabilità infrastrutturale;</li>
+<li>i futuri repository reali dovranno implementare port.out applicativi;</li>
+<li>Spring non è ancora stato attivato come wiring operativo;</li>
+<li>REST API e controller restano fuori dal Punto 7B;</li>
+<li>JPA, Hibernate e Spring Data restano fuori dal Punto 7B;</li>
+<li>il prossimo step corretto è il Punto 7C — Spring Wiring Foundation.</li>
+</ol>
+<h2>Criteri di accettazione del Punto 7B</h2>
+<p>Il Punto 7B è completo quando:</p>
+<ul>
+<li>esistono i package infrastrutturali base;</li>
+<li>ogni package base è documentato;</li>
+<li>esiste una gerarchia di eccezioni infrastrutturali;</li>
+<li>esistono contratti minimi per adapter, mapping, repository adapter e servizi tecnici;</li>
+<li>i repository in memory restano intatti;</li>
+<li>nessun controller REST è stato introdotto;</li>
+<li>nessun database reale è stato introdotto;</li>
+<li>nessuna entity JPA è stata introdotta;</li>
+<li>nessun repository Spring Data è stato introdotto;</li>
+<li>la documentazione Markdown è aggiornata;</li>
+<li>la documentazione digitale è aggiornata;</li>
+<li>i test architetturali verificano i confini principali.</li>
+</ul>
+<h2>Relazione con il Punto 7C</h2>
+<p>Il Punto 7C sarà <strong>Spring Wiring Foundation</strong>.</p>
+<p>Dopo il 7B, il progetto ha package e convenzioni pronte per accogliere Spring come motore tecnico di wiring.</p>
+<p>Il 7C potrà introdurre:</p>
+<ul>
+<li>configurazioni Spring controllate;</li>
+<li>eventuali classi <code>@Configuration</code>;</li>
+<li>bean per adapter in memory;</li>
+<li>profili tecnici;</li>
+<li>file di configurazione minimale;</li>
+<li>test di wiring tecnico.</li>
+</ul>
+<p>Anche nel 7C resteranno esclusi:</p>
+<ul>
+<li>controller REST;</li>
+<li>endpoint HTTP;</li>
+<li>DTO web;</li>
+<li>security HTTP;</li>
+<li>JPA completa;</li>
+<li>repository reali complessi.</li>
+</ul>
+<h2>Sintesi finale</h2>
+<p>Il Punto 7B trasforma il blueprint del Punto 7A in una base tecnica concreta ma prudente.</p>
+<p>Non costruisce ancora l'infrastruttura reale completa. Prepara invece il terreno con:</p>
+<ul>
+<li>package chiari;</li>
+<li>eccezioni tecniche;</li>
+<li>marker di adapter;</li>
+<li>profili tecnici;</li>
+<li>contratto generico di mapping;</li>
+<li>convenzioni per repository adapter e servizi tecnici;</li>
+<li>test architetturali.</li>
+</ul>
+<p>Questa foundation permette di passare al Punto 7C senza improvvisare e senza perdere la pulizia architetturale raggiunta fino al Punto 6M.</p>
+<hr />
+<h2>Allineamento Punto 7F</h2>
+<p>Il Punto 7F — Repository Expansion estende il pattern file-backed validato dal prototipo Locations.</p>
+<p>La prima espansione controllata aggiunge repository file-backed per Cargo, Documents e Compliance base, mantenendo fuori database, JPA, Hibernate, Spring Data, schema SQL, REST API, controller, security, servizi esterni, workflow e audit trail.</p>
+<p>I repository in-memory restano validi e non vengono sostituiti.</p>
+<hr />
+<h2>Allineamento Punto 7G</h2>
+<p>Il Punto 7G usa la foundation introdotta qui per verificare che eccezioni, marker, package e confini restino coerenti anche dopo l'introduzione dei repository file-backed.</p>
+<h2>Allineamento Punto 7H</h2>
+<p>Il Punto 7H conferma che la foundation introdotta nel Punto 7B è completa per questo ciclo: package tecnici, eccezioni, marker e convenzioni restano stabili e non vengono trasformati prematuramente in database, persistence framework, web layer o security layer.</p>
+
+    </article>
+  </main>
+</body>
+</html>

@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Archivio storico — 03-domain-qualifications — TruckFlow Docs</title>
+  <style>:root{--bg:#f5f7fb;--panel:#fff;--text:#172033;--muted:#64748b;--accent:#3554d1;--border:#d9e1ef;--code:#0f172a;--shadow:0 18px 44px rgba(15,23,42,.08)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:radial-gradient(circle at top left,rgba(53,84,209,.10),transparent 30rem),var(--bg);color:var(--text);line-height:1.68;font-size:16px}.page{width:min(980px,calc(100% - 2rem));margin:0 auto;padding:2rem 0 4rem}.topbar{display:flex;justify-content:space-between;gap:1rem;align-items:center;margin-bottom:1rem}.back{display:inline-flex;align-items:center;gap:.35rem;padding:.55rem .85rem;border:1px solid var(--border);border-radius:999px;background:#fff;color:var(--accent);font-weight:850;text-decoration:none;box-shadow:0 8px 22px rgba(15,23,42,.05)}.source{color:var(--muted);font-size:.88rem}.doc{padding:2rem;border:1px solid var(--border);border-radius:24px;background:rgba(255,255,255,.94);box-shadow:var(--shadow)}.doc-header{padding-bottom:1rem;margin-bottom:1.25rem;border-bottom:1px solid var(--border)}.kicker{display:inline-flex;width:fit-content;padding:.25rem .65rem;border-radius:999px;background:#dbeafe;color:#1e3a8a;font-size:.72rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase}.doc h1{margin:.7rem 0 .4rem;font-size:clamp(2rem,4vw,3.6rem);line-height:1;letter-spacing:-.05em}.doc h2{margin:2rem 0 .6rem;font-size:1.55rem;line-height:1.15;letter-spacing:-.03em}.doc h3{margin:1.35rem 0 .45rem;font-size:1.18rem}.doc p{margin:.65rem 0;color:#334155}.doc ul,.doc ol{padding-left:1.35rem}.doc li{margin:.35rem 0}.doc a{color:var(--accent);font-weight:800}.doc blockquote{margin:1rem 0;padding:.85rem 1rem;border-left:5px solid var(--accent);border-radius:14px;background:#eef2ff;color:#334155}.doc pre{overflow:auto;padding:1rem;border-radius:16px;background:var(--code);color:#e5e7eb;font-size:.9rem;line-height:1.55}.doc code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}.doc :not(pre)>code{padding:.15rem .32rem;border-radius:7px;background:#eef2f7;color:#1e293b}.doc table{width:100%;border-collapse:collapse;margin:1rem 0;border:1px solid var(--border);border-radius:16px;overflow:hidden;display:block}.doc thead,.doc tbody,.doc tr{width:100%}.doc th,.doc td{padding:.75rem;border-bottom:1px solid var(--border);text-align:left;vertical-align:top}.doc th{background:#f1f5f9;color:#334155;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}.doc tr:last-child td{border-bottom:0}.doc hr{border:0;border-top:1px solid var(--border);margin:2rem 0}.doc img{max-width:100%;border-radius:16px;border:1px solid var(--border)}@media(max-width:720px){.page{width:min(100% - 1rem,980px);padding-top:1rem}.doc{padding:1.15rem;border-radius:18px}.topbar{display:grid}.source{overflow-wrap:anywhere}}</style>
+</head>
+<body>
+  <main class="page">
+    <div class="topbar">
+      <a class="back" href="../index.html">← Torna alla Home</a>
+      <span class="source">Sorgente Markdown: ../old_style/03-domain-qualifications.md</span>
+    </div>
+    <article class="doc">
+      <header class="doc-header">
+        <span class="kicker">old_style</span>
+        <h1>Archivio storico — 03-domain-qualifications</h1>
+      </header>
+      <h1>Archivio storico — 03-domain-qualifications</h1>
+<blockquote>
+<p>Questo documento fa parte dell'archivio storico <code>docs/old_style/</code>.
+Mantiene il percorso step-by-step del progetto, ma la documentazione principale aggiornata si trova in:
+<code>docs/simple/</code>, <code>docs/professional/</code> e <code>docs/digital/</code>.</p>
+</blockquote>
+<hr />
+<h1>3. Package <code>domain.qualifications</code></h1>
+<h2>3.1 Scopo del package</h2>
+<p>Il package <code>domain.qualifications</code> contiene il catalogo delle qualificazioni e abilitazioni utilizzabili nel sistema.</p>
+<p>Una <code>Qualification</code> rappresenta un’abilitazione possibile, non il fatto che una persona la possieda.</p>
+<p>Esempio:</p>
+<ul>
+<li><code>DRIVING_LICENSE_C</code> esiste nel catalogo;</li>
+<li>Mario Rossi possiede <code>DRIVING_LICENSE_C</code> nel dominio operativo tramite una <code>OperationalQualification</code>.</li>
+</ul>
+<p>Questa distinzione evita di mescolare catalogo statico e dati personali/operativi.</p>
+<h2>3.2 Perché il catalogo è separato dal dominio operativo</h2>
+<p>Il catalogo risponde alla domanda:</p>
+<blockquote>
+<p>Quali qualificazioni esistono nel sistema?</p>
+</blockquote>
+<p>Il dominio operativo risponde invece alla domanda:</p>
+<blockquote>
+<p>Quali qualificazioni possiede questa figura operativa?</p>
+</blockquote>
+<p>Per questo il catalogo è separato.</p>
+<p>Se una patente o una certificazione fosse modellata direttamente dentro <code>Driver</code>, il sistema diventerebbe rigido. Con un catalogo unico, la stessa qualificazione può essere usata da autisti, meccanici, operatori di magazzino o altre figure future.</p>
+<h2>3.3 Classi principali</h2>
+<h3><code>Qualification</code></h3>
+<p><code>Qualification</code> è l’enum principale del catalogo.</p>
+<p>Ogni qualificazione contiene:</p>
+<ul>
+<li>codice;</li>
+<li>nome leggibile;</li>
+<li>categoria;</li>
+<li>descrizione breve;</li>
+<li>descrizione lunga.</li>
+</ul>
+<p>Il catalogo comprende diverse famiglie di abilitazioni:</p>
+<ul>
+<li>patenti di guida;</li>
+<li>CQC;</li>
+<li>ADR;</li>
+<li>alimentare, farmaceutico e ATP;</li>
+<li>animali vivi;</li>
+<li>rifiuti;</li>
+<li>operatori macchine;</li>
+<li>sicurezza;</li>
+<li>porti e aeroporti;</li>
+<li>logistica aziendale.</li>
+</ul>
+<p>Esempi di qualificazioni:</p>
+<ul>
+<li><code>DRIVING_LICENSE_C</code>;</li>
+<li><code>DRIVING_LICENSE_CE</code>;</li>
+<li><code>CQC_GOODS</code>;</li>
+<li><code>ADR_BASIC</code>;</li>
+<li><code>ADR_TANK</code>;</li>
+<li><code>ATP</code>;</li>
+<li><code>HACCP</code>;</li>
+<li><code>FORKLIFT</code>;</li>
+<li><code>FIRST_AID</code>;</li>
+<li><code>WAREHOUSE_MANAGEMENT</code>.</li>
+</ul>
+<h3><code>QualificationCategory</code></h3>
+<p><code>QualificationCategory</code> raggruppa le qualificazioni per categoria.</p>
+<p>Le categorie attuali sono:</p>
+<ul>
+<li><code>DRIVING_LICENSES</code>;</li>
+<li><code>CQC</code>;</li>
+<li><code>ADR</code>;</li>
+<li><code>FOOD_PHARMACEUTICALS</code>;</li>
+<li><code>ANIMALS</code>;</li>
+<li><code>WASTE</code>;</li>
+<li><code>MACHINE_OPERATORS</code>;</li>
+<li><code>SAFETY</code>;</li>
+<li><code>PORTS_AND_AIRPORTS</code>;</li>
+<li><code>COMPANY_LOGISTICS</code>.</li>
+</ul>
+<p>Ogni categoria contiene:</p>
+<ul>
+<li>codice;</li>
+<li>nome leggibile;</li>
+<li>descrizione.</li>
+</ul>
+<p>Questa struttura permette di filtrare il catalogo e presentarlo in modo ordinato.</p>
+<h3><code>QualificationCatalog</code></h3>
+<p><code>QualificationCatalog</code> è il punto di accesso al catalogo.</p>
+<p>Serve a:</p>
+<ul>
+<li>ottenere tutte le qualificazioni;</li>
+<li>cercare qualificazioni per categoria;</li>
+<li>cercare una qualificazione tramite codice.</li>
+</ul>
+<p>È una classe di supporto del dominio, non un repository di database.</p>
+<p>I test del catalogo devono verificare il comportamento e la coerenza dei dati, non bloccare numeri totali rigidi.</p>
+<p>Esempi di controlli corretti:</p>
+<ul>
+<li>tutti i codici sono univoci;</li>
+<li>tutte le categorie hanno almeno una qualificazione;</li>
+<li>le qualificazioni fondamentali sono presenti;</li>
+<li>la ricerca per codice funziona;</li>
+<li>ogni qualificazione filtrata appartiene davvero alla categoria richiesta.</li>
+</ul>
+<p>Esempio da evitare:</p>
+<ul>
+<li>fallire il test solo perché il catalogo passa da 64 a 65 qualificazioni.</li>
+</ul>
+<h2>3.4 Perché le patenti sono qualificazioni</h2>
+<p>Nel progetto TruckFlow, le patenti sono modellate come <code>Qualification</code>.</p>
+<p>Questa scelta evita di creare un enum separato come <code>LicenseType</code>, che avrebbe duplicato il concetto.</p>
+<p>Una patente C, una CQC merci o un ADR base sono tutte abilitazioni che permettono a una persona di svolgere certe attività.</p>
+<p>Quindi è più pulito modellarle tutte come qualificazioni, distinguendole tramite categoria.</p>
+<h2>3.5 Perché il catalogo non contiene scadenze</h2>
+<p>Il catalogo dice solo che una qualificazione esiste.</p>
+<p>Non deve contenere:</p>
+<ul>
+<li>data di rilascio;</li>
+<li>data di scadenza;</li>
+<li>documento PDF;</li>
+<li>ente emittente reale;</li>
+<li>validità personale;</li>
+<li>stato della certificazione.</li>
+</ul>
+<p>Questi dati appartengono alla qualificazione posseduta dalla persona, non al catalogo.</p>
+<p>Per esempio:</p>
+<ul>
+<li><code>DRIVING_LICENSE_C</code> nel catalogo non scade;</li>
+<li>la patente C di Mario Rossi può scadere.</li>
+</ul>
+<p>In futuro, le scadenze verranno gestite da un modulo dedicato a documenti, compliance e deadline.</p>
+<h2>3.6 Come viene usato dal dominio operativo</h2>
+<p>Le figure operative usano <code>OperationalQualification</code>.</p>
+<p><code>OperationalQualification</code> contiene una <code>Qualification</code> del catalogo più dati operativi come:</p>
+<ul>
+<li>numero riferimento;</li>
+<li>paese di rilascio;</li>
+<li>livello;</li>
+<li>note.</li>
+</ul>
+<p>Quindi il flusso concettuale è:</p>
+<ol>
+<li>il catalogo definisce le qualificazioni disponibili;</li>
+<li>una figura operativa possiede una o più qualificazioni;</li>
+<li>in futuro, documenti e scadenze potranno essere collegati a quelle qualificazioni possedute.</li>
+</ol>
+<h2>3.7 Cosa non fa questo package</h2>
+<p><code>domain.qualifications</code> non gestisce:</p>
+<ul>
+<li>persone;</li>
+<li>autisti;</li>
+<li>scadenze;</li>
+<li>documenti;</li>
+<li>file;</li>
+<li>controllo automatico della compliance;</li>
+<li>assegnazione a viaggi;</li>
+<li>compatibilità veicolo/autista.</li>
+</ul>
+<p>Questa scelta mantiene il catalogo semplice, stabile e riutilizzabile.</p>
+
+    </article>
+  </main>
+</body>
+</html>

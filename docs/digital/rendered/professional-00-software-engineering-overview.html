@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Software Engineering Overview — TruckFlow Manager — TruckFlow Docs</title>
+  <style>:root{--bg:#f5f7fb;--panel:#fff;--text:#172033;--muted:#64748b;--accent:#3554d1;--border:#d9e1ef;--code:#0f172a;--shadow:0 18px 44px rgba(15,23,42,.08)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:radial-gradient(circle at top left,rgba(53,84,209,.10),transparent 30rem),var(--bg);color:var(--text);line-height:1.68;font-size:16px}.page{width:min(980px,calc(100% - 2rem));margin:0 auto;padding:2rem 0 4rem}.topbar{display:flex;justify-content:space-between;gap:1rem;align-items:center;margin-bottom:1rem}.back{display:inline-flex;align-items:center;gap:.35rem;padding:.55rem .85rem;border:1px solid var(--border);border-radius:999px;background:#fff;color:var(--accent);font-weight:850;text-decoration:none;box-shadow:0 8px 22px rgba(15,23,42,.05)}.source{color:var(--muted);font-size:.88rem}.doc{padding:2rem;border:1px solid var(--border);border-radius:24px;background:rgba(255,255,255,.94);box-shadow:var(--shadow)}.doc-header{padding-bottom:1rem;margin-bottom:1.25rem;border-bottom:1px solid var(--border)}.kicker{display:inline-flex;width:fit-content;padding:.25rem .65rem;border-radius:999px;background:#dbeafe;color:#1e3a8a;font-size:.72rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase}.doc h1{margin:.7rem 0 .4rem;font-size:clamp(2rem,4vw,3.6rem);line-height:1;letter-spacing:-.05em}.doc h2{margin:2rem 0 .6rem;font-size:1.55rem;line-height:1.15;letter-spacing:-.03em}.doc h3{margin:1.35rem 0 .45rem;font-size:1.18rem}.doc p{margin:.65rem 0;color:#334155}.doc ul,.doc ol{padding-left:1.35rem}.doc li{margin:.35rem 0}.doc a{color:var(--accent);font-weight:800}.doc blockquote{margin:1rem 0;padding:.85rem 1rem;border-left:5px solid var(--accent);border-radius:14px;background:#eef2ff;color:#334155}.doc pre{overflow:auto;padding:1rem;border-radius:16px;background:var(--code);color:#e5e7eb;font-size:.9rem;line-height:1.55}.doc code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}.doc :not(pre)>code{padding:.15rem .32rem;border-radius:7px;background:#eef2f7;color:#1e293b}.doc table{width:100%;border-collapse:collapse;margin:1rem 0;border:1px solid var(--border);border-radius:16px;overflow:hidden;display:block}.doc thead,.doc tbody,.doc tr{width:100%}.doc th,.doc td{padding:.75rem;border-bottom:1px solid var(--border);text-align:left;vertical-align:top}.doc th{background:#f1f5f9;color:#334155;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}.doc tr:last-child td{border-bottom:0}.doc hr{border:0;border-top:1px solid var(--border);margin:2rem 0}.doc img{max-width:100%;border-radius:16px;border:1px solid var(--border)}@media(max-width:720px){.page{width:min(100% - 1rem,980px);padding-top:1rem}.doc{padding:1.15rem;border-radius:18px}.topbar{display:grid}.source{overflow-wrap:anywhere}}</style>
+</head>
+<body>
+  <main class="page">
+    <div class="topbar">
+      <a class="back" href="../index.html">← Torna alla Home</a>
+      <span class="source">Sorgente Markdown: ../professional/00-software-engineering-overview.md</span>
+    </div>
+    <article class="doc">
+      <header class="doc-header">
+        <span class="kicker">professional</span>
+        <h1>Software Engineering Overview — TruckFlow Manager</h1>
+      </header>
+      <h1>Software Engineering Overview — TruckFlow Manager</h1>
+<h2>1. Executive Summary</h2>
+<p>TruckFlow Manager è un progetto Java 21 orientato alla gestione professionale di processi logistici e di trasporto merci. L'obiettivo è costruire una piattaforma enterprise capace di modellare in modo realistico veicoli, autisti, carichi, spedizioni, documenti, requisiti di compliance, sedi operative e futuri processi API.</p>
+<p>Il progetto non nasce come semplice CRUD. La direzione architetturale scelta è costruire prima un dominio pulito e stabile, poi un application layer con casi d'uso, poi un infrastructure layer con adapter tecnici e repository concreti, e solo successivamente un API layer REST.</p>
+<p>Lo stato attuale è:</p>
+<pre><code class="language-text">Punto 1 → 5    Domain Layer completato
+Punto 6A → 6M  Application Layer completato
+Punto 7A → 7H  Infrastructure Layer completato
+Punto 8A → 8H  API Layer pianificato
+</code></pre>
+<p>TruckFlow Manager contiene già un modello ampio, use case applicativi, porte in ingresso/uscita, repository in-memory, repository file-backed limitati e documentazione organizzata. Non contiene ancora REST API reali, controller, DTO web, database relazionale, JPA, Spring Data, sicurezza HTTP o frontend.</p>
+<h2>2. Problema reale che il sistema risolve</h2>
+<p>Le aziende di trasporto e logistica devono coordinare molte informazioni eterogenee: veicoli, conducenti, carichi, sedi, spedizioni, documenti, scadenze, requisiti normativi, disponibilità operative e qualità del servizio.</p>
+<p>Un sistema debole tende a mescolare queste responsabilità in controller, tabelle o servizi generici. TruckFlow Manager separa invece il problema in layer e bounded context, in modo che le regole di business restino leggibili, testabili e indipendenti dalla tecnologia.</p>
+<h2>3. Obiettivi del sistema</h2>
+<ul>
+<li>Modellare il dominio logistico in modo realistico e incrementale.</li>
+<li>Separare regole di business, casi d'uso e dettagli tecnici.</li>
+<li>Evitare dipendenze premature da database, REST API, security o frontend.</li>
+<li>Preparare un'evoluzione enterprise verso API, workflow, dashboard, audit, compliance avanzata e integrazioni esterne.</li>
+<li>Mantenere documentazione e codice coerenti a ogni ciclo di sviluppo.</li>
+</ul>
+<h2>4. Attori e stakeholder</h2>
+<ul>
+<li>Manager logistico: monitora stato operativo, scadenze, qualità e performance.</li>
+<li>Dispatcher: assegna risorse e coordina operazioni future.</li>
+<li>Driver: figura operativa soggetta a qualifiche, documenti e requisiti.</li>
+<li>Warehouse operator: gestisce punti di carico/scarico e flussi operativi futuri.</li>
+<li>Compliance manager: controlla requisiti normativi e documentali.</li>
+<li>Sviluppatore/manutentore: evolve il sistema rispettando i confini architetturali.</li>
+</ul>
+<h2>5. Requisiti funzionali principali</h2>
+<table>
+<thead>
+<tr>
+  <th>ID</th>
+  <th>Requisito</th>
+  <th>Stato</th>
+  <th>Layer coinvolti</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>RF-01</td>
+  <td>Gestire concetti di utenti e ruoli operativi</td>
+  <td>Presente nel dominio</td>
+  <td>Domain</td>
+</tr>
+<tr>
+  <td>RF-02</td>
+  <td>Modellare qualifiche, certificazioni e requisiti</td>
+  <td>Presente nel dominio</td>
+  <td>Domain</td>
+</tr>
+<tr>
+  <td>RF-03</td>
+  <td>Modellare veicoli e concetti tecnici</td>
+  <td>Presente nel dominio</td>
+  <td>Domain</td>
+</tr>
+<tr>
+  <td>RF-04</td>
+  <td>Modellare cargo, location, shipments, documents e compliance</td>
+  <td>Presente nel dominio</td>
+  <td>Domain</td>
+</tr>
+<tr>
+  <td>RF-05</td>
+  <td>Eseguire use case applicativi tramite port in</td>
+  <td>Presente</td>
+  <td>Application</td>
+</tr>
+<tr>
+  <td>RF-06</td>
+  <td>Usare repository port indipendenti dall'infrastructure</td>
+  <td>Presente</td>
+  <td>Application</td>
+</tr>
+<tr>
+  <td>RF-07</td>
+  <td>Salvare contesti selezionati su file-backed repositories</td>
+  <td>Presente in modo limitato</td>
+  <td>Infrastructure</td>
+</tr>
+<tr>
+  <td>RF-08</td>
+  <td>Esporre REST API versionate</td>
+  <td>Pianificato</td>
+  <td>API futura</td>
+</tr>
+<tr>
+  <td>RF-09</td>
+  <td>Introdurre error handling API e DTO web</td>
+  <td>Pianificato</td>
+  <td>API futura</td>
+</tr>
+<tr>
+  <td>RF-10</td>
+  <td>Introdurre DB/JPA/Spring Data/security</td>
+  <td>Futuro, non ancora presente</td>
+  <td>Infrastructure/API futura</td>
+</tr>
+</tbody>
+</table>
+<h2>6. Requisiti non funzionali</h2>
+<table>
+<thead>
+<tr>
+  <th>Qualità</th>
+  <th>Descrizione</th>
+  <th>Stato attuale</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Manutenibilità</td>
+  <td>Codice diviso per layer e bounded context</td>
+  <td>Prioritaria e già applicata</td>
+</tr>
+<tr>
+  <td>Testabilità</td>
+  <td>Domain e application testabili senza web/database</td>
+  <td>Già applicata</td>
+</tr>
+<tr>
+  <td>Scalabilità architetturale</td>
+  <td>API, DB, security e integrazioni saranno aggiunti per layer</td>
+  <td>Pianificata</td>
+</tr>
+<tr>
+  <td>Osservabilità</td>
+  <td>Dashboard, KPI e audit non sono ancora implementati</td>
+  <td>Futuro</td>
+</tr>
+<tr>
+  <td>Sicurezza</td>
+  <td>Nessuna security HTTP/JWT ancora introdotta</td>
+  <td>Futuro</td>
+</tr>
+<tr>
+  <td>Portabilità</td>
+  <td>Persistenza file-backed limitata, senza DB obbligatorio</td>
+  <td>Presente</td>
+</tr>
+<tr>
+  <td>Chiarezza documentale</td>
+  <td>Documentazione simple, professional, old_style e digital</td>
+  <td>In consolidamento</td>
+</tr>
+</tbody>
+</table>
+<h2>7. Architettura software</h2>
+<p>La direzione architetturale è:</p>
+<pre><code class="language-text">API Layer futuro
+        ↓
+Application Layer
+        ↓
+Domain Layer
+
+Infrastructure Layer implementa le port dell'application
+e fornisce dettagli tecnici senza contaminare i layer interni.
+</code></pre>
+<p>Regole principali:</p>
+<ul>
+<li><code>domain</code> non dipende da Spring, JPA, REST o infrastructure.</li>
+<li><code>application</code> orchestra use case e dipende dal dominio.</li>
+<li><code>infrastructure</code> implementa dettagli tecnici e adapter.</li>
+<li><code>api</code> sarà un layer separato e userà solo use case applicativi.</li>
+<li>I controller futuri non chiameranno repository concreti.</li>
+</ul>
+<h2>8. Bounded context principali</h2>
+<ul>
+<li><code>domain.users</code></li>
+<li><code>domain.qualifications</code></li>
+<li><code>domain.operational</code></li>
+<li><code>domain.vehicles</code></li>
+<li><code>domain.cargo</code></li>
+<li><code>domain.locations</code></li>
+<li><code>domain.triptemplates</code></li>
+<li><code>domain.shipments</code></li>
+<li><code>domain.documents</code></li>
+<li><code>domain.compliance</code></li>
+</ul>
+<p>I package application e infrastructure collegano questi contesti a casi d'uso, port, repository memory, mapping e repository file-backed selezionati.</p>
+<h2>9. Tecnologie adottate</h2>
+<ul>
+<li>Java 21</li>
+<li>Maven</li>
+<li>JUnit</li>
+<li>Spring Boot come wiring tecnico non-web</li>
+<li>Repository in-memory</li>
+<li>Repository file-backed per contesti selezionati</li>
+<li>Documentazione Markdown/HTML statica</li>
+</ul>
+<p>Tecnologie rimandate:</p>
+<ul>
+<li>REST API reali</li>
+<li>Spring MVC controller</li>
+<li>JPA / Spring Data</li>
+<li>database relazionale</li>
+<li>security HTTP / JWT</li>
+<li>frontend</li>
+<li>workflow e audit trail</li>
+</ul>
+<h2>10. Stato attuale del progetto</h2>
+<p>Sono completati:</p>
+<ul>
+<li>Domain Layer: Punti 1 → 5</li>
+<li>Application Layer: Punto 6A → 6M</li>
+<li>Infrastructure Layer: Punto 7A → 7H</li>
+<li>Digital Documentation Reader: in fase di refinement</li>
+</ul>
+<p>Repository file-backed già validati:</p>
+<ul>
+<li>Locations</li>
+<li>Cargo</li>
+<li>Documents</li>
+<li>Compliance</li>
+</ul>
+<h2>11. Cosa manca</h2>
+<p>Mancano ancora:</p>
+<ul>
+<li>API Layer</li>
+<li>controller REST</li>
+<li>DTO web</li>
+<li>mapper API</li>
+<li>error handling API</li>
+<li>OpenAPI/Swagger review</li>
+<li>security</li>
+<li>database/JPA/Spring Data</li>
+<li>frontend</li>
+<li>audit trail</li>
+<li>workflow</li>
+<li>integrazioni esterne</li>
+</ul>
+<p>Queste mancanze non sono errori: sono scelte di roadmap per evitare complessità prematura.</p>
+<h2>12. Roadmap</h2>
+<table>
+<thead>
+<tr>
+  <th>Ciclo</th>
+  <th>Stato</th>
+  <th>Contenuto</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Punto 1 → 5</td>
+  <td>Completato</td>
+  <td>Domain Layer</td>
+</tr>
+<tr>
+  <td>Punto 6A → 6M</td>
+  <td>Completato</td>
+  <td>Application Layer</td>
+</tr>
+<tr>
+  <td>Punto 7A → 7H</td>
+  <td>Completato</td>
+  <td>Infrastructure Layer</td>
+</tr>
+<tr>
+  <td>Punto 8A → 8H</td>
+  <td>Pianificato</td>
+  <td>API Layer</td>
+</tr>
+</tbody>
+</table>
+<p>Roadmap API futura:</p>
+<pre><code class="language-text">8A — API Layer Blueprint
+8B — API Layer Foundation
+8C — Locations Controller Prototype
+8D — API DTO &amp; Mapping Conventions
+8E — API Error Handling
+8F — API Controller Tests
+8G — OpenAPI &amp; Swagger Review
+8H — API Layer Freeze
+</code></pre>
+<h2>13. Rischi tecnici e mitigazioni</h2>
+<table>
+<thead>
+<tr>
+  <th>Rischio</th>
+  <th>Mitigazione</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Introdurre REST/API troppo presto</td>
+  <td>Avviare Punto 8 solo dopo il consolidamento documentale</td>
+</tr>
+<tr>
+  <td>Mescolare infrastructure e application</td>
+  <td>Test architetturali e regole di dipendenza</td>
+</tr>
+<tr>
+  <td>Documentazione non allineata al codice</td>
+  <td>Digital Reader con catalogo statico aggiornato</td>
+</tr>
+<tr>
+  <td>Package Explorer troppo grande</td>
+  <td>Albero gerarchico con dettaglio selezionato</td>
+</tr>
+<tr>
+  <td>Crescita incontrollata dei bounded context</td>
+  <td>Roadmap e freeze per layer</td>
+</tr>
+</tbody>
+</table>
+<h2>14. Glossario essenziale</h2>
+<ul>
+<li>Domain Layer: layer con regole e concetti di business.</li>
+<li>Application Layer: layer dei casi d'uso e delle port.</li>
+<li>Infrastructure Layer: layer tecnico con adapter e repository concreti.</li>
+<li>API Layer: futuro layer REST versionato.</li>
+<li>Port: interfaccia che definisce un ingresso o un'uscita applicativa.</li>
+<li>Adapter: implementazione tecnica di una port.</li>
+<li>Repository: astrazione per salvare o recuperare dati.</li>
+<li>Freeze: punto di stabilizzazione che blocca derive premature.</li>
+</ul>
+
+    </article>
+  </main>
+</body>
+</html>

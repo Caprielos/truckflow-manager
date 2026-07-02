@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Archivio storico — 37-infrastructure-review-freeze — TruckFlow Docs</title>
+  <style>:root{--bg:#f5f7fb;--panel:#fff;--text:#172033;--muted:#64748b;--accent:#3554d1;--border:#d9e1ef;--code:#0f172a;--shadow:0 18px 44px rgba(15,23,42,.08)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:radial-gradient(circle at top left,rgba(53,84,209,.10),transparent 30rem),var(--bg);color:var(--text);line-height:1.68;font-size:16px}.page{width:min(980px,calc(100% - 2rem));margin:0 auto;padding:2rem 0 4rem}.topbar{display:flex;justify-content:space-between;gap:1rem;align-items:center;margin-bottom:1rem}.back{display:inline-flex;align-items:center;gap:.35rem;padding:.55rem .85rem;border:1px solid var(--border);border-radius:999px;background:#fff;color:var(--accent);font-weight:850;text-decoration:none;box-shadow:0 8px 22px rgba(15,23,42,.05)}.source{color:var(--muted);font-size:.88rem}.doc{padding:2rem;border:1px solid var(--border);border-radius:24px;background:rgba(255,255,255,.94);box-shadow:var(--shadow)}.doc-header{padding-bottom:1rem;margin-bottom:1.25rem;border-bottom:1px solid var(--border)}.kicker{display:inline-flex;width:fit-content;padding:.25rem .65rem;border-radius:999px;background:#dbeafe;color:#1e3a8a;font-size:.72rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase}.doc h1{margin:.7rem 0 .4rem;font-size:clamp(2rem,4vw,3.6rem);line-height:1;letter-spacing:-.05em}.doc h2{margin:2rem 0 .6rem;font-size:1.55rem;line-height:1.15;letter-spacing:-.03em}.doc h3{margin:1.35rem 0 .45rem;font-size:1.18rem}.doc p{margin:.65rem 0;color:#334155}.doc ul,.doc ol{padding-left:1.35rem}.doc li{margin:.35rem 0}.doc a{color:var(--accent);font-weight:800}.doc blockquote{margin:1rem 0;padding:.85rem 1rem;border-left:5px solid var(--accent);border-radius:14px;background:#eef2ff;color:#334155}.doc pre{overflow:auto;padding:1rem;border-radius:16px;background:var(--code);color:#e5e7eb;font-size:.9rem;line-height:1.55}.doc code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}.doc :not(pre)>code{padding:.15rem .32rem;border-radius:7px;background:#eef2f7;color:#1e293b}.doc table{width:100%;border-collapse:collapse;margin:1rem 0;border:1px solid var(--border);border-radius:16px;overflow:hidden;display:block}.doc thead,.doc tbody,.doc tr{width:100%}.doc th,.doc td{padding:.75rem;border-bottom:1px solid var(--border);text-align:left;vertical-align:top}.doc th{background:#f1f5f9;color:#334155;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}.doc tr:last-child td{border-bottom:0}.doc hr{border:0;border-top:1px solid var(--border);margin:2rem 0}.doc img{max-width:100%;border-radius:16px;border:1px solid var(--border)}@media(max-width:720px){.page{width:min(100% - 1rem,980px);padding-top:1rem}.doc{padding:1.15rem;border-radius:18px}.topbar{display:grid}.source{overflow-wrap:anywhere}}</style>
+</head>
+<body>
+  <main class="page">
+    <div class="topbar">
+      <a class="back" href="../index.html">← Torna alla Home</a>
+      <span class="source">Sorgente Markdown: ../old_style/37-infrastructure-review-freeze.md</span>
+    </div>
+    <article class="doc">
+      <header class="doc-header">
+        <span class="kicker">old_style</span>
+        <h1>Archivio storico — 37-infrastructure-review-freeze</h1>
+      </header>
+      <h1>Archivio storico — 37-infrastructure-review-freeze</h1>
+<blockquote>
+<p>Questo documento fa parte dell'archivio storico <code>docs/old_style/</code>.
+Mantiene il percorso step-by-step del progetto, ma la documentazione principale aggiornata si trova in:
+<code>docs/simple/</code>, <code>docs/professional/</code> e <code>docs/digital/</code>.</p>
+</blockquote>
+<hr />
+<h1>Punto 7H — Infrastructure Review &amp; Freeze</h1>
+<p>Il Punto 7H chiude il primo ciclo dell'Infrastructure Layer.</p>
+<p>Questa fase non aggiunge nuovi repository business, non introduce database e non apre ancora il layer API. Serve a verificare che tutto ciò che è stato costruito dal Punto 7A al Punto 7G sia coerente, documentato, testato e pronto per diventare la base tecnica del futuro Punto 8.</p>
+<hr />
+<h2>Obiettivo dello step</h2>
+<p>L'obiettivo del Punto 7H è congelare lo stato infrastrutturale raggiunto.</p>
+<p>Il freeze conferma che:</p>
+<ul>
+<li>il blueprint infrastrutturale è definito;</li>
+<li>la foundation tecnica è presente;</li>
+<li>Spring è usato solo come wiring non web;</li>
+<li>il mapping domain ↔ persistence è formalizzato come blueprint;</li>
+<li>il primo repository reale prototipale Locations è presente;</li>
+<li>l'espansione file-backed verso Cargo, Documents e Compliance è presente;</li>
+<li>la suite di test infrastrutturali è stata rafforzata;</li>
+<li>il domain layer e l'application layer restano indipendenti dall'infrastruttura;</li>
+<li>non sono stati introdotti layer prematuri.</li>
+</ul>
+<p>Il Punto 7H è quindi una fase di review, allineamento e protezione architetturale.</p>
+<hr />
+<h2>Stato finale del Punto 7</h2>
+<p>Alla fine del Punto 7 il progetto contiene questi sotto-step completati:</p>
+<table>
+<thead>
+<tr>
+  <th>Step</th>
+  <th>Nome</th>
+  <th>Stato</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>7A</td>
+  <td>Infrastructure Layer Blueprint</td>
+  <td>Completato</td>
+</tr>
+<tr>
+  <td>7B</td>
+  <td>Infrastructure Foundation</td>
+  <td>Completato</td>
+</tr>
+<tr>
+  <td>7C</td>
+  <td>Spring Wiring Foundation</td>
+  <td>Completato</td>
+</tr>
+<tr>
+  <td>7D</td>
+  <td>Persistence Mapping Blueprint</td>
+  <td>Completato</td>
+</tr>
+<tr>
+  <td>7E</td>
+  <td>Real Repository Prototype</td>
+  <td>Completato</td>
+</tr>
+<tr>
+  <td>7F</td>
+  <td>Repository Expansion</td>
+  <td>Completato</td>
+</tr>
+<tr>
+  <td>7G</td>
+  <td>Infrastructure Testing</td>
+  <td>Completato</td>
+</tr>
+<tr>
+  <td>7H</td>
+  <td>Infrastructure Review &amp; Freeze</td>
+  <td>Completato</td>
+</tr>
+</tbody>
+</table>
+<p>Il Punto 7 è quindi considerato chiuso.</p>
+<hr />
+<h2>Cosa è stato consolidato</h2>
+<p>Il Punto 7H consolida l'infrastruttura attuale in quattro aree principali.</p>
+<h3>1. Foundation infrastrutturale</h3>
+<p>Sono confermati i package infrastrutturali base:</p>
+<pre><code class="language-text">infrastructure.adapter
+infrastructure.config
+infrastructure.config.spring
+infrastructure.exception
+infrastructure.mapping
+infrastructure.memory
+infrastructure.repository
+infrastructure.repository.file
+infrastructure.service
+</code></pre>
+<p>Questi package danno una struttura chiara al layer tecnico senza obbligare il progetto a scegliere subito un database definitivo.</p>
+<hr />
+<h3>2. Spring wiring controllato</h3>
+<p>Spring resta confinato nell'infrastructure layer.</p>
+<p>Il Punto 7H conferma che:</p>
+<ul>
+<li><code>TruckFlowApplication</code> esiste come entry point tecnico;</li>
+<li><code>application.yml</code> mantiene runtime non web;</li>
+<li>il profilo attivo resta <code>memory</code>;</li>
+<li>i bean sono configurati esplicitamente in <code>infrastructure.config.spring</code>;</li>
+<li>domain e application non importano Spring.</li>
+</ul>
+<p>Spring è quindi un dettaglio tecnico di wiring, non un concetto di dominio o application layer.</p>
+<hr />
+<h3>3. Mapping domain ↔ persistence</h3>
+<p>Il catalogo di mapping introdotto nel Punto 7D resta il riferimento ufficiale.</p>
+<p>Il progetto ha blueprint per:</p>
+<ul>
+<li>Locations;</li>
+<li>Cargo;</li>
+<li>Shipments;</li>
+<li>Documents;</li>
+<li>Vehicles;</li>
+<li>Operational Roles;</li>
+<li>Compliance.</li>
+</ul>
+<p>Il Punto 7H conferma che questi blueprint restano descrittivi e non introducono ancora JPA, tabelle SQL, entity persistence o schema fisici.</p>
+<hr />
+<h3>4. Repository file-backed validati</h3>
+<p>Il Punto 7H congela lo scope dei repository file-backed validati:</p>
+<pre><code class="language-text">FileLocationRepository
+FileCargoUnitRepository
+FileDocumentRepository
+FileComplianceRequirementRepository
+</code></pre>
+<p>Questa scelta è intenzionale.</p>
+<p>Questi repository coprono contesti più sicuri e catalog-like. Non vengono ancora introdotti repository reali completi per:</p>
+<ul>
+<li>Shipments;</li>
+<li>Vehicles;</li>
+<li>Operational Roles;</li>
+<li>TripTemplates.</li>
+</ul>
+<p>Questi contesti hanno mapping più profondi, collezioni, relazioni e regole operative più delicate. Verranno trattati in una fase successiva, dopo il freeze dell'infrastruttura attuale.</p>
+<hr />
+<h2>Nuovo test finale</h2>
+<p>Il Punto 7H aggiunge:</p>
+<pre><code class="language-text">InfrastructureLayerFinalFreezeTest
+</code></pre>
+<p>Il test verifica che:</p>
+<ul>
+<li>la documentazione 7A → 7H sia presente;</li>
+<li>i package infrastrutturali base esistano;</li>
+<li>lo scope dei repository file-backed resti quello validato;</li>
+<li>domain e application non dipendano da infrastructure o Spring;</li>
+<li>il runtime Spring resti non web e basato sul profilo <code>memory</code>;</li>
+<li>non siano presenti controller REST, security HTTP, JPA, Spring Data o database;</li>
+<li>la suite di test infrastrutturali introdotta nei punti precedenti sia presente;</li>
+<li>non esistano package prematuri come <code>infrastructure.persistence</code>, <code>infrastructure.database</code>, <code>infrastructure.web</code> o <code>infrastructure.security</code>.</li>
+</ul>
+<p>Questo test non sostituisce i test tecnici precedenti. Li completa come controllo finale di freeze.</p>
+<hr />
+<h2>Cosa il Punto 7H NON introduce</h2>
+<p>Il Punto 7H non introduce:</p>
+<ul>
+<li>database;</li>
+<li>JPA;</li>
+<li>Hibernate;</li>
+<li>Spring Data;</li>
+<li>schema SQL;</li>
+<li>repository reali per tutti i domini;</li>
+<li>REST API;</li>
+<li>controller;</li>
+<li>DTO web;</li>
+<li>security;</li>
+<li>JWT;</li>
+<li>servizi esterni;</li>
+<li>email;</li>
+<li>audit trail;</li>
+<li>workflow;</li>
+<li>file upload;</li>
+<li>storage binario documentale;</li>
+<li>tracking;</li>
+<li>planning;</li>
+<li>dashboard.</li>
+</ul>
+<p>Il Punto 7H chiude l'infrastructure layer attuale, non apre il delivery layer.</p>
+<hr />
+<h2>Stato architetturale congelato</h2>
+<p>Dopo il Punto 7H la struttura architetturale resta:</p>
+<pre><code class="language-text">domain         -&gt; puro, senza dipendenze tecniche
+application    -&gt; orchestration layer, usa port.in e port.out
+infrastructure -&gt; adapter tecnici, repository in-memory, repository file-backed, mapping, wiring Spring
+</code></pre>
+<p>Le dipendenze restano orientate verso il centro:</p>
+<pre><code class="language-text">infrastructure -&gt; application -&gt; domain
+</code></pre>
+<p>Non è ammesso il contrario.</p>
+<hr />
+<h2>Perché il Punto 7 può chiudersi qui</h2>
+<p>Il Punto 7 non aveva l'obiettivo di creare subito tutta la persistenza enterprise definitiva.</p>
+<p>L'obiettivo era costruire una base infrastrutturale controllata:</p>
+<ul>
+<li>foundation tecnica;</li>
+<li>Spring wiring non web;</li>
+<li>mapping blueprint;</li>
+<li>repository reale prototipale;</li>
+<li>espansione file-backed prudente;</li>
+<li>test infrastrutturali;</li>
+<li>freeze finale.</li>
+</ul>
+<p>Questo obiettivo è stato raggiunto.</p>
+<p>Il progetto ora ha abbastanza infrastruttura per preparare il futuro API Layer senza violare la Clean Architecture.</p>
+<hr />
+<h2>Preparazione al Punto 8</h2>
+<p>Dopo il Punto 7H il prossimo ciclo naturale è:</p>
+<pre><code class="language-text">Punto 8 — API Layer
+</code></pre>
+<p>Il Punto 8 potrà introdurre, in modo controllato:</p>
+<ul>
+<li>blueprint API;</li>
+<li>controller REST;</li>
+<li>DTO web;</li>
+<li>mapping API ↔ application;</li>
+<li>error handling HTTP;</li>
+<li>validazione HTTP;</li>
+<li>Swagger/OpenAPI operativo;</li>
+<li>security in una fase successiva e separata.</li>
+</ul>
+<p>Il Punto 8 dovrà usare i use case applicativi già esistenti. Non dovrà chiamare direttamente il dominio né i repository tecnici.</p>
+<hr />
+<h2>Stato finale del Punto 7H</h2>
+<p>Alla fine del Punto 7H:</p>
+<ul>
+<li>il Punto 7 è chiuso;</li>
+<li>l'Infrastructure Layer è documentato;</li>
+<li>la foundation tecnica è stabile;</li>
+<li>Spring è configurato come wiring non web;</li>
+<li>il mapping blueprint è definito;</li>
+<li>i repository file-backed sicuri sono presenti;</li>
+<li>i test infrastrutturali sono rafforzati;</li>
+<li>i confini architetturali sono protetti;</li>
+<li>il progetto è pronto per aprire il Punto 8.</li>
+</ul>
+<p>Il Punto 7H rappresenta quindi il freeze finale dell'Infrastructure Layer prima dell'API Layer.</p>
+
+    </article>
+  </main>
+</body>
+</html>

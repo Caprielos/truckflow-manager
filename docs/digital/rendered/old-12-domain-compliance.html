@@ -1,0 +1,433 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Archivio storico — 12-domain-compliance — TruckFlow Docs</title>
+  <style>:root{--bg:#f5f7fb;--panel:#fff;--text:#172033;--muted:#64748b;--accent:#3554d1;--border:#d9e1ef;--code:#0f172a;--shadow:0 18px 44px rgba(15,23,42,.08)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:radial-gradient(circle at top left,rgba(53,84,209,.10),transparent 30rem),var(--bg);color:var(--text);line-height:1.68;font-size:16px}.page{width:min(980px,calc(100% - 2rem));margin:0 auto;padding:2rem 0 4rem}.topbar{display:flex;justify-content:space-between;gap:1rem;align-items:center;margin-bottom:1rem}.back{display:inline-flex;align-items:center;gap:.35rem;padding:.55rem .85rem;border:1px solid var(--border);border-radius:999px;background:#fff;color:var(--accent);font-weight:850;text-decoration:none;box-shadow:0 8px 22px rgba(15,23,42,.05)}.source{color:var(--muted);font-size:.88rem}.doc{padding:2rem;border:1px solid var(--border);border-radius:24px;background:rgba(255,255,255,.94);box-shadow:var(--shadow)}.doc-header{padding-bottom:1rem;margin-bottom:1.25rem;border-bottom:1px solid var(--border)}.kicker{display:inline-flex;width:fit-content;padding:.25rem .65rem;border-radius:999px;background:#dbeafe;color:#1e3a8a;font-size:.72rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase}.doc h1{margin:.7rem 0 .4rem;font-size:clamp(2rem,4vw,3.6rem);line-height:1;letter-spacing:-.05em}.doc h2{margin:2rem 0 .6rem;font-size:1.55rem;line-height:1.15;letter-spacing:-.03em}.doc h3{margin:1.35rem 0 .45rem;font-size:1.18rem}.doc p{margin:.65rem 0;color:#334155}.doc ul,.doc ol{padding-left:1.35rem}.doc li{margin:.35rem 0}.doc a{color:var(--accent);font-weight:800}.doc blockquote{margin:1rem 0;padding:.85rem 1rem;border-left:5px solid var(--accent);border-radius:14px;background:#eef2ff;color:#334155}.doc pre{overflow:auto;padding:1rem;border-radius:16px;background:var(--code);color:#e5e7eb;font-size:.9rem;line-height:1.55}.doc code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}.doc :not(pre)>code{padding:.15rem .32rem;border-radius:7px;background:#eef2f7;color:#1e293b}.doc table{width:100%;border-collapse:collapse;margin:1rem 0;border:1px solid var(--border);border-radius:16px;overflow:hidden;display:block}.doc thead,.doc tbody,.doc tr{width:100%}.doc th,.doc td{padding:.75rem;border-bottom:1px solid var(--border);text-align:left;vertical-align:top}.doc th{background:#f1f5f9;color:#334155;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}.doc tr:last-child td{border-bottom:0}.doc hr{border:0;border-top:1px solid var(--border);margin:2rem 0}.doc img{max-width:100%;border-radius:16px;border:1px solid var(--border)}@media(max-width:720px){.page{width:min(100% - 1rem,980px);padding-top:1rem}.doc{padding:1.15rem;border-radius:18px}.topbar{display:grid}.source{overflow-wrap:anywhere}}</style>
+</head>
+<body>
+  <main class="page">
+    <div class="topbar">
+      <a class="back" href="../index.html">← Torna alla Home</a>
+      <span class="source">Sorgente Markdown: ../old_style/12-domain-compliance.md</span>
+    </div>
+    <article class="doc">
+      <header class="doc-header">
+        <span class="kicker">old_style</span>
+        <h1>Archivio storico — 12-domain-compliance</h1>
+      </header>
+      <h1>Archivio storico — 12-domain-compliance</h1>
+<blockquote>
+<p>Questo documento fa parte dell'archivio storico <code>docs/old_style/</code>.
+Mantiene il percorso step-by-step del progetto, ma la documentazione principale aggiornata si trova in:
+<code>docs/simple/</code>, <code>docs/professional/</code> e <code>docs/digital/</code>.</p>
+</blockquote>
+<hr />
+<h1>12. Dominio <code>domain.compliance</code></h1>
+<h2>Indice</h2>
+<ol>
+<li>Obiettivo del dominio compliance</li>
+<li>Principio fondamentale</li>
+<li>Struttura del package</li>
+<li>Aggregate root <code>ComplianceRequirement</code></li>
+<li>Identità, codice e stato</li>
+<li>Categoria, tipo, obbligatorietà e severità</li>
+<li>Target astratto della regola</li>
+<li>Regola descrittiva</li>
+<li>Fonte del requisito</li>
+<li>Giurisdizione</li>
+<li>Invarianti principali</li>
+<li>Relazione con gli altri domini</li>
+<li>Cosa non appartiene al dominio compliance puro</li>
+<li>Esempio concettuale</li>
+<li>Sintesi finale</li>
+</ol>
+<hr />
+<h2>1. Obiettivo del dominio compliance</h2>
+<p>Il dominio <code>domain.compliance</code> rappresenta i requisiti di conformità che governano i concetti principali di TruckFlow.</p>
+<p>Serve a descrivere:</p>
+<ul>
+<li>quali requisiti esistono;</li>
+<li>a quale tipo di dominio si applicano;</li>
+<li>quale categoria riguardano;</li>
+<li>che tipo di requisito sono;</li>
+<li>quanto sono obbligatori;</li>
+<li>quanto sono severi;</li>
+<li>quale regola descrivono;</li>
+<li>da quale fonte derivano;</li>
+<li>in quale ambito geografico, normativo o aziendale valgono.</li>
+</ul>
+<p>Il dominio compliance completa la prima grande fondazione del dominio puro di TruckFlow, insieme a users, qualifications, operational, vehicles, cargo, locations, triptemplates, shipments e documents.</p>
+<p>Non completa “tutto il progetto per sempre”: in futuro potranno nascere altri bounded context enterprise come customers, contracts, pricing, maintenance, incidents, claims, alerts o costing. Tuttavia, per la prima fase del dominio puro, compliance è il pezzo che chiude il modello base.</p>
+<hr />
+<h2>2. Principio fondamentale</h2>
+<p>Nel dominio puro, compliance significa <strong>requisito astratto</strong>, non controllo operativo.</p>
+<p>Quindi <code>domain.compliance</code> non deve dire se oggi una spedizione è conforme, se un documento è scaduto o se un veicolo può partire.</p>
+<p>Deve solo descrivere che un requisito esiste.</p>
+<p>Esempi:</p>
+<ul>
+<li>il cargo ADR richiede requisiti ADR;</li>
+<li>una spedizione internazionale può richiedere un documento CMR;</li>
+<li>un veicolo può richiedere una certificazione tecnica;</li>
+<li>una persona operativa può richiedere una qualificazione;</li>
+<li>una regola interna aziendale può richiedere una procedura di sicurezza.</li>
+</ul>
+<p>Il controllo concreto arriverà più avanti in application layer, planning, dispatching, audit o moduli di compliance check.</p>
+<hr />
+<h2>3. Struttura del package</h2>
+<p>La struttura scelta è piatta e leggibile:</p>
+<pre><code class="language-text">it.gabriele.truckflow.domain.compliance
+├── ComplianceRequirement.java
+├── ComplianceRequirementId.java
+├── ComplianceRequirementCode.java
+├── ComplianceRequirementStatus.java
+│
+├── ComplianceCategory.java
+├── ComplianceRequirementType.java
+├── ComplianceObligationLevel.java
+├── ComplianceSeverity.java
+│
+├── ComplianceRule.java
+├── ComplianceTarget.java
+├── ComplianceTargetType.java
+│
+├── ComplianceSource.java
+├── ComplianceSourceType.java
+├── ComplianceJurisdiction.java
+├── CountryCode.java
+├── JurisdictionRegion.java
+├── ComplianceJurisdictionScope.java
+└── ComplianceValidation.java
+</code></pre>
+<p>Questa struttura non introduce sottopackage perché il dominio è ancora compatto. Se in futuro crescerà molto, potrà essere diviso per concetti, come già fatto per <code>domain.vehicles</code> e <code>domain.shipments</code>.</p>
+<hr />
+<h2>4. Aggregate root <code>ComplianceRequirement</code></h2>
+<p><code>ComplianceRequirement</code> è l'aggregate root del dominio compliance.</p>
+<p>Rappresenta un requisito astratto di conformità.</p>
+<p>La struttura concettuale è:</p>
+<pre><code class="language-text">ComplianceRequirement
+├─ ComplianceRequirementId id
+├─ ComplianceRequirementCode code
+├─ name
+├─ description
+├─ ComplianceRequirementStatus status
+├─ ComplianceCategory category
+├─ ComplianceRequirementType type
+├─ ComplianceObligationLevel obligationLevel
+├─ ComplianceSeverity severity
+├─ ComplianceTarget target
+├─ ComplianceRule rule
+├─ ComplianceSource source
+├─ ComplianceJurisdiction jurisdiction
+└─ notes
+</code></pre>
+<p>Il requisito non contiene risultati di verifica, non contiene violazioni, non contiene scadenze e non contiene riferimenti concreti a specifiche entità del sistema.</p>
+<hr />
+<h2>5. Identità, codice e stato</h2>
+<h3><code>ComplianceRequirementId</code></h3>
+<p>È l'identificatore tecnico del requisito.</p>
+<p>Serve al sistema e non all'utente.</p>
+<h3><code>ComplianceRequirementCode</code></h3>
+<p>È il codice aziendale leggibile del requisito.</p>
+<p>Esempi:</p>
+<pre><code class="language-text">CMP-ADR-001
+CMP-VEH-REV-001
+CMP-DOC-CMR-001
+CMP-ATP-001
+</code></pre>
+<p>Questa scelta è coerente con <code>CargoCode</code>, <code>FleetCode</code>, <code>ShipmentCode</code>, <code>TripTemplateCode</code>, <code>LocationCode</code>, <code>OperationalCode</code> e <code>DocumentCode</code>.</p>
+<h3><code>ComplianceRequirementStatus</code></h3>
+<p>Lo stato è anagrafico, non operativo:</p>
+<pre><code class="language-text">ACTIVE
+SUSPENDED
+ARCHIVED
+DISCONTINUED
+</code></pre>
+<p>Non sono stati del requisito puro:</p>
+<pre><code class="language-text">PASSED
+FAILED
+VIOLATED
+EXPIRED
+PENDING_REVIEW
+</code></pre>
+<p>Questi appartengono a verifiche, audit, scadenze o workflow futuri.</p>
+<hr />
+<h2>6. Categoria, tipo, obbligatorietà e severità</h2>
+<h3><code>ComplianceCategory</code></h3>
+<p>Classifica l'area del requisito:</p>
+<pre><code class="language-text">GENERIC
+VEHICLE
+OPERATIONAL
+CARGO
+SHIPMENT
+LOCATION
+TRIP_TEMPLATE
+DOCUMENT
+COMPLIANCE
+SAFETY
+FINANCIAL
+LEGAL
+</code></pre>
+<p><code>DOCUMENT</code> è presente perché TruckFlow ora contiene anche <code>domain.documents</code>.</p>
+<h3><code>ComplianceRequirementType</code></h3>
+<p>Descrive il tipo di requisito:</p>
+<pre><code class="language-text">DOCUMENT_REQUIRED
+QUALIFICATION_REQUIRED
+VEHICLE_CAPABILITY_REQUIRED
+VEHICLE_CERTIFICATION_REQUIRED
+CARGO_REGULATORY_REQUIRED
+TEMPERATURE_CONTROL_REQUIRED
+SAFETY_REQUIREMENT
+LEGAL_REQUIREMENT
+INTERNAL_POLICY
+CUSTOMER_REQUIREMENT
+</code></pre>
+<h3><code>ComplianceObligationLevel</code></h3>
+<p>Descrive il livello di obbligatorietà:</p>
+<pre><code class="language-text">MANDATORY
+REQUIRED
+RECOMMENDED
+OPTIONAL
+</code></pre>
+<p>La distinzione tra <code>MANDATORY</code> e <code>REQUIRED</code> è intenzionale:</p>
+<ul>
+<li><code>MANDATORY</code> indica un obbligo forte, legale, normativo o aziendale non derogabile;</li>
+<li><code>REQUIRED</code> indica un requisito richiesto dal processo, dal cliente o dal contratto;</li>
+<li><code>RECOMMENDED</code> indica un requisito consigliato;</li>
+<li><code>OPTIONAL</code> indica un requisito opzionale.</li>
+</ul>
+<h3><code>ComplianceSeverity</code></h3>
+<p>Descrive la severità del mancato rispetto:</p>
+<pre><code class="language-text">LOW
+MEDIUM
+HIGH
+CRITICAL
+</code></pre>
+<p>Obbligatorietà e severità sono volutamente separati.</p>
+<p>Esempio:</p>
+<pre><code class="language-text">obligationLevel = MANDATORY
+severity = CRITICAL
+</code></pre>
+<hr />
+<h2>7. Target astratto della regola</h2>
+<p><code>ComplianceTarget</code> dice a quale tipo di dominio si applica il requisito.</p>
+<p>È astratto e non punta a un caso concreto.</p>
+<pre><code class="language-text">ComplianceTarget
+├─ ComplianceTargetType targetType
+└─ notes
+</code></pre>
+<p>I target principali sono:</p>
+<pre><code class="language-text">VEHICLE
+OPERATIONAL
+CARGO
+SHIPMENT
+LOCATION
+TRIP_TEMPLATE
+DOCUMENT
+GENERIC
+OTHER
+</code></pre>
+<p>Non viene introdotto un <code>ComplianceReference</code> con <code>referencedId</code>, perché quello rappresenterebbe un collegamento a una specifica istanza, per esempio un veicolo concreto o una shipment concreta. Questo tipo di relazione appartiene a futuri moduli di verifica o assessment, non al dominio puro dei requisiti.</p>
+<hr />
+<h2>8. Regola descrittiva</h2>
+<p><code>ComplianceRule</code> descrive la regola da rispettare.</p>
+<p>È importante chiarire che non è codice eseguibile.</p>
+<p>Non contiene:</p>
+<ul>
+<li><code>check()</code>;</li>
+<li>predicati;</li>
+<li>validator operativi;</li>
+<li>logica di confronto con veicoli, cargo, shipment o documenti.</li>
+</ul>
+<p>Contiene solo una descrizione chiara del requisito.</p>
+<p>Concettualmente:</p>
+<pre><code class="language-text">ComplianceRule
+├─ title
+├─ statement
+├─ expectedCondition
+└─ notes
+</code></pre>
+<p>Esempio:</p>
+<pre><code class="language-text">Title: ADR cargo rule
+Statement: Cargo marked as ADR must require ADR-compatible transport.
+Expected condition: ADR transport requirement must be declared.
+</code></pre>
+<hr />
+<h2>9. Fonte del requisito</h2>
+<p>Ogni requisito di compliance deve avere una fonte.</p>
+<p><code>ComplianceSource</code> rappresenta da dove nasce il requisito.</p>
+<pre><code class="language-text">ComplianceSource
+├─ sourceName
+├─ ComplianceSourceType sourceType
+├─ referenceCode
+├─ description
+└─ notes
+</code></pre>
+<p>Esempi di fonte:</p>
+<pre><code class="language-text">EU regulation
+Italian road regulation
+Internal company policy
+Customer contract requirement
+Safety policy
+</code></pre>
+<p>Tipi supportati:</p>
+<pre><code class="language-text">LEGAL_REGULATION
+EU_REGULATION
+NATIONAL_REGULATION
+INTERNAL_POLICY
+CUSTOMER_REQUIREMENT
+CONTRACTUAL_REQUIREMENT
+SAFETY_STANDARD
+OTHER
+</code></pre>
+<p>Questa scelta rende il dominio più enterprise, perché un requisito non è solo una regola isolata: ha sempre un'origine normativa, contrattuale, aziendale o di sicurezza.</p>
+<hr />
+<h2>10. Giurisdizione</h2>
+<p><code>ComplianceJurisdiction</code> descrive l'ambito di validità concettuale del requisito.</p>
+<pre><code class="language-text">ComplianceJurisdiction
+├─ Optional&lt;CountryCode&gt; country
+├─ Optional&lt;JurisdictionRegion&gt; region
+├─ ComplianceJurisdictionScope scope
+└─ notes
+</code></pre>
+<p>Esempi:</p>
+<pre><code class="language-text">country = IT
+scope = NATIONAL
+</code></pre>
+<pre><code class="language-text">region = EU
+scope = EUROPEAN_UNION
+</code></pre>
+<pre><code class="language-text">scope = COMPANY_INTERNAL
+</code></pre>
+<p>La giurisdizione non calcola se una norma vale oggi, non gestisce date di validità e non applica automaticamente regole diverse per Stato.</p>
+<p>Descrive solo l'ambito concettuale del requisito.</p>
+<p><code>CountryCode</code> rappresenta un paese specifico, per esempio <code>IT</code>, <code>FR</code>, <code>DE</code> o <code>ES</code>.</p>
+<p><code>ComplianceJurisdictionScope</code> rappresenta il livello della giurisdizione, per esempio:</p>
+<pre><code class="language-text">NATIONAL
+EUROPEAN_UNION
+INTERNATIONAL
+COMPANY_INTERNAL
+CUSTOMER_SPECIFIC
+REGIONAL
+OTHER
+</code></pre>
+<p><code>JurisdictionRegion</code> rappresenta un'area geografica o normativa ampia, per esempio <code>EU</code>, <code>EMEA</code>, <code>LOMBARDY</code> o <code>NORTH_ITALY</code>. È un value object leggero e non contiene una lista rigida di nazioni.</p>
+<p>La logica applicativa del tipo &quot;scelgo Europa, vedo le nazioni europee e il paese predefinito è Italia&quot; non appartiene al dominio puro. Quella logica verrà gestita più avanti da application layer, configurazione aziendale o interfaccia utente.</p>
+<hr />
+<h2>11. Invarianti principali</h2>
+<p>Le invarianti principali sono:</p>
+<ul>
+<li><code>ComplianceRequirementId</code> obbligatorio, generato automaticamente se assente;</li>
+<li><code>ComplianceRequirementCode</code> obbligatorio e normalizzato in maiuscolo;</li>
+<li><code>name</code> obbligatorio;</li>
+<li><code>status</code> obbligatorio;</li>
+<li><code>category</code> obbligatoria;</li>
+<li><code>type</code> obbligatorio;</li>
+<li><code>obligationLevel</code> obbligatorio;</li>
+<li><code>severity</code> obbligatoria;</li>
+<li><code>target</code> obbligatorio;</li>
+<li><code>rule</code> obbligatoria;</li>
+<li><code>source</code> obbligatoria;</li>
+<li><code>jurisdiction</code> obbligatoria;</li>
+<li>note normalizzate.</li>
+</ul>
+<p>Inoltre:</p>
+<ul>
+<li><code>ComplianceRule</code> deve avere titolo e statement;</li>
+<li><code>ComplianceSource</code> deve avere nome e tipo;</li>
+<li><code>ComplianceJurisdiction</code> deve avere uno scope;</li>
+<li><code>CountryCode</code>, quando presente, deve usare un codice paese valido;</li>
+<li><code>JurisdictionRegion</code>, quando presente, deve essere normalizzata;</li>
+<li><code>ComplianceTarget</code> deve avere un target type.</li>
+</ul>
+<hr />
+<h2>12. Relazione con gli altri domini</h2>
+<p><code>domain.compliance</code> non importa classi degli altri domini.</p>
+<p>Non importa:</p>
+<ul>
+<li><code>VehicleUnitId</code>;</li>
+<li><code>CargoId</code>;</li>
+<li><code>ShipmentId</code>;</li>
+<li><code>DocumentId</code>;</li>
+<li><code>LocationId</code>;</li>
+<li><code>TripTemplateId</code>;</li>
+<li><code>DriverId</code>.</li>
+</ul>
+<p>La relazione è concettuale tramite <code>ComplianceTargetType</code>.</p>
+<p>Esempio:</p>
+<pre><code class="language-text">ComplianceRequirement
+├─ category: CARGO
+├─ target: CARGO
+├─ type: CARGO_REGULATORY_REQUIRED
+└─ rule: Cargo marked as ADR must declare ADR-compatible transport.
+</code></pre>
+<p>Il collegamento a un caso concreto, per esempio <code>Shipment SHP-001</code>, verrà gestito in futuro da moduli di compliance check, planning o dispatching.</p>
+<hr />
+<h2>13. Cosa non appartiene al dominio compliance puro</h2>
+<p>Non fanno parte di <code>domain.compliance</code> in questa fase:</p>
+<ul>
+<li><code>ComplianceCheck</code>;</li>
+<li><code>ComplianceResult</code>;</li>
+<li><code>ComplianceViolation</code>;</li>
+<li><code>ComplianceAudit</code>;</li>
+<li><code>ComplianceDeadline</code>;</li>
+<li><code>ComplianceApproval</code>;</li>
+<li><code>ComplianceAlert</code>;</li>
+<li>scadenze;</li>
+<li>workflow;</li>
+<li>approvazioni;</li>
+<li>notifiche;</li>
+<li>controlli automatici;</li>
+<li>validazioni tecniche su casi concreti.</li>
+</ul>
+<p>Questi concetti sono importanti, ma arriveranno più avanti in application layer o in moduli dedicati.</p>
+<hr />
+<h2>14. Esempio concettuale</h2>
+<p>Esempio di requisito ADR per cargo pericoloso:</p>
+<pre><code class="language-text">ComplianceRequirement
+├─ code: CMP-ADR-001
+├─ name: ADR requirement for dangerous cargo
+├─ status: ACTIVE
+├─ category: CARGO
+├─ type: CARGO_REGULATORY_REQUIRED
+├─ obligationLevel: MANDATORY
+├─ severity: CRITICAL
+├─ target:
+│  └─ targetType: CARGO
+├─ rule:
+│  ├─ title: ADR cargo rule
+│  ├─ statement: Cargo marked as ADR must require ADR-compatible transport.
+│  └─ expectedCondition: ADR transport requirement must be declared.
+├─ source:
+│  ├─ sourceName: European ADR framework
+│  ├─ sourceType: EU_REGULATION
+│  └─ referenceCode: ADR
+└─ jurisdiction:
+   ├─ region: EU
+   └─ scope: EUROPEAN_UNION
+</code></pre>
+<p>Questo requisito non controlla ancora nessun cargo reale. Descrive solo la regola.</p>
+<hr />
+<h2>15. Sintesi finale</h2>
+<p><code>domain.compliance</code> rappresenta il catalogo dei requisiti astratti di conformità di TruckFlow.</p>
+<p>La scelta finale è:</p>
+<pre><code class="language-text">ComplianceRequirement = aggregate root del requisito astratto
+ComplianceRule = descrizione della regola
+ComplianceTarget = tipo di dominio a cui si applica
+ComplianceSource = origine del requisito
+ComplianceJurisdiction = ambito di validità concettuale
+CountryCode = paese specifico della giurisdizione
+JurisdictionRegion = area geografica o normativa ampia
+ComplianceJurisdictionScope = livello della giurisdizione
+ComplianceObligationLevel = obbligatorietà
+ComplianceSeverity = severità
+</code></pre>
+<p>Il dominio resta puro perché non contiene verifiche concrete, workflow, audit, scadenze, notifiche, repository o dipendenze da altri bounded context.</p>
+<p>Questa scelta completa la prima grande fondazione del dominio puro enterprise di TruckFlow e prepara il progetto ai futuri moduli applicativi di planning, dispatching e compliance check.</p>
+
+    </article>
+  </main>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Digital Documentation Reader — TruckFlow Docs</title>
+  <style>:root{--bg:#f5f7fb;--panel:#fff;--text:#172033;--muted:#64748b;--accent:#3554d1;--border:#d9e1ef;--code:#0f172a;--shadow:0 18px 44px rgba(15,23,42,.08)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:radial-gradient(circle at top left,rgba(53,84,209,.10),transparent 30rem),var(--bg);color:var(--text);line-height:1.68;font-size:16px}.page{width:min(980px,calc(100% - 2rem));margin:0 auto;padding:2rem 0 4rem}.topbar{display:flex;justify-content:space-between;gap:1rem;align-items:center;margin-bottom:1rem}.back{display:inline-flex;align-items:center;gap:.35rem;padding:.55rem .85rem;border:1px solid var(--border);border-radius:999px;background:#fff;color:var(--accent);font-weight:850;text-decoration:none;box-shadow:0 8px 22px rgba(15,23,42,.05)}.source{color:var(--muted);font-size:.88rem}.doc{padding:2rem;border:1px solid var(--border);border-radius:24px;background:rgba(255,255,255,.94);box-shadow:var(--shadow)}.doc-header{padding-bottom:1rem;margin-bottom:1.25rem;border-bottom:1px solid var(--border)}.kicker{display:inline-flex;width:fit-content;padding:.25rem .65rem;border-radius:999px;background:#dbeafe;color:#1e3a8a;font-size:.72rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase}.doc h1{margin:.7rem 0 .4rem;font-size:clamp(2rem,4vw,3.6rem);line-height:1;letter-spacing:-.05em}.doc h2{margin:2rem 0 .6rem;font-size:1.55rem;line-height:1.15;letter-spacing:-.03em}.doc h3{margin:1.35rem 0 .45rem;font-size:1.18rem}.doc p{margin:.65rem 0;color:#334155}.doc ul,.doc ol{padding-left:1.35rem}.doc li{margin:.35rem 0}.doc a{color:var(--accent);font-weight:800}.doc blockquote{margin:1rem 0;padding:.85rem 1rem;border-left:5px solid var(--accent);border-radius:14px;background:#eef2ff;color:#334155}.doc pre{overflow:auto;padding:1rem;border-radius:16px;background:var(--code);color:#e5e7eb;font-size:.9rem;line-height:1.55}.doc code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}.doc :not(pre)>code{padding:.15rem .32rem;border-radius:7px;background:#eef2f7;color:#1e293b}.doc table{width:100%;border-collapse:collapse;margin:1rem 0;border:1px solid var(--border);border-radius:16px;overflow:hidden;display:block}.doc thead,.doc tbody,.doc tr{width:100%}.doc th,.doc td{padding:.75rem;border-bottom:1px solid var(--border);text-align:left;vertical-align:top}.doc th{background:#f1f5f9;color:#334155;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}.doc tr:last-child td{border-bottom:0}.doc hr{border:0;border-top:1px solid var(--border);margin:2rem 0}.doc img{max-width:100%;border-radius:16px;border:1px solid var(--border)}@media(max-width:720px){.page{width:min(100% - 1rem,980px);padding-top:1rem}.doc{padding:1.15rem;border-radius:18px}.topbar{display:grid}.source{overflow-wrap:anywhere}}</style>
+</head>
+<body>
+  <main class="page">
+    <div class="topbar">
+      <a class="back" href="../index.html">← Torna alla Home</a>
+      <span class="source">Sorgente Markdown: README.md</span>
+    </div>
+    <article class="doc">
+      <header class="doc-header">
+        <span class="kicker">digital</span>
+        <h1>Digital Documentation Reader</h1>
+      </header>
+      <h1>Digital Documentation Reader</h1>
+<p>Questa cartella contiene il lettore digitale statico della documentazione di TruckFlow Manager.</p>
+<p>Apri <a href="index.html"><code>index.html</code></a> dal browser per navigare la documentazione.</p>
+<h2>Cosa contiene</h2>
+<ul>
+<li><strong>Home</strong> pulita con il documento enterprise in evidenza;</li>
+<li><strong>Software Engineering Overview</strong> in versione HTML visuale;</li>
+<li><strong>Simple Documentation</strong>;</li>
+<li><strong>Professional Documentation</strong>;</li>
+<li><strong>Package Explorer</strong> ad albero apribile/chiudibile come in un IDE;</li>
+<li><strong>Old Style Archive</strong> come sezione centrale, non come lista fissa in sidebar;</li>
+<li><strong>Roadmap &amp; Freeze</strong>;</li>
+<li><strong>Architecture Rules</strong>;</li>
+<li><strong>Digital Reader</strong>.</li>
+</ul>
+<h2>Regola fondamentale</h2>
+<p><code>docs/digital</code> è solo un <strong>lettore statico</strong> della documentazione.</p>
+<p>Non introduce e non deve introdurre:</p>
+<ul>
+<li>Spring;</li>
+<li>API REST;</li>
+<li>controller;</li>
+<li>backend;</li>
+<li>database;</li>
+<li>generazione automatica runtime della documentazione;</li>
+<li>scansione runtime del filesystem;</li>
+<li>modifica dei file dal browser;</li>
+<li>dipendenze dal futuro Punto 8.</li>
+</ul>
+<h2>File principali</h2>
+<pre><code class="language-text">docs/digital/
+├── index.html
+├── styles.css
+├── docs-catalog.js
+├── software-engineering-overview.html
+├── truckflow-manager-enterprise-documentation.html
+└── README.md
+</code></pre>
+<h2>Ruolo dei file</h2>
+<ul>
+<li><code>index.html</code>: navigatore principale con sidebar pulita, ricerca, sezioni documentali e package tree. I documenti si aprono in una nuova scheda, senza iframe interno.</li>
+<li><code>styles.css</code>: stile grafico del reader.</li>
+<li><code>docs-catalog.js</code>: catalogo statico dei documenti, dei package Java reali e dello stato documentale.</li>
+<li><code>software-engineering-overview.html</code>: versione visuale e funzionale del documento enterprise di Ingegneria del Software.</li>
+<li><code>truckflow-manager-enterprise-documentation.html</code>: pagina enterprise sintetica già presente.</li>
+<li><code>README.md</code>: spiegazione di questa cartella.</li>
+</ul>
+<h2>Package Explorer</h2>
+<p>Il Package Explorer non mostra una griglia enorme di card.</p>
+<p>Mostra invece un albero apribile e richiudibile, simile all’IDE:</p>
+<pre><code class="language-text">src
+└── main
+    ├── java
+    │   └── it.gabriele.truckflow
+    │       ├── application
+    │       ├── domain
+    │       └── infrastructure
+    └── resources
+        └── application.yml
+</code></pre>
+<p>Quando apri/chiudi i nodi puoi navigare la struttura; quando selezioni un package, il pannello dettaglio mostra:</p>
+<ul>
+<li>nome package;</li>
+<li>layer;</li>
+<li>numero file Java;</li>
+<li>stato documentazione;</li>
+<li>descrizione;</li>
+<li>documenti collegati.</li>
+</ul>
+<p>Il catalogo è statico: rispecchia il progetto al momento dell’aggiornamento, ma il browser non scansiona automaticamente il filesystem.</p>
+<h2>Nota Markdown / HTML</h2>
+<p>I documenti Markdown possono essere mostrati dal browser come testo. I documenti principali, come <code>software-engineering-overview.html</code>, hanno una versione HTML visuale pensata per la lettura nel reader.</p>
+<h2>Apertura documenti</h2>
+<p>Il reader non usa più un iframe interno per i documenti.</p>
+<p>Quando clicchi un documento, questo viene aperto in una nuova scheda del browser. Questa scelta evita la lettura del Markdown come testo grezzo dentro il reader e impedisce che un documento rimanga visualizzato in modo persistente nella pagina principale.</p>
+<p>Il pulsante <strong>Home</strong> e il comando <strong>Torna alla Home</strong> riportano alla schermata iniziale del reader.</p>
+
+    </article>
+  </main>
+</body>
+</html>

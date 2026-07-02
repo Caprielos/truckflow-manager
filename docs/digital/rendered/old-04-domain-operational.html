@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Archivio storico — 04-domain-operational — TruckFlow Docs</title>
+  <style>:root{--bg:#f5f7fb;--panel:#fff;--text:#172033;--muted:#64748b;--accent:#3554d1;--border:#d9e1ef;--code:#0f172a;--shadow:0 18px 44px rgba(15,23,42,.08)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:radial-gradient(circle at top left,rgba(53,84,209,.10),transparent 30rem),var(--bg);color:var(--text);line-height:1.68;font-size:16px}.page{width:min(980px,calc(100% - 2rem));margin:0 auto;padding:2rem 0 4rem}.topbar{display:flex;justify-content:space-between;gap:1rem;align-items:center;margin-bottom:1rem}.back{display:inline-flex;align-items:center;gap:.35rem;padding:.55rem .85rem;border:1px solid var(--border);border-radius:999px;background:#fff;color:var(--accent);font-weight:850;text-decoration:none;box-shadow:0 8px 22px rgba(15,23,42,.05)}.source{color:var(--muted);font-size:.88rem}.doc{padding:2rem;border:1px solid var(--border);border-radius:24px;background:rgba(255,255,255,.94);box-shadow:var(--shadow)}.doc-header{padding-bottom:1rem;margin-bottom:1.25rem;border-bottom:1px solid var(--border)}.kicker{display:inline-flex;width:fit-content;padding:.25rem .65rem;border-radius:999px;background:#dbeafe;color:#1e3a8a;font-size:.72rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase}.doc h1{margin:.7rem 0 .4rem;font-size:clamp(2rem,4vw,3.6rem);line-height:1;letter-spacing:-.05em}.doc h2{margin:2rem 0 .6rem;font-size:1.55rem;line-height:1.15;letter-spacing:-.03em}.doc h3{margin:1.35rem 0 .45rem;font-size:1.18rem}.doc p{margin:.65rem 0;color:#334155}.doc ul,.doc ol{padding-left:1.35rem}.doc li{margin:.35rem 0}.doc a{color:var(--accent);font-weight:800}.doc blockquote{margin:1rem 0;padding:.85rem 1rem;border-left:5px solid var(--accent);border-radius:14px;background:#eef2ff;color:#334155}.doc pre{overflow:auto;padding:1rem;border-radius:16px;background:var(--code);color:#e5e7eb;font-size:.9rem;line-height:1.55}.doc code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}.doc :not(pre)>code{padding:.15rem .32rem;border-radius:7px;background:#eef2f7;color:#1e293b}.doc table{width:100%;border-collapse:collapse;margin:1rem 0;border:1px solid var(--border);border-radius:16px;overflow:hidden;display:block}.doc thead,.doc tbody,.doc tr{width:100%}.doc th,.doc td{padding:.75rem;border-bottom:1px solid var(--border);text-align:left;vertical-align:top}.doc th{background:#f1f5f9;color:#334155;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}.doc tr:last-child td{border-bottom:0}.doc hr{border:0;border-top:1px solid var(--border);margin:2rem 0}.doc img{max-width:100%;border-radius:16px;border:1px solid var(--border)}@media(max-width:720px){.page{width:min(100% - 1rem,980px);padding-top:1rem}.doc{padding:1.15rem;border-radius:18px}.topbar{display:grid}.source{overflow-wrap:anywhere}}</style>
+</head>
+<body>
+  <main class="page">
+    <div class="topbar">
+      <a class="back" href="../index.html">← Torna alla Home</a>
+      <span class="source">Sorgente Markdown: ../old_style/04-domain-operational.md</span>
+    </div>
+    <article class="doc">
+      <header class="doc-header">
+        <span class="kicker">old_style</span>
+        <h1>Archivio storico — 04-domain-operational</h1>
+      </header>
+      <h1>Archivio storico — 04-domain-operational</h1>
+<blockquote>
+<p>Questo documento fa parte dell'archivio storico <code>docs/old_style/</code>.
+Mantiene il percorso step-by-step del progetto, ma la documentazione principale aggiornata si trova in:
+<code>docs/simple/</code>, <code>docs/professional/</code> e <code>docs/digital/</code>.</p>
+</blockquote>
+<hr />
+<h1>4. Package <code>domain.operational</code></h1>
+<h2>4.1 Scopo del package</h2>
+<p>Il package <code>domain.operational</code> rappresenta le persone operative reali dell’azienda.</p>
+<p>Contiene:</p>
+<ul>
+<li>autisti;</li>
+<li>meccanici;</li>
+<li>operatori di magazzino;</li>
+<li>dispatcher;</li>
+<li>manager.</li>
+</ul>
+<p>Queste figure non sono account applicativi. Sono profili operativi collegati eventualmente a un account tramite <code>UserId</code>.</p>
+<p>La distinzione è:</p>
+<ul>
+<li><code>domain.users.User</code> = account che accede all’app;</li>
+<li><code>domain.operational.*</code> = figura reale nel contesto aziendale.</li>
+</ul>
+<h2>4.2 Perché il dominio operativo è separato dagli utenti</h2>
+<p>Un utente può accedere all’app, ma non sempre coincide con una figura operativa.</p>
+<p>Esempi:</p>
+<ul>
+<li>un amministratore può avere un account ma non essere autista;</li>
+<li>un autista può avere un account collegato;</li>
+<li>un manager può essere anche dispatcher in certi contesti;</li>
+<li>una persona può avere più profili operativi.</li>
+</ul>
+<p>Separare questi concetti evita accoppiamenti sbagliati tra login e business.</p>
+<h2>4.3 Struttura del package</h2>
+<p>Il package è diviso in sottopackage:</p>
+<ul>
+<li><code>common</code>;</li>
+<li><code>driver</code>;</li>
+<li><code>mechanic</code>;</li>
+<li><code>warehouse</code>;</li>
+<li><code>dispatcher</code>;</li>
+<li><code>manager</code>.</li>
+</ul>
+<p><code>common</code> contiene value object condivisi. Gli altri package contengono le entità operative specifiche.</p>
+<h2>4.4 Package <code>common</code></h2>
+<h3><code>OperationalCode</code></h3>
+<p><code>OperationalCode</code> è il codice interno aziendale della figura operativa.</p>
+<p>Esempi:</p>
+<ul>
+<li><code>DRV-001</code>;</li>
+<li><code>MEC-023</code>;</li>
+<li><code>WH-112</code>;</li>
+<li><code>DSP-004</code>;</li>
+<li><code>MNG-002</code>.</li>
+</ul>
+<p>È diverso dall’ID tecnico.</p>
+<p>L’ID serve al dominio e al sistema. Il codice operativo serve all’azienda e agli utenti.</p>
+<p>Nel progetto è obbligatorio: ogni figura operativa deve avere un codice interno aziendale valido. Il codice viene normalizzato in maiuscolo e validato.</p>
+<h3><code>OperationalMetadata</code></h3>
+<p><code>OperationalMetadata</code> traccia la creazione e l’aggiornamento della figura operativa.</p>
+<p>Contiene:</p>
+<ul>
+<li><code>createdAt</code>;</li>
+<li><code>updatedAt</code>;</li>
+<li><code>createdBy</code>;</li>
+<li><code>updatedBy</code>.</li>
+</ul>
+<p>È separato da <code>UserMetadata</code>, perché appartiene al contesto operativo e non al contesto utenti.</p>
+<h3><code>OperationalProfile</code></h3>
+<p><code>OperationalProfile</code> rappresenta l’anagrafica operativa della persona.</p>
+<p>Contiene:</p>
+<ul>
+<li>nome;</li>
+<li>cognome;</li>
+<li>email;</li>
+<li>telefono;</li>
+<li>cellulare;</li>
+<li>reparto;</li>
+<li>posizione;</li>
+<li>note.</li>
+</ul>
+<p>È diverso da <code>UserProfile</code>.</p>
+<p><code>UserProfile</code> descrive l’account applicativo. <code>OperationalProfile</code> descrive la persona nel contesto operativo aziendale.</p>
+<h3><code>OperationalQualification</code></h3>
+<p><code>OperationalQualification</code> rappresenta una qualificazione posseduta da una figura operativa.</p>
+<p>Contiene:</p>
+<ul>
+<li>una <code>Qualification</code> del catalogo;</li>
+<li>numero di riferimento;</li>
+<li>paese di emissione;</li>
+<li>livello;</li>
+<li>note.</li>
+</ul>
+<p>Il campo <code>level</code> serve per distinguere livelli o varianti operative senza creare troppe classi specifiche.</p>
+<p>Esempi:</p>
+<ul>
+<li>primo soccorso livello 1;</li>
+<li>muletto avanzato;</li>
+<li>formazione interna senior;</li>
+<li>abilitazione con livello specifico.</li>
+</ul>
+<p>Non contiene scadenze o documenti. Quelli verranno gestiti in moduli futuri.</p>
+<h3><code>OperationalScope</code></h3>
+<p><code>OperationalScope</code> rappresenta un ambito operativo.</p>
+<p>È usato soprattutto da dispatcher e manager.</p>
+<p>Contiene:</p>
+<ul>
+<li><code>OperationalScopeCode</code>, cioè il codice dell'ambito operativo;</li>
+<li>nome;</li>
+<li>descrizione;</li>
+<li>area.</li>
+</ul>
+<p>Esempi:</p>
+<ul>
+<li>ADR operations;</li>
+<li>North Italy;</li>
+<li>Rome branch;</li>
+<li>Warehouse A;</li>
+<li>International transport;</li>
+<li>Fleet operations.</li>
+</ul>
+<p>Lo scope permette di dire dove o su cosa una figura ha responsabilità.</p>
+<p>Il codice dello scope non è più una semplice <code>String</code>: è modellato tramite <code>OperationalScopeCode</code>.</p>
+<p>Questa scelta rende il modello coerente con gli altri codici aziendali del dominio, come <code>OperationalCode</code>, <code>FleetCode</code>, <code>CargoCode</code>, <code>ShipmentCode</code>, <code>LocationCode</code>, <code>DocumentCode</code> e <code>ComplianceRequirementCode</code>.</p>
+<p>Il campo <code>area</code> rimane invece descrittivo e flessibile. Non viene trasformato subito in enum, perché può indicare aree operative diverse come North Italy, ADR operations, Warehouse A, Fleet operations o International transport.</p>
+<h3><code>OperationalStatus</code></h3>
+<p><code>OperationalStatus</code> rappresenta lo stato operativo.</p>
+<p>I valori sono:</p>
+<ul>
+<li><code>ACTIVE</code>;</li>
+<li><code>SUSPENDED</code>;</li>
+<li><code>NOT_ELIGIBLE</code>.</li>
+</ul>
+<p>Significato:</p>
+<ul>
+<li><code>ACTIVE</code>: figura operativa attiva;</li>
+<li><code>SUSPENDED</code>: figura temporaneamente sospesa;</li>
+<li><code>NOT_ELIGIBLE</code>: figura non idonea o non abilitata.</li>
+</ul>
+<h2>4.5 Package <code>driver</code></h2>
+<h3><code>Driver</code></h3>
+<p><code>Driver</code> rappresenta un autista reale dell’azienda.</p>
+<p>Contiene:</p>
+<ul>
+<li><code>DriverId</code>;</li>
+<li><code>OperationalCode</code>;</li>
+<li><code>UserId</code>;</li>
+<li><code>OperationalProfile</code>;</li>
+<li>qualificazioni operative;</li>
+<li>stato operativo;</li>
+<li>metadata;</li>
+<li>note.</li>
+</ul>
+<p>La classe permette di aggiungere e rimuovere qualificazioni, aggiornare il profilo e cambiare stato.</p>
+<p>Regola importante: un autista <code>ACTIVE</code> deve avere almeno una qualificazione.</p>
+<p>Le patenti sono qualificazioni. Non esiste un <code>DriverLicense</code> separato perché avrebbe duplicato il catalogo <code>Qualification</code>.</p>
+<h3><code>DriverId</code></h3>
+<p><code>DriverId</code> è l’identificatore tecnico dell’autista nel dominio operativo.</p>
+<p>È distinto da <code>UserId</code>, perché l’identità dell’account e l’identità della figura operativa non sono la stessa cosa.</p>
+<h2>4.6 Package <code>mechanic</code></h2>
+<h3><code>Mechanic</code></h3>
+<p><code>Mechanic</code> rappresenta un meccanico reale dell’azienda.</p>
+<p>Contiene:</p>
+<ul>
+<li><code>MechanicId</code>;</li>
+<li><code>OperationalCode</code>;</li>
+<li><code>UserId</code>;</li>
+<li><code>OperationalProfile</code>;</li>
+<li>qualificazioni tecniche;</li>
+<li>stato;</li>
+<li>metadata;</li>
+<li>note.</li>
+</ul>
+<p>Può avere qualificazioni come:</p>
+<ul>
+<li>carrello elevatore;</li>
+<li>gru su autocarro;</li>
+<li>sicurezza antincendio;</li>
+<li>primo soccorso;</li>
+<li>corsi interni di manutenzione.</li>
+</ul>
+<p>Regola importante: un meccanico <code>ACTIVE</code> deve avere almeno una qualificazione.</p>
+<h3><code>MechanicId</code></h3>
+<p><code>MechanicId</code> identifica il profilo operativo del meccanico.</p>
+<h2>4.7 Package <code>warehouse</code></h2>
+<h3><code>WarehouseOperator</code></h3>
+<p><code>WarehouseOperator</code> rappresenta un operatore di magazzino.</p>
+<p>Contiene:</p>
+<ul>
+<li><code>WarehouseOperatorId</code>;</li>
+<li><code>OperationalCode</code>;</li>
+<li><code>UserId</code>;</li>
+<li><code>OperationalProfile</code>;</li>
+<li>qualificazioni;</li>
+<li>stato;</li>
+<li>metadata;</li>
+<li>note.</li>
+</ul>
+<p>Può avere qualificazioni come:</p>
+<ul>
+<li>muletto;</li>
+<li>transpallet elettrico;</li>
+<li>gestione magazzino;</li>
+<li>rampe e baie di carico;</li>
+<li>movimentazione carichi.</li>
+</ul>
+<p>Regola importante: un operatore di magazzino <code>ACTIVE</code> deve avere almeno una qualificazione.</p>
+<h3><code>WarehouseOperatorId</code></h3>
+<p>Identifica il profilo operativo del magazziniere.</p>
+<h2>4.8 Package <code>dispatcher</code></h2>
+<h3><code>Dispatcher</code></h3>
+<p><code>Dispatcher</code> rappresenta la figura che coordina operazioni, viaggi, mezzi, autisti e attività logistiche.</p>
+<p>A differenza di autisti, meccanici e magazzinieri, il dispatcher non ha necessariamente qualificazioni tecniche.</p>
+<p>Ha invece <code>OperationalScope</code>, cioè ambiti di responsabilità.</p>
+<p>Esempi di scope:</p>
+<ul>
+<li>domestic transport planning;</li>
+<li>international transport planning;</li>
+<li>ADR coordination;</li>
+<li>North Italy area;</li>
+<li>customer operations.</li>
+</ul>
+<p>Regola importante: un dispatcher <code>ACTIVE</code> deve avere almeno uno scope.</p>
+<h3><code>DispatcherId</code></h3>
+<p>Identifica il profilo operativo del dispatcher.</p>
+<h2>4.9 Package <code>manager</code></h2>
+<h3><code>Manager</code></h3>
+<p><code>Manager</code> rappresenta una figura di supervisione o responsabilità operativa.</p>
+<p>Usa <code>OperationalScope</code> per indicare le aree su cui ha responsabilità.</p>
+<p>Esempi:</p>
+<ul>
+<li>fleet operations;</li>
+<li>warehouse operations;</li>
+<li>maintenance supervision;</li>
+<li>transport performance;</li>
+<li>regional operations.</li>
+</ul>
+<p>Regola importante: un manager <code>ACTIVE</code> deve avere almeno uno scope.</p>
+<h3><code>ManagerId</code></h3>
+<p>Identifica il profilo operativo del manager.</p>
+<h2>4.10 Relazione con <code>domain.users</code></h2>
+<p>Ogni figura operativa contiene un <code>UserId</code>.</p>
+<p>Questa scelta permette di collegare una persona operativa a un account applicativo senza inserire direttamente un oggetto <code>User</code> dentro il dominio operativo.</p>
+<p>Il vantaggio è che:</p>
+<ul>
+<li>il dominio operativo non dipende dal ciclo di vita dell’account;</li>
+<li>l’account non contiene dati operativi;</li>
+<li>una persona può avere più profili operativi;</li>
+<li>le modifiche all’account non rompono le entità operative.</li>
+</ul>
+<h2>4.11 Cosa non contiene il dominio operativo</h2>
+<p>Il dominio operativo non contiene:</p>
+<ul>
+<li>turni;</li>
+<li>disponibilità;</li>
+<li>assegnazioni a viaggio;</li>
+<li>documenti;</li>
+<li>scadenze;</li>
+<li>visite mediche;</li>
+<li>controllo automatico patenti;</li>
+<li>buste paga;</li>
+<li>ferie;</li>
+<li>pianificazione.</li>
+</ul>
+<p>Queste parti saranno gestite in moduli successivi.</p>
+<h2>Nota applicativa dopo il Punto 6J</h2>
+<p>Il dominio <code>operational</code> rimane puro. Dopo il Punto 6J l'application layer introduce i primi use case per registrare, trovare e cambiare stato a driver, mechanic, warehouse operator, dispatcher e manager. Non sono stati introdotti turni, disponibilità, payroll, planning, tracking o assegnazioni operative concrete.</p>
+<h2>Nota applicativa dopo il Punto 6K</h2>
+<p>Il dominio <code>operational</code> rimane puro anche dopo il Punto 6K. La review applicativa rafforza i use case Operational Roles nel livello application, ma non sposta nel dominio concetti futuri come turni, disponibilità, payroll, assegnazioni operative, planning o tracking.</p>
+<p>Il Punto 6K aggiunge test applicativi di hardening e conferma che le invarianti rimangono nel dominio mentre l'application layer orchestra command, repository port, service e result.</p>
+
+    </article>
+  </main>
+</body>
+</html>

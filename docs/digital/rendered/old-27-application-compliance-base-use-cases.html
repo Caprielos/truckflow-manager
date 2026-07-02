@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Archivio storico — 27-application-compliance-base-use-cases — TruckFlow Docs</title>
+  <style>:root{--bg:#f5f7fb;--panel:#fff;--text:#172033;--muted:#64748b;--accent:#3554d1;--border:#d9e1ef;--code:#0f172a;--shadow:0 18px 44px rgba(15,23,42,.08)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:radial-gradient(circle at top left,rgba(53,84,209,.10),transparent 30rem),var(--bg);color:var(--text);line-height:1.68;font-size:16px}.page{width:min(980px,calc(100% - 2rem));margin:0 auto;padding:2rem 0 4rem}.topbar{display:flex;justify-content:space-between;gap:1rem;align-items:center;margin-bottom:1rem}.back{display:inline-flex;align-items:center;gap:.35rem;padding:.55rem .85rem;border:1px solid var(--border);border-radius:999px;background:#fff;color:var(--accent);font-weight:850;text-decoration:none;box-shadow:0 8px 22px rgba(15,23,42,.05)}.source{color:var(--muted);font-size:.88rem}.doc{padding:2rem;border:1px solid var(--border);border-radius:24px;background:rgba(255,255,255,.94);box-shadow:var(--shadow)}.doc-header{padding-bottom:1rem;margin-bottom:1.25rem;border-bottom:1px solid var(--border)}.kicker{display:inline-flex;width:fit-content;padding:.25rem .65rem;border-radius:999px;background:#dbeafe;color:#1e3a8a;font-size:.72rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase}.doc h1{margin:.7rem 0 .4rem;font-size:clamp(2rem,4vw,3.6rem);line-height:1;letter-spacing:-.05em}.doc h2{margin:2rem 0 .6rem;font-size:1.55rem;line-height:1.15;letter-spacing:-.03em}.doc h3{margin:1.35rem 0 .45rem;font-size:1.18rem}.doc p{margin:.65rem 0;color:#334155}.doc ul,.doc ol{padding-left:1.35rem}.doc li{margin:.35rem 0}.doc a{color:var(--accent);font-weight:800}.doc blockquote{margin:1rem 0;padding:.85rem 1rem;border-left:5px solid var(--accent);border-radius:14px;background:#eef2ff;color:#334155}.doc pre{overflow:auto;padding:1rem;border-radius:16px;background:var(--code);color:#e5e7eb;font-size:.9rem;line-height:1.55}.doc code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}.doc :not(pre)>code{padding:.15rem .32rem;border-radius:7px;background:#eef2f7;color:#1e293b}.doc table{width:100%;border-collapse:collapse;margin:1rem 0;border:1px solid var(--border);border-radius:16px;overflow:hidden;display:block}.doc thead,.doc tbody,.doc tr{width:100%}.doc th,.doc td{padding:.75rem;border-bottom:1px solid var(--border);text-align:left;vertical-align:top}.doc th{background:#f1f5f9;color:#334155;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}.doc tr:last-child td{border-bottom:0}.doc hr{border:0;border-top:1px solid var(--border);margin:2rem 0}.doc img{max-width:100%;border-radius:16px;border:1px solid var(--border)}@media(max-width:720px){.page{width:min(100% - 1rem,980px);padding-top:1rem}.doc{padding:1.15rem;border-radius:18px}.topbar{display:grid}.source{overflow-wrap:anywhere}}</style>
+</head>
+<body>
+  <main class="page">
+    <div class="topbar">
+      <a class="back" href="../index.html">← Torna alla Home</a>
+      <span class="source">Sorgente Markdown: ../old_style/27-application-compliance-base-use-cases.md</span>
+    </div>
+    <article class="doc">
+      <header class="doc-header">
+        <span class="kicker">old_style</span>
+        <h1>Archivio storico — 27-application-compliance-base-use-cases</h1>
+      </header>
+      <h1>Archivio storico — 27-application-compliance-base-use-cases</h1>
+<blockquote>
+<p>Questo documento fa parte dell'archivio storico <code>docs/old_style/</code>.
+Mantiene il percorso step-by-step del progetto, ma la documentazione principale aggiornata si trova in:
+<code>docs/simple/</code>, <code>docs/professional/</code> e <code>docs/digital/</code>.</p>
+</blockquote>
+<hr />
+<h1>Punto 6L — Application Compliance Base Use Cases</h1>
+<p>Il Punto 6L introduce una piccola espansione controllata dell'application layer verso il dominio <strong>Compliance</strong>.</p>
+<p>Questa fase aggiunge i primi use case applicativi per gestire un catalogo base di <code>ComplianceRequirement</code>, cioè requisiti astratti di conformità già modellati nel dominio puro.</p>
+<p>Il Punto 6L rimane rigorosamente dentro i confini dell'application layer e degli adapter in memory. Non introduce controlli legali reali, motori di validazione, workflow, audit trail, dashboard, REST API, controller Spring, database, JPA, Spring Data, security, tracking o planning.</p>
+<h2>Obiettivo dello step</h2>
+<p>L'obiettivo è rendere il dominio <code>compliance</code> consumabile dai futuri casi d'uso applicativi senza trasformarlo ancora in un motore di compliance operativo.</p>
+<p>Il sistema ora può:</p>
+<ul>
+<li>registrare un requisito astratto di compliance;</li>
+<li>trovare un requisito tramite ID;</li>
+<li>attivare un requisito;</li>
+<li>sospendere un requisito;</li>
+<li>archiviare un requisito;</li>
+<li>dismettere un requisito tramite stato <code>DISCONTINUED</code>;</li>
+<li>proteggere i codici duplicati;</li>
+<li>usare una repository port astratta;</li>
+<li>usare un adapter in memory per test e sviluppo locale.</li>
+</ul>
+<h2>Cosa è stato aggiunto</h2>
+<p>Sono stati aggiunti i package applicativi dedicati a compliance:</p>
+<pre><code class="language-text">application.command.compliance
+application.result.compliance
+application.port.in.compliance
+application.port.out.compliance
+application.usecase.compliance
+infrastructure.memory.compliance
+</code></pre>
+<p>Questa struttura segue la stessa organizzazione già usata per Locations, Cargo, Shipments, Documents, Vehicles e Operational Roles.</p>
+<h2>Command applicativi</h2>
+<p>Sono stati aggiunti i command:</p>
+<pre><code class="language-text">RegisterComplianceRequirementCommand
+FindComplianceRequirementCommand
+ActivateComplianceRequirementCommand
+SuspendComplianceRequirementCommand
+ArchiveComplianceRequirementCommand
+DiscontinueComplianceRequirementCommand
+</code></pre>
+<p>I command controllano input obbligatori e normalizzano i testi applicativi semplici dove necessario.</p>
+<p><code>RegisterComplianceRequirementCommand</code> richiede:</p>
+<ul>
+<li><code>ComplianceRequirementCode</code>;</li>
+<li>nome;</li>
+<li>stato;</li>
+<li>categoria;</li>
+<li>tipo;</li>
+<li>obligation level;</li>
+<li>severity;</li>
+<li>target;</li>
+<li>rule;</li>
+<li>source;</li>
+<li>jurisdiction.</li>
+</ul>
+<p>Il command non esegue controlli legali reali. Prepara soltanto l'input per creare un aggregate di dominio valido.</p>
+<h2>Result applicativo</h2>
+<p>È stato aggiunto:</p>
+<pre><code class="language-text">ComplianceRequirementResult
+</code></pre>
+<p>Il result espone solo informazioni utili al livello applicativo:</p>
+<ul>
+<li>ID;</li>
+<li>code;</li>
+<li>name;</li>
+<li>status;</li>
+<li>category;</li>
+<li>type;</li>
+<li>obligation level;</li>
+<li>severity;</li>
+<li>target type;</li>
+<li>jurisdiction scope;</li>
+<li>country;</li>
+<li>region;</li>
+<li>flag <code>active</code>;</li>
+<li>flag <code>mandatory</code>;</li>
+<li>flag <code>critical</code>.</li>
+</ul>
+<p>Il result non espone l'intero aggregate e rifiuta domain object nulli con <code>UseCaseValidationException</code>.</p>
+<h2>Repository port</h2>
+<p>È stata aggiunta la port:</p>
+<pre><code class="language-text">ComplianceRequirementRepository
+</code></pre>
+<p>La port consente:</p>
+<ul>
+<li><code>save</code>;</li>
+<li><code>findById</code>;</li>
+<li><code>findByCode</code>;</li>
+<li><code>existsById</code>;</li>
+<li><code>existsByCode</code>.</li>
+</ul>
+<p>È una porta astratta dell'application layer. Non conosce database, JPA, query SQL, Spring Data o repository concrete.</p>
+<h2>Repository in memory</h2>
+<p>È stato aggiunto l'adapter:</p>
+<pre><code class="language-text">InMemoryComplianceRequirementRepository
+</code></pre>
+<p>L'adapter gestisce due indici:</p>
+<ul>
+<li>requisiti per ID;</li>
+<li>ID per code.</li>
+</ul>
+<p>Rifiuta input nulli con <code>UseCaseValidationException</code> e codici duplicati con <code>DuplicateResourceException</code>.</p>
+<p>Questo adapter è utile per test e sviluppo locale, ma non rappresenta una persistenza enterprise definitiva.</p>
+<h2>Service applicativi</h2>
+<p>Sono stati aggiunti i service:</p>
+<pre><code class="language-text">RegisterComplianceRequirementService
+FindComplianceRequirementService
+ActivateComplianceRequirementService
+SuspendComplianceRequirementService
+ArchiveComplianceRequirementService
+DiscontinueComplianceRequirementService
+</code></pre>
+<p>I service orchestrano il dominio:</p>
+<ol>
+<li>validano il command;</li>
+<li>usano la repository port;</li>
+<li>recuperano o creano l'aggregate;</li>
+<li>invocano il metodo di dominio corretto;</li>
+<li>salvano tramite repository port;</li>
+<li>restituiscono un result applicativo.</li>
+</ol>
+<p>Le regole business rimangono nel dominio <code>compliance</code>.</p>
+<h2>Copy-on-write sulle mutazioni</h2>
+<p>Per i cambi di stato è stato aggiunto:</p>
+<pre><code class="language-text">ComplianceRequirementMutationSupport
+</code></pre>
+<p>Le mutazioni lavorano su una copia dell'aggregate prima del salvataggio.</p>
+<p>Questo mantiene coerente la scelta già adottata per Shipments, Documents, Vehicles e Operational Roles: evitare che un adapter in memory conservi mutazioni parziali in caso di errore futuro.</p>
+<h2>Test aggiunti</h2>
+<p>Sono stati aggiunti:</p>
+<pre><code class="language-text">ApplicationComplianceUseCaseExpansionTest
+ApplicationComplianceRepositoryPortTest
+InMemoryComplianceRepositoryTest
+</code></pre>
+<p>I test verificano:</p>
+<ul>
+<li>registrazione di un requisito compliance;</li>
+<li>ricerca tramite ID;</li>
+<li>passaggi di stato <code>ACTIVE</code>, <code>SUSPENDED</code>, <code>ARCHIVED</code> e <code>DISCONTINUED</code>;</li>
+<li>comportamento copy-on-write sui cambi di stato;</li>
+<li>rifiuto di codici duplicati;</li>
+<li>rifiuto di risorse mancanti;</li>
+<li>rifiuto di command nulli;</li>
+<li>rifiuto di dependency repository nulle;</li>
+<li>normalizzazione di nome, descrizione e note nel command;</li>
+<li>contratto della repository port;</li>
+<li>comportamento dell'adapter in memory.</li>
+</ul>
+<p>È stato inoltre aggiornato <code>ApplicationUseCaseReviewTest</code> per includere i nuovi inbound port, service e result compliance.</p>
+<h2>Cosa non viene ancora introdotto</h2>
+<p>Il Punto 6L non introduce:</p>
+<ul>
+<li>controlli automatici su ADR, ATP, tachigrafo, CQC, visite mediche o revisioni;</li>
+<li>calcolo violazioni;</li>
+<li>scadenze obbligatorie concrete;</li>
+<li>motore regole;</li>
+<li>audit trail;</li>
+<li>workflow approvativi;</li>
+<li>notifiche;</li>
+<li>dashboard compliance;</li>
+<li>document requirement enforcement;</li>
+<li>country engine concreto;</li>
+<li>REST API;</li>
+<li>controller Spring;</li>
+<li>database;</li>
+<li>JPA;</li>
+<li>Spring Data;</li>
+<li>security.</li>
+</ul>
+<p>Queste funzionalità appartengono a moduli futuri.</p>
+<h2>Confini architetturali rispettati</h2>
+<p>Il Punto 6L mantiene i confini già stabiliti:</p>
+<ul>
+<li>il dominio <code>compliance</code> contiene le invarianti;</li>
+<li>l'application layer orchestra i casi d'uso;</li>
+<li>l'infrastructure memory implementa solo adapter tecnici;</li>
+<li>l'application layer dipende da port astratte, non da implementazioni concrete;</li>
+<li>il dominio non importa application o infrastructure;</li>
+<li>non vengono introdotti framework.</li>
+</ul>
+<h2>Documentazione aggiornata</h2>
+<p>Il Punto 6L aggiorna:</p>
+<ul>
+<li>questo documento <code>docs/old_style/27-application-compliance-base-use-cases.md</code>;</li>
+<li><code>docs/README.md</code>;</li>
+<li><code>TRUCKFLOW_PROJECT_DOCUMENTATION.md</code>;</li>
+<li>i documenti applicativi collegati;</li>
+<li><code>docs/old_style/12-domain-compliance.md</code>;</li>
+<li><code>docs/digital/index.html</code>;</li>
+<li><code>docs/digital/styles.css</code>;</li>
+<li><code>docs/digital/README.md</code>;</li>
+<li><code>docs/digital/truckflow-manager-enterprise-documentation.html</code>;</li>
+<li><code>command_basic.md</code>.</li>
+</ul>
+<p>La documentazione Markdown rimane la fonte principale. La documentazione digitale HTML + CSS rimane il mirror navigabile.</p>
+<h2>Stato finale dopo il Punto 6L</h2>
+<p>Dopo il Punto 6L, l'application layer copre i primi blocchi fondamentali:</p>
+<ul>
+<li>Locations;</li>
+<li>Cargo;</li>
+<li>Shipments;</li>
+<li>Documents;</li>
+<li>Vehicles;</li>
+<li>Operational Roles;</li>
+<li>Compliance base requirements.</li>
+</ul>
+<p>Storicamente, dopo Compliance base, il passo successivo è stato il <strong>Punto 6M — Application Layer Final Review &amp; Freeze</strong>, che oggi è già completato.</p>
+<h2>Allineamento Punto 6M</h2>
+<p>Il Punto 6M chiude il primo ciclo dell'application layer con una review/freeze finale. Da questo momento i contenuti documentati nei punti 6A-6L sono considerati fondazione applicativa stabile: eventuali evoluzioni future dovranno essere introdotte in nuovi punti roadmap, mantenendo ancora fuori REST API, controller, database, JPA, Spring Data, security, tracking, planning, dashboard, workflow e integrazioni esterne.</p>
+
+    </article>
+  </main>
+</body>
+</html>

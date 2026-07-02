@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Archivio storico — 01-project-overview — TruckFlow Docs</title>
+  <style>:root{--bg:#f5f7fb;--panel:#fff;--text:#172033;--muted:#64748b;--accent:#3554d1;--border:#d9e1ef;--code:#0f172a;--shadow:0 18px 44px rgba(15,23,42,.08)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:radial-gradient(circle at top left,rgba(53,84,209,.10),transparent 30rem),var(--bg);color:var(--text);line-height:1.68;font-size:16px}.page{width:min(980px,calc(100% - 2rem));margin:0 auto;padding:2rem 0 4rem}.topbar{display:flex;justify-content:space-between;gap:1rem;align-items:center;margin-bottom:1rem}.back{display:inline-flex;align-items:center;gap:.35rem;padding:.55rem .85rem;border:1px solid var(--border);border-radius:999px;background:#fff;color:var(--accent);font-weight:850;text-decoration:none;box-shadow:0 8px 22px rgba(15,23,42,.05)}.source{color:var(--muted);font-size:.88rem}.doc{padding:2rem;border:1px solid var(--border);border-radius:24px;background:rgba(255,255,255,.94);box-shadow:var(--shadow)}.doc-header{padding-bottom:1rem;margin-bottom:1.25rem;border-bottom:1px solid var(--border)}.kicker{display:inline-flex;width:fit-content;padding:.25rem .65rem;border-radius:999px;background:#dbeafe;color:#1e3a8a;font-size:.72rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase}.doc h1{margin:.7rem 0 .4rem;font-size:clamp(2rem,4vw,3.6rem);line-height:1;letter-spacing:-.05em}.doc h2{margin:2rem 0 .6rem;font-size:1.55rem;line-height:1.15;letter-spacing:-.03em}.doc h3{margin:1.35rem 0 .45rem;font-size:1.18rem}.doc p{margin:.65rem 0;color:#334155}.doc ul,.doc ol{padding-left:1.35rem}.doc li{margin:.35rem 0}.doc a{color:var(--accent);font-weight:800}.doc blockquote{margin:1rem 0;padding:.85rem 1rem;border-left:5px solid var(--accent);border-radius:14px;background:#eef2ff;color:#334155}.doc pre{overflow:auto;padding:1rem;border-radius:16px;background:var(--code);color:#e5e7eb;font-size:.9rem;line-height:1.55}.doc code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}.doc :not(pre)>code{padding:.15rem .32rem;border-radius:7px;background:#eef2f7;color:#1e293b}.doc table{width:100%;border-collapse:collapse;margin:1rem 0;border:1px solid var(--border);border-radius:16px;overflow:hidden;display:block}.doc thead,.doc tbody,.doc tr{width:100%}.doc th,.doc td{padding:.75rem;border-bottom:1px solid var(--border);text-align:left;vertical-align:top}.doc th{background:#f1f5f9;color:#334155;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}.doc tr:last-child td{border-bottom:0}.doc hr{border:0;border-top:1px solid var(--border);margin:2rem 0}.doc img{max-width:100%;border-radius:16px;border:1px solid var(--border)}@media(max-width:720px){.page{width:min(100% - 1rem,980px);padding-top:1rem}.doc{padding:1.15rem;border-radius:18px}.topbar{display:grid}.source{overflow-wrap:anywhere}}</style>
+</head>
+<body>
+  <main class="page">
+    <div class="topbar">
+      <a class="back" href="../index.html">← Torna alla Home</a>
+      <span class="source">Sorgente Markdown: ../old_style/01-project-overview.md</span>
+    </div>
+    <article class="doc">
+      <header class="doc-header">
+        <span class="kicker">old_style</span>
+        <h1>Archivio storico — 01-project-overview</h1>
+      </header>
+      <h1>Archivio storico — 01-project-overview</h1>
+<blockquote>
+<p>Questo documento fa parte dell'archivio storico <code>docs/old_style/</code>.
+Mantiene il percorso step-by-step del progetto, ma la documentazione principale aggiornata si trova in:
+<code>docs/simple/</code>, <code>docs/professional/</code> e <code>docs/digital/</code>.</p>
+</blockquote>
+<hr />
+<h1>1. Visione generale del progetto TruckFlow Manager</h1>
+<h2>1.1 Obiettivo del progetto</h2>
+<p>TruckFlow Manager è un progetto Java pensato per diventare una piattaforma gestionale realistica per aziende di trasporto, logistica e gestione flotta.</p>
+<p>L’obiettivo non è creare un semplice elenco di camion, autisti e spedizioni, ma costruire una base di dominio solida, ordinata e scalabile, capace di evolvere nel tempo verso un sistema enterprise.</p>
+<p>In questa fase il progetto si concentra sul <strong>domain layer</strong>, cioè sulla parte che descrive i concetti fondamentali del business:</p>
+<ul>
+<li>utenti applicativi;</li>
+<li>abilitazioni e qualificazioni;</li>
+<li>figure operative aziendali;</li>
+<li>veicoli, rimorchi, semirimorchi e combinazioni;</li>
+<li>cargo, cioè merce e requisiti di trasporto;</li>
+<li>location, cioè luoghi logistici riutilizzabili;</li>
+<li>trip template, cioè percorsi tipo e missioni tecniche astratte;</li>
+<li>shipment, cioè richieste di spedizione composte da cargo, tratte logiche, requisiti, priorità e riferimenti;</li>
+<li>documents, cioè documenti aziendali astratti, classificati e riusabili senza file fisici, upload, workflow o storage;</li>
+<li>compliance, cioè requisiti astratti di conformità con regole, categorie, livelli di obbligatorietà, severità, target, fonti e giurisdizioni.</li>
+</ul>
+<p>Il dominio non è ancora collegato a database, API REST, interfacce grafiche o servizi esterni. Questa è una scelta intenzionale: prima si costruisce il modello del business, poi si aggiungono infrastruttura e applicazione.</p>
+<h2>1.2 Perché partire dal dominio puro</h2>
+<p>Il dominio puro permette di ragionare sui concetti aziendali senza confonderli con dettagli tecnici.</p>
+<p>Per esempio:</p>
+<ul>
+<li>un <code>User</code> non deve sapere nulla di JWT o sessioni HTTP;</li>
+<li>un <code>Driver</code> non deve dipendere da una tabella SQL;</li>
+<li>un <code>VehicleUnit</code> non deve dipendere da un controller REST;</li>
+<li>una <code>Qualification</code> non deve contenere file PDF, scadenze o documenti caricati;</li>
+<li>una <code>VehicleCombination</code> non deve ancora sapere se un rimorchio è disponibile oggi;</li>
+<li>un <code>CargoUnit</code> non deve ancora decidere quale veicolo può caricarlo.</li>
+</ul>
+<p>Questa separazione rende il progetto più pulito e più facile da estendere.</p>
+<h2>1.3 I macro-domini attuali</h2>
+<p>Il dominio è stato diviso in dieci macro-aree:</p>
+<h3><code>domain.users</code></h3>
+<p>Rappresenta gli account applicativi: chi accede al sistema, con quali ruoli, quali permessi, quale stato e quali dati di profilo legati all’account.</p>
+<h3><code>domain.qualifications</code></h3>
+<p>Rappresenta il catalogo statico delle abilitazioni, certificazioni, patenti, CQC, ADR e formazioni operative.</p>
+<h3><code>domain.operational</code></h3>
+<p>Rappresenta le persone operative reali dell’azienda: autisti, meccanici, magazzinieri, dispatcher e manager.</p>
+<h3><code>domain.vehicles</code></h3>
+<p>Rappresenta il parco mezzi: unità veicolo singole, trailer, semirimorchi, trattori, combinazioni come bilico e autotreno, caratteristiche tecniche, allestimenti, capacità e agganci.</p>
+<h3><code>domain.cargo</code></h3>
+<p>Rappresenta la merce: identificazione, tipologia, categorie logistiche, pesi, dimensioni, imballaggio, temperatura, pericolosità, requisiti normativi e requisiti di trasporto.</p>
+<h3><code>domain.locations</code></h3>
+<p>Rappresenta i luoghi logistici e geografici usati dal sistema: depositi, magazzini, clienti, fornitori, yard, hub, porti, aeroporti, terminal ferroviari, terminal intermodali, aree di servizio e altri punti logistici.</p>
+<h3><code>domain.triptemplates</code></h3>
+<p>Rappresenta percorsi tipo e missioni tecniche astratte. Un <code>TripTemplate</code> non è un viaggio reale: non contiene autisti, veicoli, cargo, orari o tracking. Descrive solo la struttura del percorso tramite segmenti ordinati e riferimenti a <code>LocationId</code>.</p>
+<h3><code>domain.shipments</code></h3>
+<p>Rappresenta le richieste di spedizione. Una <code>Shipment</code> descrive cosa deve essere spedito, quali cargo compongono la spedizione, quali tratte logiche sono richieste, quali requisiti di trasporto devono essere rispettati, quale priorità ha e quale livello di servizio è richiesto. Non assegna ancora veicoli, autisti, orari o tracking. Il package è organizzato in sottopackage tematici, ma <code>Shipment</code> rimane l'unico aggregate root.</p>
+<h3><code>domain.documents</code></h3>
+<p>Rappresenta il documento aziendale come concetto astratto e riusabile. Un <code>Document</code> contiene identità, codice, tipo, categoria, stato, metadati, contenuto logico e riferimenti generici verso altri domini. Non contiene file fisici, PDF, upload, storage, firma digitale, scadenze o workflow.</p>
+<h3><code>domain.compliance</code></h3>
+<p>Rappresenta i requisiti astratti di conformità. Un <code>ComplianceRequirement</code> descrive quale regola esiste, a quale target astratto si applica, quale categoria riguarda, quanto è obbligatoria, quanto è severa, da quale fonte deriva e in quale giurisdizione vale. Non esegue controlli concreti, non registra violazioni, non gestisce scadenze, audit, workflow o approvazioni.</p>
+<h2>1.4 Perché separare i contesti</h2>
+<p>La separazione dei contesti evita errori di modellazione.</p>
+<p>Un esempio importante è la differenza tra <code>User</code> e <code>Driver</code>.</p>
+<p>Un <code>User</code> è un account applicativo. Serve per accedere al sistema.</p>
+<p>Un <code>Driver</code> è una figura operativa reale. Serve per rappresentare un autista nel business dell’azienda.</p>
+<p>Quindi non vanno fusi nella stessa classe.</p>
+<p>Lo stesso ragionamento vale per le qualificazioni: una patente C è una <code>Qualification</code> del catalogo, mentre il fatto che Mario Rossi possieda quella patente appartiene al dominio operativo tramite una <code>OperationalQualification</code>.</p>
+<p>Lo stesso principio vale per cargo e veicoli: il cargo dichiara i propri requisiti, il veicolo dichiara le proprie capacità, mentre la verifica di compatibilità appartiene a un futuro modulo di pianificazione o assegnazione.</p>
+<p>Lo stesso principio vale anche per location, trip template, shipment e documents: una location è un luogo riutilizzabile, un <code>TripTemplate</code> usa solo <code>LocationId</code> per indicare origine e destinazione dei segmenti, una <code>Shipment</code> usa <code>CargoId</code> e <code>LocationId</code> per riferirsi alla merce e ai luoghi senza inglobare gli aggregati completi, un <code>Document</code> usa <code>DocumentReference</code> generico per riferirsi ad altri contesti senza importarne le classi, e un <code>ComplianceRequirement</code> usa <code>ComplianceTarget</code> per indicare il tipo di dominio a cui si applica senza collegarsi a istanze concrete. In questo modo i contesti rimangono separati e più semplici da evolvere.</p>
+<h2>1.5 Principi architetturali seguiti</h2>
+<p>Il progetto segue alcuni principi ispirati a Domain-Driven Design e Clean Architecture:</p>
+<ul>
+<li>separazione tra dominio, applicazione e infrastruttura;</li>
+<li>classi di dominio senza dipendenze da framework;</li>
+<li>value object per rappresentare concetti specifici;</li>
+<li>entità con identità propria;</li>
+<li>regole di dominio vicine ai dati che proteggono;</li>
+<li>niente duplicazioni concettuali;</li>
+<li>niente logiche temporali o tecniche inserite troppo presto;</li>
+<li>uso di riferimenti tramite ID tra aggregati diversi.</li>
+</ul>
+<h2>1.6 Cosa non fa ancora il dominio</h2>
+<p>Il dominio attuale non gestisce ancora:</p>
+<ul>
+<li>viaggi operativi reali;</li>
+<li>esecuzione operativa delle spedizioni;</li>
+<li>assegnazione autista-mezzo;</li>
+<li>disponibilità giornaliera;</li>
+<li>pianificazione;</li>
+<li>esecuzione reale dei trip;</li>
+<li>manutenzione dettagliata;</li>
+<li>scadenze legali;</li>
+<li>verifiche concrete di compliance;</li>
+<li>violazioni, audit e workflow approvativi;</li>
+<li>gestione file fisici e workflow documentali;</li>
+<li>audit trail completo;</li>
+<li>telematica;</li>
+<li>GPS;</li>
+<li>integrazioni esterne.</li>
+</ul>
+<p>Queste parti verranno aggiunte in fasi successive, mantenendo il dominio attuale come base pulita e stabile.</p>
+<h2>1.7 TruckFlow Domain Foundation v1.0</h2>
+<p>La versione attuale del dominio rappresenta la <strong>TruckFlow Domain Foundation v1.0</strong>.</p>
+<p>Questo significa che la fondazione del dominio puro è stata definita e che la prima review correttiva del dominio è stata eseguita con interventi mirati su invarianti, eccezioni, codici aziendali, test, pulizia del repository e identificativi tecnici del dominio veicoli.</p>
+<p>Non significa che tutta la piattaforma sia già enterprise completa in senso assoluto. API, database, workflow, audit, planning, dispatching e integrazioni esterne rimangono attività successive.</p>
+<p>Le regole fondamentali della fondazione sono:</p>
+<ul>
+<li>ogni dominio deve mantenere confini chiari;</li>
+<li>gli aggregate root non devono essere importati direttamente da altri domini;</li>
+<li>i riferimenti tra domini devono avvenire tramite ID, value object stabili o concetti astratti;</li>
+<li>i value object simili non vanno unificati se hanno significato diverso;</li>
+<li>le eccezioni custom devono essere usate per rappresentare errori specifici di dominio;</li>
+<li>le mutazioni degli aggregate devono avvenire solo dopo il completamento delle validazioni;</li>
+<li>i codici aziendali devono essere obbligatori quando rappresentano identificativi interni leggibili;</li>
+<li>la targa e il VIN devono essere modellati come value object del dominio veicoli, non come semplici stringhe;</li>
+<li>i test dei cataloghi devono proteggere comportamento e coerenza, non conteggi fragili;</li>
+<li>le violazioni concrete di compliance non fanno ancora parte del dominio puro.</li>
+</ul>
+<p>I documenti operativi di riferimento sono <a href="13-domain-rules.md"><code>13-domain-rules.md</code></a> e <a href="14-domain-review-patches.md"><code>14-domain-review-patches.md</code></a>.</p>
+<h2>Avvio del Punto 6 — Application Layer</h2>
+<p>Dopo la stabilizzazione della TruckFlow Domain Foundation, il progetto è entrato nel Punto 6: application layer.</p>
+<p>Il Punto 6A ha definito il blueprint dell'application layer. Il Punto 6B ha introdotto la foundation applicativa con package, contratti base ed eccezioni applicative. Il Punto 6C ha introdotto le prime repository port specifiche: <code>LocationRepository</code>, <code>CargoUnitRepository</code> e <code>ShipmentRepository</code>.</p>
+<p>Questo passaggio non introduce ancora REST API, database o framework. Serve a definire come il sistema dovrà eseguire azioni applicative usando il dominio: registrare location, registrare cargo, creare shipment, aggiungere item e tratte, confermare shipment e recuperare informazioni tramite repository astratti.</p>
+<p>Il primo blocco applicato è stato Locations + Cargo + Shipments, perché rappresenta un flusso logistico reale senza anticipare moduli futuri come planning, dispatching, tracking o availability.</p>
+<h2>Stato applicativo aggiornato</h2>
+<p>Dopo la stabilizzazione del domain layer, TruckFlow Manager ha avviato il Punto 6 dedicato all'application layer.</p>
+<p>Lo stato di quella prima fase includeva:</p>
+<ul>
+<li>blueprint dell'application layer;</li>
+<li>foundation con command, result, use case base ed eccezioni applicative;</li>
+<li>repository port per Locations, Cargo e Shipments;</li>
+<li>repository in memory per Locations, Cargo e Shipments.</li>
+</ul>
+<p>Questa evoluzione permette di iniziare i primi use case applicativi senza introdurre ancora database, API REST o framework web.</p>
+<h2>Aggiornamento Punto 6E — primi use case applicativi</h2>
+<p>Il progetto ora include il primo blocco di use case applicativi reali per Locations, Cargo e Shipments. Questo passaggio segna l'inizio del comportamento applicativo concreto sopra il dominio puro.</p>
+<p>I nuovi use case permettono di registrare location, registrare cargo, creare una shipment draft, aggiungere item e leg, confermare e recuperare una shipment. Il progetto rimane però indipendente da REST API, database, JPA e Spring: il comportamento è testato tramite repository in memory e contratti applicativi.</p>
+<h2>Aggiornamento Punto 6F — Use Case Hardening</h2>
+<p>Dopo l'introduzione dei primi use case applicativi, il progetto ha aggiunto una fase di hardening dedicata. Il Punto 6F rafforza il blocco Locations + Cargo + Shipments aggiungendo <code>CancelShipmentUseCase</code> e testando casi negativi, risorse mancanti, duplicati, command nulli e mutazioni fallite.</p>
+<p>Questo conferma la direzione architetturale del progetto: prima si stabilizza il comportamento applicativo puro, poi si passa a REST API, database, security e moduli enterprise avanzati.</p>
+<h2>Aggiornamento finale — Application Layer chiuso al Punto 6M</h2>
+<p>Dopo il Punto 6F, il progetto ha completato l'intero primo ciclo dell'application layer fino al Punto 6M.</p>
+<p>La sequenza reale completata è:</p>
+<ul>
+<li>6G — primi use case applicativi Documents: register, find, activate e archive;</li>
+<li>6H — review e allineamento dopo Documents;</li>
+<li>6I — primi use case applicativi Vehicles;</li>
+<li>6J — primi use case applicativi Operational Roles;</li>
+<li>6K — hardening dei use case Operational Roles;</li>
+<li>6L — primi use case Compliance base;</li>
+<li>6M — review/freeze finale dell'application layer.</li>
+</ul>
+<p>Lo stato attuale del progetto non è più un application layer appena avviato: è una base applicativa stabile, documentata e testata per Locations, Cargo, Shipments, Documents, Vehicles, Operational Roles e Compliance base.</p>
+<p>Il progetto continua però a non introdurre ancora REST API, controller, database, JPA, Spring Data, security, tracking, planning, dashboard, workflow, audit trail o integrazioni esterne.</p>
+<h2>Aggiornamento roadmap — Punto 7A</h2>
+<p>Dopo la chiusura del Punto 6M e la pulizia documentale finale, TruckFlow Manager apre il <strong>Punto 7A — Infrastructure Layer Blueprint</strong>.</p>
+<p>Questo aggiornamento non introduce codice operativo, database, REST API, JPA o security. Serve a definire la visione infrastrutturale del progetto: confini, dipendenze, ruolo degli adapter, ruolo di Spring come wiring tecnico, permanenza dei repository in memory e roadmap progressiva da 7A a 7H.</p>
+<p>Il documento ufficiale è <a href="30-infrastructure-layer-blueprint.md"><code>30-infrastructure-layer-blueprint.md</code></a>.</p>
+<h2>Aggiornamento roadmap — Punto 7B</h2>
+<p>Dopo il blueprint del Punto 7A, TruckFlow Manager applica il <strong>Punto 7B — Infrastructure Foundation</strong>.</p>
+<p>Questo aggiornamento introduce una base tecnica leggera del layer infrastrutturale: package dedicati, eccezioni infrastrutturali, marker di adapter, profili tecnici e un contratto generico di mapping. La fase non introduce ancora database, JPA, Spring Data, repository reali completi, controller REST, DTO web o security.</p>
+<p>Il valore del 7B è preparare una casa ordinata per gli step successivi del Punto 7, mantenendo intatti i confini: il dominio resta puro, l'application layer resta indipendente da infrastructure e i repository in memory restano disponibili per test e sviluppo locale.</p>
+<h2>Nota di avanzamento — Punto 7C</h2>
+<p>Dopo il freeze dell’application layer e la foundation infrastrutturale, il Punto 7C introduce Spring solo come wiring tecnico non web. Il dominio e l’application layer restano privi di dipendenze Spring; REST API, controller, JPA, Spring Data e security sono rimandati agli step corretti.</p>
+<h2>Nota di avanzamento — Punto 7D e 7E</h2>
+<p>Dopo il Punto 7C, TruckFlow Manager ha applicato il <strong>Punto 7D — Persistence Mapping Blueprint</strong>, che formalizza come i modelli di dominio potranno essere tradotti in modelli tecnici persistenti senza introdurre ancora database, JPA, Spring Data o repository reali.</p>
+<p>Con il <strong>Punto 7E — Real Repository Prototype</strong>, il progetto introduce il primo repository reale prototipale per Locations. Il prototipo usa un adapter file-backed, un persistence record e un mapper concreto, ma non introduce database, JPA, Spring Data, REST API, controller o security.</p>
+<p>Questo conferma la direzione del Punto 7: l'infrastruttura cresce in modo progressivo, validando un pattern per volta prima dell'espansione ai domini più complessi.</p>
+<hr />
+<h2>Allineamento Punto 7G</h2>
+<p>Il Punto 7G consolida l'Infrastructure Layer con test tecnici dedicati allo storage file-backed, all'integrazione tra repository reali prototipali e use case applicativi, e alla protezione dei confini architetturali. Il progetto resta senza REST API, database, JPA, Spring Data e security.</p>
+<h2>Allineamento Punto 7H</h2>
+<p>Il Punto 7H chiude il primo ciclo dell'Infrastructure Layer. Dopo questo freeze, TruckFlow Manager dispone di domain layer puro, application layer chiuso al Punto 6M e infrastructure layer consolidato fino al Punto 7H, senza avere ancora introdotto REST API, controller, database, JPA, Spring Data o security.</p>
+
+    </article>
+  </main>
+</body>
+</html>

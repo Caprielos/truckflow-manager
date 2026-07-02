@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Archivio storico — 02-domain-users — TruckFlow Docs</title>
+  <style>:root{--bg:#f5f7fb;--panel:#fff;--text:#172033;--muted:#64748b;--accent:#3554d1;--border:#d9e1ef;--code:#0f172a;--shadow:0 18px 44px rgba(15,23,42,.08)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:radial-gradient(circle at top left,rgba(53,84,209,.10),transparent 30rem),var(--bg);color:var(--text);line-height:1.68;font-size:16px}.page{width:min(980px,calc(100% - 2rem));margin:0 auto;padding:2rem 0 4rem}.topbar{display:flex;justify-content:space-between;gap:1rem;align-items:center;margin-bottom:1rem}.back{display:inline-flex;align-items:center;gap:.35rem;padding:.55rem .85rem;border:1px solid var(--border);border-radius:999px;background:#fff;color:var(--accent);font-weight:850;text-decoration:none;box-shadow:0 8px 22px rgba(15,23,42,.05)}.source{color:var(--muted);font-size:.88rem}.doc{padding:2rem;border:1px solid var(--border);border-radius:24px;background:rgba(255,255,255,.94);box-shadow:var(--shadow)}.doc-header{padding-bottom:1rem;margin-bottom:1.25rem;border-bottom:1px solid var(--border)}.kicker{display:inline-flex;width:fit-content;padding:.25rem .65rem;border-radius:999px;background:#dbeafe;color:#1e3a8a;font-size:.72rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase}.doc h1{margin:.7rem 0 .4rem;font-size:clamp(2rem,4vw,3.6rem);line-height:1;letter-spacing:-.05em}.doc h2{margin:2rem 0 .6rem;font-size:1.55rem;line-height:1.15;letter-spacing:-.03em}.doc h3{margin:1.35rem 0 .45rem;font-size:1.18rem}.doc p{margin:.65rem 0;color:#334155}.doc ul,.doc ol{padding-left:1.35rem}.doc li{margin:.35rem 0}.doc a{color:var(--accent);font-weight:800}.doc blockquote{margin:1rem 0;padding:.85rem 1rem;border-left:5px solid var(--accent);border-radius:14px;background:#eef2ff;color:#334155}.doc pre{overflow:auto;padding:1rem;border-radius:16px;background:var(--code);color:#e5e7eb;font-size:.9rem;line-height:1.55}.doc code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}.doc :not(pre)>code{padding:.15rem .32rem;border-radius:7px;background:#eef2f7;color:#1e293b}.doc table{width:100%;border-collapse:collapse;margin:1rem 0;border:1px solid var(--border);border-radius:16px;overflow:hidden;display:block}.doc thead,.doc tbody,.doc tr{width:100%}.doc th,.doc td{padding:.75rem;border-bottom:1px solid var(--border);text-align:left;vertical-align:top}.doc th{background:#f1f5f9;color:#334155;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}.doc tr:last-child td{border-bottom:0}.doc hr{border:0;border-top:1px solid var(--border);margin:2rem 0}.doc img{max-width:100%;border-radius:16px;border:1px solid var(--border)}@media(max-width:720px){.page{width:min(100% - 1rem,980px);padding-top:1rem}.doc{padding:1.15rem;border-radius:18px}.topbar{display:grid}.source{overflow-wrap:anywhere}}</style>
+</head>
+<body>
+  <main class="page">
+    <div class="topbar">
+      <a class="back" href="../index.html">← Torna alla Home</a>
+      <span class="source">Sorgente Markdown: ../old_style/02-domain-users.md</span>
+    </div>
+    <article class="doc">
+      <header class="doc-header">
+        <span class="kicker">old_style</span>
+        <h1>Archivio storico — 02-domain-users</h1>
+      </header>
+      <h1>Archivio storico — 02-domain-users</h1>
+<blockquote>
+<p>Questo documento fa parte dell'archivio storico <code>docs/old_style/</code>.
+Mantiene il percorso step-by-step del progetto, ma la documentazione principale aggiornata si trova in:
+<code>docs/simple/</code>, <code>docs/professional/</code> e <code>docs/digital/</code>.</p>
+</blockquote>
+<hr />
+<h1>2. Package <code>domain.users</code></h1>
+<h2>2.1 Scopo del package</h2>
+<p>Il package <code>domain.users</code> rappresenta gli <strong>account applicativi</strong> di TruckFlow Manager.</p>
+<p>Un <code>User</code> è una persona che può accedere al sistema come utente dell’applicazione. Non rappresenta automaticamente un autista, un meccanico, un magazziniere o un manager operativo.</p>
+<p>Questa distinzione è fondamentale:</p>
+<ul>
+<li><code>User</code> = account per accedere all’app;</li>
+<li><code>Driver</code>, <code>Mechanic</code>, <code>WarehouseOperator</code>, <code>Dispatcher</code>, <code>Manager</code> = figure operative reali dell’azienda.</li>
+</ul>
+<p>Un utente può avere un ruolo applicativo, per esempio <code>DRIVER_USER</code> o <code>DISPATCHER</code>, ma il profilo operativo vero sta nel package <code>domain.operational</code>.</p>
+<h2>2.2 Perché User è separato dal dominio operativo</h2>
+<p>Se mettessimo dentro <code>User</code> dati come patenti, CQC, ADR, abilitazioni operative o scope gestionali, il modello diventerebbe confuso.</p>
+<p>Un account applicativo deve rispondere a domande come:</p>
+<ul>
+<li>può accedere all’app?</li>
+<li>quale username usa?</li>
+<li>quale hash password possiede?</li>
+<li>quali ruoli applicativi ha?</li>
+<li>quali permessi ha?</li>
+<li>è attivo, sospeso o disabilitato?</li>
+</ul>
+<p>Una figura operativa deve invece rispondere a domande diverse:</p>
+<ul>
+<li>è un autista?</li>
+<li>possiede qualificazioni operative?</li>
+<li>ha un codice interno aziendale?</li>
+<li>opera in un certo reparto?</li>
+<li>ha scope di coordinamento?</li>
+</ul>
+<p>Per questo <code>User</code> e dominio operativo sono separati.</p>
+<h2>2.3 Classi principali</h2>
+<h3><code>User</code></h3>
+<p><code>User</code> è l’entità principale del package.</p>
+<p>Contiene:</p>
+<ul>
+<li><code>UserId</code>;</li>
+<li><code>Username</code>;</li>
+<li><code>UserPasswordHash</code>;</li>
+<li>insieme di <code>UserRole</code>;</li>
+<li><code>UserPermissions</code>;</li>
+<li><code>UserStatus</code>;</li>
+<li><code>UserProfile</code>;</li>
+<li><code>UserMetadata</code>;</li>
+<li><code>UserPreferences</code>;</li>
+<li>note.</li>
+</ul>
+<p>La classe gestisce regole come:</p>
+<ul>
+<li>un utente attivo deve avere almeno un ruolo;</li>
+<li>un utente disabilitato non può essere modificato con le normali operazioni;</li>
+<li>i ruoli e i permessi non possono contenere valori nulli;</li>
+<li>le note vengono normalizzate;</li>
+<li>ogni modifica aggiorna i metadata.</li>
+</ul>
+<p><code>User</code> non contiene dati operativi come patenti, CQC, ADR o aree di lavoro.</p>
+<h3><code>UserId</code></h3>
+<p><code>UserId</code> è l’identificatore del dominio per un utente.</p>
+<p>È separato da username ed email perché l’identità tecnica del dominio non deve cambiare quando cambiano i dati visibili dell’utente.</p>
+<p>Viene usato anche da altri package come riferimento, per esempio nel dominio operativo.</p>
+<p>La scelta importante è questa: gli altri domini referenziano l’utente tramite <code>UserId</code>, non tramite un oggetto <code>User</code> completo.</p>
+<h3><code>Username</code></h3>
+<p><code>Username</code> rappresenta il nome utente usato per l’accesso.</p>
+<p>È un value object dedicato perché lo username non è una semplice stringa generica: è un concetto specifico del dominio utenti.</p>
+<p>La sua presenza come classe separata permette di centralizzare normalizzazione e validazione.</p>
+<h3><code>UserPasswordHash</code></h3>
+<p><code>UserPasswordHash</code> rappresenta l’hash della password, non la password in chiaro.</p>
+<p>La scelta è corretta perché il dominio non deve mai gestire password testuali.</p>
+<p>Il dominio conserva solo il valore già trasformato in hash. La generazione dell’hash e la verifica tecnica appartengono a layer di sicurezza/applicazione, non al dominio puro.</p>
+<h3><code>UserRole</code></h3>
+<p><code>UserRole</code> rappresenta i ruoli applicativi.</p>
+<p>I ruoli attuali sono:</p>
+<ul>
+<li><code>ADMIN</code>;</li>
+<li><code>DISPATCHER</code>;</li>
+<li><code>WAREHOUSE_OPERATOR</code>;</li>
+<li><code>DRIVER_USER</code>;</li>
+<li><code>MECHANIC</code>;</li>
+<li><code>MANAGER</code>.</li>
+</ul>
+<p>Questi ruoli indicano cosa un account può fare o vedere nell’applicazione.</p>
+<p>Non vanno confusi con le figure operative reali. Per esempio:</p>
+<ul>
+<li><code>UserRole.DISPATCHER</code> = ruolo applicativo;</li>
+<li><code>Dispatcher</code> = figura operativa nel package <code>domain.operational.dispatcher</code>.</li>
+</ul>
+<h3><code>UserPermission</code></h3>
+<p><code>UserPermission</code> rappresenta permessi applicativi più granulari.</p>
+<p>I permessi sono organizzati per aree:</p>
+<ul>
+<li>utenti;</li>
+<li>autisti;</li>
+<li>veicoli;</li>
+<li>qualificazioni;</li>
+<li>viaggi;</li>
+<li>magazzino;</li>
+<li>manutenzione;</li>
+<li>report.</li>
+</ul>
+<p>Esempi:</p>
+<ul>
+<li><code>VIEW_USERS</code>;</li>
+<li><code>MANAGE_USERS</code>;</li>
+<li><code>VIEW_DRIVERS</code>;</li>
+<li><code>MANAGE_DRIVERS</code>;</li>
+<li><code>VIEW_VEHICLES</code>;</li>
+<li><code>MANAGE_VEHICLES</code>.</li>
+</ul>
+<p>Questa distinzione tra ruoli e permessi rende il modello più enterprise: un ruolo può rappresentare una macro-funzione, mentre i permessi permettono controlli più specifici.</p>
+<h3><code>UserPermissions</code></h3>
+<p><code>UserPermissions</code> incapsula l’insieme di permessi di un utente.</p>
+<p>È stato creato come value object perché un set di permessi ha regole proprie:</p>
+<ul>
+<li>non deve contenere valori nulli;</li>
+<li>deve essere copiato in modo sicuro;</li>
+<li>deve offrire metodi per verificare se un permesso è presente;</li>
+<li>deve permettere aggiunta e rimozione restituendo un nuovo stato coerente.</li>
+</ul>
+<p>Non viene usato un semplice <code>Set&lt;UserPermission&gt;</code> ovunque, perché questo disperderebbe la logica e renderebbe più facile creare stati non validi.</p>
+<h3><code>UserStatus</code></h3>
+<p><code>UserStatus</code> rappresenta lo stato dell’account.</p>
+<p>I valori sono:</p>
+<ul>
+<li><code>ACTIVE</code>;</li>
+<li><code>SUSPENDED</code>;</li>
+<li><code>DISABLED</code>.</li>
+</ul>
+<p>Significato:</p>
+<ul>
+<li><code>ACTIVE</code>: l’utente può accedere;</li>
+<li><code>SUSPENDED</code>: l’utente è sospeso temporaneamente;</li>
+<li><code>DISABLED</code>: l’utente è disabilitato e non deve essere modificato con le normali operazioni.</li>
+</ul>
+<p>La differenza tra sospeso e disabilitato è importante. Un utente sospeso può essere riattivato con logiche normali. Un utente disabilitato rappresenta uno stato più forte.</p>
+<h3><code>UserProfile</code></h3>
+<p><code>UserProfile</code> rappresenta i dati di profilo dell’account applicativo.</p>
+<p>Non è il profilo operativo aziendale. Quello è <code>OperationalProfile</code>.</p>
+<p><code>UserProfile</code> raccoglie dati anagrafici e collegamenti a contatto e indirizzo dell’utente applicativo.</p>
+<h3><code>UserContact</code></h3>
+<p><code>UserContact</code> rappresenta i dati di contatto associati al profilo utente.</p>
+<p>Serve a evitare che email, telefono o altri contatti siano sparsi direttamente nella classe <code>User</code>.</p>
+<h3><code>UserAddress</code></h3>
+<p><code>UserAddress</code> rappresenta l’indirizzo dell’utente.</p>
+<p>È separato per mantenere il profilo ordinato e per permettere eventuali evoluzioni future senza modificare direttamente <code>User</code>.</p>
+<h3><code>UserMetadata</code></h3>
+<p><code>UserMetadata</code> traccia informazioni di creazione e aggiornamento dell’account.</p>
+<p>Contiene:</p>
+<ul>
+<li>data di creazione;</li>
+<li>data di aggiornamento;</li>
+<li>autore della creazione;</li>
+<li>autore dell’aggiornamento.</li>
+</ul>
+<p>Non è un audit trail completo. È solo metadata base di dominio.</p>
+<p>Per le figure operative è stato creato <code>OperationalMetadata</code>, perché <code>UserMetadata</code> appartiene al contesto utenti.</p>
+<h3><code>UserPreferences</code></h3>
+<p><code>UserPreferences</code> rappresenta preferenze dell’account applicativo.</p>
+<p>Tiene separate le impostazioni dell’utente dal resto del dominio.</p>
+<p>Le preferenze non usano più stringhe libere per lingua e tema. Usano value object e enum dedicati:</p>
+<ul>
+<li><code>LanguageCode</code>, per rappresentare un codice lingua normalizzato;</li>
+<li><code>UserTheme</code>, per rappresentare il tema grafico scelto dall'utente.</li>
+</ul>
+<p>Questa scelta evita valori casuali come <code>italiano</code>, <code>english</code>, <code>nero</code> o <code>dark-mode</code> e rende il modello più chiaro.</p>
+<p>I valori principali di <code>UserTheme</code> sono:</p>
+<ul>
+<li><code>LIGHT</code>;</li>
+<li><code>DARK</code>;</li>
+<li><code>SYSTEM</code>.</li>
+</ul>
+<p><code>LanguageCode</code> è pensato come codice breve normalizzato, per esempio <code>EN</code>, <code>IT</code>, <code>FR</code>, <code>DE</code> o <code>ES</code>.</p>
+<h2>2.4 Perché usare value object dedicati</h2>
+<p>Il progetto usa value object dedicati perché molte informazioni non sono semplici stringhe o set generici.</p>
+<p>Esempi:</p>
+<ul>
+<li><code>Username</code> non è una stringa qualsiasi;</li>
+<li><code>UserPasswordHash</code> non è una password qualsiasi;</li>
+<li><code>UserId</code> non è un UUID qualunque;</li>
+<li><code>UserPermissions</code> non è un set senza regole;</li>
+<li><code>LanguageCode</code> non è una lingua scritta come testo libero;</li>
+<li><code>UserTheme</code> non è una stringa arbitraria.</li>
+</ul>
+<p>Questa scelta rende il dominio più chiaro, leggibile e sicuro.</p>
+<h2>2.5 Perché User non contiene patenti o abilitazioni</h2>
+<p>Patenti, CQC, ADR, HACCP, ATP e altre abilitazioni appartengono al mondo operativo.</p>
+<p>Un account può essere collegato a un autista, ma non è l’autista.</p>
+<p>Per questo le abilitazioni non stanno in <code>User</code>. Stanno nel dominio operativo tramite <code>OperationalQualification</code>, che a sua volta referenzia il catalogo <code>Qualification</code>.</p>
+<h2>2.6 Perché UserId è un riferimento e non un User</h2>
+<p>Le entità operative contengono <code>UserId</code>, non <code>User</code>.</p>
+<p>Questa scelta riduce l’accoppiamento tra contesti.</p>
+<p>Il dominio operativo non deve modificare direttamente l’account applicativo. Deve solo sapere a quale account è collegata una figura operativa.</p>
+<p>Questo approccio è più scalabile e coerente con DDD.</p>
+
+    </article>
+  </main>
+</body>
+</html>

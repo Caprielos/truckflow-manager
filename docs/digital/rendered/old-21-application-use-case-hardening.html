@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Archivio storico — 21-application-use-case-hardening — TruckFlow Docs</title>
+  <style>:root{--bg:#f5f7fb;--panel:#fff;--text:#172033;--muted:#64748b;--accent:#3554d1;--border:#d9e1ef;--code:#0f172a;--shadow:0 18px 44px rgba(15,23,42,.08)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:radial-gradient(circle at top left,rgba(53,84,209,.10),transparent 30rem),var(--bg);color:var(--text);line-height:1.68;font-size:16px}.page{width:min(980px,calc(100% - 2rem));margin:0 auto;padding:2rem 0 4rem}.topbar{display:flex;justify-content:space-between;gap:1rem;align-items:center;margin-bottom:1rem}.back{display:inline-flex;align-items:center;gap:.35rem;padding:.55rem .85rem;border:1px solid var(--border);border-radius:999px;background:#fff;color:var(--accent);font-weight:850;text-decoration:none;box-shadow:0 8px 22px rgba(15,23,42,.05)}.source{color:var(--muted);font-size:.88rem}.doc{padding:2rem;border:1px solid var(--border);border-radius:24px;background:rgba(255,255,255,.94);box-shadow:var(--shadow)}.doc-header{padding-bottom:1rem;margin-bottom:1.25rem;border-bottom:1px solid var(--border)}.kicker{display:inline-flex;width:fit-content;padding:.25rem .65rem;border-radius:999px;background:#dbeafe;color:#1e3a8a;font-size:.72rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase}.doc h1{margin:.7rem 0 .4rem;font-size:clamp(2rem,4vw,3.6rem);line-height:1;letter-spacing:-.05em}.doc h2{margin:2rem 0 .6rem;font-size:1.55rem;line-height:1.15;letter-spacing:-.03em}.doc h3{margin:1.35rem 0 .45rem;font-size:1.18rem}.doc p{margin:.65rem 0;color:#334155}.doc ul,.doc ol{padding-left:1.35rem}.doc li{margin:.35rem 0}.doc a{color:var(--accent);font-weight:800}.doc blockquote{margin:1rem 0;padding:.85rem 1rem;border-left:5px solid var(--accent);border-radius:14px;background:#eef2ff;color:#334155}.doc pre{overflow:auto;padding:1rem;border-radius:16px;background:var(--code);color:#e5e7eb;font-size:.9rem;line-height:1.55}.doc code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}.doc :not(pre)>code{padding:.15rem .32rem;border-radius:7px;background:#eef2f7;color:#1e293b}.doc table{width:100%;border-collapse:collapse;margin:1rem 0;border:1px solid var(--border);border-radius:16px;overflow:hidden;display:block}.doc thead,.doc tbody,.doc tr{width:100%}.doc th,.doc td{padding:.75rem;border-bottom:1px solid var(--border);text-align:left;vertical-align:top}.doc th{background:#f1f5f9;color:#334155;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}.doc tr:last-child td{border-bottom:0}.doc hr{border:0;border-top:1px solid var(--border);margin:2rem 0}.doc img{max-width:100%;border-radius:16px;border:1px solid var(--border)}@media(max-width:720px){.page{width:min(100% - 1rem,980px);padding-top:1rem}.doc{padding:1.15rem;border-radius:18px}.topbar{display:grid}.source{overflow-wrap:anywhere}}</style>
+</head>
+<body>
+  <main class="page">
+    <div class="topbar">
+      <a class="back" href="../index.html">← Torna alla Home</a>
+      <span class="source">Sorgente Markdown: ../old_style/21-application-use-case-hardening.md</span>
+    </div>
+    <article class="doc">
+      <header class="doc-header">
+        <span class="kicker">old_style</span>
+        <h1>Archivio storico — 21-application-use-case-hardening</h1>
+      </header>
+      <h1>Archivio storico — 21-application-use-case-hardening</h1>
+<blockquote>
+<p>Questo documento fa parte dell'archivio storico <code>docs/old_style/</code>.
+Mantiene il percorso step-by-step del progetto, ma la documentazione principale aggiornata si trova in:
+<code>docs/simple/</code>, <code>docs/professional/</code> e <code>docs/digital/</code>.</p>
+</blockquote>
+<hr />
+<h1>Punto 6F — Application Use Case Review &amp; Hardening</h1>
+<p>Il <strong>Punto 6F</strong> consolida i primi use case applicativi introdotti nel Punto 6E.</p>
+<p>Questa fase non introduce ancora REST API, controller, database, JPA, Spring, security, frontend o integrazioni esterne. L'obiettivo è rendere più robusto il primo blocco applicativo già esistente, verificando che command, service, repository port, repository in memory e result applicativi lavorino insieme in modo coerente.</p>
+<p>Il Punto 6F è quindi una fase di <strong>review e hardening</strong>, non una fase di espansione enterprise generale.</p>
+<h2>Obiettivo dello step</h2>
+<p>Il Punto 6F serve a verificare che i primi use case applicativi siano abbastanza solidi prima di estendere il modello ad altri domini.</p>
+<p>Gli obiettivi sono:</p>
+<ul>
+<li>completare il primo gruppo di azioni applicative sulle shipment;</li>
+<li>rafforzare i test negativi dei service applicativi;</li>
+<li>verificare la distinzione tra errori applicativi ed errori di dominio;</li>
+<li>controllare che le mutazioni fallite non lascino stati parziali;</li>
+<li>rafforzare il comportamento dei service che modificano una shipment;</li>
+<li>verificare la consistenza dei <code>result</code> rispetto allo stato persistito;</li>
+<li>documentare cosa è stato coperto e cosa rimane fuori dalle fasi future;</li>
+<li>mantenere separati domain, application e infrastructure memory.</li>
+</ul>
+<h2>Use case aggiunto</h2>
+<p>Il Punto 6F aggiunge un nuovo use case applicativo:</p>
+<ul>
+<li><code>CancelShipmentUseCase</code>.</li>
+</ul>
+<p>Il relativo command è:</p>
+<ul>
+<li><code>CancelShipmentCommand</code>.</li>
+</ul>
+<p>La relativa implementazione è:</p>
+<ul>
+<li><code>CancelShipmentService</code>.</li>
+</ul>
+<p>Questo use case permette di cancellare una shipment esistente usando il metodo di dominio <code>shipment.cancel()</code> e salvando poi l'aggregate aggiornato tramite <code>ShipmentRepository</code>.</p>
+<p>La logica applicativa è:</p>
+<ol>
+<li>ricevere il command;</li>
+<li>verificare che il command non sia nullo;</li>
+<li>caricare la shipment tramite repository port;</li>
+<li>se la shipment non esiste, sollevare <code>ResourceNotFoundException</code>;</li>
+<li>creare una copia applicativa della shipment caricata;</li>
+<li>chiamare <code>cancel()</code> sulla copia;</li>
+<li>salvare la shipment aggiornata solo dopo il completamento della mutazione;</li>
+<li>restituire <code>ShipmentResult</code>.</li>
+</ol>
+<h2>Perché è stato aggiunto CancelShipment</h2>
+<p>Nei documenti precedenti la cancellazione della shipment era già indicata tra le azioni applicative naturali del primo blocco Shipments.</p>
+<p>Il Punto 6E aveva introdotto creazione, aggiunta item, aggiunta leg, conferma e ricerca. Il Punto 6F completa questo primo gruppo aggiungendo la cancellazione applicativa.</p>
+<p>La cancellazione non introduce workflow avanzato, planning, dispatching o audit. È solo una prima azione applicativa coerente con lo stato <code>CANCELLED</code> già presente nel dominio shipment.</p>
+<h2>Hardening delle mutazioni shipment</h2>
+<p>Il Punto 6F rafforza anche i service che modificano una shipment già esistente:</p>
+<ul>
+<li><code>AddShipmentItemService</code>;</li>
+<li><code>AddShipmentLegService</code>;</li>
+<li><code>ConfirmShipmentService</code>;</li>
+<li><code>CancelShipmentService</code>.</li>
+</ul>
+<p>Questi service ora usano un helper interno al package shipment application:</p>
+<ul>
+<li><code>ShipmentMutationSupport</code>.</li>
+</ul>
+<p><code>ShipmentMutationSupport.copyOf(...)</code> crea una copia dell'aggregate caricato dal repository. La mutazione viene applicata alla copia e la copia viene salvata solo se tutte le validazioni di dominio sono passate.</p>
+<p>Questa scelta è importante perché le repository in memory conservano aggregate mutabili. Senza questa protezione, un service potrebbe modificare l'oggetto caricato e lasciare uno stato parziale nel repository anche quando una validazione successiva fallisce.</p>
+<p>La regola applicativa diventa:</p>
+<blockquote>
+<p>caricare l'aggregate, copiare l'aggregate, mutare la copia, salvare solo la copia valida.</p>
+</blockquote>
+<p>Questo non sostituisce transazioni, unit of work o persistenza enterprise. È un hardening locale coerente con lo stato attuale del progetto.</p>
+<h2>Test aggiunti e rafforzati</h2>
+<p>È stato rafforzato il test:</p>
+<ul>
+<li><code>ApplicationUseCaseHardeningTest</code>.</li>
+</ul>
+<p>Questo test verifica il comportamento dei primi use case in situazioni positive, negative e di protezione dello stato.</p>
+<p>I casi coperti sono:</p>
+<ul>
+<li>tutti i service rifiutano command nulli con <code>UseCaseValidationException</code>;</li>
+<li>i service rifiutano repository dependency nulle in fase di costruzione;</li>
+<li>i command rifiutano input applicativi obbligatori mancanti;</li>
+<li>i find use case restituiscono <code>ResourceNotFoundException</code> quando la risorsa non esiste;</li>
+<li>le registrazioni di location, cargo e shipment rifiutano codici business duplicati con <code>DuplicateResourceException</code>;</li>
+<li>i use case di mutazione shipment falliscono con <code>ResourceNotFoundException</code> quando mancano shipment, cargo o location necessarie;</li>
+<li><code>CancelShipmentUseCase</code> cancella e persiste una shipment esistente;</li>
+<li>una mutazione fallita su shipment item non lascia stato parziale;</li>
+<li>una mutazione fallita su shipment leg non lascia stato parziale;</li>
+<li>una conferma fallita non modifica lo stato della shipment persistita.</li>
+</ul>
+<h2>Errori applicativi verificati</h2>
+<p>Il Punto 6F rafforza la distinzione tra errori applicativi e errori di dominio.</p>
+<p>Sono errori applicativi:</p>
+<ul>
+<li>command nullo;</li>
+<li>dipendenza repository nulla nella costruzione del service;</li>
+<li>input applicativo obbligatorio mancante;</li>
+<li>location non trovata;</li>
+<li>cargo non trovato;</li>
+<li>shipment non trovata;</li>
+<li>codice business duplicato.</li>
+</ul>
+<p>Per questi casi vengono usate:</p>
+<ul>
+<li><code>UseCaseValidationException</code>;</li>
+<li><code>ResourceNotFoundException</code>;</li>
+<li><code>DuplicateResourceException</code>.</li>
+</ul>
+<p>Sono invece errori di dominio:</p>
+<ul>
+<li>shipment item con quantità non positiva;</li>
+<li>shipment leg con sequenza non valida;</li>
+<li>shipment leg con sequenza duplicata;</li>
+<li>shipment confermata senza item;</li>
+<li>shipment confermata senza leg;</li>
+<li>shipment incoerente rispetto a temperatura, separazione o requisiti.</li>
+</ul>
+<p>Questi errori restano nel domain layer e vengono propagati dall'application layer senza essere mascherati.</p>
+<h2>Regola confermata</h2>
+<p>Il Punto 6F conferma una regola centrale dell'architettura:</p>
+<blockquote>
+<p>Il dominio decide se una regola di business è valida. L'application layer orchestra il caso d'uso, gestisce risorse mancanti o duplicate e salva il risultato.</p>
+</blockquote>
+<p>Quindi un service applicativo non deve replicare le regole profonde del dominio.</p>
+<p>Esempio:</p>
+<ul>
+<li><code>AddShipmentItemService</code> verifica che shipment e cargo esistano;</li>
+<li>crea una copia della shipment caricata;</li>
+<li>crea lo shipment item usando il dominio;</li>
+<li>se la quantità è invalida, il dominio solleva <code>InvalidShipmentException</code>;</li>
+<li>il service non converte quell'errore in un errore tecnico o infrastrutturale;</li>
+<li>la repository non viene aggiornata con uno stato parziale.</li>
+</ul>
+<h2>Mutazioni fallite e stato parziale</h2>
+<p>Un punto importante del Punto 6F è la verifica delle mutazioni fallite.</p>
+<p>Quando un use case prova ad aggiungere uno shipment item non valido, aggiungere una shipment leg con sequenza duplicata o confermare una shipment incompleta, il dominio deve impedire l'operazione e la shipment salvata deve restare nello stato precedente.</p>
+<p>Questo protegge il futuro application layer da errori difficili da individuare, come:</p>
+<ul>
+<li>shipment con item parzialmente aggiunti;</li>
+<li>shipment con leg parzialmente aggiunte;</li>
+<li>shipment marcate come confermate dopo una conferma fallita;</li>
+<li>repository aggiornati dopo una validazione fallita;</li>
+<li>result applicativi incoerenti rispetto allo stato reale dell'aggregate.</li>
+</ul>
+<h2>Confini architetturali confermati</h2>
+<p>Il Punto 6F mantiene invariati i confini già stabiliti:</p>
+<ul>
+<li>il domain layer non importa application o infrastructure;</li>
+<li>l'application layer non importa framework, web adapter o repository concrete;</li>
+<li>l'application layer dipende solo da port e dominio;</li>
+<li><code>infrastructure.memory</code> implementa le repository port;</li>
+<li>non vengono introdotti controller, DTO web, database o annotazioni di persistenza.</li>
+</ul>
+<h2>Cosa è stato fatto</h2>
+<p>Con il Punto 6F il progetto ora contiene:</p>
+<ul>
+<li>domain layer puro;</li>
+<li>application foundation;</li>
+<li>repository port;</li>
+<li>repository in memory;</li>
+<li>primi use case per Locations, Cargo e Shipments;</li>
+<li>use case di cancellazione shipment;</li>
+<li>hardening copy-on-write dei service di mutazione shipment;</li>
+<li>test del primo flusso applicativo completo;</li>
+<li>test di hardening su command, service, errori, repository mancanti, risorse mancanti, duplicati e mutazioni fallite.</li>
+</ul>
+<h2>Cosa manca ancora</h2>
+<p>Il Punto 6F non introduce ancora:</p>
+<ul>
+<li>use case per Vehicles;</li>
+<li>use case per Documents;</li>
+<li>use case per Compliance;</li>
+<li>use case per Operational Roles;</li>
+<li>workflow documentali avanzati;</li>
+<li>controlli compliance concreti;</li>
+<li>planning e dispatching;</li>
+<li>disponibilità mezzi/autisti;</li>
+<li>assegnazione veicolo/cargo/shipment;</li>
+<li>tracking e monitoraggio;</li>
+<li>REST API;</li>
+<li>database;</li>
+<li>transazioni enterprise;</li>
+<li>security e permissions.</li>
+</ul>
+<p>Queste parti non vengono aggiunte ora perché il primo obiettivo è stabilizzare il nucleo applicativo già introdotto.</p>
+<h2>Stato dopo il Punto 6F</h2>
+<p>Dopo questo step, TruckFlow Manager ha un primo application layer più robusto.</p>
+<p>Il progetto non è ancora una piattaforma enterprise completa e non espone ancora API esterne, ma ora possiede una base applicativa più affidabile per continuare verso i prossimi use case.</p>
+<h2>Evoluzione successiva storica</h2>
+<p>Storicamente, dopo il Punto 6F, il progetto è passato al <strong>Punto 6G — Application Use Cases Expansion</strong>.</p>
+<p>La scelta reale è stata l'espansione controllata verso Documents. Successivamente sono stati completati anche Vehicles, Operational Roles, hardening Operational Roles, Compliance base e il freeze finale del Punto 6M.</p>
+<p>Prima di passare a REST API, database o Spring operativo, il progetto ha quindi completato un set minimo ma coerente di use case applicativi.</p>
+<h2>Aggiornamento successivo — Punto 6G completato</h2>
+<p>Dopo il Punto 6F è stato applicato il Punto 6G — Application Use Cases Expansion.</p>
+<p>L'espansione non ha modificato il significato del 6F: il nucleo Locations + Cargo + Shipments resta stabile e hardenizzato. Il Punto 6G aggiunge invece un nuovo blocco applicativo separato per <code>documents</code>, mantenendo gli stessi principi di validazione, error handling, repository usage, test e documentazione.</p>
+<p>La nuova documentazione di riferimento è:</p>
+<pre><code class="language-text">docs/old_style/22-application-use-case-expansion.md
+</code></pre>
+<p>Storicamente, dopo il Punto 6G, il passo successivo è stato la review del blocco Documents nel Punto 6H. Oggi quella review è già stata completata e il Punto 6 è chiuso al 6M.</p>
+<h2>Aggiornamento dopo il Punto 6H</h2>
+<p>Il Punto 6H estende l'idea di hardening applicativo anche dopo l'espansione Documents.</p>
+<p>Non cambia le mutazioni shipment già rafforzate nel Punto 6F, ma aggiunge una review trasversale su port, service, result e repository in memory. Inoltre conferma che anche le mutazioni documentali introdotte nel Punto 6G seguono l'approccio copy-on-write.</p>
+<h2>Aggiornamento di contesto dopo il Punto 6J</h2>
+<p>Le regole di hardening introdotte nel Punto 6F rimangono valide anche per Documents, Vehicles e Operational Roles: command nulli rifiutati, repository dependency nulle rifiutate, errori applicativi distinti dagli errori di dominio e mutazioni protette tramite copy-on-write dove gli aggregate sono mutabili.</p>
+<h2>Aggiornamento dopo il Punto 6K</h2>
+<p>Il principio di hardening introdotto nel Punto 6F viene confermato anche per Operational Roles nel Punto 6K: le mutazioni applicative devono evitare stati parziali quando una validazione di dominio fallisce.</p>
+<p>Per questo i service Operational Roles continuano a usare mutation support copy-on-write prima del salvataggio.</p>
+<h2>Aggiornamento dopo il Punto 6L</h2>
+<p>Il principio di hardening del Punto 6F rimane valido anche per Compliance base.</p>
+<p>I nuovi service compliance rifiutano command nulli, dependency repository nulle e risorse mancanti. Le mutazioni di stato usano una copia dell'aggregate prima del salvataggio, mantenendo coerente l'approccio copy-on-write già adottato negli step precedenti.</p>
+<h2>Allineamento Punto 6M</h2>
+<p>Il Punto 6M chiude il primo ciclo dell'application layer con una review/freeze finale. Da questo momento i contenuti documentati nei punti 6A-6L sono considerati fondazione applicativa stabile: eventuali evoluzioni future dovranno essere introdotte in nuovi punti roadmap, mantenendo ancora fuori REST API, controller, database, JPA, Spring Data, security, tracking, planning, dashboard, workflow e integrazioni esterne.</p>
+
+    </article>
+  </main>
+</body>
+</html>

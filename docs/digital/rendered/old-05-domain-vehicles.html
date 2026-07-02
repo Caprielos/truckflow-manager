@@ -1,0 +1,855 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Archivio storico — 05-domain-vehicles — TruckFlow Docs</title>
+  <style>:root{--bg:#f5f7fb;--panel:#fff;--text:#172033;--muted:#64748b;--accent:#3554d1;--border:#d9e1ef;--code:#0f172a;--shadow:0 18px 44px rgba(15,23,42,.08)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:radial-gradient(circle at top left,rgba(53,84,209,.10),transparent 30rem),var(--bg);color:var(--text);line-height:1.68;font-size:16px}.page{width:min(980px,calc(100% - 2rem));margin:0 auto;padding:2rem 0 4rem}.topbar{display:flex;justify-content:space-between;gap:1rem;align-items:center;margin-bottom:1rem}.back{display:inline-flex;align-items:center;gap:.35rem;padding:.55rem .85rem;border:1px solid var(--border);border-radius:999px;background:#fff;color:var(--accent);font-weight:850;text-decoration:none;box-shadow:0 8px 22px rgba(15,23,42,.05)}.source{color:var(--muted);font-size:.88rem}.doc{padding:2rem;border:1px solid var(--border);border-radius:24px;background:rgba(255,255,255,.94);box-shadow:var(--shadow)}.doc-header{padding-bottom:1rem;margin-bottom:1.25rem;border-bottom:1px solid var(--border)}.kicker{display:inline-flex;width:fit-content;padding:.25rem .65rem;border-radius:999px;background:#dbeafe;color:#1e3a8a;font-size:.72rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase}.doc h1{margin:.7rem 0 .4rem;font-size:clamp(2rem,4vw,3.6rem);line-height:1;letter-spacing:-.05em}.doc h2{margin:2rem 0 .6rem;font-size:1.55rem;line-height:1.15;letter-spacing:-.03em}.doc h3{margin:1.35rem 0 .45rem;font-size:1.18rem}.doc p{margin:.65rem 0;color:#334155}.doc ul,.doc ol{padding-left:1.35rem}.doc li{margin:.35rem 0}.doc a{color:var(--accent);font-weight:800}.doc blockquote{margin:1rem 0;padding:.85rem 1rem;border-left:5px solid var(--accent);border-radius:14px;background:#eef2ff;color:#334155}.doc pre{overflow:auto;padding:1rem;border-radius:16px;background:var(--code);color:#e5e7eb;font-size:.9rem;line-height:1.55}.doc code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}.doc :not(pre)>code{padding:.15rem .32rem;border-radius:7px;background:#eef2f7;color:#1e293b}.doc table{width:100%;border-collapse:collapse;margin:1rem 0;border:1px solid var(--border);border-radius:16px;overflow:hidden;display:block}.doc thead,.doc tbody,.doc tr{width:100%}.doc th,.doc td{padding:.75rem;border-bottom:1px solid var(--border);text-align:left;vertical-align:top}.doc th{background:#f1f5f9;color:#334155;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}.doc tr:last-child td{border-bottom:0}.doc hr{border:0;border-top:1px solid var(--border);margin:2rem 0}.doc img{max-width:100%;border-radius:16px;border:1px solid var(--border)}@media(max-width:720px){.page{width:min(100% - 1rem,980px);padding-top:1rem}.doc{padding:1.15rem;border-radius:18px}.topbar{display:grid}.source{overflow-wrap:anywhere}}</style>
+</head>
+<body>
+  <main class="page">
+    <div class="topbar">
+      <a class="back" href="../index.html">← Torna alla Home</a>
+      <span class="source">Sorgente Markdown: ../old_style/05-domain-vehicles.md</span>
+    </div>
+    <article class="doc">
+      <header class="doc-header">
+        <span class="kicker">old_style</span>
+        <h1>Archivio storico — 05-domain-vehicles</h1>
+      </header>
+      <h1>Archivio storico — 05-domain-vehicles</h1>
+<blockquote>
+<p>Questo documento fa parte dell'archivio storico <code>docs/old_style/</code>.
+Mantiene il percorso step-by-step del progetto, ma la documentazione principale aggiornata si trova in:
+<code>docs/simple/</code>, <code>docs/professional/</code> e <code>docs/digital/</code>.</p>
+</blockquote>
+<hr />
+<h1>5. Package <code>domain.vehicles</code></h1>
+<h2>5.1 Scopo del dominio veicoli</h2>
+<p>Il package <code>domain.vehicles</code> rappresenta il parco mezzi di TruckFlow Manager.</p>
+<p>È stato progettato per descrivere in modo realistico i mezzi usati in una vera azienda di trasporti, distinguendo tra:</p>
+<ul>
+<li>unità fisiche singole;</li>
+<li>combinazioni veicolari;</li>
+<li>allestimenti;</li>
+<li>schede tecniche;</li>
+<li>profili di aggancio;</li>
+<li>capacità speciali;</li>
+<li>ruoli operativi del mezzo;</li>
+<li>stato tecnico/anagrafico.</li>
+</ul>
+<p>La scelta fondamentale è separare due concetti che nella pratica vengono spesso confusi:</p>
+<ul>
+<li><code>VehicleUnit</code>: una singola unità fisica del parco mezzi;</li>
+<li><code>VehicleCombination</code>: un complesso veicolare composto da una o più unità.</li>
+</ul>
+<p>Esempi:</p>
+<ul>
+<li>un trattore stradale è una <code>VehicleUnit</code>;</li>
+<li>un semirimorchio è una <code>VehicleUnit</code>;</li>
+<li>trattore stradale + semirimorchio formano una <code>VehicleCombination</code>;</li>
+<li>una motrice è una <code>VehicleUnit</code>;</li>
+<li>un rimorchio è una <code>VehicleUnit</code>;</li>
+<li>motrice + rimorchio formano una <code>VehicleCombination</code>;</li>
+<li>un furgone singolo è una <code>VehicleCombination</code> di tipo mezzo singolo;</li>
+<li>un muletto è una <code>VehicleUnit</code> di tipo mezzo da magazzino.</li>
+</ul>
+<p>Questa distinzione permette di modellare correttamente bilici, autotreni, furgoni, rimorchi, mezzi speciali e mezzi di magazzino senza forzare tutto dentro una sola classe generica.</p>
+<h2>5.2 Perché il package è stato diviso in sottopackage</h2>
+<p>Il dominio veicoli è il package più ampio del progetto. Tenerlo tutto piatto dentro <code>domain.vehicles</code> avrebbe reso il codice difficile da leggere e da mantenere.</p>
+<p>Per questo è stato riorganizzato in sottopackage, non per tipo di mezzo, ma per concetto di dominio.</p>
+<p>La struttura finale è:</p>
+<pre><code class="language-text">domain.vehicles
+├─ unit
+├─ combination
+├─ coupling
+├─ specification
+├─ body
+├─ operation
+└─ common
+</code></pre>
+<p>Questa divisione è importante perché evita una struttura sbagliata del tipo:</p>
+<pre><code class="language-text">vehicles.truck
+vehicles.trailer
+vehicles.van
+vehicles.tractor
+</code></pre>
+<p>Una divisione per tipo di mezzo sarebbe meno pulita, perché molte classi sono condivise tra camion, trattori, rimorchi, semirimorchi e furgoni.</p>
+<p>Per esempio:</p>
+<ul>
+<li><code>VehicleWeights</code> serve sia a un camion sia a un trailer;</li>
+<li><code>VehicleAxle</code> serve sia a una motrice sia a un semirimorchio;</li>
+<li><code>CouplingProfile</code> serve sia a chi traina sia a chi viene trainato;</li>
+<li><code>VehicleBodyType</code> serve a camion, trailer, furgoni e mezzi speciali;</li>
+<li><code>VehicleCapability</code> può valere per più categorie di mezzi.</li>
+</ul>
+<p>La divisione scelta è quindi più stabile e più coerente con un dominio enterprise.</p>
+<h2>5.3 Struttura finale del package</h2>
+<pre><code class="language-text">domain.vehicles
+├─ unit
+│  ├─ VehicleUnit
+│  ├─ VehicleUnitId
+│  ├─ FleetCode
+│  ├─ LicensePlate
+│  ├─ VehicleIdentificationNumber
+│  ├─ VehicleUnitType
+│  ├─ PowerSource
+│  └─ VehicleStatus
+│
+├─ combination
+│  ├─ VehicleCombination
+│  ├─ VehicleCombinationId
+│  └─ VehicleCombinationType
+│
+├─ coupling
+│  ├─ CouplingProfile
+│  └─ CouplingType
+│
+├─ specification
+│  ├─ VehicleTechnicalSpecification
+│  ├─ VehicleDimensions
+│  ├─ VehicleLoadSpace
+│  ├─ VehicleWeights
+│  ├─ VehicleAxleSpecification
+│  ├─ VehicleAxle
+│  ├─ VehicleTireSpecification
+│  ├─ VehicleEngineSpecification
+│  ├─ VehicleTransmissionSpecification
+│  ├─ VehicleChassisSpecification
+│  ├─ VehicleElectricSpecification
+│  └─ VehicleCabSpecification
+│
+├─ body
+│  ├─ VehicleBodyType
+│  ├─ VehicleBodyProfile
+│  ├─ RefrigeratedBodyProfile
+│  ├─ TankBodyProfile
+│  ├─ CarCarrierBodyProfile
+│  ├─ ContainerChassisBodyProfile
+│  ├─ LowLoaderBodyProfile
+│  ├─ CurtainsiderBodyProfile
+│  ├─ TipperBodyProfile
+│  ├─ SiloBodyProfile
+│  └─ LivestockBodyProfile
+│
+├─ operation
+│  ├─ VehicleCapability
+│  └─ VehicleOperationalRole
+│
+└─ common
+   └─ VehicleValidation
+</code></pre>
+<h2>5.4 Cosa non gestisce ancora <code>domain.vehicles</code></h2>
+<p>Il dominio veicoli descrive il mezzo e le sue regole tecniche di base, ma non gestisce ancora:</p>
+<ul>
+<li>disponibilità giornaliera;</li>
+<li>assegnazione a viaggio;</li>
+<li>assegnazione autista;</li>
+<li>compatibilità tra autista e mezzo;</li>
+<li>manutenzione dettagliata;</li>
+<li>revisioni;</li>
+<li>assicurazioni;</li>
+<li>documenti;</li>
+<li>scadenze;</li>
+<li>GPS;</li>
+<li>telematica;</li>
+<li>consumi reali;</li>
+<li>anomalie;</li>
+<li>prenotazioni;</li>
+<li>pianificazione operativa.</li>
+</ul>
+<p>Queste parti verranno modellate in moduli futuri come planning, dispatching, fleet availability, maintenance, documents e compliance.</p>
+<p>Il dominio veicoli, per ora, risponde a domande come:</p>
+<ul>
+<li>che unità fisica è questo mezzo?</li>
+<li>che allestimento ha?</li>
+<li>può trainare?</li>
+<li>può essere trainato?</li>
+<li>può formare un bilico?</li>
+<li>può formare un autotreno?</li>
+<li>che capacità tecniche possiede?</li>
+<li>per quale tipo di lavoro viene usato?</li>
+</ul>
+<p>Non risponde ancora a domande come:</p>
+<ul>
+<li>è disponibile oggi?</li>
+<li>è già assegnato a un viaggio?</li>
+<li>l’autista ha la patente giusta?</li>
+<li>il rimorchio è libero?</li>
+<li>la revisione è scaduta?</li>
+</ul>
+<hr />
+<h1>5.5 Package <code>domain.vehicles.unit</code></h1>
+<h2>5.5.1 Scopo del package</h2>
+<p>Il package <code>unit</code> contiene tutto ciò che riguarda la singola unità fisica del parco mezzi.</p>
+<p>Una <code>VehicleUnit</code> è un oggetto fisico reale che l’azienda possiede, noleggia o gestisce.</p>
+<p>Esempi:</p>
+<ul>
+<li>trattore stradale;</li>
+<li>motrice rigida;</li>
+<li>furgone;</li>
+<li>pickup;</li>
+<li>semirimorchio;</li>
+<li>rimorchio;</li>
+<li>rimorchio ad asse centrale;</li>
+<li>mezzo speciale;</li>
+<li>muletto o mezzo da magazzino.</li>
+</ul>
+<h2>5.5.2 <code>VehicleUnit</code></h2>
+<p><code>VehicleUnit</code> rappresenta la singola unità fisica registrata nel parco mezzi.</p>
+<p>Contiene:</p>
+<ul>
+<li><code>VehicleUnitId</code>, cioè l’identità tecnica del dominio;</li>
+<li><code>FleetCode</code>, cioè il codice interno aziendale;</li>
+<li><code>LicensePlate</code>, cioè la targa ufficiale dell'unità stradale, quando richiesta;</li>
+<li><code>VehicleIdentificationNumber</code>, cioè VIN, telaio o identificativo tecnico del mezzo;</li>
+<li><code>VehicleUnitType</code>, cioè la natura fisica dell’unità;</li>
+<li><code>VehicleBodyType</code>, cioè l’allestimento;</li>
+<li><code>PowerSource</code>, cioè la sorgente di alimentazione;</li>
+<li><code>VehicleTechnicalSpecification</code>, cioè la scheda tecnica generale;</li>
+<li><code>VehicleBodyProfile</code>, cioè il profilo tecnico dell’allestimento, quando presente;</li>
+<li>capacità tecniche;</li>
+<li>ruoli operativi;</li>
+<li><code>CouplingProfile</code>, cioè il profilo di aggancio/traino;</li>
+<li><code>VehicleStatus</code>, cioè lo stato tecnico/anagrafico;</li>
+<li>note.</li>
+</ul>
+<p>Esempio concettuale:</p>
+<ul>
+<li>un trattore stradale avrà <code>VehicleUnitType.TRACTOR_UNIT</code>, <code>VehicleBodyType.NONE</code>, <code>PowerSource.DIESEL</code> e un profilo di aggancio che permette il traino;</li>
+<li>un semirimorchio frigo avrà <code>VehicleUnitType.SEMI_TRAILER</code>, <code>VehicleBodyType.REFRIGERATED</code>, <code>PowerSource.NONE</code> e un profilo di aggancio che permette di essere trainato;</li>
+<li>una motrice centinata avrà <code>VehicleUnitType.RIGID_TRUCK</code>, <code>VehicleBodyType.CURTAINSIDER</code> e, se predisposta, un profilo che permette di trainare un rimorchio.</li>
+</ul>
+<h2>5.5.3 <code>VehicleUnitId</code></h2>
+<p><code>VehicleUnitId</code> è l’identificatore tecnico della singola unità veicolo.</p>
+<p>È diverso da:</p>
+<ul>
+<li><code>LicensePlate</code>;</li>
+<li><code>VehicleIdentificationNumber</code>;</li>
+<li><code>FleetCode</code>.</li>
+</ul>
+<p><code>LicensePlate</code> rappresenta la targa ufficiale, <code>VehicleIdentificationNumber</code> identifica tecnicamente il mezzo, <code>FleetCode</code> è leggibile dall'azienda. L'ID, invece, è l'identità del dominio usata dal sistema.</p>
+<h2>5.5.4 <code>FleetCode</code></h2>
+<p><code>FleetCode</code> è il codice interno aziendale del mezzo.</p>
+<p>Esempi:</p>
+<ul>
+<li><code>TRK-001</code>;</li>
+<li><code>TRC-012</code>;</li>
+<li><code>TRL-044</code>;</li>
+<li><code>VAN-006</code>;</li>
+<li><code>FRK-003</code>.</li>
+</ul>
+<p>Serve perché in azienda spesso si lavora con codici più leggibili rispetto agli UUID o ai numeri telaio.</p>
+<h2>5.5.4.1 <code>LicensePlate</code></h2>
+<p><code>LicensePlate</code> rappresenta la targa ufficiale dell'unità fisica.</p>
+<p>La targa non è modellata come una semplice <code>String</code>, perché nel dominio veicoli non è testo libero: è un identificatore ufficiale del mezzo, usato in documenti, assicurazioni, revisioni, controlli, audit, compliance, spedizioni, ricerca veicoli e integrazioni future.</p>
+<p>Il value object <code>LicensePlate</code> centralizza:</p>
+<ul>
+<li>normalizzazione;</li>
+<li>validazione;</li>
+<li>immutabilità;</li>
+<li>semantica del dato;</li>
+<li>protezione degli invarianti.</li>
+</ul>
+<p>La targa appartiene alla singola <code>VehicleUnit</code>, non alla <code>VehicleCombination</code>.</p>
+<p>Esempi:</p>
+<ul>
+<li>in un bilico, la targa appartiene alla <code>VehicleUnit</code> di tipo <code>TRACTOR_UNIT</code> e alla <code>VehicleUnit</code> di tipo <code>SEMI_TRAILER</code>;</li>
+<li>in un autotreno, la targa appartiene alla <code>VehicleUnit</code> di tipo <code>RIGID_TRUCK</code> e alla <code>VehicleUnit</code> di tipo <code>DRAWBAR_TRAILER</code> o <code>CENTER_AXLE_TRAILER</code>;</li>
+<li>la <code>VehicleCombination</code> non possiede una targa propria, perché non è una unità fisica targabile.</li>
+</ul>
+<p>La regola del dominio è:</p>
+<pre><code class="language-text">Ogni VehicleUnit stradale deve avere una LicensePlate.
+Ogni VehicleUnit non stradale può non averla.
+VehicleCombination non possiede una LicensePlate.
+</code></pre>
+<p>In questa fase richiedono una targa le unità di tipo:</p>
+<ul>
+<li><code>TRACTOR_UNIT</code>;</li>
+<li><code>RIGID_TRUCK</code>;</li>
+<li><code>VAN</code>;</li>
+<li><code>PICKUP</code>;</li>
+<li><code>SEMI_TRAILER</code>;</li>
+<li><code>DRAWBAR_TRAILER</code>;</li>
+<li><code>CENTER_AXLE_TRAILER</code>.</li>
+</ul>
+<p><code>WAREHOUSE_EQUIPMENT</code> può non avere una targa stradale.</p>
+<p><code>SPECIAL_VEHICLE</code> va valutato caso per caso in una fase successiva, perché può rappresentare sia mezzi stradali immatricolati sia mezzi tecnici non stradali.</p>
+<h2>5.5.4.2 <code>VehicleIdentificationNumber</code></h2>
+<p><code>VehicleIdentificationNumber</code> rappresenta VIN, numero telaio o identificativo tecnico del mezzo.</p>
+<p>Anche questo concetto non è una semplice <code>String</code>, perché identifica tecnicamente una unità fisica e può essere usato in manutenzione, assicurazioni, documenti, controlli, audit e integrazioni future.</p>
+<p>Il value object centralizza normalizzazione e validazione generale, senza imporre subito una regola eccessivamente rigida legata a un solo formato nazionale o produttore.</p>
+<h2>5.5.5 <code>VehicleUnitType</code></h2>
+<p><code>VehicleUnitType</code> descrive la natura fisica dell’unità.</p>
+<p>Contiene:</p>
+<ul>
+<li><code>RIGID_TRUCK</code>;</li>
+<li><code>TRACTOR_UNIT</code>;</li>
+<li><code>VAN</code>;</li>
+<li><code>PICKUP</code>;</li>
+<li><code>SEMI_TRAILER</code>;</li>
+<li><code>DRAWBAR_TRAILER</code>;</li>
+<li><code>CENTER_AXLE_TRAILER</code>;</li>
+<li><code>SPECIAL_VEHICLE</code>;</li>
+<li><code>WAREHOUSE_EQUIPMENT</code>.</li>
+</ul>
+<p>Questa enum non contiene allestimenti.</p>
+<p>Quindi:</p>
+<ul>
+<li>una cisterna non è un <code>VehicleUnitType</code>, è un <code>VehicleBodyType</code>;</li>
+<li>un frigo non è un <code>VehicleUnitType</code>, è un <code>VehicleBodyType</code>;</li>
+<li>una bisarca non è un <code>VehicleUnitType</code>, è un <code>VehicleBodyType</code>;</li>
+<li>un bilico non è un <code>VehicleUnitType</code>, è una <code>VehicleCombination</code>;</li>
+<li>un autotreno non è un <code>VehicleUnitType</code>, è una <code>VehicleCombination</code>.</li>
+</ul>
+<h2>5.5.6 <code>PowerSource</code></h2>
+<p><code>PowerSource</code> rappresenta la sorgente di alimentazione o energia del mezzo.</p>
+<p>Contiene:</p>
+<ul>
+<li><code>DIESEL</code>;</li>
+<li><code>ELECTRIC</code>;</li>
+<li><code>CNG</code>;</li>
+<li><code>LNG</code>;</li>
+<li><code>HYBRID</code>;</li>
+<li><code>NONE</code>.</li>
+</ul>
+<p><code>NONE</code> è importante perché trailer e semirimorchi non sono motorizzati.</p>
+<p>Regola principale:</p>
+<ul>
+<li><code>SEMI_TRAILER</code>, <code>DRAWBAR_TRAILER</code> e <code>CENTER_AXLE_TRAILER</code> devono avere <code>PowerSource.NONE</code>.</li>
+</ul>
+<h2>5.5.7 <code>VehicleStatus</code></h2>
+<p><code>VehicleStatus</code> rappresenta lo stato tecnico/anagrafico del mezzo.</p>
+<p>Contiene:</p>
+<ul>
+<li><code>ACTIVE</code>;</li>
+<li><code>SUSPENDED</code>;</li>
+<li><code>OUT_OF_SERVICE</code>;</li>
+<li><code>DISMISSED</code>.</li>
+</ul>
+<p>Non contiene stati come <code>AVAILABLE</code>, <code>BOOKED</code> o <code>IN_TRIP</code>, perché quelli appartengono alla disponibilità e alla pianificazione operativa, non all’anagrafica tecnica del veicolo.</p>
+<hr />
+<h1>5.6 Package <code>domain.vehicles.body</code></h1>
+<h2>5.6.1 Scopo del package</h2>
+<p>Il package <code>body</code> contiene tutto ciò che riguarda l’allestimento del mezzo.</p>
+<p>Questa separazione è una delle scelte più importanti del dominio veicoli.</p>
+<p>Il tipo fisico del veicolo e l’allestimento non sono la stessa cosa.</p>
+<p>Esempi:</p>
+<ul>
+<li><code>RIGID_TRUCK</code> indica una motrice/camion rigido;</li>
+<li><code>CURTAINSIDER</code> indica che è centinato;</li>
+<li><code>SEMI_TRAILER</code> indica un semirimorchio;</li>
+<li><code>REFRIGERATED</code> indica che è frigo;</li>
+<li><code>CAR_CARRIER</code> indica che è bisarca.</li>
+</ul>
+<h2>5.6.2 <code>VehicleBodyType</code></h2>
+<p><code>VehicleBodyType</code> descrive l’allestimento generale.</p>
+<p>Contiene:</p>
+<ul>
+<li><code>NONE</code>;</li>
+<li><code>CURTAINSIDER</code>;</li>
+<li><code>BOX</code>;</li>
+<li><code>FLATBED</code>;</li>
+<li><code>TIPPER</code>;</li>
+<li><code>REFRIGERATED</code>;</li>
+<li><code>ISOTHERMAL</code>;</li>
+<li><code>TANK</code>;</li>
+<li><code>CONTAINER_CHASSIS</code>;</li>
+<li><code>LOW_LOADER</code>;</li>
+<li><code>CAR_CARRIER</code>;</li>
+<li><code>COIL_CARRIER</code>;</li>
+<li><code>DOUBLE_DECK</code>;</li>
+<li><code>SILO</code>;</li>
+<li><code>LIVESTOCK</code>.</li>
+</ul>
+<p>Esempi:</p>
+<ul>
+<li><code>TRACTOR_UNIT</code> + <code>NONE</code> = trattore stradale;</li>
+<li><code>SEMI_TRAILER</code> + <code>REFRIGERATED</code> = semirimorchio frigo;</li>
+<li><code>RIGID_TRUCK</code> + <code>CURTAINSIDER</code> = motrice centinata;</li>
+<li><code>DRAWBAR_TRAILER</code> + <code>BOX</code> = rimorchio furgonato;</li>
+<li><code>SEMI_TRAILER</code> + <code>CAR_CARRIER</code> = semirimorchio bisarca.</li>
+</ul>
+<h2>5.6.3 <code>VehicleBodyProfile</code></h2>
+<p><code>VehicleBodyProfile</code> rappresenta il profilo tecnico specifico dell’allestimento.</p>
+<p>È stato scelto di non usare una mappa generica <code>Map&lt;String, Object&gt;</code>, perché in un dominio puro sarebbe troppo libera e poco controllata.</p>
+<p>Invece sono stati creati profili espliciti.</p>
+<p>Questa scelta rende il dominio:</p>
+<ul>
+<li>più leggibile;</li>
+<li>più sicuro;</li>
+<li>più controllabile;</li>
+<li>più facile da testare;</li>
+<li>più vicino al linguaggio reale del business.</li>
+</ul>
+<h2>5.6.4 Profili di allestimento presenti</h2>
+<p>I profili attuali sono:</p>
+<ul>
+<li><code>RefrigeratedBodyProfile</code>, per frigo, isotermici e ATP;</li>
+<li><code>TankBodyProfile</code>, per cisterne;</li>
+<li><code>CarCarrierBodyProfile</code>, per bisarche;</li>
+<li><code>ContainerChassisBodyProfile</code>, per porta-container;</li>
+<li><code>LowLoaderBodyProfile</code>, per pianali ribassati;</li>
+<li><code>CurtainsiderBodyProfile</code>, per centinati;</li>
+<li><code>TipperBodyProfile</code>, per ribaltabili;</li>
+<li><code>SiloBodyProfile</code>, per silos;</li>
+<li><code>LivestockBodyProfile</code>, per trasporto animali vivi.</li>
+</ul>
+<p>Ogni profilo deve essere coerente con il <code>VehicleBodyType</code> della <code>VehicleUnit</code>.</p>
+<p>Esempio:</p>
+<ul>
+<li>un veicolo con <code>VehicleBodyType.REFRIGERATED</code> deve avere un profilo refrigerato;</li>
+<li>un veicolo con <code>VehicleBodyType.TANK</code> deve avere un profilo cisterna;</li>
+<li>un veicolo con <code>VehicleBodyType.CAR_CARRIER</code> deve avere un profilo bisarca.</li>
+</ul>
+<p>Questa regola evita incoerenze come una cisterna con profilo da frigo.</p>
+<hr />
+<h1>5.7 Package <code>domain.vehicles.specification</code></h1>
+<h2>5.7.1 Scopo del package</h2>
+<p>Il package <code>specification</code> contiene la scheda tecnica generale del mezzo.</p>
+<p>Non descrive l’allestimento specifico, che sta in <code>body</code>. Descrive invece caratteristiche tecniche comuni come:</p>
+<ul>
+<li>dimensioni;</li>
+<li>pesi;</li>
+<li>vano di carico;</li>
+<li>assi;</li>
+<li>pneumatici;</li>
+<li>motore;</li>
+<li>trasmissione;</li>
+<li>telaio;</li>
+<li>elettrico;</li>
+<li>cabina.</li>
+</ul>
+<p>Non tutte le sezioni valgono per tutti i mezzi.</p>
+<p>Esempi:</p>
+<ul>
+<li>un semirimorchio non ha motore;</li>
+<li>un trattore stradale non ha vano di carico;</li>
+<li>un rimorchio ha assi, pesi, pneumatici e dimensioni;</li>
+<li>un mezzo elettrico ha una specifica elettrica;</li>
+<li>un mezzo senza cabina non ha <code>VehicleCabSpecification</code>.</li>
+</ul>
+<h2>5.7.2 <code>VehicleTechnicalSpecification</code></h2>
+<p><code>VehicleTechnicalSpecification</code> raccoglie la scheda tecnica generale.</p>
+<p>Contiene:</p>
+<ul>
+<li><code>VehicleDimensions</code>;</li>
+<li><code>VehicleLoadSpace</code>;</li>
+<li><code>VehicleWeights</code>;</li>
+<li><code>VehicleAxleSpecification</code>;</li>
+<li><code>VehicleTireSpecification</code>;</li>
+<li><code>VehicleEngineSpecification</code>;</li>
+<li><code>VehicleTransmissionSpecification</code>;</li>
+<li><code>VehicleChassisSpecification</code>;</li>
+<li><code>VehicleElectricSpecification</code>;</li>
+<li><code>VehicleCabSpecification</code>.</li>
+</ul>
+<h2>5.7.3 <code>VehicleDimensions</code></h2>
+<p>Rappresenta le dimensioni esterne:</p>
+<ul>
+<li>lunghezza;</li>
+<li>larghezza;</li>
+<li>altezza;</li>
+<li>passo.</li>
+</ul>
+<h2>5.7.4 <code>VehicleLoadSpace</code></h2>
+<p>Rappresenta lo spazio utile di carico:</p>
+<ul>
+<li>lunghezza interna;</li>
+<li>larghezza interna;</li>
+<li>altezza interna;</li>
+<li>volume;</li>
+<li>capacità pallet.</li>
+</ul>
+<p>Esempi:</p>
+<ul>
+<li>un semirimorchio centinato avrà lo spazio di carico;</li>
+<li>un furgone avrà lo spazio di carico;</li>
+<li>un trattore stradale normalmente non avrà lo spazio di carico.</li>
+</ul>
+<h2>5.7.5 <code>VehicleWeights</code></h2>
+<p>Rappresenta i pesi tecnici:</p>
+<ul>
+<li>tara;</li>
+<li>massa massima;</li>
+<li>portata utile;</li>
+<li>massa massima del complesso;</li>
+<li>peso massimo rimorchiabile.</li>
+</ul>
+<p>Questi dati sono fondamentali per camion, trattori, rimorchi e semirimorchi.</p>
+<h2>5.7.6 <code>VehicleAxleSpecification</code> e <code>VehicleAxle</code></h2>
+<p>La gestione degli assi è modellata con una lista di assi.</p>
+<p>Questa è una scelta importante perché un semplice numero totale di assi non basta in un dominio realistico.</p>
+<p>Ogni <code>VehicleAxle</code> contiene:</p>
+<ul>
+<li>numero asse;</li>
+<li>indicazione se è sterzante;</li>
+<li>indicazione se è sollevabile;</li>
+<li>indicazione se è gemellato;</li>
+<li>note.</li>
+</ul>
+<p>Questa struttura permette di sapere:</p>
+<ul>
+<li>quali assi sono sterzanti;</li>
+<li>quali assi sono sollevabili;</li>
+<li>quali assi sono gemellati;</li>
+<li>in quale ordine sono montati.</li>
+</ul>
+<p>Esempio concettuale:</p>
+<ul>
+<li>asse 1: sterzante;</li>
+<li>asse 2: gemellato;</li>
+<li>asse 3: sollevabile.</li>
+</ul>
+<h2>5.7.7 <code>VehicleTireSpecification</code></h2>
+<p>Rappresenta informazioni generali sugli pneumatici:</p>
+<ul>
+<li>misura;</li>
+<li>tipo;</li>
+<li>numero ruote;</li>
+<li>informazione generale sul gemellato.</li>
+</ul>
+<p>L’informazione generale sul gemellato è solo riassuntiva.</p>
+<p>La verità tecnica dettagliata resta nella lista degli assi.</p>
+<h2>5.7.8 <code>VehicleEngineSpecification</code></h2>
+<p>Rappresenta i dati motore per i mezzi motorizzati:</p>
+<ul>
+<li>potenza;</li>
+<li>coppia;</li>
+<li>cilindrata;</li>
+<li>classe emissioni;</li>
+<li>capacità AdBlue;</li>
+<li>capacità serbatoio;</li>
+<li>consumo medio.</li>
+</ul>
+<p>Non vale per rimorchi e semirimorchi non motorizzati.</p>
+<h2>5.7.9 <code>VehicleTransmissionSpecification</code></h2>
+<p>Descrive cambio e trasmissione:</p>
+<ul>
+<li>tipo cambio;</li>
+<li>numero marce;</li>
+<li>retarder;</li>
+<li>PTO.</li>
+</ul>
+<h2>5.7.10 <code>VehicleChassisSpecification</code></h2>
+<p>Descrive telaio e sistemi di base:</p>
+<ul>
+<li>sospensioni;</li>
+<li>freni;</li>
+<li>ABS;</li>
+<li>EBS;</li>
+<li>ESP.</li>
+</ul>
+<h2>5.7.11 <code>VehicleElectricSpecification</code></h2>
+<p>Descrive i dati elettrici:</p>
+<ul>
+<li>capacità batteria;</li>
+<li>tipo ricarica;</li>
+<li>connettore;</li>
+<li>tempo di ricarica.</li>
+</ul>
+<p>Vale per van elettrici, mezzi da magazzino elettrici e altri mezzi elettrici o ibridi, quando applicabile.</p>
+<h2>5.7.12 <code>VehicleCabSpecification</code></h2>
+<p>Descrive la cabina:</p>
+<ul>
+<li>tipo cabina;</li>
+<li>posti;</li>
+<li>cuccetta;</li>
+<li>infotainment;</li>
+<li>climatizzazione.</li>
+</ul>
+<p>Vale per trattori, motrici, van e altri mezzi con cabina rilevante.</p>
+<hr />
+<h1>5.8 Package <code>domain.vehicles.coupling</code></h1>
+<h2>5.8.1 Scopo del package</h2>
+<p>Il package <code>coupling</code> contiene tutto ciò che riguarda aggancio, traino e possibilità tecnica di collegare due unità.</p>
+<p>È fondamentale per gestire:</p>
+<ul>
+<li>trattore + semirimorchio;</li>
+<li>motrice + rimorchio;</li>
+<li>furgone + rimorchio;</li>
+<li>combinazioni speciali.</li>
+</ul>
+<h2>5.8.2 <code>CouplingProfile</code></h2>
+<p><code>CouplingProfile</code> descrive se un mezzo può trainare, essere trainato o agganciarsi a un’altra unità.</p>
+<p>Contiene:</p>
+<ul>
+<li>tipo di aggancio;</li>
+<li>possibilità di trainare;</li>
+<li>possibilità di essere trainato;</li>
+<li>peso massimo rimorchiabile;</li>
+<li>massa massima del complesso;</li>
+<li>note.</li>
+</ul>
+<p>Esempi:</p>
+<ul>
+<li>un trattore stradale può trainare ed è dotato di ralla;</li>
+<li>un semirimorchio può essere trainato ed è dotato di kingpin;</li>
+<li>una motrice può trainare tramite gancio traino;</li>
+<li>un rimorchio può essere trainato tramite timone.</li>
+</ul>
+<h2>5.8.3 <code>CouplingType</code></h2>
+<p><code>CouplingType</code> rappresenta il tipo di aggancio.</p>
+<p>Contiene:</p>
+<ul>
+<li><code>NONE</code>;</li>
+<li><code>FIFTH_WHEEL</code>;</li>
+<li><code>KINGPIN</code>;</li>
+<li><code>DRAWBAR_HITCH</code>;</li>
+<li><code>DRAWBAR</code>;</li>
+<li><code>CENTER_AXLE_HITCH</code>;</li>
+<li><code>SPECIAL_COUPLING</code>.</li>
+</ul>
+<p>Questa separazione permette al dominio di controllare la coerenza tecnica tra unità.</p>
+<hr />
+<h1>5.9 Package <code>domain.vehicles.combination</code></h1>
+<h2>5.9.1 Scopo del package</h2>
+<p>Il package <code>combination</code> contiene i complessi veicolari.</p>
+<p>Una combinazione rappresenta il mezzo completo che può essere usato operativamente.</p>
+<p>Esempi:</p>
+<ul>
+<li>camion singolo;</li>
+<li>furgone singolo;</li>
+<li>trattore + semirimorchio;</li>
+<li>motrice + rimorchio;</li>
+<li>furgone + rimorchio;</li>
+<li>mezzo da magazzino.</li>
+</ul>
+<h2>5.9.2 <code>VehicleCombination</code></h2>
+<p><code>VehicleCombination</code> rappresenta una combinazione di una o più unità.</p>
+<p>Contiene:</p>
+<ul>
+<li><code>VehicleCombinationId</code>;</li>
+<li><code>VehicleCombinationType</code>;</li>
+<li>ID dell’unità primaria;</li>
+<li>ID dell’unità secondaria, quando presente;</li>
+<li>capacità combinate;</li>
+<li>ruoli operativi;</li>
+<li>stato;</li>
+<li>note.</li>
+</ul>
+<p>La combinazione contiene <code>VehicleUnitId</code>, non direttamente gli oggetti completi <code>VehicleUnit</code>.</p>
+<p>Questa scelta riduce l’accoppiamento tra aggregati.</p>
+<p>La factory concettuale da unità serve a validare che la combinazione sia tecnicamente coerente e a combinare capacità e ruoli operativi delle unità coinvolte.</p>
+<h2>5.9.3 <code>VehicleCombinationId</code></h2>
+<p>È l’identificatore tecnico della combinazione.</p>
+<p>Serve perché una combinazione può essere trattata come concetto operativo autonomo, anche se è composta da unità già esistenti.</p>
+<h2>5.9.4 <code>VehicleCombinationType</code></h2>
+<p><code>VehicleCombinationType</code> descrive il tipo di complesso veicolare.</p>
+<p>Contiene:</p>
+<ul>
+<li><code>SINGLE_VEHICLE</code>;</li>
+<li><code>ARTICULATED_VEHICLE</code>;</li>
+<li><code>ROAD_TRAIN</code>;</li>
+<li><code>VAN_WITH_TRAILER</code>;</li>
+<li><code>SPECIAL_COMBINATION</code>;</li>
+<li><code>WAREHOUSE_UNIT</code>.</li>
+</ul>
+<p>Significato:</p>
+<ul>
+<li><code>SINGLE_VEHICLE</code>: mezzo singolo;</li>
+<li><code>ARTICULATED_VEHICLE</code>: trattore stradale + semirimorchio, cioè bilico o autoarticolato;</li>
+<li><code>ROAD_TRAIN</code>: motrice + rimorchio, cioè autotreno;</li>
+<li><code>VAN_WITH_TRAILER</code>: furgone + rimorchio;</li>
+<li><code>SPECIAL_COMBINATION</code>: combinazione speciale;</li>
+<li><code>WAREHOUSE_UNIT</code>: mezzo operativo interno.</li>
+</ul>
+<h2>5.9.5 Perché non salvare <code>totalTechnicalSpecification</code></h2>
+<p>La scheda tecnica totale della combinazione non viene salvata come campo principale.</p>
+<p>È preferibile calcolarla quando serve, partendo dalle unità coinvolte.</p>
+<p>Motivo: se la stessa informazione viene salvata sia sulle unità sia sulla combinazione, può nascere incoerenza.</p>
+<p>Esempio:</p>
+<ul>
+<li>trattore = 8.000 kg;</li>
+<li>semirimorchio = 7.000 kg;</li>
+<li>totale salvato = 12.000 kg.</li>
+</ul>
+<p>Quale valore è corretto?</p>
+<p>Per questo i totali tecnici devono essere calcolati da regole di dominio o da servizi applicativi quando saranno necessari.</p>
+<hr />
+<h1>5.10 Package <code>domain.vehicles.operation</code></h1>
+<h2>5.10.1 Scopo del package</h2>
+<p>Il package <code>operation</code> contiene classificazioni operative del mezzo.</p>
+<p>Qui ci sono due concetti diversi:</p>
+<ul>
+<li><code>VehicleCapability</code>: cosa il mezzo supporta tecnicamente;</li>
+<li><code>VehicleOperationalRole</code>: per quale tipo di lavoro il mezzo viene usato.</li>
+</ul>
+<h2>5.10.2 <code>VehicleCapability</code></h2>
+<p><code>VehicleCapability</code> descrive capacità tecniche o speciali del mezzo.</p>
+<p>Esempi:</p>
+<ul>
+<li><code>ADR</code>;</li>
+<li><code>ATP</code>;</li>
+<li><code>REEFER_UNIT</code>;</li>
+<li><code>TEMPERATURE_CONTROLLED</code>;</li>
+<li><code>DUAL_TEMPERATURE</code>;</li>
+<li><code>HYDRAULIC_TAIL_LIFT</code>;</li>
+<li><code>HYDRAULIC_RAMP</code>;</li>
+<li><code>SLIDING_ROOF</code>;</li>
+<li><code>SLIDING_CURTAINS</code>;</li>
+<li><code>DOUBLE_DECK</code>;</li>
+<li><code>COIL_WELL</code>;</li>
+<li><code>BULK_TRANSPORT</code>;</li>
+<li><code>CONTAINER_LOCKS</code>;</li>
+<li><code>FOODGRADE_TANK</code>;</li>
+<li><code>CHEMICAL_TANK</code>;</li>
+<li><code>FUEL_TANK</code>;</li>
+<li><code>LOW_LOADER</code>;</li>
+<li><code>HEAVY_DUTY</code>;</li>
+<li><code>EXCEPTIONAL_TRANSPORT</code>;</li>
+<li><code>CAR_TRANSPORT</code>;</li>
+<li><code>LIVESTOCK_TRANSPORT</code>.</li>
+</ul>
+<p>La differenza è:</p>
+<ul>
+<li><code>VehicleBodyType</code> dice che allestimento ha il mezzo;</li>
+<li><code>VehicleBodyProfile</code> descrive i dati tecnici dell’allestimento;</li>
+<li><code>VehicleCapability</code> dice cosa il mezzo può supportare tecnicamente.</li>
+</ul>
+<h2>5.10.3 <code>VehicleOperationalRole</code></h2>
+<p><code>VehicleOperationalRole</code> descrive per quale tipo di lavoro viene usato il mezzo.</p>
+<p>Esempi:</p>
+<ul>
+<li><code>LINE_HAUL</code>;</li>
+<li><code>DISTRIBUTION</code>;</li>
+<li><code>LAST_MILE</code>;</li>
+<li><code>GROUPAGE</code>;</li>
+<li><code>FULL_LOAD</code>;</li>
+<li><code>ADR_TRANSPORT</code>;</li>
+<li><code>REFRIGERATED_TRANSPORT</code>;</li>
+<li><code>BULK_TRANSPORT</code>;</li>
+<li><code>CONTAINER_TRANSPORT</code>;</li>
+<li><code>COIL_TRANSPORT</code>;</li>
+<li><code>HEAVY_DUTY</code>;</li>
+<li><code>SPECIAL_TRANSPORT</code>;</li>
+<li><code>CAR_TRANSPORT</code>;</li>
+<li><code>WAREHOUSE_SUPPORT</code>;</li>
+<li><code>FLEET_SUPPORT</code>;</li>
+<li><code>MAINTENANCE_SUPPORT</code>.</li>
+</ul>
+<p>Non è una caratteristica fisica.</p>
+<p>È una classificazione d’uso aziendale.</p>
+<p>Esempio:</p>
+<ul>
+<li>un semirimorchio frigo può avere capacità <code>REEFER_UNIT</code> e ruolo operativo <code>REFRIGERATED_TRANSPORT</code>;</li>
+<li>una bisarca può avere capacità <code>CAR_TRANSPORT</code> e ruolo operativo <code>CAR_TRANSPORT</code>;</li>
+<li>un furgone può avere ruolo operativo <code>LAST_MILE</code>.</li>
+</ul>
+<hr />
+<h1>5.11 Package <code>domain.vehicles.common</code></h1>
+<h2>5.11.1 Scopo del package</h2>
+<p>Il package <code>common</code> contiene utilità di dominio condivise dal package veicoli.</p>
+<p>Al momento contiene <code>VehicleValidation</code>.</p>
+<h2>5.11.2 <code>VehicleValidation</code></h2>
+<p><code>VehicleValidation</code> raccoglie controlli comuni usati dalle classi del dominio veicoli.</p>
+<p>Serve per evitare duplicazione di piccole regole ripetitive, come:</p>
+<ul>
+<li>obbligatorietà dei valori;</li>
+<li>normalizzazione del testo;</li>
+<li>controllo di collezioni senza elementi null.</li>
+</ul>
+<p>È una utility interna del dominio veicoli, non un servizio applicativo e non un componente infrastrutturale.</p>
+<hr />
+<h1>5.12 Regole principali del dominio veicoli</h1>
+<h2>5.12.1 Regole su <code>VehicleUnit</code></h2>
+<p>Le regole principali sono:</p>
+<ul>
+<li>ID obbligatorio o generato;</li>
+<li><code>FleetCode</code> obbligatorio;</li>
+<li><code>LicensePlate</code> obbligatoria per le unità stradali;</li>
+<li><code>VehicleIdentificationNumber</code> obbligatorio;</li>
+<li><code>VehicleUnitType</code> obbligatorio;</li>
+<li><code>VehicleBodyType</code> obbligatorio;</li>
+<li><code>PowerSource</code> obbligatorio;</li>
+<li><code>VehicleTechnicalSpecification</code> obbligatoria;</li>
+<li><code>VehicleStatus</code> obbligatorio;</li>
+<li>note normalizzate;</li>
+<li>trailer e semitrailer devono avere <code>PowerSource.NONE</code>;</li>
+<li>rimorchi e semirimorchi stradali devono avere una propria <code>LicensePlate</code>;</li>
+<li>un trattore stradale deve avere <code>VehicleBodyType.NONE</code>;</li>
+<li>un trattore stradale deve poter trainare;</li>
+<li>un semirimorchio deve poter essere trainato;</li>
+<li>un rimorchio deve poter essere trainato;</li>
+<li>il profilo dell’allestimento deve corrispondere al <code>VehicleBodyType</code>.</li>
+</ul>
+<h2>5.12.2 Regole su <code>VehicleCombination</code></h2>
+<p>Le regole principali sono:</p>
+<ul>
+<li><code>SINGLE_VEHICLE</code> non deve avere unità secondaria;</li>
+<li>trailer e semitrailer non possono essere usati come veicoli singoli;</li>
+<li><code>ARTICULATED_VEHICLE</code> richiede <code>TRACTOR_UNIT</code> + <code>SEMI_TRAILER</code>;</li>
+<li><code>ROAD_TRAIN</code> richiede <code>RIGID_TRUCK</code> + <code>DRAWBAR_TRAILER</code> oppure <code>CENTER_AXLE_TRAILER</code>;</li>
+<li><code>VAN_WITH_TRAILER</code> richiede <code>VAN</code> + trailer compatibile;</li>
+<li><code>WAREHOUSE_UNIT</code> richiede una sola unità di tipo <code>WAREHOUSE_EQUIPMENT</code>;</li>
+<li><code>SPECIAL_COMBINATION</code> richiede unità tecnicamente compatibili;</li>
+<li>le unità devono essere compatibili dal punto di vista del traino e dell’aggancio.</li>
+</ul>
+<hr />
+<h1>5.13 Caso specifico: motrice con rimorchio se disponibile</h1>
+<p>Il caso pratico era:</p>
+<blockquote>
+<p>camion dove, se disponibile, metto un rimorchio.</p>
+</blockquote>
+<p>Nel dominio veicoli puro si modella così:</p>
+<ul>
+<li>la motrice è una <code>VehicleUnit</code> di tipo <code>RIGID_TRUCK</code>;</li>
+<li>la motrice ha un <code>CouplingProfile</code> che permette il traino;</li>
+<li>il rimorchio è una <code>VehicleUnit</code> di tipo <code>DRAWBAR_TRAILER</code> oppure <code>CENTER_AXLE_TRAILER</code>;</li>
+<li>il rimorchio ha un <code>CouplingProfile</code> che permette di essere trainato;</li>
+<li>la combinazione è una <code>VehicleCombination</code> di tipo <code>ROAD_TRAIN</code>.</li>
+</ul>
+<p>La frase “se disponibile” non appartiene ancora a <code>domain.vehicles</code>.</p>
+<p>Appartiene a futuri moduli come:</p>
+<ul>
+<li>fleet availability;</li>
+<li>planning;</li>
+<li>dispatching;</li>
+<li>trip assignment.</li>
+</ul>
+<p>Questa separazione è importante perché il dominio veicoli deve descrivere la possibilità tecnica, non la disponibilità giornaliera.</p>
+<hr />
+<h1>5.14 Benefici della nuova divisione in sottopackage</h1>
+<p>La nuova divisione rende il dominio più leggibile perché ogni area ha una responsabilità chiara:</p>
+<ul>
+<li><code>unit</code>: unità fisiche;</li>
+<li><code>combination</code>: complessi veicolari;</li>
+<li><code>coupling</code>: agganci e traino;</li>
+<li><code>specification</code>: scheda tecnica generale;</li>
+<li><code>body</code>: allestimenti e profili di allestimento;</li>
+<li><code>operation</code>: capacità e usi operativi;</li>
+<li><code>common</code>: validazioni condivise.</li>
+</ul>
+<p>Questa struttura è più facile da navigare e da estendere.</p>
+<p>Per esempio:</p>
+<ul>
+<li>se in futuro aggiungiamo nuovi profili di allestimento, lavoriamo in <code>body</code>;</li>
+<li>se aggiungiamo nuove specifiche tecniche, lavoriamo in <code>specification</code>;</li>
+<li>se miglioriamo le regole di aggancio, lavoriamo in <code>coupling</code>;</li>
+<li>se introduciamo nuovi tipi di combinazione, lavoriamo in <code>combination</code>.</li>
+</ul>
+<p>Il risultato è un dominio più ordinato, più professionale e più vicino a una struttura enterprise.</p>
+<h2>5.15 Sintesi finale</h2>
+<p>Il dominio veicoli ora distingue chiaramente:</p>
+<ul>
+<li>unità fisica;</li>
+<li>combinazione;</li>
+<li>tipo fisico;</li>
+<li>allestimento;</li>
+<li>profilo tecnico dell’allestimento;</li>
+<li>scheda tecnica generale;</li>
+<li>assi e pneumatici;</li>
+<li>motore e trasmissione;</li>
+<li>agganci;</li>
+<li>capacità;</li>
+<li>ruoli operativi;</li>
+<li>stato tecnico.</li>
+</ul>
+<p>La riorganizzazione in sottopackage non cambia il significato del dominio, ma lo rende molto più leggibile.</p>
+<p>Questa è la struttura corretta per continuare a far crescere TruckFlow senza trasformare <code>domain.vehicles</code> in un package troppo grande e difficile da mantenere.</p>
+
+    </article>
+  </main>
+</body>
+</html>

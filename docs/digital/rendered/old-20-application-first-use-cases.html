@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Archivio storico — 20-application-first-use-cases — TruckFlow Docs</title>
+  <style>:root{--bg:#f5f7fb;--panel:#fff;--text:#172033;--muted:#64748b;--accent:#3554d1;--border:#d9e1ef;--code:#0f172a;--shadow:0 18px 44px rgba(15,23,42,.08)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:radial-gradient(circle at top left,rgba(53,84,209,.10),transparent 30rem),var(--bg);color:var(--text);line-height:1.68;font-size:16px}.page{width:min(980px,calc(100% - 2rem));margin:0 auto;padding:2rem 0 4rem}.topbar{display:flex;justify-content:space-between;gap:1rem;align-items:center;margin-bottom:1rem}.back{display:inline-flex;align-items:center;gap:.35rem;padding:.55rem .85rem;border:1px solid var(--border);border-radius:999px;background:#fff;color:var(--accent);font-weight:850;text-decoration:none;box-shadow:0 8px 22px rgba(15,23,42,.05)}.source{color:var(--muted);font-size:.88rem}.doc{padding:2rem;border:1px solid var(--border);border-radius:24px;background:rgba(255,255,255,.94);box-shadow:var(--shadow)}.doc-header{padding-bottom:1rem;margin-bottom:1.25rem;border-bottom:1px solid var(--border)}.kicker{display:inline-flex;width:fit-content;padding:.25rem .65rem;border-radius:999px;background:#dbeafe;color:#1e3a8a;font-size:.72rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase}.doc h1{margin:.7rem 0 .4rem;font-size:clamp(2rem,4vw,3.6rem);line-height:1;letter-spacing:-.05em}.doc h2{margin:2rem 0 .6rem;font-size:1.55rem;line-height:1.15;letter-spacing:-.03em}.doc h3{margin:1.35rem 0 .45rem;font-size:1.18rem}.doc p{margin:.65rem 0;color:#334155}.doc ul,.doc ol{padding-left:1.35rem}.doc li{margin:.35rem 0}.doc a{color:var(--accent);font-weight:800}.doc blockquote{margin:1rem 0;padding:.85rem 1rem;border-left:5px solid var(--accent);border-radius:14px;background:#eef2ff;color:#334155}.doc pre{overflow:auto;padding:1rem;border-radius:16px;background:var(--code);color:#e5e7eb;font-size:.9rem;line-height:1.55}.doc code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}.doc :not(pre)>code{padding:.15rem .32rem;border-radius:7px;background:#eef2f7;color:#1e293b}.doc table{width:100%;border-collapse:collapse;margin:1rem 0;border:1px solid var(--border);border-radius:16px;overflow:hidden;display:block}.doc thead,.doc tbody,.doc tr{width:100%}.doc th,.doc td{padding:.75rem;border-bottom:1px solid var(--border);text-align:left;vertical-align:top}.doc th{background:#f1f5f9;color:#334155;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}.doc tr:last-child td{border-bottom:0}.doc hr{border:0;border-top:1px solid var(--border);margin:2rem 0}.doc img{max-width:100%;border-radius:16px;border:1px solid var(--border)}@media(max-width:720px){.page{width:min(100% - 1rem,980px);padding-top:1rem}.doc{padding:1.15rem;border-radius:18px}.topbar{display:grid}.source{overflow-wrap:anywhere}}</style>
+</head>
+<body>
+  <main class="page">
+    <div class="topbar">
+      <a class="back" href="../index.html">← Torna alla Home</a>
+      <span class="source">Sorgente Markdown: ../old_style/20-application-first-use-cases.md</span>
+    </div>
+    <article class="doc">
+      <header class="doc-header">
+        <span class="kicker">old_style</span>
+        <h1>Archivio storico — 20-application-first-use-cases</h1>
+      </header>
+      <h1>Archivio storico — 20-application-first-use-cases</h1>
+<blockquote>
+<p>Questo documento fa parte dell'archivio storico <code>docs/old_style/</code>.
+Mantiene il percorso step-by-step del progetto, ma la documentazione principale aggiornata si trova in:
+<code>docs/simple/</code>, <code>docs/professional/</code> e <code>docs/digital/</code>.</p>
+</blockquote>
+<hr />
+<h1>Punto 6E — First Use Cases</h1>
+<p>Il <strong>Punto 6E</strong> introduce i primi casi d'uso applicativi reali di TruckFlow Manager.</p>
+<p>Dopo il blueprint dell'application layer, la foundation applicativa, le repository port e le repository in memory, il progetto può finalmente iniziare a orchestrare il dominio tramite azioni applicative chiare, testabili e indipendenti da web, database e framework.</p>
+<p>Questa fase non introduce REST API, controller, JPA, Spring, database, security o frontend. L'obiettivo è costruire il primo flusso applicativo completo usando solo:</p>
+<ul>
+<li>domain layer;</li>
+<li>application command;</li>
+<li>application result;</li>
+<li>port in;</li>
+<li>port out;</li>
+<li>application service;</li>
+<li>repository in memory per i test.</li>
+</ul>
+<h2>Obiettivo dello step</h2>
+<p>Il Punto 6E serve a trasformare la struttura applicativa in comportamento reale.</p>
+<p>I primi use case permettono di:</p>
+<ul>
+<li>registrare una location;</li>
+<li>recuperare una location;</li>
+<li>registrare una cargo unit;</li>
+<li>recuperare una cargo unit;</li>
+<li>creare una shipment in stato draft;</li>
+<li>aggiungere un item alla shipment;</li>
+<li>aggiungere una leg alla shipment;</li>
+<li>confermare una shipment;</li>
+<li>recuperare una shipment.</li>
+</ul>
+<p>Il primo flusso applicativo completo è quindi:</p>
+<ol>
+<li>registrare una location di partenza;</li>
+<li>registrare una location di destinazione;</li>
+<li>registrare un cargo;</li>
+<li>creare una shipment draft;</li>
+<li>aggiungere il cargo alla shipment;</li>
+<li>aggiungere una tratta dalla location A alla location B;</li>
+<li>confermare la shipment;</li>
+<li>recuperare la shipment confermata.</li>
+</ol>
+<p>Questo è il primo scenario in cui l'application layer orchestra più domini senza duplicare le regole di business.</p>
+<h2>Package introdotti</h2>
+<p>Il Punto 6E espande l'application layer con package specifici:</p>
+<ul>
+<li><code>application.command.locations</code>;</li>
+<li><code>application.command.cargo</code>;</li>
+<li><code>application.command.shipments</code>;</li>
+<li><code>application.result.locations</code>;</li>
+<li><code>application.result.cargo</code>;</li>
+<li><code>application.result.shipments</code>;</li>
+<li><code>application.port.in.locations</code>;</li>
+<li><code>application.port.in.cargo</code>;</li>
+<li><code>application.port.in.shipments</code>;</li>
+<li><code>application.usecase.locations</code>;</li>
+<li><code>application.usecase.cargo</code>;</li>
+<li><code>application.usecase.shipments</code>.</li>
+</ul>
+<p>Questa struttura mantiene separati input, output, contratti e implementazioni.</p>
+<h2>Command applicativi</h2>
+<p>I command rappresentano l'input dell'application layer.</p>
+<p>Sono stati introdotti:</p>
+<ul>
+<li><code>RegisterLocationCommand</code>;</li>
+<li><code>FindLocationCommand</code>;</li>
+<li><code>RegisterCargoUnitCommand</code>;</li>
+<li><code>FindCargoUnitCommand</code>;</li>
+<li><code>CreateShipmentCommand</code>;</li>
+<li><code>AddShipmentItemCommand</code>;</li>
+<li><code>AddShipmentLegCommand</code>;</li>
+<li><code>ConfirmShipmentCommand</code>;</li>
+<li><code>FindShipmentCommand</code>.</li>
+</ul>
+<p>I command non sono DTO REST e non rappresentano ancora payload JSON. Sono input applicativi interni, pensati per essere chiamati in futuro da controller, CLI, batch, API o integrazioni.</p>
+<p>I command validano solo le informazioni applicative minime, per esempio:</p>
+<ul>
+<li>command non nullo;</li>
+<li>identificatori richiesti;</li>
+<li>codice richiesto;</li>
+<li>nome richiesto;</li>
+<li>tipo richiesto;</li>
+<li>stato richiesto quando necessario;</li>
+<li>categorie cargo non vuote.</li>
+</ul>
+<p>Le regole profonde restano nel dominio.</p>
+<h2>Result applicativi</h2>
+<p>I result rappresentano l'output dei casi d'uso.</p>
+<p>Sono stati introdotti:</p>
+<ul>
+<li><code>LocationResult</code>;</li>
+<li><code>CargoUnitResult</code>;</li>
+<li><code>ShipmentResult</code>.</li>
+</ul>
+<p>I result espongono le informazioni principali necessarie ai chiamanti applicativi senza obbligare il futuro web layer a restituire direttamente aggregate completi.</p>
+<p>Questa scelta prepara meglio l'introduzione futura di DTO REST, API pubbliche e viste specifiche.</p>
+<h2>Port in</h2>
+<p>Le port in sono i contratti dei casi d'uso.</p>
+<p>Sono stati introdotti:</p>
+<ul>
+<li><code>RegisterLocationUseCase</code>;</li>
+<li><code>FindLocationUseCase</code>;</li>
+<li><code>RegisterCargoUnitUseCase</code>;</li>
+<li><code>FindCargoUnitUseCase</code>;</li>
+<li><code>CreateShipmentUseCase</code>;</li>
+<li><code>AddShipmentItemUseCase</code>;</li>
+<li><code>AddShipmentLegUseCase</code>;</li>
+<li><code>ConfirmShipmentUseCase</code>;</li>
+<li><code>FindShipmentUseCase</code>.</li>
+</ul>
+<p>Questi contratti rappresentano ciò che l'esterno potrà chiedere all'applicazione.</p>
+<p>In futuro i controller REST non dovranno conoscere le implementazioni concrete. Dovranno dipendere da queste interfacce.</p>
+<h2>Application service</h2>
+<p>Le implementazioni dei casi d'uso sono state collocate in <code>application.usecase</code>.</p>
+<p>Sono stati introdotti:</p>
+<ul>
+<li><code>RegisterLocationService</code>;</li>
+<li><code>FindLocationService</code>;</li>
+<li><code>RegisterCargoUnitService</code>;</li>
+<li><code>FindCargoUnitService</code>;</li>
+<li><code>CreateShipmentService</code>;</li>
+<li><code>AddShipmentItemService</code>;</li>
+<li><code>AddShipmentLegService</code>;</li>
+<li><code>ConfirmShipmentService</code>;</li>
+<li><code>FindShipmentService</code>.</li>
+</ul>
+<p>Ogni service segue lo stesso schema:</p>
+<ol>
+<li>riceve un command;</li>
+<li>valida che il command non sia nullo;</li>
+<li>usa una o più repository port;</li>
+<li>crea o carica aggregate di dominio;</li>
+<li>chiama il dominio;</li>
+<li>salva l'aggregate aggiornato;</li>
+<li>restituisce un result applicativo.</li>
+</ol>
+<h2>Regola più importante</h2>
+<p>L'application layer non duplica le regole del dominio.</p>
+<p>Per esempio:</p>
+<ul>
+<li><code>ConfirmShipmentService</code> non decide se una shipment è confermabile;</li>
+<li><code>ConfirmShipmentService</code> carica la shipment, chiama <code>shipment.confirm()</code> e salva il risultato;</li>
+<li>se la shipment è incompleta, l'eccezione resta una <code>InvalidShipmentException</code> del dominio;</li>
+<li>l'application layer interviene solo quando il problema è applicativo, come risorsa mancante o duplicato.</li>
+</ul>
+<p>La regola da ricordare è:</p>
+<blockquote>
+<p>Il dominio decide se una cosa è valida. L'application layer decide quando chiamare il dominio e dove salvare il risultato.</p>
+</blockquote>
+<h2>Errori applicativi</h2>
+<p>I primi use case distinguono tra errori applicativi ed errori di dominio.</p>
+<p>Sono errori applicativi:</p>
+<ul>
+<li>command nullo;</li>
+<li>repository nullo nel costruttore del service;</li>
+<li>shipment non trovata;</li>
+<li>cargo non trovato;</li>
+<li>location non trovata;</li>
+<li>codice duplicato.</li>
+</ul>
+<p>Per questi casi vengono usate:</p>
+<ul>
+<li><code>UseCaseValidationException</code>;</li>
+<li><code>ResourceNotFoundException</code>;</li>
+<li><code>DuplicateResourceException</code>.</li>
+</ul>
+<p>Sono invece errori di dominio:</p>
+<ul>
+<li>shipment confermata senza item;</li>
+<li>shipment confermata senza leg;</li>
+<li>temperatura controllata senza requisito corrispondente;</li>
+<li>quantity non positiva;</li>
+<li>leg incoerente.</li>
+</ul>
+<p>Questi errori restano nel domain layer.</p>
+<h2>Primo flusso testato</h2>
+<p>È stato aggiunto un test applicativo completo che dimostra lo scenario principale:</p>
+<ol>
+<li>registrazione del deposito di Milano;</li>
+<li>registrazione del deposito di Roma;</li>
+<li>registrazione di un cargo alimentare refrigerato;</li>
+<li>creazione di una shipment draft;</li>
+<li>aggiunta del cargo come shipment item;</li>
+<li>aggiunta della tratta Milano - Roma;</li>
+<li>conferma della shipment;</li>
+<li>recupero della shipment confermata.</li>
+</ol>
+<p>Questo test dimostra che:</p>
+<ul>
+<li>i command sono utilizzabili;</li>
+<li>i service orchestrano repository e dominio;</li>
+<li>le repository in memory permettono test senza database;</li>
+<li>la shipment viene salvata e aggiornata dopo ogni mutazione;</li>
+<li>le regole di conferma restano nel dominio;</li>
+<li>il result finale racconta lo stato applicativo ottenuto.</li>
+</ul>
+<h2>Casi negativi testati</h2>
+<p>Sono stati aggiunti anche casi negativi importanti:</p>
+<ul>
+<li>registrazione di una location con codice duplicato;</li>
+<li>aggiunta di un item con cargo inesistente;</li>
+<li>aggiunta di una leg con location di destinazione inesistente;</li>
+<li>conferma di una shipment incompleta.</li>
+</ul>
+<p>Questi test verificano che l'application layer gestisca correttamente:</p>
+<ul>
+<li>duplicati;</li>
+<li>lookup mancanti;</li>
+<li>propagazione delle eccezioni di dominio.</li>
+</ul>
+<h2>Cosa non è stato fatto</h2>
+<p>Il Punto 6E non introduce ancora:</p>
+<ul>
+<li>REST controller;</li>
+<li>DTO web;</li>
+<li>database;</li>
+<li>JPA;</li>
+<li>Spring annotations;</li>
+<li>transazioni;</li>
+<li>security;</li>
+<li>paginazione;</li>
+<li>ricerca avanzata;</li>
+<li>workflow;</li>
+<li>planning e dispatching;</li>
+<li>availability;</li>
+<li>tracking;</li>
+<li>fleet operations;</li>
+<li>use case per tutti i domini;</li>
+<li>mapping enterprise completo tra result e viste pubbliche.</li>
+</ul>
+<p>Queste funzionalità arriveranno dopo.</p>
+<h2>Perché partire da Locations + Cargo + Shipments</h2>
+<p>Locations, Cargo e Shipments sono il primo blocco corretto perché rappresentano un flusso logistico reale ma ancora controllabile.</p>
+<p>Una shipment usa:</p>
+<ul>
+<li><code>LocationId</code> per origine e destinazione;</li>
+<li><code>CargoId</code> per gli item;</li>
+<li><code>ShipmentItem</code> per la merce richiesta;</li>
+<li><code>ShipmentLeg</code> per le tratte;</li>
+<li><code>ShipmentRequirementSet</code> per i requisiti di trasporto.</li>
+</ul>
+<p>Questa scelta permette di testare l'orchestrazione senza introdurre ancora veicoli, autisti, pianificazione, disponibilità o tracking.</p>
+<h2>Relazione con il Punto 6F</h2>
+<p>Il Punto 6E introduce i primi use case.</p>
+<p>Storicamente, dopo il Punto 6E, il passo successivo è stato il <strong>Punto 6F — Application Use Case Review &amp; Hardening</strong>. Oggi quel percorso è già stato completato fino al Punto 6M.</p>
+<p>Il Punto 6F dovrebbe:</p>
+<ul>
+<li>rivedere i primi use case;</li>
+<li>rafforzare i test applicativi;</li>
+<li>controllare naming e package;</li>
+<li>verificare che l'application layer non importi infrastructure;</li>
+<li>verificare che il domain layer non importi application;</li>
+<li>decidere se estendere i use case a Documents, Compliance, Vehicles e Operational;</li>
+<li>preparare la futura esposizione REST senza introdurla troppo presto.</li>
+</ul>
+<h2>Stato dopo il Punto 6E</h2>
+<p>Dopo questo step, il progetto contiene:</p>
+<ul>
+<li>domain layer puro;</li>
+<li>test suite del dominio;</li>
+<li>application foundation;</li>
+<li>repository port;</li>
+<li>repository in memory;</li>
+<li>primi command specifici;</li>
+<li>primi result specifici;</li>
+<li>prime port in;</li>
+<li>primi application service;</li>
+<li>primo flusso applicativo reale testato.</li>
+</ul>
+<p>Il progetto non è ancora una REST API e non usa ancora database, ma ha iniziato a comportarsi come una vera applicazione organizzata per casi d'uso.</p>
+<h2>Aggiornamento successivo — Punto 6F</h2>
+<p>Dopo il Punto 6E è stato aggiunto il Punto 6F — Application Use Case Review &amp; Hardening.</p>
+<p>Questa fase completa e rafforza il primo gruppo di use case aggiungendo <code>CancelShipmentUseCase</code> e testando casi negativi più espliciti: command nulli, input obbligatori mancanti, risorse inesistenti, duplicati cargo, cancellazione shipment e mutazioni fallite senza stato parziale.</p>
+<p>Il Punto 6F non cambia la natura del Punto 6E: l'application layer continua a orchestrare il dominio senza duplicare le regole business.</p>
+<h2>Aggiornamento successivo — Punto 6G</h2>
+<p>Dopo l'hardening del Punto 6F, il Punto 6G ha aggiunto il primo blocco applicativo fuori dal flusso Locations + Cargo + Shipments: i use case Documents.</p>
+<p>Il nuovo blocco non modifica il significato del Punto 6E, ma estende l'application layer con una seconda area applicativa coerente:</p>
+<ul>
+<li>registrare un documento logico;</li>
+<li>trovare un documento;</li>
+<li>attivare un documento;</li>
+<li>archiviare un documento.</li>
+</ul>
+<p>La documentazione specifica è disponibile in <code>docs/old_style/22-application-use-case-expansion.md</code>.</p>
+<h2>Aggiornamento dopo il Punto 6H</h2>
+<p>Il Punto 6H non modifica il primo flusso Locations + Cargo + Shipments introdotto nel Punto 6E.</p>
+<p>La review aggiunge però una garanzia trasversale: i result applicativi collegati ai primi use case (<code>LocationResult</code>, <code>CargoUnitResult</code> e <code>ShipmentResult</code>) ora rifiutano input nulli con <code>UseCaseValidationException</code>, evitando errori Java impliciti e mantenendo coerente l'error handling applicativo.</p>
+<h2>Aggiornamento di contesto dopo il Punto 6J</h2>
+<p>I primi use case Locations + Cargo + Shipments restano il nucleo iniziale. Gli step successivi hanno esteso lo stesso modello applicativo a Documents, Vehicles e Operational Roles senza cambiare il principio architetturale del Punto 6E.</p>
+<h2>Aggiornamento dopo il Punto 6K</h2>
+<p>Il primo nucleo Locations + Cargo + Shipments rimane invariato. Il Punto 6K opera sui use case Operational Roles, ma conferma lo stesso stile applicativo già avviato nel Punto 6E: command espliciti, service piccoli, repository port astratte, result applicativi e test con adapter in memory.</p>
+<h2>Aggiornamento dopo il Punto 6L</h2>
+<p>Il nucleo iniziale Locations + Cargo + Shipments rimane invariato.</p>
+<p>Il Punto 6L estende lo stesso modello applicativo al catalogo base di Compliance: command espliciti, service piccoli, repository port astratte, result applicativi e test con adapter in memory.</p>
+<p>Anche in questo step non vengono introdotti REST API, database o framework.</p>
+<h2>Allineamento Punto 6M</h2>
+<p>Il Punto 6M chiude il primo ciclo dell'application layer con una review/freeze finale. Da questo momento i contenuti documentati nei punti 6A-6L sono considerati fondazione applicativa stabile: eventuali evoluzioni future dovranno essere introdotte in nuovi punti roadmap, mantenendo ancora fuori REST API, controller, database, JPA, Spring Data, security, tracking, planning, dashboard, workflow e integrazioni esterne.</p>
+
+    </article>
+  </main>
+</body>
+</html>

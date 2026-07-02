@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Archivio storico — 28-application-layer-final-review-freeze — TruckFlow Docs</title>
+  <style>:root{--bg:#f5f7fb;--panel:#fff;--text:#172033;--muted:#64748b;--accent:#3554d1;--border:#d9e1ef;--code:#0f172a;--shadow:0 18px 44px rgba(15,23,42,.08)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:radial-gradient(circle at top left,rgba(53,84,209,.10),transparent 30rem),var(--bg);color:var(--text);line-height:1.68;font-size:16px}.page{width:min(980px,calc(100% - 2rem));margin:0 auto;padding:2rem 0 4rem}.topbar{display:flex;justify-content:space-between;gap:1rem;align-items:center;margin-bottom:1rem}.back{display:inline-flex;align-items:center;gap:.35rem;padding:.55rem .85rem;border:1px solid var(--border);border-radius:999px;background:#fff;color:var(--accent);font-weight:850;text-decoration:none;box-shadow:0 8px 22px rgba(15,23,42,.05)}.source{color:var(--muted);font-size:.88rem}.doc{padding:2rem;border:1px solid var(--border);border-radius:24px;background:rgba(255,255,255,.94);box-shadow:var(--shadow)}.doc-header{padding-bottom:1rem;margin-bottom:1.25rem;border-bottom:1px solid var(--border)}.kicker{display:inline-flex;width:fit-content;padding:.25rem .65rem;border-radius:999px;background:#dbeafe;color:#1e3a8a;font-size:.72rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase}.doc h1{margin:.7rem 0 .4rem;font-size:clamp(2rem,4vw,3.6rem);line-height:1;letter-spacing:-.05em}.doc h2{margin:2rem 0 .6rem;font-size:1.55rem;line-height:1.15;letter-spacing:-.03em}.doc h3{margin:1.35rem 0 .45rem;font-size:1.18rem}.doc p{margin:.65rem 0;color:#334155}.doc ul,.doc ol{padding-left:1.35rem}.doc li{margin:.35rem 0}.doc a{color:var(--accent);font-weight:800}.doc blockquote{margin:1rem 0;padding:.85rem 1rem;border-left:5px solid var(--accent);border-radius:14px;background:#eef2ff;color:#334155}.doc pre{overflow:auto;padding:1rem;border-radius:16px;background:var(--code);color:#e5e7eb;font-size:.9rem;line-height:1.55}.doc code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}.doc :not(pre)>code{padding:.15rem .32rem;border-radius:7px;background:#eef2f7;color:#1e293b}.doc table{width:100%;border-collapse:collapse;margin:1rem 0;border:1px solid var(--border);border-radius:16px;overflow:hidden;display:block}.doc thead,.doc tbody,.doc tr{width:100%}.doc th,.doc td{padding:.75rem;border-bottom:1px solid var(--border);text-align:left;vertical-align:top}.doc th{background:#f1f5f9;color:#334155;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}.doc tr:last-child td{border-bottom:0}.doc hr{border:0;border-top:1px solid var(--border);margin:2rem 0}.doc img{max-width:100%;border-radius:16px;border:1px solid var(--border)}@media(max-width:720px){.page{width:min(100% - 1rem,980px);padding-top:1rem}.doc{padding:1.15rem;border-radius:18px}.topbar{display:grid}.source{overflow-wrap:anywhere}}</style>
+</head>
+<body>
+  <main class="page">
+    <div class="topbar">
+      <a class="back" href="../index.html">← Torna alla Home</a>
+      <span class="source">Sorgente Markdown: ../old_style/28-application-layer-final-review-freeze.md</span>
+    </div>
+    <article class="doc">
+      <header class="doc-header">
+        <span class="kicker">old_style</span>
+        <h1>Archivio storico — 28-application-layer-final-review-freeze</h1>
+      </header>
+      <h1>Archivio storico — 28-application-layer-final-review-freeze</h1>
+<blockquote>
+<p>Questo documento fa parte dell'archivio storico <code>docs/old_style/</code>.
+Mantiene il percorso step-by-step del progetto, ma la documentazione principale aggiornata si trova in:
+<code>docs/simple/</code>, <code>docs/professional/</code> e <code>docs/digital/</code>.</p>
+</blockquote>
+<hr />
+<h1>Punto 6M — Application Layer Final Review &amp; Freeze</h1>
+<p>Il Punto 6M chiude il primo ciclo dell'<strong>Application Layer</strong> di TruckFlow Manager.</p>
+<p>Questa fase non introduce un nuovo dominio applicativo. Serve invece a fare una revisione finale, congelare lo stato raggiunto dal Punto 6 e documentare chiaramente cosa è completo, cosa resta volutamente fuori e quali confini architetturali devono rimanere stabili prima dei prossimi livelli del progetto.</p>
+<h2>Obiettivo dello step</h2>
+<p>L'obiettivo del Punto 6M è consolidare tutto il lavoro fatto da 6A a 6L:</p>
+<ul>
+<li>blueprint dell'application layer;</li>
+<li>contratti base applicativi;</li>
+<li>repository port;</li>
+<li>repository in memory;</li>
+<li>primi use case Locations, Cargo e Shipments;</li>
+<li>hardening dei use case iniziali;</li>
+<li>espansione verso Documents;</li>
+<li>review e allineamento dopo Documents;</li>
+<li>espansione verso Vehicles;</li>
+<li>espansione verso Operational Roles;</li>
+<li>hardening dei use case Operational Roles;</li>
+<li>primi use case Compliance base.</li>
+</ul>
+<p>Il risultato atteso è un application layer stabile, leggibile, testato e documentato, pronto per essere usato come fondazione dei prossimi step infrastrutturali e web, ma senza anticiparli.</p>
+<h2>Stato finale del Punto 6</h2>
+<p>Alla fine del Punto 6M, l'application layer contiene i seguenti bounded context applicativi:</p>
+<ul>
+<li><code>locations</code>;</li>
+<li><code>cargo</code>;</li>
+<li><code>shipments</code>;</li>
+<li><code>documents</code>;</li>
+<li><code>vehicles</code>;</li>
+<li><code>operational</code>;</li>
+<li><code>compliance</code>.</li>
+</ul>
+<p>Per ognuno di questi contesti esiste una struttura coerente:</p>
+<ul>
+<li>command applicativi in <code>application.command</code>;</li>
+<li>result applicativi in <code>application.result</code>;</li>
+<li>port in in <code>application.port.in</code>;</li>
+<li>repository port in <code>application.port.out</code>;</li>
+<li>service applicativi in <code>application.usecase</code>;</li>
+<li>adapter in memory in <code>infrastructure.memory</code>.</li>
+</ul>
+<p>Questa struttura conferma la separazione tra:</p>
+<ul>
+<li>dominio puro;</li>
+<li>application layer;</li>
+<li>adapter tecnici temporanei in memory.</li>
+</ul>
+<h2>Test aggiunti nel Punto 6M</h2>
+<p>Il Punto 6M aggiunge <code>ApplicationLayerFinalFreezeTest</code>.</p>
+<p>Questo test non verifica un singolo use case business. Verifica invece la coerenza complessiva dell'application layer alla fine del Punto 6.</p>
+<p>Il test controlla che:</p>
+<ul>
+<li>tutti i contesti applicativi attivi abbiano package completi;</li>
+<li>ogni port in concreta abbia un application service corrispondente;</li>
+<li>la documentazione applicativa dal Punto 6A al Punto 6M sia presente;</li>
+<li>non siano stati introdotti layer prematuri come web, security, JPA, persistence o database;</li>
+<li>non siano presenti annotazioni o contratti tipici di REST controller, entity JPA, repository Spring Data o configurazioni security;</li>
+<li>la test suite applicativa di review, hardening ed espansione sia ancora presente.</li>
+</ul>
+<p>Questo test è una protezione architetturale finale: se in futuro verrà introdotto per errore qualcosa fuori sequenza, il test aiuterà a intercettarlo.</p>
+<h2>Cosa è considerato completato</h2>
+<p>Il Punto 6 considera completato il primo application layer di base.</p>
+<p>Sono completati:</p>
+<ul>
+<li>contratti comuni <code>UseCase</code>, <code>Command</code>, <code>ApplicationResult</code>, <code>RepositoryPort</code>;</li>
+<li>eccezioni applicative comuni;</li>
+<li>repository port dei contesti applicativi attivi;</li>
+<li>repository in memory per test e sviluppo iniziale;</li>
+<li>use case applicativi di registrazione, ricerca e cambio stato dove previsti;</li>
+<li>copy-on-write per mutazioni delicate;</li>
+<li>test architetturali;</li>
+<li>test applicativi positivi e negativi;</li>
+<li>test repository port;</li>
+<li>test repository in memory;</li>
+<li>documentazione Markdown;</li>
+<li>documentazione digitale HTML + CSS;</li>
+<li>documentazione enterprise unica.</li>
+</ul>
+<h2>Cosa resta volutamente fuori</h2>
+<p>Il Punto 6M conferma che non sono stati ancora introdotti:</p>
+<ul>
+<li>REST API;</li>
+<li>Spring controller;</li>
+<li>DTO web;</li>
+<li>database reale;</li>
+<li>JPA;</li>
+<li>Hibernate;</li>
+<li>Spring Data;</li>
+<li>security;</li>
+<li>JWT;</li>
+<li>ruoli e permessi applicativi reali;</li>
+<li>tracking;</li>
+<li>planning;</li>
+<li>dispatching operativo;</li>
+<li>assegnazione concreta di veicoli, autisti o spedizioni;</li>
+<li>dashboard;</li>
+<li>workflow enterprise;</li>
+<li>audit trail;</li>
+<li>notifiche;</li>
+<li>file upload;</li>
+<li>file storage;</li>
+<li>motore country compliance;</li>
+<li>scadenze operative;</li>
+<li>controlli automatici di violazione compliance.</li>
+</ul>
+<p>Queste parti appartengono a step successivi e non devono essere mischiate alla chiusura del Punto 6.</p>
+<h2>Regola di freeze</h2>
+<p>Dopo il Punto 6M, il Punto 6 è considerato chiuso.</p>
+<p>Questo significa che eventuali nuove funzionalità dovranno appartenere a un nuovo punto della roadmap, per esempio:</p>
+<ul>
+<li>preparazione controllata del livello web;</li>
+<li>blueprint REST API;</li>
+<li>infrastruttura persistente;</li>
+<li>security blueprint;</li>
+<li>test di scenario enterprise;</li>
+<li>evoluzione controllata dei use case applicativi.</li>
+</ul>
+<p>Non significa che il codice non potrà più essere migliorato. Significa che il primo ciclo dell'application layer ha ora una base stabile, documentata e verificabile.</p>
+<h2>Verifica locale consigliata</h2>
+<p>Dopo aver applicato la patch del Punto 6M, eseguire:</p>
+<pre><code class="language-bash">mvn spotless:apply
+mvn spotless:check
+mvn clean test
+git status
+</code></pre>
+<p>Se tutti i test passano, il commit consigliato è:</p>
+<pre><code class="language-bash">git add -A
+git commit -m &quot;Finalize application layer review and freeze&quot;
+git push
+</code></pre>
+<h2>Stato dopo questo step</h2>
+<p>Dopo il Punto 6M, TruckFlow Manager si trova in questo stato:</p>
+<ul>
+<li>dominio puro completato, pulito, testato e documentato;</li>
+<li>application layer base completato, revisionato e documentato;</li>
+<li>adapter in memory disponibili per test e sviluppo iniziale;</li>
+<li>nessun layer web o database ancora introdotto;</li>
+<li>documentazione Markdown e HTML allineata;</li>
+<li>progetto pronto per aprire il prossimo grande punto della roadmap.</li>
+</ul>
+<h2>Allineamento documentale successivo</h2>
+<p>Dopo il Punto 6M è stata aggiunta una pulizia solo documentale, descritta in <code>docs/old_style/29-final-roadmap-documentation-alignment.md</code>.</p>
+<p>Questa pulizia non cambia il codice e non riapre il Punto 6. Serve solo a rendere esplicito che:</p>
+<ul>
+<li>il Punto 6 è chiuso da 6A a 6M;</li>
+<li>il Punto 6G Documents include register, find, activate e archive;</li>
+<li>attach fisico, generazione PDF, upload, storage, versioning e workflow documentali sono ancora futuri;</li>
+<li>le dipendenze Spring eventualmente già presenti nel <code>pom.xml</code> sono preparatorie o storiche;</li>
+<li>il prossimo lavoro deve aprire un nuovo punto roadmap, non un ulteriore sotto-step del Punto 6.</li>
+</ul>
+<h2>Allineamento successivo — Punto 7A</h2>
+<p>Dopo il freeze del Punto 6M, il progetto apre il <strong>Punto 7A — Infrastructure Layer Blueprint</strong>.</p>
+<p>Il 7A non modifica il codice applicativo congelato: definisce solo il blueprint del layer infrastrutturale, la roadmap 7A → 7H, il ruolo dei repository reali futuri, il ruolo dei repository in memory ancora presenti e il confine con il futuro Punto 8 API Layer.</p>
+<p>Documento di riferimento: <a href="30-infrastructure-layer-blueprint.md"><code>30-infrastructure-layer-blueprint.md</code></a>.</p>
+<h2>Allineamento successivo — Punto 7B</h2>
+<p>Dopo il 7A, il progetto introduce il <strong>Punto 7B — Infrastructure Foundation</strong>.</p>
+<p>Questa fase non riapre l'application layer e non modifica i use case congelati. Aggiunge solo la prima struttura tecnica del layer infrastrutturale: package base, eccezioni tecniche, marker di adapter/repository/service, profili infrastrutturali e un contratto generico di mapping.</p>
+<p>Il freeze del Punto 6M resta valido: domain e application non dipendono da infrastructure, e REST API, controller, database, JPA, Spring Data e security restano fuori dal ciclo applicativo.</p>
+<h2>Nota successiva — Punto 7C</h2>
+<p>Il freeze dell’application layer rimane valido anche dopo l’introduzione del wiring Spring: nessuna classe application riceve annotazioni framework e i use case restano indipendenti dall’infrastruttura.</p>
+
+    </article>
+  </main>
+</body>
+</html>

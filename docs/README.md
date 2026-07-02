@@ -2,13 +2,14 @@
 
 Questa cartella raccoglie tutta la documentazione ufficiale di TruckFlow Manager dopo la chiusura del **Punto 7 — Infrastructure Layer**.
 
-La documentazione è stata riorganizzata per evitare confusione tra documenti storici, guide semplici, documentazione professionale e versione digitale.
+La documentazione è divisa in documenti storici, guide semplici, documentazione professionale e lettore digitale.
 
 ## Da dove partire
 
-- **Vuoi capire il progetto da zero?** Parti da [`simple/README.md`](simple/README.md).
+- **Vuoi capire il progetto in modo professionale?** Parti da [`professional/00-software-engineering-overview.md`](professional/00-software-engineering-overview.md).
+- **Vuoi leggere una versione visuale nel browser?** Apri [`digital/software-engineering-overview.html`](digital/software-engineering-overview.html) o usa [`digital/index.html`](digital/index.html).
+- **Vuoi capire il progetto da zero con parole semplici?** Parti da [`simple/README.md`](simple/README.md).
 - **Vuoi una documentazione tecnica presentabile?** Vai in [`professional/README.md`](professional/README.md).
-- **Vuoi navigare la documentazione dal browser?** Apri [`digital/index.html`](digital/index.html).
 - **Vuoi leggere la storia step-by-step del progetto?** Consulta [`old_style/README.md`](old_style/README.md).
 
 ## Struttura
@@ -26,30 +27,26 @@ docs/
 
 TruckFlow Manager ha completato:
 
-- **Punto 1 → Punto 5**: dominio puro, review, eccezioni e regole di dominio;
-- **Punto 6A → Punto 6M**: application layer, use case, repository port, in-memory repository, hardening e freeze;
-- **Punto 7A → Punto 7H**: infrastructure layer, Spring wiring non-web, mapping blueprint, repository file-backed prototipali, test tecnici e freeze.
+- **Punto 1 → Punto 5**: Domain Layer;
+- **Punto 6A → Punto 6M**: Application Layer;
+- **Punto 7A → Punto 7H**: Infrastructure Layer.
 
-Il prossimo ciclo naturale sarà il **Punto 8 — API Layer**.
+Il prossimo ciclo naturale è:
 
-## Cosa contiene ogni sezione
+- **Punto 8A → Punto 8H**: API Layer.
 
-### `simple/`
+## Digital Documentation Reader
 
-Guida semplice e ragionata, pensata per capire il progetto anche conoscendo poco la programmazione. Spiega le scelte, i perché, gli esempi e i concetti principali con parole chiare.
+Il reader digitale in [`digital/index.html`](digital/index.html) è un lettore statico.
 
-### `professional/`
+Contiene:
 
-Documentazione tecnica ufficiale, più formale e presentabile. Descrive architettura, layer, qualità, roadmap, stato attuale e prossimi step.
+- Overview pulita con documento enterprise in evidenza;
+- ricerca nella documentazione;
+- sezioni Simple, Professional, Old Style, Roadmap, Architecture e Digital;
+- Package Explorer ad albero apribile/chiudibile, basato sui package Java reali rilevati al momento dell’aggiornamento del catalogo;
+- versione HTML visuale del documento enterprise;
+- apertura dei documenti in nuova scheda, senza iframe interno;
+- versioni HTML statiche dei Markdown in `docs/digital/rendered/`, per evitare la lettura come testo grezzo.
 
-### `digital/`
-
-Documentazione navigabile da browser. Sostituisce la vecchia cartella `digitalDocs/`.
-
-### `old_style/`
-
-Archivio storico con i documenti numerati da `01` a `37`. Sono stati conservati e resi più ordinati, ma non sono più il punto di partenza principale.
-
-## Regola di manutenzione
-
-Quando il progetto evolve, aggiorna prima la documentazione principale (`simple/`, `professional/`, `digital/`) e poi, se serve, aggiungi nuovi documenti storici in `old_style/`.
+Il reader non introduce Spring, API REST, backend, database, controller, generazione automatica runtime o scansione runtime del filesystem.

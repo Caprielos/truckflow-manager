@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Archivio storico — 35-repository-expansion — TruckFlow Docs</title>
+  <style>:root{--bg:#f5f7fb;--panel:#fff;--text:#172033;--muted:#64748b;--accent:#3554d1;--border:#d9e1ef;--code:#0f172a;--shadow:0 18px 44px rgba(15,23,42,.08)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:radial-gradient(circle at top left,rgba(53,84,209,.10),transparent 30rem),var(--bg);color:var(--text);line-height:1.68;font-size:16px}.page{width:min(980px,calc(100% - 2rem));margin:0 auto;padding:2rem 0 4rem}.topbar{display:flex;justify-content:space-between;gap:1rem;align-items:center;margin-bottom:1rem}.back{display:inline-flex;align-items:center;gap:.35rem;padding:.55rem .85rem;border:1px solid var(--border);border-radius:999px;background:#fff;color:var(--accent);font-weight:850;text-decoration:none;box-shadow:0 8px 22px rgba(15,23,42,.05)}.source{color:var(--muted);font-size:.88rem}.doc{padding:2rem;border:1px solid var(--border);border-radius:24px;background:rgba(255,255,255,.94);box-shadow:var(--shadow)}.doc-header{padding-bottom:1rem;margin-bottom:1.25rem;border-bottom:1px solid var(--border)}.kicker{display:inline-flex;width:fit-content;padding:.25rem .65rem;border-radius:999px;background:#dbeafe;color:#1e3a8a;font-size:.72rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase}.doc h1{margin:.7rem 0 .4rem;font-size:clamp(2rem,4vw,3.6rem);line-height:1;letter-spacing:-.05em}.doc h2{margin:2rem 0 .6rem;font-size:1.55rem;line-height:1.15;letter-spacing:-.03em}.doc h3{margin:1.35rem 0 .45rem;font-size:1.18rem}.doc p{margin:.65rem 0;color:#334155}.doc ul,.doc ol{padding-left:1.35rem}.doc li{margin:.35rem 0}.doc a{color:var(--accent);font-weight:800}.doc blockquote{margin:1rem 0;padding:.85rem 1rem;border-left:5px solid var(--accent);border-radius:14px;background:#eef2ff;color:#334155}.doc pre{overflow:auto;padding:1rem;border-radius:16px;background:var(--code);color:#e5e7eb;font-size:.9rem;line-height:1.55}.doc code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}.doc :not(pre)>code{padding:.15rem .32rem;border-radius:7px;background:#eef2f7;color:#1e293b}.doc table{width:100%;border-collapse:collapse;margin:1rem 0;border:1px solid var(--border);border-radius:16px;overflow:hidden;display:block}.doc thead,.doc tbody,.doc tr{width:100%}.doc th,.doc td{padding:.75rem;border-bottom:1px solid var(--border);text-align:left;vertical-align:top}.doc th{background:#f1f5f9;color:#334155;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}.doc tr:last-child td{border-bottom:0}.doc hr{border:0;border-top:1px solid var(--border);margin:2rem 0}.doc img{max-width:100%;border-radius:16px;border:1px solid var(--border)}@media(max-width:720px){.page{width:min(100% - 1rem,980px);padding-top:1rem}.doc{padding:1.15rem;border-radius:18px}.topbar{display:grid}.source{overflow-wrap:anywhere}}</style>
+</head>
+<body>
+  <main class="page">
+    <div class="topbar">
+      <a class="back" href="../index.html">← Torna alla Home</a>
+      <span class="source">Sorgente Markdown: ../old_style/35-repository-expansion.md</span>
+    </div>
+    <article class="doc">
+      <header class="doc-header">
+        <span class="kicker">old_style</span>
+        <h1>Archivio storico — 35-repository-expansion</h1>
+      </header>
+      <h1>Archivio storico — 35-repository-expansion</h1>
+<blockquote>
+<p>Questo documento fa parte dell'archivio storico <code>docs/old_style/</code>.
+Mantiene il percorso step-by-step del progetto, ma la documentazione principale aggiornata si trova in:
+<code>docs/simple/</code>, <code>docs/professional/</code> e <code>docs/digital/</code>.</p>
+</blockquote>
+<hr />
+<h1>Punto 7F — Repository Expansion</h1>
+<p>Il Punto 7F estende il pattern validato nel Punto 7E.</p>
+<p>Nel Punto 7E il progetto ha introdotto un primo repository reale prototipale per <code>Locations</code>, usando un file locale come meccanismo tecnico di persistenza. Il Punto 7F non cambia direzione: continua a usare repository file-backed piccoli, testabili e indipendenti da database, JPA, Spring Data e REST API.</p>
+<p>L'obiettivo non è ancora costruire una persistence enterprise completa. L'obiettivo è validare che il pattern repository + persistence record + mapper + test tecnici possa essere riutilizzato su più contesti applicativi senza sporcare dominio e application layer.</p>
+<hr />
+<h2>Obiettivo dello step</h2>
+<p>Il Punto 7F introduce repository reali file-backed per tre contesti sicuri e catalog-like:</p>
+<ul>
+<li><code>CargoUnit</code>;</li>
+<li><code>Document</code>;</li>
+<li><code>ComplianceRequirement</code>.</li>
+</ul>
+<p>Questi tre contesti sono adatti alla prima espansione perché hanno:</p>
+<ul>
+<li>identità stabile;</li>
+<li>codice business stabile;</li>
+<li>stato di ciclo vita;</li>
+<li>modello ricostruibile attraverso costruttori di dominio;</li>
+<li>basso rischio rispetto a Shipments, Vehicles e Operational Roles completi.</li>
+</ul>
+<p>Il repository pilota <code>FileLocationRepository</code> resta valido e non viene rimosso.</p>
+<hr />
+<h2>Cosa è stato aggiunto</h2>
+<h3>Supporto file-backed condiviso</h3>
+<p>È stato introdotto il package:</p>
+<pre><code class="language-text">it.gabriele.truckflow.infrastructure.repository.file
+</code></pre>
+<p>Contiene:</p>
+<ul>
+<li><code>FileRecordCodec</code>;</li>
+<li><code>FileRepositoryStorage</code>;</li>
+<li><code>FileRepositoryText</code>.</li>
+</ul>
+<p>Questi componenti centralizzano la logica tecnica comune:</p>
+<ul>
+<li>lettura file;</li>
+<li>scrittura file;</li>
+<li>codifica sicura dei campi testuali;</li>
+<li>gestione di file mancanti come repository vuoti;</li>
+<li>trasformazione dei record in righe testuali;</li>
+<li>gestione di errori tecnici tramite <code>RepositoryException</code>.</li>
+</ul>
+<p>Questa logica è infrastrutturale. Non entra nel dominio e non entra nell'application layer.</p>
+<hr />
+<h2>Cargo repository expansion</h2>
+<p>Per Cargo sono stati introdotti:</p>
+<pre><code class="language-text">FileCargoUnitRepository
+CargoUnitPersistenceRecord
+CargoUnitPersistenceMapper
+CargoUnitFileRecordCodec
+</code></pre>
+<p><code>FileCargoUnitRepository</code> implementa il port applicativo:</p>
+<pre><code class="language-text">CargoUnitRepository
+</code></pre>
+<p>Supporta:</p>
+<ul>
+<li><code>save</code>;</li>
+<li><code>findById</code>;</li>
+<li><code>findByCode</code>;</li>
+<li><code>existsById</code>;</li>
+<li><code>existsByCode</code>.</li>
+</ul>
+<p>Il mapper conserva i principali value object del cargo:</p>
+<ul>
+<li>categorie;</li>
+<li>dimensioni;</li>
+<li>pesi;</li>
+<li>packaging;</li>
+<li>temperatura;</li>
+<li>hazard;</li>
+<li>requisiti regolatori;</li>
+<li>proprietà;</li>
+<li>requisiti di compatibilità.</li>
+</ul>
+<p>Non introduce controlli di compatibilità infrastrutturali. Le regole restano nel dominio.</p>
+<hr />
+<h2>Documents repository expansion</h2>
+<p>Per Documents sono stati introdotti:</p>
+<pre><code class="language-text">FileDocumentRepository
+DocumentPersistenceRecord
+DocumentPersistenceMapper
+DocumentFileRecordCodec
+</code></pre>
+<p><code>FileDocumentRepository</code> implementa il port applicativo:</p>
+<pre><code class="language-text">DocumentRepository
+</code></pre>
+<p>Supporta:</p>
+<ul>
+<li><code>save</code>;</li>
+<li><code>findById</code>;</li>
+<li><code>findByCode</code>;</li>
+<li><code>existsById</code>;</li>
+<li><code>existsByCode</code>.</li>
+</ul>
+<p>Il mapper conserva:</p>
+<ul>
+<li>classificazione documento;</li>
+<li>stato logico;</li>
+<li>metadata;</li>
+<li>contenuto logico;</li>
+<li>references;</li>
+<li>note.</li>
+</ul>
+<p>Questo repository resta volutamente logico. Non introduce file upload, binary storage, PDF generation, firma digitale, versioning documentale o workflow.</p>
+<hr />
+<h2>Compliance repository expansion</h2>
+<p>Per Compliance sono stati introdotti:</p>
+<pre><code class="language-text">FileComplianceRequirementRepository
+ComplianceRequirementPersistenceRecord
+ComplianceRequirementPersistenceMapper
+ComplianceRequirementFileRecordCodec
+</code></pre>
+<p><code>FileComplianceRequirementRepository</code> implementa il port applicativo:</p>
+<pre><code class="language-text">ComplianceRequirementRepository
+</code></pre>
+<p>Supporta:</p>
+<ul>
+<li><code>save</code>;</li>
+<li><code>findById</code>;</li>
+<li><code>findByCode</code>;</li>
+<li><code>existsById</code>;</li>
+<li><code>existsByCode</code>.</li>
+</ul>
+<p>Il mapper conserva:</p>
+<ul>
+<li>categoria compliance;</li>
+<li>tipo requisito;</li>
+<li>livello di obbligo;</li>
+<li>severità;</li>
+<li>target;</li>
+<li>rule;</li>
+<li>source;</li>
+<li>jurisdiction;</li>
+<li>stato.</li>
+</ul>
+<p>Questo repository non calcola scadenze, violazioni, audit trail, notifiche o country engine operativo.</p>
+<hr />
+<h2>Perché non espandere tutto subito</h2>
+<p>Il Punto 7F non crea ancora repository file-backed completi per:</p>
+<ul>
+<li>Shipments;</li>
+<li>Vehicles;</li>
+<li>Operational Roles;</li>
+<li>TripTemplates.</li>
+</ul>
+<p>La scelta è intenzionale.</p>
+<p>Questi contesti sono più complessi:</p>
+<ul>
+<li>Shipments contiene item, legs, metriche, riferimenti e state machine;</li>
+<li>Vehicles contiene specifiche tecniche, body profile, coupling, capability e combination;</li>
+<li>Operational Roles contiene profili, qualificazioni, scope e relazioni con User;</li>
+<li>TripTemplates non ha ancora use case applicativi attivi nel Punto 6.</li>
+</ul>
+<p>Forzarli ora significherebbe creare mapping troppo grandi prima di aver rafforzato i test infrastrutturali generali. Verranno trattati dopo aver consolidato il pattern e la strategia di testing del Punto 7G.</p>
+<hr />
+<h2>Test introdotti</h2>
+<p>È stato aggiunto:</p>
+<pre><code class="language-text">FileRepositoryExpansionTest
+</code></pre>
+<p>Il test verifica:</p>
+<ul>
+<li>implementazione dei port applicativi;</li>
+<li>implementazione di <code>InfrastructureRepositoryAdapter</code>;</li>
+<li>salvataggio e ricaricamento da nuova istanza repository;</li>
+<li>rifiuto dei duplicati business code;</li>
+<li>file mancanti trattati come repository vuoti;</li>
+<li>input nulli rifiutati prima del lavoro tecnico;</li>
+<li>round-trip dei mapper domain ↔ persistence record.</li>
+</ul>
+<p>Questi sono test tecnici infrastrutturali, non test di business.</p>
+<hr />
+<h2>Confini rispettati</h2>
+<p>Il Punto 7F non introduce:</p>
+<ul>
+<li>database;</li>
+<li>JPA;</li>
+<li>Hibernate;</li>
+<li>Spring Data;</li>
+<li>schema SQL;</li>
+<li>REST API;</li>
+<li>controller;</li>
+<li>DTO web;</li>
+<li>security;</li>
+<li>JWT;</li>
+<li>servizi esterni;</li>
+<li>file upload;</li>
+<li>storage binario documentale;</li>
+<li>workflow documentali;</li>
+<li>audit trail;</li>
+<li>dashboard;</li>
+<li>planning;</li>
+<li>tracking.</li>
+</ul>
+<p>Spring resta limitato al wiring già introdotto nel Punto 7C.</p>
+<hr />
+<h2>Stato finale del Punto 7F</h2>
+<p>Dopo questo step, il progetto ha repository reali file-backed per:</p>
+<ul>
+<li>Locations, introdotto nel Punto 7E;</li>
+<li>Cargo, introdotto nel Punto 7F;</li>
+<li>Documents, introdotto nel Punto 7F;</li>
+<li>Compliance, introdotto nel Punto 7F.</li>
+</ul>
+<p>I repository in-memory restano disponibili e non vengono sostituiti.</p>
+<p>Il Punto 7F completa la prima espansione controllata dei repository reali e prepara il progetto al Punto 7G.</p>
+<hr />
+<h2>Prossimo step</h2>
+<p>Il prossimo step consigliato è:</p>
+<pre><code class="language-text">Punto 7G — Infrastructure Testing
+</code></pre>
+<p>Il 7G dovrà rafforzare la copertura tecnica su:</p>
+<ul>
+<li>repository file-backed;</li>
+<li>mapper;</li>
+<li>supporto file condiviso;</li>
+<li>error handling infrastrutturale;</li>
+<li>confini architetturali;</li>
+<li>assenza di layer prematuri.</li>
+</ul>
+<hr />
+<h2>Allineamento Punto 7G</h2>
+<p>Il Punto 7G consolida questa espansione con test tecnici dedicati allo storage condiviso, all'uso dei repository file-backed tramite port applicativi e ai confini architetturali.</p>
+<h2>Allineamento Punto 7H</h2>
+<p>Il Punto 7H congela lo scope repository validato dal Punto 7F. I repository file-backed attivi restano Locations, Cargo, Documents e Compliance. Shipments, Vehicles, Operational Roles e TripTemplates restano fuori dallo scope dei repository reali completi per questa prima chiusura infrastrutturale.</p>
+
+    </article>
+  </main>
+</body>
+</html>

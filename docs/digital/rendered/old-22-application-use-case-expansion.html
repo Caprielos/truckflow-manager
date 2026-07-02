@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Archivio storico — 22-application-use-case-expansion — TruckFlow Docs</title>
+  <style>:root{--bg:#f5f7fb;--panel:#fff;--text:#172033;--muted:#64748b;--accent:#3554d1;--border:#d9e1ef;--code:#0f172a;--shadow:0 18px 44px rgba(15,23,42,.08)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:radial-gradient(circle at top left,rgba(53,84,209,.10),transparent 30rem),var(--bg);color:var(--text);line-height:1.68;font-size:16px}.page{width:min(980px,calc(100% - 2rem));margin:0 auto;padding:2rem 0 4rem}.topbar{display:flex;justify-content:space-between;gap:1rem;align-items:center;margin-bottom:1rem}.back{display:inline-flex;align-items:center;gap:.35rem;padding:.55rem .85rem;border:1px solid var(--border);border-radius:999px;background:#fff;color:var(--accent);font-weight:850;text-decoration:none;box-shadow:0 8px 22px rgba(15,23,42,.05)}.source{color:var(--muted);font-size:.88rem}.doc{padding:2rem;border:1px solid var(--border);border-radius:24px;background:rgba(255,255,255,.94);box-shadow:var(--shadow)}.doc-header{padding-bottom:1rem;margin-bottom:1.25rem;border-bottom:1px solid var(--border)}.kicker{display:inline-flex;width:fit-content;padding:.25rem .65rem;border-radius:999px;background:#dbeafe;color:#1e3a8a;font-size:.72rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase}.doc h1{margin:.7rem 0 .4rem;font-size:clamp(2rem,4vw,3.6rem);line-height:1;letter-spacing:-.05em}.doc h2{margin:2rem 0 .6rem;font-size:1.55rem;line-height:1.15;letter-spacing:-.03em}.doc h3{margin:1.35rem 0 .45rem;font-size:1.18rem}.doc p{margin:.65rem 0;color:#334155}.doc ul,.doc ol{padding-left:1.35rem}.doc li{margin:.35rem 0}.doc a{color:var(--accent);font-weight:800}.doc blockquote{margin:1rem 0;padding:.85rem 1rem;border-left:5px solid var(--accent);border-radius:14px;background:#eef2ff;color:#334155}.doc pre{overflow:auto;padding:1rem;border-radius:16px;background:var(--code);color:#e5e7eb;font-size:.9rem;line-height:1.55}.doc code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}.doc :not(pre)>code{padding:.15rem .32rem;border-radius:7px;background:#eef2f7;color:#1e293b}.doc table{width:100%;border-collapse:collapse;margin:1rem 0;border:1px solid var(--border);border-radius:16px;overflow:hidden;display:block}.doc thead,.doc tbody,.doc tr{width:100%}.doc th,.doc td{padding:.75rem;border-bottom:1px solid var(--border);text-align:left;vertical-align:top}.doc th{background:#f1f5f9;color:#334155;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}.doc tr:last-child td{border-bottom:0}.doc hr{border:0;border-top:1px solid var(--border);margin:2rem 0}.doc img{max-width:100%;border-radius:16px;border:1px solid var(--border)}@media(max-width:720px){.page{width:min(100% - 1rem,980px);padding-top:1rem}.doc{padding:1.15rem;border-radius:18px}.topbar{display:grid}.source{overflow-wrap:anywhere}}</style>
+</head>
+<body>
+  <main class="page">
+    <div class="topbar">
+      <a class="back" href="../index.html">← Torna alla Home</a>
+      <span class="source">Sorgente Markdown: ../old_style/22-application-use-case-expansion.md</span>
+    </div>
+    <article class="doc">
+      <header class="doc-header">
+        <span class="kicker">old_style</span>
+        <h1>Archivio storico — 22-application-use-case-expansion</h1>
+      </header>
+      <h1>Archivio storico — 22-application-use-case-expansion</h1>
+<blockquote>
+<p>Questo documento fa parte dell'archivio storico <code>docs/old_style/</code>.
+Mantiene il percorso step-by-step del progetto, ma la documentazione principale aggiornata si trova in:
+<code>docs/simple/</code>, <code>docs/professional/</code> e <code>docs/digital/</code>.</p>
+</blockquote>
+<hr />
+<h1>Punto 6G — Application Use Cases Expansion</h1>
+<p>Il Punto 6G espande l'application layer dopo l'hardening del primo nucleo Locations + Cargo + Shipments.</p>
+<p>La scelta fatta in questa fase è intenzionalmente controllata: aggiungere i primi use case applicativi del dominio <code>documents</code>, senza introdurre ancora REST API, database, JPA, Spring controller, security, workflow documentali, upload file, storage fisico o compliance operativa.</p>
+<p>Il dominio <code>documents</code> era già stato modellato come dominio puro. Il Punto 6G lo rende ora utilizzabile dal livello applicativo tramite command, result, port in, port out, application service, repository in memory e test.</p>
+<h2>Obiettivo dello step</h2>
+<p>L'obiettivo non è creare un sistema documentale completo.</p>
+<p>L'obiettivo è introdurre il primo blocco applicativo per gestire documenti logici aziendali, mantenendo chiari i confini:</p>
+<ul>
+<li>il dominio <code>documents</code> continua a rappresentare il concetto puro di documento;</li>
+<li>l'application layer orchestra i casi d'uso;</li>
+<li>la repository port resta un contratto astratto;</li>
+<li>l'infrastructure memory resta un adapter temporaneo per sviluppo e test;</li>
+<li>non viene introdotta nessuna persistenza definitiva;</li>
+<li>non viene introdotto nessun controller web;</li>
+<li>non viene introdotto nessun workflow documentale avanzato.</li>
+</ul>
+<h2>Package aggiunti</h2>
+<p>Sono stati aggiunti nuovi package applicativi dedicati ai documents:</p>
+<pre><code class="language-text">src/main/java/it/gabriele/truckflow/application/command/documents
+src/main/java/it/gabriele/truckflow/application/result/documents
+src/main/java/it/gabriele/truckflow/application/port/in/documents
+src/main/java/it/gabriele/truckflow/application/port/out/documents
+src/main/java/it/gabriele/truckflow/application/usecase/documents
+src/main/java/it/gabriele/truckflow/infrastructure/memory/documents
+</code></pre>
+<p>Questi package seguono la stessa struttura già usata per Locations, Cargo e Shipments.</p>
+<h2>Command aggiunti</h2>
+<p>Sono stati aggiunti quattro command applicativi:</p>
+<ul>
+<li><code>RegisterDocumentCommand</code>;</li>
+<li><code>FindDocumentCommand</code>;</li>
+<li><code>ActivateDocumentCommand</code>;</li>
+<li><code>ArchiveDocumentCommand</code>.</li>
+</ul>
+<p>I command rappresentano input applicativi, non DTO REST.</p>
+<p>Per questo motivo:</p>
+<ul>
+<li>non contengono annotazioni web;</li>
+<li>non contengono annotazioni Spring;</li>
+<li>non dipendono da JSON, HTTP o controller;</li>
+<li>validano solo input applicativi obbligatori;</li>
+<li>delegano le regole profonde al dominio.</li>
+</ul>
+<p><code>RegisterDocumentCommand</code> richiede:</p>
+<ul>
+<li><code>DocumentCode</code>;</li>
+<li><code>DocumentType</code>;</li>
+<li><code>DocumentCategory</code>;</li>
+<li><code>DocumentStatus</code>;</li>
+<li><code>DocumentMetadata</code>.</li>
+</ul>
+<p>Accetta inoltre:</p>
+<ul>
+<li><code>DocumentContent</code>;</li>
+<li><code>Set&lt;DocumentReference&gt;</code>;</li>
+<li><code>notes</code>.</li>
+</ul>
+<p>Le references nulle vengono normalizzate a set vuoto. Le references presenti non possono contenere elementi nulli.</p>
+<h2>Result aggiunto</h2>
+<p>È stato aggiunto:</p>
+<pre><code class="language-text">DocumentResult
+</code></pre>
+<p>Il result espone una vista applicativa essenziale del documento:</p>
+<ul>
+<li>id;</li>
+<li>code;</li>
+<li>type;</li>
+<li>category;</li>
+<li>status;</li>
+<li>title;</li>
+<li>presenza di contenuto logico;</li>
+<li>numero di riferimenti.</li>
+</ul>
+<p><code>DocumentResult</code> non espone dettagli tecnici di file fisici, path, bucket, upload, download o storage, perché questi concetti non appartengono ancora a questa fase.</p>
+<h2>Repository port aggiunta</h2>
+<p>È stata aggiunta la porta outbound:</p>
+<pre><code class="language-text">DocumentRepository
+</code></pre>
+<p>La porta consente:</p>
+<ul>
+<li><code>save(Document document)</code>;</li>
+<li><code>findById(DocumentId id)</code>;</li>
+<li><code>findByCode(DocumentCode code)</code>;</li>
+<li><code>existsById(DocumentId id)</code>;</li>
+<li><code>existsByCode(DocumentCode code)</code>.</li>
+</ul>
+<p>Questa porta è un contratto dell'application layer. Non è un repository JPA e non conosce database, query SQL, Spring Data o transazioni.</p>
+<h2>Use case port aggiunte</h2>
+<p>Sono state aggiunte quattro port in:</p>
+<ul>
+<li><code>RegisterDocumentUseCase</code>;</li>
+<li><code>FindDocumentUseCase</code>;</li>
+<li><code>ActivateDocumentUseCase</code>;</li>
+<li><code>ArchiveDocumentUseCase</code>.</li>
+</ul>
+<p>Queste interfacce rappresentano le azioni applicative disponibili verso il dominio documents.</p>
+<h2>Application service aggiunti</h2>
+<p>Sono stati aggiunti quattro service applicativi:</p>
+<ul>
+<li><code>RegisterDocumentService</code>;</li>
+<li><code>FindDocumentService</code>;</li>
+<li><code>ActivateDocumentService</code>;</li>
+<li><code>ArchiveDocumentService</code>.</li>
+</ul>
+<p>Ogni service:</p>
+<ul>
+<li>riceve un command;</li>
+<li>valida la presenza del command;</li>
+<li>usa la repository port;</li>
+<li>distingue errori applicativi da errori di dominio;</li>
+<li>restituisce un result applicativo;</li>
+<li>non importa infrastructure concreta;</li>
+<li>non importa Spring, REST, JPA o web.</li>
+</ul>
+<h2>Mutazioni documentali copy-on-write</h2>
+<p>È stato aggiunto:</p>
+<pre><code class="language-text">DocumentMutationSupport
+</code></pre>
+<p>Come per le shipment nel Punto 6F, anche le mutazioni documentali lavorano su una copia dell'aggregate prima del salvataggio.</p>
+<p>In questa fase le mutazioni documentali sono semplici:</p>
+<ul>
+<li>activate;</li>
+<li>archive.</li>
+</ul>
+<p>L'approccio copy-on-write viene comunque introdotto subito per mantenere coerenza con l'hardening applicativo già fatto e per preparare in modo ordinato future mutazioni più delicate, come cambio metadati, sostituzione contenuto logico o modifica dei riferimenti.</p>
+<h2>Repository in memory aggiunta</h2>
+<p>È stata aggiunta:</p>
+<pre><code class="language-text">InMemoryDocumentRepository
+</code></pre>
+<p>Questa repository:</p>
+<ul>
+<li>implementa <code>DocumentRepository</code>;</li>
+<li>salva documenti in mappe in memoria;</li>
+<li>indicizza per <code>DocumentId</code>;</li>
+<li>indicizza per <code>DocumentCode</code>;</li>
+<li>rifiuta input nulli con <code>UseCaseValidationException</code>;</li>
+<li>rifiuta codici duplicati con <code>DuplicateResourceException</code>.</li>
+</ul>
+<p>Questa implementazione è solo un adapter tecnico temporaneo.</p>
+<p>Non sostituisce:</p>
+<ul>
+<li>database;</li>
+<li>JPA;</li>
+<li>file storage;</li>
+<li>document storage enterprise;</li>
+<li>repository definitivo;</li>
+<li>audit trail;</li>
+<li>versioning documentale reale.</li>
+</ul>
+<h2>Test aggiunti e aggiornati</h2>
+<p>È stato aggiunto:</p>
+<pre><code class="language-text">ApplicationUseCaseExpansionTest
+</code></pre>
+<p>Il test verifica:</p>
+<ul>
+<li>registrazione documento;</li>
+<li>ricerca documento;</li>
+<li>attivazione documento;</li>
+<li>archiviazione documento;</li>
+<li>persistenza dello stato dopo activate/archive;</li>
+<li>duplicati di codice;</li>
+<li>risorse documentali mancanti;</li>
+<li>command nulli;</li>
+<li>repository dependency nulle;</li>
+<li>input applicativi obbligatori;</li>
+<li>normalizzazione references nulle a set vuoto.</li>
+</ul>
+<p>Sono stati aggiornati anche:</p>
+<ul>
+<li><code>ApplicationRepositoryPortTest</code>;</li>
+<li><code>InMemoryRepositoryTest</code>.</li>
+</ul>
+<p>Questi test ora includono anche <code>DocumentRepository</code> e <code>InMemoryDocumentRepository</code>.</p>
+<h2>Confini mantenuti</h2>
+<p>Il Punto 6G non introduce:</p>
+<ul>
+<li>REST API;</li>
+<li>controller Spring;</li>
+<li>DTO web;</li>
+<li>database;</li>
+<li>JPA;</li>
+<li>Hibernate;</li>
+<li>Spring Data;</li>
+<li>security;</li>
+<li>JWT;</li>
+<li>upload file;</li>
+<li>download file;</li>
+<li>file system storage;</li>
+<li>document versioning operativo;</li>
+<li>workflow approvativi;</li>
+<li>audit trail;</li>
+<li>scadenze documentali;</li>
+<li>compliance check concreti;</li>
+<li>dashboard;</li>
+<li>tracking;</li>
+<li>planning.</li>
+</ul>
+<p>Il documento resta un aggregate puro e logico. L'application layer ora può registrarlo, recuperarlo, attivarlo e archiviarlo.</p>
+<h2>Perché Documents prima di altri domini</h2>
+<p>Documents è stato scelto come primo dominio di espansione del Punto 6G perché:</p>
+<ul>
+<li>il dominio era già puro e indipendente;</li>
+<li>non richiede assegnazioni operative;</li>
+<li>non richiede disponibilità mezzi/autisti;</li>
+<li>non richiede scheduling;</li>
+<li>non richiede tracking;</li>
+<li>non richiede storage fisico;</li>
+<li>permette di estendere l'application layer senza rompere i confini architetturali.</li>
+</ul>
+<p>Vehicles, Compliance, Operational Roles e altri moduli potranno essere aggiunti in step successivi, ma sono più delicati perché rischiano di introdurre presto pianificazione, regole paese, abilitazioni operative o workflow enterprise.</p>
+<h2>Stato finale dopo il Punto 6G</h2>
+<p>Dopo questo step l'application layer copre:</p>
+<ul>
+<li>Locations;</li>
+<li>Cargo;</li>
+<li>Shipments;</li>
+<li>Documents.</li>
+</ul>
+<p>Le repository in memory disponibili sono:</p>
+<ul>
+<li><code>InMemoryLocationRepository</code>;</li>
+<li><code>InMemoryCargoUnitRepository</code>;</li>
+<li><code>InMemoryShipmentRepository</code>;</li>
+<li><code>InMemoryDocumentRepository</code>.</li>
+</ul>
+<p>I use case applicativi documentali disponibili sono:</p>
+<ul>
+<li>registrare documento;</li>
+<li>trovare documento;</li>
+<li>attivare documento;</li>
+<li>archiviare documento.</li>
+</ul>
+<h2>Prossimo step consigliato</h2>
+<p>Il prossimo passo consigliato diventa:</p>
+<p><strong>Punto 6H — Application Use Cases Expansion Review &amp; Documentation Alignment</strong>.</p>
+<p>Prima di introdurre nuovi domini applicativi, conviene rivedere la crescita del livello application dopo Documents, verificando:</p>
+<ul>
+<li>coerenza tra use case di domini diversi;</li>
+<li>naming di command/result/port/service;</li>
+<li>error handling;</li>
+<li>test negativi;</li>
+<li>duplicati;</li>
+<li>comportamento delle repository in memory;</li>
+<li>documentazione Markdown e HTML;</li>
+<li>confini con dominio e infrastructure.</li>
+</ul>
+<p>Solo dopo questo review step sarà opportuno scegliere la prossima espansione tra Vehicles, Compliance, Operational Roles o ulteriori azioni su Shipments/Documents.</p>
+<h2>Aggiornamento dopo il Punto 6H</h2>
+<p>Il Punto 6H ha completato la review del blocco Documents introdotto in questo step.</p>
+<p>La review ha rafforzato:</p>
+<ul>
+<li>result applicativi null-safe;</li>
+<li>contratti <code>UseCase</code> verificati da test;</li>
+<li>service concreti verificati contro le proprie port in;</li>
+<li>repository in memory con validazione uniforme;</li>
+<li>test copy-on-write su activate/archive documentali;</li>
+<li>documentazione Markdown e HTML.</li>
+</ul>
+<p>Storicamente, dopo la review 6H, il progetto ha scelto il Punto 6I come espansione controllata verso Vehicles. Oggi anche 6I, 6J, 6K, 6L e 6M sono completati.</p>
+<h2>Aggiornamento successivo — Punto 6I Vehicles</h2>
+<p>Dopo la prima espansione verso Documents del Punto 6G e la review del Punto 6H, il Punto 6I ha eseguito una seconda espansione controllata verso Vehicles.</p>
+<p>Questa nuova fase non modifica il significato del Punto 6G: Documents rimane il primo dominio applicativo espanso dopo Locations, Cargo e Shipments. Vehicles viene aggiunto come step successivo separato, con documentazione dedicata in <code>24-application-use-cases-expansion-vehicles.md</code>.</p>
+<h2>Aggiornamento successivo — Punto 6J Operational Roles</h2>
+<p>Dopo Documents, review 6H e Vehicles 6I, il Punto 6J ha aggiunto i primi use case applicativi Operational Roles. Il principio rimane lo stesso: command, result, port, service e repository astratte, senza REST API, database o workflow enterprise.</p>
+<h2>Aggiornamento dopo il Punto 6K</h2>
+<p>Il Punto 6K non modifica i use case Documents introdotti nel Punto 6G. Conferma però la regola generale delle espansioni applicative: ogni nuovo dominio applicativo deve essere seguito da review, test negativi e allineamento documentale prima di procedere oltre.</p>
+<h2>Aggiornamento successivo — Punto 6L Compliance base</h2>
+<p>Dopo Documents, Vehicles e Operational Roles, il Punto 6L aggiunge una nuova espansione controllata verso Compliance base.</p>
+<p>Il principio rimane lo stesso: vengono aggiunti use case applicativi per un aggregate già puro (<code>ComplianceRequirement</code>) senza introdurre controlli reali di violazione, motori regole, audit trail, workflow, REST API o database.</p>
+<h2>Allineamento Punto 6M</h2>
+<p>Il Punto 6M chiude il primo ciclo dell'application layer con una review/freeze finale. Da questo momento i contenuti documentati nei punti 6A-6L sono considerati fondazione applicativa stabile: eventuali evoluzioni future dovranno essere introdotte in nuovi punti roadmap, mantenendo ancora fuori REST API, controller, database, JPA, Spring Data, security, tracking, planning, dashboard, workflow e integrazioni esterne.</p>
+
+    </article>
+  </main>
+</body>
+</html>

@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Archivio storico — 19-application-in-memory-repositories — TruckFlow Docs</title>
+  <style>:root{--bg:#f5f7fb;--panel:#fff;--text:#172033;--muted:#64748b;--accent:#3554d1;--border:#d9e1ef;--code:#0f172a;--shadow:0 18px 44px rgba(15,23,42,.08)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:radial-gradient(circle at top left,rgba(53,84,209,.10),transparent 30rem),var(--bg);color:var(--text);line-height:1.68;font-size:16px}.page{width:min(980px,calc(100% - 2rem));margin:0 auto;padding:2rem 0 4rem}.topbar{display:flex;justify-content:space-between;gap:1rem;align-items:center;margin-bottom:1rem}.back{display:inline-flex;align-items:center;gap:.35rem;padding:.55rem .85rem;border:1px solid var(--border);border-radius:999px;background:#fff;color:var(--accent);font-weight:850;text-decoration:none;box-shadow:0 8px 22px rgba(15,23,42,.05)}.source{color:var(--muted);font-size:.88rem}.doc{padding:2rem;border:1px solid var(--border);border-radius:24px;background:rgba(255,255,255,.94);box-shadow:var(--shadow)}.doc-header{padding-bottom:1rem;margin-bottom:1.25rem;border-bottom:1px solid var(--border)}.kicker{display:inline-flex;width:fit-content;padding:.25rem .65rem;border-radius:999px;background:#dbeafe;color:#1e3a8a;font-size:.72rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase}.doc h1{margin:.7rem 0 .4rem;font-size:clamp(2rem,4vw,3.6rem);line-height:1;letter-spacing:-.05em}.doc h2{margin:2rem 0 .6rem;font-size:1.55rem;line-height:1.15;letter-spacing:-.03em}.doc h3{margin:1.35rem 0 .45rem;font-size:1.18rem}.doc p{margin:.65rem 0;color:#334155}.doc ul,.doc ol{padding-left:1.35rem}.doc li{margin:.35rem 0}.doc a{color:var(--accent);font-weight:800}.doc blockquote{margin:1rem 0;padding:.85rem 1rem;border-left:5px solid var(--accent);border-radius:14px;background:#eef2ff;color:#334155}.doc pre{overflow:auto;padding:1rem;border-radius:16px;background:var(--code);color:#e5e7eb;font-size:.9rem;line-height:1.55}.doc code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}.doc :not(pre)>code{padding:.15rem .32rem;border-radius:7px;background:#eef2f7;color:#1e293b}.doc table{width:100%;border-collapse:collapse;margin:1rem 0;border:1px solid var(--border);border-radius:16px;overflow:hidden;display:block}.doc thead,.doc tbody,.doc tr{width:100%}.doc th,.doc td{padding:.75rem;border-bottom:1px solid var(--border);text-align:left;vertical-align:top}.doc th{background:#f1f5f9;color:#334155;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}.doc tr:last-child td{border-bottom:0}.doc hr{border:0;border-top:1px solid var(--border);margin:2rem 0}.doc img{max-width:100%;border-radius:16px;border:1px solid var(--border)}@media(max-width:720px){.page{width:min(100% - 1rem,980px);padding-top:1rem}.doc{padding:1.15rem;border-radius:18px}.topbar{display:grid}.source{overflow-wrap:anywhere}}</style>
+</head>
+<body>
+  <main class="page">
+    <div class="topbar">
+      <a class="back" href="../index.html">← Torna alla Home</a>
+      <span class="source">Sorgente Markdown: ../old_style/19-application-in-memory-repositories.md</span>
+    </div>
+    <article class="doc">
+      <header class="doc-header">
+        <span class="kicker">old_style</span>
+        <h1>Archivio storico — 19-application-in-memory-repositories</h1>
+      </header>
+      <h1>Archivio storico — 19-application-in-memory-repositories</h1>
+<blockquote>
+<p>Questo documento fa parte dell'archivio storico <code>docs/old_style/</code>.
+Mantiene il percorso step-by-step del progetto, ma la documentazione principale aggiornata si trova in:
+<code>docs/simple/</code>, <code>docs/professional/</code> e <code>docs/digital/</code>.</p>
+</blockquote>
+<hr />
+<h1>Punto 6D — In-Memory Repositories</h1>
+<p>Il <strong>Punto 6D</strong> introduce le prime implementazioni concrete, ma ancora leggere e temporanee, delle repository port create nel Punto 6C.</p>
+<p>Questa fase non introduce database, JPA, Spring, file system, API esterne o persistenza definitiva. L’obiettivo è avere repository utilizzabili da test e futuri use case applicativi, mantenendo separati dominio, application layer e infrastruttura.</p>
+<h2>Obiettivo dello step</h2>
+<p>Il Punto 6D serve a trasformare i contratti astratti dell’application layer in adapter concreti in memoria.</p>
+<p>Nel Punto 6C sono state introdotte le porte:</p>
+<ul>
+<li><code>LocationRepository</code>;</li>
+<li><code>CargoUnitRepository</code>;</li>
+<li><code>ShipmentRepository</code>.</li>
+</ul>
+<p>Con il Punto 6D vengono introdotte le prime implementazioni:</p>
+<ul>
+<li><code>InMemoryLocationRepository</code>;</li>
+<li><code>InMemoryCargoUnitRepository</code>;</li>
+<li><code>InMemoryShipmentRepository</code>.</li>
+</ul>
+<p>Queste classi permettono di salvare, cercare e verificare aggregate tramite ID e codice senza dipendere da un database reale.</p>
+<h2>Perché servono repository in memory</h2>
+<p>Le repository in memory sono utili perché permettono di:</p>
+<ul>
+<li>testare i primi use case senza introdurre subito un database;</li>
+<li>verificare che le repository port siano realmente implementabili;</li>
+<li>preparare scenari applicativi completi per Locations, Cargo e Shipments;</li>
+<li>mantenere il dominio completamente indipendente dall’infrastruttura;</li>
+<li>evitare di introdurre JPA, Spring Data o SQL prima che l’application layer sia stabile.</li>
+</ul>
+<p>Questa scelta è coerente con l’architettura del progetto: prima si costruiscono dominio e application layer, poi si introducono adapter tecnici più avanzati.</p>
+<h2>Package introdotti</h2>
+<p>La nuova infrastruttura leggera è organizzata in:</p>
+<ul>
+<li><code>infrastructure</code>;</li>
+<li><code>infrastructure.memory</code>;</li>
+<li><code>infrastructure.memory.locations</code>;</li>
+<li><code>infrastructure.memory.cargo</code>;</li>
+<li><code>infrastructure.memory.shipments</code>.</li>
+</ul>
+<p>Il package <code>infrastructure.memory</code> è un adapter tecnico. Implementa porte dell’application layer, ma non modifica e non sporca il domain layer.</p>
+<h2>Repository implementate</h2>
+<h3>InMemoryLocationRepository</h3>
+<p>Implementa <code>LocationRepository</code> e gestisce aggregate <code>Location</code>.</p>
+<p>Responsabilità principali:</p>
+<ul>
+<li>salvare una location;</li>
+<li>cercare una location tramite <code>LocationId</code>;</li>
+<li>cercare una location tramite <code>LocationCode</code>;</li>
+<li>verificare esistenza per ID;</li>
+<li>verificare esistenza per codice;</li>
+<li>impedire codici duplicati su location diverse.</li>
+</ul>
+<h3>InMemoryCargoUnitRepository</h3>
+<p>Implementa <code>CargoUnitRepository</code> e gestisce aggregate <code>CargoUnit</code>.</p>
+<p>Responsabilità principali:</p>
+<ul>
+<li>salvare una cargo unit;</li>
+<li>cercare una cargo unit tramite <code>CargoId</code>;</li>
+<li>cercare una cargo unit tramite <code>CargoCode</code>;</li>
+<li>verificare esistenza per ID;</li>
+<li>verificare esistenza per codice;</li>
+<li>impedire codici duplicati su cargo unit diverse.</li>
+</ul>
+<h3>InMemoryShipmentRepository</h3>
+<p>Implementa <code>ShipmentRepository</code> e gestisce aggregate <code>Shipment</code>.</p>
+<p>Responsabilità principali:</p>
+<ul>
+<li>salvare una shipment;</li>
+<li>cercare una shipment tramite <code>ShipmentId</code>;</li>
+<li>cercare una shipment tramite <code>ShipmentCode</code>;</li>
+<li>verificare esistenza per ID;</li>
+<li>verificare esistenza per codice;</li>
+<li>impedire codici duplicati su shipment diverse.</li>
+</ul>
+<h2>Regole applicative protette</h2>
+<p>Le repository in memory non duplicano le regole di dominio.</p>
+<p>Non decidono, per esempio:</p>
+<ul>
+<li>quando una shipment può essere confermata;</li>
+<li>se un cargo ADR è coerente;</li>
+<li>se una temperatura è valida;</li>
+<li>se una location è anagraficamente corretta.</li>
+</ul>
+<p>Queste regole restano nel dominio.</p>
+<p>Le repository in memory proteggono invece regole applicative e tecniche minime:</p>
+<ul>
+<li>non accettare aggregate nulli;</li>
+<li>non cercare tramite ID nullo;</li>
+<li>non cercare tramite codice nullo;</li>
+<li>non salvare due aggregate diversi con lo stesso codice;</li>
+<li>mantenere un indice per ID e uno per codice.</li>
+</ul>
+<h2>Eccezioni usate</h2>
+<p>Per input applicativi nulli viene usata:</p>
+<ul>
+<li><code>UseCaseValidationException</code>.</li>
+</ul>
+<p>Per duplicati di codice viene usata:</p>
+<ul>
+<li><code>DuplicateResourceException</code>.</li>
+</ul>
+<p>Queste sono eccezioni applicative, non eccezioni di dominio.</p>
+<p>La differenza è importante:</p>
+<ul>
+<li>il dominio segnala violazioni di regole business interne agli aggregate;</li>
+<li>l’application/infrastructure segnala errori di orchestrazione, input, lookup o persistenza temporanea.</li>
+</ul>
+<h2>Cosa è stato testato</h2>
+<p>Sono stati aggiunti test dedicati per verificare che le repository in memory:</p>
+<ul>
+<li>implementino le repository port dell’application layer;</li>
+<li>salvino aggregate validi;</li>
+<li>recuperino aggregate per ID;</li>
+<li>recuperino aggregate per codice;</li>
+<li>riconoscano l’esistenza per ID e codice;</li>
+<li>restituiscano <code>Optional.empty()</code> quando una risorsa non esiste;</li>
+<li>rifiutino input nulli con <code>UseCaseValidationException</code>;</li>
+<li>rifiutino codici duplicati con <code>DuplicateResourceException</code>;</li>
+<li>restino prive di dipendenze da Spring, JPA, Lombok e web adapter.</li>
+</ul>
+<h2>Cosa non è stato fatto</h2>
+<p>Il Punto 6D non introduce ancora:</p>
+<ul>
+<li>database reale;</li>
+<li>JPA;</li>
+<li>Spring Data;</li>
+<li>transazioni;</li>
+<li>query avanzate;</li>
+<li>paginazione;</li>
+<li>ordinamenti;</li>
+<li>filtri complessi;</li>
+<li>locking concorrente;</li>
+<li>caching enterprise;</li>
+<li>audit trail;</li>
+<li>repository per tutti i domini;</li>
+<li>use case applicativi specifici;</li>
+<li>controller REST.</li>
+</ul>
+<p>Queste funzionalità non appartengono a questa fase.</p>
+<h2>Perché non introdurre subito un database</h2>
+<p>Introdurre subito un database renderebbe il progetto più complesso prima di avere use case stabili.</p>
+<p>Per ora è più corretto avere repository in memory perché:</p>
+<ul>
+<li>i test sono più semplici e veloci;</li>
+<li>l’application layer può evolvere senza vincoli di mapping JPA;</li>
+<li>gli aggregate restano liberi da annotazioni tecniche;</li>
+<li>si possono cambiare i contratti prima di stabilizzare la persistenza definitiva;</li>
+<li>si riduce il rischio di progettare il database prima del comportamento applicativo.</li>
+</ul>
+<h2>Relazione con il Punto 6E</h2>
+<p>Il Punto 6D prepara direttamente il prossimo step:</p>
+<p><strong>Punto 6E — First Use Cases</strong>.</p>
+<p>Ora che esistono repository port e repository in memory, i primi use case potranno:</p>
+<ul>
+<li>ricevere command applicativi;</li>
+<li>creare o caricare aggregate;</li>
+<li>usare il dominio;</li>
+<li>salvare tramite repository port;</li>
+<li>essere testati usando repository in memory.</li>
+</ul>
+<p>Il primo flusso applicativo consigliato rimane:</p>
+<ol>
+<li>registrare una location di partenza;</li>
+<li>registrare una location di destinazione;</li>
+<li>registrare un cargo;</li>
+<li>creare una shipment;</li>
+<li>aggiungere item e leg;</li>
+<li>confermare la shipment.</li>
+</ol>
+<h2>Stato dopo il Punto 6D</h2>
+<p>Dopo questo step, il progetto contiene:</p>
+<ul>
+<li>domain layer puro e testato;</li>
+<li>application foundation;</li>
+<li>repository port applicative;</li>
+<li>repository in memory concrete per Locations, Cargo e Shipments;</li>
+<li>test infrastrutturali leggeri;</li>
+<li>documentazione aggiornata.</li>
+</ul>
+<p>Il progetto è quindi pronto per iniziare i primi use case applicativi senza introdurre ancora web, database o framework.</p>
+<h2>Aggiornamento dopo il Punto 6E</h2>
+<p>Le repository in memory introdotte nel Punto 6D sono ora usate nel primo scenario applicativo completo.</p>
+<p>Il test applicativo del Punto 6E usa <code>InMemoryLocationRepository</code>, <code>InMemoryCargoUnitRepository</code> e <code>InMemoryShipmentRepository</code> per simulare un flusso reale senza database:</p>
+<ol>
+<li>registrazione delle location;</li>
+<li>registrazione del cargo;</li>
+<li>creazione della shipment;</li>
+<li>salvataggio delle mutazioni successive;</li>
+<li>recupero della shipment finale.</li>
+</ol>
+<p>Questo conferma che gli adapter in memory sono sufficienti per testare l'orchestrazione applicativa prima di introdurre persistenza enterprise.</p>
+<h2>Collegamento con il Punto 6F</h2>
+<p>Le repository in memory introdotte nel Punto 6D vengono usate nel Punto 6F per testare scenari applicativi più severi.</p>
+<p>I test verificano che una shipment cancellata venga salvata correttamente, che un cargo duplicato venga rifiutato, che le risorse mancanti producano errori applicativi e che una mutazione fallita non lasci stato parziale nell'aggregate salvato.</p>
+<h2>Aggiornamento dopo il Punto 6G — InMemoryDocumentRepository</h2>
+<p>Il Punto 6G estende l'infrastructure memory aggiungendo:</p>
+<pre><code class="language-text">infrastructure.memory.documents.InMemoryDocumentRepository
+</code></pre>
+<p>Questa classe implementa <code>DocumentRepository</code> e gestisce aggregate <code>Document</code> in memoria.</p>
+<p>Responsabilità principali:</p>
+<ul>
+<li>salvare un documento;</li>
+<li>cercare un documento tramite <code>DocumentId</code>;</li>
+<li>cercare un documento tramite <code>DocumentCode</code>;</li>
+<li>verificare esistenza per ID;</li>
+<li>verificare esistenza per codice;</li>
+<li>impedire codici duplicati su documenti diversi;</li>
+<li>rifiutare input nulli con <code>UseCaseValidationException</code>.</li>
+</ul>
+<p>La repository resta un adapter temporaneo e leggero. Non introduce database, JPA, Spring Data, storage fisico, upload, download, versioning documentale reale o workflow approvativi.</p>
+<p><code>InMemoryRepositoryTest</code> è stato aggiornato per verificare anche il comportamento di <code>InMemoryDocumentRepository</code>.</p>
+<h2>Aggiornamento dopo il Punto 6H</h2>
+<p>Il Punto 6H rafforza i test sulle repository in memory.</p>
+<p>Ora <code>InMemoryRepositoryTest</code> verifica input nulli non solo per <code>save</code>, <code>findById</code> e <code>findByCode</code>, ma anche per:</p>
+<ul>
+<li><code>existsById(null)</code>;</li>
+<li><code>existsByCode(null)</code>.</li>
+</ul>
+<p>Questo rende uniforme il comportamento pubblico di tutte le repository in memory attuali: Location, Cargo, Shipment e Document.</p>
+<h2>Aggiornamento dopo il Punto 6I — Vehicles In-Memory Repositories</h2>
+<p>Dopo il Punto 6I, l'infrastructure memory include anche:</p>
+<ul>
+<li><code>InMemoryVehicleUnitRepository</code>;</li>
+<li><code>InMemoryVehicleCombinationRepository</code>.</li>
+</ul>
+<p><code>InMemoryVehicleUnitRepository</code> implementa <code>VehicleUnitRepository</code> e indicizza le unità veicolo per:</p>
+<ul>
+<li><code>VehicleUnitId</code>;</li>
+<li><code>FleetCode</code>;</li>
+<li><code>VehicleIdentificationNumber</code>;</li>
+<li><code>LicensePlate</code>, quando presente.</li>
+</ul>
+<p>Rifiuta input nulli con <code>UseCaseValidationException</code> e duplicati di fleet code, VIN o targa con <code>DuplicateResourceException</code>.</p>
+<p><code>InMemoryVehicleCombinationRepository</code> implementa <code>VehicleCombinationRepository</code> e indicizza le combinazioni per <code>VehicleCombinationId</code>.</p>
+<p>Questi adapter restano temporanei e servono solo per test e sviluppo locale. Non introducono database, JPA, Spring Data, transazioni o persistenza definitiva.</p>
+<h2>Aggiornamento Punto 6J — Operational in-memory repositories</h2>
+<p>Dopo il Punto 6J sono presenti anche <code>InMemoryDriverRepository</code>, <code>InMemoryMechanicRepository</code>, <code>InMemoryWarehouseOperatorRepository</code>, <code>InMemoryDispatcherRepository</code> e <code>InMemoryManagerRepository</code>. Sono adapter temporanei per test e sviluppo locale, non database reali.</p>
+<h2>Aggiornamento dopo il Punto 6K</h2>
+<p>Il Punto 6K rafforza gli adapter in memory Operational Roles verificando che le mutazioni fallite non salvino stati parziali. Questo è importante perché gli adapter in memory conservano riferimenti a oggetti mutabili e devono essere protetti dai service applicativi con l'approccio copy-on-write.</p>
+<p>Non sono stati introdotti database, JPA, transazioni o persistenza definitiva.</p>
+<h2>Aggiornamento dopo il Punto 6L — InMemoryComplianceRequirementRepository</h2>
+<p>Dopo il Punto 6L, l'infrastructure memory include anche:</p>
+<pre><code class="language-text">InMemoryComplianceRequirementRepository
+</code></pre>
+<p>Questo adapter implementa <code>ComplianceRequirementRepository</code>, indicizza i requisiti per ID e codice, rifiuta input nulli e impedisce codici duplicati.</p>
+<p>Rimane un adapter temporaneo per test e sviluppo locale. Non introduce database, JPA, Spring Data, transazioni, persistenza definitiva o controlli compliance concreti.</p>
+<h2>Allineamento Punto 6M</h2>
+<p>Il Punto 6M chiude il primo ciclo dell'application layer con una review/freeze finale. Da questo momento i contenuti documentati nei punti 6A-6L sono considerati fondazione applicativa stabile: eventuali evoluzioni future dovranno essere introdotte in nuovi punti roadmap, mantenendo ancora fuori REST API, controller, database, JPA, Spring Data, security, tracking, planning, dashboard, workflow e integrazioni esterne.</p>
+
+    </article>
+  </main>
+</body>
+</html>

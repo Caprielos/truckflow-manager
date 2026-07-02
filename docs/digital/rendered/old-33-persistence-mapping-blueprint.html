@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Archivio storico — 33-persistence-mapping-blueprint — TruckFlow Docs</title>
+  <style>:root{--bg:#f5f7fb;--panel:#fff;--text:#172033;--muted:#64748b;--accent:#3554d1;--border:#d9e1ef;--code:#0f172a;--shadow:0 18px 44px rgba(15,23,42,.08)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:radial-gradient(circle at top left,rgba(53,84,209,.10),transparent 30rem),var(--bg);color:var(--text);line-height:1.68;font-size:16px}.page{width:min(980px,calc(100% - 2rem));margin:0 auto;padding:2rem 0 4rem}.topbar{display:flex;justify-content:space-between;gap:1rem;align-items:center;margin-bottom:1rem}.back{display:inline-flex;align-items:center;gap:.35rem;padding:.55rem .85rem;border:1px solid var(--border);border-radius:999px;background:#fff;color:var(--accent);font-weight:850;text-decoration:none;box-shadow:0 8px 22px rgba(15,23,42,.05)}.source{color:var(--muted);font-size:.88rem}.doc{padding:2rem;border:1px solid var(--border);border-radius:24px;background:rgba(255,255,255,.94);box-shadow:var(--shadow)}.doc-header{padding-bottom:1rem;margin-bottom:1.25rem;border-bottom:1px solid var(--border)}.kicker{display:inline-flex;width:fit-content;padding:.25rem .65rem;border-radius:999px;background:#dbeafe;color:#1e3a8a;font-size:.72rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase}.doc h1{margin:.7rem 0 .4rem;font-size:clamp(2rem,4vw,3.6rem);line-height:1;letter-spacing:-.05em}.doc h2{margin:2rem 0 .6rem;font-size:1.55rem;line-height:1.15;letter-spacing:-.03em}.doc h3{margin:1.35rem 0 .45rem;font-size:1.18rem}.doc p{margin:.65rem 0;color:#334155}.doc ul,.doc ol{padding-left:1.35rem}.doc li{margin:.35rem 0}.doc a{color:var(--accent);font-weight:800}.doc blockquote{margin:1rem 0;padding:.85rem 1rem;border-left:5px solid var(--accent);border-radius:14px;background:#eef2ff;color:#334155}.doc pre{overflow:auto;padding:1rem;border-radius:16px;background:var(--code);color:#e5e7eb;font-size:.9rem;line-height:1.55}.doc code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}.doc :not(pre)>code{padding:.15rem .32rem;border-radius:7px;background:#eef2f7;color:#1e293b}.doc table{width:100%;border-collapse:collapse;margin:1rem 0;border:1px solid var(--border);border-radius:16px;overflow:hidden;display:block}.doc thead,.doc tbody,.doc tr{width:100%}.doc th,.doc td{padding:.75rem;border-bottom:1px solid var(--border);text-align:left;vertical-align:top}.doc th{background:#f1f5f9;color:#334155;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}.doc tr:last-child td{border-bottom:0}.doc hr{border:0;border-top:1px solid var(--border);margin:2rem 0}.doc img{max-width:100%;border-radius:16px;border:1px solid var(--border)}@media(max-width:720px){.page{width:min(100% - 1rem,980px);padding-top:1rem}.doc{padding:1.15rem;border-radius:18px}.topbar{display:grid}.source{overflow-wrap:anywhere}}</style>
+</head>
+<body>
+  <main class="page">
+    <div class="topbar">
+      <a class="back" href="../index.html">← Torna alla Home</a>
+      <span class="source">Sorgente Markdown: ../old_style/33-persistence-mapping-blueprint.md</span>
+    </div>
+    <article class="doc">
+      <header class="doc-header">
+        <span class="kicker">old_style</span>
+        <h1>Archivio storico — 33-persistence-mapping-blueprint</h1>
+      </header>
+      <h1>Archivio storico — 33-persistence-mapping-blueprint</h1>
+<blockquote>
+<p>Questo documento fa parte dell'archivio storico <code>docs/old_style/</code>.
+Mantiene il percorso step-by-step del progetto, ma la documentazione principale aggiornata si trova in:
+<code>docs/simple/</code>, <code>docs/professional/</code> e <code>docs/digital/</code>.</p>
+</blockquote>
+<hr />
+<h1>Punto 7D — Persistence Mapping Blueprint</h1>
+<p>Questo documento descrive il <strong>Punto 7D — Persistence Mapping Blueprint</strong> di TruckFlow Manager.</p>
+<p>Il Punto 7D definisce il modo in cui, nei prossimi step, gli aggregate e i value object del dominio potranno essere tradotti in modelli tecnici persistenti. La fase è volutamente prudente: introduce blueprint, convenzioni e test architetturali, ma non introduce ancora database, JPA, Spring Data, repository reali o schema fisico.</p>
+<h2>Stato da cui partiamo</h2>
+<p>Prima del Punto 7D il progetto contiene già:</p>
+<ul>
+<li>dominio puro completato, testato e documentato;</li>
+<li>application layer completato e congelato con il Punto 6M;</li>
+<li>repository port nell'application layer;</li>
+<li>repository in memory ancora validi per test, sviluppo locale e profilo <code>memory</code>;</li>
+<li>Punto 7A come blueprint generale dell'Infrastructure Layer;</li>
+<li>Punto 7B come foundation tecnica dell'infrastructure layer;</li>
+<li>Punto 7C come wiring Spring tecnico non web;</li>
+<li>nessun controller REST;</li>
+<li>nessun database reale;</li>
+<li>nessuna entity JPA;</li>
+<li>nessuna Spring Data repository;</li>
+<li>nessuna security HTTP.</li>
+</ul>
+<p>Il Punto 7D non cambia questi confini. Aggiunge solo il primo linguaggio ufficiale per parlare di mapping domain ↔ persistence.</p>
+<h2>Obiettivo del Punto 7D</h2>
+<p>L'obiettivo è rispondere a questa domanda:</p>
+<blockquote>
+<p>Come descriviamo il passaggio da domain model a persistence model senza introdurre subito una tecnologia di persistenza concreta?</p>
+</blockquote>
+<p>La risposta è:</p>
+<ul>
+<li>un catalogo di blueprint di mapping;</li>
+<li>una descrizione tecnica dei campi da persistire;</li>
+<li>una classificazione dei tipi di mapping;</li>
+<li>regole su identity, business code, state, value object, enum, collection e reference;</li>
+<li>test che proteggono il progetto da JPA/database introdotti troppo presto.</li>
+</ul>
+<h2>Struttura introdotta</h2>
+<p>Il Punto 7D rafforza il package già creato nel Punto 7B:</p>
+<pre><code class="language-text">src/main/java/it/gabriele/truckflow/infrastructure/mapping
+├── PersistenceMapper.java
+├── PersistenceMappingKind.java
+├── PersistenceFieldMapping.java
+├── PersistenceMappingBlueprint.java
+├── PersistenceMappingBlueprintCatalog.java
+└── package-info.java
+</code></pre>
+<p>Introduce anche il test:</p>
+<pre><code class="language-text">src/test/java/it/gabriele/truckflow/infrastructure/mapping/PersistenceMappingBlueprintTest.java
+</code></pre>
+<p>Questa struttura non è ancora una persistenza reale. È una mappa tecnica e documentale che guiderà il futuro Punto 7E.</p>
+<h2>Concetto di persistence mapping blueprint</h2>
+<p>Un <strong>persistence mapping blueprint</strong> descrive come un tipo di dominio dovrebbe essere rappresentato da un futuro modello tecnico persistente.</p>
+<p>Esempio concettuale:</p>
+<pre><code class="language-text">Location -&gt; LocationPersistenceModel
+Shipment -&gt; ShipmentPersistenceModel
+VehicleUnit -&gt; VehicleUnitPersistenceModel
+ComplianceRequirement -&gt; ComplianceRequirementPersistenceModel
+</code></pre>
+<p>La parola <code>PersistenceModel</code> indica un modello futuro, tecnico, neutro rispetto alla tecnologia. Non significa JPA entity, tabella SQL, documento Mongo o record fisico già implementato.</p>
+<h2>Cosa è stato introdotto nel codice</h2>
+<h3><code>PersistenceMappingKind</code></h3>
+<p>Classifica la natura del mapping:</p>
+<ul>
+<li><code>AGGREGATE</code>;</li>
+<li><code>VALUE_OBJECT</code>;</li>
+<li><code>ENUMERATION</code>;</li>
+<li><code>STATE</code>;</li>
+<li><code>COLLECTION</code>;</li>
+<li><code>REFERENCE</code>.</li>
+</ul>
+<p>Questa classificazione serve a rendere esplicito cosa stiamo traducendo:</p>
+<ul>
+<li>un value object può diventare una stringa o più colonne future;</li>
+<li>un enum può diventare un valore testuale stabile;</li>
+<li>uno stato deve essere persistito senza alterare la state machine;</li>
+<li>una collection può diventare un insieme di record figli futuri;</li>
+<li>una reference verso un altro aggregate deve rimanere basata su ID, non su aggregate completi.</li>
+</ul>
+<h3><code>PersistenceFieldMapping</code></h3>
+<p>Descrive un singolo campo del mapping:</p>
+<ul>
+<li>nome lato dominio;</li>
+<li>nome lato persistence model;</li>
+<li>tipo di mapping;</li>
+<li>obbligatorietà;</li>
+<li>note tecniche.</li>
+</ul>
+<p>È un record validato. Rifiuta nomi vuoti, tipo nullo e note vuote.</p>
+<h3><code>PersistenceMappingBlueprint</code></h3>
+<p>Descrive il blueprint completo di un tipo:</p>
+<ul>
+<li>context name;</li>
+<li>domain type;</li>
+<li>future persistence model name;</li>
+<li>elenco dei campi;</li>
+<li>note tecniche.</li>
+</ul>
+<p>Anche questo record è validato. Un blueprint senza campi non è ammesso.</p>
+<h3><code>PersistenceMappingBlueprintCatalog</code></h3>
+<p>È il catalogo ufficiale dei blueprint introdotti nel Punto 7D.</p>
+<p>Copre i contesti applicativi già attivi:</p>
+<ul>
+<li><code>locations</code>;</li>
+<li><code>cargo</code>;</li>
+<li><code>shipments</code>;</li>
+<li><code>documents</code>;</li>
+<li><code>vehicles.unit</code>;</li>
+<li><code>vehicles.combination</code>;</li>
+<li><code>operational.driver</code>;</li>
+<li><code>operational.mechanic</code>;</li>
+<li><code>operational.warehouse</code>;</li>
+<li><code>operational.dispatcher</code>;</li>
+<li><code>operational.manager</code>;</li>
+<li><code>compliance</code>.</li>
+</ul>
+<p>Il catalogo non salva nulla. Non legge nulla. Non implementa repository. Serve solo a rendere ufficiale la direzione del mapping.</p>
+<h2>Regola su ID, codice e stato</h2>
+<p>Per gli aggregate attualmente coperti dal layer applicativo, il blueprint richiede sempre:</p>
+<ul>
+<li>un identificatore stabile (<code>id</code>);</li>
+<li>un codice business stabile (<code>code</code> o <code>fleetCode</code>);</li>
+<li>uno stato di lifecycle (<code>status</code>).</li>
+</ul>
+<p>Questa regola è importante perché i repository futuri dovranno supportare le stesse operazioni già definite dalle repository port:</p>
+<ul>
+<li>salvataggio;</li>
+<li>ricerca per ID;</li>
+<li>ricerca per codice;</li>
+<li>verifica esistenza per ID;</li>
+<li>verifica esistenza per codice.</li>
+</ul>
+<h2>Mapping dei value object</h2>
+<p>I value object del dominio non devono essere eliminati o bypassati.</p>
+<p>Nel futuro mapping reale:</p>
+<ul>
+<li>lato persistence potranno essere rappresentati con primitive tecniche;</li>
+<li>lato domain dovranno essere ricostruiti tramite API pubbliche del dominio;</li>
+<li>le validazioni del dominio dovranno continuare a vivere nel dominio;</li>
+<li>l'infrastructure non deve inventare regole business parallele.</li>
+</ul>
+<p>Esempi:</p>
+<pre><code class="language-text">LocationId       -&gt; String tecnico futuro
+LocationCode     -&gt; String tecnico futuro
+ShipmentStatus   -&gt; String tecnico futuro
+VehicleUnitId    -&gt; String tecnico futuro
+CountryCode      -&gt; String tecnico futuro
+</code></pre>
+<p>La persistenza può semplificare la forma tecnica, ma non deve semplificare il significato del dominio.</p>
+<h2>Mapping degli enum e degli stati</h2>
+<p>Gli enum e gli stati devono essere persistiti come valori stabili.</p>
+<p>La regola consigliata è usare nomi testuali espliciti, non ordinali numerici fragili.</p>
+<p>Quindi concettualmente:</p>
+<pre><code class="language-text">ShipmentStatus.CONFIRMED -&gt; &quot;CONFIRMED&quot;
+VehicleStatus.ACTIVE     -&gt; &quot;ACTIVE&quot;
+DocumentStatus.ARCHIVED  -&gt; &quot;ARCHIVED&quot;
+</code></pre>
+<p>Questo rende più leggibili dati, migrazioni future, log tecnici e test.</p>
+<h2>Mapping delle collection</h2>
+<p>Alcuni aggregate contengono collection:</p>
+<ul>
+<li>item di shipment;</li>
+<li>leg di shipment;</li>
+<li>requisiti di cargo;</li>
+<li>scope operativi;</li>
+<li>riferimenti tecnici.</li>
+</ul>
+<p>Nel Punto 7D non decidiamo ancora se queste collection diventeranno:</p>
+<ul>
+<li>tabelle figlie;</li>
+<li>record embedded;</li>
+<li>strutture JSON interne;</li>
+<li>modelli tecnici separati.</li>
+</ul>
+<p>Decidiamo solo il principio:</p>
+<blockquote>
+<p>Le collection devono essere persistite come parte del modello tecnico dell'aggregate, senza spostare regole business nell'infrastructure layer.</p>
+</blockquote>
+<h2>Mapping delle reference</h2>
+<p>Quando un aggregate fa riferimento a un altro aggregate, l'infrastructure deve usare identificatori stabili.</p>
+<p>Non deve salvare aggregate completi dentro altri aggregate.</p>
+<p>Esempio concettuale:</p>
+<pre><code class="language-text">VehicleCombination -&gt; vehicle_unit_ids
+ShipmentLeg        -&gt; location_id/reference tecnica
+DocumentReference  -&gt; referenced_object_id + reference_type
+</code></pre>
+<p>Questa scelta mantiene il confine tra bounded context e impedisce accoppiamenti impropri.</p>
+<h2>Cosa NON è stato introdotto</h2>
+<p>Il Punto 7D non introduce:</p>
+<ul>
+<li>package <code>infrastructure.jpa</code>;</li>
+<li>package <code>infrastructure.database</code>;</li>
+<li>package <code>infrastructure.persistence</code>;</li>
+<li>entity JPA;</li>
+<li>annotazioni <code>@Entity</code>, <code>@Table</code>, <code>@Column</code>;</li>
+<li><code>JpaRepository</code>;</li>
+<li><code>CrudRepository</code>;</li>
+<li><code>JdbcTemplate</code>;</li>
+<li><code>EntityManager</code>;</li>
+<li>database reale;</li>
+<li>schema SQL;</li>
+<li>migration Flyway/Liquibase;</li>
+<li>repository reali;</li>
+<li>query reali;</li>
+<li>transazioni reali;</li>
+<li>controller REST;</li>
+<li>API pubbliche;</li>
+<li>security HTTP.</li>
+</ul>
+<p>Questo è fondamentale: il Punto 7D prepara il mapping, ma non implementa ancora la persistenza.</p>
+<h2>Test introdotto</h2>
+<p>Il test <code>PersistenceMappingBlueprintTest</code> verifica che:</p>
+<ul>
+<li>il catalogo copra tutti i contesti applicativi attivi;</li>
+<li>ogni blueprint abbia campi non vuoti;</li>
+<li>ogni blueprint abbia ID, codice business e stato;</li>
+<li>i record di blueprint rifiutino input invalidi;</li>
+<li>il lookup per contesto sia esplicito e null-safe;</li>
+<li>il package mapping non introduca JPA, Spring Data o framework di persistenza;</li>
+<li>domain e application layer non dipendano da <code>infrastructure.mapping</code>;</li>
+<li>la documentazione del Punto 7D sia presente.</li>
+</ul>
+<h2>Relazione con il Punto 7E</h2>
+<p>Il Punto 7E sarà il primo momento in cui potremo scegliere un dominio pilota e costruire un repository reale prototipale.</p>
+<p>Il candidato più sicuro resta:</p>
+<pre><code class="language-text">Locations
+</code></pre>
+<p>Motivo:</p>
+<ul>
+<li>è semplice;</li>
+<li>ha ID e codice chiari;</li>
+<li>non richiede collection complesse;</li>
+<li>non richiede workflow;</li>
+<li>permette di validare il pattern senza rischiare di sporcare domini più delicati.</li>
+</ul>
+<p>Il Punto 7E introduce ora, in modo controllato:</p>
+<ul>
+<li>un persistence model reale per <code>Location</code>;</li>
+<li>un mapper concreto <code>LocationPersistenceMapper</code>;</li>
+<li>un repository adapter reale prototipale;</li>
+<li>test tecnici del mapping e del repository.</li>
+</ul>
+<p>Queste cose sono state lasciate fuori dal Punto 7D e diventano il prototipo controllato del Punto 7E.</p>
+<h2>Regola finale del Punto 7D</h2>
+<p>Il Punto 7D formalizza questa regola:</p>
+<blockquote>
+<p>Prima di scegliere una tecnologia di persistenza, TruckFlow Manager deve sapere cosa deve mappare, perché lo mappa e quali confini non deve superare.</p>
+</blockquote>
+<p>Per questo il Punto 7D è un blueprint tecnico, non una persistence implementation.</p>
+<h2>Stato dopo il Punto 7D</h2>
+<p>Dopo questo step il progetto ha:</p>
+<ul>
+<li>domain layer puro ancora isolato;</li>
+<li>application layer ancora indipendente dall'infrastructure;</li>
+<li>Spring wiring tecnico non web già presente dal Punto 7C;</li>
+<li>mapping blueprint ufficiale per i contesti applicativi attivi;</li>
+<li>test architetturali dedicati al mapping;</li>
+<li>documentazione aggiornata;</li>
+<li>nessun database reale;</li>
+<li>nessun JPA;</li>
+<li>nessun repository reale dentro il Punto 7D;</li>
+<li>nessun controller REST.</li>
+</ul>
+<p>Lo step successivo è stato:</p>
+<pre><code class="language-text">Punto 7E — Real Repository Prototype
+</code></pre>
+<hr />
+<h2>Allineamento Punto 7F</h2>
+<p>Il Punto 7F — Repository Expansion estende il pattern file-backed validato dal prototipo Locations.</p>
+<p>La prima espansione controllata aggiunge repository file-backed per Cargo, Documents e Compliance base, mantenendo fuori database, JPA, Hibernate, Spring Data, schema SQL, REST API, controller, security, servizi esterni, workflow e audit trail.</p>
+<p>I repository in-memory restano validi e non vengono sostituiti.</p>
+<hr />
+<h2>Allineamento Punto 7G</h2>
+<p>Il Punto 7G non amplia il catalogo dei mapping, ma rafforza i test tecnici che proteggono i mapper e gli adapter file-backed già introdotti nei Punti 7E e 7F.</p>
+<h2>Allineamento Punto 7H</h2>
+<p>Il Punto 7H conferma che il catalogo di mapping resta un blueprint tecnico. Non vengono introdotti entity JPA, schema SQL o persistence model per tutti i domini; lo scope reale resta limitato ai repository file-backed validati.</p>
+
+    </article>
+  </main>
+</body>
+</html>

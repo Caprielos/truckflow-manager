@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Archivio storico — 25-application-use-cases-expansion-operational-roles — TruckFlow Docs</title>
+  <style>:root{--bg:#f5f7fb;--panel:#fff;--text:#172033;--muted:#64748b;--accent:#3554d1;--border:#d9e1ef;--code:#0f172a;--shadow:0 18px 44px rgba(15,23,42,.08)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:radial-gradient(circle at top left,rgba(53,84,209,.10),transparent 30rem),var(--bg);color:var(--text);line-height:1.68;font-size:16px}.page{width:min(980px,calc(100% - 2rem));margin:0 auto;padding:2rem 0 4rem}.topbar{display:flex;justify-content:space-between;gap:1rem;align-items:center;margin-bottom:1rem}.back{display:inline-flex;align-items:center;gap:.35rem;padding:.55rem .85rem;border:1px solid var(--border);border-radius:999px;background:#fff;color:var(--accent);font-weight:850;text-decoration:none;box-shadow:0 8px 22px rgba(15,23,42,.05)}.source{color:var(--muted);font-size:.88rem}.doc{padding:2rem;border:1px solid var(--border);border-radius:24px;background:rgba(255,255,255,.94);box-shadow:var(--shadow)}.doc-header{padding-bottom:1rem;margin-bottom:1.25rem;border-bottom:1px solid var(--border)}.kicker{display:inline-flex;width:fit-content;padding:.25rem .65rem;border-radius:999px;background:#dbeafe;color:#1e3a8a;font-size:.72rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase}.doc h1{margin:.7rem 0 .4rem;font-size:clamp(2rem,4vw,3.6rem);line-height:1;letter-spacing:-.05em}.doc h2{margin:2rem 0 .6rem;font-size:1.55rem;line-height:1.15;letter-spacing:-.03em}.doc h3{margin:1.35rem 0 .45rem;font-size:1.18rem}.doc p{margin:.65rem 0;color:#334155}.doc ul,.doc ol{padding-left:1.35rem}.doc li{margin:.35rem 0}.doc a{color:var(--accent);font-weight:800}.doc blockquote{margin:1rem 0;padding:.85rem 1rem;border-left:5px solid var(--accent);border-radius:14px;background:#eef2ff;color:#334155}.doc pre{overflow:auto;padding:1rem;border-radius:16px;background:var(--code);color:#e5e7eb;font-size:.9rem;line-height:1.55}.doc code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}.doc :not(pre)>code{padding:.15rem .32rem;border-radius:7px;background:#eef2f7;color:#1e293b}.doc table{width:100%;border-collapse:collapse;margin:1rem 0;border:1px solid var(--border);border-radius:16px;overflow:hidden;display:block}.doc thead,.doc tbody,.doc tr{width:100%}.doc th,.doc td{padding:.75rem;border-bottom:1px solid var(--border);text-align:left;vertical-align:top}.doc th{background:#f1f5f9;color:#334155;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}.doc tr:last-child td{border-bottom:0}.doc hr{border:0;border-top:1px solid var(--border);margin:2rem 0}.doc img{max-width:100%;border-radius:16px;border:1px solid var(--border)}@media(max-width:720px){.page{width:min(100% - 1rem,980px);padding-top:1rem}.doc{padding:1.15rem;border-radius:18px}.topbar{display:grid}.source{overflow-wrap:anywhere}}</style>
+</head>
+<body>
+  <main class="page">
+    <div class="topbar">
+      <a class="back" href="../index.html">← Torna alla Home</a>
+      <span class="source">Sorgente Markdown: ../old_style/25-application-use-cases-expansion-operational-roles.md</span>
+    </div>
+    <article class="doc">
+      <header class="doc-header">
+        <span class="kicker">old_style</span>
+        <h1>Archivio storico — 25-application-use-cases-expansion-operational-roles</h1>
+      </header>
+      <h1>Archivio storico — 25-application-use-cases-expansion-operational-roles</h1>
+<blockquote>
+<p>Questo documento fa parte dell'archivio storico <code>docs/old_style/</code>.
+Mantiene il percorso step-by-step del progetto, ma la documentazione principale aggiornata si trova in:
+<code>docs/simple/</code>, <code>docs/professional/</code> e <code>docs/digital/</code>.</p>
+</blockquote>
+<hr />
+<h1>Punto 6J — Application Use Cases Expansion III: Operational Roles</h1>
+<p>Il Punto 6J espande l'application layer verso il dominio <code>operational</code>.</p>
+<p>La fase introduce i primi use case applicativi per le figure operative aziendali già modellate nel dominio puro:</p>
+<ul>
+<li><code>Driver</code>;</li>
+<li><code>Mechanic</code>;</li>
+<li><code>WarehouseOperator</code>;</li>
+<li><code>Dispatcher</code>;</li>
+<li><code>Manager</code>.</li>
+</ul>
+<p>Lo step rimane volutamente applicativo e controllato. Non introduce ancora turni, disponibilità, assegnazioni a shipment, pianificazione, dispatching reale, payroll, HR avanzato, tracking, dashboard, security, database, JPA, REST API o controller Spring.</p>
+<h2>Obiettivo dello step</h2>
+<p>L'obiettivo del Punto 6J è rendere il dominio <code>operational</code> utilizzabile dai casi d'uso applicativi di base.</p>
+<p>Lo step permette di:</p>
+<ul>
+<li>registrare figure operative aziendali;</li>
+<li>recuperarle per ID;</li>
+<li>cambiare il loro stato applicativo;</li>
+<li>impedire duplicati per codice operativo;</li>
+<li>impedire duplicati per <code>UserId</code> nello stesso ruolo;</li>
+<li>usare repository port astratte;</li>
+<li>fornire adapter in memory temporanei;</li>
+<li>testare copy-on-write sulle mutazioni di stato;</li>
+<li>aggiornare la documentazione del livello application.</li>
+</ul>
+<p>Il dominio continua a decidere se una figura operativa è valida. L'application layer decide quando crearla, caricarla, mutarla, salvarla e trasformarla in result.</p>
+<h2>Package aggiunti</h2>
+<p>Sono stati aggiunti nuovi package applicativi dedicati agli operational roles:</p>
+<pre><code class="language-text">src/main/java/it/gabriele/truckflow/application/command/operational
+src/main/java/it/gabriele/truckflow/application/result/operational
+src/main/java/it/gabriele/truckflow/application/port/in/operational
+src/main/java/it/gabriele/truckflow/application/port/out/operational
+src/main/java/it/gabriele/truckflow/application/usecase/operational
+src/main/java/it/gabriele/truckflow/infrastructure/memory/operational
+</code></pre>
+<p>La struttura segue la stessa forma già usata per Locations, Cargo, Shipments, Documents e Vehicles.</p>
+<h2>Command aggiunti</h2>
+<p>Per ogni figura operativa sono stati aggiunti command di registrazione, ricerca e mutazione stato.</p>
+<p>Per i driver:</p>
+<ul>
+<li><code>RegisterDriverCommand</code>;</li>
+<li><code>FindDriverCommand</code>;</li>
+<li><code>ActivateDriverCommand</code>;</li>
+<li><code>SuspendDriverCommand</code>;</li>
+<li><code>MarkNotEligibleDriverCommand</code>.</li>
+</ul>
+<p>Per i mechanic:</p>
+<ul>
+<li><code>RegisterMechanicCommand</code>;</li>
+<li><code>FindMechanicCommand</code>;</li>
+<li><code>ActivateMechanicCommand</code>;</li>
+<li><code>SuspendMechanicCommand</code>;</li>
+<li><code>MarkNotEligibleMechanicCommand</code>.</li>
+</ul>
+<p>Per i warehouse operator:</p>
+<ul>
+<li><code>RegisterWarehouseOperatorCommand</code>;</li>
+<li><code>FindWarehouseOperatorCommand</code>;</li>
+<li><code>ActivateWarehouseOperatorCommand</code>;</li>
+<li><code>SuspendWarehouseOperatorCommand</code>;</li>
+<li><code>MarkNotEligibleWarehouseOperatorCommand</code>.</li>
+</ul>
+<p>Per i dispatcher:</p>
+<ul>
+<li><code>RegisterDispatcherCommand</code>;</li>
+<li><code>FindDispatcherCommand</code>;</li>
+<li><code>ActivateDispatcherCommand</code>;</li>
+<li><code>SuspendDispatcherCommand</code>;</li>
+<li><code>MarkNotEligibleDispatcherCommand</code>.</li>
+</ul>
+<p>Per i manager:</p>
+<ul>
+<li><code>RegisterManagerCommand</code>;</li>
+<li><code>FindManagerCommand</code>;</li>
+<li><code>ActivateManagerCommand</code>;</li>
+<li><code>SuspendManagerCommand</code>;</li>
+<li><code>MarkNotEligibleManagerCommand</code>.</li>
+</ul>
+<p>I command di registrazione per driver, mechanic e warehouse operator ricevono <code>Set&lt;OperationalQualification&gt;</code>. I command di registrazione per dispatcher e manager ricevono <code>Set&lt;OperationalScope&gt;</code>.</p>
+<p>Gli insiemi nulli vengono normalizzati a set vuoto. Se presenti, non possono contenere elementi nulli.</p>
+<h2>Result aggiunti</h2>
+<p>Sono stati aggiunti result applicativi dedicati:</p>
+<pre><code class="language-text">DriverResult
+MechanicResult
+WarehouseOperatorResult
+DispatcherResult
+ManagerResult
+</code></pre>
+<p>I result espongono una vista applicativa essenziale:</p>
+<ul>
+<li>ID della figura operativa;</li>
+<li><code>OperationalCode</code>;</li>
+<li><code>UserId</code> collegato;</li>
+<li><code>OperationalStatus</code>;</li>
+<li>nome completo;</li>
+<li>indicatore <code>active</code>;</li>
+<li>conteggio qualificazioni o scope;</li>
+<li>note.</li>
+</ul>
+<p>I result non espongono ancora dati HR avanzati, turni, disponibilità, assegnazioni, performance, costi, violazioni o dati payroll.</p>
+<h2>Repository port aggiunte</h2>
+<p>Sono state aggiunte cinque repository port outbound:</p>
+<pre><code class="language-text">DriverRepository
+MechanicRepository
+WarehouseOperatorRepository
+DispatcherRepository
+ManagerRepository
+</code></pre>
+<p>Ogni repository consente:</p>
+<ul>
+<li><code>save(...)</code>;</li>
+<li><code>findById(...)</code>;</li>
+<li><code>findByCode(OperationalCode code)</code>;</li>
+<li><code>findByUserId(UserId userId)</code>;</li>
+<li><code>existsById(...)</code>;</li>
+<li><code>existsByCode(OperationalCode code)</code>;</li>
+<li><code>existsByUserId(UserId userId)</code>.</li>
+</ul>
+<p>La scelta di controllare anche <code>UserId</code> serve a evitare duplicati dello stesso account utente nello stesso ruolo operativo.</p>
+<p>Non viene impedito, a livello applicativo, che lo stesso <code>UserId</code> possa appartenere a ruoli diversi. Questa decisione rimane aperta perché in aziende reali una persona può avere più responsabilità operative.</p>
+<h2>Use case port aggiunte</h2>
+<p>Ogni command ha una port in dedicata che estende il contratto base <code>UseCase&lt;C, R&gt;</code>.</p>
+<p>Sono quindi state aggiunte port in per:</p>
+<ul>
+<li>registrazione;</li>
+<li>ricerca;</li>
+<li>attivazione;</li>
+<li>sospensione;</li>
+<li>marcatura come non idoneo.</li>
+</ul>
+<p>Questa forma mantiene chiaro il confine tra richiesta applicativa e implementazione concreta del service.</p>
+<h2>Application service aggiunti</h2>
+<p>Sono stati aggiunti service applicativi per ogni port in.</p>
+<p>I service:</p>
+<ul>
+<li>validano command nulli;</li>
+<li>validano dependency repository nulle;</li>
+<li>controllano duplicati per <code>OperationalCode</code>;</li>
+<li>controllano duplicati per <code>UserId</code> nello stesso ruolo;</li>
+<li>caricano l'aggregate tramite repository port;</li>
+<li>lanciano <code>ResourceNotFoundException</code> quando la risorsa richiesta non esiste;</li>
+<li>lanciano <code>DuplicateResourceException</code> quando viene rilevato un duplicato applicativo;</li>
+<li>delegano al dominio le invarianti su qualificazioni, scope e stato;</li>
+<li>restituiscono result applicativi;</li>
+<li>non importano Spring, controller, DTO web, database, JPA o infrastructure concreta.</li>
+</ul>
+<h2>Copy-on-write sulle mutazioni operational</h2>
+<p>Per ogni ruolo operativo è stato aggiunto un supporto di copia:</p>
+<pre><code class="language-text">DriverMutationSupport
+MechanicMutationSupport
+WarehouseOperatorMutationSupport
+DispatcherMutationSupport
+ManagerMutationSupport
+</code></pre>
+<p>Le mutazioni di stato non modificano direttamente l'istanza caricata dalla repository in memory.</p>
+<p>Il flusso è:</p>
+<ol>
+<li>il service carica l'aggregate esistente;</li>
+<li>crea una copia con lo stesso ID e gli stessi dati;</li>
+<li>applica la mutazione sulla copia;</li>
+<li>salva la copia solo se la mutazione di dominio va a buon fine.</li>
+</ol>
+<p>Questa scelta protegge dai problemi tipici degli adapter in memory, dove la repository contiene riferimenti a oggetti mutabili.</p>
+<h2>Repository in memory aggiunte</h2>
+<p>Sono stati aggiunti adapter in memory per tutte le nuove repository port:</p>
+<pre><code class="language-text">InMemoryDriverRepository
+InMemoryMechanicRepository
+InMemoryWarehouseOperatorRepository
+InMemoryDispatcherRepository
+InMemoryManagerRepository
+</code></pre>
+<p>Gli adapter:</p>
+<ul>
+<li>salvano in <code>Map</code> interne;</li>
+<li>indicizzano per ID;</li>
+<li>indicizzano per <code>OperationalCode</code>;</li>
+<li>indicizzano per <code>UserId</code>;</li>
+<li>rifiutano input nulli con <code>UseCaseValidationException</code>;</li>
+<li>rifiutano duplicati con <code>DuplicateResourceException</code>.</li>
+</ul>
+<p>Sono adapter temporanei per sviluppo locale e test. Non sostituiscono un database reale e non introducono transazioni, query avanzate o persistenza definitiva.</p>
+<h2>Test aggiunti e aggiornati</h2>
+<p>Sono stati aggiunti test dedicati al Punto 6J:</p>
+<pre><code class="language-text">ApplicationOperationalUseCaseExpansionTest
+ApplicationOperationalRepositoryPortTest
+InMemoryOperationalRepositoryTest
+</code></pre>
+<p>È stato inoltre aggiornato:</p>
+<pre><code class="language-text">ApplicationUseCaseReviewTest
+</code></pre>
+<p>I test verificano:</p>
+<ul>
+<li>registrazione e ricerca dei ruoli operativi;</li>
+<li>mutazioni di stato con copy-on-write;</li>
+<li>duplicati per codice operativo;</li>
+<li>duplicati per <code>UserId</code> nello stesso ruolo;</li>
+<li>risorse mancanti;</li>
+<li>command nulli;</li>
+<li>dependency repository nulle;</li>
+<li>set nulli normalizzati;</li>
+<li>set con elementi nulli rifiutati;</li>
+<li>repository port che estendono <code>RepositoryPort</code>;</li>
+<li>port in che estendono <code>UseCase</code>;</li>
+<li>service che implementano la propria port;</li>
+<li>result null-safe.</li>
+</ul>
+<h2>Confini architetturali rispettati</h2>
+<p>Il Punto 6J non introduce:</p>
+<ul>
+<li>REST API;</li>
+<li>controller Spring;</li>
+<li>DTO web;</li>
+<li>database;</li>
+<li>JPA;</li>
+<li>Spring Data;</li>
+<li>security;</li>
+<li>JWT;</li>
+<li>planning;</li>
+<li>dispatching reale;</li>
+<li>turni;</li>
+<li>disponibilità persone;</li>
+<li>payroll;</li>
+<li>dashboard;</li>
+<li>tracking;</li>
+<li>assegnazione autista-veicolo-shipment;</li>
+<li>audit trail enterprise.</li>
+</ul>
+<p>Il dominio <code>operational</code> rimane puro. L'application layer consuma il dominio tramite command, result, port, service e repository astratte.</p>
+<h2>Stato finale dopo il Punto 6J</h2>
+<p>Dopo il Punto 6J, l'application layer copre:</p>
+<ul>
+<li>Locations;</li>
+<li>Cargo;</li>
+<li>Shipments;</li>
+<li>Documents;</li>
+<li>Vehicles;</li>
+<li>Operational Roles.</li>
+</ul>
+<p>Il progetto è ancora prima di REST API e database.</p>
+<p>Storicamente, dopo Operational Roles, il progetto ha scelto una fase di review/hardening dedicata nel Punto 6K. Successivamente sono stati completati anche Compliance base nel Punto 6L e il freeze finale nel Punto 6M.</p>
+<h2>Aggiornamento dopo il Punto 6K</h2>
+<p>Il Punto 6K rafforza il blocco introdotto in questo documento.</p>
+<p>La review aggiunge <code>ApplicationOperationalUseCaseHardeningTest</code>, copre i service di stato per tutti i ruoli operativi correnti, verifica command nulli e dependency nulle e controlla che una attivazione fallita per mancanza di qualificazioni o scope non modifichi l'aggregate persistito in memory.</p>
+<p>Il Punto 6K non introduce nuovi use case business né cambia i contratti pubblici aggiunti nel Punto 6J.</p>
+<h2>Aggiornamento dopo il Punto 6L</h2>
+<p>Il Punto 6L non modifica i use case Operational Roles. Aggiunge invece i primi use case applicativi per il catalogo base di Compliance.</p>
+<p>Le verifiche concrete su patente, CQC, ADR, visite mediche, ruoli e abilitazioni restano fuori dal Punto 6L e appartengono a futuri moduli di compliance check.</p>
+<h2>Allineamento Punto 6M</h2>
+<p>Il Punto 6M chiude il primo ciclo dell'application layer con una review/freeze finale. Da questo momento i contenuti documentati nei punti 6A-6L sono considerati fondazione applicativa stabile: eventuali evoluzioni future dovranno essere introdotte in nuovi punti roadmap, mantenendo ancora fuori REST API, controller, database, JPA, Spring Data, security, tracking, planning, dashboard, workflow e integrazioni esterne.</p>
+
+    </article>
+  </main>
+</body>
+</html>

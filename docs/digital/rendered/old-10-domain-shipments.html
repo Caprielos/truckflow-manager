@@ -1,0 +1,716 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Archivio storico — 10-domain-shipments — TruckFlow Docs</title>
+  <style>:root{--bg:#f5f7fb;--panel:#fff;--text:#172033;--muted:#64748b;--accent:#3554d1;--border:#d9e1ef;--code:#0f172a;--shadow:0 18px 44px rgba(15,23,42,.08)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:radial-gradient(circle at top left,rgba(53,84,209,.10),transparent 30rem),var(--bg);color:var(--text);line-height:1.68;font-size:16px}.page{width:min(980px,calc(100% - 2rem));margin:0 auto;padding:2rem 0 4rem}.topbar{display:flex;justify-content:space-between;gap:1rem;align-items:center;margin-bottom:1rem}.back{display:inline-flex;align-items:center;gap:.35rem;padding:.55rem .85rem;border:1px solid var(--border);border-radius:999px;background:#fff;color:var(--accent);font-weight:850;text-decoration:none;box-shadow:0 8px 22px rgba(15,23,42,.05)}.source{color:var(--muted);font-size:.88rem}.doc{padding:2rem;border:1px solid var(--border);border-radius:24px;background:rgba(255,255,255,.94);box-shadow:var(--shadow)}.doc-header{padding-bottom:1rem;margin-bottom:1.25rem;border-bottom:1px solid var(--border)}.kicker{display:inline-flex;width:fit-content;padding:.25rem .65rem;border-radius:999px;background:#dbeafe;color:#1e3a8a;font-size:.72rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase}.doc h1{margin:.7rem 0 .4rem;font-size:clamp(2rem,4vw,3.6rem);line-height:1;letter-spacing:-.05em}.doc h2{margin:2rem 0 .6rem;font-size:1.55rem;line-height:1.15;letter-spacing:-.03em}.doc h3{margin:1.35rem 0 .45rem;font-size:1.18rem}.doc p{margin:.65rem 0;color:#334155}.doc ul,.doc ol{padding-left:1.35rem}.doc li{margin:.35rem 0}.doc a{color:var(--accent);font-weight:800}.doc blockquote{margin:1rem 0;padding:.85rem 1rem;border-left:5px solid var(--accent);border-radius:14px;background:#eef2ff;color:#334155}.doc pre{overflow:auto;padding:1rem;border-radius:16px;background:var(--code);color:#e5e7eb;font-size:.9rem;line-height:1.55}.doc code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}.doc :not(pre)>code{padding:.15rem .32rem;border-radius:7px;background:#eef2f7;color:#1e293b}.doc table{width:100%;border-collapse:collapse;margin:1rem 0;border:1px solid var(--border);border-radius:16px;overflow:hidden;display:block}.doc thead,.doc tbody,.doc tr{width:100%}.doc th,.doc td{padding:.75rem;border-bottom:1px solid var(--border);text-align:left;vertical-align:top}.doc th{background:#f1f5f9;color:#334155;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}.doc tr:last-child td{border-bottom:0}.doc hr{border:0;border-top:1px solid var(--border);margin:2rem 0}.doc img{max-width:100%;border-radius:16px;border:1px solid var(--border)}@media(max-width:720px){.page{width:min(100% - 1rem,980px);padding-top:1rem}.doc{padding:1.15rem;border-radius:18px}.topbar{display:grid}.source{overflow-wrap:anywhere}}</style>
+</head>
+<body>
+  <main class="page">
+    <div class="topbar">
+      <a class="back" href="../index.html">← Torna alla Home</a>
+      <span class="source">Sorgente Markdown: ../old_style/10-domain-shipments.md</span>
+    </div>
+    <article class="doc">
+      <header class="doc-header">
+        <span class="kicker">old_style</span>
+        <h1>Archivio storico — 10-domain-shipments</h1>
+      </header>
+      <h1>Archivio storico — 10-domain-shipments</h1>
+<blockquote>
+<p>Questo documento fa parte dell'archivio storico <code>docs/old_style/</code>.
+Mantiene il percorso step-by-step del progetto, ma la documentazione principale aggiornata si trova in:
+<code>docs/simple/</code>, <code>docs/professional/</code> e <code>docs/digital/</code>.</p>
+</blockquote>
+<hr />
+<h1>10. Dominio <code>domain.shipments</code></h1>
+<h2>10.1 Obiettivo del dominio shipments</h2>
+<p>Il dominio <code>domain.shipments</code> rappresenta la <strong>richiesta di spedizione</strong>: cosa deve essere spedito, quali merci compongono la spedizione, da quali luoghi parte, verso quali luoghi arriva e quali requisiti devono essere rispettati.</p>
+<p>Una <code>Shipment</code> non è una semplice anagrafica statica come <code>CargoUnit</code>, ma non è nemmeno l'esecuzione reale di un viaggio. È il concetto intermedio che descrive una spedizione da registrare, confermare e poi passare in futuro ai moduli di planning e dispatching.</p>
+<p>La distinzione fondamentale è:</p>
+<pre><code class="language-text">Cargo = scheda della merce
+Shipment = cosa devo spedire e tra quali luoghi
+TripTemplate = modello astratto di percorso
+Vehicles = mezzi e capacità tecniche
+Planning / Dispatching = assegnazione reale di veicoli, autisti, orari e risorse
+</code></pre>
+<p>Il dominio shipments descrive la richiesta di spedizione, ma non decide ancora come eseguirla.</p>
+<h2>10.2 Cosa descrive una Shipment</h2>
+<p>Una <code>Shipment</code> descrive:</p>
+<ul>
+<li>la spedizione richiesta;</li>
+<li>il codice aziendale leggibile;</li>
+<li>il nome e la descrizione;</li>
+<li>lo stato della richiesta;</li>
+<li>la priorità;</li>
+<li>il livello di servizio richiesto;</li>
+<li>gli item di merce inclusi nella spedizione;</li>
+<li>le tratte logiche della spedizione;</li>
+<li>le proprietà generali della spedizione;</li>
+<li>i requisiti termici;</li>
+<li>i requisiti di trasporto dichiarati;</li>
+<li>le metriche dichiarate o riepilogative;</li>
+<li>i riferimenti cliente, fornitore e interni;</li>
+<li>le note interne ed esterne.</li>
+</ul>
+<p>Non descrive invece l'esecuzione reale del trasporto.</p>
+<h2>10.3 Cosa non deve contenere <code>domain.shipments</code></h2>
+<p>Il dominio shipments non contiene:</p>
+<ul>
+<li>veicolo assegnato;</li>
+<li>autista assegnato;</li>
+<li>orari reali;</li>
+<li>partenza effettiva;</li>
+<li>arrivo effettivo;</li>
+<li>tracking GPS;</li>
+<li>stato in viaggio;</li>
+<li>ritardi;</li>
+<li>prova di consegna;</li>
+<li>documenti operativi;</li>
+<li>costi reali;</li>
+<li>disponibilità mezzi;</li>
+<li>compatibilità veicolo-cargo implementata;</li>
+<li>pianificazione reale.</li>
+</ul>
+<p>Questi concetti arriveranno in moduli futuri come:</p>
+<pre><code class="language-text">planning
+dispatching
+transport execution
+tracking
+documents
+costing
+claims
+incidents
+</code></pre>
+<h2>10.4 Struttura del package dopo la riorganizzazione</h2>
+<p>Il dominio shipments è stato diviso in sottopackage tematici per rendere il codice più leggibile.</p>
+<p>La regola fondamentale è questa:</p>
+<pre><code class="language-text">Shipment rimane l'unico aggregate root.
+Tutti gli altri componenti sono entity interne o value object appartenenti all'aggregate Shipment.
+La divisione in sottopackage serve solo a organizzare il codice.
+</code></pre>
+<p>La struttura attuale è:</p>
+<pre><code class="language-text">domain.shipments
+├─ core
+│  ├─ Shipment
+│  ├─ ShipmentId
+│  ├─ ShipmentCode
+│  ├─ ShipmentStatus
+│  ├─ ShipmentPriority
+│  ├─ ShipmentServiceLevel
+│  └─ ShipmentValidation
+│
+├─ items
+│  ├─ ShipmentItem
+│  ├─ ShipmentItemId
+│  └─ ShipmentUnitOfMeasure
+│
+├─ legs
+│  ├─ ShipmentLeg
+│  ├─ ShipmentLegId
+│  └─ ShipmentLegType
+│
+├─ requirements
+│  ├─ ShipmentRequirementSet
+│  └─ ShipmentTransportRequirement
+│
+├─ metrics
+│  ├─ ShipmentMetrics
+│  ├─ ShipmentVolume
+│  ├─ ShipmentVolumeUnit
+│  ├─ ShipmentWeight
+│  └─ ShipmentWeightUnit
+│
+├─ properties
+│  ├─ ShipmentProperties
+│  └─ ShipmentTemperature
+│
+├─ notes
+│  └─ ShipmentNotes
+│
+└─ references
+   └─ ShipmentReferences
+</code></pre>
+<p>Questa divisione non crea nuovi aggregate, nuovi repository o nuovi bounded context. Serve solo a evitare un package piatto con molte classi tutte insieme.</p>
+<h2>10.5 Perché questa divisione è corretta</h2>
+<p>La riorganizzazione è corretta perché:</p>
+<ul>
+<li><code>Shipment</code> rimane l'aggregate root;</li>
+<li><code>ShipmentItem</code> e <code>ShipmentLeg</code> rimangono elementi interni della shipment;</li>
+<li><code>ShipmentRequirementSet</code>, <code>ShipmentMetrics</code>, <code>ShipmentProperties</code>, <code>ShipmentTemperature</code>, <code>ShipmentReferences</code> e <code>ShipmentNotes</code> rimangono value object dell'aggregate;</li>
+<li>non vengono creati repository separati come <code>ShipmentItemRepository</code> o <code>ShipmentLegRepository</code>;</li>
+<li>non vengono introdotti servizi di sottopackage;</li>
+<li>la struttura è più navigabile e più adatta a un dominio enterprise.</li>
+</ul>
+<p>In DDD, la struttura dei package può aiutare la leggibilità, ma non deve cambiare il confine dell'aggregate.</p>
+<h2>10.6 Package <code>core</code></h2>
+<p>Il package <code>domain.shipments.core</code> contiene il cuore dell'aggregate.</p>
+<pre><code class="language-text">domain.shipments.core
+├─ Shipment
+├─ ShipmentId
+├─ ShipmentCode
+├─ ShipmentStatus
+├─ ShipmentPriority
+├─ ShipmentServiceLevel
+└─ ShipmentValidation
+</code></pre>
+<h3><code>Shipment</code></h3>
+<p><code>Shipment</code> è l'aggregate root.</p>
+<p>Rappresenta una <strong>richiesta di spedizione</strong> o una <strong>spedizione da organizzare</strong>.</p>
+<p>Contiene:</p>
+<ul>
+<li><code>ShipmentId id</code>;</li>
+<li><code>ShipmentCode code</code>;</li>
+<li><code>name</code>;</li>
+<li><code>description</code>;</li>
+<li><code>ShipmentStatus status</code>;</li>
+<li><code>ShipmentPriority priority</code>;</li>
+<li><code>ShipmentServiceLevel serviceLevel</code>;</li>
+<li><code>List&lt;ShipmentItem&gt; items</code>;</li>
+<li><code>List&lt;ShipmentLeg&gt; legs</code>;</li>
+<li><code>ShipmentProperties properties</code>;</li>
+<li><code>ShipmentTemperature temperature</code>;</li>
+<li><code>ShipmentRequirementSet requirementSet</code>;</li>
+<li><code>ShipmentMetrics metrics</code>;</li>
+<li><code>ShipmentReferences references</code>;</li>
+<li><code>ShipmentNotes notes</code>;</li>
+<li><code>generalNotes</code>.</li>
+</ul>
+<p>La shipment non contiene oggetti completi di altri domini. Quando deve riferirsi a cargo o location usa solo i rispettivi ID.</p>
+<h3><code>ShipmentId</code></h3>
+<p><code>ShipmentId</code> è l'identificatore tecnico della spedizione.</p>
+<p>Serve al sistema e non all'utente finale.</p>
+<p>È simile a:</p>
+<ul>
+<li><code>CargoId</code>;</li>
+<li><code>VehicleUnitId</code>;</li>
+<li><code>TripTemplateId</code>;</li>
+<li><code>LocationId</code>;</li>
+<li><code>UserId</code>.</li>
+</ul>
+<p>La regola è:</p>
+<pre><code class="language-text">ShipmentId = identificatore tecnico interno
+ShipmentCode = codice aziendale leggibile
+</code></pre>
+<h3><code>ShipmentCode</code></h3>
+<p><code>ShipmentCode</code> è il codice leggibile della spedizione.</p>
+<p>Esempi:</p>
+<pre><code class="language-text">SHP-001
+ORD-2024-033
+EXP-00012
+FOOD-SHP-044
+ADR-SHP-009
+</code></pre>
+<p>Questa scelta è coerente con altri codici aziendali già presenti nel progetto:</p>
+<ul>
+<li><code>CargoCode</code>;</li>
+<li><code>FleetCode</code>;</li>
+<li><code>OperationalCode</code>;</li>
+<li><code>LocationCode</code>;</li>
+<li><code>TripTemplateCode</code>.</li>
+</ul>
+<p>L'ID tecnico serve al sistema, mentre il codice aziendale serve agli utenti.</p>
+<h3><code>ShipmentStatus</code></h3>
+<p><code>ShipmentStatus</code> rappresenta lo stato della <strong>richiesta di spedizione</strong>, non lo stato operativo del viaggio.</p>
+<p>I valori sono:</p>
+<pre><code class="language-text">DRAFT
+REGISTERED
+CONFIRMED
+SUSPENDED
+CANCELLED
+ARCHIVED
+</code></pre>
+<p>Significato:</p>
+<ul>
+<li><code>DRAFT</code>: spedizione ancora in bozza;</li>
+<li><code>REGISTERED</code>: spedizione registrata nel sistema;</li>
+<li><code>CONFIRMED</code>: spedizione confermata e pronta per essere pianificata;</li>
+<li><code>SUSPENDED</code>: spedizione temporaneamente bloccata;</li>
+<li><code>CANCELLED</code>: richiesta di spedizione annullata;</li>
+<li><code>ARCHIVED</code>: spedizione storica archiviata.</li>
+</ul>
+<p>Non sono stati di <code>domain.shipments</code>:</p>
+<ul>
+<li><code>IN_TRANSIT</code>;</li>
+<li><code>DELIVERED</code>;</li>
+<li><code>FAILED</code>;</li>
+<li><code>DAMAGED</code>;</li>
+<li><code>DELAYED</code>;</li>
+<li><code>PARTIALLY_DELIVERED</code>.</li>
+</ul>
+<p>Questi ultimi appartengono all'esecuzione reale del trasporto, al tracking, alla consegna, ai reclami o agli incidenti.</p>
+<h3><code>ShipmentPriority</code></h3>
+<p><code>ShipmentPriority</code> descrive quanto è importante o urgente una spedizione.</p>
+<p>Valori:</p>
+<pre><code class="language-text">LOW
+NORMAL
+HIGH
+URGENT
+</code></pre>
+<p>La priorità non pianifica il viaggio e non assegna un mezzo. È solo una caratteristica dichiarata della richiesta, utile per il futuro planning.</p>
+<h3><code>ShipmentServiceLevel</code></h3>
+<p><code>ShipmentServiceLevel</code> descrive il livello di servizio richiesto.</p>
+<p>Valori:</p>
+<pre><code class="language-text">ECONOMY
+STANDARD
+EXPRESS
+DEDICATED
+TIME_CRITICAL
+</code></pre>
+<p>Non è ancora SLA operativo, non calcola penali e non decide il mezzo.</p>
+<h3><code>ShipmentValidation</code></h3>
+<p><code>ShipmentValidation</code> contiene funzioni di validazione condivise usate dai sottopackage del dominio shipments.</p>
+<p>È stato spostato in <code>core</code> perché gli altri sottopackage devono poter riutilizzare le stesse regole base, come:</p>
+<ul>
+<li>testo obbligatorio;</li>
+<li>valori non nulli;</li>
+<li>quantità positive;</li>
+<li>valori non negativi;</li>
+<li>normalizzazione delle note;</li>
+<li>controllo di collezioni senza elementi nulli.</li>
+</ul>
+<h2>10.7 Package <code>items</code></h2>
+<p>Il package <code>domain.shipments.items</code> contiene le righe merce della spedizione.</p>
+<pre><code class="language-text">domain.shipments.items
+├─ ShipmentItem
+├─ ShipmentItemId
+└─ ShipmentUnitOfMeasure
+</code></pre>
+<h3><code>ShipmentItem</code></h3>
+<p><code>ShipmentItem</code> rappresenta una riga merce inclusa nella spedizione.</p>
+<p>Contiene:</p>
+<ul>
+<li><code>ShipmentItemId id</code>;</li>
+<li><code>CargoId cargoId</code>;</li>
+<li><code>quantity</code>;</li>
+<li><code>ShipmentUnitOfMeasure unitOfMeasure</code>;</li>
+<li><code>notes</code>.</li>
+</ul>
+<p>La relazione corretta è:</p>
+<pre><code class="language-text">ShipmentItem -&gt; CargoId
+</code></pre>
+<p>Non è:</p>
+<pre><code class="language-text">ShipmentItem -&gt; CargoUnit completo
+</code></pre>
+<p>Questa scelta mantiene separati <code>domain.cargo</code> e <code>domain.shipments</code>.</p>
+<h3><code>ShipmentItemId</code></h3>
+<p><code>ShipmentItemId</code> identifica tecnicamente una riga merce dentro la shipment.</p>
+<p>Una shipment può avere più item, per esempio:</p>
+<pre><code class="language-text">Shipment SHP-001
+├─ Item 1: 33 pallet alimentari
+├─ Item 2: 4 pallet farmaceutici
+└─ Item 3: 2 colli fragili
+</code></pre>
+<h3><code>ShipmentUnitOfMeasure</code></h3>
+<p><code>ShipmentUnitOfMeasure</code> evita stringhe libere per le unità di misura.</p>
+<p>Valori:</p>
+<pre><code class="language-text">UNIT
+PALLET
+BOX
+CARTON
+KG
+TON
+LITER
+CUBIC_METER
+CONTAINER
+ROLL_CONTAINER
+OTHER
+</code></pre>
+<p>Esempi:</p>
+<pre><code class="language-text">33 PALLET
+120 BOX
+1500 KG
+22 TON
+1 CONTAINER
+</code></pre>
+<h2>10.8 Package <code>legs</code></h2>
+<p>Il package <code>domain.shipments.legs</code> contiene le tratte logiche richieste dalla spedizione.</p>
+<pre><code class="language-text">domain.shipments.legs
+├─ ShipmentLeg
+├─ ShipmentLegId
+└─ ShipmentLegType
+</code></pre>
+<h3><code>ShipmentLeg</code></h3>
+<p><code>ShipmentLeg</code> rappresenta una tratta logica richiesta dalla spedizione.</p>
+<p>È diversa da <code>TripTemplateSegment</code>.</p>
+<pre><code class="language-text">TripTemplateSegment = tratta di un percorso tipo
+ShipmentLeg = tratta richiesta da una spedizione specifica
+</code></pre>
+<p>Contiene:</p>
+<ul>
+<li><code>ShipmentLegId id</code>;</li>
+<li><code>sequenceNumber</code>;</li>
+<li><code>ShipmentLegType type</code>;</li>
+<li><code>LocationId originLocationId</code>;</li>
+<li><code>LocationId destinationLocationId</code>;</li>
+<li><code>estimatedDistanceKm</code>;</li>
+<li><code>notes</code>.</li>
+</ul>
+<p>La shipment usa <code>LocationId</code>, non l'oggetto completo <code>Location</code>.</p>
+<p>Questo mantiene separati:</p>
+<pre><code class="language-text">domain.locations
+domain.shipments
+</code></pre>
+<h3><code>ShipmentLegId</code></h3>
+<p><code>ShipmentLegId</code> identifica tecnicamente una tratta della shipment.</p>
+<p>Ogni shipment può avere più leg, per esempio:</p>
+<pre><code class="language-text">Shipment SHP-001
+├─ Leg 1: Pickup da cliente
+├─ Leg 2: Transit verso hub
+└─ Leg 3: Delivery al destinatario
+</code></pre>
+<h3><code>ShipmentLegType</code></h3>
+<p>Valori:</p>
+<pre><code class="language-text">PICKUP
+DELIVERY
+TRANSIT
+RETURN
+TRANSFER
+SPECIAL
+</code></pre>
+<p>Nel dominio <code>triptemplates</code> avevamo evitato <code>PICKUP</code> e <code>DELIVERY</code>, perché il template di percorso è astratto e non conosce la spedizione.</p>
+<p>In <code>shipments</code>, invece, <code>PICKUP</code> e <code>DELIVERY</code> sono coerenti perché una spedizione può avere punti logici di ritiro e consegna.</p>
+<h2>10.9 Package <code>requirements</code></h2>
+<p>Il package <code>domain.shipments.requirements</code> contiene i requisiti dichiarati dalla spedizione.</p>
+<pre><code class="language-text">domain.shipments.requirements
+├─ ShipmentRequirementSet
+└─ ShipmentTransportRequirement
+</code></pre>
+<h3><code>ShipmentRequirementSet</code></h3>
+<p><code>ShipmentRequirementSet</code> contiene un set di requisiti di trasporto dichiarati dalla spedizione.</p>
+<p>È stato scelto un set invece di tanti booleani per evitare classi troppo rigide.</p>
+<p>Con i booleani, ogni nuovo requisito richiederebbe un nuovo campo.</p>
+<p>Con il set, è sufficiente aggiungere un nuovo valore all'enum <code>ShipmentTransportRequirement</code>.</p>
+<h3><code>ShipmentTransportRequirement</code></h3>
+<p>Valori principali:</p>
+<pre><code class="language-text">ADR_REQUIRED
+ATP_REQUIRED
+FOOD_GRADE_REQUIRED
+PHARMA_GRADE_REQUIRED
+WASTE_AUTHORIZATION_REQUIRED
+LIVESTOCK_AUTHORIZATION_REQUIRED
+TEMPERATURE_CONTROL_REQUIRED
+REFRIGERATED_TRANSPORT_REQUIRED
+FROZEN_TRANSPORT_REQUIRED
+SEPARATION_REQUIRED
+HIGH_VALUE_HANDLING_REQUIRED
+FRAGILE_HANDLING_REQUIRED
+DEDICATED_VEHICLE_REQUIRED
+EXPRESS_HANDLING_REQUIRED
+SPECIAL_HANDLING_REQUIRED
+</code></pre>
+<p>Esempio spedizione alimentare fresca:</p>
+<pre><code class="language-text">ATP_REQUIRED
+FOOD_GRADE_REQUIRED
+TEMPERATURE_CONTROL_REQUIRED
+REFRIGERATED_TRANSPORT_REQUIRED
+</code></pre>
+<p>Esempio spedizione ADR:</p>
+<pre><code class="language-text">ADR_REQUIRED
+</code></pre>
+<p>Esempio spedizione ad alto valore:</p>
+<pre><code class="language-text">HIGH_VALUE_HANDLING_REQUIRED
+DEDICATED_VEHICLE_REQUIRED
+</code></pre>
+<p>Questa scelta è coerente con il modello del cargo, dove i requisiti sono espressi come set e non come lista di booleani.</p>
+<h2>10.10 Package <code>metrics</code></h2>
+<p>Il package <code>domain.shipments.metrics</code> contiene le metriche dichiarate o riepilogative della shipment.</p>
+<pre><code class="language-text">domain.shipments.metrics
+├─ ShipmentMetrics
+├─ ShipmentVolume
+├─ ShipmentVolumeUnit
+├─ ShipmentWeight
+└─ ShipmentWeightUnit
+</code></pre>
+<h3><code>ShipmentMetrics</code></h3>
+<p><code>ShipmentMetrics</code> rappresenta metriche dichiarate, riepilogative o stimate della spedizione.</p>
+<p>Contiene:</p>
+<ul>
+<li><code>ShipmentVolume volume</code>;</li>
+<li><code>ShipmentWeight weight</code>;</li>
+<li><code>notes</code>.</li>
+</ul>
+<p>È importante notare che queste metriche non sono sempre calcolate automaticamente. Nella realtà possono essere dichiarate dal cliente, stimate, verificate o calcolate in fasi successive.</p>
+<p>Per ora il dominio le registra come informazioni della shipment.</p>
+<h3><code>ShipmentVolume</code></h3>
+<p><code>ShipmentVolume</code> contiene:</p>
+<ul>
+<li><code>value</code>;</li>
+<li><code>ShipmentVolumeUnit unit</code>.</li>
+</ul>
+<p>L'unità attuale è:</p>
+<pre><code class="language-text">CUBIC_METER
+</code></pre>
+<h3><code>ShipmentWeight</code></h3>
+<p><code>ShipmentWeight</code> contiene:</p>
+<ul>
+<li><code>grossWeight</code>;</li>
+<li><code>netWeight</code>;</li>
+<li><code>ShipmentWeightUnit unit</code>.</li>
+</ul>
+<p>Le unità sono:</p>
+<pre><code class="language-text">KG
+TON
+</code></pre>
+<p>Il peso netto non può essere maggiore del peso lordo.</p>
+<h2>10.11 Package <code>properties</code></h2>
+<p>Il package <code>domain.shipments.properties</code> contiene le proprietà generali e i requisiti termici della shipment.</p>
+<pre><code class="language-text">domain.shipments.properties
+├─ ShipmentProperties
+└─ ShipmentTemperature
+</code></pre>
+<h3><code>ShipmentProperties</code></h3>
+<p><code>ShipmentProperties</code> contiene proprietà generali della spedizione.</p>
+<p>Campi:</p>
+<ul>
+<li><code>fragile</code>;</li>
+<li><code>highValue</code>;</li>
+<li><code>perishable</code>;</li>
+<li><code>requiresSeparation</code>;</li>
+<li><code>stackable</code>;</li>
+<li><code>notes</code>.</li>
+</ul>
+<p>Queste informazioni possono derivare dai cargo inclusi nella spedizione, ma possono anche essere dichiarate a livello shipment.</p>
+<p>Esempio:</p>
+<pre><code class="language-text">Cargo 1 fragile = true
+Cargo 2 highValue = true
+ShipmentProperties fragile = true, highValue = true
+</code></pre>
+<h3><code>ShipmentTemperature</code></h3>
+<p><code>ShipmentTemperature</code> descrive i requisiti termici della spedizione.</p>
+<p>Campi:</p>
+<ul>
+<li><code>requiredMinCelsius</code>;</li>
+<li><code>requiredMaxCelsius</code>;</li>
+<li><code>controlled</code>;</li>
+<li><code>notes</code>.</li>
+</ul>
+<p>Se <code>controlled</code> è <code>true</code>, devono essere presenti temperatura minima e massima.</p>
+<p>La classe non decide quale veicolo usare. Dice solo che la spedizione richiede determinate condizioni termiche.</p>
+<p>La verifica con i veicoli verrà più avanti.</p>
+<h2>10.12 Package <code>references</code></h2>
+<p>Il package <code>domain.shipments.references</code> contiene i riferimenti interni o esterni collegati alla spedizione.</p>
+<pre><code class="language-text">domain.shipments.references
+└─ ShipmentReferences
+</code></pre>
+<p><code>ShipmentReferences</code> contiene:</p>
+<ul>
+<li><code>customerReference</code>;</li>
+<li><code>supplierReference</code>;</li>
+<li><code>internalReference</code>;</li>
+<li><code>purchaseOrderReference</code>;</li>
+<li><code>salesOrderReference</code>;</li>
+<li><code>notes</code>.</li>
+</ul>
+<p>Questi non sono documenti e non sono allegati. Sono riferimenti testuali utili al gestionale.</p>
+<p>Esempi:</p>
+<ul>
+<li>riferimento cliente;</li>
+<li>riferimento ordine fornitore;</li>
+<li>riferimento interno aziendale;</li>
+<li>numero ordine di acquisto;</li>
+<li>numero ordine di vendita.</li>
+</ul>
+<h2>10.13 Package <code>notes</code></h2>
+<p>Il package <code>domain.shipments.notes</code> contiene le note interne ed esterne della spedizione.</p>
+<pre><code class="language-text">domain.shipments.notes
+└─ ShipmentNotes
+</code></pre>
+<p><code>ShipmentNotes</code> separa:</p>
+<ul>
+<li><code>internalNotes</code>;</li>
+<li><code>externalNotes</code>.</li>
+</ul>
+<p>Le note interne sono visibili solo all'azienda.</p>
+<p>Le note esterne possono essere comunicate a cliente, destinatario o partner.</p>
+<p>Questa separazione è utile perché non tutte le note devono uscire dall'azienda.</p>
+<h2>10.14 Relazioni con gli altri domini</h2>
+<h3>Shipment e Cargo</h3>
+<pre><code class="language-text">ShipmentItem
+└─ CargoId
+</code></pre>
+<p>La shipment non contiene direttamente <code>CargoUnit</code>.</p>
+<h3>Shipment e Locations</h3>
+<pre><code class="language-text">ShipmentLeg
+├─ originLocationId
+└─ destinationLocationId
+</code></pre>
+<p>La shipment non contiene direttamente <code>Location</code>.</p>
+<h3>Shipment e Vehicles</h3>
+<p><code>Shipment</code> non contiene:</p>
+<ul>
+<li><code>VehicleUnitId</code>;</li>
+<li><code>VehicleCombinationId</code>.</li>
+</ul>
+<p>L'assegnazione del mezzo appartiene a planning/dispatching.</p>
+<h3>Shipment e Operational</h3>
+<p><code>Shipment</code> non contiene:</p>
+<ul>
+<li><code>DriverId</code>;</li>
+<li><code>DispatcherId</code>;</li>
+<li><code>ManagerId</code>.</li>
+</ul>
+<p>Le persone operative verranno collegate più avanti tramite moduli applicativi o operativi.</p>
+<h3>Shipment e TripTemplate</h3>
+<p><code>Shipment</code> non deve contenere obbligatoriamente un <code>TripTemplateId</code>.</p>
+<p>Il template di percorso potrà essere usato più avanti dal planning per suggerire una rotta o creare un piano di trasporto.</p>
+<p>Per ora la shipment ha le sue <code>ShipmentLeg</code>.</p>
+<h2>10.15 Linee guida DDD sui sottopackage</h2>
+<p>La divisione in sottopackage non deve essere interpretata come divisione in micro-domini.</p>
+<p>Regole:</p>
+<ul>
+<li>non creare <code>ShipmentItemRepository</code>;</li>
+<li>non creare <code>ShipmentLegRepository</code>;</li>
+<li>non creare servizi separati solo perché esiste un sottopackage;</li>
+<li>non trattare <code>items</code>, <code>legs</code>, <code>metrics</code>, <code>requirements</code>, <code>properties</code>, <code>notes</code> o <code>references</code> come aggregate indipendenti;</li>
+<li>usare <code>Shipment</code> come unico aggregate root;</li>
+<li>salvare, caricare e modificare la shipment come aggregate unitario.</li>
+</ul>
+<p>Il repository futuro sarà concettualmente:</p>
+<pre><code class="language-text">ShipmentRepository
+</code></pre>
+<p>non:</p>
+<pre><code class="language-text">ShipmentItemRepository
+ShipmentLegRepository
+ShipmentMetricsRepository
+</code></pre>
+<h2>10.16 Invarianti principali</h2>
+<h3>Shipment</h3>
+<ul>
+<li><code>id</code> obbligatorio;</li>
+<li><code>code</code> obbligatorio;</li>
+<li><code>name</code> obbligatorio;</li>
+<li><code>status</code> obbligatorio;</li>
+<li><code>priority</code> obbligatoria;</li>
+<li><code>serviceLevel</code> obbligatorio;</li>
+<li><code>items</code> non nullo;</li>
+<li><code>legs</code> non nullo;</li>
+<li>note normalizzate;</li>
+<li>una shipment <code>CONFIRMED</code> deve avere almeno un item;</li>
+<li>una shipment <code>CONFIRMED</code> deve avere almeno una leg;</li>
+<li>i <code>sequenceNumber</code> delle leg devono essere univoci;</li>
+<li>le leg vengono ordinate per <code>sequenceNumber</code>.</li>
+</ul>
+<h3>ShipmentItem</h3>
+<ul>
+<li><code>id</code> obbligatorio;</li>
+<li><code>cargoId</code> obbligatorio;</li>
+<li><code>quantity</code> positiva;</li>
+<li><code>unitOfMeasure</code> obbligatoria;</li>
+<li>note normalizzate.</li>
+</ul>
+<h3>ShipmentLeg</h3>
+<ul>
+<li><code>id</code> obbligatorio;</li>
+<li><code>sequenceNumber</code> positivo;</li>
+<li><code>type</code> obbligatorio;</li>
+<li><code>originLocationId</code> obbligatorio;</li>
+<li><code>destinationLocationId</code> obbligatorio;</li>
+<li><code>estimatedDistanceKm</code> opzionale ma non negativa;</li>
+<li>note normalizzate.</li>
+</ul>
+<h3>ShipmentTemperature</h3>
+<ul>
+<li>se <code>controlled = true</code>, devono esserci temperatura minima e massima;</li>
+<li>la temperatura minima non può essere maggiore della massima;</li>
+<li>una shipment a temperatura controllata deve dichiarare <code>TEMPERATURE_CONTROL_REQUIRED</code>.</li>
+</ul>
+<h3>ShipmentProperties</h3>
+<ul>
+<li>se <code>requiresSeparation = true</code>, la shipment deve dichiarare <code>SEPARATION_REQUIRED</code>.</li>
+</ul>
+<h2>10.17 Esempio completo</h2>
+<pre><code class="language-text">Shipment
+├─ code: SHP-001
+├─ name: Spedizione alimentare Milano - Roma
+├─ status: CONFIRMED
+├─ priority: HIGH
+├─ serviceLevel: EXPRESS
+│
+├─ items:
+│  ├─ Item 1:
+│  │  ├─ cargoId: FOOD-023
+│  │  ├─ quantity: 33
+│  │  └─ unitOfMeasure: PALLET
+│  │
+│  └─ Item 2:
+│     ├─ cargoId: PHARMA-004
+│     ├─ quantity: 4
+│     └─ unitOfMeasure: PALLET
+│
+├─ legs:
+│  ├─ Leg 1:
+│  │  ├─ sequenceNumber: 1
+│  │  ├─ type: PICKUP
+│  │  ├─ originLocationId: CUS-MIL-001
+│  │  └─ destinationLocationId: HUB-BO-001
+│  │
+│  └─ Leg 2:
+│     ├─ sequenceNumber: 2
+│     ├─ type: DELIVERY
+│     ├─ originLocationId: HUB-BO-001
+│     └─ destinationLocationId: DEP-ROMA-001
+│
+├─ properties:
+│  ├─ fragile: false
+│  ├─ highValue: true
+│  ├─ perishable: true
+│  └─ requiresSeparation: true
+│
+├─ temperature:
+│  ├─ requiredMin: +2°C
+│  ├─ requiredMax: +4°C
+│  └─ controlled: true
+│
+├─ requirementSet:
+│  ├─ ATP_REQUIRED
+│  ├─ FOOD_GRADE_REQUIRED
+│  ├─ TEMPERATURE_CONTROL_REQUIRED
+│  ├─ REFRIGERATED_TRANSPORT_REQUIRED
+│  └─ SEPARATION_REQUIRED
+│
+├─ metrics:
+│  ├─ volume: 60 m³
+│  └─ weight: 12000 kg
+│
+├─ references:
+│  ├─ customerReference: ORD-2024-033
+│  ├─ supplierReference: SUP-8831
+│  └─ internalReference: INT-0001
+│
+└─ notes:
+   ├─ internalNotes: Verificare separazione merce pharma
+   └─ externalNotes: Consegnare in area refrigerata
+</code></pre>
+<h2>10.18 Perché questa scelta è coerente con DDD</h2>
+<p><code>domain.shipments</code> è coerente con il resto del progetto perché:</p>
+<ul>
+<li>usa ID per riferirsi ad altri aggregati;</li>
+<li>non ingloba <code>CargoUnit</code> o <code>Location</code> completi;</li>
+<li>non assegna veicoli;</li>
+<li>non assegna autisti;</li>
+<li>non pianifica;</li>
+<li>non traccia;</li>
+<li>non gestisce documenti operativi;</li>
+<li>non implementa compatibilità veicolo-cargo;</li>
+<li>usa value object espliciti;</li>
+<li>protegge invarianti semplici ma importanti;</li>
+<li>organizza il package in sottopackage senza spezzare l'aggregate root.</li>
+</ul>
+<p>La separazione finale è:</p>
+<pre><code class="language-text">Cargo = merce
+Shipments = richiesta di spedizione
+Locations = luoghi
+TripTemplates = percorsi tipo
+Vehicles = mezzi
+Operational = persone operative
+Planning/Dispatching = esecuzione reale futura
+</code></pre>
+<p>Questa struttura mantiene TruckFlow pulito, scalabile e pronto per i moduli operativi futuri.</p>
+
+    </article>
+  </main>
+</body>
+</html>

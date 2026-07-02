@@ -1,0 +1,499 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Software Engineering Overview — TruckFlow Manager</title>
+  <style>
+    :root {
+      --bg: #f5f7fb;
+      --panel: #ffffff;
+      --panel-soft: #f8fafc;
+      --text: #172033;
+      --muted: #65738b;
+      --accent: #3554d1;
+      --accent-soft: #e8edff;
+      --green: #047857;
+      --green-soft: #d1fae5;
+      --amber: #a16207;
+      --amber-soft: #fef3c7;
+      --border: #d9e1ef;
+      --shadow: 0 18px 44px rgba(15, 23, 42, 0.08);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(53, 84, 209, .12), transparent 30rem),
+        var(--bg);
+      line-height: 1.55;
+      font-size: 15px;
+    }
+
+    a { color: var(--accent); text-decoration: none; font-weight: 750; }
+    a:hover { text-decoration: underline; }
+
+    .page {
+      width: min(1180px, calc(100% - 2rem));
+      margin: 0 auto;
+      padding: 2rem 0 4rem;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 280px;
+      gap: 1rem;
+      align-items: stretch;
+      margin-bottom: 1rem;
+    }
+
+    .hero-main,
+    .hero-side,
+    .panel {
+      background: rgba(255, 255, 255, .92);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+    }
+
+    .hero-main { padding: 2rem; }
+    .hero-side {
+      padding: 1.25rem;
+      display: grid;
+      gap: .75rem;
+      align-content: center;
+    }
+
+    .eyebrow,
+    .tag,
+    .status {
+      display: inline-flex;
+      width: fit-content;
+      align-items: center;
+      border-radius: 999px;
+      font-size: .72rem;
+      font-weight: 850;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow {
+      padding: .28rem .7rem;
+      color: #1e3a8a;
+      background: #dbeafe;
+    }
+
+    h1 {
+      margin: .75rem 0 .7rem;
+      max-width: 920px;
+      font-size: clamp(2.2rem, 4vw, 4.4rem);
+      line-height: .98;
+      letter-spacing: -.055em;
+    }
+
+    .lead {
+      max-width: 880px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    .hero-side strong {
+      font-size: .8rem;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: .06em;
+    }
+
+    .hero-side span {
+      font-size: 1.05rem;
+      font-weight: 820;
+      line-height: 1.3;
+    }
+
+    .toc {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
+      margin: 1rem 0;
+      padding: .85rem;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: var(--panel);
+      box-shadow: 0 10px 28px rgba(15, 23, 42, .05);
+    }
+
+    .toc a {
+      padding: .45rem .65rem;
+      border-radius: 999px;
+      color: #334155;
+      background: #eef2f7;
+      font-size: .86rem;
+    }
+
+    .grid {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+    .panel {
+      padding: 1.25rem;
+      margin-top: 1rem;
+    }
+
+    .panel h2 {
+      margin: .25rem 0 .7rem;
+      font-size: clamp(1.35rem, 2.4vw, 2rem);
+      letter-spacing: -.035em;
+    }
+
+    .panel h3 {
+      margin: 0 0 .4rem;
+      font-size: 1.02rem;
+    }
+
+    .panel p { color: var(--muted); }
+
+    .metric {
+      padding: 1rem;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: var(--panel-soft);
+    }
+
+    .metric strong {
+      display: block;
+      color: var(--accent);
+      font-size: .78rem;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+    }
+
+    .metric span {
+      display: block;
+      margin-top: .25rem;
+      font-size: 1.05rem;
+      font-weight: 800;
+    }
+
+    .status {
+      padding: .24rem .6rem;
+      color: var(--green);
+      background: var(--green-soft);
+    }
+
+    .status.planned {
+      color: var(--amber);
+      background: var(--amber-soft);
+    }
+
+    .architecture {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: .8rem;
+      align-items: center;
+      margin-top: .8rem;
+    }
+
+    .layer-stack {
+      display: grid;
+      gap: .55rem;
+    }
+
+    .layer {
+      padding: .9rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: #fff;
+      font-weight: 850;
+    }
+
+    .layer small {
+      display: block;
+      margin-top: .15rem;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .arrow {
+      color: var(--accent);
+      font-size: 1.8rem;
+      font-weight: 900;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: #fff;
+    }
+
+    th,
+    td {
+      padding: .75rem;
+      border-bottom: 1px solid var(--border);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      color: #334155;
+      background: #f1f5f9;
+      font-size: .8rem;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+    }
+
+    tr:last-child td { border-bottom: 0; }
+
+    .timeline {
+      display: grid;
+      gap: .65rem;
+      margin-top: .8rem;
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 130px 1fr auto;
+      gap: .8rem;
+      align-items: center;
+      padding: .85rem;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: #fff;
+    }
+
+    .timeline-item strong { color: var(--accent); }
+
+    .callout {
+      border-left: 5px solid var(--accent);
+      padding: 1rem;
+      border-radius: 16px;
+      background: var(--accent-soft);
+    }
+
+    .code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      white-space: pre-wrap;
+      padding: 1rem;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: #0f172a;
+      color: #e5e7eb;
+      font-size: .88rem;
+    }
+
+    @media (max-width: 900px) {
+      .hero,
+      .architecture,
+      .grid-4,
+      .grid-3,
+      .grid-2 {
+        grid-template-columns: 1fr;
+      }
+
+      .arrow { display: none; }
+
+      .timeline-item {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="hero">
+      <div class="hero-main">
+        <span class="eyebrow">Relazione enterprise</span>
+        <h1>Software Engineering Overview — TruckFlow Manager</h1>
+        <p class="lead">
+          Documento visuale per capire il progetto: problema reale, requisiti, attori,
+          architettura a layer, stato attuale, vincoli tecnici, roadmap e rischi.
+        </p>
+      </div>
+      <aside class="hero-side">
+        <strong>Stato progetto</strong>
+        <span>Domain, Application e Infrastructure completati. API Layer pianificato come Punto 8.</span>
+        <a href="../professional/00-software-engineering-overview.md" target="_blank" rel="noopener">Apri sorgente Markdown</a>
+      </aside>
+    </section>
+
+    <nav class="toc" aria-label="Indice documento">
+      <a href="#summary">Executive Summary</a>
+      <a href="#requirements">Requisiti</a>
+      <a href="#architecture">Architettura</a>
+      <a href="#domain">Dominio</a>
+      <a href="#status">Stato attuale</a>
+      <a href="#roadmap">Roadmap</a>
+      <a href="#missing">Cosa manca</a>
+      <a href="#risks">Rischi</a>
+      <a href="#glossary">Glossario</a>
+    </nav>
+
+    <section id="summary" class="panel">
+      <span class="eyebrow">Executive Summary</span>
+      <h2>Un sistema logistico enterprise costruito per layer</h2>
+      <p>
+        TruckFlow Manager è un progetto Java 21 per modellare processi logistici e di trasporto merci.
+        Non nasce come semplice CRUD: prima stabilizza il dominio, poi i casi d’uso applicativi,
+        poi gli adapter tecnici, e solo dopo introduce API REST.
+      </p>
+      <div class="grid grid-4">
+        <article class="metric"><strong>Domain</strong><span>Punti 1 → 5</span><p>Completato</p></article>
+        <article class="metric"><strong>Application</strong><span>6A → 6M</span><p>Completato</p></article>
+        <article class="metric"><strong>Infrastructure</strong><span>7A → 7H</span><p>Completato</p></article>
+        <article class="metric"><strong>API</strong><span>8A → 8H</span><p>Pianificato</p></article>
+      </div>
+    </section>
+
+    <section id="requirements" class="panel">
+      <span class="eyebrow">Requisiti</span>
+      <h2>Requisiti funzionali e non funzionali</h2>
+      <table>
+        <thead><tr><th>ID</th><th>Requisito funzionale</th><th>Stato</th><th>Layer</th></tr></thead>
+        <tbody>
+          <tr><td>RF-01</td><td>Modellare utenti, qualifiche, ruoli operativi, veicoli, cargo, locations, shipments, documents e compliance.</td><td><span class="status">Presente</span></td><td>Domain</td></tr>
+          <tr><td>RF-02</td><td>Eseguire casi d’uso applicativi tramite port in, command e result.</td><td><span class="status">Presente</span></td><td>Application</td></tr>
+          <tr><td>RF-03</td><td>Separare repository port e implementazioni tecniche.</td><td><span class="status">Presente</span></td><td>Application / Infrastructure</td></tr>
+          <tr><td>RF-04</td><td>Persistenza file-backed limitata per contesti validati.</td><td><span class="status">Presente</span></td><td>Infrastructure</td></tr>
+          <tr><td>RF-05</td><td>Esporre API REST versionate con DTO e mapping.</td><td><span class="status planned">Pianificato</span></td><td>API futura</td></tr>
+        </tbody>
+      </table>
+      <table style="margin-top:1rem">
+        <thead><tr><th>Qualità</th><th>Descrizione</th><th>Stato attuale</th></tr></thead>
+        <tbody>
+          <tr><td>Manutenibilità</td><td>Layer e bounded context separati.</td><td>Applicata</td></tr>
+          <tr><td>Testabilità</td><td>Domain e application testabili senza web/database.</td><td>Applicata</td></tr>
+          <tr><td>Sicurezza</td><td>Security HTTP/JWT non ancora presente.</td><td>Futura</td></tr>
+          <tr><td>Scalabilità</td><td>API, DB e integrazioni arriveranno per cicli controllati.</td><td>Pianificata</td></tr>
+          <tr><td>Documentazione</td><td>Simple, Professional, Old Style e Digital Reader.</td><td>In refinement</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="architecture" class="panel">
+      <span class="eyebrow">Architettura</span>
+      <h2>Separazione dei layer</h2>
+      <div class="architecture">
+        <div class="layer-stack">
+          <div class="layer">API Layer <small>Futuro Punto 8: controller, DTO, error handling, OpenAPI.</small></div>
+          <div class="layer">Application Layer <small>Use case, command, result, port in/out.</small></div>
+          <div class="layer">Domain Layer <small>Business model puro, senza Spring/JPA/REST.</small></div>
+        </div>
+        <div class="arrow">↔</div>
+        <div class="layer-stack">
+          <div class="layer">Infrastructure Layer <small>Spring wiring non-web, repository memory/file-backed, mapping.</small></div>
+          <div class="callout">Infrastructure implementa dettagli tecnici, ma non deve contaminare domain/application.</div>
+        </div>
+      </div>
+      <div class="code">Regola principale:
+api → application → domain
+infrastructure → application/domain
+
+Vietato:
+domain → application/infrastructure/api
+application → infrastructure/api
+api → repository concreti</div>
+    </section>
+
+    <section id="domain" class="panel">
+      <span class="eyebrow">Dominio</span>
+      <h2>Bounded context principali</h2>
+      <div class="grid grid-3">
+        <article class="metric"><strong>Core domain</strong><span>cargo, locations, shipments</span><p>Concetti centrali per trasporto e logistica.</p></article>
+        <article class="metric"><strong>Operational</strong><span>drivers, dispatchers, managers</span><p>Ruoli operativi e figure professionali.</p></article>
+        <article class="metric"><strong>Compliance</strong><span>documents, requirements</span><p>Documenti, requisiti e scadenze normative.</p></article>
+      </div>
+    </section>
+
+    <section id="status" class="panel">
+      <span class="eyebrow">Stato attuale</span>
+      <h2>Cosa è già presente</h2>
+      <div class="grid grid-2">
+        <div>
+          <h3>Completato</h3>
+          <ul>
+            <li>Domain Layer completato e documentato.</li>
+            <li>Application Layer completato con use case, port, command e result.</li>
+            <li>Infrastructure Layer completato con wiring Spring non-web e repository file-backed limitati.</li>
+            <li>Documentazione simple, professional, old_style e digital.</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Repository file-backed validati</h3>
+          <ul>
+            <li>Locations</li>
+            <li>Cargo</li>
+            <li>Documents</li>
+            <li>Compliance</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="roadmap" class="panel">
+      <span class="eyebrow">Roadmap</span>
+      <h2>Punti 1 → 8</h2>
+      <div class="timeline">
+        <div class="timeline-item"><strong>Punto 1 → 5</strong><span>Domain Layer: modellazione e freeze del dominio.</span><span class="status">Completato</span></div>
+        <div class="timeline-item"><strong>Punto 6A → 6M</strong><span>Application Layer: use case, port, repository interfaces e freeze.</span><span class="status">Completato</span></div>
+        <div class="timeline-item"><strong>Punto 7A → 7H</strong><span>Infrastructure Layer: wiring, mapping, repository file-backed e freeze.</span><span class="status">Completato</span></div>
+        <div class="timeline-item"><strong>Punto 8A → 8H</strong><span>API Layer: blueprint, foundation, controller Locations, DTO, error handling, test, OpenAPI e freeze.</span><span class="status planned">Pianificato</span></div>
+      </div>
+    </section>
+
+    <section id="missing" class="panel">
+      <span class="eyebrow">Cosa manca</span>
+      <h2>Funzionalità non ancora introdotte</h2>
+      <p>Queste parti sono rimandate per scelta architetturale, non per errore.</p>
+      <div class="grid grid-3">
+        <article class="metric"><strong>API</strong><span>REST controller, DTO, mapping</span></article>
+        <article class="metric"><strong>Persistence</strong><span>Database, JPA, Spring Data</span></article>
+        <article class="metric"><strong>Security</strong><span>JWT, ruoli HTTP, autorizzazioni</span></article>
+        <article class="metric"><strong>Enterprise</strong><span>Audit, workflow, dashboard</span></article>
+        <article class="metric"><strong>Frontend</strong><span>UI applicativa</span></article>
+        <article class="metric"><strong>Integrations</strong><span>Telematics, tachograph, ERP</span></article>
+      </div>
+    </section>
+
+    <section id="risks" class="panel">
+      <span class="eyebrow">Rischi</span>
+      <h2>Rischi tecnici e mitigazioni</h2>
+      <table>
+        <thead><tr><th>Rischio</th><th>Mitigazione</th></tr></thead>
+        <tbody>
+          <tr><td>Introdurre API troppo presto</td><td>Punto 8A parte solo dopo documentazione e layer freeze.</td></tr>
+          <tr><td>Mescolare layer interni e tecnici</td><td>Test architetturali e convenzioni chiare.</td></tr>
+          <tr><td>Package Explorer ingestibile</td><td>Albero gerarchico e pannello dettaglio.</td></tr>
+          <tr><td>Documentazione generica</td><td>Descrizioni specifiche e documento enterprise visuale.</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="glossary" class="panel">
+      <span class="eyebrow">Glossario</span>
+      <h2>Termini essenziali</h2>
+      <div class="grid grid-2">
+        <article><h3>Domain Layer</h3><p>Layer con concetti e regole di business.</p></article>
+        <article><h3>Application Layer</h3><p>Layer dei casi d’uso e delle port.</p></article>
+        <article><h3>Infrastructure Layer</h3><p>Layer tecnico con adapter e repository concreti.</p></article>
+        <article><h3>API Layer</h3><p>Futuro layer REST versionato.</p></article>
+        <article><h3>Port</h3><p>Interfaccia applicativa di ingresso o uscita.</p></article>
+        <article><h3>Adapter</h3><p>Implementazione tecnica collegata a una port.</p></article>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Glossario semplice — TruckFlow Docs</title>
+  <style>:root{--bg:#f5f7fb;--panel:#fff;--text:#172033;--muted:#64748b;--accent:#3554d1;--border:#d9e1ef;--code:#0f172a;--shadow:0 18px 44px rgba(15,23,42,.08)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:radial-gradient(circle at top left,rgba(53,84,209,.10),transparent 30rem),var(--bg);color:var(--text);line-height:1.68;font-size:16px}.page{width:min(980px,calc(100% - 2rem));margin:0 auto;padding:2rem 0 4rem}.topbar{display:flex;justify-content:space-between;gap:1rem;align-items:center;margin-bottom:1rem}.back{display:inline-flex;align-items:center;gap:.35rem;padding:.55rem .85rem;border:1px solid var(--border);border-radius:999px;background:#fff;color:var(--accent);font-weight:850;text-decoration:none;box-shadow:0 8px 22px rgba(15,23,42,.05)}.source{color:var(--muted);font-size:.88rem}.doc{padding:2rem;border:1px solid var(--border);border-radius:24px;background:rgba(255,255,255,.94);box-shadow:var(--shadow)}.doc-header{padding-bottom:1rem;margin-bottom:1.25rem;border-bottom:1px solid var(--border)}.kicker{display:inline-flex;width:fit-content;padding:.25rem .65rem;border-radius:999px;background:#dbeafe;color:#1e3a8a;font-size:.72rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase}.doc h1{margin:.7rem 0 .4rem;font-size:clamp(2rem,4vw,3.6rem);line-height:1;letter-spacing:-.05em}.doc h2{margin:2rem 0 .6rem;font-size:1.55rem;line-height:1.15;letter-spacing:-.03em}.doc h3{margin:1.35rem 0 .45rem;font-size:1.18rem}.doc p{margin:.65rem 0;color:#334155}.doc ul,.doc ol{padding-left:1.35rem}.doc li{margin:.35rem 0}.doc a{color:var(--accent);font-weight:800}.doc blockquote{margin:1rem 0;padding:.85rem 1rem;border-left:5px solid var(--accent);border-radius:14px;background:#eef2ff;color:#334155}.doc pre{overflow:auto;padding:1rem;border-radius:16px;background:var(--code);color:#e5e7eb;font-size:.9rem;line-height:1.55}.doc code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}.doc :not(pre)>code{padding:.15rem .32rem;border-radius:7px;background:#eef2f7;color:#1e293b}.doc table{width:100%;border-collapse:collapse;margin:1rem 0;border:1px solid var(--border);border-radius:16px;overflow:hidden;display:block}.doc thead,.doc tbody,.doc tr{width:100%}.doc th,.doc td{padding:.75rem;border-bottom:1px solid var(--border);text-align:left;vertical-align:top}.doc th{background:#f1f5f9;color:#334155;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}.doc tr:last-child td{border-bottom:0}.doc hr{border:0;border-top:1px solid var(--border);margin:2rem 0}.doc img{max-width:100%;border-radius:16px;border:1px solid var(--border)}@media(max-width:720px){.page{width:min(100% - 1rem,980px);padding-top:1rem}.doc{padding:1.15rem;border-radius:18px}.topbar{display:grid}.source{overflow-wrap:anywhere}}</style>
+</head>
+<body>
+  <main class="page">
+    <div class="topbar">
+      <a class="back" href="../index.html">← Torna alla Home</a>
+      <span class="source">Sorgente Markdown: ../simple/glossario-semplice.md</span>
+    </div>
+    <article class="doc">
+      <header class="doc-header">
+        <span class="kicker">simple</span>
+        <h1>Glossario semplice</h1>
+      </header>
+      <h1>Glossario semplice</h1>
+<p>Questo glossario spiega le parole difficili con un linguaggio pratico.</p>
+<h2>Adapter</h2>
+<p>Una classe concreta che collega il progetto a una tecnologia o a un dettaglio tecnico. Esempio: un repository in-memory o file-backed.</p>
+<h2>Application Layer</h2>
+<p>La parte che coordina le azioni del sistema. Riceve command, chiama il dominio e usa repository.</p>
+<h2>Bean</h2>
+<p>Un oggetto creato e gestito da Spring.</p>
+<h2>Command</h2>
+<p>L'oggetto che contiene i dati necessari per eseguire un use case.</p>
+<h2>Controller</h2>
+<p>La classe che, in futuro, riceverà richieste HTTP. Non è ancora stata introdotta.</p>
+<h2>Database</h2>
+<p>Un sistema per salvare dati in modo reale e strutturato. Non è ancora presente nel progetto.</p>
+<h2>Domain Layer</h2>
+<p>La parte che contiene le regole vere del business.</p>
+<h2>DTO</h2>
+<p>Oggetto usato per trasportare dati, spesso nelle API. Verrà valutato nel Punto 8.</p>
+<h2>File-backed repository</h2>
+<p>Repository che salva dati su file. È più reale dell'in-memory, ma non è ancora un database.</p>
+<h2>In-memory repository</h2>
+<p>Repository che salva dati solo in memoria. Utile per test e sviluppo.</p>
+<h2>Infrastructure Layer</h2>
+<p>La parte tecnica del progetto: repository concreti, configurazione, mapping e wiring.</p>
+<h2>JPA</h2>
+<p>Tecnologia Java per lavorare con database relazionali. Non è ancora introdotta.</p>
+<h2>Port</h2>
+<p>Un contratto. Dice cosa serve, senza dire quale tecnologia lo realizza.</p>
+<h2>Port in</h2>
+<p>Contratto di ingresso verso il sistema, come un use case.</p>
+<h2>Port out</h2>
+<p>Contratto verso l'esterno, come un repository.</p>
+<h2>Repository</h2>
+<p>Oggetto che salva e recupera dati.</p>
+<h2>REST API</h2>
+<p>Modo per esporre funzioni via HTTP. Sarà il tema del Punto 8.</p>
+<h2>Result</h2>
+<p>Oggetto restituito da un use case.</p>
+<h2>Security</h2>
+<p>Gestione di accessi, ruoli, token e protezione. Non è ancora introdotta a livello web.</p>
+<h2>Spring wiring</h2>
+<p>Uso di Spring per collegare tra loro gli oggetti. Nel progetto è non-web e resta nell'infrastructure layer.</p>
+<h2>Use case</h2>
+<p>Azione che il sistema sa eseguire, come registrare una location o trovare un documento.</p>
+
+    </article>
+  </main>
+</body>
+</html>

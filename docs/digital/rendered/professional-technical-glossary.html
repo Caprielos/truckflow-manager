@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Technical Glossary — TruckFlow Docs</title>
+  <style>:root{--bg:#f5f7fb;--panel:#fff;--text:#172033;--muted:#64748b;--accent:#3554d1;--border:#d9e1ef;--code:#0f172a;--shadow:0 18px 44px rgba(15,23,42,.08)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:radial-gradient(circle at top left,rgba(53,84,209,.10),transparent 30rem),var(--bg);color:var(--text);line-height:1.68;font-size:16px}.page{width:min(980px,calc(100% - 2rem));margin:0 auto;padding:2rem 0 4rem}.topbar{display:flex;justify-content:space-between;gap:1rem;align-items:center;margin-bottom:1rem}.back{display:inline-flex;align-items:center;gap:.35rem;padding:.55rem .85rem;border:1px solid var(--border);border-radius:999px;background:#fff;color:var(--accent);font-weight:850;text-decoration:none;box-shadow:0 8px 22px rgba(15,23,42,.05)}.source{color:var(--muted);font-size:.88rem}.doc{padding:2rem;border:1px solid var(--border);border-radius:24px;background:rgba(255,255,255,.94);box-shadow:var(--shadow)}.doc-header{padding-bottom:1rem;margin-bottom:1.25rem;border-bottom:1px solid var(--border)}.kicker{display:inline-flex;width:fit-content;padding:.25rem .65rem;border-radius:999px;background:#dbeafe;color:#1e3a8a;font-size:.72rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase}.doc h1{margin:.7rem 0 .4rem;font-size:clamp(2rem,4vw,3.6rem);line-height:1;letter-spacing:-.05em}.doc h2{margin:2rem 0 .6rem;font-size:1.55rem;line-height:1.15;letter-spacing:-.03em}.doc h3{margin:1.35rem 0 .45rem;font-size:1.18rem}.doc p{margin:.65rem 0;color:#334155}.doc ul,.doc ol{padding-left:1.35rem}.doc li{margin:.35rem 0}.doc a{color:var(--accent);font-weight:800}.doc blockquote{margin:1rem 0;padding:.85rem 1rem;border-left:5px solid var(--accent);border-radius:14px;background:#eef2ff;color:#334155}.doc pre{overflow:auto;padding:1rem;border-radius:16px;background:var(--code);color:#e5e7eb;font-size:.9rem;line-height:1.55}.doc code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}.doc :not(pre)>code{padding:.15rem .32rem;border-radius:7px;background:#eef2f7;color:#1e293b}.doc table{width:100%;border-collapse:collapse;margin:1rem 0;border:1px solid var(--border);border-radius:16px;overflow:hidden;display:block}.doc thead,.doc tbody,.doc tr{width:100%}.doc th,.doc td{padding:.75rem;border-bottom:1px solid var(--border);text-align:left;vertical-align:top}.doc th{background:#f1f5f9;color:#334155;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}.doc tr:last-child td{border-bottom:0}.doc hr{border:0;border-top:1px solid var(--border);margin:2rem 0}.doc img{max-width:100%;border-radius:16px;border:1px solid var(--border)}@media(max-width:720px){.page{width:min(100% - 1rem,980px);padding-top:1rem}.doc{padding:1.15rem;border-radius:18px}.topbar{display:grid}.source{overflow-wrap:anywhere}}</style>
+</head>
+<body>
+  <main class="page">
+    <div class="topbar">
+      <a class="back" href="../index.html">← Torna alla Home</a>
+      <span class="source">Sorgente Markdown: ../professional/technical-glossary.md</span>
+    </div>
+    <article class="doc">
+      <header class="doc-header">
+        <span class="kicker">professional</span>
+        <h1>Technical Glossary</h1>
+      </header>
+      <h1>Technical Glossary</h1>
+<p>This glossary provides precise technical definitions for the main concepts used in TruckFlow Manager.</p>
+<h2>Adapter</h2>
+<p><strong>Category:</strong> Architecture / Infrastructure Layer</p>
+<p><strong>Definition:</strong> A concrete implementation that connects an abstract port to a technical mechanism.</p>
+<p><strong>Usage in TruckFlow Manager:</strong> <code>InMemoryLocationRepository</code> and <code>FileLocationRepository</code> are adapters implementing application repository ports.</p>
+<p><strong>Related terms:</strong> Port, Repository, Infrastructure Layer.</p>
+<h2>Aggregate</h2>
+<p><strong>Category:</strong> Domain-Driven Design</p>
+<p><strong>Definition:</strong> A consistency boundary that groups domain behavior and protects internal invariants.</p>
+<p><strong>Usage in TruckFlow Manager:</strong> Concepts such as shipments, vehicle units and documents are modeled as important domain objects with rules.</p>
+<p><strong>Related terms:</strong> Entity, Invariant, Domain Layer.</p>
+<h2>Application Layer</h2>
+<p><strong>Category:</strong> Architecture</p>
+<p><strong>Definition:</strong> The layer responsible for orchestrating use cases and coordinating domain operations through ports.</p>
+<p><strong>Usage in TruckFlow Manager:</strong> Contains commands, results, inbound ports, outbound ports and application services.</p>
+<p><strong>Related terms:</strong> Use Case, Port In, Port Out, Command, Result.</p>
+<h2>Bean</h2>
+<p><strong>Category:</strong> Spring</p>
+<p><strong>Definition:</strong> An object managed by the Spring container.</p>
+<p><strong>Usage in TruckFlow Manager:</strong> Spring wiring configuration creates beans for application services and repository adapters.</p>
+<p><strong>Related terms:</strong> Spring Wiring, Dependency Injection.</p>
+<h2>Blueprint</h2>
+<p><strong>Category:</strong> Roadmap / Architecture</p>
+<p><strong>Definition:</strong> A design step that defines structure, rules and direction before full implementation.</p>
+<p><strong>Usage in TruckFlow Manager:</strong> Punto 7D defines a persistence mapping blueprint without introducing JPA or database schema.</p>
+<p><strong>Related terms:</strong> Freeze, Hardening.</p>
+<h2>Command</h2>
+<p><strong>Category:</strong> Application Layer</p>
+<p><strong>Definition:</strong> An input object carrying the data required to execute a use case.</p>
+<p><strong>Usage in TruckFlow Manager:</strong> <code>RegisterLocationCommand</code> represents the data needed to register a location.</p>
+<p><strong>Related terms:</strong> Use Case, Result.</p>
+<h2>Controller</h2>
+<p><strong>Category:</strong> API Layer</p>
+<p><strong>Definition:</strong> A delivery-layer class that handles HTTP requests and delegates to application use cases.</p>
+<p><strong>Usage in TruckFlow Manager:</strong> Controllers are not yet introduced and belong to the future Punto 8.</p>
+<p><strong>Related terms:</strong> REST, DTO, API Layer.</p>
+<h2>Dependency Injection</h2>
+<p><strong>Category:</strong> Architecture / Spring</p>
+<p><strong>Definition:</strong> A technique where dependencies are provided to objects instead of being created internally.</p>
+<p><strong>Usage in TruckFlow Manager:</strong> Spring configuration wires use case services with repository port implementations.</p>
+<p><strong>Related terms:</strong> Bean, Spring Wiring.</p>
+<h2>Domain Layer</h2>
+<p><strong>Category:</strong> Architecture</p>
+<p><strong>Definition:</strong> The layer containing business rules, domain concepts, invariants and domain exceptions.</p>
+<p><strong>Usage in TruckFlow Manager:</strong> Contains contexts such as shipments, vehicles, cargo, documents and compliance.</p>
+<p><strong>Related terms:</strong> Aggregate, Value Object, Invariant.</p>
+<h2>DTO</h2>
+<p><strong>Category:</strong> API Layer</p>
+<p><strong>Definition:</strong> Data Transfer Object used to move data across boundaries, often in HTTP APIs.</p>
+<p><strong>Usage in TruckFlow Manager:</strong> DTOs are not yet introduced and belong to the future API Layer.</p>
+<p><strong>Related terms:</strong> Controller, REST, API Layer.</p>
+<h2>Entity</h2>
+<p><strong>Category:</strong> Domain-Driven Design</p>
+<p><strong>Definition:</strong> A domain object with identity.</p>
+<p><strong>Usage in TruckFlow Manager:</strong> Domain concepts with stable identifiers are modeled as entities or aggregate-like objects.</p>
+<p><strong>Related terms:</strong> Aggregate, Value Object.</p>
+<h2>File-Backed Repository</h2>
+<p><strong>Category:</strong> Infrastructure Layer</p>
+<p><strong>Definition:</strong> Repository implementation that persists records to local files.</p>
+<p><strong>Usage in TruckFlow Manager:</strong> File-backed repositories currently exist for Locations, Cargo, Documents and Compliance.</p>
+<p><strong>Related terms:</strong> Repository, Persistence Record, Persistence Mapper.</p>
+<h2>Freeze</h2>
+<p><strong>Category:</strong> Roadmap / Quality</p>
+<p><strong>Definition:</strong> A final review step that stabilizes a cycle and documents what is complete and what remains excluded.</p>
+<p><strong>Usage in TruckFlow Manager:</strong> Punto 6M and Punto 7H are freeze steps.</p>
+<p><strong>Related terms:</strong> Hardening, Blueprint.</p>
+<h2>Hardening</h2>
+<p><strong>Category:</strong> Quality</p>
+<p><strong>Definition:</strong> A strengthening phase focused on validation, negative tests, consistency and boundary protection.</p>
+<p><strong>Usage in TruckFlow Manager:</strong> Application use cases and operational role use cases were hardened before freeze.</p>
+<p><strong>Related terms:</strong> Freeze, Test Suite.</p>
+<h2>Hexagonal Architecture</h2>
+<p><strong>Category:</strong> Architecture</p>
+<p><strong>Definition:</strong> Architectural style that separates core logic from external systems using ports and adapters.</p>
+<p><strong>Usage in TruckFlow Manager:</strong> Application outbound ports are implemented by infrastructure adapters.</p>
+<p><strong>Related terms:</strong> Clean Architecture, Ports &amp; Adapters.</p>
+<h2>In-Memory Repository</h2>
+<p><strong>Category:</strong> Infrastructure Layer</p>
+<p><strong>Definition:</strong> Repository implementation storing data in memory only.</p>
+<p><strong>Usage in TruckFlow Manager:</strong> In-memory repositories remain valid for tests and local development.</p>
+<p><strong>Related terms:</strong> Repository, Adapter.</p>
+<h2>Infrastructure Layer</h2>
+<p><strong>Category:</strong> Architecture</p>
+<p><strong>Definition:</strong> Layer containing technical implementations, adapters, configuration, mapping and repository implementations.</p>
+<p><strong>Usage in TruckFlow Manager:</strong> Includes memory repositories, file-backed repositories, mapping support and Spring wiring.</p>
+<p><strong>Related terms:</strong> Adapter, Repository, Spring Wiring.</p>
+<h2>Invariant</h2>
+<p><strong>Category:</strong> Domain-Driven Design</p>
+<p><strong>Definition:</strong> A rule that must always remain true for a domain object to be valid.</p>
+<p><strong>Usage in TruckFlow Manager:</strong> Domain objects validate their own rules and reject invalid states.</p>
+<p><strong>Related terms:</strong> Domain Layer, Aggregate.</p>
+<h2>JPA</h2>
+<p><strong>Category:</strong> Persistence Technology</p>
+<p><strong>Definition:</strong> Java Persistence API, a standard for object-relational mapping.</p>
+<p><strong>Usage in TruckFlow Manager:</strong> JPA is intentionally not introduced yet.</p>
+<p><strong>Related terms:</strong> Spring Data, Database, Entity.</p>
+<h2>Persistence Mapper</h2>
+<p><strong>Category:</strong> Infrastructure Layer</p>
+<p><strong>Definition:</strong> Component that translates between domain objects and persistence records.</p>
+<p><strong>Usage in TruckFlow Manager:</strong> File-backed repositories use mappers to keep domain objects separate from storage representation.</p>
+<p><strong>Related terms:</strong> Persistence Record, File-Backed Repository.</p>
+<h2>Persistence Record</h2>
+<p><strong>Category:</strong> Infrastructure Layer</p>
+<p><strong>Definition:</strong> Technical data representation used for storage.</p>
+<p><strong>Usage in TruckFlow Manager:</strong> File-backed repositories store records rather than exposing storage details to the domain.</p>
+<p><strong>Related terms:</strong> Persistence Mapper, Repository.</p>
+<h2>Port In</h2>
+<p><strong>Category:</strong> Application Layer</p>
+<p><strong>Definition:</strong> Inbound contract representing an action offered by the application.</p>
+<p><strong>Usage in TruckFlow Manager:</strong> <code>RegisterLocationUseCase</code> is a port in.</p>
+<p><strong>Related terms:</strong> Use Case, Application Layer.</p>
+<h2>Port Out</h2>
+<p><strong>Category:</strong> Application Layer</p>
+<p><strong>Definition:</strong> Outbound contract representing a dependency required by the application.</p>
+<p><strong>Usage in TruckFlow Manager:</strong> Repository interfaces are port out contracts.</p>
+<p><strong>Related terms:</strong> Adapter, Repository, Infrastructure Layer.</p>
+<h2>Repository</h2>
+<p><strong>Category:</strong> Application / Infrastructure</p>
+<p><strong>Definition:</strong> Abstraction used to store and retrieve domain objects.</p>
+<p><strong>Usage in TruckFlow Manager:</strong> Application defines repository ports; infrastructure provides implementations.</p>
+<p><strong>Related terms:</strong> Port Out, Adapter.</p>
+<h2>REST</h2>
+<p><strong>Category:</strong> API Layer</p>
+<p><strong>Definition:</strong> Architectural style for exposing resources over HTTP.</p>
+<p><strong>Usage in TruckFlow Manager:</strong> REST API is planned for Punto 8 and is not yet implemented.</p>
+<p><strong>Related terms:</strong> Controller, DTO, API Layer.</p>
+<h2>Result</h2>
+<p><strong>Category:</strong> Application Layer</p>
+<p><strong>Definition:</strong> Output object returned by a use case.</p>
+<p><strong>Usage in TruckFlow Manager:</strong> Use cases return result objects to avoid exposing domain objects directly in application responses.</p>
+<p><strong>Related terms:</strong> Command, Use Case.</p>
+<h2>Security</h2>
+<p><strong>Category:</strong> Cross-cutting / API Layer</p>
+<p><strong>Definition:</strong> Authentication, authorization and protection of application access.</p>
+<p><strong>Usage in TruckFlow Manager:</strong> HTTP security is intentionally not introduced yet.</p>
+<p><strong>Related terms:</strong> Controller, API Layer.</p>
+<h2>Spring Data</h2>
+<p><strong>Category:</strong> Persistence Technology</p>
+<p><strong>Definition:</strong> Spring project that simplifies repository implementations for persistence technologies.</p>
+<p><strong>Usage in TruckFlow Manager:</strong> Spring Data is intentionally not used yet.</p>
+<p><strong>Related terms:</strong> JPA, Repository.</p>
+<h2>Spring Wiring</h2>
+<p><strong>Category:</strong> Infrastructure / Spring</p>
+<p><strong>Definition:</strong> Technical configuration that creates and connects beans.</p>
+<p><strong>Usage in TruckFlow Manager:</strong> Spring wiring is non-web and lives in infrastructure configuration packages.</p>
+<p><strong>Related terms:</strong> Bean, Dependency Injection.</p>
+<h2>Use Case</h2>
+<p><strong>Category:</strong> Application Layer</p>
+<p><strong>Definition:</strong> Application action representing a user/system operation.</p>
+<p><strong>Usage in TruckFlow Manager:</strong> Examples include registering locations, cargo, documents, vehicles and compliance requirements.</p>
+<p><strong>Related terms:</strong> Command, Result, Port In.</p>
+<h2>Value Object</h2>
+<p><strong>Category:</strong> Domain-Driven Design</p>
+<p><strong>Definition:</strong> Immutable domain object identified by its value rather than an identity.</p>
+<p><strong>Usage in TruckFlow Manager:</strong> Domain-specific values are modeled as value objects to keep meaning explicit.</p>
+<p><strong>Related terms:</strong> Domain Layer, Entity.</p>
+
+    </article>
+  </main>
+</body>
+</html>

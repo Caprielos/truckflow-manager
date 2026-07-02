@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Guida semplice e ragionata di TruckFlow Manager — TruckFlow Docs</title>
+  <style>:root{--bg:#f5f7fb;--panel:#fff;--text:#172033;--muted:#64748b;--accent:#3554d1;--border:#d9e1ef;--code:#0f172a;--shadow:0 18px 44px rgba(15,23,42,.08)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:radial-gradient(circle at top left,rgba(53,84,209,.10),transparent 30rem),var(--bg);color:var(--text);line-height:1.68;font-size:16px}.page{width:min(980px,calc(100% - 2rem));margin:0 auto;padding:2rem 0 4rem}.topbar{display:flex;justify-content:space-between;gap:1rem;align-items:center;margin-bottom:1rem}.back{display:inline-flex;align-items:center;gap:.35rem;padding:.55rem .85rem;border:1px solid var(--border);border-radius:999px;background:#fff;color:var(--accent);font-weight:850;text-decoration:none;box-shadow:0 8px 22px rgba(15,23,42,.05)}.source{color:var(--muted);font-size:.88rem}.doc{padding:2rem;border:1px solid var(--border);border-radius:24px;background:rgba(255,255,255,.94);box-shadow:var(--shadow)}.doc-header{padding-bottom:1rem;margin-bottom:1.25rem;border-bottom:1px solid var(--border)}.kicker{display:inline-flex;width:fit-content;padding:.25rem .65rem;border-radius:999px;background:#dbeafe;color:#1e3a8a;font-size:.72rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase}.doc h1{margin:.7rem 0 .4rem;font-size:clamp(2rem,4vw,3.6rem);line-height:1;letter-spacing:-.05em}.doc h2{margin:2rem 0 .6rem;font-size:1.55rem;line-height:1.15;letter-spacing:-.03em}.doc h3{margin:1.35rem 0 .45rem;font-size:1.18rem}.doc p{margin:.65rem 0;color:#334155}.doc ul,.doc ol{padding-left:1.35rem}.doc li{margin:.35rem 0}.doc a{color:var(--accent);font-weight:800}.doc blockquote{margin:1rem 0;padding:.85rem 1rem;border-left:5px solid var(--accent);border-radius:14px;background:#eef2ff;color:#334155}.doc pre{overflow:auto;padding:1rem;border-radius:16px;background:var(--code);color:#e5e7eb;font-size:.9rem;line-height:1.55}.doc code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}.doc :not(pre)>code{padding:.15rem .32rem;border-radius:7px;background:#eef2f7;color:#1e293b}.doc table{width:100%;border-collapse:collapse;margin:1rem 0;border:1px solid var(--border);border-radius:16px;overflow:hidden;display:block}.doc thead,.doc tbody,.doc tr{width:100%}.doc th,.doc td{padding:.75rem;border-bottom:1px solid var(--border);text-align:left;vertical-align:top}.doc th{background:#f1f5f9;color:#334155;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}.doc tr:last-child td{border-bottom:0}.doc hr{border:0;border-top:1px solid var(--border);margin:2rem 0}.doc img{max-width:100%;border-radius:16px;border:1px solid var(--border)}@media(max-width:720px){.page{width:min(100% - 1rem,980px);padding-top:1rem}.doc{padding:1.15rem;border-radius:18px}.topbar{display:grid}.source{overflow-wrap:anywhere}}</style>
+</head>
+<body>
+  <main class="page">
+    <div class="topbar">
+      <a class="back" href="../index.html">← Torna alla Home</a>
+      <span class="source">Sorgente Markdown: ../simple/README.md</span>
+    </div>
+    <article class="doc">
+      <header class="doc-header">
+        <span class="kicker">simple</span>
+        <h1>Guida semplice e ragionata di TruckFlow Manager</h1>
+      </header>
+      <h1>Guida semplice e ragionata di TruckFlow Manager</h1>
+<p>Questa guida è pensata per capire TruckFlow Manager senza dover essere già esperti di programmazione.</p>
+<p>L'obiettivo non è solo dire quali file esistono, ma spiegare <strong>perché</strong> il progetto è stato costruito in questo modo.</p>
+<h2>Ordine consigliato di lettura</h2>
+<ol>
+<li><a href="01-cos-e-truckflow-manager.md"><code>01-cos-e-truckflow-manager.md</code></a></li>
+<li><a href="02-perche-il-progetto-e-organizzato-cosi.md"><code>02-perche-il-progetto-e-organizzato-cosi.md</code></a></li>
+<li><a href="03-domain-layer-spiegato-semplice.md"><code>03-domain-layer-spiegato-semplice.md</code></a></li>
+<li><a href="04-application-layer-spiegato-semplice.md"><code>04-application-layer-spiegato-semplice.md</code></a></li>
+<li><a href="05-infrastructure-layer-spiegato-semplice.md"><code>05-infrastructure-layer-spiegato-semplice.md</code></a></li>
+<li><a href="06-cosa-sono-i-use-case.md"><code>06-cosa-sono-i-use-case.md</code></a></li>
+<li><a href="07-cosa-sono-i-repository.md"><code>07-cosa-sono-i-repository.md</code></a></li>
+<li><a href="08-cosa-sono-i-port-e-gli-adapter.md"><code>08-cosa-sono-i-port-e-gli-adapter.md</code></a></li>
+<li><a href="09-perche-non-abbiamo-ancora-rest-api.md"><code>09-perche-non-abbiamo-ancora-rest-api.md</code></a></li>
+<li><a href="10-perche-non-abbiamo-ancora-database-jpa-security.md"><code>10-perche-non-abbiamo-ancora-database-jpa-security.md</code></a></li>
+<li><a href="11-cosa-abbiamo-costruito-dal-punto-1-al-punto-7.md"><code>11-cosa-abbiamo-costruito-dal-punto-1-al-punto-7.md</code></a></li>
+<li><a href="12-cosa-succedera-nel-punto-8.md"><code>12-cosa-succedera-nel-punto-8.md</code></a></li>
+<li><a href="glossario-semplice.md"><code>glossario-semplice.md</code></a></li>
+</ol>
+<h2>Come usare questa guida</h2>
+<p>Leggi un capitolo alla volta. Quando trovi una parola difficile, controlla il glossario semplice. La guida spiega molti concetti con esempi pratici, perché TruckFlow Manager non è solo codice: è un progetto costruito con scelte precise.</p>
+<h2>Stato attuale</h2>
+<p>Il progetto ha completato il <strong>Punto 7 — Infrastructure Layer</strong>. Il prossimo ciclo sarà il <strong>Punto 8 — API Layer</strong>.</p>
+
+    </article>
+  </main>
+</body>
+</html>

@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Archivio storico — 32-spring-wiring-foundation — TruckFlow Docs</title>
+  <style>:root{--bg:#f5f7fb;--panel:#fff;--text:#172033;--muted:#64748b;--accent:#3554d1;--border:#d9e1ef;--code:#0f172a;--shadow:0 18px 44px rgba(15,23,42,.08)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:radial-gradient(circle at top left,rgba(53,84,209,.10),transparent 30rem),var(--bg);color:var(--text);line-height:1.68;font-size:16px}.page{width:min(980px,calc(100% - 2rem));margin:0 auto;padding:2rem 0 4rem}.topbar{display:flex;justify-content:space-between;gap:1rem;align-items:center;margin-bottom:1rem}.back{display:inline-flex;align-items:center;gap:.35rem;padding:.55rem .85rem;border:1px solid var(--border);border-radius:999px;background:#fff;color:var(--accent);font-weight:850;text-decoration:none;box-shadow:0 8px 22px rgba(15,23,42,.05)}.source{color:var(--muted);font-size:.88rem}.doc{padding:2rem;border:1px solid var(--border);border-radius:24px;background:rgba(255,255,255,.94);box-shadow:var(--shadow)}.doc-header{padding-bottom:1rem;margin-bottom:1.25rem;border-bottom:1px solid var(--border)}.kicker{display:inline-flex;width:fit-content;padding:.25rem .65rem;border-radius:999px;background:#dbeafe;color:#1e3a8a;font-size:.72rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase}.doc h1{margin:.7rem 0 .4rem;font-size:clamp(2rem,4vw,3.6rem);line-height:1;letter-spacing:-.05em}.doc h2{margin:2rem 0 .6rem;font-size:1.55rem;line-height:1.15;letter-spacing:-.03em}.doc h3{margin:1.35rem 0 .45rem;font-size:1.18rem}.doc p{margin:.65rem 0;color:#334155}.doc ul,.doc ol{padding-left:1.35rem}.doc li{margin:.35rem 0}.doc a{color:var(--accent);font-weight:800}.doc blockquote{margin:1rem 0;padding:.85rem 1rem;border-left:5px solid var(--accent);border-radius:14px;background:#eef2ff;color:#334155}.doc pre{overflow:auto;padding:1rem;border-radius:16px;background:var(--code);color:#e5e7eb;font-size:.9rem;line-height:1.55}.doc code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}.doc :not(pre)>code{padding:.15rem .32rem;border-radius:7px;background:#eef2f7;color:#1e293b}.doc table{width:100%;border-collapse:collapse;margin:1rem 0;border:1px solid var(--border);border-radius:16px;overflow:hidden;display:block}.doc thead,.doc tbody,.doc tr{width:100%}.doc th,.doc td{padding:.75rem;border-bottom:1px solid var(--border);text-align:left;vertical-align:top}.doc th{background:#f1f5f9;color:#334155;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}.doc tr:last-child td{border-bottom:0}.doc hr{border:0;border-top:1px solid var(--border);margin:2rem 0}.doc img{max-width:100%;border-radius:16px;border:1px solid var(--border)}@media(max-width:720px){.page{width:min(100% - 1rem,980px);padding-top:1rem}.doc{padding:1.15rem;border-radius:18px}.topbar{display:grid}.source{overflow-wrap:anywhere}}</style>
+</head>
+<body>
+  <main class="page">
+    <div class="topbar">
+      <a class="back" href="../index.html">← Torna alla Home</a>
+      <span class="source">Sorgente Markdown: ../old_style/32-spring-wiring-foundation.md</span>
+    </div>
+    <article class="doc">
+      <header class="doc-header">
+        <span class="kicker">old_style</span>
+        <h1>Archivio storico — 32-spring-wiring-foundation</h1>
+      </header>
+      <h1>Archivio storico — 32-spring-wiring-foundation</h1>
+<blockquote>
+<p>Questo documento fa parte dell'archivio storico <code>docs/old_style/</code>.
+Mantiene il percorso step-by-step del progetto, ma la documentazione principale aggiornata si trova in:
+<code>docs/simple/</code>, <code>docs/professional/</code> e <code>docs/digital/</code>.</p>
+</blockquote>
+<hr />
+<blockquote>
+<p>Aggiornamento 7E: il wiring Spring resta ancora sul profilo <code>memory</code>. Il primo repository reale prototipale per Locations viene introdotto come adapter separato e non sostituisce automaticamente gli in-memory repository.</p>
+</blockquote>
+<h1>Punto 7C — Spring Wiring Foundation</h1>
+<blockquote>
+<p>Aggiornamento 7D: il wiring Spring del Punto 7C resta invariato. Il Punto 7D aggiunge solo blueprint di mapping nel package <code>infrastructure.mapping</code> e non modifica i bean, i profili Spring o il runtime non web.</p>
+</blockquote>
+<p>Questo documento descrive il <strong>Punto 7C — Spring Wiring Foundation</strong> di TruckFlow Manager.</p>
+<p>Il Punto 7C introduce Spring in modo <strong>controllato, tecnico e non web</strong>. Lo scopo non è creare API, controller, database o sicurezza HTTP. Lo scopo è solo permettere al progetto di comporre repository in memory e use case applicativi tramite configurazioni Spring esplicite, lasciando intatti i confini già stabiliti da dominio, application layer e infrastructure foundation.</p>
+<h2>Stato da cui partiamo</h2>
+<p>Prima del Punto 7C il progetto contiene già:</p>
+<ul>
+<li>dominio puro completato, testato e documentato;</li>
+<li>application layer completato e congelato con il Punto 6M;</li>
+<li>repository port definiti nell'application layer;</li>
+<li>repository in memory già presenti sotto <code>infrastructure.memory</code>;</li>
+<li>Punto 7A documentato come blueprint dell'Infrastructure Layer;</li>
+<li>Punto 7B implementato come foundation infrastrutturale leggera;</li>
+<li>nessun controller REST;</li>
+<li>nessuna entity JPA;</li>
+<li>nessun database reale;</li>
+<li>nessuna Spring Data repository;</li>
+<li>nessuna security HTTP.</li>
+</ul>
+<p>Il Punto 7C non cambia questi confini. Aggiunge solo il primo livello di <strong>wiring tecnico Spring</strong>.</p>
+<h2>Obiettivo del Punto 7C</h2>
+<p>L'obiettivo del Punto 7C è rispondere a questa domanda:</p>
+<blockquote>
+<p>Come possiamo avviare TruckFlow Manager con Spring, componendo i use case esistenti e gli adapter in memory, senza contaminare domain e application layer?</p>
+</blockquote>
+<p>La risposta è:</p>
+<ul>
+<li>un entry point Spring Boot tecnico;</li>
+<li>un file <code>application.yml</code> minimale;</li>
+<li>un profilo Spring <code>memory</code>;</li>
+<li>configurazioni bean esplicite nel package <code>infrastructure.config.spring</code>;</li>
+<li>nessuna annotazione Spring nel dominio;</li>
+<li>nessuna annotazione Spring nell'application layer;</li>
+<li>nessun web server operativo;</li>
+<li>nessun repository reale;</li>
+<li>nessuna persistenza JPA.</li>
+</ul>
+<h2>Struttura introdotta</h2>
+<p>Il Punto 7C introduce la seguente struttura:</p>
+<pre><code class="language-text">src/main/java/it/gabriele/truckflow
+├── TruckFlowApplication.java
+└── infrastructure/config/spring
+    ├── SpringProfileNames.java
+    ├── TruckFlowSpringWiringConfiguration.java
+    ├── InMemoryRepositorySpringConfiguration.java
+    ├── LocationUseCaseSpringConfiguration.java
+    ├── CargoUseCaseSpringConfiguration.java
+    ├── ShipmentUseCaseSpringConfiguration.java
+    ├── DocumentUseCaseSpringConfiguration.java
+    ├── VehicleUseCaseSpringConfiguration.java
+    ├── OperationalUseCaseSpringConfiguration.java
+    ├── ComplianceUseCaseSpringConfiguration.java
+    └── package-info.java
+</code></pre>
+<p>Introduce anche:</p>
+<pre><code class="language-text">src/main/resources/application.yml
+src/test/java/it/gabriele/truckflow/infrastructure/config/spring/SpringWiringFoundationTest.java
+</code></pre>
+<p>Questa struttura è volutamente esplicita. Non usa component scan su application service o repository in memory. Questo rende chiaro dove Spring entra nel progetto e impedisce al framework di diventare invisibile nei layer centrali.</p>
+<h2><code>TruckFlowApplication</code></h2>
+<p><code>TruckFlowApplication</code> è l'entry point tecnico Spring Boot del progetto.</p>
+<p>La classe appartiene al package root <code>it.gabriele.truckflow</code>, ma scansiona solo la configurazione infrastrutturale Spring:</p>
+<pre><code class="language-text">it.gabriele.truckflow.infrastructure.config.spring
+</code></pre>
+<p>Questo è importante perché:</p>
+<ul>
+<li>evita di cercare componenti Spring nel dominio;</li>
+<li>evita di cercare componenti Spring nell'application layer;</li>
+<li>impedisce di trasformare i service applicativi in <code>@Service</code>;</li>
+<li>mantiene Spring come dettaglio dell'infrastructure layer.</li>
+</ul>
+<p><code>TruckFlowApplication</code> non rappresenta business logic. È solo bootstrap tecnico.</p>
+<h2><code>application.yml</code></h2>
+<p>Il Punto 7C aggiunge una configurazione minimale:</p>
+<pre><code class="language-yaml">spring:
+  application:
+    name: truckflow-manager
+  main:
+    web-application-type: none
+  profiles:
+    active: memory
+
+truckflow:
+  infrastructure:
+    profile: memory
+</code></pre>
+<p>La scelta più importante è:</p>
+<pre><code class="language-yaml">web-application-type: none
+</code></pre>
+<p>Questo significa che Spring Boot può avviare il contesto applicativo, ma non avvia un server web.</p>
+<p>Quindi nel Punto 7C restano esclusi:</p>
+<ul>
+<li>controller REST;</li>
+<li>endpoint HTTP;</li>
+<li>DTO web;</li>
+<li>JSON API;</li>
+<li>Swagger operativo;</li>
+<li>security HTTP;</li>
+<li>autenticazione;</li>
+<li>autorizzazione.</li>
+</ul>
+<p>Il profilo <code>memory</code> collega i port.out ai repository in memory già esistenti.</p>
+<h2>Package <code>infrastructure.config.spring</code></h2>
+<p>Il package <code>infrastructure.config.spring</code> è l'unico punto in cui Spring viene usato per comporre il sistema.</p>
+<p>Questo package può dipendere da:</p>
+<ul>
+<li>application port in;</li>
+<li>application port out;</li>
+<li>application service concreti;</li>
+<li>repository in memory;</li>
+<li>Spring configuration API.</li>
+</ul>
+<p>Questo package non deve contenere:</p>
+<ul>
+<li>regole di dominio;</li>
+<li>flussi applicativi nuovi;</li>
+<li>controller;</li>
+<li>entity JPA;</li>
+<li>mapper persistence concreti;</li>
+<li>integrazioni esterne;</li>
+<li>security configuration.</li>
+</ul>
+<h2><code>SpringProfileNames</code></h2>
+<p><code>SpringProfileNames</code> centralizza i nomi dei profili Spring.</p>
+<p>Nel Punto 7C viene formalizzato il profilo:</p>
+<pre><code class="language-text">memory
+</code></pre>
+<p>Questo profilo indica che l'infrastruttura attiva usa gli adapter in memory. In futuro potranno essere aggiunti profili come <code>local</code>, <code>test</code> o <code>production</code>, ma non vengono ancora configurati in questa fase.</p>
+<h2><code>TruckFlowSpringWiringConfiguration</code></h2>
+<p><code>TruckFlowSpringWiringConfiguration</code> è la configurazione root del wiring Spring.</p>
+<p>Il suo compito è importare le configurazioni specifiche:</p>
+<ul>
+<li>repository in memory;</li>
+<li>use case Locations;</li>
+<li>use case Cargo;</li>
+<li>use case Shipments;</li>
+<li>use case Documents;</li>
+<li>use case Vehicles;</li>
+<li>use case Operational Roles;</li>
+<li>use case Compliance.</li>
+</ul>
+<p>Questa classe non costruisce business logic. Si limita a comporre bean.</p>
+<h2><code>InMemoryRepositorySpringConfiguration</code></h2>
+<p><code>InMemoryRepositorySpringConfiguration</code> collega i port.out dell'application layer agli adapter in memory.</p>
+<p>Esempi concettuali:</p>
+<ul>
+<li><code>LocationRepository</code> → <code>InMemoryLocationRepository</code>;</li>
+<li><code>CargoUnitRepository</code> → <code>InMemoryCargoUnitRepository</code>;</li>
+<li><code>ShipmentRepository</code> → <code>InMemoryShipmentRepository</code>;</li>
+<li><code>DocumentRepository</code> → <code>InMemoryDocumentRepository</code>;</li>
+<li><code>VehicleUnitRepository</code> → <code>InMemoryVehicleUnitRepository</code>;</li>
+<li><code>DriverRepository</code> → <code>InMemoryDriverRepository</code>;</li>
+<li><code>ComplianceRequirementRepository</code> → <code>InMemoryComplianceRequirementRepository</code>.</li>
+</ul>
+<p>Questa configurazione è attiva solo con il profilo:</p>
+<pre><code class="language-text">memory
+</code></pre>
+<p>Questo mantiene chiaro che l'infrastruttura reale non è ancora stata introdotta. I repository in memory restano validi per test, sviluppo locale e bootstrap tecnico controllato.</p>
+<h2>Configurazioni use case</h2>
+<p>Il Punto 7C aggiunge configurazioni distinte per contesto applicativo:</p>
+<ul>
+<li><code>LocationUseCaseSpringConfiguration</code>;</li>
+<li><code>CargoUseCaseSpringConfiguration</code>;</li>
+<li><code>ShipmentUseCaseSpringConfiguration</code>;</li>
+<li><code>DocumentUseCaseSpringConfiguration</code>;</li>
+<li><code>VehicleUseCaseSpringConfiguration</code>;</li>
+<li><code>OperationalUseCaseSpringConfiguration</code>;</li>
+<li><code>ComplianceUseCaseSpringConfiguration</code>.</li>
+</ul>
+<p>Queste configurazioni creano bean per le port.in già esistenti.</p>
+<p>Esempio concettuale:</p>
+<pre><code class="language-text">RegisterLocationUseCase -&gt; RegisterLocationService
+FindLocationUseCase     -&gt; FindLocationService
+</code></pre>
+<p>La regola è sempre la stessa:</p>
+<ul>
+<li>il bean esposto è la port.in;</li>
+<li>l'implementazione concreta è il service applicativo;</li>
+<li>le dipendenze sono port.out;</li>
+<li>Spring vive solo nella configurazione infrastrutturale.</li>
+</ul>
+<h2>Perché non usare <code>@Service</code> negli application service</h2>
+<p>Una scelta importante del Punto 7C è non annotare i service applicativi con <code>@Service</code>.</p>
+<p>Motivo:</p>
+<ul>
+<li>gli application service appartengono all'application layer;</li>
+<li>l'application layer deve restare indipendente dal framework;</li>
+<li>Spring è un dettaglio tecnico esterno;</li>
+<li>il wiring deve vivere nell'infrastructure layer.</li>
+</ul>
+<p>Quindi invece di scrivere:</p>
+<pre><code class="language-text">@Service
+class RegisterLocationService
+</code></pre>
+<p>si mantiene il service puro e lo si compone da infrastructure:</p>
+<pre><code class="language-text">@Bean
+RegisterLocationUseCase registerLocationUseCase(...)
+</code></pre>
+<p>Questa scelta mantiene l'architettura pulita.</p>
+<h2>Cosa è stato collegato</h2>
+<p>Il Punto 7C collega tramite Spring:</p>
+<ul>
+<li>repository in memory attuali;</li>
+<li>use case Locations;</li>
+<li>use case Cargo;</li>
+<li>use case Shipments;</li>
+<li>use case Documents;</li>
+<li>use case Vehicles;</li>
+<li>use case Operational Roles;</li>
+<li>use case Compliance.</li>
+</ul>
+<p>Questo significa che il progetto può avviare un application context tecnico e ottenere i use case tramite Spring, ma senza introdurre delivery layer.</p>
+<h2>Cosa NON è stato introdotto</h2>
+<p>Il Punto 7C non introduce:</p>
+<ul>
+<li>REST API;</li>
+<li>controller;</li>
+<li>DTO web;</li>
+<li>endpoint HTTP;</li>
+<li>JSON API;</li>
+<li>database;</li>
+<li>JPA;</li>
+<li>Hibernate;</li>
+<li>Spring Data;</li>
+<li>entity persistence;</li>
+<li>repository reali;</li>
+<li>transazioni;</li>
+<li>security HTTP;</li>
+<li>JWT;</li>
+<li>audit trail operativo;</li>
+<li>workflow;</li>
+<li>servizi esterni;</li>
+<li>email service;</li>
+<li>document generation;</li>
+<li>file storage reale;</li>
+<li>nuovi use case business.</li>
+</ul>
+<p>Queste esclusioni sono intenzionali. Il Punto 7C deve essere solo wiring, non infrastruttura completa.</p>
+<h2>Test del Punto 7C</h2>
+<p>Il test <code>SpringWiringFoundationTest</code> verifica che:</p>
+<ul>
+<li><code>TruckFlowApplication</code> esista;</li>
+<li><code>application.yml</code> configuri runtime non web;</li>
+<li>il profilo <code>memory</code> sia esplicito;</li>
+<li>il contesto Spring possa essere avviato con <code>TruckFlowSpringWiringConfiguration</code>;</li>
+<li>i repository in memory siano disponibili come port.out;</li>
+<li>i use case principali siano disponibili come port.in;</li>
+<li>domain e application layer non contengano dipendenze Spring;</li>
+<li>l'infrastructure layer non abbia introdotto controller, JPA, Spring Data o security;</li>
+<li>la documentazione del Punto 7C sia presente.</li>
+</ul>
+<p>Il test è architetturale e tecnico. Non ridefinisce le regole business già coperte dai test domain/application.</p>
+<h2>Relazione con il Punto 7B</h2>
+<p>Il Punto 7B ha creato la foundation infrastrutturale:</p>
+<ul>
+<li>package;</li>
+<li>eccezioni;</li>
+<li>marker;</li>
+<li>profili tecnici;</li>
+<li>contratto generico di mapping.</li>
+</ul>
+<p>Il Punto 7C usa quella foundation per introdurre il wiring Spring.</p>
+<p>Il passaggio è coerente:</p>
+<pre><code class="language-text">7B = struttura e linguaggio infrastrutturale
+7C = composizione tecnica con Spring
+</code></pre>
+<h2>Relazione con il Punto 7D</h2>
+<p>Dopo il Punto 7C, il Punto 7D introduce:</p>
+<pre><code class="language-text">7D — Persistence Mapping Blueprint
+</code></pre>
+<p>Il Punto 7D non parte con JPA o database completi. Definisce invece in modo ordinato:</p>
+<ul>
+<li>regole di mapping domain ↔ persistence;</li>
+<li>blueprint dei modelli persistenti futuri;</li>
+<li>catalogo dei contesti applicativi attivi;</li>
+<li>vincoli per non rompere il dominio;</li>
+<li>strategia per un futuro repository reale pilota.</li>
+</ul>
+<p>Il Punto 7C prepara il terreno perché i futuri adapter possano essere collegati tramite Spring senza cambiare application layer. Il Punto 7D usa questa base per descrivere cosa dovrà essere mappato, prima di scegliere una tecnologia concreta di persistenza.</p>
+<h2>Stato finale del Punto 7C</h2>
+<p>Alla fine del Punto 7C il progetto ha:</p>
+<ul>
+<li>Spring Boot come bootstrap tecnico;</li>
+<li>runtime non web;</li>
+<li>profilo <code>memory</code> attivo;</li>
+<li>repository in memory cablati tramite Spring;</li>
+<li>use case applicativi cablati tramite Spring;</li>
+<li>domain layer ancora puro;</li>
+<li>application layer ancora framework-free;</li>
+<li>nessun database;</li>
+<li>nessun controller;</li>
+<li>nessuna API REST;</li>
+<li>nessuna security.</li>
+</ul>
+<h2>Sintesi</h2>
+<p>Il Punto 7C introduce Spring nel modo più prudente possibile:</p>
+<blockquote>
+<p>Spring non entra nel dominio, non entra nell'application layer e non apre API.
+Spring viene usato solo per comporre tecnicamente ciò che esiste già.</p>
+</blockquote>
+<p>Questa scelta permette di avanzare verso un'infrastruttura reale senza rompere l'architettura costruita fino al Punto 6M.</p>
+<hr />
+<h2>Allineamento Punto 7G</h2>
+<p>Il Punto 7G non cambia il wiring Spring: lo rafforza indirettamente verificando che i confini restino puliti e che non vengano introdotti controller, security, JPA o Spring Data nel codice main.</p>
+<h2>Allineamento Punto 7H</h2>
+<p>Il Punto 7H conferma che Spring resta confinato al wiring tecnico non web. <code>application.yml</code> mantiene il profilo <code>memory</code>, domain e application non importano Spring e il progetto non espone ancora endpoint HTTP.</p>
+
+    </article>
+  </main>
+</body>
+</html>

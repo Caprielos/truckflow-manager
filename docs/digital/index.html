@@ -3,59 +3,493 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>TruckFlow Manager — Documentazione</title>
+  <title>TruckFlow Manager — Digital Documentation Reader</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header>
-    <span class="badge">Punto 7 completato</span>
-    <h1>TruckFlow Manager — Documentazione</h1>
-    <p>Hub digitale della documentazione dopo la chiusura dell'Infrastructure Layer. Da qui puoi accedere alla guida semplice, alla documentazione professionale, ai glossari e all'archivio storico.</p>
-  </header>
-  <main>
-    <section class="grid">
-      <article class="card">
-        <h2>Guida semplice</h2>
-        <p>La lettura consigliata se vuoi capire il progetto con parole chiare, esempi pratici e spiegazione dei ragionamenti.</p>
-        <a href="../simple/README.md">Apri la guida semplice</a>
-      </article>
-      <article class="card">
-        <h2>Documentazione professionale</h2>
-        <p>La documentazione tecnica presentabile, con architettura, roadmap, qualità, stato attuale e prossimi step.</p>
-        <a href="../professional/README.md">Apri la documentazione professionale</a>
-      </article>
-      <article class="card">
-        <h2>Glossario semplice</h2>
-        <p>Spiegazioni facili dei termini più importanti per chi sta imparando il progetto.</p>
-        <a href="../simple/glossario-semplice.md">Apri il glossario semplice</a>
-      </article>
-      <article class="card">
-        <h2>Glossario tecnico</h2>
-        <p>Definizioni professionali, categorie e termini correlati per la documentazione tecnica.</p>
-        <a href="../professional/technical-glossary.md">Apri il glossario tecnico</a>
-      </article>
-      <article class="card">
-        <h2>Archivio storico</h2>
-        <p>Tutti i documenti numerati da 01 a 37, conservati come memoria storica del percorso progettuale.</p>
-        <a href="../old_style/README.md">Apri old_style</a>
-      </article>
-      <article class="card">
-        <h2>Enterprise summary</h2>
-        <p>Pagina HTML sintetica e professionale con stato del progetto e struttura della documentazione.</p>
-        <a href="truckflow-manager-enterprise-documentation.html">Apri enterprise summary</a>
-      </article>
-    </section>
-    <section class="section card">
-      <h2>Stato attuale</h2>
-      <p>TruckFlow Manager ha completato il Domain Layer, l'Application Layer e il primo ciclo Infrastructure Layer. Il prossimo ciclo sarà il Punto 8 — API Layer.</p>
-      <ul class="clean">
-        <li>Nessun REST controller è ancora introdotto.</li>
-        <li>Nessun JPA o Spring Data è ancora introdotto.</li>
-        <li>Spring è usato solo come wiring tecnico non-web.</li>
-        <li>I repository file-backed restano limitati ai contesti validati nel Punto 7.</li>
-      </ul>
-    </section>
-  </main>
-  <footer>TruckFlow Manager documentation hub — docs/digital</footer>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Navigazione documentazione">
+      <div class="brand">
+        <span class="brand-mark">TF</span>
+        <div>
+          <strong>TruckFlow Docs</strong>
+          <small>Digital Reader statico</small>
+        </div>
+      </div>
+
+      <nav class="nav-block" aria-label="Sezioni principali">
+        <button class="nav-button active" data-section="overview">Home</button>
+        <button class="nav-button" data-section="simple">Simple Documentation</button>
+        <button class="nav-button" data-section="professional">Professional Documentation</button>
+        <button class="nav-button" data-section="packages">Package Explorer</button>
+        <button class="nav-button" data-section="old_style">Old Style Archive</button>
+        <button class="nav-button" data-section="roadmap">Roadmap & Freeze</button>
+        <button class="nav-button" data-section="architecture">Architecture Rules</button>
+        <button class="nav-button" data-section="digital">Digital Reader</button>
+      </nav>
+
+      <div class="search-box" aria-label="Ricerca documentazione">
+        <label for="searchInput">Cerca nella documentazione</label>
+        <input id="searchInput" type="search" placeholder="es. requisiti, locations, repository, API">
+      </div>
+    </aside>
+
+    <main class="content">
+      <button id="homeButton" class="home-button hidden" type="button">← Torna alla Home</button>
+
+      <header class="hero">
+        <div>
+          <span class="badge">Punto 7 completato</span>
+          <h1>Digital Documentation Reader</h1>
+          <p>
+            Lettore statico per navigare la documentazione TruckFlow Manager:
+            overview enterprise, guide semplici, documentazione professionale,
+            archivio storico e struttura reale dei package Java.
+          </p>
+        </div>
+        <button class="hero-action" type="button" data-doc-id="digital-software-engineering-overview">
+          <span>Documento principale</span>
+          <strong>Software Engineering Overview</strong>
+          <small>Problema, requisiti, architettura, stato attuale e roadmap.</small>
+        </button>
+      </header>
+
+      <section id="overviewSection" class="section-block">
+        <div class="section-heading">
+          <span class="kicker">Overview</span>
+          <h2>Scegli cosa leggere</h2>
+          <p>Parti dal documento enterprise oppure apri una delle sezioni principali. I documenti si aprono in una nuova scheda per essere letti meglio.</p>
+        </div>
+
+        <div class="featured-doc" data-doc-id="digital-software-engineering-overview" role="button" tabindex="0">
+          <div>
+            <span class="kicker">Relazione visuale</span>
+            <h3>Software Engineering Overview</h3>
+            <p>
+              Il documento più importante: spiega TruckFlow Manager come progetto di Ingegneria del Software,
+              con requisiti, attori, architettura a layer, stato attuale, roadmap e vincoli tecnici.
+            </p>
+          </div>
+          <span class="featured-cta">Apri documento</span>
+        </div>
+
+        <div class="quick-grid">
+          <button class="quick-card" data-section="simple">
+            <strong>Simple Documentation</strong>
+            <small>Guide chiare per capire layer, repository, port, adapter e prossimi step.</small>
+          </button>
+          <button class="quick-card" data-section="professional">
+            <strong>Professional Documentation</strong>
+            <small>Documenti tecnici ufficiali: overview, architettura, qualità, roadmap e glossario.</small>
+          </button>
+          <button class="quick-card" data-section="packages">
+            <strong>Package Explorer</strong>
+            <small>Albero del progetto con tutti i package Java reali e dettaglio documentale.</small>
+          </button>
+          <button class="quick-card" data-section="old_style">
+            <strong>Old Style Archive</strong>
+            <small>Archivio storico numerato 01 → 37 con la cronologia delle decisioni.</small>
+          </button>
+          <button class="quick-card" data-section="roadmap">
+            <strong>Roadmap & Freeze</strong>
+            <small>Documenti su review, freeze e progressione Domain → Application → Infrastructure → API.</small>
+          </button>
+          <button class="quick-card" data-section="architecture">
+            <strong>Architecture Rules</strong>
+            <small>Regole di dipendenza, confini tra layer e vincoli anti-complessità prematura.</small>
+          </button>
+        </div>
+      </section>
+
+      <section id="packageExplorer" class="section-block hidden">
+        <div class="section-heading">
+          <span class="kicker">Package Explorer</span>
+          <h2>Struttura reale del progetto</h2>
+          <p>
+            Albero statico apribile e richiudibile, simile a un IDE, generato dai package Java presenti al momento dell’aggiornamento.
+            Il reader non scansiona il filesystem: il catalogo resta esplicito e versionabile.
+          </p>
+        </div>
+        <div class="package-layout">
+          <div class="package-tree-panel">
+            <div class="package-tree-header">
+              <strong>Project tree</strong>
+              <small id="packageStats"></small>
+            </div>
+            <div id="packageTree" class="package-tree"></div>
+          </div>
+          <article id="packageDetail" class="package-detail">
+            <span class="kicker">Dettaglio package</span>
+            <h3>Seleziona un package</h3>
+            <p>Clicca un nodo dell’albero per vedere descrizione, stato documentale, file Java e documenti collegati.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="documentsSection" class="section-block">
+        <div class="section-heading">
+          <span id="sectionKicker" class="kicker">Documenti</span>
+          <h2 id="sectionTitle">Documenti consigliati</h2>
+          <p id="sectionSubtitle">Seleziona una sezione per visualizzare i documenti collegati.</p>
+        </div>
+        <div id="documentGrid" class="document-grid"></div>
+      </section>
+
+    </main>
+  </div>
+
+  <script src="docs-catalog.js"></script>
+  <script>
+    const catalog = window.TRUCKFLOW_DOCS;
+    const docsById = new Map(catalog.documents.map((doc) => [doc.id, doc]));
+    const sectionsById = new Map(catalog.sections.map((section) => [section.id, section]));
+    const packagesById = new Map(catalog.packages.map((pkg) => [pkg.id, pkg]));
+
+    const state = {
+      section: 'overview',
+      search: '',
+      selectedPackage: ''
+    };
+
+    const expandedNodes = new Set([
+      'src',
+      'src/main',
+      'src/main/java',
+      'src/main/java/it',
+      'src/main/java/it/gabriele',
+      'src/main/java/it/gabriele/truckflow'
+    ]);
+
+    const navButtons = Array.from(document.querySelectorAll('.nav-button'));
+    const quickCards = Array.from(document.querySelectorAll('.quick-card'));
+    const searchInput = document.getElementById('searchInput');
+    const homeButton = document.getElementById('homeButton');
+    const overviewSection = document.getElementById('overviewSection');
+    const packageExplorer = document.getElementById('packageExplorer');
+    const packageTree = document.getElementById('packageTree');
+    const packageStats = document.getElementById('packageStats');
+    const packageDetail = document.getElementById('packageDetail');
+    const documentGrid = document.getElementById('documentGrid');
+    const sectionKicker = document.getElementById('sectionKicker');
+    const sectionTitle = document.getElementById('sectionTitle');
+    const sectionSubtitle = document.getElementById('sectionSubtitle');
+
+    function normalize(value) {
+      return String(value || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    }
+
+    function makeElement(tag, className, text) {
+      const element = document.createElement(tag);
+      if (className) element.className = className;
+      if (text !== undefined) element.textContent = text;
+      return element;
+    }
+
+    function setActiveSection(section) {
+      state.section = section;
+      if (section !== 'packages') state.selectedPackage = '';
+      navButtons.forEach((button) => button.classList.toggle('active', button.dataset.section === section));
+      render();
+    }
+
+    function goHome() {
+      state.section = 'overview';
+      state.search = '';
+      state.selectedPackage = '';
+      searchInput.value = '';
+      navButtons.forEach((button) => button.classList.toggle('active', button.dataset.section === 'overview'));
+      render();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function getSectionDocuments(sectionId) {
+      const section = sectionsById.get(sectionId);
+      if (!section) return [];
+      return section.documents.map((id) => docsById.get(id)).filter(Boolean);
+    }
+
+    function currentBaseDocs() {
+      if (state.search) return catalog.documents;
+      if (state.section === 'overview') return getSectionDocuments('overview');
+      if (state.section === 'packages') {
+        const selected = packagesById.get(state.selectedPackage);
+        if (selected) return selected.documents.map((id) => docsById.get(id)).filter(Boolean);
+        return getSectionDocuments('architecture').slice(0, 8);
+      }
+      return getSectionDocuments(state.section);
+    }
+
+    function filteredDocuments(baseDocs) {
+      const search = normalize(state.search);
+      return baseDocs.filter((doc) => {
+        const text = normalize([
+          doc.title,
+          doc.description,
+          doc.path,
+          doc.layer,
+          doc.type,
+          doc.number,
+          ...(doc.keywords || [])
+        ].join(' '));
+        return !search || text.includes(search);
+      });
+    }
+
+    function updateSectionHeading(baseDocs) {
+      if (state.search) {
+        sectionKicker.textContent = 'Ricerca';
+        sectionTitle.textContent = `Risultati per “${state.search}”`;
+        sectionSubtitle.textContent = 'Ricerca su titoli, descrizioni, path, layer, keyword e metadati del catalogo.';
+        return;
+      }
+
+      if (state.section === 'packages') {
+        const pkg = packagesById.get(state.selectedPackage);
+        sectionKicker.textContent = 'Package Explorer';
+        sectionTitle.textContent = pkg ? `Documenti collegati a ${pkg.name}` : 'Documenti collegati alla struttura';
+        sectionSubtitle.textContent = pkg ? pkg.description : 'Seleziona un package nell’albero per vedere i documenti collegati.';
+        return;
+      }
+
+      const section = sectionsById.get(state.section);
+      sectionKicker.textContent = section ? section.title : 'Documenti';
+      sectionTitle.textContent = section ? section.title : 'Documenti';
+      sectionSubtitle.textContent = section ? section.subtitle : `${baseDocs.length} documenti disponibili.`;
+    }
+
+    function renderDocumentCards(docs) {
+      documentGrid.innerHTML = '';
+      if (docs.length === 0) {
+        documentGrid.appendChild(makeElement('p', 'empty-state', 'Nessun documento trovato.'));
+        return;
+      }
+
+      if (state.section === 'old_style' && !state.search) {
+        const archive = makeElement('div', 'archive-main-list');
+        docs.forEach((doc) => {
+          const item = document.createElement('button');
+          item.type = 'button';
+          item.className = 'archive-main-item';
+          item.dataset.docId = doc.id;
+          const number = makeElement('span', 'archive-number-main', doc.number || '--');
+          const body = makeElement('span', 'archive-main-body');
+          const title = makeElement('strong', '', doc.title);
+          const desc = makeElement('small', '', doc.description);
+          body.append(title, desc);
+          item.append(number, body);
+          item.addEventListener('click', (event) => {
+            event.preventDefault();
+            openDocument(doc.id);
+          });
+          archive.appendChild(item);
+        });
+        documentGrid.appendChild(archive);
+        return;
+      }
+
+      docs.forEach((doc) => {
+        const card = document.createElement('article');
+        card.className = 'doc-card';
+        card.tabIndex = 0;
+        card.dataset.docId = doc.id;
+
+        const top = makeElement('div', 'doc-card-top');
+        const type = makeElement('span', 'doc-type', doc.type.replace('_', ' '));
+        const number = makeElement('span', 'doc-number', doc.number ? `#${doc.number}` : doc.layer);
+        top.append(type, number);
+
+        const title = makeElement('h3', '', doc.title);
+        const description = makeElement('p', '', doc.description);
+
+        const actions = makeElement('div', 'doc-actions');
+        const openButton = makeElement('button', 'primary-action', 'Apri documento');
+        openButton.type = 'button';
+        openButton.addEventListener('click', (event) => {
+          event.preventDefault();
+          event.stopPropagation();
+          openDocument(doc.id);
+        });
+        actions.append(openButton);
+
+        card.append(top, title, description, actions);
+        card.addEventListener('click', (event) => {
+          event.preventDefault();
+          openDocument(doc.id);
+        });
+        card.addEventListener('keydown', (event) => {
+          if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            openDocument(doc.id);
+          }
+        });
+        documentGrid.appendChild(card);
+      });
+    }
+
+    function buildTree() {
+      const root = { label: 'src', children: new Map(), kind: 'folder' };
+
+      function ensurePath(parts, packageId, kind = 'folder') {
+        let node = root;
+        parts.forEach((part, index) => {
+          if (!node.children.has(part)) {
+            node.children.set(part, { label: part, children: new Map(), kind: index === parts.length - 1 ? kind : 'folder' });
+          }
+          node = node.children.get(part);
+        });
+        if (packageId) node.packageId = packageId;
+        if (kind) node.kind = kind;
+      }
+
+      catalog.packages.forEach((pkg) => {
+        ensurePath(['main', 'java', ...pkg.path], pkg.id, 'package');
+      });
+
+      (catalog.projectTree.resources || []).forEach((resource) => {
+        const clean = resource.replace(/^src\//, '').split('/');
+        ensurePath(clean, '', 'file');
+      });
+
+      return root;
+    }
+
+    function renderTreeNode(node, container, depth = 0, pathParts = []) {
+      const item = document.createElement('div');
+      item.className = 'tree-node';
+      item.style.setProperty('--depth', depth);
+
+      const nodePath = [...pathParts, node.label].join('/');
+      const children = Array.from(node.children.values()).sort((a, b) => a.label.localeCompare(b.label));
+      const hasChildren = children.length > 0;
+      const isExpanded = expandedNodes.has(nodePath);
+
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'tree-button';
+      button.setAttribute('aria-expanded', hasChildren ? String(isExpanded) : 'false');
+      if (node.packageId) button.dataset.packageId = node.packageId;
+      if (state.selectedPackage === node.packageId) button.classList.add('selected');
+
+      const icon = hasChildren ? (isExpanded ? '▾' : '▸') : (node.kind === 'file' ? '•' : '▣');
+      button.append(makeElement('span', 'tree-icon', icon), makeElement('span', 'tree-label', node.label));
+
+      if (hasChildren || node.packageId) {
+        button.addEventListener('click', () => {
+          if (hasChildren) {
+            if (expandedNodes.has(nodePath)) expandedNodes.delete(nodePath);
+            else expandedNodes.add(nodePath);
+          }
+          if (node.packageId) {
+            state.selectedPackage = node.packageId;
+          }
+          render();
+        });
+      } else {
+        button.disabled = true;
+      }
+
+      item.appendChild(button);
+      container.appendChild(item);
+
+      if (hasChildren && isExpanded) {
+        children.forEach((child) => renderTreeNode(child, container, depth + 1, [...pathParts, node.label]));
+      }
+    }
+
+    function renderPackageTree() {
+      packageStats.textContent = `${catalog.meta.mainJavaPackages} package · ${catalog.meta.mainJavaFiles} file Java`;
+      packageTree.innerHTML = '';
+      const tree = buildTree();
+      renderTreeNode(tree, packageTree, 0);
+    }
+
+    function renderPackageDetail(packageId) {
+      const pkg = packagesById.get(packageId);
+      if (!pkg) {
+        packageDetail.innerHTML = `
+          <span class="kicker">Dettaglio package</span>
+          <h3>Seleziona un package</h3>
+          <p>Clicca un nodo dell’albero per vedere descrizione, stato documentale, file Java e documenti collegati.</p>
+        `;
+        return;
+      }
+
+      const docs = pkg.documents.map((id) => docsById.get(id)).filter(Boolean);
+      const docsHtml = docs.length
+        ? docs.map((doc) => `<button class="package-doc-link" type="button" data-doc-id="${doc.id}">${doc.number ? doc.number + ' — ' : ''}${doc.title}</button>`).join('')
+        : '<p class="muted">Nessun documento collegato nel catalogo.</p>';
+
+      packageDetail.innerHTML = `
+        <span class="kicker">${pkg.layer}</span>
+        <h3>${pkg.name}</h3>
+        <div class="package-meta">
+          <span>File Java: <strong>${pkg.fileCount}</strong></span>
+          <span>Stato: <strong>${pkg.status}</strong></span>
+        </div>
+        <p>${pkg.description}</p>
+        <h4>Documenti collegati</h4>
+        <div class="package-docs">${docsHtml}</div>
+      `;
+
+      packageDetail.querySelectorAll('.package-doc-link').forEach((button) => {
+        button.addEventListener('click', (event) => {
+          event.preventDefault();
+          openDocument(button.dataset.docId);
+        });
+      });
+    }
+
+    function render() {
+      const showOverview = state.section === 'overview' && !state.search;
+      const showPackages = state.section === 'packages' && !state.search;
+      overviewSection.classList.toggle('hidden', !showOverview);
+      packageExplorer.classList.toggle('hidden', !showPackages);
+      homeButton.classList.toggle('hidden', showOverview);
+
+      const baseDocs = currentBaseDocs();
+      const docs = filteredDocuments(baseDocs);
+      updateSectionHeading(baseDocs);
+      renderDocumentCards(docs);
+      renderPackageTree();
+      renderPackageDetail(state.selectedPackage);
+    }
+
+    function openDocument(docId) {
+      const doc = docsById.get(docId);
+      if (!doc) return;
+      window.open(doc.path, '_blank', 'noopener,noreferrer');
+    }
+
+    navButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        if (button.dataset.section === 'overview') goHome();
+        else setActiveSection(button.dataset.section);
+      });
+    });
+
+    homeButton.addEventListener('click', goHome);
+
+    quickCards.forEach((card) => card.addEventListener('click', () => setActiveSection(card.dataset.section)));
+
+    document.querySelectorAll('[data-doc-id]').forEach((element) => {
+      element.addEventListener('click', (event) => {
+        event.preventDefault();
+        openDocument(element.dataset.docId);
+      });
+      element.addEventListener('keydown', (event) => {
+        if ((event.key === 'Enter' || event.key === ' ') && element.dataset.docId) {
+          event.preventDefault();
+          openDocument(element.dataset.docId);
+        }
+      });
+    });
+
+    searchInput.addEventListener('input', (event) => {
+      state.search = event.target.value.trim();
+      render();
+    });
+
+    render();
+  </script>
 </body>
 </html>

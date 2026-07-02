@@ -1,6 +1,6 @@
 # Comandi base TruckFlow Manager
 
-> Nota documentale: dopo la riorganizzazione finale, i documenti storici numerati si trovano in `docs/old_style/`, la documentazione digitale in `docs/digital/`, la guida semplice in `docs/simple/` e la documentazione professionale in `docs/professional/`.
+> Nota documentale: la documentazione è in `docs/`. Il documento enterprise principale è `docs/professional/00-software-engineering-overview.md`; la versione visuale è `docs/digital/software-engineering-overview.html`; il lettore digitale è `docs/digital/index.html`.
 
 ---
 
@@ -752,4 +752,40 @@ Commit consigliato:
 ```bash
 git add -A
 git commit -m "Freeze infrastructure layer"
+```
+
+
+---
+
+## Nota progetto — Digital Documentation Reader Refinement
+
+Questo refinement migliora la documentazione digitale prima del Punto 8.
+
+Aggiunge il documento enterprise di Ingegneria del Software, rende la Overview più utile, migliora la ricerca del reader, compatta la sidebar e aggiorna il Package Explorer con i package Java reali presenti nel progetto al momento dell'aggiornamento del catalogo.
+
+Non introduce API REST, controller, backend, database, JPA, Spring Data, security, frontend o modifiche ai layer Java.
+
+Dopo l'applicazione della patch, il controllo consigliato è:
+
+```bash
+mvn test
+mvn clean test
+mvn -q test
+git status
+```
+
+Documenti e file principali da controllare:
+
+```bash
+ls docs/professional/00-software-engineering-overview.md
+ls docs/digital/index.html
+ls docs/digital/docs-catalog.js
+ls docs/digital/styles.css
+```
+
+Commit consigliato:
+
+```bash
+git add -A
+git commit -m "Refine digital documentation reader"
 ```

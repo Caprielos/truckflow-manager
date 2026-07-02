@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Archivio storico — 17-application-foundation — TruckFlow Docs</title>
+  <style>:root{--bg:#f5f7fb;--panel:#fff;--text:#172033;--muted:#64748b;--accent:#3554d1;--border:#d9e1ef;--code:#0f172a;--shadow:0 18px 44px rgba(15,23,42,.08)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:radial-gradient(circle at top left,rgba(53,84,209,.10),transparent 30rem),var(--bg);color:var(--text);line-height:1.68;font-size:16px}.page{width:min(980px,calc(100% - 2rem));margin:0 auto;padding:2rem 0 4rem}.topbar{display:flex;justify-content:space-between;gap:1rem;align-items:center;margin-bottom:1rem}.back{display:inline-flex;align-items:center;gap:.35rem;padding:.55rem .85rem;border:1px solid var(--border);border-radius:999px;background:#fff;color:var(--accent);font-weight:850;text-decoration:none;box-shadow:0 8px 22px rgba(15,23,42,.05)}.source{color:var(--muted);font-size:.88rem}.doc{padding:2rem;border:1px solid var(--border);border-radius:24px;background:rgba(255,255,255,.94);box-shadow:var(--shadow)}.doc-header{padding-bottom:1rem;margin-bottom:1.25rem;border-bottom:1px solid var(--border)}.kicker{display:inline-flex;width:fit-content;padding:.25rem .65rem;border-radius:999px;background:#dbeafe;color:#1e3a8a;font-size:.72rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase}.doc h1{margin:.7rem 0 .4rem;font-size:clamp(2rem,4vw,3.6rem);line-height:1;letter-spacing:-.05em}.doc h2{margin:2rem 0 .6rem;font-size:1.55rem;line-height:1.15;letter-spacing:-.03em}.doc h3{margin:1.35rem 0 .45rem;font-size:1.18rem}.doc p{margin:.65rem 0;color:#334155}.doc ul,.doc ol{padding-left:1.35rem}.doc li{margin:.35rem 0}.doc a{color:var(--accent);font-weight:800}.doc blockquote{margin:1rem 0;padding:.85rem 1rem;border-left:5px solid var(--accent);border-radius:14px;background:#eef2ff;color:#334155}.doc pre{overflow:auto;padding:1rem;border-radius:16px;background:var(--code);color:#e5e7eb;font-size:.9rem;line-height:1.55}.doc code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}.doc :not(pre)>code{padding:.15rem .32rem;border-radius:7px;background:#eef2f7;color:#1e293b}.doc table{width:100%;border-collapse:collapse;margin:1rem 0;border:1px solid var(--border);border-radius:16px;overflow:hidden;display:block}.doc thead,.doc tbody,.doc tr{width:100%}.doc th,.doc td{padding:.75rem;border-bottom:1px solid var(--border);text-align:left;vertical-align:top}.doc th{background:#f1f5f9;color:#334155;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}.doc tr:last-child td{border-bottom:0}.doc hr{border:0;border-top:1px solid var(--border);margin:2rem 0}.doc img{max-width:100%;border-radius:16px;border:1px solid var(--border)}@media(max-width:720px){.page{width:min(100% - 1rem,980px);padding-top:1rem}.doc{padding:1.15rem;border-radius:18px}.topbar{display:grid}.source{overflow-wrap:anywhere}}</style>
+</head>
+<body>
+  <main class="page">
+    <div class="topbar">
+      <a class="back" href="../index.html">← Torna alla Home</a>
+      <span class="source">Sorgente Markdown: ../old_style/17-application-foundation.md</span>
+    </div>
+    <article class="doc">
+      <header class="doc-header">
+        <span class="kicker">old_style</span>
+        <h1>Archivio storico — 17-application-foundation</h1>
+      </header>
+      <h1>Archivio storico — 17-application-foundation</h1>
+<blockquote>
+<p>Questo documento fa parte dell'archivio storico <code>docs/old_style/</code>.
+Mantiene il percorso step-by-step del progetto, ma la documentazione principale aggiornata si trova in:
+<code>docs/simple/</code>, <code>docs/professional/</code> e <code>docs/digital/</code>.</p>
+</blockquote>
+<hr />
+<h1>17 — Application Foundation</h1>
+<p>Questo documento descrive il <strong>Punto 6B — Application Foundation</strong> di TruckFlow Manager.</p>
+<p>Il Punto 6A ha definito il blueprint del livello applicativo. Il Punto 6B inizia a trasformare quel blueprint in codice, creando la fondazione tecnica dell'application layer senza introdurre ancora casi d'uso operativi completi, repository concreti, database, controller REST o framework applicativi.</p>
+<hr />
+<h2>1. Obiettivo del Punto 6B</h2>
+<p>L'obiettivo del Punto 6B è creare la base minima, stabile e riusabile su cui costruire i futuri use case.</p>
+<p>Questa fase introduce:</p>
+<ul>
+<li>il package <code>application</code>;</li>
+<li>i sottopackage <code>command</code>, <code>result</code>, <code>port.in</code>, <code>port.out</code>, <code>usecase</code> ed <code>exception</code>;</li>
+<li>i contratti base <code>ApplicationCommand</code>, <code>ApplicationResult</code> e <code>UseCase</code>;</li>
+<li>le eccezioni applicative fondamentali;</li>
+<li>test architetturali e contrattuali dedicati all'application layer;</li>
+<li>documentazione aggiornata sul nuovo step.</li>
+</ul>
+<p>Il risultato non è ancora un'applicazione operativa completa, ma una fondazione pulita per iniziare il lavoro sui casi d'uso.</p>
+<hr />
+<h2>2. Cosa è stato aggiunto</h2>
+<h3>2.1 Package <code>application</code></h3>
+<p>È stato creato il package:</p>
+<pre><code class="language-text">it.gabriele.truckflow.application
+</code></pre>
+<p>Questo package rappresenta il secondo livello architetturale di TruckFlow Manager.</p>
+<p>Il dominio rimane il livello che protegge le regole di business. L'application layer diventa il livello che, in futuro, coordinerà quelle regole tramite casi d'uso.</p>
+<hr />
+<h3>2.2 <code>application.command</code></h3>
+<p>È stato creato il package:</p>
+<pre><code class="language-text">it.gabriele.truckflow.application.command
+</code></pre>
+<p>Questo package contiene il contratto base:</p>
+<pre><code class="language-text">ApplicationCommand
+</code></pre>
+<p>Un command rappresenta l'input di un caso d'uso applicativo.</p>
+<p>Non è un DTO REST, non è un JSON e non contiene annotazioni di framework.</p>
+<p>Esempi futuri:</p>
+<ul>
+<li><code>RegisterLocationCommand</code>;</li>
+<li><code>RegisterCargoUnitCommand</code>;</li>
+<li><code>CreateShipmentCommand</code>;</li>
+<li><code>AddShipmentItemCommand</code>;</li>
+<li><code>AddShipmentLegCommand</code>;</li>
+<li><code>ConfirmShipmentCommand</code>.</li>
+</ul>
+<hr />
+<h3>2.3 <code>application.result</code></h3>
+<p>È stato creato il package:</p>
+<pre><code class="language-text">it.gabriele.truckflow.application.result
+</code></pre>
+<p>Questo package contiene il contratto base:</p>
+<pre><code class="language-text">ApplicationResult
+</code></pre>
+<p>Un result rappresenta l'output stabile di un caso d'uso applicativo.</p>
+<p>Serve a evitare che gli adapter futuri, come controller REST o job, dipendano direttamente dagli aggregate root completi del dominio.</p>
+<p>Esempi futuri:</p>
+<ul>
+<li><code>LocationResult</code>;</li>
+<li><code>CargoUnitResult</code>;</li>
+<li><code>ShipmentResult</code>;</li>
+<li><code>DocumentResult</code>;</li>
+<li><code>ComplianceRequirementResult</code>.</li>
+</ul>
+<hr />
+<h3>2.4 <code>application.port.in</code></h3>
+<p>È stato creato il package:</p>
+<pre><code class="language-text">it.gabriele.truckflow.application.port.in
+</code></pre>
+<p>Questo package contiene il contratto generico:</p>
+<pre><code class="language-text">UseCase
+</code></pre>
+<p>Il contratto esprime una regola semplice:</p>
+<pre><code class="language-text">un command entra, un result esce
+</code></pre>
+<p>I casi d'uso specifici potranno estendere questo concetto.</p>
+<p>Esempi futuri:</p>
+<ul>
+<li><code>RegisterLocationUseCase</code>;</li>
+<li><code>RegisterCargoUnitUseCase</code>;</li>
+<li><code>CreateShipmentUseCase</code>;</li>
+<li><code>ConfirmShipmentUseCase</code>.</li>
+</ul>
+<hr />
+<h3>2.5 <code>application.port.out</code></h3>
+<p>È stato creato il package:</p>
+<pre><code class="language-text">it.gabriele.truckflow.application.port.out
+</code></pre>
+<p>Per ora contiene solo la documentazione di package.</p>
+<p>I repository port concreti non sono stati introdotti nel Punto 6B perché appartengono allo step successivo. Sono stati poi aggiunti nel Punto 6C e documentati in <code>18-application-repository-ports.md</code>.</p>
+<p>Esempi futuri:</p>
+<ul>
+<li><code>LocationRepository</code>;</li>
+<li><code>CargoUnitRepository</code>;</li>
+<li><code>ShipmentRepository</code>.</li>
+</ul>
+<hr />
+<h3>2.6 <code>application.usecase</code></h3>
+<p>È stato creato il package:</p>
+<pre><code class="language-text">it.gabriele.truckflow.application.usecase
+</code></pre>
+<p>Per ora contiene solo la documentazione di package.</p>
+<p>Le implementazioni dei casi d'uso non sono state ancora aggiunte.</p>
+<p>La convenzione prevista rimane:</p>
+<pre><code class="language-text">Interfaccia use case: RegisterLocationUseCase
+Implementazione: RegisterLocationService
+</code></pre>
+<p>La parola <code>Service</code> indica un application service, non un domain service.</p>
+<hr />
+<h3>2.7 <code>application.exception</code></h3>
+<p>È stato creato il package:</p>
+<pre><code class="language-text">it.gabriele.truckflow.application.exception
+</code></pre>
+<p>Sono state introdotte le prime eccezioni applicative:</p>
+<ul>
+<li><code>ApplicationException</code>;</li>
+<li><code>UseCaseValidationException</code>;</li>
+<li><code>ResourceNotFoundException</code>;</li>
+<li><code>DuplicateResourceException</code>.</li>
+</ul>
+<p>Queste eccezioni non sostituiscono le eccezioni del dominio.</p>
+<p>Le eccezioni di dominio rappresentano violazioni delle regole di business.</p>
+<p>Le eccezioni applicative rappresentano problemi di orchestrazione del caso d'uso.</p>
+<hr />
+<h2>3. Differenza tra errori di dominio ed errori applicativi</h2>
+<p>Esempi di errori di dominio:</p>
+<ul>
+<li>una shipment incompleta non può essere confermata;</li>
+<li>una temperatura minima non può essere maggiore della massima;</li>
+<li>un veicolo stradale non può essere creato senza targa quando la targa è obbligatoria;</li>
+<li>un documento non può avere metadati incoerenti.</li>
+</ul>
+<p>Esempi di errori applicativi:</p>
+<ul>
+<li>la shipment richiesta non è stata trovata;</li>
+<li>esiste già una location con lo stesso codice;</li>
+<li>il command ricevuto è nullo;</li>
+<li>un campo richiesto dal caso d'uso è blank;</li>
+<li>un cargo da collegare alla shipment non esiste.</li>
+</ul>
+<p>La regola è:</p>
+<pre><code class="language-text">Il dominio decide se il modello è valido.
+L'application layer decide come orchestrare il modello e come gestire risorse mancanti, duplicati e input applicativi.
+</code></pre>
+<hr />
+<h2>4. Cosa è stato testato</h2>
+<p>Sono stati aggiunti test dedicati all'application foundation.</p>
+<p>I test verificano:</p>
+<ul>
+<li>normalizzazione dei messaggi di <code>ApplicationException</code>;</li>
+<li>comportamento di <code>ResourceNotFoundException</code>;</li>
+<li>comportamento di <code>DuplicateResourceException</code>;</li>
+<li>validazione base di <code>UseCaseValidationException</code>;</li>
+<li>contratto generico <code>UseCase</code>;</li>
+<li>assenza di dipendenze da Spring, JPA, Lombok, web e infrastructure nell'application layer;</li>
+<li>assenza di dipendenze del domain layer verso l'application layer.</li>
+</ul>
+<p>Questi test non sostituiscono i test del dominio.</p>
+<p>Servono a proteggere la nuova architettura applicativa prima dell'introduzione dei veri use case.</p>
+<hr />
+<h2>5. Cosa non è stato ancora fatto</h2>
+<p>Il Punto 6B non introduce ancora:</p>
+<ul>
+<li>use case specifici come <code>RegisterLocationUseCase</code> o <code>CreateShipmentUseCase</code>;</li>
+<li>command specifici come <code>RegisterLocationCommand</code>;</li>
+<li>result specifici come <code>ShipmentResult</code>;</li>
+<li>repository port specifici;</li>
+<li>repository in memory;</li>
+<li>controller REST;</li>
+<li>database;</li>
+<li>JPA;</li>
+<li>Spring annotations;</li>
+<li>sicurezza;</li>
+<li>API pubbliche;</li>
+<li>workflow operativi.</li>
+</ul>
+<p>Queste parti sono escluse volontariamente perché devono arrivare in step successivi.</p>
+<hr />
+<h2>6. Perché questo step è necessario</h2>
+<p>Questo step è utile perché evita di iniziare l'application layer in modo disordinato.</p>
+<p>Prima di creare use case concreti, il progetto ora ha:</p>
+<ul>
+<li>package chiari;</li>
+<li>contratti base;</li>
+<li>vocabolario applicativo condiviso;</li>
+<li>eccezioni applicative dedicate;</li>
+<li>test architetturali;</li>
+<li>separazione esplicita da framework e infrastruttura.</li>
+</ul>
+<p>In questo modo i prossimi use case potranno seguire una forma coerente.</p>
+<hr />
+<h2>7. Stato dopo il Punto 6C</h2>
+<p>Il passo successivo al Punto 6B è stato avviato con:</p>
+<pre><code class="language-text">Punto 6C — Repository Ports
+</code></pre>
+<p>Nel Punto 6C sono state introdotte le prime porte repository astratte del blocco:</p>
+<ul>
+<li>Locations;</li>
+<li>Cargo;</li>
+<li>Shipments.</li>
+</ul>
+<p>Repository aggiunti:</p>
+<ul>
+<li><code>LocationRepository</code>;</li>
+<li><code>CargoUnitRepository</code>;</li>
+<li><code>ShipmentRepository</code>;</li>
+<li><code>RepositoryPort</code>.</li>
+</ul>
+<p>Questi repository sono interfacce applicative, non implementazioni tecniche.</p>
+<p>Le implementazioni in memory arriveranno nello step successivo, Punto 6D.</p>
+<h2>Collegamento con il Punto 6D</h2>
+<p>Dopo la foundation applicativa e le repository port, il Punto 6D introduce il primo adapter infrastructure reale: le repository in memory.</p>
+<p>Questo step usa le eccezioni applicative definite nella foundation:</p>
+<ul>
+<li><code>UseCaseValidationException</code> per input nulli;</li>
+<li><code>DuplicateResourceException</code> per codici duplicati.</li>
+</ul>
+<p>In questo modo la foundation non rimane teorica: viene utilizzata concretamente da adapter tecnici leggeri, senza introdurre framework o database.</p>
+<h2>Aggiornamento dopo il Punto 6E</h2>
+<p>La foundation introdotta nel Punto 6B è ora usata dai primi use case reali.</p>
+<p>I marker <code>ApplicationCommand</code> e <code>ApplicationResult</code> sono implementati da command e result specifici per Locations, Cargo e Shipments. Il contratto generico <code>UseCase</code> è specializzato dalle nuove port in, mentre le eccezioni applicative sono usate per command nulli, risorse mancanti e duplicati.</p>
+<p>Questo conferma che la foundation è sufficiente per avviare casi d'uso concreti senza introdurre Spring, REST API, database o framework esterni.</p>
+<h2>Collegamento con il Punto 6F</h2>
+<p>La foundation applicativa introdotta nel Punto 6B viene utilizzata pienamente nel Punto 6F.</p>
+<p><code>ApplicationCommand</code>, <code>ApplicationResult</code>, <code>UseCase</code>, <code>UseCaseValidationException</code>, <code>ResourceNotFoundException</code> e <code>DuplicateResourceException</code> vengono esercitati nei test di hardening dei primi use case. Questo conferma che la foundation è abbastanza stabile per supportare casi d'uso reali senza dipendere da framework o infrastruttura concreta.</p>
+<h2>Allineamento Punto 6M</h2>
+<p>Il Punto 6M chiude il primo ciclo dell'application layer con una review/freeze finale. Da questo momento i contenuti documentati nei punti 6A-6L sono considerati fondazione applicativa stabile: eventuali evoluzioni future dovranno essere introdotte in nuovi punti roadmap, mantenendo ancora fuori REST API, controller, database, JPA, Spring Data, security, tracking, planning, dashboard, workflow e integrazioni esterne.</p>
+
+    </article>
+  </main>
+</body>
+</html>

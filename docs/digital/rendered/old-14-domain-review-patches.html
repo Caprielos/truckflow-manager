@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Archivio storico — 14-domain-review-patches — TruckFlow Docs</title>
+  <style>:root{--bg:#f5f7fb;--panel:#fff;--text:#172033;--muted:#64748b;--accent:#3554d1;--border:#d9e1ef;--code:#0f172a;--shadow:0 18px 44px rgba(15,23,42,.08)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:radial-gradient(circle at top left,rgba(53,84,209,.10),transparent 30rem),var(--bg);color:var(--text);line-height:1.68;font-size:16px}.page{width:min(980px,calc(100% - 2rem));margin:0 auto;padding:2rem 0 4rem}.topbar{display:flex;justify-content:space-between;gap:1rem;align-items:center;margin-bottom:1rem}.back{display:inline-flex;align-items:center;gap:.35rem;padding:.55rem .85rem;border:1px solid var(--border);border-radius:999px;background:#fff;color:var(--accent);font-weight:850;text-decoration:none;box-shadow:0 8px 22px rgba(15,23,42,.05)}.source{color:var(--muted);font-size:.88rem}.doc{padding:2rem;border:1px solid var(--border);border-radius:24px;background:rgba(255,255,255,.94);box-shadow:var(--shadow)}.doc-header{padding-bottom:1rem;margin-bottom:1.25rem;border-bottom:1px solid var(--border)}.kicker{display:inline-flex;width:fit-content;padding:.25rem .65rem;border-radius:999px;background:#dbeafe;color:#1e3a8a;font-size:.72rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase}.doc h1{margin:.7rem 0 .4rem;font-size:clamp(2rem,4vw,3.6rem);line-height:1;letter-spacing:-.05em}.doc h2{margin:2rem 0 .6rem;font-size:1.55rem;line-height:1.15;letter-spacing:-.03em}.doc h3{margin:1.35rem 0 .45rem;font-size:1.18rem}.doc p{margin:.65rem 0;color:#334155}.doc ul,.doc ol{padding-left:1.35rem}.doc li{margin:.35rem 0}.doc a{color:var(--accent);font-weight:800}.doc blockquote{margin:1rem 0;padding:.85rem 1rem;border-left:5px solid var(--accent);border-radius:14px;background:#eef2ff;color:#334155}.doc pre{overflow:auto;padding:1rem;border-radius:16px;background:var(--code);color:#e5e7eb;font-size:.9rem;line-height:1.55}.doc code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}.doc :not(pre)>code{padding:.15rem .32rem;border-radius:7px;background:#eef2f7;color:#1e293b}.doc table{width:100%;border-collapse:collapse;margin:1rem 0;border:1px solid var(--border);border-radius:16px;overflow:hidden;display:block}.doc thead,.doc tbody,.doc tr{width:100%}.doc th,.doc td{padding:.75rem;border-bottom:1px solid var(--border);text-align:left;vertical-align:top}.doc th{background:#f1f5f9;color:#334155;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}.doc tr:last-child td{border-bottom:0}.doc hr{border:0;border-top:1px solid var(--border);margin:2rem 0}.doc img{max-width:100%;border-radius:16px;border:1px solid var(--border)}@media(max-width:720px){.page{width:min(100% - 1rem,980px);padding-top:1rem}.doc{padding:1.15rem;border-radius:18px}.topbar{display:grid}.source{overflow-wrap:anywhere}}</style>
+</head>
+<body>
+  <main class="page">
+    <div class="topbar">
+      <a class="back" href="../index.html">← Torna alla Home</a>
+      <span class="source">Sorgente Markdown: ../old_style/14-domain-review-patches.md</span>
+    </div>
+    <article class="doc">
+      <header class="doc-header">
+        <span class="kicker">old_style</span>
+        <h1>Archivio storico — 14-domain-review-patches</h1>
+      </header>
+      <h1>Archivio storico — 14-domain-review-patches</h1>
+<blockquote>
+<p>Questo documento fa parte dell'archivio storico <code>docs/old_style/</code>.
+Mantiene il percorso step-by-step del progetto, ma la documentazione principale aggiornata si trova in:
+<code>docs/simple/</code>, <code>docs/professional/</code> e <code>docs/digital/</code>.</p>
+</blockquote>
+<hr />
+<h1>14 – Domain Review: interventi correttivi</h1>
+<h2>1. Overview</h2>
+<p>Questo documento riepiloga gli interventi correttivi eseguiti durante la prima review concreta del dominio puro di TruckFlow.</p>
+<p>L'obiettivo non era aggiungere nuove funzionalità operative, ma rafforzare la qualità architetturale del dominio prima di passare al livello <code>application</code>.</p>
+<p>Gli interventi hanno seguito le regole definite in <a href="13-domain-rules.md"><code>13-domain-rules.md</code></a>:</p>
+<ul>
+<li>mantenere il dominio puro;</li>
+<li>proteggere gli invarianti;</li>
+<li>usare eccezioni di dominio coerenti;</li>
+<li>evitare mutazioni parziali dello stato;</li>
+<li>mantenere confini chiari tra bounded context;</li>
+<li>ridurre file locali e artefatti generati dal repository.</li>
+</ul>
+<hr />
+<h2>2. Obiettivo della review correttiva</h2>
+<p>La review concreta ha trasformato la Domain Foundation da semplice base modellata a base più robusta e più sicura.</p>
+<p>Prima della review il dominio era già coerente, ma presentava alcuni punti migliorabili:</p>
+<ul>
+<li>alcuni aggregate modificavano lo stato prima di completare tutte le validazioni;</li>
+<li>le eccezioni custom erano state introdotte ma non erano ancora usate in modo diffuso;</li>
+<li><code>OperationalCode</code> era opzionale, mentre gli altri codici aziendali erano obbligatori;</li>
+<li>alcuni test del catalogo qualificazioni erano fragili perché basati su conteggi rigidi;</li>
+<li>alcuni file locali dell'ambiente di sviluppo erano ancora presenti o visibili nel repository;</li>
+<li>la targa e il VIN erano ancora rappresentati come primitive <code>String</code> nel dominio veicoli.</li>
+</ul>
+<p>Gli interventi hanno corretto questi punti senza introdurre application layer, database, API REST o logica infrastrutturale.</p>
+<hr />
+<h2>3. Intervento 1 — Validare prima di mutare lo stato</h2>
+<h3>Problema</h3>
+<p>Alcuni aggregate modificavano campi interni prima di completare tutte le validazioni.</p>
+<p>Questo poteva creare un problema importante: se una validazione falliva dopo una prima assegnazione, l'oggetto poteva rimanere in uno stato parzialmente modificato.</p>
+<p>Esempio concettuale del problema:</p>
+<pre><code class="language-text">1. cambio lo stato in CONFIRMED
+2. valido gli item
+3. la validazione fallisce
+4. l'aggregate resta con lo stato già cambiato
+</code></pre>
+<h3>Correzione</h3>
+<p>La regola introdotta è:</p>
+<pre><code class="language-text">prima si validano tutti i nuovi valori
+poi si assegna lo stato interno
+</code></pre>
+<p>Questa logica è stata applicata ai metodi di modifica degli aggregate più importanti, in particolare nei domini:</p>
+<ul>
+<li><code>domain.users</code>;</li>
+<li><code>domain.operational</code>;</li>
+<li><code>domain.vehicles</code>;</li>
+<li><code>domain.cargo</code>;</li>
+<li><code>domain.triptemplates</code>;</li>
+<li><code>domain.shipments</code>;</li>
+<li><code>domain.documents</code>;</li>
+<li><code>domain.compliance</code>.</li>
+</ul>
+<h3>Perché è importante</h3>
+<p>Questa correzione rende le modifiche di stato più sicure.</p>
+<p>Un aggregate non deve mai restare in uno stato incoerente se un'operazione fallisce. La validazione preventiva protegge l'integrità del dominio e rende più affidabili i futuri use case applicativi.</p>
+<hr />
+<h2>4. Intervento 2 — Eccezioni custom nei domini semplici</h2>
+<h3>Problema</h3>
+<p>Le eccezioni custom erano state definite, ma alcuni domini continuavano a usare eccezioni standard Java come <code>IllegalArgumentException</code>.</p>
+<p>Nei domini più semplici questo rendeva meno chiaro quale bounded context avesse prodotto l'errore.</p>
+<h3>Correzione</h3>
+<p>Sono state introdotte eccezioni specifiche nei domini più piccoli e isolati:</p>
+<ul>
+<li><code>InvalidDocumentException</code> per <code>domain.documents</code>;</li>
+<li><code>InvalidComplianceRequirementException</code> per <code>domain.compliance</code>;</li>
+<li><code>InvalidLocationException</code> per <code>domain.locations</code>;</li>
+<li><code>InvalidTripTemplateException</code> e <code>InvalidTripTemplateSegmentException</code> per <code>domain.triptemplates</code>.</li>
+</ul>
+<p>Sono stati aggiornati anche i test collegati, in modo che verifichino le eccezioni di dominio corrette.</p>
+<h3>Perché è importante</h3>
+<p>Le eccezioni custom rendono il dominio più leggibile e più professionale.</p>
+<p>Un errore di validazione di un documento non è più un generico <code>IllegalArgumentException</code>, ma un errore specifico del dominio documents. Questo migliora chiarezza, testabilità e futura gestione degli errori nel livello application.</p>
+<hr />
+<h2>5. Intervento 3 — Eccezioni custom nei domini complessi</h2>
+<h3>Problema</h3>
+<p>Dopo l'intervento sui domini semplici, restavano ancora eccezioni standard nei domini più grandi:</p>
+<ul>
+<li><code>domain.cargo</code>;</li>
+<li><code>domain.shipments</code>;</li>
+<li><code>domain.vehicles</code>;</li>
+<li><code>domain.operational</code>;</li>
+<li><code>domain.users</code>.</li>
+</ul>
+<p>Questi domini contengono aggregate più ricchi e regole più numerose, quindi richiedevano una sostituzione più attenta.</p>
+<h3>Correzione</h3>
+<p>Sono state applicate le eccezioni custom anche ai domini complessi:</p>
+<ul>
+<li><code>InvalidCargoException</code>;</li>
+<li><code>InvalidShipmentException</code>;</li>
+<li><code>InvalidShipmentItemException</code>;</li>
+<li><code>InvalidShipmentLegException</code>;</li>
+<li><code>InvalidVehicleException</code>;</li>
+<li><code>InvalidVehicleCombinationException</code>;</li>
+<li><code>InvalidDriverException</code>;</li>
+<li><code>InvalidMechanicException</code>;</li>
+<li><code>InvalidWarehouseOperatorException</code>;</li>
+<li><code>InvalidDispatcherException</code>;</li>
+<li><code>InvalidManagerException</code>;</li>
+<li><code>InvalidUserException</code>.</li>
+</ul>
+<p>Anche i test sono stati adeguati per riflettere il nuovo comportamento.</p>
+<h3>Perché è importante</h3>
+<p>Questa correzione completa il passaggio principale dalle eccezioni generiche alle eccezioni di dominio.</p>
+<p>Il dominio diventa più esplicito: ogni violazione viene espressa usando il vocabolario del bounded context corretto.</p>
+<p>Questo prepara meglio il progetto a future funzionalità come use case applicativi, mapping errori API, gestione centralizzata degli errori e reportistica di validazione.</p>
+<hr />
+<h2>6. Intervento 4 — Rendere <code>OperationalCode</code> obbligatorio</h2>
+<h3>Problema</h3>
+<p><code>OperationalCode</code> era opzionale, mentre altri codici aziendali del progetto erano obbligatori.</p>
+<p>Esempi di codici obbligatori già presenti:</p>
+<ul>
+<li><code>FleetCode</code>;</li>
+<li><code>CargoCode</code>;</li>
+<li><code>ShipmentCode</code>;</li>
+<li><code>DocumentCode</code>;</li>
+<li><code>ComplianceRequirementCode</code>.</li>
+</ul>
+<p>Questa differenza creava una piccola incoerenza nel modello.</p>
+<h3>Correzione</h3>
+<p><code>OperationalCode</code> è stato reso obbligatorio per le figure operative:</p>
+<ul>
+<li><code>Driver</code>;</li>
+<li><code>Mechanic</code>;</li>
+<li><code>WarehouseOperator</code>;</li>
+<li><code>Dispatcher</code>;</li>
+<li><code>Manager</code>.</li>
+</ul>
+<p>Il codice operativo non può più essere <code>null</code>, vuoto o composto solo da spazi.</p>
+<h3>Perché è importante</h3>
+<p>In un sistema enterprise, le figure operative devono avere un codice aziendale leggibile e stabile.</p>
+<p>Codici come <code>DRV-001</code>, <code>MEC-001</code>, <code>WH-001</code>, <code>DSP-001</code> o <code>MNG-001</code> sono utili per:</p>
+<ul>
+<li>ricerca;</li>
+<li>documentazione;</li>
+<li>comunicazione interna;</li>
+<li>integrazione futura;</li>
+<li>audit;</li>
+<li>reportistica;</li>
+<li>collegamento con sistemi HR o gestionali.</li>
+</ul>
+<p>Questa scelta rende <code>domain.operational</code> più coerente con gli altri domini.</p>
+<hr />
+<h2>7. Intervento 5 — Rendere meno fragili i test del catalogo qualificazioni</h2>
+<h3>Problema</h3>
+<p>Alcuni test del catalogo qualificazioni controllavano numeri fissi, per esempio il totale degli elementi o il numero di qualificazioni per categoria.</p>
+<p>Questo rendeva i test fragili: aggiungere una nuova qualificazione corretta avrebbe potuto far fallire il test solo perché cambiava un conteggio.</p>
+<h3>Correzione</h3>
+<p>I test sono stati orientati verso controlli di comportamento e coerenza:</p>
+<ul>
+<li>codici univoci;</li>
+<li>presenza delle qualificazioni fondamentali;</li>
+<li>ricerca per codice;</li>
+<li>coerenza tra qualificazione e categoria;</li>
+<li>metadati minimi presenti;</li>
+<li>copertura delle categorie principali.</li>
+</ul>
+<h3>Perché è importante</h3>
+<p>Un catalogo statico è destinato a crescere.</p>
+<p>I test devono proteggere la qualità del catalogo, non bloccarne inutilmente l'evoluzione.</p>
+<p>Questa correzione rende il catalogo qualificazioni più facile da mantenere nel tempo.</p>
+<hr />
+<h2>8. Intervento 6 — Pulizia file locali, IDE e artefatti generati</h2>
+<h3>Problema</h3>
+<p>Nel repository potevano comparire file non appartenenti al codice sorgente o alla documentazione ufficiale, come:</p>
+<ul>
+<li>configurazioni locali dell'IDE;</li>
+<li>artefatti generati da Maven;</li>
+<li>file temporanei;</li>
+<li>file generati da macOS;</li>
+<li>script o patch temporanee.</li>
+</ul>
+<p>Questi file non rappresentano il dominio e possono sporcare la history o creare differenze inutili tra ambienti di sviluppo.</p>
+<h3>Correzione</h3>
+<p>La documentazione e la configurazione del repository sono state allineate alla regola:</p>
+<pre><code class="language-text">il repository deve contenere codice sorgente, test, configurazioni condivise e documentazione ufficiale
+</code></pre>
+<p>Devono restare fuori dal versionamento:</p>
+<ul>
+<li><code>.idea/</code>;</li>
+<li><code>target/</code>;</li>
+<li><code>.DS_Store</code>;</li>
+<li><code>__MACOSX/</code>;</li>
+<li>file <code>.patch</code>;</li>
+<li>script locali <code>.sh</code>.</li>
+</ul>
+<h3>Perché è importante</h3>
+<p>Il repository deve essere pulito e riproducibile.</p>
+<p>Tenere fuori file locali e artefatti generati evita commit inutili, conflitti non necessari e confusione tra ciò che è codice ufficiale e ciò che appartiene solo all'ambiente locale.</p>
+<hr />
+<h2>9. Intervento 7 — Trasformare targa e VIN in Value Object</h2>
+<h3>Problema</h3>
+<p>Nel dominio <code>domain.vehicles</code>, la targa era rappresentata come una semplice <code>String</code>.</p>
+<p>Questo è un caso di primitive obsession: un concetto importante del dominio viene modellato con un tipo troppo generico.</p>
+<p>La targa non è testo libero. È un identificatore ufficiale dell'unità fisica, usato in documenti, assicurazioni, revisioni, controlli, audit, compliance, spedizioni, ricerca veicoli e integrazioni future.</p>
+<p>Lo stesso ragionamento vale per VIN, telaio o identificativo tecnico del mezzo.</p>
+<h3>Correzione</h3>
+<p>Sono stati introdotti due value object dedicati:</p>
+<ul>
+<li><code>LicensePlate</code>;</li>
+<li><code>VehicleIdentificationNumber</code>.</li>
+</ul>
+<p><code>VehicleUnit</code> ora usa questi value object invece di semplici stringhe.</p>
+<p>È stata inoltre formalizzata la regola:</p>
+<pre><code class="language-text">Ogni VehicleUnit stradale deve avere una LicensePlate.
+Ogni VehicleUnit non stradale può non averla.
+VehicleCombination non possiede una LicensePlate.
+</code></pre>
+<p>Quindi rimorchi e semirimorchi hanno una propria targa, distinta da quella del trattore o della motrice.</p>
+<p>La <code>VehicleCombination</code> non ha una targa propria perché non è una unità fisica targabile, ma una struttura logica composta da <code>VehicleUnit</code>.</p>
+<h3>Perché è importante</h3>
+<p>Questa correzione rende il dominio veicoli più robusto e più esplicito.</p>
+<p>Il tipo <code>LicensePlate</code> comunica chiaramente il significato del dato e centralizza normalizzazione, validazione e invarianti.</p>
+<p>Il tipo <code>VehicleIdentificationNumber</code> fa lo stesso per l'identificativo tecnico del mezzo.</p>
+<p>Il modello diventa più coerente con gli altri value object già presenti nel progetto, come <code>FleetCode</code>, <code>CargoCode</code>, <code>ShipmentCode</code>, <code>LocationCode</code>, <code>DocumentCode</code> e <code>ComplianceRequirementCode</code>.</p>
+<hr />
+<h2>10. Intervento 8 — Rafforzare giurisdizione, scope operativi e preferenze utente</h2>
+<h3>Problema</h3>
+<p>Durante la pulizia finale del dominio puro erano rimasti alcuni concetti modellati come stringhe libere.</p>
+<p>I casi principali erano:</p>
+<ul>
+<li><code>UserPreferences.language</code>;</li>
+<li><code>UserPreferences.theme</code>;</li>
+<li><code>ComplianceJurisdiction.country</code>;</li>
+<li><code>ComplianceJurisdiction.region</code>;</li>
+<li><code>ComplianceJurisdiction.scope</code>;</li>
+<li><code>OperationalScope.code</code>.</li>
+</ul>
+<p>Questi campi non sono semplici testi descrittivi. Rappresentano concetti con semantica, normalizzazione e regole proprie.</p>
+<h3>Correzione</h3>
+<p>Sono stati introdotti concetti più espliciti:</p>
+<ul>
+<li><code>LanguageCode</code>;</li>
+<li><code>UserTheme</code>;</li>
+<li><code>CountryCode</code>;</li>
+<li><code>JurisdictionRegion</code>;</li>
+<li><code>ComplianceJurisdictionScope</code>;</li>
+<li><code>OperationalScopeCode</code>.</li>
+</ul>
+<p>La giurisdizione di compliance distingue ora tra:</p>
+<pre><code class="language-text">scope   = livello della giurisdizione
+region  = area geografica o normativa ampia
+country = paese specifico
+</code></pre>
+<p>La logica futura del tipo &quot;Europa -&gt; lista nazioni -&gt; Italia come default&quot; non è stata inserita nel dominio puro. Appartiene ad application layer, configurazione o interfaccia utente.</p>
+<h3>Perché è importante</h3>
+<p>Questa correzione riduce primitive obsession senza introdurre overengineering.</p>
+<p>Il dominio diventa più esplicito: lingua, tema, paese, regione, scope di giurisdizione e codice dello scope operativo non sono più stringhe generiche.</p>
+<p>Allo stesso tempo, il modello rimane flessibile: non vengono creati <code>UserCode</code>, <code>VehicleCode</code> o <code>QualificationCode</code> solo per simmetria e non viene introdotta logica UI dentro il dominio.</p>
+<hr />
+<h2>11. Stato finale dopo gli otto interventi</h2>
+<p>Dopo questi interventi, il dominio puro di TruckFlow risulta più solido perché:</p>
+<ul>
+<li>le modifiche di stato sono più sicure;</li>
+<li>le eccezioni sono più coerenti con il linguaggio di dominio;</li>
+<li>i codici aziendali sono più uniformi;</li>
+<li>i test del catalogo qualificazioni sono meno fragili;</li>
+<li>il repository è più pulito;</li>
+<li>targa e VIN sono modellati come value object nel dominio veicoli;</li>
+<li>giurisdizione, scope operativi e preferenze utente usano concetti più espliciti;</li>
+<li>la documentazione architetturale è più allineata al codice reale.</li>
+</ul>
+<p>Questa fase non introduce ancora:</p>
+<ul>
+<li>application layer;</li>
+<li>repository port;</li>
+<li>repository infrastructure;</li>
+<li>API REST;</li>
+<li>database;</li>
+<li>workflow;</li>
+<li>audit;</li>
+<li>verifiche concrete di compliance;</li>
+<li>pianificazione o dispatching.</li>
+</ul>
+<p>Il risultato corretto è:</p>
+<pre><code class="language-text">TruckFlow Domain Foundation v1.0 rafforzata dalla prima review correttiva del dominio puro.
+</code></pre>
+<hr />
+<h2>12. Revisione finale della test suite</h2>
+<p>Dopo gli otto interventi correttivi è stata aggiunta una revisione specifica della test suite del dominio puro, documentata in <a href="15-domain-test-suite-review.md"><code>15-domain-test-suite-review.md</code></a>.</p>
+<p>Questa revisione non introduce nuovi concetti operativi nel dominio. Rafforza invece i test esistenti con:</p>
+<ul>
+<li>test architetturali sui confini tra bounded context;</li>
+<li>controlli contro dipendenze vietate nel domain layer;</li>
+<li>controlli contro eccezioni standard nei punti di validazione;</li>
+<li>test contrattuali sui value object principali;</li>
+<li>casi limite aggiuntivi per cargo e shipment;</li>
+<li>spiegazione esplicita di ciò che non viene ancora testato perché appartiene a moduli futuri.</li>
+</ul>
+<hr />
+<h2>13. Prossimo passo consigliato</h2>
+<p>Il prossimo passo naturale è preparare il livello <code>application</code>.</p>
+<p>Prima di introdurre API REST o database, conviene definire:</p>
+<ul>
+<li>use case applicativi principali;</li>
+<li>porte in ingresso;</li>
+<li>porte repository in uscita;</li>
+<li>repository in-memory per test e scenari;</li>
+<li>primi flussi applicativi semplici.</li>
+</ul>
+<p>La direzione consigliata è:</p>
+<pre><code class="language-text">domain -&gt; application -&gt; infrastructure -&gt; api
+</code></pre>
+<p>Il dominio deve rimanere stabile e protetto: i nuovi livelli dovranno consumare il dominio, non sporcarlo.</p>
+<h2>Passaggio successivo documentato — Punto 6A</h2>
+<p>Dopo la review correttiva del dominio puro e la revisione finale della test suite, il progetto introduce <code>docs/old_style/16-application-layer-blueprint.md</code>.</p>
+<p>Questo non è un nuovo refactoring del dominio. È il documento di handoff verso il livello applicativo. Definisce come TruckFlow Manager dovrà organizzare use case, command, result, port in, port out, repository in memory, eccezioni applicative e test applicativi.</p>
+<p>La scelta protegge il lavoro fatto nel dominio: i futuri controller, database e moduli infrastrutturali dovranno passare dall'application layer e non manipolare direttamente gli aggregate in modo disordinato.</p>
+<h2>Step successivo — Punto 6B Application Foundation</h2>
+<p>Dopo gli interventi correttivi sul dominio e il blueprint del Punto 6A, il progetto ha iniziato il Punto 6B.</p>
+<p>Questo step non è una correzione del dominio, ma il primo passo applicativo: crea la foundation dell'application layer con contratti base, package dedicati, eccezioni applicative e test architetturali.</p>
+<p>La review del dominio resta valida: il dominio rimane puro e non dipende dal nuovo layer applicativo.</p>
+<h2>Punto 6C — Application Repository Ports</h2>
+<p>Dopo la foundation applicativa del Punto 6B, il progetto ha avviato il Punto 6C introducendo le prime porte repository specifiche.</p>
+<p>Sono stati aggiunti:</p>
+<ul>
+<li><code>RepositoryPort</code>;</li>
+<li><code>LocationRepository</code>;</li>
+<li><code>CargoUnitRepository</code>;</li>
+<li><code>ShipmentRepository</code>;</li>
+<li>test contrattuali sulle porte repository;</li>
+<li>documentazione dedicata in <code>docs/old_style/18-application-repository-ports.md</code>.</li>
+</ul>
+<p>Questa fase non introduce database, repository in memory ufficiali, use case operativi o REST API. Serve a stabilire i contratti che i prossimi use case useranno per salvare e recuperare aggregate.</p>
+<h2>Punto 6D — In-Memory Repositories</h2>
+<p>Dopo la chiusura della foundation del dominio e l'avvio dell'application layer, è stato aggiunto il Punto 6D.</p>
+<p>Questo step introduce repository in memory per i primi tre domini applicativi:</p>
+<ul>
+<li>Locations;</li>
+<li>Cargo;</li>
+<li>Shipments.</li>
+</ul>
+<p>Le repository in memory implementano le porte del Punto 6C e permettono ai futuri use case di essere testati senza database.</p>
+<p>La scelta è intenzionale: TruckFlow Manager non introduce subito JPA o Spring Data, perché l'obiettivo attuale è stabilizzare prima l'application layer e i suoi flussi.</p>
+<h2>Punto 6E — First Use Cases</h2>
+<p>Dopo la stabilizzazione del dominio e dei primi adapter applicativi, è stato introdotto il primo blocco di use case reali.</p>
+<p>Lo step aggiunge command, result, port in e application service per Locations, Cargo e Shipments. Il primo scenario testato registra due location, registra un cargo, crea una shipment draft, aggiunge item e leg, conferma la shipment e la recupera.</p>
+<p>Questa fase non modifica il domain layer: dimostra che il dominio è consumabile dall'application layer senza introdurre framework, web adapter o database.</p>
+<h2>Aggiornamento applicativo — Punto 6F</h2>
+<p>Dopo la review del dominio e i primi step applicativi, il Punto 6F ha rafforzato i primi use case del blocco Locations + Cargo + Shipments.</p>
+<p>L'intervento aggiunge <code>CancelShipmentUseCase</code> e test di hardening sui command, sulle risorse mancanti, sui duplicati e sulle mutazioni fallite. Questo aggiornamento non modifica le regole del dominio: conferma che il dominio continua a essere il proprietario delle invarianti e che l'application layer orchestra il flusso applicativo.</p>
+
+    </article>
+  </main>
+</body>
+</html>

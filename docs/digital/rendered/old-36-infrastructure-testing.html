@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Archivio storico — 36-infrastructure-testing — TruckFlow Docs</title>
+  <style>:root{--bg:#f5f7fb;--panel:#fff;--text:#172033;--muted:#64748b;--accent:#3554d1;--border:#d9e1ef;--code:#0f172a;--shadow:0 18px 44px rgba(15,23,42,.08)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:radial-gradient(circle at top left,rgba(53,84,209,.10),transparent 30rem),var(--bg);color:var(--text);line-height:1.68;font-size:16px}.page{width:min(980px,calc(100% - 2rem));margin:0 auto;padding:2rem 0 4rem}.topbar{display:flex;justify-content:space-between;gap:1rem;align-items:center;margin-bottom:1rem}.back{display:inline-flex;align-items:center;gap:.35rem;padding:.55rem .85rem;border:1px solid var(--border);border-radius:999px;background:#fff;color:var(--accent);font-weight:850;text-decoration:none;box-shadow:0 8px 22px rgba(15,23,42,.05)}.source{color:var(--muted);font-size:.88rem}.doc{padding:2rem;border:1px solid var(--border);border-radius:24px;background:rgba(255,255,255,.94);box-shadow:var(--shadow)}.doc-header{padding-bottom:1rem;margin-bottom:1.25rem;border-bottom:1px solid var(--border)}.kicker{display:inline-flex;width:fit-content;padding:.25rem .65rem;border-radius:999px;background:#dbeafe;color:#1e3a8a;font-size:.72rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase}.doc h1{margin:.7rem 0 .4rem;font-size:clamp(2rem,4vw,3.6rem);line-height:1;letter-spacing:-.05em}.doc h2{margin:2rem 0 .6rem;font-size:1.55rem;line-height:1.15;letter-spacing:-.03em}.doc h3{margin:1.35rem 0 .45rem;font-size:1.18rem}.doc p{margin:.65rem 0;color:#334155}.doc ul,.doc ol{padding-left:1.35rem}.doc li{margin:.35rem 0}.doc a{color:var(--accent);font-weight:800}.doc blockquote{margin:1rem 0;padding:.85rem 1rem;border-left:5px solid var(--accent);border-radius:14px;background:#eef2ff;color:#334155}.doc pre{overflow:auto;padding:1rem;border-radius:16px;background:var(--code);color:#e5e7eb;font-size:.9rem;line-height:1.55}.doc code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}.doc :not(pre)>code{padding:.15rem .32rem;border-radius:7px;background:#eef2f7;color:#1e293b}.doc table{width:100%;border-collapse:collapse;margin:1rem 0;border:1px solid var(--border);border-radius:16px;overflow:hidden;display:block}.doc thead,.doc tbody,.doc tr{width:100%}.doc th,.doc td{padding:.75rem;border-bottom:1px solid var(--border);text-align:left;vertical-align:top}.doc th{background:#f1f5f9;color:#334155;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}.doc tr:last-child td{border-bottom:0}.doc hr{border:0;border-top:1px solid var(--border);margin:2rem 0}.doc img{max-width:100%;border-radius:16px;border:1px solid var(--border)}@media(max-width:720px){.page{width:min(100% - 1rem,980px);padding-top:1rem}.doc{padding:1.15rem;border-radius:18px}.topbar{display:grid}.source{overflow-wrap:anywhere}}</style>
+</head>
+<body>
+  <main class="page">
+    <div class="topbar">
+      <a class="back" href="../index.html">← Torna alla Home</a>
+      <span class="source">Sorgente Markdown: ../old_style/36-infrastructure-testing.md</span>
+    </div>
+    <article class="doc">
+      <header class="doc-header">
+        <span class="kicker">old_style</span>
+        <h1>Archivio storico — 36-infrastructure-testing</h1>
+      </header>
+      <h1>Archivio storico — 36-infrastructure-testing</h1>
+<blockquote>
+<p>Questo documento fa parte dell'archivio storico <code>docs/old_style/</code>.
+Mantiene il percorso step-by-step del progetto, ma la documentazione principale aggiornata si trova in:
+<code>docs/simple/</code>, <code>docs/professional/</code> e <code>docs/digital/</code>.</p>
+</blockquote>
+<hr />
+<h1>Punto 7G — Infrastructure Testing</h1>
+<p>Il Punto 7G rafforza la parte tecnica dell'Infrastructure Layer senza aggiungere nuovi repository business, nuovi adapter esterni o nuove funzionalità applicative.</p>
+<p>Dopo il Punto 7E e il Punto 7F, il progetto dispone di repository file-backed per:</p>
+<ul>
+<li><code>Locations</code>;</li>
+<li><code>Cargo</code>;</li>
+<li><code>Documents</code>;</li>
+<li><code>Compliance</code>.</li>
+</ul>
+<p>Il Punto 7G verifica che questi adapter siano davvero affidabili dal punto di vista tecnico, che possano essere usati dai use case applicativi tramite i port.out e che i confini architetturali restino puliti.</p>
+<hr />
+<h2>Obiettivo dello step</h2>
+<p>L'obiettivo del Punto 7G è costruire una suite di test infrastrutturali più forte.</p>
+<p>Questi test non sono test di business. Le regole di business restano nel dominio e nell'application layer.</p>
+<p>I test del Punto 7G controllano invece:</p>
+<ul>
+<li>comportamento tecnico dello storage file-backed;</li>
+<li>codifica e decodifica sicura dei record;</li>
+<li>gestione dei file mancanti;</li>
+<li>gestione dei record malformati;</li>
+<li>uso dei repository file-backed tramite use case applicativi;</li>
+<li>assenza di dipendenze vietate tra layer;</li>
+<li>assenza di framework prematuri come JPA, Spring Data, REST controller e security.</li>
+</ul>
+<hr />
+<h2>Cosa è stato aggiunto</h2>
+<p>Sono stati aggiunti tre nuovi test principali:</p>
+<pre><code class="language-text">FileRepositoryStorageTest
+InfrastructureRepositoryUseCaseIntegrationTest
+InfrastructureTechnicalBoundaryTest
+</code></pre>
+<p>Questi test completano la base già introdotta da:</p>
+<pre><code class="language-text">FileLocationRepositoryPrototypeTest
+FileRepositoryExpansionTest
+PersistenceMappingBlueprintTest
+SpringWiringFoundationTest
+InfrastructureFoundationTest
+</code></pre>
+<p>Il Punto 7G non modifica i repository esistenti. Li verifica meglio.</p>
+<hr />
+<h2>FileRepositoryStorageTest</h2>
+<p><code>FileRepositoryStorageTest</code> controlla il supporto tecnico condiviso usato dai repository file-backed introdotti nel Punto 7F.</p>
+<p>Verifica che <code>FileRepositoryStorage</code>:</p>
+<ul>
+<li>tratti un file mancante come repository vuoto;</li>
+<li>scriva e rilegga record in modo stabile;</li>
+<li>crei automaticamente le directory parent necessarie;</li>
+<li>mantenga sicuri campi con tab, newline e caratteri Unicode;</li>
+<li>segnali un field count non valido tramite <code>RepositoryException</code>;</li>
+<li>segnali campi non decodificabili tramite <code>RepositoryException</code>;</li>
+<li>rifiuti input infrastrutturali nulli o non validi.</li>
+</ul>
+<p>Questo test è importante perché <code>FileRepositoryStorage</code> è il punto tecnico comune usato dai repository file-backed di Cargo, Documents e Compliance.</p>
+<hr />
+<h2>InfrastructureRepositoryUseCaseIntegrationTest</h2>
+<p><code>InfrastructureRepositoryUseCaseIntegrationTest</code> verifica che un repository file-backed possa essere usato da veri use case applicativi attraverso il port.out corretto.</p>
+<p>Il test usa il dominio pilota <code>Locations</code>:</p>
+<ul>
+<li><code>RegisterLocationService</code>;</li>
+<li><code>FindLocationService</code>;</li>
+<li><code>FileLocationRepository</code>.</li>
+</ul>
+<p>Verifica che:</p>
+<ul>
+<li>un use case applicativo possa registrare una Location usando il repository file-backed;</li>
+<li>un altro use case possa ritrovarla per ID;</li>
+<li>i dati restino disponibili anche ricreando una nuova istanza del repository;</li>
+<li>la protezione contro codici business duplicati resti valida anche con repository file-backed.</li>
+</ul>
+<p>Questo conferma che l'infrastruttura reale resta compatibile con l'application layer, senza far conoscere file system o dettagli tecnici ai use case.</p>
+<hr />
+<h2>InfrastructureTechnicalBoundaryTest</h2>
+<p><code>InfrastructureTechnicalBoundaryTest</code> controlla i confini architetturali dopo l'espansione repository.</p>
+<p>Verifica che:</p>
+<ul>
+<li><code>domain</code> e <code>application</code> non importino <code>infrastructure</code>;</li>
+<li>il codice main non contenga controller REST;</li>
+<li>il codice main non contenga security HTTP;</li>
+<li>il codice main non contenga JPA o Spring Data;</li>
+<li>non siano stati creati package prematuri come <code>infrastructure.persistence</code>, <code>infrastructure.database</code>, <code>infrastructure.security</code> o <code>infrastructure.web</code>.</li>
+</ul>
+<p>Questo test protegge il progetto da scorciatoie tecniche premature.</p>
+<hr />
+<h2>Cosa il Punto 7G NON introduce</h2>
+<p>Il Punto 7G non introduce:</p>
+<ul>
+<li>database;</li>
+<li>JPA;</li>
+<li>Hibernate;</li>
+<li>Spring Data;</li>
+<li>schema SQL;</li>
+<li>repository reali per Shipments, Vehicles o Operational Roles;</li>
+<li>REST API;</li>
+<li>controller;</li>
+<li>DTO web;</li>
+<li>security;</li>
+<li>JWT;</li>
+<li>servizi esterni;</li>
+<li>email;</li>
+<li>audit trail;</li>
+<li>workflow;</li>
+<li>file upload;</li>
+<li>storage binario documentale;</li>
+<li>tracking;</li>
+<li>planning;</li>
+<li>dashboard.</li>
+</ul>
+<p>Il Punto 7G è uno step di test e consolidamento tecnico.</p>
+<hr />
+<h2>Perché non espandere ancora tutti i repository</h2>
+<p>Dopo il Punto 7F il progetto ha già repository file-backed per contesti catalog-like.</p>
+<p>Non vengono ancora aggiunti repository reali completi per:</p>
+<ul>
+<li><code>Shipments</code>;</li>
+<li><code>Vehicles</code>;</li>
+<li><code>Operational Roles</code>;</li>
+<li><code>TripTemplates</code>.</li>
+</ul>
+<p>La scelta resta intenzionale.</p>
+<p>Questi contesti hanno strutture più complesse, relazioni più delicate e mapping più profondi. Prima di espanderli serve avere una suite di test infrastrutturali solida. Il Punto 7G serve proprio a creare questa protezione.</p>
+<hr />
+<h2>Confini architetturali confermati</h2>
+<p>Dopo il Punto 7G la direzione resta la stessa:</p>
+<pre><code class="language-text">domain      -&gt; puro, senza infrastruttura
+application -&gt; usa port.out astratti
+infrastructure -&gt; implementa adapter tecnici
+</code></pre>
+<p>I repository file-backed sono adapter infrastructure.</p>
+<p>I use case applicativi continuano a vedere solo i port.out.</p>
+<p>Spring resta wiring tecnico non web.</p>
+<p>I repository in-memory restano validi per test, sviluppo locale e scenari leggeri.</p>
+<hr />
+<h2>Stato finale del Punto 7G</h2>
+<p>Alla fine del Punto 7G il progetto ha:</p>
+<ul>
+<li>Infrastructure Layer foundation presente;</li>
+<li>Spring wiring non web presente;</li>
+<li>blueprint mapping presente;</li>
+<li>prototipo repository reale Locations presente;</li>
+<li>repository file-backed per Cargo, Documents e Compliance presenti;</li>
+<li>test tecnici più forti su storage, use case integration e confini architetturali;</li>
+<li>nessuna API REST;</li>
+<li>nessun database;</li>
+<li>nessun JPA;</li>
+<li>nessuna security.</li>
+</ul>
+<p>Il progetto è pronto per il Punto 7H — Infrastructure Review &amp; Freeze.</p>
+<hr />
+<h2>Allineamento Punto 7H</h2>
+<p>Il Punto 7H usa la suite tecnica introdotta dal Punto 7G come base del freeze finale. La fase successiva non aggiunge nuovi repository o servizi, ma verifica la presenza dei test infrastrutturali, dei documenti 7A → 7H, del runtime Spring non web e dell'assenza di layer prematuri.</p>
+<p>Dopo il Punto 7H, il Punto 7 è considerato chiuso e il progetto può preparare il futuro Punto 8 — API Layer.</p>
+
+    </article>
+  </main>
+</body>
+</html>
