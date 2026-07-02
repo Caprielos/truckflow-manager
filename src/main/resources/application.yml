@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: truckflow-manager
+  main:
+    web-application-type: none
+  profiles:
+    active: memory
+
+truckflow:
+  infrastructure:
+    profile: memory

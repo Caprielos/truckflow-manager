@@ -573,7 +573,7 @@ ls docs/32-spring-wiring-foundation.md
 ls src/main/java/it/gabriele/truckflow/TruckFlowApplication.java
 ls src/main/java/it/gabriele/truckflow/infrastructure/config/spring
 ls src/main/resources/application.yml
-ls src/test/java/it/gabriele/truckflow/infrastructure/SpringWiringFoundationTest.java
+ls src/test/java/it/gabriele/truckflow/infrastructure/config/spring/SpringWiringFoundationTest.java
 ```
 
 Commit consigliato:
