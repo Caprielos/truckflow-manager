@@ -110,11 +110,11 @@ class InfrastructureFoundationTest {
 
   @Test
   void infrastructureFoundationDocumentationIsPresent() {
-    assertTrue(Files.exists(Path.of("docs/30-infrastructure-layer-blueprint.md")));
-    assertTrue(Files.exists(Path.of("docs/31-infrastructure-foundation.md")));
-    assertTrue(Files.exists(Path.of("digitalDocs/index.html")));
+    assertTrue(Files.exists(Path.of("docs/old_style/30-infrastructure-layer-blueprint.md")));
+    assertTrue(Files.exists(Path.of("docs/old_style/31-infrastructure-foundation.md")));
+    assertTrue(Files.exists(Path.of("docs/digital/index.html")));
     assertTrue(
-        Files.exists(Path.of("digitalDocs/truckflow-manager-enterprise-documentation.html")));
+        Files.exists(Path.of("docs/digital/truckflow-manager-enterprise-documentation.html")));
     assertFalse(
         Files.exists(INFRASTRUCTURE_ROOT.resolve("jpa")),
         "JPA package must not be introduced by the infrastructure foundation step.");

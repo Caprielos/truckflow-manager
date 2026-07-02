@@ -57,9 +57,9 @@ class ApplicationLayerFinalFreezeTest {
                 assertTrue(Files.exists(path), () -> "Missing application documentation: " + path));
 
     assertTrue(Files.exists(Path.of("TRUCKFLOW_PROJECT_DOCUMENTATION.md")));
-    assertTrue(Files.exists(Path.of("digitalDocs/index.html")));
+    assertTrue(Files.exists(Path.of("docs/digital/index.html")));
     assertTrue(
-        Files.exists(Path.of("digitalDocs/truckflow-manager-enterprise-documentation.html")));
+        Files.exists(Path.of("docs/digital/truckflow-manager-enterprise-documentation.html")));
   }
 
   @Test
@@ -120,19 +120,19 @@ class ApplicationLayerFinalFreezeTest {
 
   private Path applicationDocumentationPath(int number) {
     return switch (number) {
-      case 16 -> Path.of("docs/16-application-layer-blueprint.md");
-      case 17 -> Path.of("docs/17-application-foundation.md");
-      case 18 -> Path.of("docs/18-application-repository-ports.md");
-      case 19 -> Path.of("docs/19-application-in-memory-repositories.md");
-      case 20 -> Path.of("docs/20-application-first-use-cases.md");
-      case 21 -> Path.of("docs/21-application-use-case-hardening.md");
-      case 22 -> Path.of("docs/22-application-use-case-expansion.md");
-      case 23 -> Path.of("docs/23-application-use-case-expansion-review.md");
-      case 24 -> Path.of("docs/24-application-use-cases-expansion-vehicles.md");
-      case 25 -> Path.of("docs/25-application-use-cases-expansion-operational-roles.md");
-      case 26 -> Path.of("docs/26-application-operational-use-case-hardening.md");
-      case 27 -> Path.of("docs/27-application-compliance-base-use-cases.md");
-      case 28 -> Path.of("docs/28-application-layer-final-review-freeze.md");
+      case 16 -> Path.of("docs/old_style/16-application-layer-blueprint.md");
+      case 17 -> Path.of("docs/old_style/17-application-foundation.md");
+      case 18 -> Path.of("docs/old_style/18-application-repository-ports.md");
+      case 19 -> Path.of("docs/old_style/19-application-in-memory-repositories.md");
+      case 20 -> Path.of("docs/old_style/20-application-first-use-cases.md");
+      case 21 -> Path.of("docs/old_style/21-application-use-case-hardening.md");
+      case 22 -> Path.of("docs/old_style/22-application-use-case-expansion.md");
+      case 23 -> Path.of("docs/old_style/23-application-use-case-expansion-review.md");
+      case 24 -> Path.of("docs/old_style/24-application-use-cases-expansion-vehicles.md");
+      case 25 -> Path.of("docs/old_style/25-application-use-cases-expansion-operational-roles.md");
+      case 26 -> Path.of("docs/old_style/26-application-operational-use-case-hardening.md");
+      case 27 -> Path.of("docs/old_style/27-application-compliance-base-use-cases.md");
+      case 28 -> Path.of("docs/old_style/28-application-layer-final-review-freeze.md");
       default ->
           throw new IllegalArgumentException(
               "Unsupported application documentation number: " + number);

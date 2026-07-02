@@ -132,8 +132,8 @@ class SpringWiringFoundationTest {
 
   @Test
   void springWiringDocumentationIsPresent() {
-    assertTrue(Files.exists(Path.of("docs/32-spring-wiring-foundation.md")));
-    assertTrue(Files.exists(Path.of("digitalDocs/index.html")));
+    assertTrue(Files.exists(Path.of("docs/old_style/32-spring-wiring-foundation.md")));
+    assertTrue(Files.exists(Path.of("docs/digital/index.html")));
     assertFalse(
         Files.exists(INFRASTRUCTURE_ROOT.resolve("jpa")),
         "JPA package must not be introduced by Spring wiring foundation.");

@@ -1,3 +1,9 @@
+# Comandi base TruckFlow Manager
+
+> Nota documentale: dopo la riorganizzazione finale, i documenti storici numerati si trovano in `docs/old_style/`, la documentazione digitale in `docs/digital/`, la guida semplice in `docs/simple/` e la documentazione professionale in `docs/professional/`.
+
+---
+
 # Command Basic - TruckFlow Manager
 
 Documento con i comandi base più usati per lavorare sul progetto TruckFlow Manager.
@@ -442,7 +448,7 @@ Il Punto 6M chiude il primo ciclo dell'application layer. Non aggiunge nuovi use
 Prima del commit conviene controllare anche che il documento finale sia presente:
 
 ```bash
-ls docs/28-application-layer-final-review-freeze.md
+ls docs/old_style/28-application-layer-final-review-freeze.md
 ```
 
 Commit consigliato:
@@ -504,9 +510,9 @@ git status
 Documenti principali da controllare:
 
 ```bash
-ls docs/30-infrastructure-layer-blueprint.md
-ls digitalDocs/index.html
-ls digitalDocs/truckflow-manager-enterprise-documentation.html
+ls docs/old_style/30-infrastructure-layer-blueprint.md
+ls docs/digital/index.html
+ls docs/digital/truckflow-manager-enterprise-documentation.html
 ```
 
 Commit consigliato:
@@ -536,7 +542,7 @@ git status
 Documenti principali da controllare:
 
 ```bash
-ls docs/31-infrastructure-foundation.md
+ls docs/old_style/31-infrastructure-foundation.md
 ls src/main/java/it/gabriele/truckflow/infrastructure/exception
 ls src/test/java/it/gabriele/truckflow/infrastructure/InfrastructureFoundationTest.java
 ```
@@ -569,7 +575,7 @@ git status
 Documenti e file principali da controllare:
 
 ```bash
-ls docs/32-spring-wiring-foundation.md
+ls docs/old_style/32-spring-wiring-foundation.md
 ls src/main/java/it/gabriele/truckflow/TruckFlowApplication.java
 ls src/main/java/it/gabriele/truckflow/infrastructure/config/spring
 ls src/main/resources/application.yml
@@ -603,7 +609,7 @@ git status
 Documenti e file principali da controllare:
 
 ```bash
-ls docs/33-persistence-mapping-blueprint.md
+ls docs/old_style/33-persistence-mapping-blueprint.md
 ls src/main/java/it/gabriele/truckflow/infrastructure/mapping
 ls src/test/java/it/gabriele/truckflow/infrastructure/mapping/PersistenceMappingBlueprintTest.java
 ```
@@ -635,7 +641,7 @@ git status
 Documenti e file principali da controllare:
 
 ```bash
-ls docs/34-real-repository-prototype.md
+ls docs/old_style/34-real-repository-prototype.md
 ls src/main/java/it/gabriele/truckflow/infrastructure/repository/locations
 ls src/test/java/it/gabriele/truckflow/infrastructure/repository/locations/FileLocationRepositoryPrototypeTest.java
 ```
@@ -667,7 +673,7 @@ git status
 Documenti e file principali da controllare:
 
 ```bash
-ls docs/35-repository-expansion.md
+ls docs/old_style/35-repository-expansion.md
 ls src/main/java/it/gabriele/truckflow/infrastructure/repository/file
 ls src/main/java/it/gabriele/truckflow/infrastructure/repository/cargo
 ls src/main/java/it/gabriele/truckflow/infrastructure/repository/documents
@@ -703,7 +709,7 @@ git status
 Documenti e file principali da controllare:
 
 ```bash
-ls docs/36-infrastructure-testing.md
+ls docs/old_style/36-infrastructure-testing.md
 ls src/test/java/it/gabriele/truckflow/infrastructure/repository/file/FileRepositoryStorageTest.java
 ls src/test/java/it/gabriele/truckflow/infrastructure/repository/InfrastructureRepositoryUseCaseIntegrationTest.java
 ls src/test/java/it/gabriele/truckflow/infrastructure/InfrastructureTechnicalBoundaryTest.java
@@ -737,7 +743,7 @@ git status
 Documenti e file principali da controllare:
 
 ```bash
-ls docs/37-infrastructure-review-freeze.md
+ls docs/old_style/37-infrastructure-review-freeze.md
 ls src/test/java/it/gabriele/truckflow/infrastructure/InfrastructureLayerFinalFreezeTest.java
 ```
 

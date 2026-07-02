@@ -23,14 +23,14 @@ class InfrastructureLayerFinalFreezeTest {
   void infrastructureRoadmapDocumentsArePresentFrom7aTo7h() throws IOException {
     List<String> expectedDocuments =
         List.of(
-            "30-infrastructure-layer-blueprint.md",
-            "31-infrastructure-foundation.md",
-            "32-spring-wiring-foundation.md",
-            "33-persistence-mapping-blueprint.md",
-            "34-real-repository-prototype.md",
-            "35-repository-expansion.md",
-            "36-infrastructure-testing.md",
-            "37-infrastructure-review-freeze.md");
+            "old_style/30-infrastructure-layer-blueprint.md",
+            "old_style/31-infrastructure-foundation.md",
+            "old_style/32-spring-wiring-foundation.md",
+            "old_style/33-persistence-mapping-blueprint.md",
+            "old_style/34-real-repository-prototype.md",
+            "old_style/35-repository-expansion.md",
+            "old_style/36-infrastructure-testing.md",
+            "old_style/37-infrastructure-review-freeze.md");
 
     for (String document : expectedDocuments) {
       assertTrue(Files.exists(DOCS.resolve(document)), "Missing infrastructure doc: " + document);
@@ -177,7 +177,8 @@ class InfrastructureLayerFinalFreezeTest {
 
   @Test
   void documentationStatesThatPoint7IsClosedAndPoint8IsNext() throws IOException {
-    String finalDoc = Files.readString(DOCS.resolve("37-infrastructure-review-freeze.md"));
+    String finalDoc =
+        Files.readString(DOCS.resolve("old_style/37-infrastructure-review-freeze.md"));
 
     assertTrue(finalDoc.contains("Punto 7H"));
     assertTrue(finalDoc.contains("Punto 7"));

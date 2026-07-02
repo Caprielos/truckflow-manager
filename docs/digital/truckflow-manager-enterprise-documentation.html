@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TruckFlow Manager — Enterprise Documentation</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <span class="badge">Enterprise documentation</span>
+    <h1>TruckFlow Manager</h1>
+    <p>Documentazione sintetica professionale dopo il completamento del Punto 7 — Infrastructure Layer.</p>
+  </header>
+  <main>
+    <section class="card">
+      <h2>Overview</h2>
+      <p>TruckFlow Manager è un progetto Java 21 per la modellazione di una piattaforma di trasporto, logistica e gestione flotta, costruito con separazione tra Domain, Application e Infrastructure Layer.</p>
+    </section>
+    <section class="grid section">
+      <article class="card">
+        <h3>Domain Layer</h3>
+        <p>Contiene regole business, aggregate, value object, eccezioni e invarianti. È privo di dipendenze tecniche.</p>
+      </article>
+      <article class="card">
+        <h3>Application Layer</h3>
+        <p>Contiene use case, command, result, port in, port out e service applicativi.</p>
+      </article>
+      <article class="card">
+        <h3>Infrastructure Layer</h3>
+        <p>Contiene adapter tecnici, repository in-memory, repository file-backed, mapper, eccezioni e Spring wiring non-web.</p>
+      </article>
+    </section>
+    <section class="card section">
+      <h2>Roadmap completata</h2>
+      <p>Punto 1 → Punto 5: Domain. Punto 6A → 6M: Application Layer. Punto 7A → 7H: Infrastructure Layer.</p>
+      <p>Prossimo ciclo: Punto 8 — API Layer.</p>
+    </section>
+    <section class="card section">
+      <h2>Link principali</h2>
+      <ul class="clean">
+        <li><a href="../simple/README.md">Guida semplice</a></li>
+        <li><a href="../professional/README.md">Documentazione professionale</a></li>
+        <li><a href="../professional/technical-glossary.md">Glossario tecnico professionale</a></li>
+        <li><a href="../old_style/README.md">Archivio storico</a></li>
+      </ul>
+    </section>
+  </main>
+  <footer>TruckFlow Manager — docs/digital</footer>
+</body>
+</html>

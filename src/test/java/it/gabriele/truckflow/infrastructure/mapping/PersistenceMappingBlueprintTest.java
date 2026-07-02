@@ -134,9 +134,9 @@ class PersistenceMappingBlueprintTest {
 
   @Test
   void persistenceMappingBlueprintDocumentationIsPresent() {
-    assertTrue(Files.exists(Path.of("docs/33-persistence-mapping-blueprint.md")));
-    assertTrue(Files.exists(Path.of("docs/32-spring-wiring-foundation.md")));
-    assertTrue(Files.exists(Path.of("digitalDocs/index.html")));
+    assertTrue(Files.exists(Path.of("docs/old_style/33-persistence-mapping-blueprint.md")));
+    assertTrue(Files.exists(Path.of("docs/old_style/32-spring-wiring-foundation.md")));
+    assertTrue(Files.exists(Path.of("docs/digital/index.html")));
   }
 
   private static List<Path> filesContaining(Path root, List<String> patterns) throws IOException {

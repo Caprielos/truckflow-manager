@@ -1,470 +1,72 @@
-# TruckFlow Manager — Documentazione completa del progetto
-
-Questa è la pagina di ingresso della documentazione ufficiale di TruckFlow Manager.
+# TruckFlow Manager — Documentazione principale
 
-La documentazione ufficiale aggiornata si trova nella cartella [`docs`](docs/README.md).
+Questa è la mappa principale della documentazione del progetto.
 
+La documentazione completa è stata riorganizzata sotto [`docs/`](docs/README.md) dopo la chiusura del **Punto 7 — Infrastructure Layer**.
 
-## Documentazione digitale HTML + CSS
+## Stato attuale
 
-Oltre alla documentazione Markdown nella cartella [`docs`](docs/README.md), il progetto ora include una prima documentazione digitale nella cartella [`digitalDocs`](digitalDocs/index.html).
+TruckFlow Manager ha completato:
 
-Questa documentazione è pensata per essere full English e coerente con il codice: i nomi di classi, entità, value object, variabili e concetti architetturali rimangono in inglese. La spiegazione italiana è disponibile tramite tooltip CSS oppure può essere mostrata direttamente modificando solo la classe globale del tag `<body>`.
+- Punto 1 → Punto 5: Domain Layer;
+- Punto 6A → Punto 6M: Application Layer;
+- Punto 7A → Punto 7H: Infrastructure Layer.
 
-Il comportamento è controllato da due flag CSS globali:
+Il prossimo ciclo sarà il **Punto 8 — API Layer**.
 
-- `tooltip-enabled` — mostra la traduzione italiana al passaggio del mouse;
-- `tooltip-disabled` — mostra la traduzione italiana direttamente nella pagina.
+## Nuova struttura documentale
 
-Il markup HTML resta identico in entrambi i casi. Cambia solo il CSS applicato dal flag globale.
+```text
+docs/
+├── README.md
+├── old_style/
+├── simple/
+├── professional/
+└── digital/
+```
 
-La documentazione digitale funziona anche come sistema di **Guided Links**: un indice laterale guida la lettura tra i documenti principali, mantenendo i file Markdown come fonte ufficiale e offrendo una consultazione più rapida tramite pannelli HTML navigabili.
+## Lettura consigliata
 
-## Stato attuale del dominio
+- Per capire il progetto con parole semplici: [`docs/simple/README.md`](docs/simple/README.md).
+- Per una documentazione tecnica presentabile: [`docs/professional/README.md`](docs/professional/README.md).
+- Per navigare dal browser: [`docs/digital/index.html`](docs/digital/index.html).
+- Per consultare la storia step-by-step: [`docs/old_style/README.md`](docs/old_style/README.md).
 
-Il progetto ha consolidato il **domain layer puro**, ha completato il primo ciclo dell’application layer fino al **Punto 6M — Application Layer Final Review & Freeze**, ha aperto il **Punto 7A — Infrastructure Layer Blueprint**, ha applicato il **Punto 7B — Infrastructure Foundation** e ha introdotto il **Punto 7C — Spring Wiring Foundation** come wiring tecnico non web del nuovo ciclo infrastrutturale e ha aggiunto il **Punto 7D — Persistence Mapping Blueprint** come blueprint neutro del mapping domain ↔ persistence.
+## Archivio storico
 
-La versione attuale rappresenta la **TruckFlow Domain Foundation v1.0** rafforzata dalla prima review correttiva del dominio puro. La fondazione è definita, le regole sono documentate e sono stati applicati interventi mirati su invarianti, eccezioni, codici aziendali, test e pulizia del repository. Il Punto 6M ha chiuso la review/freeze finale del primo ciclo dell'application layer; il Punto 7A ha definito il blueprint dell'Infrastructure Layer; il Punto 7B ha introdotto la foundation tecnica con package, eccezioni e convenzioni infrastrutturali; il Punto 7C ha introdotto Spring come wiring tecnico non web, mantenendo domain e application privi di dipendenze framework; il Punto 7D ha definito il catalogo dei mapping blueprint senza introdurre ancora database, JPA, Spring Data o repository reali. Ora l'application layer copre Locations, Cargo, Shipments, Documents, Vehicles, Operational Roles e Compliance base con command, result, port in, port out, service, repository in memory, test e documentazione allineati, senza introdurre ancora REST API, database, JPA, Spring Data, planning, tracking, audit trail, workflow, country engine operativo o controlli concreti di violazione.
+I vecchi documenti numerati sono stati spostati in [`docs/old_style/`](docs/old_style/README.md).
 
-Nota importante: eventuali dipendenze Spring Boot, Web, Validation o OpenAPI già presenti nel `pom.xml` sono da considerare preparatorie o storiche. Non rappresentano ancora l'introduzione architetturale di REST API, controller, database, JPA, Spring Data o security nel Punto 6.
+L'archivio conserva i documenti da `01` a `37`, dal project overview fino al freeze finale dell'Infrastructure Layer.
 
-I package principali sono:
+## Guida semplice
 
-- `domain.users`;
-- `domain.qualifications`;
-- `domain.operational`;
-- `domain.vehicles`;
-- `domain.cargo`;
-- `domain.locations`;
-- `domain.triptemplates`;
-- `domain.shipments`;
-- `domain.documents`;
-- `domain.compliance`.
+La nuova guida semplice si trova in [`docs/simple/`](docs/simple/README.md).
 
-Il dominio è stato costruito seguendo una regola precisa: modellare prima i concetti reali dell'azienda, senza introdurre database, controller, JPA, REST API, JWT, microservizi, tracking, disponibilità, pianificazione operativa, audit, workflow o controlli concreti di compliance.
+È pensata per spiegare il progetto in modo chiaro, con esempi, analogie e ragionamenti sulle scelte fatte.
 
-## Documenti principali
+## Documentazione professionale
 
-- [`docs/README.md`](docs/README.md) — indice della documentazione del dominio.
-- [`docs/01-project-overview.md`](docs/01-project-overview.md) — visione generale del progetto.
-- [`docs/02-domain-users.md`](docs/02-domain-users.md) — account applicativi e autorizzazioni.
-- [`docs/03-domain-qualifications.md`](docs/03-domain-qualifications.md) — catalogo qualificazioni.
-- [`docs/04-domain-operational.md`](docs/04-domain-operational.md) — figure operative aziendali.
-- [`docs/05-domain-vehicles.md`](docs/05-domain-vehicles.md) — veicoli, allestimenti, combinazioni e schede tecniche.
-- [`docs/06-architecture-decisions.md`](docs/06-architecture-decisions.md) — decisioni architetturali.
-- [`docs/07-domain-cargo.md`](docs/07-domain-cargo.md) — merce e requisiti cargo.
-- [`docs/08-domain-locations.md`](docs/08-domain-locations.md) — luoghi logistici.
-- [`docs/09-domain-triptemplates.md`](docs/09-domain-triptemplates.md) — percorsi tipo e missioni tecniche astratte.
-- [`docs/10-domain-shipments.md`](docs/10-domain-shipments.md) — richieste di spedizione.
-- [`docs/11-domain-documents.md`](docs/11-domain-documents.md) — documento aziendale come concetto puro.
-- [`docs/12-domain-compliance.md`](docs/12-domain-compliance.md) — requisiti astratti di conformità.
-- [`docs/13-domain-rules.md`](docs/13-domain-rules.md) — regole ufficiali della TruckFlow Domain Foundation v1.0.
-- [`docs/14-domain-review-patches.md`](docs/14-domain-review-patches.md) — riepilogo degli interventi correttivi della prima review concreta del dominio puro.
-- [`docs/15-domain-test-suite-review.md`](docs/15-domain-test-suite-review.md) — revisione finale della test suite del dominio puro, con cosa è stato aggiunto, cosa manca e perché.
-- [`docs/16-application-layer-blueprint.md`](docs/16-application-layer-blueprint.md) — blueprint del Punto 6A, dedicato a struttura application, command, result, port, repository, use case e test applicativi.
-- [`docs/17-application-foundation.md`](docs/17-application-foundation.md) — foundation del Punto 6B: package application, contratti base, eccezioni applicative e test architetturali.
-- [`docs/18-application-repository-ports.md`](docs/18-application-repository-ports.md) — repository port del Punto 6C: `RepositoryPort`, `LocationRepository`, `CargoUnitRepository` e `ShipmentRepository`.
-- [`docs/19-application-in-memory-repositories.md`](docs/19-application-in-memory-repositories.md) — repository in memory del Punto 6D: implementazioni leggere per Locations, Cargo e Shipments.
-- [`docs/20-application-first-use-cases.md`](docs/20-application-first-use-cases.md) — primi use case del Punto 6E: command, result, port in, application service e primo flusso applicativo Locations + Cargo + Shipments.
-- [`docs/21-application-use-case-hardening.md`](docs/21-application-use-case-hardening.md) — hardening del Punto 6F: `CancelShipmentUseCase`, copy-on-write delle mutazioni shipment, test negativi, errori applicativi e protezione dalle mutazioni fallite.
-- [`docs/22-application-use-case-expansion.md`](docs/22-application-use-case-expansion.md) — espansione del Punto 6G: primi use case applicativi Documents, `DocumentRepository`, `InMemoryDocumentRepository` e flusso register/find/activate/archive.
-- [`docs/23-application-use-case-expansion-review.md`](docs/23-application-use-case-expansion-review.md) — review del Punto 6H: contratti `UseCase`, service allineati alle port in, result null-safe, repository in memory uniformi e documentazione aggiornata.
-- [`docs/24-application-use-cases-expansion-vehicles.md`](docs/24-application-use-cases-expansion-vehicles.md) — espansione del Punto 6I: primi use case applicativi Vehicles, repository port Vehicles, repository in memory Vehicles e test applicativi.
-- [`docs/25-application-use-cases-expansion-operational-roles.md`](docs/25-application-use-cases-expansion-operational-roles.md) — espansione del Punto 6J: primi use case applicativi Operational Roles, repository port Operational, repository in memory Operational e test applicativi.
-- [`docs/26-application-operational-use-case-hardening.md`](docs/26-application-operational-use-case-hardening.md) — hardening del Punto 6K: review Operational Roles, copertura completa dei service di stato, copy-on-write sulle attivazioni fallite e documentazione allineata.
-- [`docs/27-application-compliance-base-use-cases.md`](docs/27-application-compliance-base-use-cases.md) — espansione del Punto 6L: primi use case Compliance base, `ComplianceRequirementRepository`, `InMemoryComplianceRequirementRepository` e flusso register/find/status.
-- [`docs/28-application-layer-final-review-freeze.md`](docs/28-application-layer-final-review-freeze.md) — chiusura del Punto 6M: review finale, freeze dell’application layer, controlli architetturali e documentazione di cosa resta fuori.
-- [`docs/29-final-roadmap-documentation-alignment.md`](docs/29-final-roadmap-documentation-alignment.md) — pulizia documentale finale: roadmap reale 1 → 6M, correzione del 6G Documents, chiarimento sulle dipendenze Spring preparatorie e definizione del concetto di Guided Links.
-- [`docs/30-infrastructure-layer-blueprint.md`](docs/30-infrastructure-layer-blueprint.md) — apertura del Punto 7A: principi, confini, roadmap 7A → 7H, ruolo di Spring, repository reali, repository in memory, mapping, adapter e relazione con il futuro Punto 8 API Layer.
-- [`docs/31-infrastructure-foundation.md`](docs/31-infrastructure-foundation.md) — Punto 7B: foundation tecnica leggera dell'Infrastructure Layer, package base, eccezioni infrastrutturali, convenzioni, marker tecnici e test architetturale.
-- [`docs/32-spring-wiring-foundation.md`](docs/32-spring-wiring-foundation.md) — Punto 7C: Spring Wiring Foundation, entry point tecnico, configurazioni bean, profilo memory, runtime non web e test dedicato.
-- [`docs/33-persistence-mapping-blueprint.md`](docs/33-persistence-mapping-blueprint.md) — Punto 7D: Persistence Mapping Blueprint, catalogo dei mapping blueprint, regole su ID/codice/stato/value object/reference e test dedicato.
+La documentazione tecnica ufficiale si trova in [`docs/professional/`](docs/professional/README.md).
 
-## Regole fondamentali della Domain Foundation
+Contiene overview, architettura, descrizione dei layer, qualità, roadmap, stato attuale, prossimi step e glossario tecnico professionale.
 
-Le regole principali sono:
+## Documentazione digitale
 
-- ogni dominio mantiene confini chiari;
-- un dominio non importa aggregate root completi di altri domini;
-- i riferimenti tra domini avvengono tramite ID, value object stabili o concetti astratti;
-- value object simili non vengono unificati se hanno significato diverso;
-- le eccezioni custom sono introdotte gradualmente;
-- `ComplianceViolationException` non viene introdotta ora perché le violazioni concrete non appartengono ancora al dominio puro;
-- application layer e infrastructure rimangono separati dal dominio;
-- file locali dell'IDE, artefatti Maven, file macOS generati e file temporanei come `.patch` e `.sh` restano fuori dal versionamento.
+La documentazione digitale si trova in [`docs/digital/`](docs/digital/README.md).
 
-## Eccezioni di dominio
+La vecchia cartella `digitalDocs/` è stata superata dalla nuova struttura `docs/digital/`.
 
-Sono state introdotte le eccezioni base condivise:
+## Confini attuali del progetto
 
-- `DomainException`;
-- `DomainValidationException`;
-- `InvariantViolationException`.
+Alla fine del Punto 7 il progetto non contiene ancora:
 
-Sono state inoltre definite eccezioni specifiche per i domini principali, come `InvalidUserException`, `InvalidShipmentException`, `InvalidDocumentException` e `InvalidComplianceRequirementException`.
+- REST API;
+- controller;
+- DTO web;
+- security HTTP;
+- JPA;
+- Spring Data;
+- database relazionale;
+- frontend.
 
-Queste eccezioni non obbligano a modificare immediatamente tutte le classi esistenti. Il refactoring dalle eccezioni standard Java alle eccezioni custom deve avvenire gradualmente, dominio per dominio, aggiornando i test.
-
-## Review correttiva completata
-
-La prima review correttiva del dominio puro ha consolidato otto aspetti principali:
-
-1. validazione completa prima delle mutazioni di stato degli aggregate;
-2. uso delle eccezioni custom nei domini semplici;
-3. uso delle eccezioni custom nei domini complessi;
-4. obbligatorietà di `OperationalCode` per le figure operative;
-5. test del catalogo qualificazioni basati su comportamento e coerenza, non su conteggi fragili;
-6. pulizia della documentazione e delle regole sui file locali, IDE, build e artefatti temporanei;
-7. modellazione di `LicensePlate` e `VehicleIdentificationNumber` come value object del dominio veicoli;
-8. rafforzamento di preferenze utente, giurisdizione compliance e scope operativi con `LanguageCode`, `UserTheme`, `CountryCode`, `JurisdictionRegion`, `ComplianceJurisdictionScope` e `OperationalScopeCode`.
-
-Questi interventi non aggiungono nuove funzionalità operative, ma rendono il dominio più sicuro, leggibile e pronto per essere consumato dal livello application.
-
-Dopo questi interventi è stata aggiunta anche una revisione finale della test suite del dominio puro. Questa revisione introduce test architetturali sui confini tra domini, test contrattuali sui value object principali, casi limite aggiuntivi su cargo e shipment e un documento dedicato che chiarisce cosa è coperto e cosa rimane fuori perché appartiene a moduli futuri.
-
-È stato inoltre aggiunto il blueprint del Punto 6A. Questo step ha definito come organizzare use case, command, result, port in, port out, repository in memory, eccezioni applicative e test dell'application layer.
-
-Dopo il blueprint è stata avviata la foundation del Punto 6B: sono stati creati i package applicativi principali, i contratti base `ApplicationCommand`, `ApplicationResult` e `UseCase`, le prime eccezioni applicative e i test architetturali che proteggono il nuovo livello.
-
-Con il Punto 6C sono state introdotte le prime repository port specifiche: `RepositoryPort`, `LocationRepository`, `CargoUnitRepository` e `ShipmentRepository`. Questi contratti permettono ai futuri use case di salvare e recuperare aggregate tramite ID e codice senza conoscere implementazioni concrete.
-
-Con il Punto 6D sono state introdotte le prime implementazioni in memory: `InMemoryLocationRepository`, `InMemoryCargoUnitRepository` e `InMemoryShipmentRepository`. Questi adapter sono utili per test e sviluppo locale, proteggono duplicati di codice e input nulli, ma non sostituiscono un database enterprise definitivo.
-
-Con il Punto 6E sono stati introdotti i primi use case applicativi reali: registrazione e recupero di Locations e Cargo, creazione di una Shipment draft, aggiunta di item e leg, conferma e recupero della Shipment. Questo step dimostra il primo flusso applicativo completo senza introdurre ancora REST API, database o framework.
-
-Con il Punto 6F è stato eseguito l'hardening dei primi use case: è stato aggiunto `CancelShipmentUseCase`, sono stati rafforzati i service di mutazione shipment con approccio copy-on-write, sono stati ampliati i test negativi su command, dependency nulle, risorse mancanti e duplicati, ed è stata verificata la protezione da mutazioni parziali in caso di errore di dominio.
-
-Con il Punto 6G è stata eseguita la prima espansione controllata dell'application layer verso `documents`: sono stati aggiunti command, result, port in, port out, service applicativi, repository in memory e test per registrare, trovare, attivare e archiviare documenti logici aziendali.
-
-Con il Punto 6H è stata eseguita una review tecnica e documentale dell'espansione: i result applicativi sono stati resi null-safe, è stato aggiunto `ApplicationUseCaseReviewTest`, sono stati rafforzati i controlli sulle repository in memory e il flusso Documents verifica esplicitamente il comportamento copy-on-write.
-
-Con il Punto 6I è stata eseguita la seconda espansione controllata dell'application layer verso `vehicles`: sono stati aggiunti command, result, port in, port out, service applicativi, repository in memory e test per registrare, trovare e cambiare stato alle unità veicolo, oltre a registrare e trovare combinazioni veicolo costruite da unità già esistenti.
-
-Con il Punto 6J è stata eseguita la terza espansione controllata dell'application layer verso `operational`: sono stati aggiunti command, result, port in, port out, service applicativi, repository in memory e test per registrare, trovare e cambiare stato a Driver, Mechanic, WarehouseOperator, Dispatcher e Manager.
-
-Con il Punto 6K è stata eseguita la review/hardening dei use case Operational Roles: sono stati rafforzati i test sui service di stato, sui command nulli, sulle dependency nulle e sul copy-on-write in caso di attivazioni fallite.
-
-Con il Punto 6L è stata eseguita l'espansione controllata verso Compliance base: sono stati aggiunti command, result, port in, port out, service applicativi, repository in memory e test per registrare, trovare, attivare, sospendere, archiviare e dismettere requisiti astratti di compliance.
-
-Con il Punto 6M è stata eseguita la review/freeze finale del primo ciclo application layer: `ApplicationLayerFinalFreezeTest` verifica completezza dei package, allineamento tra port in e service, presenza della documentazione applicativa e assenza di layer prematuri come web, security, JPA, persistence o database.
-
-Con la pulizia documentale finale è stato aggiunto il documento [`docs/29-final-roadmap-documentation-alignment.md`](docs/29-final-roadmap-documentation-alignment.md), che rende esplicita la roadmap reale dal Punto 1 al Punto 6M, corregge la descrizione del Punto 6G Documents e chiarisce il ruolo preparatorio delle dipendenze Spring presenti nel `pom.xml`.
-
-Con il Punto 7A è stato aggiunto il documento [`docs/30-infrastructure-layer-blueprint.md`](docs/30-infrastructure-layer-blueprint.md), che apre ufficialmente il ciclo Infrastructure Layer senza introdurre ancora codice operativo. Il blueprint definisce cosa entra e cosa resta fuori dal Punto 7, mantiene i repository in memory come adapter validi e stabilisce una roadmap progressiva 7A → 7H prima del futuro Punto 8 API Layer.
-
-Con il Punto 7B è stato aggiunto il documento [`docs/31-infrastructure-foundation.md`](docs/31-infrastructure-foundation.md) e sono stati introdotti package infrastrutturali base, eccezioni tecniche, marker di adapter/repository/service, profili tecnici e un contratto generico di mapping. La fase resta prudente: niente database, JPA, Spring Data, REST API, controller, security o repository reali completi.
-
-Con il Punto 7C è stato aggiunto il documento [`docs/32-spring-wiring-foundation.md`](docs/32-spring-wiring-foundation.md) e Spring è stato introdotto come wiring tecnico controllato: `TruckFlowApplication`, configurazioni bean in `infrastructure.config.spring`, profilo `memory`, runtime non web e test architetturale dedicato. Domain e application layer restano privi di dipendenze Spring.
-
-Con il Punto 7D è stato aggiunto il documento [`docs/33-persistence-mapping-blueprint.md`](docs/33-persistence-mapping-blueprint.md) e sono stati introdotti `PersistenceMappingKind`, `PersistenceFieldMapping`, `PersistenceMappingBlueprint` e `PersistenceMappingBlueprintCatalog`. Questo step definisce il blueprint del mapping domain ↔ persistence per i contesti applicativi attivi senza introdurre database, JPA, Spring Data, repository reali o schema fisico.
-
-Con il Punto 7E è stato aggiunto il documento [`docs/34-real-repository-prototype.md`](docs/34-real-repository-prototype.md) ed è stato introdotto il primo repository reale prototipale per Locations: `FileLocationRepository`, supportato da `LocationPersistenceRecord`, `LocationPersistenceMapper` e test tecnici dedicati. Il prototipo usa un file locale per validare il pattern repository + mapper senza introdurre database, JPA, Spring Data, REST API o security.
-
-Con il Punto 7F è stato aggiunto il documento [`docs/35-repository-expansion.md`](docs/35-repository-expansion.md) ed è stato esteso il pattern file-backed verso Cargo, Documents e Compliance, mantenendo fuori database, JPA, Spring Data, REST API e security.
-
-Con il Punto 7G è stato aggiunto il documento [`docs/36-infrastructure-testing.md`](docs/36-infrastructure-testing.md) e sono stati rafforzati i test tecnici dell'Infrastructure Layer. La fase aggiunge `FileRepositoryStorageTest`, `InfrastructureRepositoryUseCaseIntegrationTest` e `InfrastructureTechnicalBoundaryTest`, verificando storage file-backed, uso dei repository file-backed attraverso use case applicativi e confini architetturali contro REST, security, JPA, Spring Data e database prematuri.
-
-Con il Punto 7H è stato aggiunto il documento [`docs/37-infrastructure-review-freeze.md`](docs/37-infrastructure-review-freeze.md) ed è stato chiuso il primo ciclo Infrastructure Layer. La fase aggiunge `InfrastructureLayerFinalFreezeTest`, congela lo scope infrastrutturale validato e prepara il progetto al futuro Punto 8 — API Layer.
-
-## Punto 6A — Application Layer Blueprint
-
-Il Punto 6A ha progettato il livello applicativo prima di scrivere codice operativo. L'application layer dovrà orchestrare il dominio tramite casi d'uso, senza duplicare le regole di business e senza introdurre subito controller, database, JPA, Spring o API REST.
-
-La struttura prevista include command, result, port in, port out, application service, eccezioni applicative e repository astratti. Il primo flusso consigliato parte da Locations + Cargo + Shipments, perché permette di creare un caso d'uso reale mantenendo separati dominio, applicazione e infrastruttura.
-
-## Punto 6B — Application Foundation
-
-Il Punto 6B introduce la prima base concreta dell'application layer. Sono stati aggiunti i package `application.command`, `application.result`, `application.port.in`, `application.port.out`, `application.usecase` e `application.exception`.
-
-La foundation include i contratti `ApplicationCommand`, `ApplicationResult` e `UseCase`, più le eccezioni applicative `ApplicationException`, `UseCaseValidationException`, `ResourceNotFoundException` e `DuplicateResourceException`.
-
-Questa fase non introduce ancora use case specifici, repository port specifici, repository in memory, API REST o database. Serve a rendere stabile la struttura prima di costruire Locations, Cargo e Shipments nel livello applicativo.
-
-## Punto 6C — Repository Ports
-
-Il Punto 6C aggiunge il primo gruppo di porte repository dell'application layer. Sono contratti astratti, non repository concreti.
-
-Le prime porte sono dedicate a:
-
-- Locations, tramite `LocationRepository`;
-- Cargo, tramite `CargoUnitRepository`;
-- Shipments, tramite `ShipmentRepository`;
-- Documents, tramite `DocumentRepository` dopo il Punto 6G;
-- Vehicles, tramite `VehicleUnitRepository` e `VehicleCombinationRepository` dopo il Punto 6I;
-- Operational Roles, tramite `DriverRepository`, `MechanicRepository`, `WarehouseOperatorRepository`, `DispatcherRepository` e `ManagerRepository` dopo il Punto 6J, rafforzate dal Punto 6K;
-- Compliance base, tramite `ComplianceRequirementRepository` dopo il Punto 6L, consolidata dal freeze del Punto 6M.
-
-Ogni porta permette salvataggio, ricerca per ID, ricerca per codice e verifica di esistenza per ID o codice. Questa scelta prepara i futuri use case senza introdurre database, JPA, Spring, file system o infrastructure concreta.
-
-Il Punto 6C è documentato in [`docs/18-application-repository-ports.md`](docs/18-application-repository-ports.md).
-
-
-## Punto 6D — In-Memory Repositories
-
-Il Punto 6D aggiunge le prime implementazioni concrete delle repository port. Sono adapter tecnici leggeri, collocati in `infrastructure.memory`, e implementano i contratti definiti dall’application layer.
-
-Le implementazioni introdotte sono:
-
-- `InMemoryLocationRepository`;
-- `InMemoryCargoUnitRepository`;
-- `InMemoryShipmentRepository`;
-- `InMemoryDocumentRepository` dopo il Punto 6G;
-- `InMemoryVehicleUnitRepository` e `InMemoryVehicleCombinationRepository` dopo il Punto 6I;
-- `InMemoryDriverRepository`, `InMemoryMechanicRepository`, `InMemoryWarehouseOperatorRepository`, `InMemoryDispatcherRepository` e `InMemoryManagerRepository` dopo il Punto 6J, rafforzate dai test del Punto 6K;
-- `InMemoryComplianceRequirementRepository` dopo il Punto 6L, consolidata dal freeze del Punto 6M.
-
-Queste repository permettono salvataggio, ricerca per ID, ricerca per codice e verifica di esistenza. Inoltre rifiutano input nulli con `UseCaseValidationException` e codici duplicati con `DuplicateResourceException`.
-
-Questa fase non introduce ancora database, JPA, Spring Data, transazioni o query avanzate. Serve a preparare test e primi use case applicativi mantenendo dominio, application e infrastruttura separati.
-
-Il Punto 6D è documentato in [`docs/19-application-in-memory-repositories.md`](docs/19-application-in-memory-repositories.md).
-
-## Punto 6E — First Use Cases
-
-Il Punto 6E aggiunge il primo comportamento applicativo reale. Sono stati introdotti command, result, port in e application service per Locations, Cargo e Shipments.
-
-I primi use case permettono di registrare location, registrare cargo, creare una shipment draft, aggiungere item, aggiungere leg, confermare la shipment e recuperarla. Il flusso viene testato usando le repository in memory introdotte nel Punto 6D.
-
-Questa fase non introduce ancora web, database, JPA, Spring, transazioni o security. Il suo scopo è dimostrare che l'application layer orchestra correttamente il dominio e distingue errori applicativi da errori di dominio.
-
-Il Punto 6E è documentato in [`docs/20-application-first-use-cases.md`](docs/20-application-first-use-cases.md).
-
-
-## Punto 6F — Application Use Case Review & Hardening
-
-Il Punto 6F rafforza i primi use case del blocco Locations + Cargo + Shipments.
-
-Sono stati aggiunti `CancelShipmentCommand`, `CancelShipmentUseCase` e `CancelShipmentService`, completando il primo set di azioni applicative sulle shipment con la cancellazione. Inoltre i service di mutazione shipment (`AddShipmentItemService`, `AddShipmentLegService`, `ConfirmShipmentService` e `CancelShipmentService`) usano una copia dell'aggregate prima di salvare, così una validazione di dominio fallita non modifica lo stato persistito in memory.
-
-La fase aggiunge test di hardening che verificano command nulli, dependency repository nulle, input obbligatori mancanti, find use case su risorse inesistenti, duplicati di location/cargo/shipment, risorse mancanti nei use case di mutazione, cancellazione persistita della shipment e assenza di stato parziale dopo mutazioni fallite su item, leg e conferma shipment.
-
-Questa fase non introduce ancora REST API, database, Spring, JPA, security o moduli enterprise avanzati. Serve a rendere stabile il primo nucleo applicativo prima dell'espansione verso altri domini.
-
-Il Punto 6F è documentato in [`docs/21-application-use-case-hardening.md`](docs/21-application-use-case-hardening.md).
-
-## Punto 6G — Application Use Cases Expansion
-
-Il Punto 6G espande l'application layer verso il dominio Documents.
-
-Sono stati aggiunti `RegisterDocumentCommand`, `FindDocumentCommand`, `ActivateDocumentCommand` e `ArchiveDocumentCommand`, insieme a `DocumentResult`, `DocumentRepository`, le port in documentali e i service `RegisterDocumentService`, `FindDocumentService`, `ActivateDocumentService` e `ArchiveDocumentService`.
-
-È stata aggiunta anche `InMemoryDocumentRepository`, coerente con gli adapter in memory già presenti per Locations, Cargo e Shipments. I test applicativi verificano registrazione, ricerca, attivazione, archiviazione, duplicati, risorse mancanti, command nulli e dependency nulle.
-
-Questa fase non introduce REST API, database, JPA, Spring controller, file upload, file storage, workflow documentali, audit trail o compliance check concreti.
-
-Il Punto 6G è documentato in [`docs/22-application-use-case-expansion.md`](docs/22-application-use-case-expansion.md).
-
-## Punto 6H — Application Use Case Expansion Review & Documentation Alignment
-
-Il Punto 6H rivede e allinea l'application layer dopo l'espansione Documents.
-
-Sono stati rafforzati i factory method dei result applicativi (`LocationResult`, `CargoUnitResult`, `ShipmentResult`, `DocumentResult`) per rifiutare input nulli con `UseCaseValidationException`. È stato aggiunto `ApplicationUseCaseReviewTest`, che verifica che tutte le port in attuali estendano `UseCase` e che tutti i service concreti implementino la propria port.
-
-Sono stati inoltre ampliati i test delle repository in memory per coprire anche `existsById(null)` ed `existsByCode(null)`, e il test dei Documents verifica esplicitamente che activate/archive lavorino su copie prima del salvataggio.
-
-Questa fase non introduce nuovi use case business, REST API, database, JPA, controller, security, tracking, planning o dashboard.
-
-Il Punto 6H è documentato in [`docs/23-application-use-case-expansion-review.md`](docs/23-application-use-case-expansion-review.md).
-
-## Punto 6I — Application Use Cases Expansion II: Vehicles
-
-Il Punto 6I espande l'application layer verso il dominio Vehicles.
-
-Sono stati aggiunti i primi command, result, port in e service per `VehicleUnit`: registrazione, ricerca, attivazione, sospensione, messa fuori servizio e dismissione logica. Sono state aggiunte anche le prime port e i primi service per `VehicleCombination`: registrazione da unità veicolo esistenti e ricerca per ID.
-
-Le repository port aggiunte sono `VehicleUnitRepository` e `VehicleCombinationRepository`. Le relative implementazioni temporanee sono `InMemoryVehicleUnitRepository` e `InMemoryVehicleCombinationRepository`.
-
-La fase mantiene il dominio Vehicles puro e non introduce ancora pianificazione, dispatching, disponibilità, manutenzione, tracking, telematica, scadenze tecniche, database, JPA o REST API.
-
-Il Punto 6I è documentato in [`docs/24-application-use-cases-expansion-vehicles.md`](docs/24-application-use-cases-expansion-vehicles.md).
-
-
-## Punto 6J — Application Use Cases Expansion III: Operational Roles
-
-Il Punto 6J espande l'application layer verso il dominio Operational Roles.
-
-Sono stati aggiunti i primi command, result, port in e service per `Driver`, `Mechanic`, `WarehouseOperator`, `Dispatcher` e `Manager`: registrazione, ricerca per ID, attivazione, sospensione e marcatura come non idoneo.
-
-Sono state aggiunte le repository port `DriverRepository`, `MechanicRepository`, `WarehouseOperatorRepository`, `DispatcherRepository` e `ManagerRepository`, insieme agli adapter temporanei `InMemoryDriverRepository`, `InMemoryMechanicRepository`, `InMemoryWarehouseOperatorRepository`, `InMemoryDispatcherRepository` e `InMemoryManagerRepository`.
-
-La fase mantiene il dominio Operational puro e non introduce ancora turni, availability, payroll, assegnazioni operative, planning, dispatching reale, tracking, security, database, JPA o REST API.
-
-Il Punto 6J è documentato in [`docs/25-application-use-cases-expansion-operational-roles.md`](docs/25-application-use-cases-expansion-operational-roles.md).
-
-## Punto 6K — Application Operational Use Case Review & Hardening
-
-Il Punto 6K rivede e rafforza i use case Operational Roles introdotti nel Punto 6J.
-
-La fase aggiunge `ApplicationOperationalUseCaseHardeningTest`, che verifica copertura uniforme dei service di stato per Driver, Mechanic, WarehouseOperator, Dispatcher e Manager, command nulli, dependency repository nulle e assenza di mutazioni parziali quando una attivazione fallisce per mancanza di qualificazioni o scope.
-
-Sono stati inoltre ripuliti piccoli commenti JavaDoc nei package operational dell'application layer, senza cambiare nomi pubblici, metodi, package o contratti.
-
-Questa fase non introduce nuovi use case business, REST API, controller, database, JPA, security, planning, dispatching reale, turni, payroll, tracking o dashboard.
-
-Il Punto 6K è documentato in [`docs/26-application-operational-use-case-hardening.md`](docs/26-application-operational-use-case-hardening.md).
-
-
-## Punto 6L — Application Compliance Base Use Cases
-
-Il Punto 6L aggiunge i primi use case applicativi Compliance base.
-
-La fase introduce command, result, port in, repository port, service applicativi e repository in memory per `ComplianceRequirement`. I flussi supportati sono registrazione, ricerca, attivazione, sospensione, archiviazione e dismissione del requisito.
-
-Questa fase mantiene Compliance come catalogo astratto. Non introduce controlli automatici su ADR, ATP, CQC, tachigrafo o revisioni, non calcola violazioni, non gestisce scadenze reali, audit trail, workflow, notifiche, REST API, controller, database, JPA o security.
-
-Il Punto 6L è documentato in [`docs/27-application-compliance-base-use-cases.md`](docs/27-application-compliance-base-use-cases.md).
-
-## Punto 6M — Application Layer Final Review & Freeze
-
-Il Punto 6M chiude il primo ciclo dell'application layer.
-
-Questa fase non aggiunge nuovi use case business. Introduce invece `ApplicationLayerFinalFreezeTest`, che verifica la completezza dei package applicativi attivi, l'allineamento tra port in concrete e service applicativi, la presenza della documentazione applicativa dal Punto 6A al Punto 6M e l'assenza di layer prematuri come web, security, JPA, persistence o database.
-
-Il Punto 6M conferma che l'application layer base è ora stabile per Locations, Cargo, Shipments, Documents, Vehicles, Operational Roles e Compliance base, mantenendo ancora fuori REST API, controller, database, JPA, Spring Data, security, planning, tracking, workflow, audit trail e dashboard.
-
-Il Punto 6M è documentato in [`docs/28-application-layer-final-review-freeze.md`](docs/28-application-layer-final-review-freeze.md).
-
-## Roadmap finale allineata dopo il Punto 6M
-
-La roadmap ufficiale completata è ora:
-
-1. Domain Review Finale;
-2. Review concreta dominio per dominio;
-3. Eccezioni custom;
-4. Aggiornamento delle regole e della documentazione del dominio;
-5. Pulizia finale del dominio puro;
-6. Application Layer completo da 6A a 6M.
-
-Il Punto 6 è considerato chiuso. I sotto-step reali finali sono:
-
-- 6I — Vehicles use cases;
-- 6J — Operational Roles use cases;
-- 6K — Operational Roles review & hardening;
-- 6L — Compliance base use cases;
-- 6M — Application Layer final review & freeze.
-
-La descrizione corretta del Punto 6G Documents è: register, find, activate e archive. Non sono stati introdotti update documentale completo, attach di file fisici, generate/PDF, upload, storage, firma digitale, versioning o workflow documentali.
-
-La roadmap finale e le note di allineamento sono documentate in [`docs/29-final-roadmap-documentation-alignment.md`](docs/29-final-roadmap-documentation-alignment.md).
-
-## Punto 7A — Infrastructure Layer Blueprint
-
-Il Punto 7A apre il nuovo ciclo della roadmap: **Punto 7 — Infrastructure Layer**.
-
-Questa fase non modifica codice Java operativo. Serve a fissare i confini dell'infrastruttura prima di introdurre package, wiring, mapping, repository reali o configurazioni tecniche.
-
-Il blueprint stabilisce che:
-
-- domain e application layer restano indipendenti da infrastructure;
-- l'infrastructure layer implementerà i port.out dell'application layer;
-- Spring potrà essere usato solo come wiring tecnico;
-- i repository in memory restano validi per test e sviluppo;
-- REST API, controller, DTO web, JSON e security HTTP restano fuori dal Punto 7;
-- il Punto 8 sarà il momento corretto per l'API Layer.
-
-La roadmap ufficiale del Punto 7 è composta da 7A Infrastructure Blueprint, 7B Infrastructure Foundation, 7C Spring Wiring Foundation, 7D Persistence Mapping Blueprint, 7E Real Repository Prototype, 7F Repository Expansion, 7G Infrastructure Testing e 7H Infrastructure Review & Freeze.
-
-Il Punto 7A è documentato in [`docs/30-infrastructure-layer-blueprint.md`](docs/30-infrastructure-layer-blueprint.md).
-
-## Punto 7B — Infrastructure Foundation
-
-Il Punto 7B è il primo step implementativo leggero del ciclo Infrastructure Layer.
-
-Questa fase crea una struttura tecnica ordinata sotto `infrastructure` senza introdurre ancora persistenza reale. I package introdotti sono `adapter`, `config`, `exception`, `mapping`, `repository` e `service`, che affiancano il package `memory` già esistente.
-
-Il 7B introduce anche una gerarchia di eccezioni infrastrutturali con `InfrastructureException` come radice, più `RepositoryException`, `ExternalServiceException`, `InfrastructureConfigurationException` e `MappingException`.
-
-La foundation aggiunge marker/convenzioni tecniche come `InfrastructureAdapter`, `InfrastructureRepositoryAdapter`, `InfrastructureService`, `InfrastructureProfile` e `PersistenceMapper`. Questi elementi preparano gli step successivi, ma non implementano ancora un database o repository reali completi.
-
-Il Punto 7B mantiene fuori REST API, controller, DTO web, security HTTP, JPA, Hibernate, Spring Data, database e servizi esterni operativi.
-
-Il Punto 7B è documentato in [`docs/31-infrastructure-foundation.md`](docs/31-infrastructure-foundation.md).
-
-## Punto 7C — Spring Wiring Foundation
-
-Il Punto 7C introduce Spring solo come motore di wiring tecnico.
-
-La configurazione Spring vive nel layer infrastructure e collega i port.out ai repository in memory e le port.in ai service applicativi già esistenti. L'application layer non viene annotato e il dominio resta completamente framework-free.
-
-`application.yml` mantiene `spring.main.web-application-type: none`, quindi il progetto non avvia ancora un server HTTP e non espone API. REST, DTO web, controller, JPA, Spring Data e security rimangono fuori da questo step.
-
-Il Punto 7C è documentato in [`docs/32-spring-wiring-foundation.md`](docs/32-spring-wiring-foundation.md).
-
-
-## Punto 7D — Persistence Mapping Blueprint
-
-Il Punto 7D introduce il blueprint del mapping domain ↔ persistence.
-
-La fase aggiunge classi descrittive e un catalogo tecnico nel package `infrastructure.mapping`, ma non introduce ancora database reale, JPA, Spring Data, repository reali o schema fisico. Il suo obiettivo è chiarire come i futuri persistence model dovranno rappresentare ID, codici business, stati, value object, enum, collection e reference.
-
-Il Punto 7D è documentato in [`docs/33-persistence-mapping-blueprint.md`](docs/33-persistence-mapping-blueprint.md).
-
-
-## Punto 7E — Real Repository Prototype
-
-Il Punto 7E introduce il primo repository reale prototipale del progetto.
-
-Il dominio pilota è Locations. La fase aggiunge `FileLocationRepository`, `LocationPersistenceRecord`, `LocationPersistenceMapper` e `FileLocationRepositoryPrototypeTest`. Il prototipo usa un file locale come meccanismo tecnico di salvataggio, ma non introduce database, JPA, Hibernate, Spring Data, schema SQL, REST API, controller o security.
-
-Il repository in-memory resta valido e non viene rimosso. Il repository file-backed serve a validare il pattern repository + persistence record + mapper + test tecnici.
-
-Il Punto 7E è documentato in [`docs/34-real-repository-prototype.md`](docs/34-real-repository-prototype.md).
-
-## Punto 7F — Repository Expansion
-
-Il Punto 7F estende il pattern file-backed validato nel Punto 7E.
-
-La fase aggiunge repository reali file-backed per `CargoUnit`, `Document` e `ComplianceRequirement`, insieme ai rispettivi persistence record, mapper, codec e test tecnici. Viene inoltre introdotto supporto file-backed condiviso nel package `infrastructure.repository.file`, così lettura, scrittura e codifica dei record restano centralizzate.
-
-Dopo questo step, il progetto dispone di repository reali file-backed per Locations, Cargo, Documents e Compliance base, continuando però a mantenere disponibili tutti i repository in-memory.
-
-Il Punto 7F non introduce database, JPA, Hibernate, Spring Data, schema SQL, REST API, controller, DTO web, security, servizi esterni, storage binario documentale, workflow, audit trail, planning o tracking.
-
-Shipments, Vehicles, Operational Roles e TripTemplates non vengono forzati in questa fase: richiedono mapping più complessi e verranno trattati solo dopo il rafforzamento dei test infrastrutturali.
-
-Il Punto 7F è documentato in [`docs/35-repository-expansion.md`](docs/35-repository-expansion.md).
-
-
-## Punto 7G — Infrastructure Testing
-
-Il Punto 7G rafforza la suite tecnica dell'Infrastructure Layer. Aggiunge test su storage file-backed, integrazione tra repository file-backed e use case applicativi e confini architetturali contro layer prematuri.
-
-Il Punto 7G è documentato in [`docs/36-infrastructure-testing.md`](docs/36-infrastructure-testing.md).
-
-
-## Punto 7H — Infrastructure Review & Freeze
-
-Il Punto 7H chiude il primo ciclo dell'Infrastructure Layer. Aggiunge `InfrastructureLayerFinalFreezeTest`, conferma la documentazione 7A → 7H, congela lo scope dei repository file-backed validati e verifica che il progetto non abbia introdotto REST API, controller, database, JPA, Spring Data o security.
-
-Il Punto 7H è documentato in [`docs/37-infrastructure-review-freeze.md`](docs/37-infrastructure-review-freeze.md). Dopo questo step il Punto 7 è considerato chiuso e il prossimo ciclo naturale sarà il Punto 8 — API Layer.
-
-
-## Prossimi step consigliati
-
-La roadmap consigliata è:
-
-1. verificare sul Mac `mvn spotless:apply` e `mvn clean test` dopo ogni intervento importante;
-2. mantenere aggiornata la documentazione `docs/13-domain-rules.md`, `docs/14-domain-review-patches.md`, `docs/15-domain-test-suite-review.md` e `docs/16-application-layer-blueprint.md` quando cambiano regole, test, confini o struttura applicativa;
-3. mantenere il Punto 6A come blueprint ufficiale dell'application layer;
-4. mantenere stabile il Punto 6B con foundation applicativa, package, eccezioni applicative, command, result e test;
-5. mantenere stabile il Punto 6C con le prime repository port specifiche;
-6. mantenere stabile il Punto 6D con le prime repository in memory per test e scenari locali;
-7. mantenere stabile il Punto 6E con i primi use case Locations + Cargo + Shipments;
-8. mantenere stabile il Punto 6F con hardening dei primi use case, `CancelShipmentUseCase` e protezione copy-on-write delle mutazioni shipment;
-9. mantenere stabile il Punto 6G con i primi use case applicativi Documents, `DocumentRepository` e `InMemoryDocumentRepository`;
-10. mantenere stabile il Punto 6H con review dei contratti `UseCase`, service, result null-safe, repository in memory e copy-on-write Documents;
-11. mantenere stabile il Punto 6I con i primi use case applicativi Vehicles, repository port Vehicles, repository in memory Vehicles e test dedicati;
-12. mantenere stabile il Punto 6J con i primi use case applicativi Operational Roles, repository port Operational, repository in memory Operational e test dedicati;
-13. mantenere stabile il Punto 6K con hardening dei use case Operational Roles, copertura completa dei service di stato e test copy-on-write sulle attivazioni fallite;
-14. mantenere stabile il Punto 6L con i primi use case Compliance base, repository port Compliance, repository in memory Compliance e test dedicati;
-15. mantenere stabile il Punto 6M come freeze finale del primo ciclo application layer;
-16. usare il Punto 7A come riferimento ufficiale prima di introdurre qualunque infrastruttura reale;
-17. mantenere stabile il Punto 7B come foundation tecnica dell'Infrastructure Layer, senza trasformarlo prematuramente in database, JPA, REST API o security;
-18. procedere con il Punto 7C — Spring Wiring Foundation solo dopo verifica locale completa con `mvn spotless:check` e `mvn clean test`;
-19. mantenere stabile il Punto 7D — Persistence Mapping Blueprint come catalogo ufficiale prima dei repository reali;
-20. mantenere stabile il Punto 7E — Real Repository Prototype come prototipo Locations file-backed;
-21. mantenere stabile il Punto 7F — Repository Expansion con repository file-backed per Cargo, Documents e Compliance;
-22. mantenere stabile il Punto 7G — Infrastructure Testing con test tecnici su storage file-backed, use case integration e confini architetturali;
-23. mantenere stabile il Punto 7H — Infrastructure Review & Freeze come chiusura finale del Punto 7;
-24. aprire il futuro Punto 8 — API Layer solo dopo verifica locale completa;
-25. rimandare API REST, database completi e integrazioni esterne finché non viene definito lo step specifico corretto.
+Questi temi appartengono al futuro **Punto 8 — API Layer** o a cicli successivi.
