@@ -394,6 +394,31 @@ La fase aggiunge classi descrittive e un catalogo tecnico nel package `infrastru
 Il Punto 7D è documentato in [`docs/33-persistence-mapping-blueprint.md`](docs/33-persistence-mapping-blueprint.md).
 
 
+## Punto 7E — Real Repository Prototype
+
+Il Punto 7E introduce il primo repository reale prototipale del progetto.
+
+Il dominio pilota è Locations. La fase aggiunge `FileLocationRepository`, `LocationPersistenceRecord`, `LocationPersistenceMapper` e `FileLocationRepositoryPrototypeTest`. Il prototipo usa un file locale come meccanismo tecnico di salvataggio, ma non introduce database, JPA, Hibernate, Spring Data, schema SQL, REST API, controller o security.
+
+Il repository in-memory resta valido e non viene rimosso. Il repository file-backed serve a validare il pattern repository + persistence record + mapper + test tecnici.
+
+Il Punto 7E è documentato in [`docs/34-real-repository-prototype.md`](docs/34-real-repository-prototype.md).
+
+## Punto 7F — Repository Expansion
+
+Il Punto 7F estende il pattern file-backed validato nel Punto 7E.
+
+La fase aggiunge repository reali file-backed per `CargoUnit`, `Document` e `ComplianceRequirement`, insieme ai rispettivi persistence record, mapper, codec e test tecnici. Viene inoltre introdotto supporto file-backed condiviso nel package `infrastructure.repository.file`, così lettura, scrittura e codifica dei record restano centralizzate.
+
+Dopo questo step, il progetto dispone di repository reali file-backed per Locations, Cargo, Documents e Compliance base, continuando però a mantenere disponibili tutti i repository in-memory.
+
+Il Punto 7F non introduce database, JPA, Hibernate, Spring Data, schema SQL, REST API, controller, DTO web, security, servizi esterni, storage binario documentale, workflow, audit trail, planning o tracking.
+
+Shipments, Vehicles, Operational Roles e TripTemplates non vengono forzati in questa fase: richiedono mapping più complessi e verranno trattati solo dopo il rafforzamento dei test infrastrutturali.
+
+Il Punto 7F è documentato in [`docs/35-repository-expansion.md`](docs/35-repository-expansion.md).
+
+
 ## Prossimi step consigliati
 
 La roadmap consigliata è:
@@ -416,5 +441,8 @@ La roadmap consigliata è:
 16. usare il Punto 7A come riferimento ufficiale prima di introdurre qualunque infrastruttura reale;
 17. mantenere stabile il Punto 7B come foundation tecnica dell'Infrastructure Layer, senza trasformarlo prematuramente in database, JPA, REST API o security;
 18. procedere con il Punto 7C — Spring Wiring Foundation solo dopo verifica locale completa con `mvn spotless:check` e `mvn clean test`;
-19. procedere con il Punto 7D — Persistence Mapping Blueprint per formalizzare mapping e catalogo prima di qualsiasi repository reale;
-20. rimandare API REST, database completi e integrazioni esterne finché non viene definito lo step specifico corretto.
+19. mantenere stabile il Punto 7D — Persistence Mapping Blueprint come catalogo ufficiale prima dei repository reali;
+20. mantenere stabile il Punto 7E — Real Repository Prototype come prototipo Locations file-backed;
+21. mantenere stabile il Punto 7F — Repository Expansion con repository file-backed per Cargo, Documents e Compliance;
+22. procedere con il Punto 7G — Infrastructure Testing per rafforzare test tecnici, mapper, repository file-backed e confini infrastrutturali;
+23. rimandare API REST, database completi e integrazioni esterne finché non viene definito lo step specifico corretto.

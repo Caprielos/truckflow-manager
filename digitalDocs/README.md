@@ -240,3 +240,9 @@ La documentazione digitale include ora anche `34-real-repository-prototype.md`, 
 Questo aggiornamento introduce il prototipo Locations file-backed: `FileLocationRepository`, `LocationPersistenceRecord`, `LocationPersistenceMapper` e test tecnici dedicati. Il prototipo valida il pattern repository + mapper usando un file locale, senza introdurre database, JPA, Spring Data, repository reali per tutti i domini, REST API, controller o security.
 
 Documento di riferimento: `docs/34-real-repository-prototype.md`.
+
+## Punto 7F — Repository Expansion
+
+La documentazione digitale include ora anche `docs/35-repository-expansion.md`.
+
+Il pannello descrive l'espansione controllata dei repository file-backed verso Cargo, Documents e Compliance base, chiarendo che non sono stati introdotti database, JPA, Spring Data, REST API, controller, security o servizi esterni.

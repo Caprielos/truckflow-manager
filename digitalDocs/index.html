@@ -44,6 +44,7 @@
 <input class="doc-toggle" type="radio" name="active-doc" id="doc-34">
 <input class="doc-toggle" type="radio" name="active-doc" id="doc-35">
 <input class="doc-toggle" type="radio" name="active-doc" id="doc-36">
+<input class="doc-toggle" type="radio" name="active-doc" id="doc-37">
 <div class="app-shell">
   <aside class="sidebar">
     <div class="brand"><div class="brand-mark">TF</div><div><h1>TruckFlow Docs</h1><p>Digital mirror of the official Markdown documentation.</p></div></div>
@@ -85,7 +86,8 @@
 <label class="nav-item" for="doc-33"><span class="nav-number">34</span><span class="nav-label">Spring Wiring Foundation</span><span class="nav-file">32-spring-wiring-foundation.md</span></label>
 <label class="nav-item" for="doc-34"><span class="nav-number">35</span><span class="nav-label">Persistence Mapping Blueprint</span><span class="nav-file">33-persistence-mapping-blueprint.md</span></label>
 <label class="nav-item" for="doc-35"><span class="nav-number">36</span><span class="nav-label">Real Repository Prototype</span><span class="nav-file">34-real-repository-prototype.md</span></label>
-<label class="nav-item" for="doc-36"><span class="nav-number">37</span><span class="nav-label">Command Basic</span><span class="nav-file">command_basic.md</span></label>
+<label class="nav-item" for="doc-36"><span class="nav-number">37</span><span class="nav-label">Repository Expansion</span><span class="nav-file">35-repository-expansion.md</span></label>
+<label class="nav-item" for="doc-37"><span class="nav-number">38</span><span class="nav-label">Command Basic</span><span class="nav-file">command_basic.md</span></label>
     </nav>
   </aside>
   <main class="content">
@@ -15483,7 +15485,34 @@ da zero: potrà riusare la struttura validata dal 7E.</p>
 <pre class="text"><code>Punto 7F — Repository Expansion</code></pre>
 
 </article>
-<article class="doc-panel panel-36" id="command_basic-md">
+<article class="doc-panel panel-36" id="docs-35-repository-expansion-md">
+  <header class="doc-header">
+    <p class="eyebrow">Infrastructure Layer</p>
+    <h2>Punto 7F — Repository Expansion</h2>
+    <p class="doc-path">docs/35-repository-expansion.md</p>
+  </header>
+  <section class="doc-section roadmap-notice">
+    <strong>Repository expansion controllata.</strong>
+    <p>Il Punto 7F estende il pattern file-backed validato da Locations verso Cargo, Documents e Compliance base.</p>
+  </section>
+  <section class="doc-section">
+    <h3>Obiettivo</h3>
+    <p>Validare che repository + persistence record + mapper + codec possano essere riutilizzati su più contesti senza sporcare domain e application layer.</p>
+    <ul>
+      <li><code>FileCargoUnitRepository</code></li>
+      <li><code>FileDocumentRepository</code></li>
+      <li><code>FileComplianceRequirementRepository</code></li>
+      <li><code>FileRepositoryExpansionTest</code></li>
+    </ul>
+  </section>
+  <section class="doc-section">
+    <h3>Confini</h3>
+    <p>Non vengono introdotti database, JPA, Hibernate, Spring Data, schema SQL, REST API, controller, security, servizi esterni, workflow, audit trail, planning o tracking.</p>
+    <p>I repository in-memory restano validi e non vengono sostituiti.</p>
+  </section>
+</article>
+
+<article class="doc-panel panel-37" id="command_basic-md">
   <header class="doc-header">
     <p class="eyebrow">command_basic.md</p>
     <h2>Command Basic</h2>

@@ -394,3 +394,15 @@ Il Punto 7E introduce il primo repository reale prototipale del progetto.
 Il dominio pilota è Locations. La patch aggiunge `FileLocationRepository`, `LocationPersistenceRecord`, `LocationPersistenceMapper` e `FileLocationRepositoryPrototypeTest`. Il prototipo usa un file locale come meccanismo tecnico di salvataggio, ma non introduce database, JPA, Spring Data, repository reali per tutti i domini, REST API, controller o security.
 
 Il Punto 7E è documentato in [`34-real-repository-prototype.md`](34-real-repository-prototype.md).
+
+## Punto 7F — Repository Expansion
+
+Il Punto 7F estende il pattern file-backed validato nel Punto 7E.
+
+Dopo il prototipo Locations, questa fase aggiunge repository reali file-backed per `CargoUnit`, `Document` e `ComplianceRequirement`, insieme ai rispettivi persistence record, mapper, codec e test tecnici.
+
+La fase introduce anche supporto file-backed condiviso nel package `infrastructure.repository.file`, così la logica tecnica di lettura, scrittura e codifica non viene duplicata in ogni adapter.
+
+Il Punto 7F mantiene fuori database, JPA, Hibernate, Spring Data, schema SQL, REST API, controller, security, servizi esterni, storage binario documentale, workflow e audit trail.
+
+Il Punto 7F è documentato in [`35-repository-expansion.md`](35-repository-expansion.md).

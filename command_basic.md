@@ -646,3 +646,38 @@ Commit consigliato:
 git add -A
 git commit -m "Add real location repository prototype"
 ```
+
+---
+
+## Nota progetto — Punto 7F
+
+Il Punto 7F — Repository Expansion estende il pattern file-backed introdotto con Locations.
+
+La patch aggiunge repository file-backed per Cargo, Documents e Compliance, supporto file condiviso, mapper, persistence record, codec e test tecnici. Non introduce database, JPA, Spring Data, schema SQL, REST API, controller o security.
+
+Dopo l'applicazione della patch, il controllo consigliato è:
+
+```bash
+mvn spotless:apply
+mvn spotless:check
+mvn clean test
+git status
+```
+
+Documenti e file principali da controllare:
+
+```bash
+ls docs/35-repository-expansion.md
+ls src/main/java/it/gabriele/truckflow/infrastructure/repository/file
+ls src/main/java/it/gabriele/truckflow/infrastructure/repository/cargo
+ls src/main/java/it/gabriele/truckflow/infrastructure/repository/documents
+ls src/main/java/it/gabriele/truckflow/infrastructure/repository/compliance
+ls src/test/java/it/gabriele/truckflow/infrastructure/repository/FileRepositoryExpansionTest.java
+```
+
+Commit consigliato:
+
+```bash
+git add -A
+git commit -m "Expand file-backed repositories"
+```
