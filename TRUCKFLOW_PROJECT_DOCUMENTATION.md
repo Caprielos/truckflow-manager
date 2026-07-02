@@ -160,6 +160,8 @@ Con il Punto 7D è stato aggiunto il documento [`docs/33-persistence-mapping-blu
 
 Con il Punto 7E è stato aggiunto il documento [`docs/34-real-repository-prototype.md`](docs/34-real-repository-prototype.md) ed è stato introdotto il primo repository reale prototipale per Locations: `FileLocationRepository`, supportato da `LocationPersistenceRecord`, `LocationPersistenceMapper` e test tecnici dedicati. Il prototipo usa un file locale per validare il pattern repository + mapper senza introdurre database, JPA, Spring Data, REST API o security.
 
+Con il Punto 7G è stato aggiunto il documento [`docs/36-infrastructure-testing.md`](docs/36-infrastructure-testing.md) e sono stati rafforzati i test tecnici dell'Infrastructure Layer. La fase aggiunge `FileRepositoryStorageTest`, `InfrastructureRepositoryUseCaseIntegrationTest` e `InfrastructureTechnicalBoundaryTest`, verificando storage file-backed, uso dei repository file-backed attraverso use case applicativi e confini architetturali contro REST, security, JPA, Spring Data e database prematuri.
+
 ## Punto 6A — Application Layer Blueprint
 
 Il Punto 6A ha progettato il livello applicativo prima di scrivere codice operativo. L'application layer dovrà orchestrare il dominio tramite casi d'uso, senza duplicare le regole di business e senza introdurre subito controller, database, JPA, Spring o API REST.
@@ -444,5 +446,6 @@ La roadmap consigliata è:
 19. mantenere stabile il Punto 7D — Persistence Mapping Blueprint come catalogo ufficiale prima dei repository reali;
 20. mantenere stabile il Punto 7E — Real Repository Prototype come prototipo Locations file-backed;
 21. mantenere stabile il Punto 7F — Repository Expansion con repository file-backed per Cargo, Documents e Compliance;
-22. procedere con il Punto 7G — Infrastructure Testing per rafforzare test tecnici, mapper, repository file-backed e confini infrastrutturali;
-23. rimandare API REST, database completi e integrazioni esterne finché non viene definito lo step specifico corretto.
+22. mantenere stabile il Punto 7G — Infrastructure Testing con test tecnici su storage file-backed, use case integration e confini architetturali;
+23. procedere con il Punto 7H — Infrastructure Review & Freeze solo dopo verifica locale completa;
+24. rimandare API REST, database completi e integrazioni esterne finché non viene definito lo step specifico corretto.

@@ -681,3 +681,37 @@ Commit consigliato:
 git add -A
 git commit -m "Expand file-backed repositories"
 ```
+
+
+---
+
+## Nota progetto — Punto 7G
+
+Il Punto 7G — Infrastructure Testing rafforza i test tecnici dell'Infrastructure Layer.
+
+La patch aggiunge test su storage file-backed, integrazione tra use case applicativi e repository file-backed, e confini architetturali. Non introduce database, JPA, Spring Data, REST API, controller o security.
+
+Dopo l'applicazione della patch, il controllo consigliato è:
+
+```bash
+mvn spotless:apply
+mvn spotless:check
+mvn clean test
+git status
+```
+
+Documenti e file principali da controllare:
+
+```bash
+ls docs/36-infrastructure-testing.md
+ls src/test/java/it/gabriele/truckflow/infrastructure/repository/file/FileRepositoryStorageTest.java
+ls src/test/java/it/gabriele/truckflow/infrastructure/repository/InfrastructureRepositoryUseCaseIntegrationTest.java
+ls src/test/java/it/gabriele/truckflow/infrastructure/InfrastructureTechnicalBoundaryTest.java
+```
+
+Commit consigliato:
+
+```bash
+git add -A
+git commit -m "Strengthen infrastructure testing"
+```

@@ -237,3 +237,10 @@ Dopo il Punto 7C, TruckFlow Manager ha applicato il **Punto 7D — Persistence M
 Con il **Punto 7E — Real Repository Prototype**, il progetto introduce il primo repository reale prototipale per Locations. Il prototipo usa un adapter file-backed, un persistence record e un mapper concreto, ma non introduce database, JPA, Spring Data, REST API, controller o security.
 
 Questo conferma la direzione del Punto 7: l'infrastruttura cresce in modo progressivo, validando un pattern per volta prima dell'espansione ai domini più complessi.
+
+
+---
+
+## Allineamento Punto 7G
+
+Il Punto 7G consolida l'Infrastructure Layer con test tecnici dedicati allo storage file-backed, all'integrazione tra repository reali prototipali e use case applicativi, e alla protezione dei confini architetturali. Il progetto resta senza REST API, database, JPA, Spring Data e security.

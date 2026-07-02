@@ -68,6 +68,8 @@ This digital documentation mirrors:
 - `docs/32-spring-wiring-foundation.md`
 - `docs/33-persistence-mapping-blueprint.md`
 - `docs/34-real-repository-prototype.md`
+- `docs/35-repository-expansion.md`
+- `docs/36-infrastructure-testing.md`
 - `command_basic.md`
 
 
@@ -246,3 +248,12 @@ Documento di riferimento: `docs/34-real-repository-prototype.md`.
 La documentazione digitale include ora anche `docs/35-repository-expansion.md`.
 
 Il pannello descrive l'espansione controllata dei repository file-backed verso Cargo, Documents e Compliance base, chiarendo che non sono stati introdotti database, JPA, Spring Data, REST API, controller, security o servizi esterni.
+
+
+## Punto 7G — Infrastructure Testing
+
+La documentazione digitale include ora anche `docs/36-infrastructure-testing.md`.
+
+Il pannello descrive il rafforzamento dei test tecnici dell'Infrastructure Layer: storage file-backed condiviso, integrazione tra use case applicativi e repository file-backed, e controllo dei confini architetturali contro REST, security, JPA, Spring Data, database e package prematuri.
+
+Documento di riferimento: `docs/36-infrastructure-testing.md`.

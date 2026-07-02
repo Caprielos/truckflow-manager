@@ -381,3 +381,10 @@ Il Punto 7C introduce Spring nel modo più prudente possibile:
 > Spring viene usato solo per comporre tecnicamente ciò che esiste già.
 
 Questa scelta permette di avanzare verso un'infrastruttura reale senza rompere l'architettura costruita fino al Punto 6M.
+
+
+---
+
+## Allineamento Punto 7G
+
+Il Punto 7G non cambia il wiring Spring: lo rafforza indirettamente verificando che i confini restino puliti e che non vengano introdotti controller, security, JPA o Spring Data nel codice main.

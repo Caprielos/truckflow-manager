@@ -1066,7 +1066,23 @@
           <span class="pill">Scalable roadmap</span>
         </div>
       </section>
-    </main>
+
+<section class="doc-section">
+  <h2>Punto 7G — Infrastructure Testing</h2>
+  <p>
+    Il Punto 7G rafforza i test tecnici dell'Infrastructure Layer senza introdurre nuovi repository business o nuovi layer applicativi.
+    La fase verifica lo storage file-backed condiviso, l'uso di repository file-backed attraverso use case applicativi e i confini architetturali contro REST, security, JPA, Spring Data e database prematuri.
+  </p>
+  <ul>
+    <li><code>FileRepositoryStorageTest</code> controlla codifica, decodifica, file mancanti, record malformati e directory parent.</li>
+    <li><code>InfrastructureRepositoryUseCaseIntegrationTest</code> usa <code>FileLocationRepository</code> attraverso <code>RegisterLocationService</code> e <code>FindLocationService</code>.</li>
+    <li><code>InfrastructureTechnicalBoundaryTest</code> protegge domain, application e infrastructure da dipendenze o framework prematuri.</li>
+  </ul>
+  <p>
+    Il Punto 7G non introduce database, JPA, Hibernate, Spring Data, REST API, controller, DTO web, security, servizi esterni, workflow, audit trail, planning o tracking.
+  </p>
+</section>
+</main>
   </div>
 
   <footer class="footer">

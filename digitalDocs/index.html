@@ -45,6 +45,7 @@
 <input class="doc-toggle" type="radio" name="active-doc" id="doc-35">
 <input class="doc-toggle" type="radio" name="active-doc" id="doc-36">
 <input class="doc-toggle" type="radio" name="active-doc" id="doc-37">
+<input class="doc-toggle" type="radio" name="active-doc" id="doc-38">
 <div class="app-shell">
   <aside class="sidebar">
     <div class="brand"><div class="brand-mark">TF</div><div><h1>TruckFlow Docs</h1><p>Digital mirror of the official Markdown documentation.</p></div></div>
@@ -87,12 +88,13 @@
 <label class="nav-item" for="doc-34"><span class="nav-number">35</span><span class="nav-label">Persistence Mapping Blueprint</span><span class="nav-file">33-persistence-mapping-blueprint.md</span></label>
 <label class="nav-item" for="doc-35"><span class="nav-number">36</span><span class="nav-label">Real Repository Prototype</span><span class="nav-file">34-real-repository-prototype.md</span></label>
 <label class="nav-item" for="doc-36"><span class="nav-number">37</span><span class="nav-label">Repository Expansion</span><span class="nav-file">35-repository-expansion.md</span></label>
-<label class="nav-item" for="doc-37"><span class="nav-number">38</span><span class="nav-label">Command Basic</span><span class="nav-file">command_basic.md</span></label>
+<label class="nav-item" for="doc-37"><span class="nav-number">38</span><span class="nav-label">Infrastructure Testing</span><span class="nav-file">36-infrastructure-testing.md</span></label>
+<label class="nav-item" for="doc-38"><span class="nav-number">39</span><span class="nav-label">Command Basic</span><span class="nav-file">command_basic.md</span></label>
     </nav>
   </aside>
   <main class="content">
-    <div class="content-toolbar"><div><p class="eyebrow">TruckFlow Manager</p><h2>Official Project Documentation</h2></div><div class="toolbar-badges"><span>HTML + CSS</span><span>Markdown mirror</span><span>Application Layer Freeze</span><span>Punto 7E</span><span>Real Repository Prototype</span><span>Roadmap 1→7E</span></div></div>
-    <div class="roadmap-notice"><strong>Punto 7E aperto:</strong> la documentazione digitale include ora il primo repository reale prototipale per Locations. Il prototipo usa un adapter file-backed separato e non introduce database, JPA, Spring Data, REST API o security.</div>
+    <div class="content-toolbar"><div><p class="eyebrow">TruckFlow Manager</p><h2>Official Project Documentation</h2></div><div class="toolbar-badges"><span>HTML + CSS</span><span>Markdown mirror</span><span>Application Layer Freeze</span><span>Punto 7G</span><span>Infrastructure Testing</span><span>Roadmap 1→7G</span></div></div>
+    <div class="roadmap-notice"><strong>Punto 7G completato:</strong> la documentazione digitale include ora il rafforzamento dei test infrastrutturali su storage file-backed, integrazione use case/repository e confini architetturali. Non introduce database, JPA, Spring Data, REST API o security.</div>
 <article class="doc-panel panel-0" id="TRUCKFLOW_PROJECT_DOCUMENTATION-md">
   <header class="doc-header">
     <p class="eyebrow">TRUCKFLOW_PROJECT_DOCUMENTATION.md</p>
@@ -490,6 +492,23 @@ e sono stati introdotti <code>PersistenceMappingKind</code>,
 il blueprint del mapping domain ↔︎ persistence per i contesti applicativi
 attivi senza introdurre database, JPA, Spring Data, repository reali o
 schema fisico.</p>
+<p>Con il Punto 7E è stato aggiunto il documento <a
+href="docs/34-real-repository-prototype.md"><code>docs/34-real-repository-prototype.md</code></a>
+ed è stato introdotto il primo repository reale prototipale per
+Locations: <code>FileLocationRepository</code>, supportato da
+<code>LocationPersistenceRecord</code>,
+<code>LocationPersistenceMapper</code> e test tecnici dedicati. Il
+prototipo usa un file locale per validare il pattern repository + mapper
+senza introdurre database, JPA, Spring Data, REST API o security.</p>
+<p>Con il Punto 7G è stato aggiunto il documento <a
+href="docs/36-infrastructure-testing.md"><code>docs/36-infrastructure-testing.md</code></a>
+e sono stati rafforzati i test tecnici dell’Infrastructure Layer. La
+fase aggiunge <code>FileRepositoryStorageTest</code>,
+<code>InfrastructureRepositoryUseCaseIntegrationTest</code> e
+<code>InfrastructureTechnicalBoundaryTest</code>, verificando storage
+file-backed, uso dei repository file-backed attraverso use case
+applicativi e confini architetturali contro REST, security, JPA, Spring
+Data e database prematuri.</p>
 <h2 id="punto-6a-application-layer-blueprint">Punto 6A — Application
 Layer Blueprint</h2>
 <p>Il Punto 6A ha progettato il livello applicativo prima di scrivere
@@ -857,6 +876,45 @@ rappresentare ID, codici business, stati, value object, enum, collection
 e reference.</p>
 <p>Il Punto 7D è documentato in <a
 href="docs/33-persistence-mapping-blueprint.md"><code>docs/33-persistence-mapping-blueprint.md</code></a>.</p>
+<h2 id="punto-7e-real-repository-prototype">Punto 7E — Real Repository
+Prototype</h2>
+<p>Il Punto 7E introduce il primo repository reale prototipale del
+progetto.</p>
+<p>Il dominio pilota è Locations. La fase aggiunge
+<code>FileLocationRepository</code>,
+<code>LocationPersistenceRecord</code>,
+<code>LocationPersistenceMapper</code> e
+<code>FileLocationRepositoryPrototypeTest</code>. Il prototipo usa un
+file locale come meccanismo tecnico di salvataggio, ma non introduce
+database, JPA, Hibernate, Spring Data, schema SQL, REST API, controller
+o security.</p>
+<p>Il repository in-memory resta valido e non viene rimosso. Il
+repository file-backed serve a validare il pattern repository +
+persistence record + mapper + test tecnici.</p>
+<p>Il Punto 7E è documentato in <a
+href="docs/34-real-repository-prototype.md"><code>docs/34-real-repository-prototype.md</code></a>.</p>
+<h2 id="punto-7f-repository-expansion">Punto 7F — Repository
+Expansion</h2>
+<p>Il Punto 7F estende il pattern file-backed validato nel Punto 7E.</p>
+<p>La fase aggiunge repository reali file-backed per
+<code>CargoUnit</code>, <code>Document</code> e
+<code>ComplianceRequirement</code>, insieme ai rispettivi persistence
+record, mapper, codec e test tecnici. Viene inoltre introdotto supporto
+file-backed condiviso nel package
+<code>infrastructure.repository.file</code>, così lettura, scrittura e
+codifica dei record restano centralizzate.</p>
+<p>Dopo questo step, il progetto dispone di repository reali file-backed
+per Locations, Cargo, Documents e Compliance base, continuando però a
+mantenere disponibili tutti i repository in-memory.</p>
+<p>Il Punto 7F non introduce database, JPA, Hibernate, Spring Data,
+schema SQL, REST API, controller, DTO web, security, servizi esterni,
+storage binario documentale, workflow, audit trail, planning o
+tracking.</p>
+<p>Shipments, Vehicles, Operational Roles e TripTemplates non vengono
+forzati in questa fase: richiedono mapping più complessi e verranno
+trattati solo dopo il rafforzamento dei test infrastrutturali.</p>
+<p>Il Punto 7F è documentato in <a
+href="docs/35-repository-expansion.md"><code>docs/35-repository-expansion.md</code></a>.</p>
 <h2 id="prossimi-step-consigliati">Prossimi step consigliati</h2>
 <p>La roadmap consigliata è:</p>
 <ol type="1">
@@ -909,9 +967,17 @@ database, JPA, REST API o security;</li>
 <li>procedere con il Punto 7C — Spring Wiring Foundation solo dopo
 verifica locale completa con <code>mvn spotless:check</code> e
 <code>mvn clean test</code>;</li>
-<li>procedere con il Punto 7D — Persistence Mapping Blueprint per
-formalizzare mapping e catalogo prima di qualsiasi repository
-reale;</li>
+<li>mantenere stabile il Punto 7D — Persistence Mapping Blueprint come
+catalogo ufficiale prima dei repository reali;</li>
+<li>mantenere stabile il Punto 7E — Real Repository Prototype come
+prototipo Locations file-backed;</li>
+<li>mantenere stabile il Punto 7F — Repository Expansion con repository
+file-backed per Cargo, Documents e Compliance;</li>
+<li>mantenere stabile il Punto 7G — Infrastructure Testing con test
+tecnici su storage file-backed, use case integration e confini
+architetturali;</li>
+<li>procedere con il Punto 7H — Infrastructure Review &amp; Freeze solo
+dopo verifica locale completa;</li>
 <li>rimandare API REST, database completi e integrazioni esterne finché
 non viene definito lo step specifico corretto.</li>
 </ol>
@@ -928,8 +994,10 @@ non viene definito lo step specifico corretto.</li>
 Manager, con la fondazione del dominio puro, il primo ciclo completo
 dell’application layer fino al Punto 6M, l’apertura documentale del
 Punto 7A — Infrastructure Layer Blueprint, la foundation tecnica leggera
-del Punto 7B e il wiring Spring controllato del Punto 7C e il blueprint
-di mapping del Punto 7D.</p>
+del Punto 7B e il wiring Spring controllato del Punto 7C, il blueprint
+di mapping del Punto 7D, il primo prototipo di repository reale del
+Punto 7E, l’espansione repository del Punto 7F e il rafforzamento
+tecnico del Punto 7G.</p>
 <p>Il documento <code>29-final-roadmap-documentation-alignment.md</code>
 chiarisce lo stato reale dopo il Punto 6M: il Punto 6 è chiuso, la
 descrizione corretta del Punto 6G Documents è
@@ -947,8 +1015,15 @@ spiega come Spring viene usato solo come wiring tecnico non web,
 mantenendo domain e application layer privi di dipendenze framework. Il
 documento <code>33-persistence-mapping-blueprint.md</code> descrive il
 Punto 7D e formalizza il catalogo dei mapping blueprint domain ↔︎
-persistence senza introdurre ancora JPA, database o repository
-reali.</p>
+persistence senza introdurre ancora JPA, database o repository reali. Il
+documento <code>34-real-repository-prototype.md</code> descrive il Punto
+7E e introduce il primo repository reale prototipale file-backed per
+Locations, senza database, JPA, Spring Data o REST API. Il documento
+<code>35-repository-expansion.md</code> descrive il Punto 7F e
+l’espansione file-backed verso Cargo, Documents e Compliance. Il
+documento <code>36-infrastructure-testing.md</code> descrive il Punto 7G
+e rafforza i test tecnici su storage, integrazione use case ↔︎ repository
+file-backed e confini architetturali.</p>
 <p>Il progetto ha completato la fondazione del <strong>domain
 layer</strong>. L’<strong>application layer</strong> ha consolidato i
 primi casi d’uso, ha completato la prima espansione controllata verso
@@ -1139,6 +1214,20 @@ href="33-persistence-mapping-blueprint.md"><code>33-persistence-mapping-blueprin
 — Punto 7D: blueprint del mapping domain ↔︎ persistence, catalogo dei
 contesti applicativi, regole su ID/codice/stato/value object/reference e
 test architetturale dedicato.</li>
+<li><a
+href="34-real-repository-prototype.md"><code>34-real-repository-prototype.md</code></a>
+— Punto 7E: primo repository reale prototipale per Locations, con
+persistence record, mapper concreto, adapter file-backed e test tecnici
+dedicati.</li>
+<li><a
+href="35-repository-expansion.md"><code>35-repository-expansion.md</code></a>
+— Punto 7F: espansione file-backed verso Cargo, Documents e Compliance,
+con supporto file condiviso, mapper, codec e test tecnici.</li>
+<li><a
+href="36-infrastructure-testing.md"><code>36-infrastructure-testing.md</code></a>
+— Punto 7G: rafforzamento dei test infrastrutturali su storage
+file-backed, integrazione use case/repository e confini
+architetturali.</li>
 </ol>
 <h2 id="stato-del-progetto-documentato">Stato del progetto
 documentato</h2>
@@ -1650,14 +1739,53 @@ controller, JPA, Spring Data e security rimangono fuori da questo
 step.</p>
 <p>Il Punto 7C è documentato in <a
 href="32-spring-wiring-foundation.md"><code>32-spring-wiring-foundation.md</code></a>.</p>
+<h2 id="punto-7d-persistence-mapping-blueprint">Punto 7D — Persistence
+Mapping Blueprint</h2>
+<p>Il Punto 7D formalizza il blueprint del mapping domain ↔︎
+persistence.</p>
+<p>Questa fase aggiunge un catalogo tecnico dei mapping per Locations,
+Cargo, Shipments, Documents, Vehicles, Operational Roles e Compliance
+base. Il catalogo descrive ID, codici business, stati, value object,
+enum, collection e reference senza introdurre ancora database, JPA,
+Spring Data, schema SQL o repository reali.</p>
+<p>Il Punto 7D è documentato in <a
+href="33-persistence-mapping-blueprint.md"><code>33-persistence-mapping-blueprint.md</code></a>.</p>
+<h2 id="punto-7e-real-repository-prototype">Punto 7E — Real Repository
+Prototype</h2>
+<p>Il Punto 7E introduce il primo repository reale prototipale del
+progetto.</p>
+<p>Il dominio pilota è Locations. La patch aggiunge
+<code>FileLocationRepository</code>,
+<code>LocationPersistenceRecord</code>,
+<code>LocationPersistenceMapper</code> e
+<code>FileLocationRepositoryPrototypeTest</code>. Il prototipo usa un
+file locale come meccanismo tecnico di salvataggio, ma non introduce
+database, JPA, Spring Data, repository reali per tutti i domini, REST
+API, controller o security.</p>
+<p>Il Punto 7E è documentato in <a
+href="34-real-repository-prototype.md"><code>34-real-repository-prototype.md</code></a>.</p>
+<h2 id="punto-7f-repository-expansion">Punto 7F — Repository
+Expansion</h2>
+<p>Il Punto 7F estende il pattern file-backed validato nel Punto 7E.</p>
+<p>Dopo il prototipo Locations, questa fase aggiunge repository reali
+file-backed per <code>CargoUnit</code>, <code>Document</code> e
+<code>ComplianceRequirement</code>, insieme ai rispettivi persistence
+record, mapper, codec e test tecnici.</p>
+<p>La fase introduce anche supporto file-backed condiviso nel package
+<code>infrastructure.repository.file</code>, così la logica tecnica di
+lettura, scrittura e codifica non viene duplicata in ogni adapter.</p>
+<p>Il Punto 7F mantiene fuori database, JPA, Hibernate, Spring Data,
+schema SQL, REST API, controller, security, servizi esterni, storage
+binario documentale, workflow e audit trail.</p>
+<p>Il Punto 7F è documentato in <a
+href="35-repository-expansion.md"><code>35-repository-expansion.md</code></a>.</p>
 
 </article>
 <article class="doc-panel panel-2" id="docs-01-project-overview-md">
-  <header class="doc-panel-header">
+  <header class="doc-header">
     <p class="eyebrow">docs/01-project-overview.md</p>
-    <h1>1. Visione generale del progetto TruckFlow Manager</h1>
+    <h2>Project Overview</h2>
   </header>
-  <div class="markdown-body">
 <h1 id="visione-generale-del-progetto-truckflow-manager">1. Visione
 generale del progetto TruckFlow Manager</h1>
 <h2 id="obiettivo-del-progetto">1.1 Obiettivo del progetto</h2>
@@ -1961,8 +2089,35 @@ completi, controller REST, DTO web o security.</p>
 successivi del Punto 7, mantenendo intatti i confini: il dominio resta
 puro, l’application layer resta indipendente da infrastructure e i
 repository in memory restano disponibili per test e sviluppo locale.</p>
+<h2 id="nota-di-avanzamento-punto-7c">Nota di avanzamento — Punto
+7C</h2>
+<p>Dopo il freeze dell’application layer e la foundation
+infrastrutturale, il Punto 7C introduce Spring solo come wiring tecnico
+non web. Il dominio e l’application layer restano privi di dipendenze
+Spring; REST API, controller, JPA, Spring Data e security sono rimandati
+agli step corretti.</p>
+<h2 id="nota-di-avanzamento-punto-7d-e-7e">Nota di avanzamento — Punto
+7D e 7E</h2>
+<p>Dopo il Punto 7C, TruckFlow Manager ha applicato il <strong>Punto 7D
+— Persistence Mapping Blueprint</strong>, che formalizza come i modelli
+di dominio potranno essere tradotti in modelli tecnici persistenti senza
+introdurre ancora database, JPA, Spring Data o repository reali.</p>
+<p>Con il <strong>Punto 7E — Real Repository Prototype</strong>, il
+progetto introduce il primo repository reale prototipale per Locations.
+Il prototipo usa un adapter file-backed, un persistence record e un
+mapper concreto, ma non introduce database, JPA, Spring Data, REST API,
+controller o security.</p>
+<p>Questo conferma la direzione del Punto 7: l’infrastruttura cresce in
+modo progressivo, validando un pattern per volta prima dell’espansione
+ai domini più complessi.</p>
+<hr />
+<h2 id="allineamento-punto-7g">Allineamento Punto 7G</h2>
+<p>Il Punto 7G consolida l’Infrastructure Layer con test tecnici
+dedicati allo storage file-backed, all’integrazione tra repository reali
+prototipali e use case applicativi, e alla protezione dei confini
+architetturali. Il progetto resta senza REST API, database, JPA, Spring
+Data e security.</p>
 
-  </div>
 </article>
 <article class="doc-panel panel-3" id="docs-02-domain-users-md">
   <header class="doc-panel-header">
@@ -3781,11 +3936,10 @@ troppo grande e difficile da mantenere.</p>
   </div>
 </article>
 <article class="doc-panel panel-7" id="docs-06-architecture-decisions-md">
-  <header class="doc-panel-header">
+  <header class="doc-header">
     <p class="eyebrow">docs/06-architecture-decisions.md</p>
-    <h1>6. Decisioni architetturali del dominio</h1>
+    <h2>Architecture Decisions</h2>
   </header>
-  <div class="markdown-body">
 <h1 id="decisioni-architetturali-del-dominio">6. Decisioni
 architetturali del dominio</h1>
 <h2 id="decisione-dominio-puro-prima-di-infrastruttura">6.1 Decisione:
@@ -4711,8 +4865,48 @@ esterni sono problemi infrastrutturali.</p>
 infrastructure. L’infrastructure layer può preparare marker, contratti e
 convenzioni, ma non deve ancora introdurre controller, JPA entity,
 Spring Data repository o security HTTP.</p>
+<h2 id="decisione-architetturale-spring-wiring-foundation">Decisione
+architetturale — Spring Wiring Foundation</h2>
+<p>Dal Punto 7C Spring può essere usato nel layer infrastructure per
+configurare bean e profili tecnici. Questa decisione non autorizza
+annotazioni Spring nel dominio o nell’application layer e non apre
+ancora REST API, persistence JPA o security HTTP.</p>
+<h2
+id="decisione-architetturale-persistence-mapping-blueprint">Decisione
+architetturale — Persistence Mapping Blueprint</h2>
+<p>Il Punto 7D introduce blueprint di mapping domain ↔︎ persistence prima
+di introdurre repository reali o database. La decisione è separare la
+domanda “cosa deve essere mappato” dalla domanda “con quale tecnologia
+sarà persistito”.</p>
+<p>Questa scelta evita di forzare il dominio dentro una tecnologia
+specifica e impedisce l’introduzione prematura di JPA, Spring Data,
+schema SQL o package database.</p>
+<h2 id="decisione-architetturale-real-repository-prototype">Decisione
+architetturale — Real Repository Prototype</h2>
+<p>Il Punto 7E introduce il primo repository reale prototipale usando
+Locations come dominio pilota.</p>
+<p>La decisione è usare un adapter file-backed, non un database, perché
+il Punto 7E deve validare il pattern tecnico repository + persistence
+model + mapper senza vincolare ancora il progetto a JPA, SQL, Spring
+Data o migrazioni.</p>
+<p><code>FileLocationRepository</code> implementa la port.out
+applicativa <code>LocationRepository</code> e vive nel layer
+infrastructure. Usa <code>LocationPersistenceRecord</code> come modello
+tecnico e <code>LocationPersistenceMapper</code> per tradurre domain ↔︎
+persistence. Il profilo Spring <code>memory</code> resta invariato: il
+nuovo repository reale non sostituisce automaticamente gli adapter in
+memory.</p>
+<p>Questa scelta mantiene dominio e application layer indipendenti
+dall’infrastruttura e prepara il Punto 7F, dove il pattern potrà essere
+esteso o sostituito da una tecnologia di persistenza più
+strutturata.</p>
+<hr />
+<h2 id="allineamento-punto-7g">Allineamento Punto 7G</h2>
+<p>Il Punto 7G conferma le decisioni architetturali: il dominio e
+l’application layer non dipendono da infrastructure; l’infrastruttura
+implementa adapter tecnici; repository file-backed e repository
+in-memory restano dettagli sostituibili dietro port.out applicativi.</p>
 
-  </div>
 </article>
 <article class="doc-panel panel-8" id="docs-07-domain-cargo-md">
   <header class="doc-panel-header">
@@ -14129,10 +14323,11 @@ perdere la pulizia architetturale costruita fino al Punto 6M.</p>
 <h1 id="punto-7b-infrastructure-foundation">Punto 7B — Infrastructure
 Foundation</h1>
 <blockquote>
-<p>Aggiornamento 7D: il contratto generico
-<code>PersistenceMapper</code> della foundation è ora affiancato da
-blueprint descrittivi di mapping. Questi blueprint preparano il futuro
-7E, ma non sono ancora mapper concreti né persistence model reali.</p>
+<p>Aggiornamento 7E: il contratto generico
+<code>PersistenceMapper</code> della foundation è ora usato dal primo
+mapper concreto del prototipo Locations. La foundation resta neutra: il
+7E aggiunge un adapter file-backed pilota, non database, JPA o Spring
+Data.</p>
 </blockquote>
 <p>Questo documento descrive il <strong>Punto 7B — Infrastructure
 Foundation</strong> di TruckFlow Manager.</p>
@@ -14521,6 +14716,20 @@ il terreno con:</p>
 <p>Questa foundation permette di passare al Punto 7C senza improvvisare
 e senza perdere la pulizia architetturale raggiunta fino al Punto
 6M.</p>
+<hr />
+<h2 id="allineamento-punto-7f">Allineamento Punto 7F</h2>
+<p>Il Punto 7F — Repository Expansion estende il pattern file-backed
+validato dal prototipo Locations.</p>
+<p>La prima espansione controllata aggiunge repository file-backed per
+Cargo, Documents e Compliance base, mantenendo fuori database, JPA,
+Hibernate, Spring Data, schema SQL, REST API, controller, security,
+servizi esterni, workflow e audit trail.</p>
+<p>I repository in-memory restano validi e non vengono sostituiti.</p>
+<hr />
+<h2 id="allineamento-punto-7g">Allineamento Punto 7G</h2>
+<p>Il Punto 7G usa la foundation introdotta qui per verificare che
+eccezioni, marker, package e confini restino coerenti anche dopo
+l’introduzione dei repository file-backed.</p>
 
 </article>
 <article class="doc-panel panel-33" id="docs-32-spring-wiring-foundation-md">
@@ -14528,6 +14737,12 @@ e senza perdere la pulizia architetturale raggiunta fino al Punto
     <p class="eyebrow">docs/32-spring-wiring-foundation.md</p>
     <h2>Spring Wiring Foundation</h2>
   </header>
+<blockquote>
+<p>Aggiornamento 7E: il wiring Spring resta ancora sul profilo
+<code>memory</code>. Il primo repository reale prototipale per Locations
+viene introdotto come adapter separato e non sostituisce automaticamente
+gli in-memory repository.</p>
+</blockquote>
 <h1 id="punto-7c-spring-wiring-foundation">Punto 7C — Spring Wiring
 Foundation</h1>
 <blockquote>
@@ -14882,6 +15097,11 @@ esiste già.</p>
 </blockquote>
 <p>Questa scelta permette di avanzare verso un’infrastruttura reale
 senza rompere l’architettura costruita fino al Punto 6M.</p>
+<hr />
+<h2 id="allineamento-punto-7g">Allineamento Punto 7G</h2>
+<p>Il Punto 7G non cambia il wiring Spring: lo rafforza indirettamente
+verificando che i confini restino puliti e che non vengano introdotti
+controller, security, JPA o Spring Data nel codice main.</p>
 
 </article>
 <article class="doc-panel panel-34" id="docs-33-persistence-mapping-blueprint-md">
@@ -15201,7 +15421,7 @@ implementation.</p>
 </article>
 <article class="doc-panel panel-35" id="34-real-repository-prototype-md">
   <header class="doc-header">
-    <p class="eyebrow">34-real-repository-prototype.md</p>
+    <p class="eyebrow">docs/34-real-repository-prototype.md</p>
     <h2>Real Repository Prototype</h2>
   </header>
 <h1 id="punto-7e-real-repository-prototype">Punto 7E — Real Repository
@@ -15483,36 +15703,477 @@ da zero: potrà riusare la struttura validata dal 7E.</p>
 </ul>
 <p>Il prossimo step naturale è:</p>
 <pre class="text"><code>Punto 7F — Repository Expansion</code></pre>
+<hr />
+<h2 id="allineamento-punto-7f">Allineamento Punto 7F</h2>
+<p>Il Punto 7F — Repository Expansion estende il pattern file-backed
+validato dal prototipo Locations.</p>
+<p>La prima espansione controllata aggiunge repository file-backed per
+Cargo, Documents e Compliance base, mantenendo fuori database, JPA,
+Hibernate, Spring Data, schema SQL, REST API, controller, security,
+servizi esterni, workflow e audit trail.</p>
+<p>I repository in-memory restano validi e non vengono sostituiti.</p>
+<hr />
+<h2 id="allineamento-punto-7g">Allineamento Punto 7G</h2>
+<p>Il Punto 7G conferma il prototipo Locations usando
+<code>FileLocationRepository</code> direttamente attraverso i use case
+applicativi <code>RegisterLocationService</code> e
+<code>FindLocationService</code>.</p>
 
 </article>
 <article class="doc-panel panel-36" id="docs-35-repository-expansion-md">
   <header class="doc-header">
-    <p class="eyebrow">Infrastructure Layer</p>
-    <h2>Punto 7F — Repository Expansion</h2>
-    <p class="doc-path">docs/35-repository-expansion.md</p>
+    <p class="eyebrow">docs/35-repository-expansion.md</p>
+    <h2>Repository Expansion</h2>
   </header>
-  <section class="doc-section roadmap-notice">
-    <strong>Repository expansion controllata.</strong>
-    <p>Il Punto 7F estende il pattern file-backed validato da Locations verso Cargo, Documents e Compliance base.</p>
-  </section>
-  <section class="doc-section">
-    <h3>Obiettivo</h3>
-    <p>Validare che repository + persistence record + mapper + codec possano essere riutilizzati su più contesti senza sporcare domain e application layer.</p>
-    <ul>
-      <li><code>FileCargoUnitRepository</code></li>
-      <li><code>FileDocumentRepository</code></li>
-      <li><code>FileComplianceRequirementRepository</code></li>
-      <li><code>FileRepositoryExpansionTest</code></li>
-    </ul>
-  </section>
-  <section class="doc-section">
-    <h3>Confini</h3>
-    <p>Non vengono introdotti database, JPA, Hibernate, Spring Data, schema SQL, REST API, controller, security, servizi esterni, workflow, audit trail, planning o tracking.</p>
-    <p>I repository in-memory restano validi e non vengono sostituiti.</p>
-  </section>
+<h1 id="punto-7f-repository-expansion">Punto 7F — Repository
+Expansion</h1>
+<p>Il Punto 7F estende il pattern validato nel Punto 7E.</p>
+<p>Nel Punto 7E il progetto ha introdotto un primo repository reale
+prototipale per <code>Locations</code>, usando un file locale come
+meccanismo tecnico di persistenza. Il Punto 7F non cambia direzione:
+continua a usare repository file-backed piccoli, testabili e
+indipendenti da database, JPA, Spring Data e REST API.</p>
+<p>L’obiettivo non è ancora costruire una persistence enterprise
+completa. L’obiettivo è validare che il pattern repository + persistence
+record + mapper + test tecnici possa essere riutilizzato su più contesti
+applicativi senza sporcare dominio e application layer.</p>
+<hr />
+<h2 id="obiettivo-dello-step">Obiettivo dello step</h2>
+<p>Il Punto 7F introduce repository reali file-backed per tre contesti
+sicuri e catalog-like:</p>
+<ul>
+<li><code>CargoUnit</code>;</li>
+<li><code>Document</code>;</li>
+<li><code>ComplianceRequirement</code>.</li>
+</ul>
+<p>Questi tre contesti sono adatti alla prima espansione perché
+hanno:</p>
+<ul>
+<li>identità stabile;</li>
+<li>codice business stabile;</li>
+<li>stato di ciclo vita;</li>
+<li>modello ricostruibile attraverso costruttori di dominio;</li>
+<li>basso rischio rispetto a Shipments, Vehicles e Operational Roles
+completi.</li>
+</ul>
+<p>Il repository pilota <code>FileLocationRepository</code> resta valido
+e non viene rimosso.</p>
+<hr />
+<h2 id="cosa-è-stato-aggiunto">Cosa è stato aggiunto</h2>
+<h3 id="supporto-file-backed-condiviso">Supporto file-backed
+condiviso</h3>
+<p>È stato introdotto il package:</p>
+<pre class="text"><code>it.gabriele.truckflow.infrastructure.repository.file</code></pre>
+<p>Contiene:</p>
+<ul>
+<li><code>FileRecordCodec</code>;</li>
+<li><code>FileRepositoryStorage</code>;</li>
+<li><code>FileRepositoryText</code>.</li>
+</ul>
+<p>Questi componenti centralizzano la logica tecnica comune:</p>
+<ul>
+<li>lettura file;</li>
+<li>scrittura file;</li>
+<li>codifica sicura dei campi testuali;</li>
+<li>gestione di file mancanti come repository vuoti;</li>
+<li>trasformazione dei record in righe testuali;</li>
+<li>gestione di errori tecnici tramite
+<code>RepositoryException</code>.</li>
+</ul>
+<p>Questa logica è infrastrutturale. Non entra nel dominio e non entra
+nell’application layer.</p>
+<hr />
+<h2 id="cargo-repository-expansion">Cargo repository expansion</h2>
+<p>Per Cargo sono stati introdotti:</p>
+<pre class="text"><code>FileCargoUnitRepository
+CargoUnitPersistenceRecord
+CargoUnitPersistenceMapper
+CargoUnitFileRecordCodec</code></pre>
+<p><code>FileCargoUnitRepository</code> implementa il port
+applicativo:</p>
+<pre class="text"><code>CargoUnitRepository</code></pre>
+<p>Supporta:</p>
+<ul>
+<li><code>save</code>;</li>
+<li><code>findById</code>;</li>
+<li><code>findByCode</code>;</li>
+<li><code>existsById</code>;</li>
+<li><code>existsByCode</code>.</li>
+</ul>
+<p>Il mapper conserva i principali value object del cargo:</p>
+<ul>
+<li>categorie;</li>
+<li>dimensioni;</li>
+<li>pesi;</li>
+<li>packaging;</li>
+<li>temperatura;</li>
+<li>hazard;</li>
+<li>requisiti regolatori;</li>
+<li>proprietà;</li>
+<li>requisiti di compatibilità.</li>
+</ul>
+<p>Non introduce controlli di compatibilità infrastrutturali. Le regole
+restano nel dominio.</p>
+<hr />
+<h2 id="documents-repository-expansion">Documents repository
+expansion</h2>
+<p>Per Documents sono stati introdotti:</p>
+<pre class="text"><code>FileDocumentRepository
+DocumentPersistenceRecord
+DocumentPersistenceMapper
+DocumentFileRecordCodec</code></pre>
+<p><code>FileDocumentRepository</code> implementa il port
+applicativo:</p>
+<pre class="text"><code>DocumentRepository</code></pre>
+<p>Supporta:</p>
+<ul>
+<li><code>save</code>;</li>
+<li><code>findById</code>;</li>
+<li><code>findByCode</code>;</li>
+<li><code>existsById</code>;</li>
+<li><code>existsByCode</code>.</li>
+</ul>
+<p>Il mapper conserva:</p>
+<ul>
+<li>classificazione documento;</li>
+<li>stato logico;</li>
+<li>metadata;</li>
+<li>contenuto logico;</li>
+<li>references;</li>
+<li>note.</li>
+</ul>
+<p>Questo repository resta volutamente logico. Non introduce file
+upload, binary storage, PDF generation, firma digitale, versioning
+documentale o workflow.</p>
+<hr />
+<h2 id="compliance-repository-expansion">Compliance repository
+expansion</h2>
+<p>Per Compliance sono stati introdotti:</p>
+<pre class="text"><code>FileComplianceRequirementRepository
+ComplianceRequirementPersistenceRecord
+ComplianceRequirementPersistenceMapper
+ComplianceRequirementFileRecordCodec</code></pre>
+<p><code>FileComplianceRequirementRepository</code> implementa il port
+applicativo:</p>
+<pre class="text"><code>ComplianceRequirementRepository</code></pre>
+<p>Supporta:</p>
+<ul>
+<li><code>save</code>;</li>
+<li><code>findById</code>;</li>
+<li><code>findByCode</code>;</li>
+<li><code>existsById</code>;</li>
+<li><code>existsByCode</code>.</li>
+</ul>
+<p>Il mapper conserva:</p>
+<ul>
+<li>categoria compliance;</li>
+<li>tipo requisito;</li>
+<li>livello di obbligo;</li>
+<li>severità;</li>
+<li>target;</li>
+<li>rule;</li>
+<li>source;</li>
+<li>jurisdiction;</li>
+<li>stato.</li>
+</ul>
+<p>Questo repository non calcola scadenze, violazioni, audit trail,
+notifiche o country engine operativo.</p>
+<hr />
+<h2 id="perché-non-espandere-tutto-subito">Perché non espandere tutto
+subito</h2>
+<p>Il Punto 7F non crea ancora repository file-backed completi per:</p>
+<ul>
+<li>Shipments;</li>
+<li>Vehicles;</li>
+<li>Operational Roles;</li>
+<li>TripTemplates.</li>
+</ul>
+<p>La scelta è intenzionale.</p>
+<p>Questi contesti sono più complessi:</p>
+<ul>
+<li>Shipments contiene item, legs, metriche, riferimenti e state
+machine;</li>
+<li>Vehicles contiene specifiche tecniche, body profile, coupling,
+capability e combination;</li>
+<li>Operational Roles contiene profili, qualificazioni, scope e
+relazioni con User;</li>
+<li>TripTemplates non ha ancora use case applicativi attivi nel Punto
+6.</li>
+</ul>
+<p>Forzarli ora significherebbe creare mapping troppo grandi prima di
+aver rafforzato i test infrastrutturali generali. Verranno trattati dopo
+aver consolidato il pattern e la strategia di testing del Punto 7G.</p>
+<hr />
+<h2 id="test-introdotti">Test introdotti</h2>
+<p>È stato aggiunto:</p>
+<pre class="text"><code>FileRepositoryExpansionTest</code></pre>
+<p>Il test verifica:</p>
+<ul>
+<li>implementazione dei port applicativi;</li>
+<li>implementazione di
+<code>InfrastructureRepositoryAdapter</code>;</li>
+<li>salvataggio e ricaricamento da nuova istanza repository;</li>
+<li>rifiuto dei duplicati business code;</li>
+<li>file mancanti trattati come repository vuoti;</li>
+<li>input nulli rifiutati prima del lavoro tecnico;</li>
+<li>round-trip dei mapper domain ↔︎ persistence record.</li>
+</ul>
+<p>Questi sono test tecnici infrastrutturali, non test di business.</p>
+<hr />
+<h2 id="confini-rispettati">Confini rispettati</h2>
+<p>Il Punto 7F non introduce:</p>
+<ul>
+<li>database;</li>
+<li>JPA;</li>
+<li>Hibernate;</li>
+<li>Spring Data;</li>
+<li>schema SQL;</li>
+<li>REST API;</li>
+<li>controller;</li>
+<li>DTO web;</li>
+<li>security;</li>
+<li>JWT;</li>
+<li>servizi esterni;</li>
+<li>file upload;</li>
+<li>storage binario documentale;</li>
+<li>workflow documentali;</li>
+<li>audit trail;</li>
+<li>dashboard;</li>
+<li>planning;</li>
+<li>tracking.</li>
+</ul>
+<p>Spring resta limitato al wiring già introdotto nel Punto 7C.</p>
+<hr />
+<h2 id="stato-finale-del-punto-7f">Stato finale del Punto 7F</h2>
+<p>Dopo questo step, il progetto ha repository reali file-backed
+per:</p>
+<ul>
+<li>Locations, introdotto nel Punto 7E;</li>
+<li>Cargo, introdotto nel Punto 7F;</li>
+<li>Documents, introdotto nel Punto 7F;</li>
+<li>Compliance, introdotto nel Punto 7F.</li>
+</ul>
+<p>I repository in-memory restano disponibili e non vengono
+sostituiti.</p>
+<p>Il Punto 7F completa la prima espansione controllata dei repository
+reali e prepara il progetto al Punto 7G.</p>
+<hr />
+<h2 id="prossimo-step">Prossimo step</h2>
+<p>Il prossimo step consigliato è:</p>
+<pre class="text"><code>Punto 7G — Infrastructure Testing</code></pre>
+<p>Il 7G dovrà rafforzare la copertura tecnica su:</p>
+<ul>
+<li>repository file-backed;</li>
+<li>mapper;</li>
+<li>supporto file condiviso;</li>
+<li>error handling infrastrutturale;</li>
+<li>confini architetturali;</li>
+<li>assenza di layer prematuri.</li>
+</ul>
+<hr />
+<h2 id="allineamento-punto-7g">Allineamento Punto 7G</h2>
+<p>Il Punto 7G consolida questa espansione con test tecnici dedicati
+allo storage condiviso, all’uso dei repository file-backed tramite port
+applicativi e ai confini architetturali.</p>
+
 </article>
 
-<article class="doc-panel panel-37" id="command_basic-md">
+<article class="doc-panel panel-37" id="docs-36-infrastructure-testing-md">
+  <header class="doc-header">
+    <p class="eyebrow">docs/36-infrastructure-testing.md</p>
+    <h2>Infrastructure Testing</h2>
+  </header>
+<h1 id="punto-7g-infrastructure-testing">Punto 7G — Infrastructure
+Testing</h1>
+<p>Il Punto 7G rafforza la parte tecnica dell’Infrastructure Layer senza
+aggiungere nuovi repository business, nuovi adapter esterni o nuove
+funzionalità applicative.</p>
+<p>Dopo il Punto 7E e il Punto 7F, il progetto dispone di repository
+file-backed per:</p>
+<ul>
+<li><code>Locations</code>;</li>
+<li><code>Cargo</code>;</li>
+<li><code>Documents</code>;</li>
+<li><code>Compliance</code>.</li>
+</ul>
+<p>Il Punto 7G verifica che questi adapter siano davvero affidabili dal
+punto di vista tecnico, che possano essere usati dai use case
+applicativi tramite i port.out e che i confini architetturali restino
+puliti.</p>
+<hr />
+<h2 id="obiettivo-dello-step">Obiettivo dello step</h2>
+<p>L’obiettivo del Punto 7G è costruire una suite di test
+infrastrutturali più forte.</p>
+<p>Questi test non sono test di business. Le regole di business restano
+nel dominio e nell’application layer.</p>
+<p>I test del Punto 7G controllano invece:</p>
+<ul>
+<li>comportamento tecnico dello storage file-backed;</li>
+<li>codifica e decodifica sicura dei record;</li>
+<li>gestione dei file mancanti;</li>
+<li>gestione dei record malformati;</li>
+<li>uso dei repository file-backed tramite use case applicativi;</li>
+<li>assenza di dipendenze vietate tra layer;</li>
+<li>assenza di framework prematuri come JPA, Spring Data, REST
+controller e security.</li>
+</ul>
+<hr />
+<h2 id="cosa-è-stato-aggiunto">Cosa è stato aggiunto</h2>
+<p>Sono stati aggiunti tre nuovi test principali:</p>
+<pre class="text"><code>FileRepositoryStorageTest
+InfrastructureRepositoryUseCaseIntegrationTest
+InfrastructureTechnicalBoundaryTest</code></pre>
+<p>Questi test completano la base già introdotta da:</p>
+<pre class="text"><code>FileLocationRepositoryPrototypeTest
+FileRepositoryExpansionTest
+PersistenceMappingBlueprintTest
+SpringWiringFoundationTest
+InfrastructureFoundationTest</code></pre>
+<p>Il Punto 7G non modifica i repository esistenti. Li verifica
+meglio.</p>
+<hr />
+<h2 id="filerepositorystoragetest">FileRepositoryStorageTest</h2>
+<p><code>FileRepositoryStorageTest</code> controlla il supporto tecnico
+condiviso usato dai repository file-backed introdotti nel Punto 7F.</p>
+<p>Verifica che <code>FileRepositoryStorage</code>:</p>
+<ul>
+<li>tratti un file mancante come repository vuoto;</li>
+<li>scriva e rilegga record in modo stabile;</li>
+<li>crei automaticamente le directory parent necessarie;</li>
+<li>mantenga sicuri campi con tab, newline e caratteri Unicode;</li>
+<li>segnali un field count non valido tramite
+<code>RepositoryException</code>;</li>
+<li>segnali campi non decodificabili tramite
+<code>RepositoryException</code>;</li>
+<li>rifiuti input infrastrutturali nulli o non validi.</li>
+</ul>
+<p>Questo test è importante perché <code>FileRepositoryStorage</code> è
+il punto tecnico comune usato dai repository file-backed di Cargo,
+Documents e Compliance.</p>
+<hr />
+<h2
+id="infrastructurerepositoryusecaseintegrationtest">InfrastructureRepositoryUseCaseIntegrationTest</h2>
+<p><code>InfrastructureRepositoryUseCaseIntegrationTest</code> verifica
+che un repository file-backed possa essere usato da veri use case
+applicativi attraverso il port.out corretto.</p>
+<p>Il test usa il dominio pilota <code>Locations</code>:</p>
+<ul>
+<li><code>RegisterLocationService</code>;</li>
+<li><code>FindLocationService</code>;</li>
+<li><code>FileLocationRepository</code>.</li>
+</ul>
+<p>Verifica che:</p>
+<ul>
+<li>un use case applicativo possa registrare una Location usando il
+repository file-backed;</li>
+<li>un altro use case possa ritrovarla per ID;</li>
+<li>i dati restino disponibili anche ricreando una nuova istanza del
+repository;</li>
+<li>la protezione contro codici business duplicati resti valida anche
+con repository file-backed.</li>
+</ul>
+<p>Questo conferma che l’infrastruttura reale resta compatibile con
+l’application layer, senza far conoscere file system o dettagli tecnici
+ai use case.</p>
+<hr />
+<h2
+id="infrastructuretechnicalboundarytest">InfrastructureTechnicalBoundaryTest</h2>
+<p><code>InfrastructureTechnicalBoundaryTest</code> controlla i confini
+architetturali dopo l’espansione repository.</p>
+<p>Verifica che:</p>
+<ul>
+<li><code>domain</code> e <code>application</code> non importino
+<code>infrastructure</code>;</li>
+<li>il codice main non contenga controller REST;</li>
+<li>il codice main non contenga security HTTP;</li>
+<li>il codice main non contenga JPA o Spring Data;</li>
+<li>non siano stati creati package prematuri come
+<code>infrastructure.persistence</code>,
+<code>infrastructure.database</code>,
+<code>infrastructure.security</code> o
+<code>infrastructure.web</code>.</li>
+</ul>
+<p>Questo test protegge il progetto da scorciatoie tecniche
+premature.</p>
+<hr />
+<h2 id="cosa-il-punto-7g-non-introduce">Cosa il Punto 7G NON
+introduce</h2>
+<p>Il Punto 7G non introduce:</p>
+<ul>
+<li>database;</li>
+<li>JPA;</li>
+<li>Hibernate;</li>
+<li>Spring Data;</li>
+<li>schema SQL;</li>
+<li>repository reali per Shipments, Vehicles o Operational Roles;</li>
+<li>REST API;</li>
+<li>controller;</li>
+<li>DTO web;</li>
+<li>security;</li>
+<li>JWT;</li>
+<li>servizi esterni;</li>
+<li>email;</li>
+<li>audit trail;</li>
+<li>workflow;</li>
+<li>file upload;</li>
+<li>storage binario documentale;</li>
+<li>tracking;</li>
+<li>planning;</li>
+<li>dashboard.</li>
+</ul>
+<p>Il Punto 7G è uno step di test e consolidamento tecnico.</p>
+<hr />
+<h2 id="perché-non-espandere-ancora-tutti-i-repository">Perché non
+espandere ancora tutti i repository</h2>
+<p>Dopo il Punto 7F il progetto ha già repository file-backed per
+contesti catalog-like.</p>
+<p>Non vengono ancora aggiunti repository reali completi per:</p>
+<ul>
+<li><code>Shipments</code>;</li>
+<li><code>Vehicles</code>;</li>
+<li><code>Operational Roles</code>;</li>
+<li><code>TripTemplates</code>.</li>
+</ul>
+<p>La scelta resta intenzionale.</p>
+<p>Questi contesti hanno strutture più complesse, relazioni più delicate
+e mapping più profondi. Prima di espanderli serve avere una suite di
+test infrastrutturali solida. Il Punto 7G serve proprio a creare questa
+protezione.</p>
+<hr />
+<h2 id="confini-architetturali-confermati">Confini architetturali
+confermati</h2>
+<p>Dopo il Punto 7G la direzione resta la stessa:</p>
+<pre class="text"><code>domain      -&gt; puro, senza infrastruttura
+application -&gt; usa port.out astratti
+infrastructure -&gt; implementa adapter tecnici</code></pre>
+<p>I repository file-backed sono adapter infrastructure.</p>
+<p>I use case applicativi continuano a vedere solo i port.out.</p>
+<p>Spring resta wiring tecnico non web.</p>
+<p>I repository in-memory restano validi per test, sviluppo locale e
+scenari leggeri.</p>
+<hr />
+<h2 id="stato-finale-del-punto-7g">Stato finale del Punto 7G</h2>
+<p>Alla fine del Punto 7G il progetto ha:</p>
+<ul>
+<li>Infrastructure Layer foundation presente;</li>
+<li>Spring wiring non web presente;</li>
+<li>blueprint mapping presente;</li>
+<li>prototipo repository reale Locations presente;</li>
+<li>repository file-backed per Cargo, Documents e Compliance
+presenti;</li>
+<li>test tecnici più forti su storage, use case integration e confini
+architetturali;</li>
+<li>nessuna API REST;</li>
+<li>nessun database;</li>
+<li>nessun JPA;</li>
+<li>nessuna security.</li>
+</ul>
+<p>Il progetto è pronto per il Punto 7H — Infrastructure Review &amp;
+Freeze.</p>
+
+</article>
+
+<article class="doc-panel panel-38" id="command_basic-md">
   <header class="doc-header">
     <p class="eyebrow">command_basic.md</p>
     <h2>Command Basic</h2>
@@ -15995,6 +16656,79 @@ class="sourceCode bash"><code class="sourceCode bash"><span id="cb56-1"><a href=
 <div class="sourceCode" id="cb57"><pre
 class="sourceCode bash"><code class="sourceCode bash"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add <span class="at">-A</span></span>
 <span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">&quot;Add persistence mapping blueprint&quot;</span></span></code></pre></div>
+<hr />
+<h2 id="nota-progetto-punto-7e">Nota progetto — Punto 7E</h2>
+<p>Il Punto 7E — Real Repository Prototype introduce il primo repository
+reale prototipale del progetto.</p>
+<p>La patch aggiunge un adapter file-backed per Locations, un
+persistence record tecnico, un mapper concreto e un test dedicato. Non
+introduce database, JPA, Spring Data, repository reali per tutti i
+domini, schema SQL, REST API, controller o security.</p>
+<p>Dopo l’applicazione della patch, il controllo consigliato è:</p>
+<div class="sourceCode" id="cb58"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="ex">mvn</span> spotless:apply</span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a><span class="ex">mvn</span> spotless:check</span>
+<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a><span class="ex">mvn</span> clean test</span>
+<span id="cb58-4"><a href="#cb58-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> status</span></code></pre></div>
+<p>Documenti e file principali da controllare:</p>
+<div class="sourceCode" id="cb59"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> docs/34-real-repository-prototype.md</span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> src/main/java/it/gabriele/truckflow/infrastructure/repository/locations</span>
+<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> src/test/java/it/gabriele/truckflow/infrastructure/repository/locations/FileLocationRepositoryPrototypeTest.java</span></code></pre></div>
+<p>Commit consigliato:</p>
+<div class="sourceCode" id="cb60"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add <span class="at">-A</span></span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">&quot;Add real location repository prototype&quot;</span></span></code></pre></div>
+<hr />
+<h2 id="nota-progetto-punto-7f">Nota progetto — Punto 7F</h2>
+<p>Il Punto 7F — Repository Expansion estende il pattern file-backed
+introdotto con Locations.</p>
+<p>La patch aggiunge repository file-backed per Cargo, Documents e
+Compliance, supporto file condiviso, mapper, persistence record, codec e
+test tecnici. Non introduce database, JPA, Spring Data, schema SQL, REST
+API, controller o security.</p>
+<p>Dopo l’applicazione della patch, il controllo consigliato è:</p>
+<div class="sourceCode" id="cb61"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="ex">mvn</span> spotless:apply</span>
+<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a><span class="ex">mvn</span> spotless:check</span>
+<span id="cb61-3"><a href="#cb61-3" aria-hidden="true" tabindex="-1"></a><span class="ex">mvn</span> clean test</span>
+<span id="cb61-4"><a href="#cb61-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> status</span></code></pre></div>
+<p>Documenti e file principali da controllare:</p>
+<div class="sourceCode" id="cb62"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> docs/35-repository-expansion.md</span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> src/main/java/it/gabriele/truckflow/infrastructure/repository/file</span>
+<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> src/main/java/it/gabriele/truckflow/infrastructure/repository/cargo</span>
+<span id="cb62-4"><a href="#cb62-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> src/main/java/it/gabriele/truckflow/infrastructure/repository/documents</span>
+<span id="cb62-5"><a href="#cb62-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> src/main/java/it/gabriele/truckflow/infrastructure/repository/compliance</span>
+<span id="cb62-6"><a href="#cb62-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> src/test/java/it/gabriele/truckflow/infrastructure/repository/FileRepositoryExpansionTest.java</span></code></pre></div>
+<p>Commit consigliato:</p>
+<div class="sourceCode" id="cb63"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add <span class="at">-A</span></span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">&quot;Expand file-backed repositories&quot;</span></span></code></pre></div>
+<hr />
+<h2 id="nota-progetto-punto-7g">Nota progetto — Punto 7G</h2>
+<p>Il Punto 7G — Infrastructure Testing rafforza i test tecnici
+dell’Infrastructure Layer.</p>
+<p>La patch aggiunge test su storage file-backed, integrazione tra use
+case applicativi e repository file-backed, e confini architetturali. Non
+introduce database, JPA, Spring Data, REST API, controller o
+security.</p>
+<p>Dopo l’applicazione della patch, il controllo consigliato è:</p>
+<div class="sourceCode" id="cb64"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="ex">mvn</span> spotless:apply</span>
+<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a><span class="ex">mvn</span> spotless:check</span>
+<span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a><span class="ex">mvn</span> clean test</span>
+<span id="cb64-4"><a href="#cb64-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> status</span></code></pre></div>
+<p>Documenti e file principali da controllare:</p>
+<div class="sourceCode" id="cb65"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> docs/36-infrastructure-testing.md</span>
+<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> src/test/java/it/gabriele/truckflow/infrastructure/repository/file/FileRepositoryStorageTest.java</span>
+<span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> src/test/java/it/gabriele/truckflow/infrastructure/repository/InfrastructureRepositoryUseCaseIntegrationTest.java</span>
+<span id="cb65-4"><a href="#cb65-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> src/test/java/it/gabriele/truckflow/infrastructure/InfrastructureTechnicalBoundaryTest.java</span></code></pre></div>
+<p>Commit consigliato:</p>
+<div class="sourceCode" id="cb66"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add <span class="at">-A</span></span>
+<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">&quot;Strengthen infrastructure testing&quot;</span></span></code></pre></div>
 
 </article>
   </main>

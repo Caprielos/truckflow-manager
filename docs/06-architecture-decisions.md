@@ -861,3 +861,10 @@ La decisione è usare un adapter file-backed, non un database, perché il Punto 
 `FileLocationRepository` implementa la port.out applicativa `LocationRepository` e vive nel layer infrastructure. Usa `LocationPersistenceRecord` come modello tecnico e `LocationPersistenceMapper` per tradurre domain ↔ persistence. Il profilo Spring `memory` resta invariato: il nuovo repository reale non sostituisce automaticamente gli adapter in memory.
 
 Questa scelta mantiene dominio e application layer indipendenti dall'infrastruttura e prepara il Punto 7F, dove il pattern potrà essere esteso o sostituito da una tecnologia di persistenza più strutturata.
+
+
+---
+
+## Allineamento Punto 7G
+
+Il Punto 7G conferma le decisioni architetturali: il dominio e l'application layer non dipendono da infrastructure; l'infrastruttura implementa adapter tecnici; repository file-backed e repository in-memory restano dettagli sostituibili dietro port.out applicativi.

@@ -279,3 +279,10 @@ Il 7G dovrà rafforzare la copertura tecnica su:
 - error handling infrastrutturale;
 - confini architetturali;
 - assenza di layer prematuri.
+
+
+---
+
+## Allineamento Punto 7G
+
+Il Punto 7G consolida questa espansione con test tecnici dedicati allo storage condiviso, all'uso dei repository file-backed tramite port applicativi e ai confini architetturali.

@@ -534,3 +534,10 @@ Il Punto 7F — Repository Expansion estende il pattern file-backed validato dal
 La prima espansione controllata aggiunge repository file-backed per Cargo, Documents e Compliance base, mantenendo fuori database, JPA, Hibernate, Spring Data, schema SQL, REST API, controller, security, servizi esterni, workflow e audit trail.
 
 I repository in-memory restano validi e non vengono sostituiti.
+
+
+---
+
+## Allineamento Punto 7G
+
+Il Punto 7G conferma questa impostazione: prima di procedere al freeze finale, l'Infrastructure Layer viene rafforzato con test tecnici su storage, adapter file-backed, integrazione con use case applicativi e confini architetturali.
