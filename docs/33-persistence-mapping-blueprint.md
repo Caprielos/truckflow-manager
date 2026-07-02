@@ -342,3 +342,8 @@ I repository in-memory restano validi e non vengono sostituiti.
 ## Allineamento Punto 7G
 
 Il Punto 7G non amplia il catalogo dei mapping, ma rafforza i test tecnici che proteggono i mapper e gli adapter file-backed già introdotti nei Punti 7E e 7F.
+
+
+## Allineamento Punto 7H
+
+Il Punto 7H conferma che il catalogo di mapping resta un blueprint tecnico. Non vengono introdotti entity JPA, schema SQL o persistence model per tutti i domini; lo scope reale resta limitato ai repository file-backed validati.

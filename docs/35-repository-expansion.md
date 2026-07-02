@@ -286,3 +286,8 @@ Il 7G dovrà rafforzare la copertura tecnica su:
 ## Allineamento Punto 7G
 
 Il Punto 7G consolida questa espansione con test tecnici dedicati allo storage condiviso, all'uso dei repository file-backed tramite port applicativi e ai confini architetturali.
+
+
+## Allineamento Punto 7H
+
+Il Punto 7H congela lo scope repository validato dal Punto 7F. I repository file-backed attivi restano Locations, Cargo, Documents e Compliance. Shipments, Vehicles, Operational Roles e TripTemplates restano fuori dallo scope dei repository reali completi per questa prima chiusura infrastrutturale.

@@ -1039,7 +1039,10 @@
               <tr><td>Infrastructure Foundation</td><td><span class="badge done">Completato</span></td><td>Il Punto 7B introduce package infrastrutturali base, eccezioni tecniche, marker/convenzioni, profili e contratto generico di mapping senza introdurre database, JPA, Spring Data, REST API o security.</td></tr>
               <tr><td>Spring Wiring Foundation</td><td><span class="badge done">Completato</span></td><td>Il Punto 7C introduce Spring solo come wiring tecnico: entry point, application.yml non web, configurazioni bean e profilo memory, senza contaminare domain/application.</td></tr>
               <tr><td>Persistence Mapping Blueprint</td><td><span class="badge done">Completato</span></td><td>Il Punto 7D formalizza blueprint di mapping per i contesti applicativi attivi senza introdurre database, JPA, Spring Data, repository reali o schema fisico.</td></tr>
-              <tr><td>Real Repository Prototype</td><td><span class="badge now">Aperto</span></td><td>Il Punto 7E introduce il primo repository reale prototipale per Locations, con persistence record, mapper concreto e adapter file-backed, senza database, JPA, Spring Data, REST API o security.</td></tr>
+              <tr><td>Real Repository Prototype</td><td><span class="badge done">Completato</span></td><td>Il Punto 7E introduce il primo repository reale prototipale per Locations, con persistence record, mapper concreto e adapter file-backed, senza database, JPA, Spring Data, REST API o security.</td></tr>
+              <tr><td>Repository Expansion</td><td><span class="badge done">Completata</span></td><td>Il Punto 7F estende il pattern file-backed verso Cargo, Documents e Compliance con supporto file condiviso, mapper, codec e test tecnici.</td></tr>
+              <tr><td>Infrastructure Testing</td><td><span class="badge done">Completato</span></td><td>Il Punto 7G rafforza i test tecnici su storage file-backed, integrazione con use case applicativi e confini architetturali.</td></tr>
+              <tr><td>Infrastructure Review &amp; Freeze</td><td><span class="badge done">Completato</span></td><td>Il Punto 7H chiude il primo ciclo dell’Infrastructure Layer, congela lo scope validato e prepara il progetto al futuro Punto 8 API Layer.</td></tr>
               <tr><td>Database e repository reali</td><td><span class="badge planned">Futuro</span></td><td>Non vanno introdotti prima della stabilizzazione dei repository in memory e dei use case applicativi.</td></tr>
               <tr><td>API REST</td><td><span class="badge planned">Futuro</span></td><td>Le API devono esporre casi d’uso stabili, non accedere direttamente al dominio in modo improvvisato.</td></tr>
               <tr><td>Planning & Dispatching</td><td><span class="badge planned">Futuro</span></td><td>È il modulo che assegnerà risorse reali e verificherà compatibilità operative.</td></tr>
@@ -1056,7 +1059,7 @@
       <section id="conclusione" class="soft">
         <h2>13. Conclusione</h2>
         <p class="lead">TruckFlow Manager è oggi una fondazione di dominio solida per una futura piattaforma enterprise di trasporto e logistica.</p>
-        <p>Il progetto descrive i principali concetti aziendali con confini chiari, value object espressivi, invarianti protetti, eccezioni custom e documentazione strutturata. La fase attuale ha rafforzato i primi use case applicativi, li ha espansi verso Documents, Vehicles, Operational Roles e Compliance base, ha aggiunto hardening dedicato agli Operational Roles e ha chiuso il Punto 6 con un freeze finale senza introdurre ancora API REST, controller, database, JPA, security o uso architetturale di Spring nel codice applicativo, e ha aperto il Punto 7A come blueprint documentale dell’Infrastructure Layer, ha applicato il Punto 7B come foundation tecnica leggera, ha introdotto il Punto 7C come Spring Wiring Foundation non web, ha aggiunto il Punto 7D come Persistence Mapping Blueprint e ha aperto il Punto 7E con il primo Real Repository Prototype per Locations. L’obiettivo è costruire progressivamente nuovi layer sopra una base application stabile.</p>
+        <p>Il progetto descrive i principali concetti aziendali con confini chiari, value object espressivi, invarianti protetti, eccezioni custom e documentazione strutturata. La fase attuale ha rafforzato i primi use case applicativi, li ha espansi verso Documents, Vehicles, Operational Roles e Compliance base, ha aggiunto hardening dedicato agli Operational Roles e ha chiuso il Punto 6 con un freeze finale senza introdurre ancora API REST, controller, database, JPA, security o uso architetturale di Spring nel codice applicativo, e ha aperto il Punto 7A come blueprint documentale dell’Infrastructure Layer, ha applicato il Punto 7B come foundation tecnica leggera, ha introdotto il Punto 7C come Spring Wiring Foundation non web, ha aggiunto il Punto 7D come Persistence Mapping Blueprint, ha completato il Punto 7E con il primo Real Repository Prototype per Locations, ha esteso il pattern con il Punto 7F, ha rafforzato i test con il Punto 7G e ha chiuso il ciclo infrastrutturale con il Punto 7H. L’obiettivo ora è preparare progressivamente il futuro API Layer sopra una base domain, application e infrastructure stabile.</p>
         <p>La direzione futura è costruire gradualmente una piattaforma completa: prima domain e application layer, poi infrastructure blueprint, foundation tecnica, wiring Spring controllato, blueprint di mapping, repository prototipali e reali, test infrastrutturali, quindi API, workflow, planning, dispatching, document management avanzato, tracking, analytics e integrazioni enterprise.</p>
         <div class="pill-list">
           <span class="pill">Domain-first</span>
@@ -1067,7 +1070,23 @@
         </div>
       </section>
 
-<section class="doc-section">
+
+
+<section class="doc-section" id="punto-7f-repository-expansion">
+  <h2>Punto 7F — Repository Expansion</h2>
+  <p>
+    Il Punto 7F estende il pattern file-backed validato con Locations verso Cargo,
+    Documents e Compliance base. La fase introduce repository reali file-backed,
+    persistence record, mapper, codec e test tecnici, mantenendo disponibili i repository
+    in-memory.
+  </p>
+  <p>
+    Non vengono introdotti database, JPA, Hibernate, Spring Data, schema SQL, REST API,
+    controller, DTO web, security, servizi esterni, workflow, audit trail, planning o tracking.
+  </p>
+</section>
+
+<section class="doc-section" id="punto-7g-infrastructure-testing">
   <h2>Punto 7G — Infrastructure Testing</h2>
   <p>
     Il Punto 7G rafforza i test tecnici dell'Infrastructure Layer senza introdurre nuovi repository business o nuovi layer applicativi.
@@ -1082,6 +1101,17 @@
     Il Punto 7G non introduce database, JPA, Hibernate, Spring Data, REST API, controller, DTO web, security, servizi esterni, workflow, audit trail, planning o tracking.
   </p>
 </section>
+
+<section class="doc-section" id="punto-7h-infrastructure-review-freeze">
+  <h2>Punto 7H — Infrastructure Review &amp; Freeze</h2>
+  <p>
+    Il Punto 7H chiude il primo ciclo dell'Infrastructure Layer. Non aggiunge nuovi repository business e non introduce REST API, controller, database, JPA, Spring Data o security.
+  </p>
+  <p>
+    La fase aggiunge <code>InfrastructureLayerFinalFreezeTest</code>, conferma la presenza della documentazione 7A → 7H, congela lo scope dei repository file-backed validati e prepara il progetto al futuro Punto 8 — API Layer.
+  </p>
+</section>
+
 </main>
   </div>
 
@@ -1093,17 +1123,3 @@
   </footer>
 </body>
 </html>
-
-<section id="punto-7f-repository-expansion">
-  <h2>Punto 7F — Repository Expansion</h2>
-  <p>
-    Il Punto 7F estende il pattern file-backed validato con Locations verso Cargo,
-    Documents e Compliance base. La fase introduce repository reali file-backed,
-    persistence record, mapper, codec e test tecnici, mantenendo disponibili i repository
-    in-memory.
-  </p>
-  <p>
-    Non vengono introdotti database, JPA, Hibernate, Spring Data, schema SQL, REST API,
-    controller, DTO web, security, servizi esterni, workflow, audit trail, planning o tracking.
-  </p>
-</section>

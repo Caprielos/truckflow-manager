@@ -257,3 +257,8 @@ La documentazione digitale include ora anche `docs/36-infrastructure-testing.md`
 Il pannello descrive il rafforzamento dei test tecnici dell'Infrastructure Layer: storage file-backed condiviso, integrazione tra use case applicativi e repository file-backed, e controllo dei confini architetturali contro REST, security, JPA, Spring Data, database e package prematuri.
 
 Documento di riferimento: `docs/36-infrastructure-testing.md`.
+
+
+## Punto 7H — Infrastructure Review & Freeze
+
+La documentazione digitale include ora anche `docs/37-infrastructure-review-freeze.md`, che chiude il Punto 7 — Infrastructure Layer e prepara il progetto al futuro Punto 8 — API Layer.

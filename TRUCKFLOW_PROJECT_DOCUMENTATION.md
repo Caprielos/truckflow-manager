@@ -160,7 +160,11 @@ Con il Punto 7D è stato aggiunto il documento [`docs/33-persistence-mapping-blu
 
 Con il Punto 7E è stato aggiunto il documento [`docs/34-real-repository-prototype.md`](docs/34-real-repository-prototype.md) ed è stato introdotto il primo repository reale prototipale per Locations: `FileLocationRepository`, supportato da `LocationPersistenceRecord`, `LocationPersistenceMapper` e test tecnici dedicati. Il prototipo usa un file locale per validare il pattern repository + mapper senza introdurre database, JPA, Spring Data, REST API o security.
 
+Con il Punto 7F è stato aggiunto il documento [`docs/35-repository-expansion.md`](docs/35-repository-expansion.md) ed è stato esteso il pattern file-backed verso Cargo, Documents e Compliance, mantenendo fuori database, JPA, Spring Data, REST API e security.
+
 Con il Punto 7G è stato aggiunto il documento [`docs/36-infrastructure-testing.md`](docs/36-infrastructure-testing.md) e sono stati rafforzati i test tecnici dell'Infrastructure Layer. La fase aggiunge `FileRepositoryStorageTest`, `InfrastructureRepositoryUseCaseIntegrationTest` e `InfrastructureTechnicalBoundaryTest`, verificando storage file-backed, uso dei repository file-backed attraverso use case applicativi e confini architetturali contro REST, security, JPA, Spring Data e database prematuri.
+
+Con il Punto 7H è stato aggiunto il documento [`docs/37-infrastructure-review-freeze.md`](docs/37-infrastructure-review-freeze.md) ed è stato chiuso il primo ciclo Infrastructure Layer. La fase aggiunge `InfrastructureLayerFinalFreezeTest`, congela lo scope infrastrutturale validato e prepara il progetto al futuro Punto 8 — API Layer.
 
 ## Punto 6A — Application Layer Blueprint
 
@@ -421,6 +425,20 @@ Shipments, Vehicles, Operational Roles e TripTemplates non vengono forzati in qu
 Il Punto 7F è documentato in [`docs/35-repository-expansion.md`](docs/35-repository-expansion.md).
 
 
+## Punto 7G — Infrastructure Testing
+
+Il Punto 7G rafforza la suite tecnica dell'Infrastructure Layer. Aggiunge test su storage file-backed, integrazione tra repository file-backed e use case applicativi e confini architetturali contro layer prematuri.
+
+Il Punto 7G è documentato in [`docs/36-infrastructure-testing.md`](docs/36-infrastructure-testing.md).
+
+
+## Punto 7H — Infrastructure Review & Freeze
+
+Il Punto 7H chiude il primo ciclo dell'Infrastructure Layer. Aggiunge `InfrastructureLayerFinalFreezeTest`, conferma la documentazione 7A → 7H, congela lo scope dei repository file-backed validati e verifica che il progetto non abbia introdotto REST API, controller, database, JPA, Spring Data o security.
+
+Il Punto 7H è documentato in [`docs/37-infrastructure-review-freeze.md`](docs/37-infrastructure-review-freeze.md). Dopo questo step il Punto 7 è considerato chiuso e il prossimo ciclo naturale sarà il Punto 8 — API Layer.
+
+
 ## Prossimi step consigliati
 
 La roadmap consigliata è:
@@ -447,5 +465,6 @@ La roadmap consigliata è:
 20. mantenere stabile il Punto 7E — Real Repository Prototype come prototipo Locations file-backed;
 21. mantenere stabile il Punto 7F — Repository Expansion con repository file-backed per Cargo, Documents e Compliance;
 22. mantenere stabile il Punto 7G — Infrastructure Testing con test tecnici su storage file-backed, use case integration e confini architetturali;
-23. procedere con il Punto 7H — Infrastructure Review & Freeze solo dopo verifica locale completa;
-24. rimandare API REST, database completi e integrazioni esterne finché non viene definito lo step specifico corretto.
+23. mantenere stabile il Punto 7H — Infrastructure Review & Freeze come chiusura finale del Punto 7;
+24. aprire il futuro Punto 8 — API Layer solo dopo verifica locale completa;
+25. rimandare API REST, database completi e integrazioni esterne finché non viene definito lo step specifico corretto.

@@ -541,3 +541,8 @@ I repository in-memory restano validi e non vengono sostituiti.
 ## Allineamento Punto 7G
 
 Il Punto 7G conferma questa impostazione: prima di procedere al freeze finale, l'Infrastructure Layer viene rafforzato con test tecnici su storage, adapter file-backed, integrazione con use case applicativi e confini architetturali.
+
+
+## Allineamento Punto 7H
+
+Il Punto 7H conferma e chiude la roadmap 7A → 7H definita in questo blueprint. L'Infrastructure Layer resta tecnico, progressivo e separato dal futuro API Layer. Il freeze finale non introduce REST, controller, database, JPA, Spring Data o security; aggiunge invece un test finale e una documentazione di chiusura.

@@ -715,3 +715,35 @@ Commit consigliato:
 git add -A
 git commit -m "Strengthen infrastructure testing"
 ```
+
+
+---
+
+## Nota progetto — Punto 7H
+
+Il Punto 7H — Infrastructure Review & Freeze chiude il primo ciclo dell'Infrastructure Layer.
+
+La patch aggiunge `InfrastructureLayerFinalFreezeTest`, aggiorna la documentazione finale e congela lo scope tecnico validato: Spring wiring non web, mapping blueprint, repository file-backed per Locations, Cargo, Documents e Compliance, test infrastrutturali e nessun layer prematuro.
+
+Dopo l'applicazione della patch, il controllo consigliato è:
+
+```bash
+mvn spotless:apply
+mvn spotless:check
+mvn clean test
+git status
+```
+
+Documenti e file principali da controllare:
+
+```bash
+ls docs/37-infrastructure-review-freeze.md
+ls src/test/java/it/gabriele/truckflow/infrastructure/InfrastructureLayerFinalFreezeTest.java
+```
+
+Commit consigliato:
+
+```bash
+git add -A
+git commit -m "Freeze infrastructure layer"
+```

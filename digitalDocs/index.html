@@ -46,6 +46,8 @@
 <input class="doc-toggle" type="radio" name="active-doc" id="doc-36">
 <input class="doc-toggle" type="radio" name="active-doc" id="doc-37">
 <input class="doc-toggle" type="radio" name="active-doc" id="doc-38">
+<input class="doc-toggle" type="radio" name="active-doc" id="doc-39">
+<input class="doc-toggle" type="radio" name="active-doc" id="doc-40">
 <div class="app-shell">
   <aside class="sidebar">
     <div class="brand"><div class="brand-mark">TF</div><div><h1>TruckFlow Docs</h1><p>Digital mirror of the official Markdown documentation.</p></div></div>
@@ -89,12 +91,14 @@
 <label class="nav-item" for="doc-35"><span class="nav-number">36</span><span class="nav-label">Real Repository Prototype</span><span class="nav-file">34-real-repository-prototype.md</span></label>
 <label class="nav-item" for="doc-36"><span class="nav-number">37</span><span class="nav-label">Repository Expansion</span><span class="nav-file">35-repository-expansion.md</span></label>
 <label class="nav-item" for="doc-37"><span class="nav-number">38</span><span class="nav-label">Infrastructure Testing</span><span class="nav-file">36-infrastructure-testing.md</span></label>
-<label class="nav-item" for="doc-38"><span class="nav-number">39</span><span class="nav-label">Command Basic</span><span class="nav-file">command_basic.md</span></label>
+<label class="nav-item" for="doc-38"><span class="nav-number">39</span><span class="nav-label">Infrastructure Freeze</span><span class="nav-file">37-infrastructure-review-freeze.md</span></label>
+<label class="nav-item" for="doc-39"><span class="nav-number">40</span><span class="nav-label">README</span><span class="nav-file">README.md</span></label>
+<label class="nav-item" for="doc-40"><span class="nav-number">41</span><span class="nav-label">Command Basic</span><span class="nav-file">command_basic.md</span></label>
     </nav>
   </aside>
   <main class="content">
-    <div class="content-toolbar"><div><p class="eyebrow">TruckFlow Manager</p><h2>Official Project Documentation</h2></div><div class="toolbar-badges"><span>HTML + CSS</span><span>Markdown mirror</span><span>Application Layer Freeze</span><span>Punto 7G</span><span>Infrastructure Testing</span><span>Roadmap 1→7G</span></div></div>
-    <div class="roadmap-notice"><strong>Punto 7G completato:</strong> la documentazione digitale include ora il rafforzamento dei test infrastrutturali su storage file-backed, integrazione use case/repository e confini architetturali. Non introduce database, JPA, Spring Data, REST API o security.</div>
+    <div class="content-toolbar"><div><p class="eyebrow">TruckFlow Manager</p><h2>Official Project Documentation</h2></div><div class="toolbar-badges"><span>HTML + CSS</span><span>Markdown mirror</span><span>Application Layer Freeze</span><span>Punto 7H</span><span>Infrastructure Freeze</span><span>Roadmap 1→7H</span></div></div>
+    <div class="roadmap-notice"><strong>Punto 7H completato:</strong> la documentazione digitale include ora il freeze finale dell'Infrastructure Layer. Il Punto 7 è chiuso e il progetto è pronto per preparare il futuro Punto 8 — API Layer.</div>
 <article class="doc-panel panel-0" id="TRUCKFLOW_PROJECT_DOCUMENTATION-md">
   <header class="doc-header">
     <p class="eyebrow">TRUCKFLOW_PROJECT_DOCUMENTATION.md</p>
@@ -500,6 +504,11 @@ Locations: <code>FileLocationRepository</code>, supportato da
 <code>LocationPersistenceMapper</code> e test tecnici dedicati. Il
 prototipo usa un file locale per validare il pattern repository + mapper
 senza introdurre database, JPA, Spring Data, REST API o security.</p>
+<p>Con il Punto 7F è stato aggiunto il documento <a
+href="docs/35-repository-expansion.md"><code>docs/35-repository-expansion.md</code></a>
+ed è stato esteso il pattern file-backed verso Cargo, Documents e
+Compliance, mantenendo fuori database, JPA, Spring Data, REST API e
+security.</p>
 <p>Con il Punto 7G è stato aggiunto il documento <a
 href="docs/36-infrastructure-testing.md"><code>docs/36-infrastructure-testing.md</code></a>
 e sono stati rafforzati i test tecnici dell’Infrastructure Layer. La
@@ -509,6 +518,12 @@ fase aggiunge <code>FileRepositoryStorageTest</code>,
 file-backed, uso dei repository file-backed attraverso use case
 applicativi e confini architetturali contro REST, security, JPA, Spring
 Data e database prematuri.</p>
+<p>Con il Punto 7H è stato aggiunto il documento <a
+href="docs/37-infrastructure-review-freeze.md"><code>docs/37-infrastructure-review-freeze.md</code></a>
+ed è stato chiuso il primo ciclo Infrastructure Layer. La fase aggiunge
+<code>InfrastructureLayerFinalFreezeTest</code>, congela lo scope
+infrastrutturale validato e prepara il progetto al futuro Punto 8 — API
+Layer.</p>
 <h2 id="punto-6a-application-layer-blueprint">Punto 6A — Application
 Layer Blueprint</h2>
 <p>Il Punto 6A ha progettato il livello applicativo prima di scrivere
@@ -915,6 +930,25 @@ forzati in questa fase: richiedono mapping più complessi e verranno
 trattati solo dopo il rafforzamento dei test infrastrutturali.</p>
 <p>Il Punto 7F è documentato in <a
 href="docs/35-repository-expansion.md"><code>docs/35-repository-expansion.md</code></a>.</p>
+<h2 id="punto-7g-infrastructure-testing">Punto 7G — Infrastructure
+Testing</h2>
+<p>Il Punto 7G rafforza la suite tecnica dell’Infrastructure Layer.
+Aggiunge test su storage file-backed, integrazione tra repository
+file-backed e use case applicativi e confini architetturali contro layer
+prematuri.</p>
+<p>Il Punto 7G è documentato in <a
+href="docs/36-infrastructure-testing.md"><code>docs/36-infrastructure-testing.md</code></a>.</p>
+<h2 id="punto-7h-infrastructure-review-freeze">Punto 7H — Infrastructure
+Review &amp; Freeze</h2>
+<p>Il Punto 7H chiude il primo ciclo dell’Infrastructure Layer. Aggiunge
+<code>InfrastructureLayerFinalFreezeTest</code>, conferma la
+documentazione 7A → 7H, congela lo scope dei repository file-backed
+validati e verifica che il progetto non abbia introdotto REST API,
+controller, database, JPA, Spring Data o security.</p>
+<p>Il Punto 7H è documentato in <a
+href="docs/37-infrastructure-review-freeze.md"><code>docs/37-infrastructure-review-freeze.md</code></a>.
+Dopo questo step il Punto 7 è considerato chiuso e il prossimo ciclo
+naturale sarà il Punto 8 — API Layer.</p>
 <h2 id="prossimi-step-consigliati">Prossimi step consigliati</h2>
 <p>La roadmap consigliata è:</p>
 <ol type="1">
@@ -976,16 +1010,18 @@ file-backed per Cargo, Documents e Compliance;</li>
 <li>mantenere stabile il Punto 7G — Infrastructure Testing con test
 tecnici su storage file-backed, use case integration e confini
 architetturali;</li>
-<li>procedere con il Punto 7H — Infrastructure Review &amp; Freeze solo
-dopo verifica locale completa;</li>
+<li>mantenere stabile il Punto 7H — Infrastructure Review &amp; Freeze
+come chiusura finale del Punto 7;</li>
+<li>aprire il futuro Punto 8 — API Layer solo dopo verifica locale
+completa;</li>
 <li>rimandare API REST, database completi e integrazioni esterne finché
 non viene definito lo step specifico corretto.</li>
 </ol>
 
 </article>
-<article class="doc-panel panel-1" id="docs-README-md">
+<article class="doc-panel panel-1" id="README-md">
   <header class="doc-header">
-    <p class="eyebrow">docs/README.md</p>
+    <p class="eyebrow">README.md</p>
     <h2>Documentation Index</h2>
   </header>
 <h1 id="truckflow-manager-documentazione-del-dominio">TruckFlow Manager
@@ -996,8 +1032,8 @@ dell’application layer fino al Punto 6M, l’apertura documentale del
 Punto 7A — Infrastructure Layer Blueprint, la foundation tecnica leggera
 del Punto 7B e il wiring Spring controllato del Punto 7C, il blueprint
 di mapping del Punto 7D, il primo prototipo di repository reale del
-Punto 7E, l’espansione repository del Punto 7F e il rafforzamento
-tecnico del Punto 7G.</p>
+Punto 7E, l’espansione repository del Punto 7F, il rafforzamento tecnico
+del Punto 7G e il freeze finale del Punto 7H.</p>
 <p>Il documento <code>29-final-roadmap-documentation-alignment.md</code>
 chiarisce lo stato reale dopo il Punto 6M: il Punto 6 è chiuso, la
 descrizione corretta del Punto 6G Documents è
@@ -1023,7 +1059,10 @@ Locations, senza database, JPA, Spring Data o REST API. Il documento
 l’espansione file-backed verso Cargo, Documents e Compliance. Il
 documento <code>36-infrastructure-testing.md</code> descrive il Punto 7G
 e rafforza i test tecnici su storage, integrazione use case ↔︎ repository
-file-backed e confini architetturali.</p>
+file-backed e confini architetturali. Il documento
+<code>37-infrastructure-review-freeze.md</code> chiude il Punto 7H,
+congela lo scope infrastrutturale validato e prepara il progetto al
+futuro Punto 8 — API Layer.</p>
 <p>Il progetto ha completato la fondazione del <strong>domain
 layer</strong>. L’<strong>application layer</strong> ha consolidato i
 primi casi d’uso, ha completato la prima espansione controllata verso
@@ -1228,6 +1267,10 @@ href="36-infrastructure-testing.md"><code>36-infrastructure-testing.md</code></a
 — Punto 7G: rafforzamento dei test infrastrutturali su storage
 file-backed, integrazione use case/repository e confini
 architetturali.</li>
+<li><a
+href="37-infrastructure-review-freeze.md"><code>37-infrastructure-review-freeze.md</code></a>
+— Punto 7H: review e freeze finale dell’Infrastructure Layer prima del
+futuro Punto 8 API Layer.</li>
 </ol>
 <h2 id="stato-del-progetto-documentato">Stato del progetto
 documentato</h2>
@@ -1779,11 +1822,24 @@ schema SQL, REST API, controller, security, servizi esterni, storage
 binario documentale, workflow e audit trail.</p>
 <p>Il Punto 7F è documentato in <a
 href="35-repository-expansion.md"><code>35-repository-expansion.md</code></a>.</p>
+<hr />
+<h2 id="punto-7h-infrastructure-review-freeze">Punto 7H — Infrastructure
+Review &amp; Freeze</h2>
+<p>Il Punto 7H chiude il primo ciclo dell’Infrastructure Layer. Non
+aggiunge nuovi repository business e non introduce database, JPA, Spring
+Data, REST API, controller o security.</p>
+<p>La fase aggiunge <code>InfrastructureLayerFinalFreezeTest</code>,
+congela lo scope dei repository file-backed validati, conferma che
+Spring resta wiring non web, conferma che domain/application restano
+indipendenti dall’infrastructure layer e rende esplicito che il prossimo
+ciclo naturale sarà il Punto 8 — API Layer.</p>
+<p>Il Punto 7H è documentato in <a
+href="37-infrastructure-review-freeze.md"><code>37-infrastructure-review-freeze.md</code></a>.</p>
 
 </article>
-<article class="doc-panel panel-2" id="docs-01-project-overview-md">
+<article class="doc-panel panel-2" id="01-project-overview-md">
   <header class="doc-header">
-    <p class="eyebrow">docs/01-project-overview.md</p>
+    <p class="eyebrow">01-project-overview.md</p>
     <h2>Project Overview</h2>
   </header>
 <h1 id="visione-generale-del-progetto-truckflow-manager">1. Visione
@@ -2117,14 +2173,19 @@ dedicati allo storage file-backed, all’integrazione tra repository reali
 prototipali e use case applicativi, e alla protezione dei confini
 architetturali. Il progetto resta senza REST API, database, JPA, Spring
 Data e security.</p>
+<h2 id="allineamento-punto-7h">Allineamento Punto 7H</h2>
+<p>Il Punto 7H chiude il primo ciclo dell’Infrastructure Layer. Dopo
+questo freeze, TruckFlow Manager dispone di domain layer puro,
+application layer chiuso al Punto 6M e infrastructure layer consolidato
+fino al Punto 7H, senza avere ancora introdotto REST API, controller,
+database, JPA, Spring Data o security.</p>
 
 </article>
-<article class="doc-panel panel-3" id="docs-02-domain-users-md">
-  <header class="doc-panel-header">
-    <p class="eyebrow">docs/02-domain-users.md</p>
-    <h1>2. Package `domain.users`</h1>
+<article class="doc-panel panel-3" id="02-domain-users-md">
+  <header class="doc-header">
+    <p class="eyebrow">02-domain-users.md</p>
+    <h2>Domain Users</h2>
   </header>
-  <div class="markdown-body">
 <h1 id="package-domain.users">2. Package <code>domain.users</code></h1>
 <h2 id="scopo-del-package">2.1 Scopo del package</h2>
 <p>Il package <code>domain.users</code> rappresenta gli <strong>account
@@ -2382,14 +2443,12 @@ applicativo. Deve solo sapere a quale account è collegata una figura
 operativa.</p>
 <p>Questo approccio è più scalabile e coerente con DDD.</p>
 
-  </div>
 </article>
-<article class="doc-panel panel-4" id="docs-03-domain-qualifications-md">
-  <header class="doc-panel-header">
-    <p class="eyebrow">docs/03-domain-qualifications.md</p>
-    <h1>3. Package `domain.qualifications`</h1>
+<article class="doc-panel panel-4" id="03-domain-qualifications-md">
+  <header class="doc-header">
+    <p class="eyebrow">03-domain-qualifications.md</p>
+    <h2>Domain Qualifications</h2>
   </header>
-  <div class="markdown-body">
 <h1 id="package-domain.qualifications">3. Package
 <code>domain.qualifications</code></h1>
 <h2 id="scopo-del-package">3.1 Scopo del package</h2>
@@ -2572,14 +2631,12 @@ qualificazioni possedute.</li>
 <p>Questa scelta mantiene il catalogo semplice, stabile e
 riutilizzabile.</p>
 
-  </div>
 </article>
-<article class="doc-panel panel-5" id="docs-04-domain-operational-md">
-  <header class="doc-panel-header">
-    <p class="eyebrow">docs/04-domain-operational.md</p>
-    <h1>4. Package `domain.operational`</h1>
+<article class="doc-panel panel-5" id="04-domain-operational-md">
+  <header class="doc-header">
+    <p class="eyebrow">04-domain-operational.md</p>
+    <h2>Domain Operational</h2>
   </header>
-  <div class="markdown-body">
 <h1 id="package-domain.operational">4. Package
 <code>domain.operational</code></h1>
 <h2 id="scopo-del-package">4.1 Scopo del package</h2>
@@ -2911,14 +2968,12 @@ tracking.</p>
 invarianti rimangono nel dominio mentre l’application layer orchestra
 command, repository port, service e result.</p>
 
-  </div>
 </article>
-<article class="doc-panel panel-6" id="docs-05-domain-vehicles-md">
-  <header class="doc-panel-header">
-    <p class="eyebrow">docs/05-domain-vehicles.md</p>
-    <h1>5. Package `domain.vehicles`</h1>
+<article class="doc-panel panel-6" id="05-domain-vehicles-md">
+  <header class="doc-header">
+    <p class="eyebrow">05-domain-vehicles.md</p>
+    <h2>Domain Vehicles</h2>
   </header>
-  <div class="markdown-body">
 <h1 id="package-domain.vehicles">5. Package
 <code>domain.vehicles</code></h1>
 <h2 id="scopo-del-dominio-veicoli">5.1 Scopo del dominio veicoli</h2>
@@ -3933,11 +3988,10 @@ dominio, ma lo rende molto più leggibile.</p>
 TruckFlow senza trasformare <code>domain.vehicles</code> in un package
 troppo grande e difficile da mantenere.</p>
 
-  </div>
 </article>
-<article class="doc-panel panel-7" id="docs-06-architecture-decisions-md">
+<article class="doc-panel panel-7" id="06-architecture-decisions-md">
   <header class="doc-header">
-    <p class="eyebrow">docs/06-architecture-decisions.md</p>
+    <p class="eyebrow">06-architecture-decisions.md</p>
     <h2>Architecture Decisions</h2>
   </header>
 <h1 id="decisioni-architetturali-del-dominio">6. Decisioni
@@ -4906,14 +4960,19 @@ strutturata.</p>
 l’application layer non dipendono da infrastructure; l’infrastruttura
 implementa adapter tecnici; repository file-backed e repository
 in-memory restano dettagli sostituibili dietro port.out applicativi.</p>
+<h2 id="decisione-architetturale-punto-7h">Decisione architetturale —
+Punto 7H</h2>
+<p>Il Punto 7H congela l’Infrastructure Layer nello stato validato:
+Spring resta wiring non web, i repository file-backed restano limitati
+ai contesti sicuri già testati e il futuro API Layer dovrà passare dai
+port.in applicativi, non dal dominio o dai repository tecnici.</p>
 
 </article>
-<article class="doc-panel panel-8" id="docs-07-domain-cargo-md">
-  <header class="doc-panel-header">
-    <p class="eyebrow">docs/07-domain-cargo.md</p>
-    <h1>7. Package `domain.cargo`</h1>
+<article class="doc-panel panel-8" id="07-domain-cargo-md">
+  <header class="doc-header">
+    <p class="eyebrow">07-domain-cargo.md</p>
+    <h2>Domain Cargo</h2>
   </header>
-  <div class="markdown-body">
 <h1 id="package-domain.cargo">7. Package <code>domain.cargo</code></h1>
 <h2 id="scopo-del-dominio-cargo">7.1 Scopo del dominio cargo</h2>
 <p>Il package <code>domain.cargo</code> rappresenta la merce gestita da
@@ -5249,14 +5308,12 @@ spedizioni.</p>
 <p>Questa scelta rende TruckFlow più pulito, più scalabile e coerente
 con il dominio veicoli già introdotto.</p>
 
-  </div>
 </article>
-<article class="doc-panel panel-9" id="docs-08-domain-locations-md">
-  <header class="doc-panel-header">
-    <p class="eyebrow">docs/08-domain-locations.md</p>
-    <h1>8. Dominio `domain.locations`</h1>
+<article class="doc-panel panel-9" id="08-domain-locations-md">
+  <header class="doc-header">
+    <p class="eyebrow">08-domain-locations.md</p>
+    <h2>Domain Locations</h2>
   </header>
-  <div class="markdown-body">
 <h1 id="dominio-domain.locations">8. Dominio
 <code>domain.locations</code></h1>
 <h2 id="scopo-del-dominio-locations">8.1 Scopo del dominio
@@ -5556,14 +5613,12 @@ percorsi, ma è un concetto autonomo.</p>
 essere usato da percorsi tipo, spedizioni, magazzini, clienti,
 fornitori, documenti, pianificazione e tracking senza duplicazioni.</p>
 
-  </div>
 </article>
-<article class="doc-panel panel-10" id="docs-09-domain-triptemplates-md">
-  <header class="doc-panel-header">
-    <p class="eyebrow">docs/09-domain-triptemplates.md</p>
-    <h1>9. Dominio `domain.triptemplates`</h1>
+<article class="doc-panel panel-10" id="09-domain-triptemplates-md">
+  <header class="doc-header">
+    <p class="eyebrow">09-domain-triptemplates.md</p>
+    <h2>Domain TripTemplates</h2>
   </header>
-  <div class="markdown-body">
 <h1 id="dominio-domain.triptemplates">9. Dominio
 <code>domain.triptemplates</code></h1>
 <h2 id="scopo-del-dominio-triptemplates">9.1 Scopo del dominio
@@ -5997,14 +6052,12 @@ Cargo = merce
 Operational = persone operative
 Planning/Dispatching = assegnazione reale futura</code></pre>
 
-  </div>
 </article>
-<article class="doc-panel panel-11" id="docs-10-domain-shipments-md">
-  <header class="doc-panel-header">
-    <p class="eyebrow">docs/10-domain-shipments.md</p>
-    <h1>10. Dominio `domain.shipments`</h1>
+<article class="doc-panel panel-11" id="10-domain-shipments-md">
+  <header class="doc-header">
+    <p class="eyebrow">10-domain-shipments.md</p>
+    <h2>Domain Shipments</h2>
   </header>
-  <div class="markdown-body">
 <h1 id="dominio-domain.shipments">10. Dominio
 <code>domain.shipments</code></h1>
 <h2 id="obiettivo-del-dominio-shipments">10.1 Obiettivo del dominio
@@ -6746,14 +6799,12 @@ Planning/Dispatching = esecuzione reale futura</code></pre>
 <p>Questa struttura mantiene TruckFlow pulito, scalabile e pronto per i
 moduli operativi futuri.</p>
 
-  </div>
 </article>
-<article class="doc-panel panel-12" id="docs-11-domain-documents-md">
-  <header class="doc-panel-header">
-    <p class="eyebrow">docs/11-domain-documents.md</p>
-    <h1>11. Dominio `domain.documents`</h1>
+<article class="doc-panel panel-12" id="11-domain-documents-md">
+  <header class="doc-header">
+    <p class="eyebrow">11-domain-documents.md</p>
+    <h2>Domain Documents</h2>
   </header>
-  <div class="markdown-body">
 <h1 id="dominio-domain.documents">11. Dominio
 <code>domain.documents</code></h1>
 <h2 id="indice">Indice</h2>
@@ -7135,14 +7186,12 @@ o compliance operativa.</p>
 TruckFlow e pronto a diventare una base stabile per i futuri moduli
 documentali enterprise.</p>
 
-  </div>
 </article>
-<article class="doc-panel panel-13" id="docs-12-domain-compliance-md">
-  <header class="doc-panel-header">
-    <p class="eyebrow">docs/12-domain-compliance.md</p>
-    <h1>12. Dominio `domain.compliance`</h1>
+<article class="doc-panel panel-13" id="12-domain-compliance-md">
+  <header class="doc-header">
+    <p class="eyebrow">12-domain-compliance.md</p>
+    <h2>Domain Compliance</h2>
   </header>
-  <div class="markdown-body">
 <h1 id="dominio-domain.compliance">12. Dominio
 <code>domain.compliance</code></h1>
 <h2 id="indice">Indice</h2>
@@ -7592,14 +7641,12 @@ bounded context.</p>
 enterprise di TruckFlow e prepara il progetto ai futuri moduli
 applicativi di planning, dispatching e compliance check.</p>
 
-  </div>
 </article>
-<article class="doc-panel panel-14" id="docs-13-domain-rules-md">
-  <header class="doc-panel-header">
-    <p class="eyebrow">docs/13-domain-rules.md</p>
-    <h1>13 – Domain Rules</h1>
+<article class="doc-panel panel-14" id="13-domain-rules-md">
+  <header class="doc-header">
+    <p class="eyebrow">13-domain-rules.md</p>
+    <h2>Domain Rules</h2>
   </header>
-  <div class="markdown-body">
 <h1 id="domain-rules">13 – Domain Rules</h1>
 <h2 id="overview">1. Overview</h2>
 <p>Questo documento definisce le regole architetturali del dominio puro
@@ -8086,14 +8133,12 @@ errore del dominio shipment. L’application layer può orchestrare
 <code>AddShipmentItemService</code>, ma non deve duplicare la regola
 business che rende valida o invalida la quantità.</p>
 
-  </div>
 </article>
-<article class="doc-panel panel-15" id="docs-14-domain-review-patches-md">
-  <header class="doc-panel-header">
-    <p class="eyebrow">docs/14-domain-review-patches.md</p>
-    <h1>14 – Domain Review: interventi correttivi</h1>
+<article class="doc-panel panel-15" id="14-domain-review-patches-md">
+  <header class="doc-header">
+    <p class="eyebrow">14-domain-review-patches.md</p>
+    <h2>Domain Review Patches</h2>
   </header>
-  <div class="markdown-body">
 <h1 id="domain-review-interventi-correttivi">14 – Domain Review:
 interventi correttivi</h1>
 <h2 id="overview">1. Overview</h2>
@@ -8580,14 +8625,12 @@ dominio: conferma che il dominio continua a essere il proprietario delle
 invarianti e che l’application layer orchestra il flusso
 applicativo.</p>
 
-  </div>
 </article>
-<article class="doc-panel panel-16" id="docs-15-domain-test-suite-review-md">
-  <header class="doc-panel-header">
-    <p class="eyebrow">docs/15-domain-test-suite-review.md</p>
-    <h1>15 – Domain Test Suite Review</h1>
+<article class="doc-panel panel-16" id="15-domain-test-suite-review-md">
+  <header class="doc-header">
+    <p class="eyebrow">15-domain-test-suite-review.md</p>
+    <h2>Domain Test Suite Review</h2>
   </header>
-  <div class="markdown-body">
 <h1 id="domain-test-suite-review">15 – Domain Test Suite Review</h1>
 <h2 id="obiettivo">1. Obiettivo</h2>
 <p>Questo documento descrive la revisione finale della test suite del
@@ -8930,14 +8973,12 @@ l’orchestrazione applicativa: command, service, repository port,
 repository in memory, risorse mancanti, duplicati e propagazione degli
 errori di dominio.</p>
 
-  </div>
 </article>
-<article class="doc-panel panel-17" id="docs-16-application-layer-blueprint-md">
-  <header class="doc-panel-header">
-    <p class="eyebrow">docs/16-application-layer-blueprint.md</p>
-    <h1>16 — Application Layer Blueprint</h1>
+<article class="doc-panel panel-17" id="16-application-layer-blueprint-md">
+  <header class="doc-header">
+    <p class="eyebrow">16-application-layer-blueprint.md</p>
+    <h2>Application Layer Blueprint</h2>
   </header>
-  <div class="markdown-body">
 <h1 id="application-layer-blueprint">16 — Application Layer
 Blueprint</h1>
 <p>Questo documento definisce il <strong>Punto 6A — Application Layer
@@ -9634,15 +9675,19 @@ command, result, port in, port out o service applicativi già
 congelati.</p>
 <p>Questa separazione permette al Punto 7 di crescere senza trasformare
 l’application layer in codice tecnico o framework-specific.</p>
+<h2 id="nota-post-application-punto-7c">Nota post-application — Punto
+7C</h2>
+<p>Il Punto 7C conferma il confine definito dal blueprint applicativo: i
+service applicativi restano classi Java pure. Il wiring Spring viene
+dichiarato esternamente, nel layer infrastructure, tramite
+configurazioni dedicate.</p>
 
-  </div>
 </article>
-<article class="doc-panel panel-18" id="docs-17-application-foundation-md">
-  <header class="doc-panel-header">
-    <p class="eyebrow">docs/17-application-foundation.md</p>
-    <h1>17 — Application Foundation</h1>
+<article class="doc-panel panel-18" id="17-application-foundation-md">
+  <header class="doc-header">
+    <p class="eyebrow">17-application-foundation.md</p>
+    <h2>Application Foundation</h2>
   </header>
-  <div class="markdown-body">
 <h1 id="application-foundation">17 — Application Foundation</h1>
 <p>Questo documento descrive il <strong>Punto 6B — Application
 Foundation</strong> di TruckFlow Manager.</p>
@@ -9920,14 +9965,12 @@ mantenendo ancora fuori REST API, controller, database, JPA, Spring
 Data, security, tracking, planning, dashboard, workflow e integrazioni
 esterne.</p>
 
-  </div>
 </article>
-<article class="doc-panel panel-19" id="docs-18-application-repository-ports-md">
-  <header class="doc-panel-header">
-    <p class="eyebrow">docs/18-application-repository-ports.md</p>
-    <h1>18 — Application Repository Ports</h1>
+<article class="doc-panel panel-19" id="18-application-repository-ports-md">
+  <header class="doc-header">
+    <p class="eyebrow">18-application-repository-ports.md</p>
+    <h2>Application Repository Ports</h2>
   </header>
-  <div class="markdown-body">
 <h1 id="application-repository-ports">18 — Application Repository
 Ports</h1>
 <p>Questo documento descrive il <strong>Punto 6C — Repository
@@ -10335,14 +10378,12 @@ mantenendo ancora fuori REST API, controller, database, JPA, Spring
 Data, security, tracking, planning, dashboard, workflow e integrazioni
 esterne.</p>
 
-  </div>
 </article>
-<article class="doc-panel panel-20" id="docs-19-application-in-memory-repositories-md">
-  <header class="doc-panel-header">
-    <p class="eyebrow">docs/19-application-in-memory-repositories.md</p>
-    <h1>Punto 6D — In-Memory Repositories</h1>
+<article class="doc-panel panel-20" id="19-application-in-memory-repositories-md">
+  <header class="doc-header">
+    <p class="eyebrow">19-application-in-memory-repositories.md</p>
+    <h2>In-Memory Repositories</h2>
   </header>
-  <div class="markdown-body">
 <h1 id="punto-6d-in-memory-repositories">Punto 6D — In-Memory
 Repositories</h1>
 <p>Il <strong>Punto 6D</strong> introduce le prime implementazioni
@@ -10680,14 +10721,12 @@ mantenendo ancora fuori REST API, controller, database, JPA, Spring
 Data, security, tracking, planning, dashboard, workflow e integrazioni
 esterne.</p>
 
-  </div>
 </article>
-<article class="doc-panel panel-21" id="docs-20-application-first-use-cases-md">
-  <header class="doc-panel-header">
-    <p class="eyebrow">docs/20-application-first-use-cases.md</p>
-    <h1>Punto 6E — First Use Cases</h1>
+<article class="doc-panel panel-21" id="20-application-first-use-cases-md">
+  <header class="doc-header">
+    <p class="eyebrow">20-application-first-use-cases.md</p>
+    <h2>First Use Cases</h2>
   </header>
-  <div class="markdown-body">
 <h1 id="punto-6e-first-use-cases">Punto 6E — First Use Cases</h1>
 <p>Il <strong>Punto 6E</strong> introduce i primi casi d’uso applicativi
 reali di TruckFlow Manager.</p>
@@ -11058,14 +11097,12 @@ mantenendo ancora fuori REST API, controller, database, JPA, Spring
 Data, security, tracking, planning, dashboard, workflow e integrazioni
 esterne.</p>
 
-  </div>
 </article>
-<article class="doc-panel panel-22" id="docs-21-application-use-case-hardening-md">
-  <header class="doc-panel-header">
-    <p class="eyebrow">docs/21-application-use-case-hardening.md</p>
-    <h1>Punto 6F — Application Use Case Review &amp; Hardening</h1>
+<article class="doc-panel panel-22" id="21-application-use-case-hardening-md">
+  <header class="doc-header">
+    <p class="eyebrow">21-application-use-case-hardening.md</p>
+    <h2>Use Case Hardening</h2>
   </header>
-  <div class="markdown-body">
 <h1 id="punto-6f-application-use-case-review-hardening">Punto 6F —
 Application Use Case Review &amp; Hardening</h1>
 <p>Il <strong>Punto 6F</strong> consolida i primi use case applicativi
@@ -11387,14 +11424,12 @@ mantenendo ancora fuori REST API, controller, database, JPA, Spring
 Data, security, tracking, planning, dashboard, workflow e integrazioni
 esterne.</p>
 
-  </div>
 </article>
-<article class="doc-panel panel-23" id="docs-22-application-use-case-expansion-md">
-  <header class="doc-panel-header">
-    <p class="eyebrow">docs/22-application-use-case-expansion.md</p>
-    <h1>Punto 6G — Application Use Cases Expansion</h1>
+<article class="doc-panel panel-23" id="22-application-use-case-expansion-md">
+  <header class="doc-header">
+    <p class="eyebrow">22-application-use-case-expansion.md</p>
+    <h2>Use Case Expansion</h2>
   </header>
-  <div class="markdown-body">
 <h1 id="punto-6g-application-use-cases-expansion">Punto 6G — Application
 Use Cases Expansion</h1>
 <p>Il Punto 6G espande l’application layer dopo l’hardening del primo
@@ -11733,14 +11768,12 @@ mantenendo ancora fuori REST API, controller, database, JPA, Spring
 Data, security, tracking, planning, dashboard, workflow e integrazioni
 esterne.</p>
 
-  </div>
 </article>
-<article class="doc-panel panel-24" id="docs-23-application-use-case-expansion-review-md">
-  <header class="doc-panel-header">
-    <p class="eyebrow">docs/23-application-use-case-expansion-review.md</p>
-    <h1>Punto 6H — Application Use Case Expansion Review &amp; Documentation Alignment</h1>
+<article class="doc-panel panel-24" id="23-application-use-case-expansion-review-md">
+  <header class="doc-header">
+    <p class="eyebrow">23-application-use-case-expansion-review.md</p>
+    <h2>Use Case Expansion Review</h2>
   </header>
-  <div class="markdown-body">
 <h1
 id="punto-6h-application-use-case-expansion-review-documentation-alignment">Punto
 6H — Application Use Case Expansion Review &amp; Documentation
@@ -12038,14 +12071,12 @@ mantenendo ancora fuori REST API, controller, database, JPA, Spring
 Data, security, tracking, planning, dashboard, workflow e integrazioni
 esterne.</p>
 
-  </div>
 </article>
-<article class="doc-panel panel-25" id="docs-24-application-use-cases-expansion-vehicles-md">
-  <header class="doc-panel-header">
-    <p class="eyebrow">docs/24-application-use-cases-expansion-vehicles.md</p>
-    <h1>Punto 6I — Application Use Cases Expansion II: Vehicles</h1>
+<article class="doc-panel panel-25" id="24-application-use-cases-expansion-vehicles-md">
+  <header class="doc-header">
+    <p class="eyebrow">24-application-use-cases-expansion-vehicles.md</p>
+    <h2>Use Cases Vehicles</h2>
   </header>
-  <div class="markdown-body">
 <h1 id="punto-6i-application-use-cases-expansion-ii-vehicles">Punto 6I —
 Application Use Cases Expansion II: Vehicles</h1>
 <p>Il Punto 6I espande l’application layer verso il dominio
@@ -12396,14 +12427,12 @@ mantenendo ancora fuori REST API, controller, database, JPA, Spring
 Data, security, tracking, planning, dashboard, workflow e integrazioni
 esterne.</p>
 
-  </div>
 </article>
-<article class="doc-panel panel-26" id="docs-25-application-use-cases-expansion-operational-roles-md">
-  <header class="doc-panel-header">
-    <p class="eyebrow">docs/25-application-use-cases-expansion-operational-roles.md</p>
-    <h1>Punto 6J — Application Use Cases Expansion III: Operational Roles</h1>
+<article class="doc-panel panel-26" id="25-application-use-cases-expansion-operational-roles-md">
+  <header class="doc-header">
+    <p class="eyebrow">25-application-use-cases-expansion-operational-roles.md</p>
+    <h2>Use Cases Operational Roles</h2>
   </header>
-  <div class="markdown-body">
 <h1
 id="punto-6j-application-use-cases-expansion-iii-operational-roles">Punto
 6J — Application Use Cases Expansion III: Operational Roles</h1>
@@ -12711,14 +12740,12 @@ mantenendo ancora fuori REST API, controller, database, JPA, Spring
 Data, security, tracking, planning, dashboard, workflow e integrazioni
 esterne.</p>
 
-  </div>
 </article>
-<article class="doc-panel panel-27" id="docs-26-application-operational-use-case-hardening-md">
-  <header class="doc-panel-header">
-    <p class="eyebrow">docs/26-application-operational-use-case-hardening.md</p>
-    <h1>Punto 6K — Application Operational Use Case Review &amp; Hardening</h1>
+<article class="doc-panel panel-27" id="26-application-operational-use-case-hardening-md">
+  <header class="doc-header">
+    <p class="eyebrow">26-application-operational-use-case-hardening.md</p>
+    <h2>Operational Hardening</h2>
   </header>
-  <div class="markdown-body">
 <h1
 id="punto-6k-application-operational-use-case-review-hardening">Punto 6K
 — Application Operational Use Case Review &amp; Hardening</h1>
@@ -12914,14 +12941,12 @@ mantenendo ancora fuori REST API, controller, database, JPA, Spring
 Data, security, tracking, planning, dashboard, workflow e integrazioni
 esterne.</p>
 
-  </div>
 </article>
-<article class="doc-panel panel-28" id="docs-27-application-compliance-base-use-cases-md">
-  <header class="doc-panel-header">
-    <p class="eyebrow">docs/27-application-compliance-base-use-cases.md</p>
-    <h1>Punto 6L — Application Compliance Base Use Cases</h1>
+<article class="doc-panel panel-28" id="27-application-compliance-base-use-cases-md">
+  <header class="doc-header">
+    <p class="eyebrow">27-application-compliance-base-use-cases.md</p>
+    <h2>Compliance Base</h2>
   </header>
-  <div class="markdown-body">
 <h1 id="punto-6l-application-compliance-base-use-cases">Punto 6L —
 Application Compliance Base Use Cases</h1>
 <p>Il Punto 6L introduce una piccola espansione controllata
@@ -13162,14 +13187,12 @@ mantenendo ancora fuori REST API, controller, database, JPA, Spring
 Data, security, tracking, planning, dashboard, workflow e integrazioni
 esterne.</p>
 
-  </div>
 </article>
-<article class="doc-panel panel-29" id="docs-28-application-layer-final-review-freeze-md">
-  <header class="doc-panel-header">
-    <p class="eyebrow">docs/28-application-layer-final-review-freeze.md</p>
-    <h1>Punto 6M — Application Layer Final Review &amp; Freeze</h1>
+<article class="doc-panel panel-29" id="28-application-layer-final-review-freeze-md">
+  <header class="doc-header">
+    <p class="eyebrow">28-application-layer-final-review-freeze.md</p>
+    <h2>Application Freeze</h2>
   </header>
-  <div class="markdown-body">
 <h1 id="punto-6m-application-layer-final-review-freeze">Punto 6M —
 Application Layer Final Review &amp; Freeze</h1>
 <p>Il Punto 6M chiude il primo ciclo dell’<strong>Application
@@ -13379,15 +13402,18 @@ generico di mapping.</p>
 <p>Il freeze del Punto 6M resta valido: domain e application non
 dipendono da infrastructure, e REST API, controller, database, JPA,
 Spring Data e security restano fuori dal ciclo applicativo.</p>
+<h2 id="nota-successiva-punto-7c">Nota successiva — Punto 7C</h2>
+<p>Il freeze dell’application layer rimane valido anche dopo
+l’introduzione del wiring Spring: nessuna classe application riceve
+annotazioni framework e i use case restano indipendenti
+dall’infrastruttura.</p>
 
-  </div>
 </article>
-<article class="doc-panel panel-30" id="docs-29-final-roadmap-documentation-alignment-md">
-  <header class="doc-panel-header">
-    <p class="eyebrow">docs/29-final-roadmap-documentation-alignment.md</p>
-    <h1>Roadmap finale e allineamento documentale</h1>
+<article class="doc-panel panel-30" id="29-final-roadmap-documentation-alignment-md">
+  <header class="doc-header">
+    <p class="eyebrow">29-final-roadmap-documentation-alignment.md</p>
+    <h2>Final Roadmap Alignment</h2>
   </header>
-  <div class="markdown-body">
 <h1 id="roadmap-finale-e-allineamento-documentale">Roadmap finale e
 allineamento documentale</h1>
 <p>Questo documento chiude la pulizia documentale successiva al
@@ -13755,15 +13781,31 @@ roadmap finale del Punto 6. La sequenza corretta diventa:</p>
 <p>Il Punto 7B non introduce API REST, controller, JSON, database, JPA,
 Spring Data o security. Introduce solo struttura tecnica e convenzioni
 per proseguire in modo ordinato.</p>
+<h2 id="aggiornamento-successivo-punto-7e">Aggiornamento successivo —
+Punto 7E</h2>
+<p>La roadmap del Punto 7 è avanzata oltre il blueprint iniziale.</p>
+<p>Dopo il Punto 7A, 7B, 7C e 7D, il progetto introduce il <strong>Punto
+7E — Real Repository Prototype</strong>.</p>
+<p>Questo step applica il primo prototipo reale di repository su
+Locations, usando un adapter file-backed e un mapper concreto. Il
+prototipo non cambia la chiusura del Punto 6, non introduce REST API e
+non introduce database, JPA, Spring Data o security.</p>
+<p>La sequenza aggiornata del Punto 7 è quindi:</p>
+<ol type="1">
+<li>7A — Infrastructure Layer Blueprint;</li>
+<li>7B — Infrastructure Foundation;</li>
+<li>7C — Spring Wiring Foundation;</li>
+<li>7D — Persistence Mapping Blueprint;</li>
+<li>7E — Real Repository Prototype;</li>
+<li>prossimo step: 7F — Repository Expansion.</li>
+</ol>
 
-  </div>
 </article>
-<article class="doc-panel panel-31" id="docs-30-infrastructure-layer-blueprint-md">
-  <header class="doc-panel-header">
-    <p class="eyebrow">docs/30-infrastructure-layer-blueprint.md</p>
-    <h1>Punto 7A — Infrastructure Layer Blueprint</h1>
+<article class="doc-panel panel-31" id="30-infrastructure-layer-blueprint-md">
+  <header class="doc-header">
+    <p class="eyebrow">30-infrastructure-layer-blueprint.md</p>
+    <h2>Infrastructure Blueprint</h2>
   </header>
-  <div class="markdown-body">
 <h1 id="punto-7a-infrastructure-layer-blueprint">Punto 7A —
 Infrastructure Layer Blueprint</h1>
 <p>Questo documento apre ufficialmente il <strong>Punto 7 —
@@ -13772,6 +13814,10 @@ Infrastructure Layer</strong> di TruckFlow Manager.</p>
 <p>Aggiornamento 7B: il blueprint è stato trasformato in foundation
 tecnica leggera con package, eccezioni e convenzioni infrastrutturali
 documentate in <code>31-infrastructure-foundation.md</code>.</p>
+<p>Aggiornamento 7C: Spring è stato introdotto solo come wiring tecnico
+non web, documentato in <code>32-spring-wiring-foundation.md</code>,
+senza contaminare domain/application e senza introdurre REST, JPA,
+Spring Data o security.</p>
 </blockquote>
 <p>Il Punto 7A è una fase <strong>solo documentale e
 architetturale</strong>: non introduce codice Java operativo, non crea
@@ -14089,7 +14135,7 @@ infrastrutturali</td>
 <td>7E</td>
 <td>Real Repository Prototype</td>
 <td>Implementativa pilota</td>
-<td>Implementare un repository reale su un dominio semplice</td>
+<td>Implementare il primo repository reale prototipale su Locations</td>
 </tr>
 <tr class="even">
 <td>7F</td>
@@ -14191,7 +14237,9 @@ Blueprint</h2>
 <p>Il 7D può preparare classi o interfacce leggere, ma non deve forzare
 subito tutti i domini dentro un database.</p>
 <h2 id="e-real-repository-prototype">7E — Real Repository Prototype</h2>
-<p>Il Punto 7E implementerà un repository reale pilota.</p>
+<p>Il Punto 7E implementa il primo repository reale pilota, scegliendo
+Locations come dominio sicuro e usando un adapter file-backed separato
+dal profilo <code>memory</code>.</p>
 <p>Il dominio consigliato è <strong>Locations</strong>, perché è più
 semplice e riduce il rischio architetturale.</p>
 <p>Alternative possibili:</p>
@@ -14295,8 +14343,9 @@ direttamente al dominio e senza improvvisare repository o
 persistence.</p>
 <h2 id="sintesi-finale">Sintesi finale</h2>
 <p>Il Punto 7A apre l’Infrastructure Layer in modo prudente e
-professionale. Il successivo Punto 7B ha introdotto la prima foundation
-tecnica leggera mantenendo gli stessi confini architetturali.</p>
+professionale. I successivi punti 7B, 7C, 7D e 7E hanno iniziato ad
+applicare la roadmap: foundation tecnica, wiring Spring non web, mapping
+blueprint e primo repository reale prototipale su Locations.</p>
 <p>Non implementa subito database o Spring operativo. Prima
 definisce:</p>
 <ul>
@@ -14310,14 +14359,35 @@ definisce:</p>
 <li>ruolo dei repository in memory;</li>
 <li>rapporto tra Punto 7 e Punto 8.</li>
 </ul>
-<p>Questa fase rende il progetto pronto a passare al Punto 7B senza
-perdere la pulizia architetturale costruita fino al Punto 6M.</p>
+<p>Questa fase ha reso il progetto pronto a passare agli step successivi
+del Punto 7 senza perdere la pulizia architetturale costruita fino al
+Punto 6M.</p>
+<hr />
+<h2 id="allineamento-punto-7f">Allineamento Punto 7F</h2>
+<p>Il Punto 7F — Repository Expansion estende il pattern file-backed
+validato dal prototipo Locations.</p>
+<p>La prima espansione controllata aggiunge repository file-backed per
+Cargo, Documents e Compliance base, mantenendo fuori database, JPA,
+Hibernate, Spring Data, schema SQL, REST API, controller, security,
+servizi esterni, workflow e audit trail.</p>
+<p>I repository in-memory restano validi e non vengono sostituiti.</p>
+<hr />
+<h2 id="allineamento-punto-7g">Allineamento Punto 7G</h2>
+<p>Il Punto 7G conferma questa impostazione: prima di procedere al
+freeze finale, l’Infrastructure Layer viene rafforzato con test tecnici
+su storage, adapter file-backed, integrazione con use case applicativi e
+confini architetturali.</p>
+<h2 id="allineamento-punto-7h">Allineamento Punto 7H</h2>
+<p>Il Punto 7H conferma e chiude la roadmap 7A → 7H definita in questo
+blueprint. L’Infrastructure Layer resta tecnico, progressivo e separato
+dal futuro API Layer. Il freeze finale non introduce REST, controller,
+database, JPA, Spring Data o security; aggiunge invece un test finale e
+una documentazione di chiusura.</p>
 
-  </div>
 </article>
-<article class="doc-panel panel-32" id="docs-31-infrastructure-foundation-md">
+<article class="doc-panel panel-32" id="31-infrastructure-foundation-md">
   <header class="doc-header">
-    <p class="eyebrow">docs/31-infrastructure-foundation.md</p>
+    <p class="eyebrow">31-infrastructure-foundation.md</p>
     <h2>Infrastructure Foundation</h2>
   </header>
 <h1 id="punto-7b-infrastructure-foundation">Punto 7B — Infrastructure
@@ -14730,11 +14800,16 @@ servizi esterni, workflow e audit trail.</p>
 <p>Il Punto 7G usa la foundation introdotta qui per verificare che
 eccezioni, marker, package e confini restino coerenti anche dopo
 l’introduzione dei repository file-backed.</p>
+<h2 id="allineamento-punto-7h">Allineamento Punto 7H</h2>
+<p>Il Punto 7H conferma che la foundation introdotta nel Punto 7B è
+completa per questo ciclo: package tecnici, eccezioni, marker e
+convenzioni restano stabili e non vengono trasformati prematuramente in
+database, persistence framework, web layer o security layer.</p>
 
 </article>
-<article class="doc-panel panel-33" id="docs-32-spring-wiring-foundation-md">
+<article class="doc-panel panel-33" id="32-spring-wiring-foundation-md">
   <header class="doc-header">
-    <p class="eyebrow">docs/32-spring-wiring-foundation.md</p>
+    <p class="eyebrow">32-spring-wiring-foundation.md</p>
     <h2>Spring Wiring Foundation</h2>
   </header>
 <blockquote>
@@ -15102,11 +15177,16 @@ senza rompere l’architettura costruita fino al Punto 6M.</p>
 <p>Il Punto 7G non cambia il wiring Spring: lo rafforza indirettamente
 verificando che i confini restino puliti e che non vengano introdotti
 controller, security, JPA o Spring Data nel codice main.</p>
+<h2 id="allineamento-punto-7h">Allineamento Punto 7H</h2>
+<p>Il Punto 7H conferma che Spring resta confinato al wiring tecnico non
+web. <code>application.yml</code> mantiene il profilo
+<code>memory</code>, domain e application non importano Spring e il
+progetto non espone ancora endpoint HTTP.</p>
 
 </article>
-<article class="doc-panel panel-34" id="docs-33-persistence-mapping-blueprint-md">
+<article class="doc-panel panel-34" id="33-persistence-mapping-blueprint-md">
   <header class="doc-header">
-    <p class="eyebrow">docs/33-persistence-mapping-blueprint.md</p>
+    <p class="eyebrow">33-persistence-mapping-blueprint.md</p>
     <h2>Persistence Mapping Blueprint</h2>
   </header>
 <h1 id="punto-7d-persistence-mapping-blueprint">Punto 7D — Persistence
@@ -15384,14 +15464,15 @@ pilota e costruire un repository reale prototipale.</p>
 <li>permette di validare il pattern senza rischiare di sporcare domini
 più delicati.</li>
 </ul>
-<p>Il Punto 7E potrà quindi introdurre:</p>
+<p>Il Punto 7E introduce ora, in modo controllato:</p>
 <ul>
 <li>un persistence model reale per <code>Location</code>;</li>
 <li>un mapper concreto <code>LocationPersistenceMapper</code>;</li>
 <li>un repository adapter reale prototipale;</li>
 <li>test tecnici del mapping e del repository.</li>
 </ul>
-<p>Ma queste cose non appartengono ancora al Punto 7D.</p>
+<p>Queste cose sono state lasciate fuori dal Punto 7D e diventano il
+prototipo controllato del Punto 7E.</p>
 <h2 id="regola-finale-del-punto-7d">Regola finale del Punto 7D</h2>
 <p>Il Punto 7D formalizza questa regola:</p>
 <blockquote>
@@ -15412,16 +15493,35 @@ implementation.</p>
 <li>documentazione aggiornata;</li>
 <li>nessun database reale;</li>
 <li>nessun JPA;</li>
-<li>nessun repository reale;</li>
+<li>nessun repository reale dentro il Punto 7D;</li>
 <li>nessun controller REST.</li>
 </ul>
-<p>Il prossimo step naturale è:</p>
+<p>Lo step successivo è stato:</p>
 <pre class="text"><code>Punto 7E — Real Repository Prototype</code></pre>
+<hr />
+<h2 id="allineamento-punto-7f">Allineamento Punto 7F</h2>
+<p>Il Punto 7F — Repository Expansion estende il pattern file-backed
+validato dal prototipo Locations.</p>
+<p>La prima espansione controllata aggiunge repository file-backed per
+Cargo, Documents e Compliance base, mantenendo fuori database, JPA,
+Hibernate, Spring Data, schema SQL, REST API, controller, security,
+servizi esterni, workflow e audit trail.</p>
+<p>I repository in-memory restano validi e non vengono sostituiti.</p>
+<hr />
+<h2 id="allineamento-punto-7g">Allineamento Punto 7G</h2>
+<p>Il Punto 7G non amplia il catalogo dei mapping, ma rafforza i test
+tecnici che proteggono i mapper e gli adapter file-backed già introdotti
+nei Punti 7E e 7F.</p>
+<h2 id="allineamento-punto-7h">Allineamento Punto 7H</h2>
+<p>Il Punto 7H conferma che il catalogo di mapping resta un blueprint
+tecnico. Non vengono introdotti entity JPA, schema SQL o persistence
+model per tutti i domini; lo scope reale resta limitato ai repository
+file-backed validati.</p>
 
 </article>
 <article class="doc-panel panel-35" id="34-real-repository-prototype-md">
   <header class="doc-header">
-    <p class="eyebrow">docs/34-real-repository-prototype.md</p>
+    <p class="eyebrow">34-real-repository-prototype.md</p>
     <h2>Real Repository Prototype</h2>
   </header>
 <h1 id="punto-7e-real-repository-prototype">Punto 7E — Real Repository
@@ -15718,11 +15818,16 @@ servizi esterni, workflow e audit trail.</p>
 <code>FileLocationRepository</code> direttamente attraverso i use case
 applicativi <code>RegisterLocationService</code> e
 <code>FindLocationService</code>.</p>
+<h2 id="allineamento-punto-7h">Allineamento Punto 7H</h2>
+<p>Il Punto 7H conferma che il prototipo Locations del Punto 7E è il
+pattern pilota ufficiale. Lo stesso approccio è stato esteso in modo
+prudente nel Punto 7F e consolidato con test nel Punto 7G, senza
+sostituire i repository in-memory.</p>
 
 </article>
-<article class="doc-panel panel-36" id="docs-35-repository-expansion-md">
+<article class="doc-panel panel-36" id="35-repository-expansion-md">
   <header class="doc-header">
-    <p class="eyebrow">docs/35-repository-expansion.md</p>
+    <p class="eyebrow">35-repository-expansion.md</p>
     <h2>Repository Expansion</h2>
   </header>
 <h1 id="punto-7f-repository-expansion">Punto 7F — Repository
@@ -15975,12 +16080,17 @@ reali e prepara il progetto al Punto 7G.</p>
 <p>Il Punto 7G consolida questa espansione con test tecnici dedicati
 allo storage condiviso, all’uso dei repository file-backed tramite port
 applicativi e ai confini architetturali.</p>
+<h2 id="allineamento-punto-7h">Allineamento Punto 7H</h2>
+<p>Il Punto 7H congela lo scope repository validato dal Punto 7F. I
+repository file-backed attivi restano Locations, Cargo, Documents e
+Compliance. Shipments, Vehicles, Operational Roles e TripTemplates
+restano fuori dallo scope dei repository reali completi per questa prima
+chiusura infrastrutturale.</p>
 
 </article>
-
-<article class="doc-panel panel-37" id="docs-36-infrastructure-testing-md">
+<article class="doc-panel panel-37" id="36-infrastructure-testing-md">
   <header class="doc-header">
-    <p class="eyebrow">docs/36-infrastructure-testing.md</p>
+    <p class="eyebrow">36-infrastructure-testing.md</p>
     <h2>Infrastructure Testing</h2>
   </header>
 <h1 id="punto-7g-infrastructure-testing">Punto 7G — Infrastructure
@@ -16170,10 +16280,1108 @@ architetturali;</li>
 </ul>
 <p>Il progetto è pronto per il Punto 7H — Infrastructure Review &amp;
 Freeze.</p>
+<hr />
+<h2 id="allineamento-punto-7h">Allineamento Punto 7H</h2>
+<p>Il Punto 7H usa la suite tecnica introdotta dal Punto 7G come base
+del freeze finale. La fase successiva non aggiunge nuovi repository o
+servizi, ma verifica la presenza dei test infrastrutturali, dei
+documenti 7A → 7H, del runtime Spring non web e dell’assenza di layer
+prematuri.</p>
+<p>Dopo il Punto 7H, il Punto 7 è considerato chiuso e il progetto può
+preparare il futuro Punto 8 — API Layer.</p>
 
 </article>
+<article class="doc-panel panel-38" id="37-infrastructure-review-freeze-md">
+  <header class="doc-header">
+    <p class="eyebrow">37-infrastructure-review-freeze.md</p>
+    <h2>Infrastructure Freeze</h2>
+  </header>
+<h1 id="punto-7h-infrastructure-review-freeze">Punto 7H — Infrastructure
+Review &amp; Freeze</h1>
+<p>Il Punto 7H chiude il primo ciclo dell’Infrastructure Layer.</p>
+<p>Questa fase non aggiunge nuovi repository business, non introduce
+database e non apre ancora il layer API. Serve a verificare che tutto
+ciò che è stato costruito dal Punto 7A al Punto 7G sia coerente,
+documentato, testato e pronto per diventare la base tecnica del futuro
+Punto 8.</p>
+<hr />
+<h2 id="obiettivo-dello-step">Obiettivo dello step</h2>
+<p>L’obiettivo del Punto 7H è congelare lo stato infrastrutturale
+raggiunto.</p>
+<p>Il freeze conferma che:</p>
+<ul>
+<li>il blueprint infrastrutturale è definito;</li>
+<li>la foundation tecnica è presente;</li>
+<li>Spring è usato solo come wiring non web;</li>
+<li>il mapping domain ↔︎ persistence è formalizzato come blueprint;</li>
+<li>il primo repository reale prototipale Locations è presente;</li>
+<li>l’espansione file-backed verso Cargo, Documents e Compliance è
+presente;</li>
+<li>la suite di test infrastrutturali è stata rafforzata;</li>
+<li>il domain layer e l’application layer restano indipendenti
+dall’infrastruttura;</li>
+<li>non sono stati introdotti layer prematuri.</li>
+</ul>
+<p>Il Punto 7H è quindi una fase di review, allineamento e protezione
+architetturale.</p>
+<hr />
+<h2 id="stato-finale-del-punto-7">Stato finale del Punto 7</h2>
+<p>Alla fine del Punto 7 il progetto contiene questi sotto-step
+completati:</p>
+<table>
+<thead>
+<tr class="header">
+<th>Step</th>
+<th>Nome</th>
+<th>Stato</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>7A</td>
+<td>Infrastructure Layer Blueprint</td>
+<td>Completato</td>
+</tr>
+<tr class="even">
+<td>7B</td>
+<td>Infrastructure Foundation</td>
+<td>Completato</td>
+</tr>
+<tr class="odd">
+<td>7C</td>
+<td>Spring Wiring Foundation</td>
+<td>Completato</td>
+</tr>
+<tr class="even">
+<td>7D</td>
+<td>Persistence Mapping Blueprint</td>
+<td>Completato</td>
+</tr>
+<tr class="odd">
+<td>7E</td>
+<td>Real Repository Prototype</td>
+<td>Completato</td>
+</tr>
+<tr class="even">
+<td>7F</td>
+<td>Repository Expansion</td>
+<td>Completato</td>
+</tr>
+<tr class="odd">
+<td>7G</td>
+<td>Infrastructure Testing</td>
+<td>Completato</td>
+</tr>
+<tr class="even">
+<td>7H</td>
+<td>Infrastructure Review &amp; Freeze</td>
+<td>Completato</td>
+</tr>
+</tbody>
+</table>
+<p>Il Punto 7 è quindi considerato chiuso.</p>
+<hr />
+<h2 id="cosa-è-stato-consolidato">Cosa è stato consolidato</h2>
+<p>Il Punto 7H consolida l’infrastruttura attuale in quattro aree
+principali.</p>
+<h3 id="foundation-infrastrutturale">1. Foundation infrastrutturale</h3>
+<p>Sono confermati i package infrastrutturali base:</p>
+<pre class="text"><code>infrastructure.adapter
+infrastructure.config
+infrastructure.config.spring
+infrastructure.exception
+infrastructure.mapping
+infrastructure.memory
+infrastructure.repository
+infrastructure.repository.file
+infrastructure.service</code></pre>
+<p>Questi package danno una struttura chiara al layer tecnico senza
+obbligare il progetto a scegliere subito un database definitivo.</p>
+<hr />
+<h3 id="spring-wiring-controllato">2. Spring wiring controllato</h3>
+<p>Spring resta confinato nell’infrastructure layer.</p>
+<p>Il Punto 7H conferma che:</p>
+<ul>
+<li><code>TruckFlowApplication</code> esiste come entry point
+tecnico;</li>
+<li><code>application.yml</code> mantiene runtime non web;</li>
+<li>il profilo attivo resta <code>memory</code>;</li>
+<li>i bean sono configurati esplicitamente in
+<code>infrastructure.config.spring</code>;</li>
+<li>domain e application non importano Spring.</li>
+</ul>
+<p>Spring è quindi un dettaglio tecnico di wiring, non un concetto di
+dominio o application layer.</p>
+<hr />
+<h3 id="mapping-domain-persistence">3. Mapping domain ↔︎ persistence</h3>
+<p>Il catalogo di mapping introdotto nel Punto 7D resta il riferimento
+ufficiale.</p>
+<p>Il progetto ha blueprint per:</p>
+<ul>
+<li>Locations;</li>
+<li>Cargo;</li>
+<li>Shipments;</li>
+<li>Documents;</li>
+<li>Vehicles;</li>
+<li>Operational Roles;</li>
+<li>Compliance.</li>
+</ul>
+<p>Il Punto 7H conferma che questi blueprint restano descrittivi e non
+introducono ancora JPA, tabelle SQL, entity persistence o schema
+fisici.</p>
+<hr />
+<h3 id="repository-file-backed-validati">4. Repository file-backed
+validati</h3>
+<p>Il Punto 7H congela lo scope dei repository file-backed validati:</p>
+<pre class="text"><code>FileLocationRepository
+FileCargoUnitRepository
+FileDocumentRepository
+FileComplianceRequirementRepository</code></pre>
+<p>Questa scelta è intenzionale.</p>
+<p>Questi repository coprono contesti più sicuri e catalog-like. Non
+vengono ancora introdotti repository reali completi per:</p>
+<ul>
+<li>Shipments;</li>
+<li>Vehicles;</li>
+<li>Operational Roles;</li>
+<li>TripTemplates.</li>
+</ul>
+<p>Questi contesti hanno mapping più profondi, collezioni, relazioni e
+regole operative più delicate. Verranno trattati in una fase successiva,
+dopo il freeze dell’infrastruttura attuale.</p>
+<hr />
+<h2 id="nuovo-test-finale">Nuovo test finale</h2>
+<p>Il Punto 7H aggiunge:</p>
+<pre class="text"><code>InfrastructureLayerFinalFreezeTest</code></pre>
+<p>Il test verifica che:</p>
+<ul>
+<li>la documentazione 7A → 7H sia presente;</li>
+<li>i package infrastrutturali base esistano;</li>
+<li>lo scope dei repository file-backed resti quello validato;</li>
+<li>domain e application non dipendano da infrastructure o Spring;</li>
+<li>il runtime Spring resti non web e basato sul profilo
+<code>memory</code>;</li>
+<li>non siano presenti controller REST, security HTTP, JPA, Spring Data
+o database;</li>
+<li>la suite di test infrastrutturali introdotta nei punti precedenti
+sia presente;</li>
+<li>non esistano package prematuri come
+<code>infrastructure.persistence</code>,
+<code>infrastructure.database</code>, <code>infrastructure.web</code> o
+<code>infrastructure.security</code>.</li>
+</ul>
+<p>Questo test non sostituisce i test tecnici precedenti. Li completa
+come controllo finale di freeze.</p>
+<hr />
+<h2 id="cosa-il-punto-7h-non-introduce">Cosa il Punto 7H NON
+introduce</h2>
+<p>Il Punto 7H non introduce:</p>
+<ul>
+<li>database;</li>
+<li>JPA;</li>
+<li>Hibernate;</li>
+<li>Spring Data;</li>
+<li>schema SQL;</li>
+<li>repository reali per tutti i domini;</li>
+<li>REST API;</li>
+<li>controller;</li>
+<li>DTO web;</li>
+<li>security;</li>
+<li>JWT;</li>
+<li>servizi esterni;</li>
+<li>email;</li>
+<li>audit trail;</li>
+<li>workflow;</li>
+<li>file upload;</li>
+<li>storage binario documentale;</li>
+<li>tracking;</li>
+<li>planning;</li>
+<li>dashboard.</li>
+</ul>
+<p>Il Punto 7H chiude l’infrastructure layer attuale, non apre il
+delivery layer.</p>
+<hr />
+<h2 id="stato-architetturale-congelato">Stato architetturale
+congelato</h2>
+<p>Dopo il Punto 7H la struttura architetturale resta:</p>
+<pre class="text"><code>domain         -&gt; puro, senza dipendenze tecniche
+application    -&gt; orchestration layer, usa port.in e port.out
+infrastructure -&gt; adapter tecnici, repository in-memory, repository file-backed, mapping, wiring Spring</code></pre>
+<p>Le dipendenze restano orientate verso il centro:</p>
+<pre class="text"><code>infrastructure -&gt; application -&gt; domain</code></pre>
+<p>Non è ammesso il contrario.</p>
+<hr />
+<h2 id="perché-il-punto-7-può-chiudersi-qui">Perché il Punto 7 può
+chiudersi qui</h2>
+<p>Il Punto 7 non aveva l’obiettivo di creare subito tutta la
+persistenza enterprise definitiva.</p>
+<p>L’obiettivo era costruire una base infrastrutturale controllata:</p>
+<ul>
+<li>foundation tecnica;</li>
+<li>Spring wiring non web;</li>
+<li>mapping blueprint;</li>
+<li>repository reale prototipale;</li>
+<li>espansione file-backed prudente;</li>
+<li>test infrastrutturali;</li>
+<li>freeze finale.</li>
+</ul>
+<p>Questo obiettivo è stato raggiunto.</p>
+<p>Il progetto ora ha abbastanza infrastruttura per preparare il futuro
+API Layer senza violare la Clean Architecture.</p>
+<hr />
+<h2 id="preparazione-al-punto-8">Preparazione al Punto 8</h2>
+<p>Dopo il Punto 7H il prossimo ciclo naturale è:</p>
+<pre class="text"><code>Punto 8 — API Layer</code></pre>
+<p>Il Punto 8 potrà introdurre, in modo controllato:</p>
+<ul>
+<li>blueprint API;</li>
+<li>controller REST;</li>
+<li>DTO web;</li>
+<li>mapping API ↔︎ application;</li>
+<li>error handling HTTP;</li>
+<li>validazione HTTP;</li>
+<li>Swagger/OpenAPI operativo;</li>
+<li>security in una fase successiva e separata.</li>
+</ul>
+<p>Il Punto 8 dovrà usare i use case applicativi già esistenti. Non
+dovrà chiamare direttamente il dominio né i repository tecnici.</p>
+<hr />
+<h2 id="stato-finale-del-punto-7h">Stato finale del Punto 7H</h2>
+<p>Alla fine del Punto 7H:</p>
+<ul>
+<li>il Punto 7 è chiuso;</li>
+<li>l’Infrastructure Layer è documentato;</li>
+<li>la foundation tecnica è stabile;</li>
+<li>Spring è configurato come wiring non web;</li>
+<li>il mapping blueprint è definito;</li>
+<li>i repository file-backed sicuri sono presenti;</li>
+<li>i test infrastrutturali sono rafforzati;</li>
+<li>i confini architetturali sono protetti;</li>
+<li>il progetto è pronto per aprire il Punto 8.</li>
+</ul>
+<p>Il Punto 7H rappresenta quindi il freeze finale dell’Infrastructure
+Layer prima dell’API Layer.</p>
 
-<article class="doc-panel panel-38" id="command_basic-md">
+</article>
+<article class="doc-panel panel-39" id="README-md">
+  <header class="doc-header">
+    <p class="eyebrow">README.md</p>
+    <h2>README</h2>
+  </header>
+<h1 id="truckflow-manager-documentazione-del-dominio">TruckFlow Manager
+— Documentazione del dominio</h1>
+<p>Questa cartella contiene la documentazione ufficiale di TruckFlow
+Manager, con la fondazione del dominio puro, il primo ciclo completo
+dell’application layer fino al Punto 6M, l’apertura documentale del
+Punto 7A — Infrastructure Layer Blueprint, la foundation tecnica leggera
+del Punto 7B e il wiring Spring controllato del Punto 7C, il blueprint
+di mapping del Punto 7D, il primo prototipo di repository reale del
+Punto 7E, l’espansione repository del Punto 7F, il rafforzamento tecnico
+del Punto 7G e il freeze finale del Punto 7H.</p>
+<p>Il documento <code>29-final-roadmap-documentation-alignment.md</code>
+chiarisce lo stato reale dopo il Punto 6M: il Punto 6 è chiuso, la
+descrizione corretta del Punto 6G Documents è
+register/find/activate/archive e le dipendenze Spring presenti nel
+<code>pom.xml</code> sono preparatorie, non ancora usate come
+architettura REST o persistence. Il documento
+<code>30-infrastructure-layer-blueprint.md</code> apre il Punto 7A e
+definisce confini, filosofia, roadmap 7A→7H e regole dell’infrastructure
+layer prima di qualunque implementazione reale. Il documento
+<code>31-infrastructure-foundation.md</code> descrive il Punto 7B e
+formalizza package, eccezioni e convenzioni tecniche della foundation
+infrastrutturale. Il documento
+<code>32-spring-wiring-foundation.md</code> descrive il Punto 7C e
+spiega come Spring viene usato solo come wiring tecnico non web,
+mantenendo domain e application layer privi di dipendenze framework. Il
+documento <code>33-persistence-mapping-blueprint.md</code> descrive il
+Punto 7D e formalizza il catalogo dei mapping blueprint domain ↔︎
+persistence senza introdurre ancora JPA, database o repository reali. Il
+documento <code>34-real-repository-prototype.md</code> descrive il Punto
+7E e introduce il primo repository reale prototipale file-backed per
+Locations, senza database, JPA, Spring Data o REST API. Il documento
+<code>35-repository-expansion.md</code> descrive il Punto 7F e
+l’espansione file-backed verso Cargo, Documents e Compliance. Il
+documento <code>36-infrastructure-testing.md</code> descrive il Punto 7G
+e rafforza i test tecnici su storage, integrazione use case ↔︎ repository
+file-backed e confini architetturali. Il documento
+<code>37-infrastructure-review-freeze.md</code> chiude il Punto 7H,
+congela lo scope infrastrutturale validato e prepara il progetto al
+futuro Punto 8 — API Layer.</p>
+<p>Il progetto ha completato la fondazione del <strong>domain
+layer</strong>. L’<strong>application layer</strong> ha consolidato i
+primi casi d’uso, ha completato la prima espansione controllata verso
+Documents, l’ha rafforzata con una review tecnica e documentale, ha
+aggiunto i primi use case applicativi Vehicles e Operational Roles, ha
+rafforzato Operational Roles con il Punto 6K, ha introdotto i primi use
+case Compliance base nel Punto 6L e ha chiuso il primo ciclo
+dell’application layer con il Punto 6M. La fondazione di dominio
+contiene i seguenti package principali:</p>
+<ul>
+<li><code>domain.users</code></li>
+<li><code>domain.qualifications</code></li>
+<li><code>domain.operational</code></li>
+<li><code>domain.vehicles</code></li>
+<li><code>domain.cargo</code></li>
+<li><code>domain.locations</code></li>
+<li><code>domain.triptemplates</code></li>
+<li><code>domain.shipments</code></li>
+<li><code>domain.documents</code></li>
+<li><code>domain.compliance</code></li>
+</ul>
+<p>L’obiettivo di questa documentazione è spiegare in italiano, in modo
+chiaro e professionale, <strong>perché il dominio è stato modellato
+così</strong>, quali scelte sono state fatte, cosa ogni package
+rappresenta e come il progetto sta preparando il livello
+applicativo.</p>
+<h2 id="documentazione-digitale-html-css">Documentazione digitale HTML +
+CSS</h2>
+<p>È stata aggiunta una prima documentazione digitale separata nella
+cartella <a
+href="../digitalDocs/index.html"><code>../digitalDocs</code></a>.</p>
+<p>Questa nuova documentazione non sostituisce i file Markdown
+esistenti. Serve come primo prototipo di documentazione navigabile in
+HTML + CSS, con contenuto principale in inglese e traduzioni italiane
+disponibili tramite tooltip o visualizzazione diretta.</p>
+<p>Il sistema usa un flag globale sul tag <code>&lt;body&gt;</code>:</p>
+<ul>
+<li><code>tooltip-enabled</code> per mostrare le traduzioni italiane
+tramite hover;</li>
+<li><code>tooltip-disabled</code> per mostrare le traduzioni italiane
+direttamente nella pagina.</li>
+</ul>
+<p>I nomi tecnici rimangono in inglese e allineati al codice Java.</p>
+<h2 id="indice-consigliato">Indice consigliato</h2>
+<ol type="1">
+<li><a
+href="01-project-overview.md"><code>01-project-overview.md</code></a> —
+visione generale del progetto e principi architetturali.</li>
+<li><a href="02-domain-users.md"><code>02-domain-users.md</code></a> —
+documentazione completa del dominio utenti.</li>
+<li><a
+href="03-domain-qualifications.md"><code>03-domain-qualifications.md</code></a>
+— documentazione completa del catalogo abilitazioni.</li>
+<li><a
+href="04-domain-operational.md"><code>04-domain-operational.md</code></a>
+— documentazione completa delle figure operative aziendali.</li>
+<li><a
+href="05-domain-vehicles.md"><code>05-domain-vehicles.md</code></a> —
+documentazione completa del dominio veicoli e combinazioni.</li>
+<li><a
+href="06-architecture-decisions.md"><code>06-architecture-decisions.md</code></a>
+— decisioni architetturali e regole generali del dominio puro.</li>
+<li><a href="07-domain-cargo.md"><code>07-domain-cargo.md</code></a> —
+documentazione completa del dominio cargo e dei requisiti della
+merce.</li>
+<li><a
+href="08-domain-locations.md"><code>08-domain-locations.md</code></a> —
+documentazione completa del dominio locations e dei luoghi
+logistici.</li>
+<li><a
+href="09-domain-triptemplates.md"><code>09-domain-triptemplates.md</code></a>
+— documentazione completa dei percorsi tipo e delle missioni tecniche
+astratte.</li>
+<li><a
+href="10-domain-shipments.md"><code>10-domain-shipments.md</code></a> —
+documentazione completa delle spedizioni richieste e dei loro
+requisiti.</li>
+<li><a
+href="11-domain-documents.md"><code>11-domain-documents.md</code></a> —
+documentazione completa del dominio documents e del concetto puro di
+documento aziendale.</li>
+<li><a
+href="12-domain-compliance.md"><code>12-domain-compliance.md</code></a>
+— documentazione completa del dominio compliance e dei requisiti
+astratti di conformità.</li>
+<li><a href="13-domain-rules.md"><code>13-domain-rules.md</code></a> —
+regole ufficiali della TruckFlow Domain Foundation v1.0 e roadmap della
+domain review.</li>
+<li><a
+href="14-domain-review-patches.md"><code>14-domain-review-patches.md</code></a>
+— riepilogo degli interventi correttivi eseguiti durante la prima review
+concreta del dominio puro.</li>
+<li><a
+href="15-domain-test-suite-review.md"><code>15-domain-test-suite-review.md</code></a>
+— revisione finale della test suite del dominio puro, con cosa è stato
+aggiunto, cosa manca e perché.</li>
+<li><a
+href="16-application-layer-blueprint.md"><code>16-application-layer-blueprint.md</code></a>
+— blueprint del Punto 6A: obiettivi, struttura, package, use case,
+repository port, repository in memory, test strategy e roadmap
+dell’application layer.</li>
+<li><a
+href="17-application-foundation.md"><code>17-application-foundation.md</code></a>
+— foundation del Punto 6B: package application, contratti base,
+eccezioni applicative, test architetturali e cosa manca prima dei primi
+use case.</li>
+<li><a
+href="18-application-repository-ports.md"><code>18-application-repository-ports.md</code></a>
+— repository port del Punto 6C: <code>RepositoryPort</code>,
+<code>LocationRepository</code>, <code>CargoUnitRepository</code>,
+<code>ShipmentRepository</code>, contratti per ID/codice e prossimo
+passaggio verso repository in memory.</li>
+<li><a
+href="19-application-in-memory-repositories.md"><code>19-application-in-memory-repositories.md</code></a>
+— repository in memory del Punto 6D:
+<code>InMemoryLocationRepository</code>,
+<code>InMemoryCargoUnitRepository</code>,
+<code>InMemoryShipmentRepository</code>, regole sui duplicati, test e
+limiti dello step.</li>
+<li><a
+href="20-application-first-use-cases.md"><code>20-application-first-use-cases.md</code></a>
+— primi use case del Punto 6E: command, result, port in, application
+service e flusso Locations + Cargo + Shipments.</li>
+<li><a
+href="21-application-use-case-hardening.md"><code>21-application-use-case-hardening.md</code></a>
+— hardening del Punto 6F: review dei primi use case,
+<code>CancelShipmentUseCase</code>, copy-on-write delle mutazioni
+shipment, test negativi e protezione dalle mutazioni parziali.</li>
+<li><a
+href="22-application-use-case-expansion.md"><code>22-application-use-case-expansion.md</code></a>
+— espansione del Punto 6G: primi use case applicativi Documents,
+<code>DocumentRepository</code>,
+<code>InMemoryDocumentRepository</code>, command/result/port/service e
+test applicativi.</li>
+<li><a
+href="23-application-use-case-expansion-review.md"><code>23-application-use-case-expansion-review.md</code></a>
+— review del Punto 6H: contratti <code>UseCase</code>, service allineati
+alle port in, result null-safe, repository in memory uniformi,
+copy-on-write Documents e documentazione aggiornata.</li>
+<li><a
+href="24-application-use-cases-expansion-vehicles.md"><code>24-application-use-cases-expansion-vehicles.md</code></a>
+— espansione del Punto 6I: primi use case applicativi Vehicles,
+<code>VehicleUnitRepository</code>,
+<code>VehicleCombinationRepository</code>, repository in memory,
+command/result/port/service e test applicativi.</li>
+<li><a
+href="25-application-use-cases-expansion-operational-roles.md"><code>25-application-use-cases-expansion-operational-roles.md</code></a>
+— espansione del Punto 6J: primi use case applicativi Operational Roles,
+repository port Operational, repository in memory Operational e test
+applicativi.</li>
+<li><a
+href="26-application-operational-use-case-hardening.md"><code>26-application-operational-use-case-hardening.md</code></a>
+— hardening del Punto 6K: review Operational Roles, copertura completa
+dei service di stato, test copy-on-write sulle attivazioni fallite e
+documentazione allineata.</li>
+<li><a
+href="27-application-compliance-base-use-cases.md"><code>27-application-compliance-base-use-cases.md</code></a>
+— espansione del Punto 6L: primi use case Compliance base,
+<code>ComplianceRequirementRepository</code>,
+<code>InMemoryComplianceRequirementRepository</code> e flusso
+register/find/status.</li>
+<li><a
+href="28-application-layer-final-review-freeze.md"><code>28-application-layer-final-review-freeze.md</code></a>
+— chiusura del Punto 6M: review finale, freeze dell’application layer,
+controlli architetturali e documentazione di cosa resta fuori.</li>
+<li><a
+href="29-final-roadmap-documentation-alignment.md"><code>29-final-roadmap-documentation-alignment.md</code></a>
+— allineamento documentale finale: roadmap reale 1 → 6M, correzione del
+6G Documents, nota sulle dipendenze Spring preparatorie e Guided
+Links.</li>
+<li><a
+href="30-infrastructure-layer-blueprint.md"><code>30-infrastructure-layer-blueprint.md</code></a>
+— Punto 7A: blueprint dell’Infrastructure Layer, confini architetturali,
+roadmap 7A → 7H, ruolo di Spring, repository reali, adapter, mapping e
+relazione con il futuro Punto 8 API Layer.</li>
+<li><a
+href="31-infrastructure-foundation.md"><code>31-infrastructure-foundation.md</code></a>
+— Punto 7B: foundation tecnica leggera dell’Infrastructure Layer,
+package base, eccezioni tecniche, convenzioni, marker infrastructure e
+test architetturale.</li>
+<li><a
+href="32-spring-wiring-foundation.md"><code>32-spring-wiring-foundation.md</code></a>
+— Punto 7C: wiring Spring controllato, entry point tecnico,
+configurazioni bean, profilo memory, runtime non web e test
+architetturale dedicato.</li>
+<li><a
+href="33-persistence-mapping-blueprint.md"><code>33-persistence-mapping-blueprint.md</code></a>
+— Punto 7D: blueprint del mapping domain ↔︎ persistence, catalogo dei
+contesti applicativi, regole su ID/codice/stato/value object/reference e
+test architetturale dedicato.</li>
+<li><a
+href="34-real-repository-prototype.md"><code>34-real-repository-prototype.md</code></a>
+— Punto 7E: primo repository reale prototipale per Locations, con
+persistence record, mapper concreto, adapter file-backed e test tecnici
+dedicati.</li>
+<li><a
+href="35-repository-expansion.md"><code>35-repository-expansion.md</code></a>
+— Punto 7F: espansione file-backed verso Cargo, Documents e Compliance,
+con supporto file condiviso, mapper, codec e test tecnici.</li>
+<li><a
+href="36-infrastructure-testing.md"><code>36-infrastructure-testing.md</code></a>
+— Punto 7G: rafforzamento dei test infrastrutturali su storage
+file-backed, integrazione use case/repository e confini
+architetturali.</li>
+<li><a
+href="37-infrastructure-review-freeze.md"><code>37-infrastructure-review-freeze.md</code></a>
+— Punto 7H: review e freeze finale dell’Infrastructure Layer prima del
+futuro Punto 8 API Layer.</li>
+</ol>
+<h2 id="stato-del-progetto-documentato">Stato del progetto
+documentato</h2>
+<p>Questa documentazione descrive la versione del progetto in cui il
+dominio contiene:</p>
+<ul>
+<li>account applicativi e autorizzazioni di base;</li>
+<li>catalogo statico delle qualificazioni e abilitazioni;</li>
+<li>figure operative reali dell’azienda;</li>
+<li>unità veicolo, allestimenti, combinazioni, schede tecniche,
+capacità, agganci e ruoli operativi dei mezzi, con
+<code>domain.vehicles</code> organizzato in sottopackage
+(<code>unit</code>, <code>combination</code>, <code>coupling</code>,
+<code>specification</code>, <code>body</code>, <code>operation</code>,
+<code>common</code>);</li>
+<li>dominio cargo per descrivere la merce, le sue caratteristiche e i
+suoi requisiti di trasporto senza introdurre pianificazione o
+compatibilità implementata;</li>
+<li>dominio locations per descrivere luoghi logistici riutilizzabili
+come depositi, hub, yard, porti, clienti e fornitori;</li>
+<li>dominio triptemplates per descrivere percorsi tipo e missioni
+tecniche astratte senza assegnare mezzi, autisti, cargo o orari
+reali;</li>
+<li>dominio shipments per descrivere richieste di spedizione, item
+cargo, tratte logiche, priorità, livelli di servizio, requisiti e
+riferimenti senza introdurre pianificazione o tracking, con
+<code>domain.shipments</code> organizzato in sottopackage
+(<code>core</code>, <code>items</code>, <code>legs</code>,
+<code>requirements</code>, <code>metrics</code>,
+<code>properties</code>, <code>notes</code>,
+<code>references</code>);</li>
+<li>dominio documents per descrivere il concetto puro di documento
+aziendale, con identità, codice, tipo, categoria, stato, metadati,
+contenuto logico e riferimenti astratti, senza introdurre file fisici,
+upload, storage, workflow, scadenze o compliance operativa;</li>
+<li>dominio compliance per descrivere requisiti astratti di conformità,
+categorie, livelli di obbligatorietà, severità, target, regole, fonti e
+giurisdizioni senza introdurre controlli automatici, workflow, audit,
+scadenze o risultati di verifica;</li>
+<li>application layer base chiuso al Punto 6M con use case, repository
+port, repository in memory, test e documentazione allineati per
+Locations, Cargo, Shipments, Documents, Vehicles, Operational Roles e
+Compliance base;</li>
+<li>roadmap finale chiarita nel documento
+<code>29-final-roadmap-documentation-alignment.md</code>, che
+sostituisce le descrizioni intermedie ormai superate;</li>
+<li>blueprint del Punto 7A documentato in
+<code>30-infrastructure-layer-blueprint.md</code>, che apre il ciclo
+Infrastructure Layer senza introdurre ancora codice operativo, database,
+REST API, controller, JPA o security;</li>
+<li>foundation tecnica del Punto 7B documentata in
+<code>31-infrastructure-foundation.md</code>, che introduce package
+infrastrutturali, eccezioni tecniche, marker di adapter, profili tecnici
+e test architetturale senza ancora introdurre database, JPA, Spring
+Data, controller o repository reali completi;</li>
+<li>wiring Spring controllato del Punto 7C documentato in
+<code>32-spring-wiring-foundation.md</code>, che collega repository in
+memory e use case tramite configurazioni Spring, mantenendo il runtime
+non web e lasciando domain/application privi di dipendenze
+framework;</li>
+<li>regole ufficiali di dominio per guidare la TruckFlow Domain
+Foundation v1.0, la review finale del dominio puro e l’introduzione
+graduale delle eccezioni custom;</li>
+<li>prima review correttiva del dominio puro completata con otto
+interventi mirati: mutazioni atomiche, eccezioni custom,
+<code>OperationalCode</code> obbligatorio, test catalogo qualificazioni
+meno fragili, pulizia dei file locali/generati e introduzione di
+<code>LicensePlate</code> e <code>VehicleIdentificationNumber</code>
+come value object del dominio veicoli, più <code>LanguageCode</code>,
+<code>UserTheme</code>, <code>CountryCode</code>,
+<code>JurisdictionRegion</code>,
+<code>ComplianceJurisdictionScope</code> e
+<code>OperationalScopeCode</code> per ridurre primitive obsession;</li>
+<li>revisione finale della test suite del dominio puro documentata in
+<code>15-domain-test-suite-review.md</code>, con test architetturali,
+test contrattuali dei value object, casi limite cargo e shipment e
+spiegazione esplicita di cosa rimane fuori perché appartiene a moduli
+futuri;</li>
+<li>blueprint del primo application layer documentato in
+<code>16-application-layer-blueprint.md</code>, che definisce struttura,
+responsabilità, package, command, result, port, use case, repository in
+memory e test strategy prima di introdurre codice applicativo;</li>
+<li>foundation del primo application layer documentata in
+<code>17-application-foundation.md</code>, che introduce package
+application, contratti base, eccezioni applicative e test architetturali
+senza ancora aggiungere use case specifici o repository in memory;</li>
+<li>repository port del primo application layer documentate in
+<code>18-application-repository-ports.md</code>, con
+<code>RepositoryPort</code>, <code>LocationRepository</code>,
+<code>CargoUnitRepository</code> e <code>ShipmentRepository</code> come
+primi contratti outbound per Locations, Cargo e Shipments;</li>
+<li>repository in memory del primo infrastructure adapter documentate in
+<code>19-application-in-memory-repositories.md</code>, con
+<code>InMemoryLocationRepository</code>,
+<code>InMemoryCargoUnitRepository</code> e
+<code>InMemoryShipmentRepository</code> per test e sviluppo locale senza
+database;</li>
+<li>primi use case applicativi documentati in
+<code>20-application-first-use-cases.md</code>, con command, result,
+port in e service per Locations, Cargo e Shipments;</li>
+<li>hardening dei primi use case documentato in
+<code>21-application-use-case-hardening.md</code>, con
+<code>CancelShipmentUseCase</code>, copy-on-write dei service di
+mutazione shipment, test negativi, controllo degli errori applicativi e
+verifica delle mutazioni fallite;</li>
+<li>espansione controllata dei use case applicativi documentata in
+<code>22-application-use-case-expansion.md</code>, con
+<code>RegisterDocumentUseCase</code>, <code>FindDocumentUseCase</code>,
+<code>ActivateDocumentUseCase</code>,
+<code>ArchiveDocumentUseCase</code>, <code>DocumentRepository</code>,
+<code>InMemoryDocumentRepository</code> e test del flusso documentale
+logico;</li>
+<li>review e allineamento del Punto 6H documentati in
+<code>23-application-use-case-expansion-review.md</code>, con controlli
+su contratti <code>UseCase</code>, service, result null-safe, repository
+in memory e copy-on-write Documents;</li>
+<li>espansione controllata dei use case Vehicles documentata in
+<code>24-application-use-cases-expansion-vehicles.md</code>, con
+<code>RegisterVehicleUnitUseCase</code>,
+<code>FindVehicleUnitUseCase</code>, use case di stato VehicleUnit,
+<code>RegisterVehicleCombinationUseCase</code>,
+<code>FindVehicleCombinationUseCase</code>, repository port Vehicles,
+repository in memory Vehicles e test applicativi;</li>
+<li>espansione controllata dei use case Operational Roles documentata in
+<code>25-application-use-cases-expansion-operational-roles.md</code>,
+con use case per Driver, Mechanic, WarehouseOperator, Dispatcher e
+Manager, repository port Operational, repository in memory Operational e
+test applicativi.</li>
+</ul>
+<h2 id="nota-sul-packaging-di-domain.vehicles">Nota sul packaging di
+<code>domain.vehicles</code></h2>
+<p>Il dominio veicoli è stato riorganizzato in sottopackage per renderlo
+più leggibile:</p>
+<ul>
+<li><code>domain.vehicles.unit</code> per le unità fisiche;</li>
+<li><code>domain.vehicles.combination</code> per bilici, autotreni e
+mezzi singoli operativi;</li>
+<li><code>domain.vehicles.coupling</code> per agganci e traino;</li>
+<li><code>domain.vehicles.specification</code> per le schede
+tecniche;</li>
+<li><code>domain.vehicles.body</code> per allestimenti e profili di
+allestimento;</li>
+<li><code>domain.vehicles.operation</code> per capacità e ruoli
+operativi;</li>
+<li><code>domain.vehicles.common</code> per validazioni condivise.</li>
+</ul>
+<p>Questa divisione non è per tipo di mezzo, ma per concetto di dominio.
+È stata scelta perché molte classi sono condivise tra camion, trattori,
+rimorchi, semirimorchi e mezzi di magazzino.</p>
+<h2 id="cosa-significa-domain-puro">Cosa significa “domain puro”</h2>
+<p>Nel progetto TruckFlow, “domain puro” significa che le classi di
+dominio descrivono il business e le sue regole essenziali, senza
+dipendere da framework o infrastruttura.</p>
+<p>Quindi il dominio non contiene:</p>
+<ul>
+<li>controller REST;</li>
+<li>database;</li>
+<li>JPA;</li>
+<li>Spring;</li>
+<li>JWT;</li>
+<li>microservizi;</li>
+<li>chiamate HTTP;</li>
+<li>disponibilità giornaliera;</li>
+<li>pianificazione dei viaggi;</li>
+<li>documenti PDF;</li>
+<li>scadenze amministrative;</li>
+<li>GPS o telematica.</li>
+</ul>
+<p>Tutte queste parti potranno essere aggiunte in futuro in layer o
+moduli separati, senza sporcare il dominio.</p>
+<h2 id="nota-sulle-dipendenze-spring-preparatorie">Nota sulle dipendenze
+Spring preparatorie</h2>
+<p>Il <code>pom.xml</code> può contenere dipendenze Spring Boot, Web,
+Validation o OpenAPI già aggiunte in precedenza.</p>
+<p>Questa presenza non cambia lo stato architetturale del progetto: fino
+al Punto 6M non sono stati introdotti controller REST, entity JPA,
+repository Spring Data, security configuration o persistence reale. Il
+dominio e l’application layer restano indipendenti da Spring.</p>
+<h2 id="nota-su-domain.locations-e-domain.triptemplates">Nota su
+<code>domain.locations</code> e <code>domain.triptemplates</code></h2>
+<p>Le location sono state modellate come dominio separato perché i
+luoghi non appartengono solo ai percorsi: in futuro saranno utili anche
+per clienti, fornitori, magazzini, spedizioni, tracking, documenti e
+pianificazione.</p>
+<p>I percorsi astratti sono stati modellati come
+<code>TripTemplate</code>, non come <code>Trip</code>, per evitare
+confusione con il viaggio reale operativo. Un <code>TripTemplate</code>
+descrive la struttura del percorso; il viaggio eseguito con veicolo,
+autista, cargo e orari reali verrà modellato più avanti in
+planning/dispatching.</p>
+<h2 id="nota-su-domain.shipments">Nota su
+<code>domain.shipments</code></h2>
+<p>Il dominio shipments rappresenta la richiesta di spedizione: cosa
+deve essere spedito, quali cargo compongono la spedizione, da quali
+location parte, verso quali location arriva e quali requisiti devono
+essere rispettati.</p>
+<p>Una shipment non è ancora un viaggio operativo reale. Per questo non
+contiene veicoli, autisti, orari reali, tracking, documenti operativi o
+costi. Questi concetti verranno introdotti più avanti nei moduli di
+planning, dispatching, transport execution, tracking e documents.</p>
+<p>Il package <code>domain.shipments</code> è stato riorganizzato in
+sottopackage tematici per migliorare la leggibilità:</p>
+<ul>
+<li><code>domain.shipments.core</code> per l’aggregate root
+<code>Shipment</code>, ID, codice, stato, priorità, livello di servizio
+e validazioni condivise;</li>
+<li><code>domain.shipments.items</code> per gli item cargo della
+spedizione;</li>
+<li><code>domain.shipments.legs</code> per le tratte logiche della
+spedizione;</li>
+<li><code>domain.shipments.requirements</code> per i requisiti di
+trasporto dichiarati;</li>
+<li><code>domain.shipments.metrics</code> per peso e volume
+dichiarati;</li>
+<li><code>domain.shipments.properties</code> per proprietà generali e
+temperatura;</li>
+<li><code>domain.shipments.notes</code> per note interne ed
+esterne;</li>
+<li><code>domain.shipments.references</code> per riferimenti cliente,
+fornitore e interni.</li>
+</ul>
+<p>Questa divisione non crea micro-aggregate. <code>Shipment</code>
+rimane l’unico aggregate root; tutti gli altri elementi rimangono entity
+interne o value object appartenenti alla shipment.</p>
+<h2 id="nota-su-domain.documents">Nota su
+<code>domain.documents</code></h2>
+<p>Il dominio documents rappresenta il documento aziendale come concetto
+astratto e riusabile. Non gestisce file PDF, upload, path filesystem,
+URL, storage, firma digitale, scadenze o workflow.</p>
+<p>Un documento contiene solo identità, codice aziendale, tipo,
+categoria, stato astratto, metadati, contenuto logico opzionale e
+riferimenti generici verso altri domini tramite
+<code>DocumentReference</code>.</p>
+<p><code>DocumentReference</code> non importa gli ID concreti degli
+altri domini: usa <code>DocumentReferenceType</code> e un
+<code>referencedId</code> testuale. Questa scelta mantiene
+<code>domain.documents</code> disaccoppiato da vehicles, cargo,
+shipments, locations, triptemplates e operational.</p>
+<h2 id="nota-su-domain.compliance">Nota su
+<code>domain.compliance</code></h2>
+<p>Il dominio compliance rappresenta i requisiti astratti di conformità
+di TruckFlow. Un <code>ComplianceRequirement</code> descrive una regola,
+la sua categoria, il suo tipo, il livello di obbligatorietà, la
+severità, il target astratto, la fonte e la giurisdizione.</p>
+<p>Il dominio non esegue controlli concreti e non contiene violazioni,
+audit, workflow, scadenze, approvazioni o notifiche. Questi concetti
+saranno introdotti più avanti nei moduli applicativi di compliance
+check, planning, dispatching e audit.</p>
+<p>Questa scelta completa la prima grande fondazione del dominio puro
+enterprise di TruckFlow, mantenendo separati requisiti astratti e
+verifiche operative.</p>
+<h2 id="nota-su-docs14-domain-review-patches.md">Nota su
+<code>docs/14-domain-review-patches.md</code></h2>
+<p>Il documento <code>14-domain-review-patches.md</code> riepiloga la
+prima review correttiva concreta del dominio puro.</p>
+<p>Non descrive procedure operative di applicazione tecnica, ma spiega
+perché sono stati eseguiti gli otto interventi principali:</p>
+<ul>
+<li>validare prima di mutare lo stato degli aggregate;</li>
+<li>usare eccezioni custom nei domini semplici;</li>
+<li>usare eccezioni custom nei domini complessi;</li>
+<li>rendere <code>OperationalCode</code> obbligatorio;</li>
+<li>rendere meno fragili i test del catalogo qualificazioni;</li>
+<li>tenere fuori dal repository file locali, artefatti generati e file
+temporanei;</li>
+<li>trasformare targa e VIN da primitive <code>String</code> a value
+object del dominio veicoli;</li>
+<li>rafforzare preferenze utente, giurisdizione compliance e scope
+operativi con <code>LanguageCode</code>, <code>UserTheme</code>,
+<code>CountryCode</code>, <code>JurisdictionRegion</code>,
+<code>ComplianceJurisdictionScope</code> e
+<code>OperationalScopeCode</code>.</li>
+</ul>
+<p>Questo documento serve come storico architetturale della review e
+come riferimento per le prossime fasi.</p>
+<h2 id="nota-su-docs13-domain-rules.md">Nota su
+<code>docs/13-domain-rules.md</code></h2>
+<p>Il documento <code>13-domain-rules.md</code> definisce la roadmap
+ufficiale della TruckFlow Domain Foundation v1.0.</p>
+<p>La Domain Review Finale della TruckFlow Domain Foundation v1.0 è
+considerata completata per il perimetro attuale del dominio puro. Future
+review saranno necessarie solo quando verranno introdotti nuovi punti
+roadmap come infrastructure, API, planning, dispatching, workflow o
+moduli enterprise avanzati.</p>
+<p>Le regole principali sono:</p>
+<ul>
+<li>non unificare value object simili se hanno significato diverso;</li>
+<li>non importare aggregate root completi da altri domini;</li>
+<li>usare riferimenti tramite ID, value object stabili o concetti
+astratti;</li>
+<li>introdurre eccezioni custom di dominio in modo graduale;</li>
+<li>non aggiungere ancora concetti come
+<code>ComplianceViolationException</code>, perché le violazioni concrete
+appartengono a moduli futuri di compliance check, audit o planning.</li>
+</ul>
+<h2 id="nota-su-docs15-domain-test-suite-review.md">Nota su
+<code>docs/15-domain-test-suite-review.md</code></h2>
+<p>Il documento <code>15-domain-test-suite-review.md</code> descrive la
+revisione finale della test suite del dominio puro.</p>
+<p>Spiega cosa è stato aggiunto nei test, perché sono stati aggiunti
+test architetturali e test contrattuali dei value object, quali
+invarianti sono stati rafforzati e quali aree non vengono ancora testate
+perché appartengono a moduli futuri come availability, maintenance,
+planning, dispatching, workflow documentali e compliance check
+concreti.</p>
+<h2 id="nota-su-docs16-application-layer-blueprint.md">Nota su
+<code>docs/16-application-layer-blueprint.md</code></h2>
+<p>Il documento <code>16-application-layer-blueprint.md</code> apre
+ufficialmente il Punto 6A.</p>
+<p>Non introduce ancora controller REST, database, JPA, Spring, API o
+workflow operativi. Definisce invece come TruckFlow Manager dovrà
+costruire il livello che orchestra il dominio: command, result, port in,
+port out, application service, eccezioni applicative, repository
+astratti, repository in memory e test dei casi d’uso.</p>
+<p>Il primo blocco applicativo consigliato è
+<code>Locations + Cargo + Shipments</code>, perché permette di costruire
+un flusso reale senza anticipare planning, dispatching, tracking o
+compatibilità cargo-veicolo operative.</p>
+<h2 id="nota-su-docs17-application-foundation.md">Nota su
+<code>docs/17-application-foundation.md</code></h2>
+<p>Il documento <code>17-application-foundation.md</code> descrive il
+Punto 6B.</p>
+<p>Questo step inizia il codice dell’application layer senza introdurre
+ancora funzionalità operative complete. Aggiunge package applicativi,
+contratti base, eccezioni applicative e test architetturali.</p>
+<p>La foundation ha preparato i successivi step: repository port
+specifici, repository in memory e primi use case del blocco Locations +
+Cargo + Shipments.</p>
+<h2 id="nota-su-docs18-application-repository-ports.md">Nota su
+<code>docs/18-application-repository-ports.md</code></h2>
+<p>Il documento <code>18-application-repository-ports.md</code> descrive
+il Punto 6C.</p>
+<p>Questo step aggiunge i primi contratti outbound specifici
+dell’application layer: <code>RepositoryPort</code>,
+<code>LocationRepository</code>, <code>CargoUnitRepository</code> e
+<code>ShipmentRepository</code>.</p>
+<p>Le porte permettono ai futuri use case di salvare e recuperare
+aggregate tramite ID e codice, senza conoscere database, JPA, Spring,
+file system o infrastructure concreta.</p>
+<p>Storicamente, dopo questo step il progetto ha creato repository in
+memory ufficiali per testare i primi flussi applicativi senza database.
+Oggi questo lavoro è già stato completato e consolidato fino al Punto
+6M.</p>
+<h2 id="nota-su-docs19-application-in-memory-repositories.md">Nota su
+<code>docs/19-application-in-memory-repositories.md</code></h2>
+<p>Il documento <code>19-application-in-memory-repositories.md</code>
+descrive il Punto 6D.</p>
+<p>Questo step aggiunge le prime implementazioni concrete e leggere
+delle repository port: <code>InMemoryLocationRepository</code>,
+<code>InMemoryCargoUnitRepository</code> e
+<code>InMemoryShipmentRepository</code>.</p>
+<p>Queste implementazioni permettono test e sviluppo locale senza
+database, proteggendo input nulli e codici duplicati.</p>
+<h2 id="nota-su-docs20-application-first-use-cases.md">Nota su
+<code>docs/20-application-first-use-cases.md</code></h2>
+<p>Il documento <code>20-application-first-use-cases.md</code> descrive
+il Punto 6E.</p>
+<p>Questo step introduce i primi command, result, port in e application
+service per Locations, Cargo e Shipments. Il primo scenario applicativo
+completo registra due location, registra un cargo, crea una shipment
+draft, aggiunge item e leg, conferma la shipment e la recupera.</p>
+<p>Il Punto 6E dimostra che TruckFlow Manager sta iniziando a funzionare
+come applicazione a casi d’uso, ma senza introdurre ancora REST API,
+database, JPA, Spring, security o frontend.</p>
+<h2 id="nota-su-docs21-application-use-case-hardening.md">Nota su
+<code>docs/21-application-use-case-hardening.md</code></h2>
+<p>Il documento <code>21-application-use-case-hardening.md</code>
+descrive il Punto 6F.</p>
+<p>Questo step rafforza i primi use case applicativi introdotti nel
+Punto 6E. Aggiunge <code>CancelShipmentUseCase</code>,
+<code>CancelShipmentCommand</code> e <code>CancelShipmentService</code>,
+introduce una protezione copy-on-write per i service che mutano
+shipment, estende la copertura dei test applicativi e verifica che
+command nulli, dependency nulle, risorse mancanti, duplicati e mutazioni
+fallite siano gestiti correttamente.</p>
+<p>Il Punto 6F non introduce ancora REST API, database, Spring, JPA,
+security, planning o tracking. Serve a rendere stabile il primo nucleo
+applicativo prima di estendere i casi d’uso ad altri domini.</p>
+<h2 id="nota-su-docs22-application-use-case-expansion.md">Nota su
+<code>docs/22-application-use-case-expansion.md</code></h2>
+<p>Il documento <code>22-application-use-case-expansion.md</code>
+descrive il Punto 6G.</p>
+<p>La descrizione corretta del blocco Documents è: registrazione,
+ricerca, attivazione e archiviazione di documenti logici aziendali. Non
+introduce update documentale completo, attach di file fisici,
+generazione PDF, upload, storage, firma digitale, versioning o workflow
+documentale.</p>
+<h2 id="nota-su-docs23-application-use-case-expansion-review.md">Nota su
+<code>docs/23-application-use-case-expansion-review.md</code></h2>
+<p>Il documento <code>23-application-use-case-expansion-review.md</code>
+descrive il Punto 6H.</p>
+<p>Questo step è una review tecnica e documentale dopo Documents:
+controlla contratti <code>UseCase</code>, service, result null-safe,
+repository in memory e copy-on-write documentale. Non aggiunge nuovi
+domini e non introduce REST API o database.</p>
+<h2 id="nota-su-docs24-application-use-cases-expansion-vehicles.md">Nota
+su <code>docs/24-application-use-cases-expansion-vehicles.md</code></h2>
+<p>Il documento
+<code>24-application-use-cases-expansion-vehicles.md</code> descrive il
+Punto 6I.</p>
+<p>Questo step aggiunge i primi use case Vehicles per registro logico di
+unità e combinazioni veicolo. Non introduce planning, dispatching,
+tracking, manutenzione, disponibilità mezzi o assegnazioni
+operative.</p>
+<h2
+id="nota-su-docs25-application-use-cases-expansion-operational-roles.md">Nota
+su
+<code>docs/25-application-use-cases-expansion-operational-roles.md</code></h2>
+<p>Il documento
+<code>25-application-use-cases-expansion-operational-roles.md</code>
+descrive il Punto 6J.</p>
+<p>Questo step aggiunge i primi use case Operational Roles per Driver,
+Mechanic, WarehouseOperator, Dispatcher e Manager. Non introduce turni,
+availability, payroll o assegnazioni reali.</p>
+<h2
+id="nota-su-docs26-application-operational-use-case-hardening.md">Nota
+su
+<code>docs/26-application-operational-use-case-hardening.md</code></h2>
+<p>Il documento
+<code>26-application-operational-use-case-hardening.md</code> descrive
+il Punto 6K.</p>
+<p>Questo step non aggiunge nuovi use case business. Rafforza invece i
+use case Operational Roles introdotti nel Punto 6J con
+<code>ApplicationOperationalUseCaseHardeningTest</code>, copertura
+completa dei service di stato per Driver, Mechanic, WarehouseOperator,
+Dispatcher e Manager, controlli su command nulli, dependency nulle e
+protezione copy-on-write sulle attivazioni fallite.</p>
+<p>La fase mantiene fuori REST API, controller, database, JPA, security,
+planning, dispatching reale, turni, payroll, tracking e dashboard.</p>
+<h2 id="nota-su-docs27-application-compliance-base-use-cases.md">Nota su
+<code>docs/27-application-compliance-base-use-cases.md</code></h2>
+<p>Il documento <code>27-application-compliance-base-use-cases.md</code>
+descrive il Punto 6L.</p>
+<p>Questo step aggiunge i primi use case applicativi Compliance base per
+<code>ComplianceRequirement</code>: registrazione, ricerca, attivazione,
+sospensione, archiviazione e dismissione.</p>
+<p>La fase non introduce controlli legali reali, violazioni concrete,
+audit trail, workflow, REST API, database, JPA o Spring Data.</p>
+<h2 id="nota-su-docs29-final-roadmap-documentation-alignment.md">Nota su
+<code>docs/29-final-roadmap-documentation-alignment.md</code></h2>
+<p>Il documento <code>29-final-roadmap-documentation-alignment.md</code>
+chiude la pulizia documentale dopo il Punto 6M.</p>
+<p>Serve a rendere esplicita la roadmap reale dal Punto 1 al Punto 6M,
+correggere la descrizione del Punto 6G Documents, chiarire il ruolo
+preparatorio delle dipendenze Spring nel <code>pom.xml</code> e
+formalizzare il concetto di Guided Links nella documentazione
+digitale.</p>
+<h2 id="punto-7a-infrastructure-layer-blueprint">Punto 7A —
+Infrastructure Layer Blueprint</h2>
+<p>Il Punto 7A apre ufficialmente il nuovo ciclo roadmap dedicato
+all’infrastructure layer.</p>
+<p>Questa fase è solo documentale e architetturale: definisce principi,
+confini, dipendenze consentite, dipendenze vietate, ruolo degli adapter,
+ruolo dei repository reali, ruolo dei repository in memory, ruolo di
+Spring come wiring tecnico e relazione tra Punto 7 e Punto 8.</p>
+<p>La roadmap ufficiale del Punto 7 è:</p>
+<ul>
+<li>7A — Infrastructure Blueprint;</li>
+<li>7B — Infrastructure Foundation;</li>
+<li>7C — Spring Wiring Foundation;</li>
+<li>7D — Persistence Mapping Blueprint;</li>
+<li>7E — Real Repository Prototype;</li>
+<li>7F — Repository Expansion;</li>
+<li>7G — Infrastructure Testing;</li>
+<li>7H — Infrastructure Review &amp; Freeze.</li>
+</ul>
+<p>Il Punto 7A non introduce REST API, controller, DTO web, JSON,
+security HTTP, database, JPA, repository reali o servizi esterni.
+Prepara soltanto la base teorica necessaria per procedere in modo
+ordinato con il Punto 7B.</p>
+<p>Il Punto 7A è documentato in <a
+href="30-infrastructure-layer-blueprint.md"><code>30-infrastructure-layer-blueprint.md</code></a>.</p>
+<h2 id="punto-7b-infrastructure-foundation">Punto 7B — Infrastructure
+Foundation</h2>
+<p>Il Punto 7B trasforma il blueprint del Punto 7A in una foundation
+tecnica leggera.</p>
+<p>Questa fase crea package infrastrutturali base, eccezioni tecniche,
+contratti marker per adapter/repository/service, un contratto generico
+di mapping e un test architetturale dedicato.</p>
+<p>Il Punto 7B mantiene fuori database, JPA, Hibernate, Spring Data,
+controller REST, DTO web, security HTTP, servizi esterni operativi e
+repository reali completi.</p>
+<p>La struttura infrastrutturale ufficiale introdotta è:</p>
+<ul>
+<li><code>infrastructure.adapter</code>;</li>
+<li><code>infrastructure.config</code>;</li>
+<li><code>infrastructure.exception</code>;</li>
+<li><code>infrastructure.mapping</code>;</li>
+<li><code>infrastructure.repository</code>;</li>
+<li><code>infrastructure.service</code>;</li>
+<li><code>infrastructure.memory</code>.</li>
+</ul>
+<p>Il package <code>infrastructure.memory</code> resta valido e non
+viene sostituito. I nuovi package preparano gli step successivi del
+Punto 7.</p>
+<p>Il Punto 7B è documentato in <a
+href="31-infrastructure-foundation.md"><code>31-infrastructure-foundation.md</code></a>.</p>
+<h2 id="punto-7c-spring-wiring-foundation">Punto 7C — Spring Wiring
+Foundation</h2>
+<p>Il Punto 7C introduce Spring solo come motore di wiring tecnico.</p>
+<p>La configurazione Spring vive nel layer infrastructure e collega i
+port.out ai repository in memory e le port.in ai service applicativi già
+esistenti. L’application layer non viene annotato e il dominio resta
+completamente framework-free.</p>
+<p><code>application.yml</code> mantiene
+<code>spring.main.web-application-type: none</code>, quindi il progetto
+non avvia ancora un server HTTP e non espone API. REST, DTO web,
+controller, JPA, Spring Data e security rimangono fuori da questo
+step.</p>
+<p>Il Punto 7C è documentato in <a
+href="32-spring-wiring-foundation.md"><code>32-spring-wiring-foundation.md</code></a>.</p>
+<h2 id="punto-7d-persistence-mapping-blueprint">Punto 7D — Persistence
+Mapping Blueprint</h2>
+<p>Il Punto 7D formalizza il blueprint del mapping domain ↔︎
+persistence.</p>
+<p>Questa fase aggiunge un catalogo tecnico dei mapping per Locations,
+Cargo, Shipments, Documents, Vehicles, Operational Roles e Compliance
+base. Il catalogo descrive ID, codici business, stati, value object,
+enum, collection e reference senza introdurre ancora database, JPA,
+Spring Data, schema SQL o repository reali.</p>
+<p>Il Punto 7D è documentato in <a
+href="33-persistence-mapping-blueprint.md"><code>33-persistence-mapping-blueprint.md</code></a>.</p>
+<h2 id="punto-7e-real-repository-prototype">Punto 7E — Real Repository
+Prototype</h2>
+<p>Il Punto 7E introduce il primo repository reale prototipale del
+progetto.</p>
+<p>Il dominio pilota è Locations. La patch aggiunge
+<code>FileLocationRepository</code>,
+<code>LocationPersistenceRecord</code>,
+<code>LocationPersistenceMapper</code> e
+<code>FileLocationRepositoryPrototypeTest</code>. Il prototipo usa un
+file locale come meccanismo tecnico di salvataggio, ma non introduce
+database, JPA, Spring Data, repository reali per tutti i domini, REST
+API, controller o security.</p>
+<p>Il Punto 7E è documentato in <a
+href="34-real-repository-prototype.md"><code>34-real-repository-prototype.md</code></a>.</p>
+<h2 id="punto-7f-repository-expansion">Punto 7F — Repository
+Expansion</h2>
+<p>Il Punto 7F estende il pattern file-backed validato nel Punto 7E.</p>
+<p>Dopo il prototipo Locations, questa fase aggiunge repository reali
+file-backed per <code>CargoUnit</code>, <code>Document</code> e
+<code>ComplianceRequirement</code>, insieme ai rispettivi persistence
+record, mapper, codec e test tecnici.</p>
+<p>La fase introduce anche supporto file-backed condiviso nel package
+<code>infrastructure.repository.file</code>, così la logica tecnica di
+lettura, scrittura e codifica non viene duplicata in ogni adapter.</p>
+<p>Il Punto 7F mantiene fuori database, JPA, Hibernate, Spring Data,
+schema SQL, REST API, controller, security, servizi esterni, storage
+binario documentale, workflow e audit trail.</p>
+<p>Il Punto 7F è documentato in <a
+href="35-repository-expansion.md"><code>35-repository-expansion.md</code></a>.</p>
+<hr />
+<h2 id="punto-7h-infrastructure-review-freeze">Punto 7H — Infrastructure
+Review &amp; Freeze</h2>
+<p>Il Punto 7H chiude il primo ciclo dell’Infrastructure Layer. Non
+aggiunge nuovi repository business e non introduce database, JPA, Spring
+Data, REST API, controller o security.</p>
+<p>La fase aggiunge <code>InfrastructureLayerFinalFreezeTest</code>,
+congela lo scope dei repository file-backed validati, conferma che
+Spring resta wiring non web, conferma che domain/application restano
+indipendenti dall’infrastructure layer e rende esplicito che il prossimo
+ciclo naturale sarà il Punto 8 — API Layer.</p>
+<p>Il Punto 7H è documentato in <a
+href="37-infrastructure-review-freeze.md"><code>37-infrastructure-review-freeze.md</code></a>.</p>
+
+</article>
+<article class="doc-panel panel-40" id="command_basic-md">
   <header class="doc-header">
     <p class="eyebrow">command_basic.md</p>
     <h2>Command Basic</h2>
@@ -16729,6 +17937,29 @@ class="sourceCode bash"><code class="sourceCode bash"><span id="cb65-1"><a href=
 <div class="sourceCode" id="cb66"><pre
 class="sourceCode bash"><code class="sourceCode bash"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add <span class="at">-A</span></span>
 <span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">&quot;Strengthen infrastructure testing&quot;</span></span></code></pre></div>
+<hr />
+<h2 id="nota-progetto-punto-7h">Nota progetto — Punto 7H</h2>
+<p>Il Punto 7H — Infrastructure Review &amp; Freeze chiude il primo
+ciclo dell’Infrastructure Layer.</p>
+<p>La patch aggiunge <code>InfrastructureLayerFinalFreezeTest</code>,
+aggiorna la documentazione finale e congela lo scope tecnico validato:
+Spring wiring non web, mapping blueprint, repository file-backed per
+Locations, Cargo, Documents e Compliance, test infrastrutturali e nessun
+layer prematuro.</p>
+<p>Dopo l’applicazione della patch, il controllo consigliato è:</p>
+<div class="sourceCode" id="cb67"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="ex">mvn</span> spotless:apply</span>
+<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a><span class="ex">mvn</span> spotless:check</span>
+<span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a><span class="ex">mvn</span> clean test</span>
+<span id="cb67-4"><a href="#cb67-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> status</span></code></pre></div>
+<p>Documenti e file principali da controllare:</p>
+<div class="sourceCode" id="cb68"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> docs/37-infrastructure-review-freeze.md</span>
+<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> src/test/java/it/gabriele/truckflow/infrastructure/InfrastructureLayerFinalFreezeTest.java</span></code></pre></div>
+<p>Commit consigliato:</p>
+<div class="sourceCode" id="cb69"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add <span class="at">-A</span></span>
+<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">&quot;Freeze infrastructure layer&quot;</span></span></code></pre></div>
 
 </article>
   </main>

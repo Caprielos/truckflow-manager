@@ -395,3 +395,8 @@ I repository in-memory restano validi e non vengono sostituiti.
 ## Allineamento Punto 7G
 
 Il Punto 7G usa la foundation introdotta qui per verificare che eccezioni, marker, package e confini restino coerenti anche dopo l'introduzione dei repository file-backed.
+
+
+## Allineamento Punto 7H
+
+Il Punto 7H conferma che la foundation introdotta nel Punto 7B è completa per questo ciclo: package tecnici, eccezioni, marker e convenzioni restano stabili e non vengono trasformati prematuramente in database, persistence framework, web layer o security layer.

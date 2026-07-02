@@ -244,3 +244,8 @@ Questo conferma la direzione del Punto 7: l'infrastruttura cresce in modo progre
 ## Allineamento Punto 7G
 
 Il Punto 7G consolida l'Infrastructure Layer con test tecnici dedicati allo storage file-backed, all'integrazione tra repository reali prototipali e use case applicativi, e alla protezione dei confini architetturali. Il progetto resta senza REST API, database, JPA, Spring Data e security.
+
+
+## Allineamento Punto 7H
+
+Il Punto 7H chiude il primo ciclo dell'Infrastructure Layer. Dopo questo freeze, TruckFlow Manager dispone di domain layer puro, application layer chiuso al Punto 6M e infrastructure layer consolidato fino al Punto 7H, senza avere ancora introdotto REST API, controller, database, JPA, Spring Data o security.

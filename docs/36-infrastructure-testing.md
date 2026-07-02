@@ -192,3 +192,12 @@ Alla fine del Punto 7G il progetto ha:
 - nessuna security.
 
 Il progetto è pronto per il Punto 7H — Infrastructure Review & Freeze.
+
+
+---
+
+## Allineamento Punto 7H
+
+Il Punto 7H usa la suite tecnica introdotta dal Punto 7G come base del freeze finale. La fase successiva non aggiunge nuovi repository o servizi, ma verifica la presenza dei test infrastrutturali, dei documenti 7A → 7H, del runtime Spring non web e dell'assenza di layer prematuri.
+
+Dopo il Punto 7H, il Punto 7 è considerato chiuso e il progetto può preparare il futuro Punto 8 — API Layer.

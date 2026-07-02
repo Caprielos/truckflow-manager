@@ -320,3 +320,8 @@ I repository in-memory restano validi e non vengono sostituiti.
 ## Allineamento Punto 7G
 
 Il Punto 7G conferma il prototipo Locations usando `FileLocationRepository` direttamente attraverso i use case applicativi `RegisterLocationService` e `FindLocationService`.
+
+
+## Allineamento Punto 7H
+
+Il Punto 7H conferma che il prototipo Locations del Punto 7E è il pattern pilota ufficiale. Lo stesso approccio è stato esteso in modo prudente nel Punto 7F e consolidato con test nel Punto 7G, senza sostituire i repository in-memory.

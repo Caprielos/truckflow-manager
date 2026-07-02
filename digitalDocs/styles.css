@@ -504,3 +504,133 @@ body.tooltip-disabled .term[data-it]::after {
 #doc-38:checked ~ .app-shell .panel-38 { display: block; }
 #doc-38:checked ~ .app-shell label[for="doc-38"] { background: var(--nav-active-bg); border-color: var(--accent); color: var(--text-strong); }
 #doc-38:checked ~ .app-shell label[for="doc-38"] .nav-number { background: var(--accent); color: white; }
+
+
+
+
+
+
+/* Punto 7H canonical generated navigation states. */
+#doc-0:checked ~ .app-shell .panel-0 { display: block; }
+#doc-0:checked ~ .app-shell label[for="doc-0"] { background: var(--nav-active-bg); border-color: var(--accent); color: var(--text-strong); }
+#doc-0:checked ~ .app-shell label[for="doc-0"] .nav-number { background: var(--accent); color: white; }
+#doc-1:checked ~ .app-shell .panel-1 { display: block; }
+#doc-1:checked ~ .app-shell label[for="doc-1"] { background: var(--nav-active-bg); border-color: var(--accent); color: var(--text-strong); }
+#doc-1:checked ~ .app-shell label[for="doc-1"] .nav-number { background: var(--accent); color: white; }
+#doc-2:checked ~ .app-shell .panel-2 { display: block; }
+#doc-2:checked ~ .app-shell label[for="doc-2"] { background: var(--nav-active-bg); border-color: var(--accent); color: var(--text-strong); }
+#doc-2:checked ~ .app-shell label[for="doc-2"] .nav-number { background: var(--accent); color: white; }
+#doc-3:checked ~ .app-shell .panel-3 { display: block; }
+#doc-3:checked ~ .app-shell label[for="doc-3"] { background: var(--nav-active-bg); border-color: var(--accent); color: var(--text-strong); }
+#doc-3:checked ~ .app-shell label[for="doc-3"] .nav-number { background: var(--accent); color: white; }
+#doc-4:checked ~ .app-shell .panel-4 { display: block; }
+#doc-4:checked ~ .app-shell label[for="doc-4"] { background: var(--nav-active-bg); border-color: var(--accent); color: var(--text-strong); }
+#doc-4:checked ~ .app-shell label[for="doc-4"] .nav-number { background: var(--accent); color: white; }
+#doc-5:checked ~ .app-shell .panel-5 { display: block; }
+#doc-5:checked ~ .app-shell label[for="doc-5"] { background: var(--nav-active-bg); border-color: var(--accent); color: var(--text-strong); }
+#doc-5:checked ~ .app-shell label[for="doc-5"] .nav-number { background: var(--accent); color: white; }
+#doc-6:checked ~ .app-shell .panel-6 { display: block; }
+#doc-6:checked ~ .app-shell label[for="doc-6"] { background: var(--nav-active-bg); border-color: var(--accent); color: var(--text-strong); }
+#doc-6:checked ~ .app-shell label[for="doc-6"] .nav-number { background: var(--accent); color: white; }
+#doc-7:checked ~ .app-shell .panel-7 { display: block; }
+#doc-7:checked ~ .app-shell label[for="doc-7"] { background: var(--nav-active-bg); border-color: var(--accent); color: var(--text-strong); }
+#doc-7:checked ~ .app-shell label[for="doc-7"] .nav-number { background: var(--accent); color: white; }
+#doc-8:checked ~ .app-shell .panel-8 { display: block; }
+#doc-8:checked ~ .app-shell label[for="doc-8"] { background: var(--nav-active-bg); border-color: var(--accent); color: var(--text-strong); }
+#doc-8:checked ~ .app-shell label[for="doc-8"] .nav-number { background: var(--accent); color: white; }
+#doc-9:checked ~ .app-shell .panel-9 { display: block; }
+#doc-9:checked ~ .app-shell label[for="doc-9"] { background: var(--nav-active-bg); border-color: var(--accent); color: var(--text-strong); }
+#doc-9:checked ~ .app-shell label[for="doc-9"] .nav-number { background: var(--accent); color: white; }
+#doc-10:checked ~ .app-shell .panel-10 { display: block; }
+#doc-10:checked ~ .app-shell label[for="doc-10"] { background: var(--nav-active-bg); border-color: var(--accent); color: var(--text-strong); }
+#doc-10:checked ~ .app-shell label[for="doc-10"] .nav-number { background: var(--accent); color: white; }
+#doc-11:checked ~ .app-shell .panel-11 { display: block; }
+#doc-11:checked ~ .app-shell label[for="doc-11"] { background: var(--nav-active-bg); border-color: var(--accent); color: var(--text-strong); }
+#doc-11:checked ~ .app-shell label[for="doc-11"] .nav-number { background: var(--accent); color: white; }
+#doc-12:checked ~ .app-shell .panel-12 { display: block; }
+#doc-12:checked ~ .app-shell label[for="doc-12"] { background: var(--nav-active-bg); border-color: var(--accent); color: var(--text-strong); }
+#doc-12:checked ~ .app-shell label[for="doc-12"] .nav-number { background: var(--accent); color: white; }
+#doc-13:checked ~ .app-shell .panel-13 { display: block; }
+#doc-13:checked ~ .app-shell label[for="doc-13"] { background: var(--nav-active-bg); border-color: var(--accent); color: var(--text-strong); }
+#doc-13:checked ~ .app-shell label[for="doc-13"] .nav-number { background: var(--accent); color: white; }
+#doc-14:checked ~ .app-shell .panel-14 { display: block; }
+#doc-14:checked ~ .app-shell label[for="doc-14"] { background: var(--nav-active-bg); border-color: var(--accent); color: var(--text-strong); }
+#doc-14:checked ~ .app-shell label[for="doc-14"] .nav-number { background: var(--accent); color: white; }
+#doc-15:checked ~ .app-shell .panel-15 { display: block; }
+#doc-15:checked ~ .app-shell label[for="doc-15"] { background: var(--nav-active-bg); border-color: var(--accent); color: var(--text-strong); }
+#doc-15:checked ~ .app-shell label[for="doc-15"] .nav-number { background: var(--accent); color: white; }
+#doc-16:checked ~ .app-shell .panel-16 { display: block; }
+#doc-16:checked ~ .app-shell label[for="doc-16"] { background: var(--nav-active-bg); border-color: var(--accent); color: var(--text-strong); }
+#doc-16:checked ~ .app-shell label[for="doc-16"] .nav-number { background: var(--accent); color: white; }
+#doc-17:checked ~ .app-shell .panel-17 { display: block; }
+#doc-17:checked ~ .app-shell label[for="doc-17"] { background: var(--nav-active-bg); border-color: var(--accent); color: var(--text-strong); }
+#doc-17:checked ~ .app-shell label[for="doc-17"] .nav-number { background: var(--accent); color: white; }
+#doc-18:checked ~ .app-shell .panel-18 { display: block; }
+#doc-18:checked ~ .app-shell label[for="doc-18"] { background: var(--nav-active-bg); border-color: var(--accent); color: var(--text-strong); }
+#doc-18:checked ~ .app-shell label[for="doc-18"] .nav-number { background: var(--accent); color: white; }
+#doc-19:checked ~ .app-shell .panel-19 { display: block; }
+#doc-19:checked ~ .app-shell label[for="doc-19"] { background: var(--nav-active-bg); border-color: var(--accent); color: var(--text-strong); }
+#doc-19:checked ~ .app-shell label[for="doc-19"] .nav-number { background: var(--accent); color: white; }
+#doc-20:checked ~ .app-shell .panel-20 { display: block; }
+#doc-20:checked ~ .app-shell label[for="doc-20"] { background: var(--nav-active-bg); border-color: var(--accent); color: var(--text-strong); }
+#doc-20:checked ~ .app-shell label[for="doc-20"] .nav-number { background: var(--accent); color: white; }
+#doc-21:checked ~ .app-shell .panel-21 { display: block; }
+#doc-21:checked ~ .app-shell label[for="doc-21"] { background: var(--nav-active-bg); border-color: var(--accent); color: var(--text-strong); }
+#doc-21:checked ~ .app-shell label[for="doc-21"] .nav-number { background: var(--accent); color: white; }
+#doc-22:checked ~ .app-shell .panel-22 { display: block; }
+#doc-22:checked ~ .app-shell label[for="doc-22"] { background: var(--nav-active-bg); border-color: var(--accent); color: var(--text-strong); }
+#doc-22:checked ~ .app-shell label[for="doc-22"] .nav-number { background: var(--accent); color: white; }
+#doc-23:checked ~ .app-shell .panel-23 { display: block; }
+#doc-23:checked ~ .app-shell label[for="doc-23"] { background: var(--nav-active-bg); border-color: var(--accent); color: var(--text-strong); }
+#doc-23:checked ~ .app-shell label[for="doc-23"] .nav-number { background: var(--accent); color: white; }
+#doc-24:checked ~ .app-shell .panel-24 { display: block; }
+#doc-24:checked ~ .app-shell label[for="doc-24"] { background: var(--nav-active-bg); border-color: var(--accent); color: var(--text-strong); }
+#doc-24:checked ~ .app-shell label[for="doc-24"] .nav-number { background: var(--accent); color: white; }
+#doc-25:checked ~ .app-shell .panel-25 { display: block; }
+#doc-25:checked ~ .app-shell label[for="doc-25"] { background: var(--nav-active-bg); border-color: var(--accent); color: var(--text-strong); }
+#doc-25:checked ~ .app-shell label[for="doc-25"] .nav-number { background: var(--accent); color: white; }
+#doc-26:checked ~ .app-shell .panel-26 { display: block; }
+#doc-26:checked ~ .app-shell label[for="doc-26"] { background: var(--nav-active-bg); border-color: var(--accent); color: var(--text-strong); }
+#doc-26:checked ~ .app-shell label[for="doc-26"] .nav-number { background: var(--accent); color: white; }
+#doc-27:checked ~ .app-shell .panel-27 { display: block; }
+#doc-27:checked ~ .app-shell label[for="doc-27"] { background: var(--nav-active-bg); border-color: var(--accent); color: var(--text-strong); }
+#doc-27:checked ~ .app-shell label[for="doc-27"] .nav-number { background: var(--accent); color: white; }
+#doc-28:checked ~ .app-shell .panel-28 { display: block; }
+#doc-28:checked ~ .app-shell label[for="doc-28"] { background: var(--nav-active-bg); border-color: var(--accent); color: var(--text-strong); }
+#doc-28:checked ~ .app-shell label[for="doc-28"] .nav-number { background: var(--accent); color: white; }
+#doc-29:checked ~ .app-shell .panel-29 { display: block; }
+#doc-29:checked ~ .app-shell label[for="doc-29"] { background: var(--nav-active-bg); border-color: var(--accent); color: var(--text-strong); }
+#doc-29:checked ~ .app-shell label[for="doc-29"] .nav-number { background: var(--accent); color: white; }
+#doc-30:checked ~ .app-shell .panel-30 { display: block; }
+#doc-30:checked ~ .app-shell label[for="doc-30"] { background: var(--nav-active-bg); border-color: var(--accent); color: var(--text-strong); }
+#doc-30:checked ~ .app-shell label[for="doc-30"] .nav-number { background: var(--accent); color: white; }
+#doc-31:checked ~ .app-shell .panel-31 { display: block; }
+#doc-31:checked ~ .app-shell label[for="doc-31"] { background: var(--nav-active-bg); border-color: var(--accent); color: var(--text-strong); }
+#doc-31:checked ~ .app-shell label[for="doc-31"] .nav-number { background: var(--accent); color: white; }
+#doc-32:checked ~ .app-shell .panel-32 { display: block; }
+#doc-32:checked ~ .app-shell label[for="doc-32"] { background: var(--nav-active-bg); border-color: var(--accent); color: var(--text-strong); }
+#doc-32:checked ~ .app-shell label[for="doc-32"] .nav-number { background: var(--accent); color: white; }
+#doc-33:checked ~ .app-shell .panel-33 { display: block; }
+#doc-33:checked ~ .app-shell label[for="doc-33"] { background: var(--nav-active-bg); border-color: var(--accent); color: var(--text-strong); }
+#doc-33:checked ~ .app-shell label[for="doc-33"] .nav-number { background: var(--accent); color: white; }
+#doc-34:checked ~ .app-shell .panel-34 { display: block; }
+#doc-34:checked ~ .app-shell label[for="doc-34"] { background: var(--nav-active-bg); border-color: var(--accent); color: var(--text-strong); }
+#doc-34:checked ~ .app-shell label[for="doc-34"] .nav-number { background: var(--accent); color: white; }
+#doc-35:checked ~ .app-shell .panel-35 { display: block; }
+#doc-35:checked ~ .app-shell label[for="doc-35"] { background: var(--nav-active-bg); border-color: var(--accent); color: var(--text-strong); }
+#doc-35:checked ~ .app-shell label[for="doc-35"] .nav-number { background: var(--accent); color: white; }
+#doc-36:checked ~ .app-shell .panel-36 { display: block; }
+#doc-36:checked ~ .app-shell label[for="doc-36"] { background: var(--nav-active-bg); border-color: var(--accent); color: var(--text-strong); }
+#doc-36:checked ~ .app-shell label[for="doc-36"] .nav-number { background: var(--accent); color: white; }
+#doc-37:checked ~ .app-shell .panel-37 { display: block; }
+#doc-37:checked ~ .app-shell label[for="doc-37"] { background: var(--nav-active-bg); border-color: var(--accent); color: var(--text-strong); }
+#doc-37:checked ~ .app-shell label[for="doc-37"] .nav-number { background: var(--accent); color: white; }
+#doc-38:checked ~ .app-shell .panel-38 { display: block; }
+#doc-38:checked ~ .app-shell label[for="doc-38"] { background: var(--nav-active-bg); border-color: var(--accent); color: var(--text-strong); }
+#doc-38:checked ~ .app-shell label[for="doc-38"] .nav-number { background: var(--accent); color: white; }
+#doc-39:checked ~ .app-shell .panel-39 { display: block; }
+#doc-39:checked ~ .app-shell label[for="doc-39"] { background: var(--nav-active-bg); border-color: var(--accent); color: var(--text-strong); }
+#doc-39:checked ~ .app-shell label[for="doc-39"] .nav-number { background: var(--accent); color: white; }
+#doc-40:checked ~ .app-shell .panel-40 { display: block; }
+#doc-40:checked ~ .app-shell label[for="doc-40"] { background: var(--nav-active-bg); border-color: var(--accent); color: var(--text-strong); }
+#doc-40:checked ~ .app-shell label[for="doc-40"] .nav-number { background: var(--accent); color: white; }

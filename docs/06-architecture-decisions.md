@@ -868,3 +868,8 @@ Questa scelta mantiene dominio e application layer indipendenti dall'infrastrutt
 ## Allineamento Punto 7G
 
 Il Punto 7G conferma le decisioni architetturali: il dominio e l'application layer non dipendono da infrastructure; l'infrastruttura implementa adapter tecnici; repository file-backed e repository in-memory restano dettagli sostituibili dietro port.out applicativi.
+
+
+## Decisione architetturale — Punto 7H
+
+Il Punto 7H congela l'Infrastructure Layer nello stato validato: Spring resta wiring non web, i repository file-backed restano limitati ai contesti sicuri già testati e il futuro API Layer dovrà passare dai port.in applicativi, non dal dominio o dai repository tecnici.

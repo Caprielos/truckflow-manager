@@ -388,3 +388,8 @@ Questa scelta permette di avanzare verso un'infrastruttura reale senza rompere l
 ## Allineamento Punto 7G
 
 Il Punto 7G non cambia il wiring Spring: lo rafforza indirettamente verificando che i confini restino puliti e che non vengano introdotti controller, security, JPA o Spring Data nel codice main.
+
+
+## Allineamento Punto 7H
+
+Il Punto 7H conferma che Spring resta confinato al wiring tecnico non web. `application.yml` mantiene il profilo `memory`, domain e application non importano Spring e il progetto non espone ancora endpoint HTTP.
