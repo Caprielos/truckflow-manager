@@ -480,7 +480,7 @@
   <div class="hero">
     <div class="hero-inner">
       <div>
-        <div class="eyebrow">Documentazione professionale • Domain Foundation • Application Freeze • Persistence Mapping Blueprint</div>
+        <div class="eyebrow">Documentazione professionale • Domain Foundation • Application Freeze • Real Repository Prototype</div>
         <h1>TruckFlow Manager — Documentazione Enterprise</h1>
         <p>Una panoramica completa, tecnica e commerciale, del progetto TruckFlow Manager: cosa fa oggi, perché è progettato in questo modo, quali domini contiene, come è stato consolidato l’application layer, come viene aperto e fondato il nuovo Infrastructure Layer e quali moduli dovranno essere aggiunti per evolvere in una piattaforma enterprise completa per trasporto, logistica e gestione flotta.</p>
         <div class="hero-actions">
@@ -497,7 +497,7 @@
           <li><span>Eccezioni custom</span><span class="badge done">Applicate</span></li>
           <li><span>Revisione test dominio</span><span class="badge done">Completata</span></li>
           <li><span>Application layer</span><span class="badge done">Punto 6M completato</span></li>
-          <li><span>Infrastructure layer</span><span class="badge now">Punto 7D mapping</span></li>
+          <li><span>Infrastructure layer</span><span class="badge now">Punto 7E prototype</span></li>
         </ul>
       </aside>
     </div>
@@ -835,8 +835,16 @@
             <div><h3>Infrastructure Foundation</h3><p>Prima foundation tecnica leggera: package infrastructure, eccezioni tecniche, marker di adapter/repository/service, profili infrastrutturali, contratto generico di mapping e test architetturale, senza database, JPA, Spring Data, REST API o security.</p></div>
           </div>
           <div class="timeline-item">
-            <div><span class="badge now">Aperto</span><div class="milestone">Punto 7D</div></div>
-            <div><h3>Persistence Mapping Blueprint</h3><p>Il mapping domain ↔ persistence viene formalizzato con blueprint tecnici per i contesti applicativi attivi, senza introdurre ancora database, JPA, Spring Data, repository reali o schema fisico.</p></div>
+            <div><span class="badge done">Completato</span><div class="milestone">Punto 7C</div></div>
+            <div><h3>Spring Wiring Foundation</h3><p>Spring viene introdotto solo come wiring tecnico non web: entry point, application.yml, configurazioni bean e profilo memory, senza annotazioni framework dentro domain/application.</p></div>
+          </div>
+          <div class="timeline-item">
+            <div><span class="badge done">Completato</span><div class="milestone">Punto 7D</div></div>
+            <div><h3>Persistence Mapping Blueprint</h3><p>Il mapping domain ↔ persistence viene formalizzato con blueprint tecnici per i contesti applicativi attivi, senza introdurre database, JPA, Spring Data, repository reali o schema fisico.</p></div>
+          </div>
+          <div class="timeline-item">
+            <div><span class="badge now">Aperto</span><div class="milestone">Punto 7E</div></div>
+            <div><h3>Real Repository Prototype</h3><p>Introduzione del primo repository reale prototipale per Locations: persistence record, mapper concreto, adapter file-backed e test tecnici, senza database o JPA.</p></div>
           </div>
         </div>
         <h3>Obiettivi a breve termine</h3>
@@ -858,7 +866,8 @@
           <li>usare il Punto 7A come blueprint ufficiale dell'Infrastructure Layer;</li>
           <li>mantenere stabile il Punto 7B come foundation tecnica senza anticipare database, JPA, REST API o security;</li>
           <li>mantenere stabile il Punto 7C come wiring Spring non web, senza annotazioni framework dentro domain/application;</li>
-          <li>usare il Punto 7D come base per il futuro prototipo repository del Punto 7E.</li>
+          <li>mantenere stabile il Punto 7D come mapping blueprint senza database o JPA;</li>
+          <li>usare il Punto 7E come primo prototipo repository prima della futura espansione del Punto 7F.</li>
         </ul>
         <h3>Obiettivi a medio termine</h3>
         <ul>
@@ -910,7 +919,7 @@
 
       <section id="infrastructure-layer" class="soft">
         <h2>9. Infrastructure Layer Foundation</h2>
-        <p class="lead">Il Punto 7A ha aperto l'Infrastructure Layer in modo prudente e professionale. Il Punto 7B ha aggiunto la prima foundation tecnica: package base, eccezioni infrastrutturali, marker di adapter, profili tecnici e mapping contract. Il Punto 7C ha aggiunto Spring come wiring tecnico controllato, con runtime non web e profilo memory. Il Punto 7D aggiunge ora il blueprint del mapping domain ↔ persistence, senza introdurre database, JPA, Spring Data, REST API, controller o security.</p>
+        <p class="lead">Il Punto 7A ha aperto l'Infrastructure Layer in modo prudente e professionale. Il Punto 7B ha aggiunto la prima foundation tecnica: package base, eccezioni infrastrutturali, marker di adapter, profili tecnici e mapping contract. Il Punto 7C ha aggiunto Spring come wiring tecnico controllato, con runtime non web e profilo memory. Il Punto 7D ha aggiunto il blueprint del mapping domain ↔ persistence; il Punto 7E aggiunge ora il primo repository reale prototipale per Locations, senza introdurre database, JPA, Spring Data, REST API, controller o security.</p>
         <div class="grid two">
           <div class="card">
             <h3>Obiettivo</h3>
@@ -1029,7 +1038,8 @@
               <tr><td>Infrastructure Layer Blueprint</td><td><span class="badge done">Completato</span></td><td>Il Punto 7A definisce confini, roadmap 7A → 7H, ruolo di Spring, adapter, mapping e repository reali senza introdurre codice operativo, database o REST API.</td></tr>
               <tr><td>Infrastructure Foundation</td><td><span class="badge done">Completato</span></td><td>Il Punto 7B introduce package infrastrutturali base, eccezioni tecniche, marker/convenzioni, profili e contratto generico di mapping senza introdurre database, JPA, Spring Data, REST API o security.</td></tr>
               <tr><td>Spring Wiring Foundation</td><td><span class="badge done">Completato</span></td><td>Il Punto 7C introduce Spring solo come wiring tecnico: entry point, application.yml non web, configurazioni bean e profilo memory, senza contaminare domain/application.</td></tr>
-              <tr><td>Persistence Mapping Blueprint</td><td><span class="badge now">Aperto</span></td><td>Il Punto 7D formalizza blueprint di mapping per i contesti applicativi attivi senza introdurre database, JPA, Spring Data, repository reali o schema fisico.</td></tr>
+              <tr><td>Persistence Mapping Blueprint</td><td><span class="badge done">Completato</span></td><td>Il Punto 7D formalizza blueprint di mapping per i contesti applicativi attivi senza introdurre database, JPA, Spring Data, repository reali o schema fisico.</td></tr>
+              <tr><td>Real Repository Prototype</td><td><span class="badge now">Aperto</span></td><td>Il Punto 7E introduce il primo repository reale prototipale per Locations, con persistence record, mapper concreto e adapter file-backed, senza database, JPA, Spring Data, REST API o security.</td></tr>
               <tr><td>Database e repository reali</td><td><span class="badge planned">Futuro</span></td><td>Non vanno introdotti prima della stabilizzazione dei repository in memory e dei use case applicativi.</td></tr>
               <tr><td>API REST</td><td><span class="badge planned">Futuro</span></td><td>Le API devono esporre casi d’uso stabili, non accedere direttamente al dominio in modo improvvisato.</td></tr>
               <tr><td>Planning & Dispatching</td><td><span class="badge planned">Futuro</span></td><td>È il modulo che assegnerà risorse reali e verificherà compatibilità operative.</td></tr>
@@ -1046,8 +1056,8 @@
       <section id="conclusione" class="soft">
         <h2>13. Conclusione</h2>
         <p class="lead">TruckFlow Manager è oggi una fondazione di dominio solida per una futura piattaforma enterprise di trasporto e logistica.</p>
-        <p>Il progetto descrive i principali concetti aziendali con confini chiari, value object espressivi, invarianti protetti, eccezioni custom e documentazione strutturata. La fase attuale ha rafforzato i primi use case applicativi, li ha espansi verso Documents, Vehicles, Operational Roles e Compliance base, ha aggiunto hardening dedicato agli Operational Roles e ha chiuso il Punto 6 con un freeze finale senza introdurre ancora API REST, controller, database, JPA, security o uso architetturale di Spring nel codice applicativo, e ha aperto il Punto 7A come blueprint documentale dell’Infrastructure Layer, ha applicato il Punto 7B come foundation tecnica leggera, ha introdotto il Punto 7C come Spring Wiring Foundation non web e ha aggiunto il Punto 7D come Persistence Mapping Blueprint. L’obiettivo è costruire progressivamente nuovi layer sopra una base application stabile.</p>
-        <p>La direzione futura è costruire gradualmente una piattaforma completa: prima domain e application layer, poi infrastructure blueprint, foundation tecnica, wiring Spring controllato, blueprint di mapping, repository reali, test infrastrutturali, quindi API, workflow, planning, dispatching, document management avanzato, tracking, analytics e integrazioni enterprise.</p>
+        <p>Il progetto descrive i principali concetti aziendali con confini chiari, value object espressivi, invarianti protetti, eccezioni custom e documentazione strutturata. La fase attuale ha rafforzato i primi use case applicativi, li ha espansi verso Documents, Vehicles, Operational Roles e Compliance base, ha aggiunto hardening dedicato agli Operational Roles e ha chiuso il Punto 6 con un freeze finale senza introdurre ancora API REST, controller, database, JPA, security o uso architetturale di Spring nel codice applicativo, e ha aperto il Punto 7A come blueprint documentale dell’Infrastructure Layer, ha applicato il Punto 7B come foundation tecnica leggera, ha introdotto il Punto 7C come Spring Wiring Foundation non web, ha aggiunto il Punto 7D come Persistence Mapping Blueprint e ha aperto il Punto 7E con il primo Real Repository Prototype per Locations. L’obiettivo è costruire progressivamente nuovi layer sopra una base application stabile.</p>
+        <p>La direzione futura è costruire gradualmente una piattaforma completa: prima domain e application layer, poi infrastructure blueprint, foundation tecnica, wiring Spring controllato, blueprint di mapping, repository prototipali e reali, test infrastrutturali, quindi API, workflow, planning, dispatching, document management avanzato, tracking, analytics e integrazioni enterprise.</p>
         <div class="pill-list">
           <span class="pill">Domain-first</span>
           <span class="pill">Enterprise-ready foundation</span>

@@ -5,8 +5,8 @@ import java.util.Objects;
 /**
  * Describes one planned mapping rule between a domain field and a future persistence field.
  *
- * <p>This is a blueprint element, not a JPA entity, not a database column declaration
- * and not a real mapper implementation.
+ * <p>This is a blueprint element, not a JPA entity, not a database column declaration and not a
+ * real mapper implementation.
  */
 public record PersistenceFieldMapping(
     String domainField,

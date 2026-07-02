@@ -493,3 +493,6 @@ body.tooltip-disabled .term[data-it]::after {
 #doc-35:checked ~ .app-shell .panel-35 { display: block; }
 #doc-35:checked ~ .app-shell label[for="doc-35"] { background: var(--nav-active-bg); border-color: var(--accent); color: var(--text-strong); }
 #doc-35:checked ~ .app-shell label[for="doc-35"] .nav-number { background: var(--accent); color: white; }
+#doc-36:checked ~ .app-shell .panel-36 { display: block; }
+#doc-36:checked ~ .app-shell label[for="doc-36"] { background: var(--nav-active-bg); border-color: var(--accent); color: var(--text-strong); }
+#doc-36:checked ~ .app-shell label[for="doc-36"] .nav-number { background: var(--accent); color: white; }

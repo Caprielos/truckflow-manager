@@ -1,3 +1,5 @@
+> Aggiornamento 7E: il wiring Spring resta ancora sul profilo `memory`. Il primo repository reale prototipale per Locations viene introdotto come adapter separato e non sostituisce automaticamente gli in-memory repository.
+
 # Punto 7C — Spring Wiring Foundation
 
 

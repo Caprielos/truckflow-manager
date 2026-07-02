@@ -65,6 +65,9 @@ This digital documentation mirrors:
 - `docs/29-final-roadmap-documentation-alignment.md`
 - `docs/30-infrastructure-layer-blueprint.md`
 - `docs/31-infrastructure-foundation.md`
+- `docs/32-spring-wiring-foundation.md`
+- `docs/33-persistence-mapping-blueprint.md`
+- `docs/34-real-repository-prototype.md`
 - `command_basic.md`
 
 
@@ -228,3 +231,12 @@ La documentazione digitale include ora anche `33-persistence-mapping-blueprint.m
 Questo aggiornamento introduce una mappa tecnica dei futuri mapping per Locations, Cargo, Shipments, Documents, Vehicles, Operational Roles e Compliance base. Il Punto 7D chiarisce come trattare ID, codici business, stati, value object, enum, collection e reference senza introdurre ancora database reale, JPA, Spring Data, repository reali, schema SQL o package `infrastructure.persistence`.
 
 Documento di riferimento: `docs/33-persistence-mapping-blueprint.md`.
+
+
+## Punto 7E — Real Repository Prototype
+
+La documentazione digitale include ora anche `34-real-repository-prototype.md`, che descrive il primo repository reale prototipale del progetto.
+
+Questo aggiornamento introduce il prototipo Locations file-backed: `FileLocationRepository`, `LocationPersistenceRecord`, `LocationPersistenceMapper` e test tecnici dedicati. Il prototipo valida il pattern repository + mapper usando un file locale, senza introdurre database, JPA, Spring Data, repository reali per tutti i domini, REST API, controller o security.
+
+Documento di riferimento: `docs/34-real-repository-prototype.md`.

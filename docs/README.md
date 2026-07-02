@@ -1,8 +1,8 @@
 # TruckFlow Manager — Documentazione del dominio
 
-Questa cartella contiene la documentazione ufficiale di TruckFlow Manager, con la fondazione del dominio puro, il primo ciclo completo dell’application layer fino al Punto 6M, l’apertura documentale del Punto 7A — Infrastructure Layer Blueprint, la foundation tecnica leggera del Punto 7B e il wiring Spring controllato del Punto 7C e il blueprint di mapping del Punto 7D.
+Questa cartella contiene la documentazione ufficiale di TruckFlow Manager, con la fondazione del dominio puro, il primo ciclo completo dell’application layer fino al Punto 6M, l’apertura documentale del Punto 7A — Infrastructure Layer Blueprint, la foundation tecnica leggera del Punto 7B e il wiring Spring controllato del Punto 7C, il blueprint di mapping del Punto 7D e il primo prototipo di repository reale del Punto 7E.
 
-Il documento `29-final-roadmap-documentation-alignment.md` chiarisce lo stato reale dopo il Punto 6M: il Punto 6 è chiuso, la descrizione corretta del Punto 6G Documents è register/find/activate/archive e le dipendenze Spring presenti nel `pom.xml` sono preparatorie, non ancora usate come architettura REST o persistence. Il documento `30-infrastructure-layer-blueprint.md` apre il Punto 7A e definisce confini, filosofia, roadmap 7A→7H e regole dell’infrastructure layer prima di qualunque implementazione reale. Il documento `31-infrastructure-foundation.md` descrive il Punto 7B e formalizza package, eccezioni e convenzioni tecniche della foundation infrastrutturale. Il documento `32-spring-wiring-foundation.md` descrive il Punto 7C e spiega come Spring viene usato solo come wiring tecnico non web, mantenendo domain e application layer privi di dipendenze framework. Il documento `33-persistence-mapping-blueprint.md` descrive il Punto 7D e formalizza il catalogo dei mapping blueprint domain ↔ persistence senza introdurre ancora JPA, database o repository reali.
+Il documento `29-final-roadmap-documentation-alignment.md` chiarisce lo stato reale dopo il Punto 6M: il Punto 6 è chiuso, la descrizione corretta del Punto 6G Documents è register/find/activate/archive e le dipendenze Spring presenti nel `pom.xml` sono preparatorie, non ancora usate come architettura REST o persistence. Il documento `30-infrastructure-layer-blueprint.md` apre il Punto 7A e definisce confini, filosofia, roadmap 7A→7H e regole dell’infrastructure layer prima di qualunque implementazione reale. Il documento `31-infrastructure-foundation.md` descrive il Punto 7B e formalizza package, eccezioni e convenzioni tecniche della foundation infrastrutturale. Il documento `32-spring-wiring-foundation.md` descrive il Punto 7C e spiega come Spring viene usato solo come wiring tecnico non web, mantenendo domain e application layer privi di dipendenze framework. Il documento `33-persistence-mapping-blueprint.md` descrive il Punto 7D e formalizza il catalogo dei mapping blueprint domain ↔ persistence senza introdurre ancora JPA, database o repository reali. Il documento `34-real-repository-prototype.md` descrive il Punto 7E e introduce il primo repository reale prototipale file-backed per Locations, senza database, JPA, Spring Data o REST API.
 
 Il progetto ha completato la fondazione del **domain layer**. L'**application layer** ha consolidato i primi casi d'uso, ha completato la prima espansione controllata verso Documents, l'ha rafforzata con una review tecnica e documentale, ha aggiunto i primi use case applicativi Vehicles e Operational Roles, ha rafforzato Operational Roles con il Punto 6K, ha introdotto i primi use case Compliance base nel Punto 6L e ha chiuso il primo ciclo dell'application layer con il Punto 6M. La fondazione di dominio contiene i seguenti package principali:
 
@@ -68,6 +68,7 @@ I nomi tecnici rimangono in inglese e allineati al codice Java.
 31. [`31-infrastructure-foundation.md`](31-infrastructure-foundation.md) — Punto 7B: foundation tecnica leggera dell'Infrastructure Layer, package base, eccezioni tecniche, convenzioni, marker infrastructure e test architetturale.
 32. [`32-spring-wiring-foundation.md`](32-spring-wiring-foundation.md) — Punto 7C: wiring Spring controllato, entry point tecnico, configurazioni bean, profilo memory, runtime non web e test architetturale dedicato.
 33. [`33-persistence-mapping-blueprint.md`](33-persistence-mapping-blueprint.md) — Punto 7D: blueprint del mapping domain ↔ persistence, catalogo dei contesti applicativi, regole su ID/codice/stato/value object/reference e test architetturale dedicato.
+34. [`34-real-repository-prototype.md`](34-real-repository-prototype.md) — Punto 7E: primo repository reale prototipale per Locations, con persistence record, mapper concreto, adapter file-backed e test tecnici dedicati.
 
 ## Stato del progetto documentato
 
@@ -377,3 +378,19 @@ La configurazione Spring vive nel layer infrastructure e collega i port.out ai r
 `application.yml` mantiene `spring.main.web-application-type: none`, quindi il progetto non avvia ancora un server HTTP e non espone API. REST, DTO web, controller, JPA, Spring Data e security rimangono fuori da questo step.
 
 Il Punto 7C è documentato in [`32-spring-wiring-foundation.md`](32-spring-wiring-foundation.md).
+
+## Punto 7D — Persistence Mapping Blueprint
+
+Il Punto 7D formalizza il blueprint del mapping domain ↔ persistence.
+
+Questa fase aggiunge un catalogo tecnico dei mapping per Locations, Cargo, Shipments, Documents, Vehicles, Operational Roles e Compliance base. Il catalogo descrive ID, codici business, stati, value object, enum, collection e reference senza introdurre ancora database, JPA, Spring Data, schema SQL o repository reali.
+
+Il Punto 7D è documentato in [`33-persistence-mapping-blueprint.md`](33-persistence-mapping-blueprint.md).
+
+## Punto 7E — Real Repository Prototype
+
+Il Punto 7E introduce il primo repository reale prototipale del progetto.
+
+Il dominio pilota è Locations. La patch aggiunge `FileLocationRepository`, `LocationPersistenceRecord`, `LocationPersistenceMapper` e `FileLocationRepositoryPrototypeTest`. Il prototipo usa un file locale come meccanismo tecnico di salvataggio, ma non introduce database, JPA, Spring Data, repository reali per tutti i domini, REST API, controller o security.
+
+Il Punto 7E è documentato in [`34-real-repository-prototype.md`](34-real-repository-prototype.md).

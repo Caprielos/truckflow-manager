@@ -229,3 +229,11 @@ Il valore del 7B è preparare una casa ordinata per gli step successivi del Punt
 ## Nota di avanzamento — Punto 7C
 
 Dopo il freeze dell’application layer e la foundation infrastrutturale, il Punto 7C introduce Spring solo come wiring tecnico non web. Il dominio e l’application layer restano privi di dipendenze Spring; REST API, controller, JPA, Spring Data e security sono rimandati agli step corretti.
+
+## Nota di avanzamento — Punto 7D e 7E
+
+Dopo il Punto 7C, TruckFlow Manager ha applicato il **Punto 7D — Persistence Mapping Blueprint**, che formalizza come i modelli di dominio potranno essere tradotti in modelli tecnici persistenti senza introdurre ancora database, JPA, Spring Data o repository reali.
+
+Con il **Punto 7E — Real Repository Prototype**, il progetto introduce il primo repository reale prototipale per Locations. Il prototipo usa un adapter file-backed, un persistence record e un mapper concreto, ma non introduce database, JPA, Spring Data, REST API, controller o security.
+
+Questo conferma la direzione del Punto 7: l'infrastruttura cresce in modo progressivo, validando un pattern per volta prima dell'espansione ai domini più complessi.

@@ -1,7 +1,7 @@
 # Punto 7B — Infrastructure Foundation
 
 
-> Aggiornamento 7D: il contratto generico `PersistenceMapper` della foundation è ora affiancato da blueprint descrittivi di mapping. Questi blueprint preparano il futuro 7E, ma non sono ancora mapper concreti né persistence model reali.
+> Aggiornamento 7E: il contratto generico `PersistenceMapper` della foundation è ora usato dal primo mapper concreto del prototipo Locations. La foundation resta neutra: il 7E aggiunge un adapter file-backed pilota, non database, JPA o Spring Data.
 
 Questo documento descrive il **Punto 7B — Infrastructure Foundation** di TruckFlow Manager.
 

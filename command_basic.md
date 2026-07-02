@@ -614,3 +614,35 @@ Commit consigliato:
 git add -A
 git commit -m "Add persistence mapping blueprint"
 ```
+
+---
+
+## Nota progetto — Punto 7E
+
+Il Punto 7E — Real Repository Prototype introduce il primo repository reale prototipale del progetto.
+
+La patch aggiunge un adapter file-backed per Locations, un persistence record tecnico, un mapper concreto e un test dedicato. Non introduce database, JPA, Spring Data, repository reali per tutti i domini, schema SQL, REST API, controller o security.
+
+Dopo l'applicazione della patch, il controllo consigliato è:
+
+```bash
+mvn spotless:apply
+mvn spotless:check
+mvn clean test
+git status
+```
+
+Documenti e file principali da controllare:
+
+```bash
+ls docs/34-real-repository-prototype.md
+ls src/main/java/it/gabriele/truckflow/infrastructure/repository/locations
+ls src/test/java/it/gabriele/truckflow/infrastructure/repository/locations/FileLocationRepositoryPrototypeTest.java
+```
+
+Commit consigliato:
+
+```bash
+git add -A
+git commit -m "Add real location repository prototype"
+```

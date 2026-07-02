@@ -158,6 +158,8 @@ Con il Punto 7C è stato aggiunto il documento [`docs/32-spring-wiring-foundatio
 
 Con il Punto 7D è stato aggiunto il documento [`docs/33-persistence-mapping-blueprint.md`](docs/33-persistence-mapping-blueprint.md) e sono stati introdotti `PersistenceMappingKind`, `PersistenceFieldMapping`, `PersistenceMappingBlueprint` e `PersistenceMappingBlueprintCatalog`. Questo step definisce il blueprint del mapping domain ↔ persistence per i contesti applicativi attivi senza introdurre database, JPA, Spring Data, repository reali o schema fisico.
 
+Con il Punto 7E è stato aggiunto il documento [`docs/34-real-repository-prototype.md`](docs/34-real-repository-prototype.md) ed è stato introdotto il primo repository reale prototipale per Locations: `FileLocationRepository`, supportato da `LocationPersistenceRecord`, `LocationPersistenceMapper` e test tecnici dedicati. Il prototipo usa un file locale per validare il pattern repository + mapper senza introdurre database, JPA, Spring Data, REST API o security.
+
 ## Punto 6A — Application Layer Blueprint
 
 Il Punto 6A ha progettato il livello applicativo prima di scrivere codice operativo. L'application layer dovrà orchestrare il dominio tramite casi d'uso, senza duplicare le regole di business e senza introdurre subito controller, database, JPA, Spring o API REST.

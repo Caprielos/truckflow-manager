@@ -307,7 +307,7 @@ Non sono tutti solo teorici: alcuni sono documentali, altri sono implementativi,
 | 7B | Infrastructure Foundation | Implementativa leggera | Creare struttura package, eccezioni e convenzioni infrastrutturali |
 | 7C | Spring Wiring Foundation | Implementativa controllata | Introdurre wiring Spring senza controller, REST, JPA o security |
 | 7D | Persistence Mapping Blueprint | Documentale + struttura | Definire strategia di mapping domain ↔ persistence |
-| 7E | Real Repository Prototype | Implementativa pilota | Implementare un repository reale su un dominio semplice |
+| 7E | Real Repository Prototype | Implementativa pilota | Implementare il primo repository reale prototipale su Locations |
 | 7F | Repository Expansion | Implementativa progressiva | Estendere il pattern agli altri domini prioritari |
 | 7G | Infrastructure Testing | Tecnica | Consolidare test di mapper, repository, config e adapter |
 | 7H | Infrastructure Review & Freeze | Review | Congelare il Punto 7 prima del Punto 8 |
@@ -401,7 +401,7 @@ Il 7D può preparare classi o interfacce leggere, ma non deve forzare subito tut
 
 ## 7E — Real Repository Prototype
 
-Il Punto 7E implementerà un repository reale pilota.
+Il Punto 7E implementa il primo repository reale pilota, scegliendo Locations come dominio sicuro e usando un adapter file-backed separato dal profilo `memory`.
 
 Il dominio consigliato è **Locations**, perché è più semplice e riduce il rischio architetturale.
 
@@ -509,7 +509,7 @@ Il Punto 7 deve preparare una base infrastrutturale stabile affinché il Punto 8
 
 ## Sintesi finale
 
-Il Punto 7A apre l'Infrastructure Layer in modo prudente e professionale. Il successivo Punto 7B ha introdotto la prima foundation tecnica leggera mantenendo gli stessi confini architetturali.
+Il Punto 7A apre l'Infrastructure Layer in modo prudente e professionale. I successivi punti 7B, 7C, 7D e 7E hanno iniziato ad applicare la roadmap: foundation tecnica, wiring Spring non web, mapping blueprint e primo repository reale prototipale su Locations.
 
 Non implementa subito database o Spring operativo. Prima definisce:
 
@@ -523,4 +523,4 @@ Non implementa subito database o Spring operativo. Prima definisce:
 - ruolo dei repository in memory;
 - rapporto tra Punto 7 e Punto 8.
 
-Questa fase rende il progetto pronto a passare al Punto 7B senza perdere la pulizia architetturale costruita fino al Punto 6M.
+Questa fase ha reso il progetto pronto a passare agli step successivi del Punto 7 senza perdere la pulizia architetturale costruita fino al Punto 6M.

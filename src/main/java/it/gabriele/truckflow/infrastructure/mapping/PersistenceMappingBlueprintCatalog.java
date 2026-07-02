@@ -52,12 +52,7 @@ public final class PersistenceMappingBlueprintCatalog {
               "Cargo mapping must preserve transport requirements without calculating compatibility"
                   + " inside infrastructure.",
               field("id", "id", PersistenceMappingKind.VALUE_OBJECT, true, "Stable CargoId."),
-              field(
-                  "code",
-                  "code",
-                  PersistenceMappingKind.VALUE_OBJECT,
-                  true,
-                  "Stable CargoCode."),
+              field("code", "code", PersistenceMappingKind.VALUE_OBJECT, true, "Stable CargoCode."),
               field(
                   "status",
                   "status",
@@ -144,8 +139,7 @@ public final class PersistenceMappingBlueprintCatalog {
               "VehicleUnitPersistenceModel",
               "Vehicle unit mapping keeps technical specifications separate from future operational"
                   + " availability or planning modules.",
-              field(
-                  "id", "id", PersistenceMappingKind.VALUE_OBJECT, true, "Stable VehicleUnitId."),
+              field("id", "id", PersistenceMappingKind.VALUE_OBJECT, true, "Stable VehicleUnitId."),
               field(
                   "fleetCode",
                   "fleet_code",
@@ -203,9 +197,7 @@ public final class PersistenceMappingBlueprintCatalog {
           operationalBlueprint("operational.driver", "Driver", "DriverPersistenceModel"),
           operationalBlueprint("operational.mechanic", "Mechanic", "MechanicPersistenceModel"),
           operationalBlueprint(
-              "operational.warehouse",
-              "WarehouseOperator",
-              "WarehouseOperatorPersistenceModel"),
+              "operational.warehouse", "WarehouseOperator", "WarehouseOperatorPersistenceModel"),
           operationalBlueprint(
               "operational.dispatcher", "Dispatcher", "DispatcherPersistenceModel"),
           operationalBlueprint("operational.manager", "Manager", "ManagerPersistenceModel"),

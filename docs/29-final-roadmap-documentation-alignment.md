@@ -232,3 +232,20 @@ Il 7B rende concreta la foundation infrastrutturale senza cambiare la roadmap fi
 5. prossimo step: Punto 7C — Spring Wiring Foundation.
 
 Il Punto 7B non introduce API REST, controller, JSON, database, JPA, Spring Data o security. Introduce solo struttura tecnica e convenzioni per proseguire in modo ordinato.
+
+## Aggiornamento successivo — Punto 7E
+
+La roadmap del Punto 7 è avanzata oltre il blueprint iniziale.
+
+Dopo il Punto 7A, 7B, 7C e 7D, il progetto introduce il **Punto 7E — Real Repository Prototype**.
+
+Questo step applica il primo prototipo reale di repository su Locations, usando un adapter file-backed e un mapper concreto. Il prototipo non cambia la chiusura del Punto 6, non introduce REST API e non introduce database, JPA, Spring Data o security.
+
+La sequenza aggiornata del Punto 7 è quindi:
+
+1. 7A — Infrastructure Layer Blueprint;
+2. 7B — Infrastructure Foundation;
+3. 7C — Spring Wiring Foundation;
+4. 7D — Persistence Mapping Blueprint;
+5. 7E — Real Repository Prototype;
+6. prossimo step: 7F — Repository Expansion.

@@ -288,14 +288,14 @@ Motivo:
 - non richiede workflow;
 - permette di validare il pattern senza rischiare di sporcare domini più delicati.
 
-Il Punto 7E potrà quindi introdurre:
+Il Punto 7E introduce ora, in modo controllato:
 
 - un persistence model reale per `Location`;
 - un mapper concreto `LocationPersistenceMapper`;
 - un repository adapter reale prototipale;
 - test tecnici del mapping e del repository.
 
-Ma queste cose non appartengono ancora al Punto 7D.
+Queste cose sono state lasciate fuori dal Punto 7D e diventano il prototipo controllato del Punto 7E.
 
 ## Regola finale del Punto 7D
 
@@ -317,10 +317,10 @@ Dopo questo step il progetto ha:
 - documentazione aggiornata;
 - nessun database reale;
 - nessun JPA;
-- nessun repository reale;
+- nessun repository reale dentro il Punto 7D;
 - nessun controller REST.
 
-Il prossimo step naturale è:
+Lo step successivo è stato:
 
 ```text
 Punto 7E — Real Repository Prototype

@@ -845,3 +845,19 @@ Il Punto 7B conferma che domain e application non devono dipendere da infrastruc
 ## Decisione architetturale — Spring Wiring Foundation
 
 Dal Punto 7C Spring può essere usato nel layer infrastructure per configurare bean e profili tecnici. Questa decisione non autorizza annotazioni Spring nel dominio o nell’application layer e non apre ancora REST API, persistence JPA o security HTTP.
+
+## Decisione architetturale — Persistence Mapping Blueprint
+
+Il Punto 7D introduce blueprint di mapping domain ↔ persistence prima di introdurre repository reali o database. La decisione è separare la domanda "cosa deve essere mappato" dalla domanda "con quale tecnologia sarà persistito".
+
+Questa scelta evita di forzare il dominio dentro una tecnologia specifica e impedisce l'introduzione prematura di JPA, Spring Data, schema SQL o package database.
+
+## Decisione architetturale — Real Repository Prototype
+
+Il Punto 7E introduce il primo repository reale prototipale usando Locations come dominio pilota.
+
+La decisione è usare un adapter file-backed, non un database, perché il Punto 7E deve validare il pattern tecnico repository + persistence model + mapper senza vincolare ancora il progetto a JPA, SQL, Spring Data o migrazioni.
+
+`FileLocationRepository` implementa la port.out applicativa `LocationRepository` e vive nel layer infrastructure. Usa `LocationPersistenceRecord` come modello tecnico e `LocationPersistenceMapper` per tradurre domain ↔ persistence. Il profilo Spring `memory` resta invariato: il nuovo repository reale non sostituisce automaticamente gli adapter in memory.
+
+Questa scelta mantiene dominio e application layer indipendenti dall'infrastruttura e prepara il Punto 7F, dove il pattern potrà essere esteso o sostituito da una tecnologia di persistenza più strutturata.
